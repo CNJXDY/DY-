@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万能工具箱 - 免费在线工具集合</title>
+<meta name="description" content="免费在线工具集合：JSON格式化、文本统计、URL编解码、Base64、颜色转换、二维码生成、密码生成、UUID生成、时间戳转换、哈希计算、正则测试、Markdown预览">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+<style>
+:root {
+  --bg: #0f172a;
+  --sidebar-bg: #1e293b;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --border: #334155;
+  --input-bg: #0f172a;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  padding: 20px 0;
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  overflow-y: auto;
+  z-index: 10;
+}
+.sidebar-header {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.sidebar-header p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.tool-nav { list-style: none; }
+.tool-nav li a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.tool-nav li a:hover { background: rgba(99,102,241,0.1); color: var(--text); }
+.tool-nav li a.active {
+  background: rgba(99,102,241,0.15);
+  color: var(--accent-hover);
+  border-left-color: var(--accent);
+}
+.tool-nav .category {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  padding: 15px 20px 5px;
+  opacity: 0.6;
+}
+.tool-nav .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* Main */
+.main {
+  margin-left: 260px;
+  flex: 1;
+  padding: 30px;
+  max-width: 900px;
+}
+.tool-panel { display: none; }
+.tool-panel.active { display: block; }
+.tool-panel h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.tool-panel .desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Form elements */
+textarea, input[type="text"], input[type="number"], select {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+textarea:focus, input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+textarea { min-height: 180px; }
+input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-secondary:hover { background: var(--border); }
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.result-box {
+  margin-top: 16px;
+  padding: 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  word-break: break-all;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.flex-row { display: flex; gap: 12px; }
+.flex-row > * { flex: 1; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.stat-card {
+  background: var(--card-bg);
+  padding: 14px;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.stat-card .num { font-size: 28px; font-weight: 700; color: var(--accent-hover); }
+.stat-card .lbl { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+.color-preview {
+  width: 100%;
+  height: 60px;
+  border-radius: var(--radius);
+  margin-top: 10px;
+  border: 1px solid var(--border);
+}
+#qrcode-container { display: flex; justify-content: center; margin-top: 16px; }
+#qrcode-container canvas, #qrcode-container img { border-radius: var(--radius); }
+.password-display {
+  font-size: 22px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  padding: 16px;
+  background: var(--input-bg);
+  border-radius: var(--radius);
+  text-align: center;
+  word-break: break-all;
+  border: 1px solid var(--border);
+  letter-spacing: 2px;
+}
+.markdown-preview {
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  line-height: 1.8;
+  min-height: 200px;
+}
+.markdown-preview h1, .markdown-preview h2, .markdown-preview h3 { margin-top: 16px; }
+.markdown-preview code { background: var(--bg); padding: 2px 6px; border-radius: 4px; }
+.markdown-preview pre { background: var(--bg); padding: 14px; border-radius: var(--radius); overflow-x: auto; }
+.markdown-preview table { border-collapse: collapse; width: 100%; }
+.markdown-preview th, .markdown-preview td { border: 1px solid var(--border); padding: 8px; }
+.markdown-preview img { max-width: 100%; border-radius: var(--radius); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: var(--success); color: #000; padding: 10px 24px;
+  border-radius: 50px; font-size: 14px; font-weight: 600;
+  opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 999;
+}
+.toast.show { opacity: 1; }
+
+/* Ad placeholder */
+.ad-placeholder {
+  margin-top: 30px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar { width: 100%; height: auto; position: relative; }
+  body { flex-direction: column; }
+  .main { margin-left: 0; padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h1>万能工具箱</h1>
+    <p>免费 · 无广告 · 本地运行</p>
+  </div>
+  <ul class="tool-nav">
+    <li class="category">文本工具</li>
+    <li><a href="#json" class="active" data-tool="json"><span class="icon">{ }</span>JSON 格式化</a></li>
+    <li><a href="#text-counter" data-tool="text-counter"><span class="icon">📝</span>文本统计</a></li>
+    <li><a href="#markdown" data-tool="markdown"><span class="icon">📄</span>Markdown 预览</a></li>
+    <li class="category">编码转换</li>
+    <li><a href="#url" data-tool="url"><span class="icon">🔗</span>URL 编解码</a></li>
+    <li><a href="#base64" data-tool="base64"><span class="icon">🔐</span>Base64 编解码</a></li>
+    <li><a href="#hash" data-tool="hash"><span class="icon">🔒</span>哈希计算</a></li>
+    <li class="category">生成器</li>
+    <li><a href="#qrcode" data-tool="qrcode"><span class="icon">📱</span>二维码生成</a></li>
+    <li><a href="#password" data-tool="password"><span class="icon">🔑</span>密码生成</a></li>
+    <li><a href="#uuid" data-tool="uuid"><span class="icon">🆔</span>UUID 生成</a></li>
+    <li class="category">其他</li>
+    <li><a href="#timestamp" data-tool="timestamp"><span class="icon">⏰</span>时间戳转换</a></li>
+    <li><a href="#color" data-tool="color"><span class="icon">🎨</span>颜色转换</a></li>
+    <li><a href="#regex" data-tool="regex"><span class="icon">🔍</span>正则测试</a></li>
+  </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+
+  <!-- JSON Formatter -->
+  <section class="tool-panel active" id="panel-json">
+    <h2>JSON 格式化 / 验证</h2>
+    <p class="desc">粘贴 JSON 字符串，自动格式化或压缩。支持语法校验。</p>
+    <textarea id="json-input" placeholder='粘贴 JSON 内容，例如：{"name":"张三","age":25}'></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="formatJSON()">✨ 格式化</button>
+      <button class="btn btn-secondary" onclick="compressJSON()">📦 压缩</button>
+      <button class="btn btn-secondary" onclick="validateJSON()">✅ 验证</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('json')">📋 复制</button>
+    </div>
+    <div class="result-box" id="json-result" style="display:none;"></div>
+  </section>
+
+  <!-- Text Counter -->
+  <section class="tool-panel" id="panel-text-counter">
+    <h2>文本统计</h2>
+    <p class="desc">统计文本的字数、字符数、行数、段落数等。</p>
+    <textarea id="text-input" placeholder="在这里输入或粘贴文本..."></textarea>
+    <div class="stats" id="text-stats">
+      <div class="stat-card"><div class="num" id="stat-chars">0</div><div class="lbl">字符数</div></div>
+      <div class="stat-card"><div class="num" id="stat-words">0</div><div class="lbl">单词数</div></div>
+      <div class="stat-card"><div class="num" id="stat-chinese">0</div><div class="lbl">中文字数</div></div>
+      <div class="stat-card"><div class="num" id="stat-lines">0</div><div class="lbl">行数</div></div>
+      <div class="stat-card"><div class="num" id="stat-paras">0</div><div class="lbl">段落数</div></div>
+      <div class="stat-card"><div class="num" id="stat-bytes">0</div><div class="lbl">字节数</div></div>
+    </div>
+  </section>
+
+  <!-- URL Encoder/Decoder -->
+  <section class="tool-panel" id="panel-url">
+    <h2>URL 编解码</h2>
+    <p class="desc">对 URL 进行编码（encodeURIComponent）或解码（decodeURIComponent）。</p>
+    <textarea id="url-input" placeholder="输入要编码或解码的 URL 文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="urlEncode()">🔒 编码</button>
+      <button class="btn btn-secondary" onclick="urlDecode()">🔓 解码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('url')">📋 复制</button>
+    </div>
+    <div class="result-box" id="url-result" style="display:none;"></div>
+  </section>
+
+  <!-- Base64 -->
+  <section class="tool-panel" id="panel-base64">
+    <h2>Base64 编解码</h2>
+    <p class="desc">对文本进行 Base64 编码或解码。支持中文。</p>
+    <textarea id="base64-input" placeholder="输入要编码或解码的文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="base64Encode()">🔒 Base64 编码</button>
+      <button class="btn btn-secondary" onclick="base64Decode()">🔓 Base64 解码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('base64')">📋 复制</button>
+    </div>
+    <div class="result-box" id="base64-result" style="display:none;"></div>
+  </section>
+
+  <!-- Hash -->
+  <section class="tool-panel" id="panel-hash">
+    <h2>哈希计算</h2>
+    <p class="desc">计算文本的 MD5、SHA1、SHA256、SHA512 哈希值。</p>
+    <textarea id="hash-input" placeholder="输入要计算哈希的文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="calcHash('MD5')">MD5</button>
+      <button class="btn" onclick="calcHash('SHA1')">SHA1</button>
+      <button class="btn" onclick="calcHash('SHA256')">SHA256</button>
+      <button class="btn" onclick="calcHash('SHA512')">SHA512</button>
+    </div>
+    <div class="result-box" id="hash-result" style="display:none;"></div>
+  </section>
+
+  <!-- QR Code -->
+  <section class="tool-panel" id="panel-qrcode">
+    <h2>二维码生成</h2>
+    <p class="desc">输入文本或链接，生成二维码图片。右键可保存。</p>
+    <textarea id="qrcode-input" placeholder="输入文本或链接..." style="min-height:80px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="generateQR()">📱 生成二维码</button>
+    </div>
+    <div id="qrcode-container"></div>
+  </section>
+
+  <!-- Password Generator -->
+  <section class="tool-panel" id="panel-password">
+    <h2>密码生成器</h2>
+    <p class="desc">生成安全的随机密码。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">密码长度</div>
+        <input type="number" id="pwd-length" value="16" min="4" max="128">
+      </div>
+      <div>
+        <div class="label">选项</div>
+        <div style="display:flex;gap:12px;padding-top:6px;flex-wrap:wrap;">
+          <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" id="pwd-upper" checked> 大写</label>
+          <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" id="pwd-lower" checked> 小写</label>
+          <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" id="pwd-numbers" checked> 数字</label>
+          <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" id="pwd-symbols" checked> 符号</label>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generatePassword()">🔑 生成密码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('pwd-display')">📋 复制</button>
+    </div>
+    <div class="password-display" id="pwd-display" style="margin-top:14px;">点击生成</div>
+  </section>
+
+  <!-- UUID Generator -->
+  <section class="tool-panel" id="panel-uuid">
+    <h2>UUID 生成器</h2>
+    <p class="desc">一键生成 UUID v4 随机标识符。</p>
+    <div class="btn-group">
+      <button class="btn" onclick="generateUUID()">🆔 生成 UUID</button>
+      <button class="btn btn-secondary" onclick="generateUUIDs(5)">批量生成 5 个</button>
+      <button class="btn btn-secondary" onclick="generateUUIDs(10)">批量生成 10 个</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('uuid-display')">📋 复制</button>
+    </div>
+    <div class="result-box" id="uuid-display" style="margin-top:14px;">点击上方按钮生成 UUID</div>
+  </section>
+
+  <!-- Timestamp Converter -->
+  <section class="tool-panel" id="panel-timestamp">
+    <h2>时间戳转换</h2>
+    <p class="desc">Unix 时间戳与日期时间互转。当前时间戳：<strong id="now-ts"></strong></p>
+    <div class="flex-row">
+      <div>
+        <div class="label">时间戳 → 日期</div>
+        <input type="text" id="ts-input" placeholder="输入时间戳，如 1700000000">
+        <div class="btn-group">
+          <button class="btn btn-sm" onclick="tsToDate()">转换</button>
+        </div>
+        <div class="result-box" id="ts-result" style="display:none;"></div>
+      </div>
+      <div>
+        <div class="label">日期 → 时间戳</div>
+        <input type="text" id="date-input" placeholder="如 2024-01-01 12:00:00">
+        <div class="btn-group">
+          <button class="btn btn-sm" onclick="dateToTs()">转换</button>
+        </div>
+        <div class="result-box" id="date-result" style="display:none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Color Converter -->
+  <section class="tool-panel" id="panel-color">
+    <h2>颜色转换</h2>
+    <p class="desc">HEX、RGB、HSL 颜色格式互转。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">HEX</div>
+        <input type="text" id="color-hex" placeholder="#6366f1" value="#6366f1">
+      </div>
+      <div>
+        <div class="label">RGB</div>
+        <input type="text" id="color-rgb" placeholder="rgb(99, 102, 241)">
+      </div>
+      <div>
+        <div class="label">HSL</div>
+        <input type="text" id="color-hsl" placeholder="hsl(239, 84%, 67%)">
+      </div>
+    </div>
+    <div class="color-preview" id="color-preview" style="background:#6366f1;"></div>
+  </section>
+
+  <!-- Regex Tester -->
+  <section class="tool-panel" id="panel-regex">
+    <h2>正则表达式测试</h2>
+    <p class="desc">在线测试正则表达式，查看匹配结果。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">正则表达式</div>
+        <input type="text" id="regex-pattern" placeholder="/pattern/flags">
+      </div>
+      <div>
+        <div class="label">修饰符</div>
+        <input type="text" id="regex-flags" placeholder="g, i, m 等" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="label" style="margin-top:12px;">测试文本</div>
+    <textarea id="regex-text" placeholder="输入要测试的文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="testRegex()">🔍 测试</button>
+    </div>
+    <div class="result-box" id="regex-result" style="display:none;"></div>
+  </section>
+
+  <!-- Markdown Preview -->
+  <section class="tool-panel" id="panel-markdown">
+    <h2>Markdown 预览</h2>
+    <p class="desc">实时预览 Markdown 文本的渲染效果。</p>
+    <textarea id="md-input" placeholder="# 标题
+输入 Markdown 文本...
+- 列表项 1
+- 列表项 2
+
+**粗体** *斜体* `代码`"># 你好，Markdown！
+
+输入 Markdown 文本，右侧实时预览效果。
+
+- 支持 **粗体** 和 *斜体*
+- 支持 `行内代码`
+- 支持 [链接](https://example.com)
+
+```js
+console.log('代码块');
+```
+</textarea>
+    <div class="label" style="margin-top:12px;">预览效果</div>
+    <div class="markdown-preview" id="md-preview"></div>
+  </section>
+
+  <!-- Ad Placeholder -->
+  <div class="ad-placeholder">
+    📢 广告位招租 &mdash; 联系邮箱：your@email.com
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ Navigation ============
+document.querySelectorAll('.tool-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.tool-nav a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + link.dataset.tool).classList.add('active');
+    if (link.dataset.tool === 'markdown') updateMarkdown();
+    if (link.dataset.tool === 'text-counter') updateTextStats();
+    if (link.dataset.tool === 'color') updateColor();
+  });
+});
+
+// ============ Toast ============
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ============ Copy Helpers ============
+function copyResult(tool) {
+  const el = document.getElementById(tool + '-result');
+  if (el && el.style.display !== 'none') {
+    navigator.clipboard.writeText(el.textContent).then(() => showToast('已复制！'));
+  }
+}
+function copyText(id) {
+  const el = document.getElementById(id);
+  if (el) navigator.clipboard.writeText(el.textContent).then(() => showToast('已复制！'));
+}
+
+// ============ JSON ============
+function showResult(id, text) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  el.textContent = text;
+}
+function formatJSON() {
+  try {
+    const obj = JSON.parse(document.getElementById('json-input').value);
+    showResult('json-result', JSON.stringify(obj, null, 2));
+  } catch(e) { showResult('json-result', '❌ JSON 格式错误：' + e.message); }
+}
+function compressJSON() {
+  try {
+    const obj = JSON.parse(document.getElementById('json-input').value);
+    showResult('json-result', JSON.stringify(obj));
+  } catch(e) { showResult('json-result', '❌ JSON 格式错误：' + e.message); }
+}
+function validateJSON() {
+  try {
+    JSON.parse(document.getElementById('json-input').value);
+    showResult('json-result', '✅ JSON 格式正确！');
+  } catch(e) { showResult('json-result', '❌ ' + e.message); }
+}
+
+// ============ Text Counter ============
+document.getElementById('text-input').addEventListener('input', updateTextStats);
+function updateTextStats() {
+  const text = document.getElementById('text-input').value;
+  document.getElementById('stat-chars').textContent = text.length;
+  document.getElementById('stat-words').textContent = text.trim() ? text.trim().split(/\s+/).length : 0;
+  document.getElementById('stat-chinese').textContent = (text.match(/[\u4e00-\u9fff]/g) || []).length;
+  document.getElementById('stat-lines').textContent = text ? text.split('\n').length : 0;
+  document.getElementById('stat-paras').textContent = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+  document.getElementById('stat-bytes').textContent = new Blob([text]).size;
+}
+
+// ============ URL ============
+function urlEncode() {
+  showResult('url-result', encodeURIComponent(document.getElementById('url-input').value));
+}
+function urlDecode() {
+  try { showResult('url-result', decodeURIComponent(document.getElementById('url-input').value)); }
+  catch(e) { showResult('url-result', '❌ 解码失败：' + e.message); }
+}
+
+// ============ Base64 ============
+function base64Encode() {
+  showResult('base64-result', btoa(unescape(encodeURIComponent(document.getElementById('base64-input').value))));
+}
+function base64Decode() {
+  try { showResult('base64-result', decodeURIComponent(escape(atob(document.getElementById('base64-input').value)))); }
+  catch(e) { showResult('base64-result', '❌ 解码失败，请检查输入是否为有效的 Base64 字符串'); }
+}
+
+// ============ Hash ============
+function calcHash(algo) {
+  const text = document.getElementById('hash-input').value;
+  const result = CryptoJS[algo](text).toString();
+  showResult('hash-result', `${algo}: ${result}`);
+}
+
+// ============ QR Code ============
+let qrInstance = null;
+function generateQR() {
+  const text = document.getElementById('qrcode-input').value.trim();
+  if (!text) { showToast('请输入内容'); return; }
+  const container = document.getElementById('qrcode-container');
+  container.innerHTML = '';
+  qrInstance = new QRCode(container, { text, width: 220, height: 220, colorDark: '#e2e8f0', colorLight: '#1e293b' });
+}
+
+// ============ Password ============
+function generatePassword() {
+  const len = parseInt(document.getElementById('pwd-length').value) || 16;
+  let chars = '';
+  if (document.getElementById('pwd-upper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (document.getElementById('pwd-lower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+  if (document.getElementById('pwd-numbers').checked) chars += '0123456789';
+  if (document.getElementById('pwd-symbols').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+  if (!chars) { showToast('请至少选一种字符类型'); return; }
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  let pwd = '';
+  for (let i = 0; i < len; i++) pwd += chars[arr[i] % chars.length];
+  document.getElementById('pwd-display').textContent = pwd;
+}
+
+// ============ UUID ============
+function generateUUID() {
+  const uuid = crypto.randomUUID();
+  document.getElementById('uuid-display').textContent = uuid;
+}
+function generateUUIDs(count) {
+  const uuids = [];
+  for (let i = 0; i < count; i++) uuids.push(crypto.randomUUID());
+  document.getElementById('uuid-display').textContent = uuids.join('\n');
+}
+
+// ============ Timestamp ============
+function updateNowTs() {
+  document.getElementById('now-ts').textContent = Math.floor(Date.now() / 1000);
+}
+setInterval(updateNowTs, 1000);
+updateNowTs();
+
+function tsToDate() {
+  const ts = parseInt(document.getElementById('ts-input').value);
+  if (isNaN(ts)) { showResult('ts-result', '❌ 请输入有效的时间戳'); return; }
+  const d = new Date(ts * 1000);
+  showResult('ts-result', `UTC: ${d.toUTCString()}\n本地: ${d.toLocaleString('zh-CN')}\nISO: ${d.toISOString()}`);
+}
+function dateToTs() {
+  const d = new Date(document.getElementById('date-input').value);
+  if (isNaN(d.getTime())) { showResult('date-result', '❌ 请输入有效的日期时间'); return; }
+  showResult('date-result', `秒: ${Math.floor(d.getTime() / 1000)}\n毫秒: ${d.getTime()}`);
+}
+
+// ============ Color ============
+function hexToRgb(hex) {
+  const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return r ? [parseInt(r[1],16), parseInt(r[2],16), parseInt(r[3],16)] : null;
+}
+function rgbToHex(r,g,b) { return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join(''); }
+function rgbToHsl(r,g,b) {
+  r/=255;g/=255;b/=255;
+  const max=Math.max(r,g,b),min=Math.min(r,g,b);
+  let h=0,s=0,l=(max+min)/2;
+  if(max!==min){
+    const d=max-min;
+    s=l>0.5?d/(2-max-min):d/(max+min);
+    h=max===r?((g-b)/d+(g<b?6:0)):max===g?((b-r)/d+2):((r-g)/d+4);
+    h/=6;
+  }
+  return [Math.round(h*360), Math.round(s*100), Math.round(l*100)];
+}
+function hslToRgb(h,s,l) {
+  h/=360;s/=100;l/=100;
+  if(s===0) return [Math.round(l*255),Math.round(l*255),Math.round(l*255)];
+  const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};
+  const q=l<0.5?l*(1+s):l+s-l*s,p=2*l-q;
+  return [Math.round(hue2rgb(p,q,h+1/3)*255),Math.round(hue2rgb(p,q,h)*255),Math.round(hue2rgb(p,q,h-1/3)*255)];
+}
+function updateColor() {
+  const hex = document.getElementById('color-hex').value;
+  const rgb = hexToRgb(hex);
+  if (rgb) {
+    document.getElementById('color-rgb').value = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    const hsl = rgbToHsl(...rgb);
+    document.getElementById('color-hsl').value = `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
+    document.getElementById('color-preview').style.background = hex.startsWith('#') ? hex : '#' + hex;
+  }
+}
+['color-hex','color-rgb','color-hsl'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    const val = this.value.trim();
+    if (id === 'color-hex') { updateColor(); }
+    else if (id === 'color-rgb') {
+      const m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(val);
+      if (m) {
+        const hex = rgbToHex(+m[1],+m[2],+m[3]);
+        document.getElementById('color-hex').value = hex;
+        document.getElementById('color-hsl').value = 'hsl(' + rgbToHsl(+m[1],+m[2],+m[3]).join(', ') + ')';
+        document.getElementById('color-preview').style.background = hex;
+      }
+    } else if (id === 'color-hsl') {
+      const m = /hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/.exec(val);
+      if (m) {
+        const rgb = hslToRgb(+m[1],+m[2],+m[3]);
+        document.getElementById('color-hex').value = rgbToHex(...rgb);
+        document.getElementById('color-rgb').value = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+        document.getElementById('color-preview').style.background = rgbToHex(...rgb);
+      }
+    }
+  });
+});
+
+// ============ Regex ============
+function testRegex() {
+  const pattern = document.getElementById('regex-pattern').value;
+  const flags = document.getElementById('regex-flags').value;
+  const text = document.getElementById('regex-text').value;
+  if (!pattern) { showResult('regex-result', '请输入正则表达式'); return; }
+  try {
+    const re = new RegExp(pattern, flags);
+    const matches = [...text.matchAll(re)];
+    if (matches.length === 0) { showResult('regex-result', '没有匹配项'); return; }
+    let out = `共 ${matches.length} 个匹配项:\n\n`;
+    matches.forEach((m, i) => {
+      out += `匹配 ${i + 1}: "${m[0]}" (位置 ${m.index})\n`;
+      if (m.length > 1) {
+        m.slice(1).forEach((g, gi) => out += `  分组 ${gi + 1}: "${g}"\n`);
+      }
+    });
+    showResult('regex-result', out);
+  } catch(e) { showResult('regex-result', '❌ 正则表达式错误：' + e.message); }
+}
+
+// ============ Markdown ============
+function updateMarkdown() {
+  const md = document.getElementById('md-input').value;
+  document.getElementById('md-preview').innerHTML = marked.parse(md);
+}
+document.getElementById('md-input').addEventListener('input', updateMarkdown);
+updateMarkdown();
+</script>
+</body>
+</html>
