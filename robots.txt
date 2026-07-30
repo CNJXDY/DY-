@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://cnjxdy.github.io/DY-/sitemap.xml
+
+# 禁止爬取的路径（没有）
+Disallow:

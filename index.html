@@ -273,6 +273,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#timestamp" data-tool="timestamp"><span class="icon">⏰</span>时间戳转换</a></li>
     <li><a href="#color" data-tool="color"><span class="icon">🎨</span>颜色转换</a></li>
     <li><a href="#regex" data-tool="regex"><span class="icon">🔍</span>正则测试</a></li>
+    <li class="category">更多工具</li>
+    <li><a href="#image-base64" data-tool="image-base64"><span class="icon">🖼️</span>图片转Base64</a></li>
+    <li><a href="#text-dedup" data-tool="text-dedup"><span class="icon">📋</span>文本去重排序</a></li>
+    <li><a href="#countdown" data-tool="countdown"><span class="icon">⏳</span>倒计时计算</a></li>
+    <li><a href="#ip-info" data-tool="ip-info"><span class="icon">🌐</span>IP/浏览器信息</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -490,6 +495,68 @@ console.log('代码块');
 </textarea>
     <div class="label" style="margin-top:12px;">预览效果</div>
     <div class="markdown-preview" id="md-preview"></div>
+  </section>
+
+  <!-- Image to Base64 -->
+  <section class="tool-panel" id="panel-image-base64">
+    <h2>图片转Base64</h2>
+    <p class="desc">上传图片，转换为Base64编码字符串。可用于内嵌图片、CSS背景图等场景。</p>
+    <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:40px;text-align:center;cursor:pointer;" id="image-drop-zone">
+      <p style="color:var(--text-secondary);">📁 点击或拖拽图片到这里</p>
+      <input type="file" id="image-file-input" accept="image/*" style="display:none;">
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('image-base64-result')" style="display:none;" id="image-copy-btn">📋 复制Base64</button>
+    </div>
+    <div class="result-box" id="image-base64-result" style="display:none;max-height:150px;font-size:11px;"></div>
+    <div id="image-preview" style="margin-top:12px;text-align:center;"></div>
+  </section>
+
+  <!-- Text Dedup -->
+  <section class="tool-panel" id="panel-text-dedup">
+    <h2>文本去重排序</h2>
+    <p class="desc">粘贴文本，按行去重、排序、过滤空行。适合处理名单、关键词等数据。</p>
+    <textarea id="dedup-input" placeholder="每行一条数据，例如：&#10;苹果&#10;香蕉&#10;苹果&#10;橙子&#10;香蕉"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="dedupText()">去重</button>
+      <button class="btn btn-secondary" onclick="sortText('asc')">升序排序</button>
+      <button class="btn btn-secondary" onclick="sortText('desc')">降序排序</button>
+      <button class="btn btn-secondary" onclick="removeEmptyLines()">去空行</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('dedup-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="dedup-result" style="display:none;"></div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="tool-panel" id="panel-countdown">
+    <h2>倒计时计算</h2>
+    <p class="desc">计算两个日期之间的天数，或者计算N天后的日期。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">起始日期</div>
+        <input type="text" id="countdown-start" placeholder="如 2026-01-01" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">结束日期</div>
+        <input type="text" id="countdown-end" placeholder="如 2026-12-31" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcDaysBetween()">计算相差天数</button>
+      <button class="btn btn-secondary" onclick="calcDateAfter()">N天后日期</button>
+      <input type="number" id="days-offset" value="30" min="1" style="width:80px;min-height:auto;font-family:inherit;display:inline;" placeholder="天数">
+    </div>
+    <div class="result-box" id="countdown-result" style="display:none;"></div>
+  </section>
+
+  <!-- IP/UA Info -->
+  <section class="tool-panel" id="panel-ip-info">
+    <h2>浏览器信息查看</h2>
+    <p class="desc">查看当前浏览器、操作系统、屏幕分辨率、语言、时区等信息。</p>
+    <div class="btn-group">
+      <button class="btn" onclick="showBrowserInfo()">🔍 查看我的信息</button>
+    </div>
+    <div class="result-box" id="ip-info-result" style="display:none;"></div>
   </section>
 
   <!-- Ad Placeholder -->
@@ -739,6 +806,98 @@ function updateMarkdown() {
 }
 document.getElementById('md-input').addEventListener('input', updateMarkdown);
 updateMarkdown();
+
+// ============ Image to Base64 ============
+const dropZone = document.getElementById('image-drop-zone');
+const fileInput = document.getElementById('image-file-input');
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--accent)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'var(--border)'; });
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.style.borderColor = 'var(--border)';
+  const file = e.dataTransfer.files[0];
+  if (file) processImage(file);
+});
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (file) processImage(file);
+});
+function processImage(file) {
+  if (!file.type.startsWith('image/')) { showToast('请选择图片文件'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    showResult('image-base64-result', base64);
+    document.getElementById('image-copy-btn').style.display = 'inline-flex';
+    document.getElementById('image-preview').innerHTML = `<img src="${base64}" style="max-width:300px;border-radius:var(--radius);border:1px solid var(--border);">`;
+    dropZone.querySelector('p').textContent = '✅ ' + file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============ Text Dedup ============
+function getDedupLines() {
+  return document.getElementById('dedup-input').value.split('\n');
+}
+function dedupText() {
+  const lines = [...new Set(getDedupLines())];
+  showResult('dedup-result', lines.join('\n'));
+}
+function sortText(order) {
+  const lines = getDedupLines().filter(l => l.trim());
+  lines.sort((a, b) => order === 'asc' ? a.localeCompare(b, 'zh') : b.localeCompare(a, 'zh'));
+  showResult('dedup-result', lines.join('\n'));
+}
+function removeEmptyLines() {
+  const lines = getDedupLines().filter(l => l.trim());
+  showResult('dedup-result', lines.join('\n'));
+}
+
+// ============ Countdown ============
+function calcDaysBetween() {
+  const start = new Date(document.getElementById('countdown-start').value);
+  const end = new Date(document.getElementById('countdown-end').value);
+  if (isNaN(start) || isNaN(end)) { showResult('countdown-result', '❌ 请输入有效日期 (格式: YYYY-MM-DD)'); return; }
+  const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+  showResult('countdown-result', `${document.getElementById('countdown-start').value} 到 ${document.getElementById('countdown-end').value}\n相差 ${Math.abs(diff)} 天 (${diff >= 0 ? '已过' : '还剩'} ${Math.abs(diff)} 天)`);
+}
+function calcDateAfter() {
+  const start = new Date(document.getElementById('countdown-start').value);
+  const days = parseInt(document.getElementById('days-offset').value) || 30;
+  if (isNaN(start)) { showResult('countdown-result', '❌ 请输入有效起始日期'); return; }
+  const future = new Date(start.getTime() + days * 86400000);
+  showResult('countdown-result', `${document.getElementById('countdown-start').value} 的 ${days} 天后是:\n${future.toISOString().split('T')[0]}`);
+}
+
+// ============ Browser Info ============
+function showBrowserInfo() {
+  const ua = navigator.userAgent;
+  let os = '未知', browser = '未知';
+  if (/Windows/i.test(ua)) os = 'Windows';
+  else if (/Mac/i.test(ua)) os = 'macOS';
+  else if (/Linux/i.test(ua) && !/Android/i.test(ua)) os = 'Linux';
+  else if (/Android/i.test(ua)) os = 'Android';
+  else if (/iPhone|iPad/i.test(ua)) os = 'iOS';
+  if (/Edg/i.test(ua)) browser = 'Edge';
+  else if (/Chrome/i.test(ua) && !/Edg/i.test(ua)) browser = 'Chrome';
+  else if (/Firefox/i.test(ua)) browser = 'Firefox';
+  else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
+  const info = [
+    `操作系统: ${os}`,
+    `浏览器: ${browser}`,
+    `屏幕分辨率: ${screen.width} x ${screen.height}`,
+    `可用分辨率: ${screen.availWidth} x ${screen.availHeight}`,
+    `语言: ${navigator.language}`,
+    `时区: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
+    `Cookie: ${navigator.cookieEnabled ? '已启用' : '已禁用'}`,
+    `在线状态: ${navigator.onLine ? '在线' : '离线'}`,
+    `逻辑核心数: ${navigator.hardwareConcurrency || '未知'}`,
+    `内存: ${navigator.deviceMemory ? navigator.deviceMemory + 'GB' : '未知'}`,
+    `User Agent: ${ua}`,
+  ];
+  showResult('ip-info-result', info.join('\n'));
+}
 </script>
 </body>
 </html>
