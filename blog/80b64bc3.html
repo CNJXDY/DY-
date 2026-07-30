@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正则表达式入门：从害怕到掌握，看这一篇就够了 - 万能工具箱</title>
+<meta name="description" content="用最通俗的语言讲解正则表达式，包含常用正则大全和在线测试工具推荐。">
+<meta name="keywords" content="正则表达式,regex测试,在线正则">
+<style>
+:root {
+  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
+  --text-secondary: #94a3b8; --accent: #6366f1; --accent-hover: #818cf8;
+  --border: #334155; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.9; font-size: 16px;
+}
+.container { max-width: 750px; margin: 0 auto; padding: 20px; }
+.header {
+  padding: 30px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 30px;
+}
+.header .back { margin-bottom: 12px; }
+.header .back a { color: var(--accent); text-decoration: none; font-size: 14px; }
+.header .back a:hover { color: var(--accent-hover); }
+.header .category {
+  display: inline-block; background: rgba(99,102,241,0.2); color: var(--accent-hover);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;
+}
+.header h1 { font-size: 26px; font-weight: 700; line-height: 1.4; }
+.header .meta { color: var(--text-secondary); font-size: 13px; margin-top: 8px; }
+.content { padding: 0 0 40px; }
+.content p { margin-bottom: 18px; color: #cbd5e1; }
+.content h2 { font-size: 20px; margin: 28px 0 12px; }
+.content h3 { font-size: 17px; margin: 20px 0 10px; }
+.content ul, .content ol { margin: 10px 0 18px 24px; color: #cbd5e1; }
+.content li { margin-bottom: 6px; }
+.content strong { color: var(--text); }
+.content code {
+  background: rgba(99,102,241,0.15); padding: 2px 6px; border-radius: 4px;
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px;
+}
+.content a { color: var(--accent); text-decoration: none; }
+.content a:hover { color: var(--accent-hover); }
+.related {
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);
+}
+.related h3 { font-size: 16px; margin-bottom: 12px; }
+.related a {
+  display: block; color: var(--accent); text-decoration: none;
+  padding: 6px 0; font-size: 14px;
+}
+.related a:hover { color: var(--accent-hover); }
+.footer {
+  text-align: center; padding: 30px 0; color: var(--text-secondary);
+  font-size: 13px; border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="back"><a href="index.html">← 返回博客列表</a> | <a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
+    <div class="category">开发工具</div>
+    <h1>正则表达式入门：从害怕到掌握，看这一篇就够了</h1>
+    <div class="meta">2026-07-30 · 519字 · 开发工具</div>
+  </div>
+  <div class="content">
+        <p>正则表达式是很多程序员的心魔。看起来像乱码，学起来头疼。但其实掌握几个常用模式，就能解决90%的问题。</p>
+    <p>正则表达式本质上是一种模式匹配语言，用来在一段文本中查找符合特定模式的字符串。比如验证手机号、提取邮箱、替换敏感词等。</p>
+    <p>常用元字符速记：. 匹配任意单个字符；* 匹配0次或多次；+ 匹配1次或多次；？匹配0次或1次；\d 匹配数字；\w 匹配字母数字下划线；\s 匹配空白字符；^ 匹配开头；$ 匹配结尾；[] 匹配括号内任意字符；() 分组。</p>
+    <p>几个实用正则：手机号 /1[3-9]\d{9}/；邮箱 /[\w.-]+@[\w.-]+\.\w+/；URL /https?:\/\/[\w.-]+\.[a-z]{2,}(\/\S*)?/i；中文 /[\u4e00-\u9fff]+/。</p>
+    <p>学习正则的最好方法是在线测试工具。输入正则表达式和测试文本，立即看到匹配结果。本站的正则测试工具支持分组捕获，帮你理解每个括号匹配了什么。</p>
+    <p>正则表达式不需要死记硬背，常用的自然就记住了，不常用的用的时候查一下就行。关键是理解它的工作原理。</p>
+    <p>最后分享一个技巧：写复杂正则时，先写一个简单的版本，逐步添加规则，每加一条就测试一下。这样比一口气写一个复杂正则容易得多。</p>
+  </div>
+  <div class="related">
+    <h3>相关文章</h3>
+    
+  </div>
+  <div class="footer">
+    <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
+    <p style="margin-top:4px;">所有工具数据均在浏览器本地处理，不上传服务器</p>
+  </div>
+</div>
+</body>
+</html>

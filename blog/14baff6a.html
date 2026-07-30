@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unix时间戳是什么？程序员必知的时间戳转换方法 - 万能工具箱</title>
+<meta name="description" content="搞懂时间戳的概念、为什么用时间戳存储时间、以及如何在线转换时间戳和日期。">
+<meta name="keywords" content="时间戳转换,unix时间戳,在线时间戳">
+<style>
+:root {
+  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
+  --text-secondary: #94a3b8; --accent: #6366f1; --accent-hover: #818cf8;
+  --border: #334155; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.9; font-size: 16px;
+}
+.container { max-width: 750px; margin: 0 auto; padding: 20px; }
+.header {
+  padding: 30px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 30px;
+}
+.header .back { margin-bottom: 12px; }
+.header .back a { color: var(--accent); text-decoration: none; font-size: 14px; }
+.header .back a:hover { color: var(--accent-hover); }
+.header .category {
+  display: inline-block; background: rgba(99,102,241,0.2); color: var(--accent-hover);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;
+}
+.header h1 { font-size: 26px; font-weight: 700; line-height: 1.4; }
+.header .meta { color: var(--text-secondary); font-size: 13px; margin-top: 8px; }
+.content { padding: 0 0 40px; }
+.content p { margin-bottom: 18px; color: #cbd5e1; }
+.content h2 { font-size: 20px; margin: 28px 0 12px; }
+.content h3 { font-size: 17px; margin: 20px 0 10px; }
+.content ul, .content ol { margin: 10px 0 18px 24px; color: #cbd5e1; }
+.content li { margin-bottom: 6px; }
+.content strong { color: var(--text); }
+.content code {
+  background: rgba(99,102,241,0.15); padding: 2px 6px; border-radius: 4px;
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px;
+}
+.content a { color: var(--accent); text-decoration: none; }
+.content a:hover { color: var(--accent-hover); }
+.related {
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);
+}
+.related h3 { font-size: 16px; margin-bottom: 12px; }
+.related a {
+  display: block; color: var(--accent); text-decoration: none;
+  padding: 6px 0; font-size: 14px;
+}
+.related a:hover { color: var(--accent-hover); }
+.footer {
+  text-align: center; padding: 30px 0; color: var(--text-secondary);
+  font-size: 13px; border-top: 1px solid var(--border);
+}
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="back"><a href="index.html">← 返回博客列表</a> | <a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
+    <div class="category">效率提升</div>
+    <h1>Unix时间戳是什么？程序员必知的时间戳转换方法</h1>
+    <div class="meta">2026-07-30 · 471字 · 效率提升</div>
+  </div>
+  <div class="content">
+        <p>如果你写过代码，一定见过类似 1700000000 这样的数字。这就是Unix时间戳，表示从1970年1月1日0时0分0秒（UTC）到现在经过的秒数。</p>
+    <p>为什么用时间戳而不是直接存日期字符串？因为时间戳是一个纯数字，不受时区影响，不受格式影响，计算时间差非常方便，数据库存储和索引效率高。</p>
+    <p>时间戳分为秒级和毫秒级。秒级是10位数字，毫秒级是13位数字。JavaScript的Date.now()返回的是毫秒级，Python的time.time()返回的是秒级（带小数）。</p>
+    <p>在线时间戳转换工具让你不用写代码就能转换时间。输入时间戳，秒变日期；输入日期，秒变时间戳。对于查日志、调试接口、数据分析等场景非常实用。</p>
+    <p>常见的时间戳陷阱：时区问题——时间戳本身没有时区概念，但转成日期时需要注意时区；2038年问题——32位系统的时间戳会在2038年溢出，不过现在大部分系统都已经升级到64位了。</p>
+    <p>本站的时间戳转换工具同时显示UTC时间和本地时间，支持秒级和毫秒级时间戳，双向转换，方便快捷。</p>
+    <p>理解时间戳是每个程序员的必修课。搞懂了它，处理时间相关的Bug会少很多。</p>
+  </div>
+  <div class="related">
+    <h3>相关文章</h3>
+    
+  </div>
+  <div class="footer">
+    <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
+    <p style="margin-top:4px;">所有工具数据均在浏览器本地处理，不上传服务器</p>
+  </div>
+</div>
+</body>
+</html>
