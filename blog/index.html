@@ -7,58 +7,30 @@
 <meta name="description" content="免费在线工具 + 实用教程博客，每天更新JSON格式化、二维码生成、Base64编解码、Markdown等教程">
 <meta name="keywords" content="在线工具,JSON格式化,二维码生成,Base64,教程,博客">
 <style>
-:root {
-  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
-  --text-secondary: #94a3b8; --accent: #6366f1; --accent-hover: #818cf8;
-  --border: #334155; --radius: 10px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6;
-}
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-.header {
-  text-align: center; padding: 40px 0 20px;
-  border-bottom: 1px solid var(--border); margin-bottom: 30px;
-}
-.header h1 {
-  font-size: 28px; font-weight: 700;
-  background: linear-gradient(135deg, var(--accent), #a78bfa);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.header p { color: var(--text-secondary); margin-top: 8px; font-size: 14px; }
-.header .back { margin-top: 12px; }
-.header .back a { color: var(--accent); text-decoration: none; font-size: 14px; }
-.header .back a:hover { color: var(--accent-hover); }
-.stats {
-  display: flex; gap: 20px; justify-content: center; margin: 20px 0;
-  flex-wrap: wrap;
-}
-.stat { text-align: center; }
-.stat .num { font-size: 24px; font-weight: 700; color: var(--accent-hover); }
-.stat .lbl { font-size: 12px; color: var(--text-secondary); }
-.article-card {
-  background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-  transition: border-color 0.2s;
-}
-.article-card:hover { border-color: var(--accent); }
-.article-card .category {
-  display: inline-block; background: rgba(99,102,241,0.2); color: var(--accent-hover);
-  padding: 2px 10px; border-radius: 20px; font-size: 12px; margin-bottom: 8px;
-}
-.article-card h2 { font-size: 18px; margin-bottom: 6px; }
-.article-card h2 a { color: var(--text); text-decoration: none; }
-.article-card h2 a:hover { color: var(--accent-hover); }
-.article-card .desc { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
-.article-card .meta { color: var(--text-secondary); font-size: 12px; }
-.footer {
-  text-align: center; padding: 40px 0; color: var(--text-secondary);
-  font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px;
-}
-.footer a { color: var(--accent); text-decoration: none; }
+:root {--bg:#0f172a;--card-bg:#1e293b;--text:#e2e8f0;--text-secondary:#94a3b8;--accent:#6366f1;--accent-hover:#818cf8;--border:#334155;--radius:10px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+.container{max-width:800px;margin:0 auto;padding:20px;}
+.header{text-align:center;padding:40px 0 20px;border-bottom:1px solid var(--border);margin-bottom:30px;}
+.header h1{font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header p{color:var(--text-secondary);margin-top:8px;font-size:14px;}
+.header .back{margin-top:12px;}
+.header .back a{color:var(--accent);text-decoration:none;font-size:14px;}
+.header .back a:hover{color:var(--accent-hover);}
+.stats{display:flex;gap:20px;justify-content:center;margin:20px 0;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat .num{font-size:24px;font-weight:700;color:var(--accent-hover);}
+.stat .lbl{font-size:12px;color:var(--text-secondary);}
+.article-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:border-color 0.2s;}
+.article-card:hover{border-color:var(--accent);}
+.article-card .category{display:inline-block;background:rgba(99,102,241,0.2);color:var(--accent-hover);padding:2px 10px;border-radius:20px;font-size:12px;margin-bottom:8px;}
+.article-card h2{font-size:18px;margin-bottom:6px;}
+.article-card h2 a{color:var(--text);text-decoration:none;}
+.article-card h2 a:hover{color:var(--accent-hover);}
+.article-card .desc{color:var(--text-secondary);font-size:14px;margin-bottom:8px;}
+.article-card .meta{color:var(--text-secondary);font-size:12px;}
+.footer{text-align:center;padding:40px 0;color:var(--text-secondary);font-size:13px;border-top:1px solid var(--border);margin-top:40px;}
+.footer a{color:var(--accent);text-decoration:none;}
 </style>
 </head>
 <body>
@@ -68,12 +40,11 @@ body {
     <p>每天更新实用教程，涵盖开发工具、效率提升、热点科普</p>
     <div class="back"><a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
     <div class="stats">
-      <div class="stat"><div class="num">12</div><div class="lbl">篇文章</div></div>
-      <div class="stat"><div class="num">5,910</div><div class="lbl">总字数</div></div>
+      <div class="stat"><div class="num">13</div><div class="lbl">篇文章</div></div>
+      <div class="stat"><div class="num">6,521</div><div class="lbl">总字数</div></div>
       <div class="stat"><div class="num">5</div><div class="lbl">个分类</div></div>
     </div>
   </div>
-
     <article class="article-card">
     <div class="category">工具教程</div>
     <h2><a href="c2364fce.html">JSON格式化工具推荐：这5个在线工具让你效率翻倍</a></h2>
@@ -146,7 +117,12 @@ body {
     <p class="desc">图片、PDF、视频文件太大怎么办？推荐5个免费在线压缩工具，不用下载软件，打开网页就能用。</p>
     <p class="meta">2026-07-30 · 489字</p>
   </article>
-
+  <article class="article-card">
+    <div class="category">热点科普</div>
+    <h2><a href="ac6c57d1.html">你的个人信息可能已经泄露了：10个保护隐私的实用建议</a></h2>
+    <p class="desc">在信息泄露频发的时代，普通人如何保护自己的隐私和数据安全？这10条建议简单有效。</p>
+    <p class="meta">2026-07-30 · 611字</p>
+  </article>
   <div class="footer">
     <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
     <p style="margin-top:4px;">所有工具数据均在浏览器本地处理，不上传服务器</p>
