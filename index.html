@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、进制转换、HTML实体编解码、CSS格式化、SQL格式化、文本统计、URL编解码、Base64、颜色转换、二维码生成、密码生成、UUID生成、时间戳转换、哈希计算、正则测试、Markdown预览等20个实用工具">
+<meta name="description" content="免费在线工具集合：JSON格式化、金额大写转换、简繁转换、单位换算、文本对比、进制转换、CSS格式化、SQL格式化、二维码生成等24个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、进制转换、CSS格式化、二维码生成、密码生成、Base64编解码等20个实用在线工具，免费、无广告、本地运行。">
+<meta property="og:description" content="JSON格式化、金额大写转换、简繁转换、单位换算、文本对比、进制转换、CSS格式化、SQL格式化等24个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -41,6 +41,19 @@
   --success: #22c55e;
   --danger: #ef4444;
   --radius: 10px;
+}
+.light {
+  --bg: #f8fafc;
+  --sidebar-bg: #fff;
+  --card-bg: #fff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --border: #e2e8f0;
+  --input-bg: #f1f5f9;
+  --success: #16a34a;
+  --danger: #dc2626;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -104,6 +117,64 @@ body {
   opacity: 0.6;
 }
 .tool-nav .icon { font-size: 16px; width: 20px; text-align: center; }
+.tool-nav li a.hidden { display: none; }
+
+/* Search */
+.search-box {
+  padding: 0 16px 10px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 32px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box .search-icon {
+  position: absolute;
+  left: 26px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  padding: 0 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.theme-toggle button {
+  background: var(--border);
+  border: none;
+  width: 44px; height: 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+}
+.theme-toggle button::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+.light .theme-toggle button { background: var(--accent); }
+.light .theme-toggle button::after { transform: translateX(20px); }
 
 /* Main */
 .main {
@@ -275,6 +346,14 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <h1>万能工具箱</h1>
     <p>免费 · 无广告 · 本地运行</p>
   </div>
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="tool-search" placeholder="搜索工具..." oninput="filterTools()">
+  </div>
+  <div class="theme-toggle">
+    <span>🌙 暗色模式</span>
+    <button onclick="toggleTheme()" id="theme-btn"></button>
+  </div>
   <ul class="tool-nav">
     <li class="category">文本工具</li>
     <li><a href="#json" class="active" data-tool="json"><span class="icon">{ }</span>JSON 格式化</a></li>
@@ -302,6 +381,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#html-entity" data-tool="html-entity"><span class="icon">🏷️</span>HTML实体编解码</a></li>
     <li><a href="#css-formatter" data-tool="css-formatter"><span class="icon">🎨</span>CSS格式化</a></li>
     <li><a href="#sql-formatter" data-tool="sql-formatter"><span class="icon">🗄️</span>SQL格式化</a></li>
+    <li class="category">实用工具</li>
+    <li><a href="#amount-uppercase" data-tool="amount-uppercase"><span class="icon">💰</span>金额大写转换</a></li>
+    <li><a href="#chinese-convert" data-tool="chinese-convert"><span class="icon">🀄</span>简繁转换</a></li>
+    <li><a href="#unit-converter" data-tool="unit-converter"><span class="icon">📏</span>单位换算</a></li>
+    <li><a href="#text-diff" data-tool="text-diff"><span class="icon">📑</span>文本对比</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -652,6 +736,95 @@ console.log('代码块');
     <div class="result-box" id="sql-result" style="display:none;"></div>
   </section>
 
+  <!-- Amount to Chinese Uppercase -->
+  <section class="tool-panel" id="panel-amount-uppercase">
+    <h2>金额大写转换</h2>
+    <p class="desc">将阿拉伯数字金额转换为中文大写金额，支持元角分，适合财务、发票等场景。</p>
+    <div style="margin-bottom:12px;">
+      <div class="label">输入金额</div>
+      <input type="text" id="amount-input" placeholder="如：12345.67" style="font-family:inherit;font-size:18px;">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="amountToChinese()">💰 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('amount-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="amount-result" style="display:none;font-size:18px;text-align:center;padding:20px;letter-spacing:2px;"></div>
+  </section>
+
+  <!-- Simplified/Traditional Chinese -->
+  <section class="tool-panel" id="panel-chinese-convert">
+    <h2>简繁转换</h2>
+    <p class="desc">中文简体与繁体互相转换，支持常见词汇和短语。</p>
+    <textarea id="chinese-input" placeholder="输入要转换的中文文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="toTraditional()">繁 简体→繁体</button>
+      <button class="btn btn-secondary" onclick="toSimplified()">简 繁体→简体</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('chinese')">📋 复制</button>
+    </div>
+    <div class="result-box" id="chinese-result" style="display:none;"></div>
+  </section>
+
+  <!-- Unit Converter -->
+  <section class="tool-panel" id="panel-unit-converter">
+    <h2>单位换算</h2>
+    <p class="desc">长度、重量、温度、面积、体积、速度等多种单位换算。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">类别</div>
+        <select id="unit-category" onchange="updateUnitOptions()" style="font-family:inherit;">
+          <option value="length">长度</option>
+          <option value="weight">重量</option>
+          <option value="temperature">温度</option>
+          <option value="area">面积</option>
+          <option value="volume">体积</option>
+          <option value="speed">速度</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">数值</div>
+        <input type="text" id="unit-value" placeholder="输入数值" style="font-family:inherit;" oninput="convertUnit()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">从</div>
+        <select id="unit-from" onchange="convertUnit()" style="font-family:inherit;"></select>
+      </div>
+      <div>
+        <div class="label">到</div>
+        <select id="unit-to" onchange="convertUnit()" style="font-family:inherit;"></select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="swapUnits()">🔄 交换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('unit-result-text')">📋 复制</button>
+    </div>
+    <div class="result-box" id="unit-result" style="display:none;font-size:16px;text-align:center;padding:16px;">
+      <span id="unit-result-text"></span>
+    </div>
+  </section>
+
+  <!-- Text Diff -->
+  <section class="tool-panel" id="panel-text-diff">
+    <h2>文本对比</h2>
+    <p class="desc">对比两段文本的差异，逐行高亮显示新增、删除和修改的内容。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">原始文本</div>
+        <textarea id="diff-old" placeholder="粘贴原始文本..."></textarea>
+      </div>
+      <div>
+        <div class="label">新文本</div>
+        <textarea id="diff-new" placeholder="粘贴新文本..."></textarea>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="computeDiff()">📑 对比</button>
+      <button class="btn btn-secondary btn-sm" onclick="swapDiff()">🔄 交换</button>
+    </div>
+    <div class="result-box" id="diff-result" style="display:none;max-height:500px;font-family:inherit;line-height:1.8;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -659,7 +832,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 20个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 24个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -1096,6 +1269,420 @@ function formatSQL() {
 function minifySQL() {
   let sql = document.getElementById('sql-input').value;
   showResult('sql-result', sql.replace(/\s+/g, ' ').trim());
+}
+
+// ============ Amount to Chinese Uppercase ============
+const CN_DIGITS = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+const CN_UNITS = ['', '拾', '佰', '仟'];
+const CN_BIG = ['', '万', '亿', '万亿'];
+function amountToChinese() {
+  let val = document.getElementById('amount-input').value.trim();
+  if (!val || isNaN(parseFloat(val))) { showResult('amount-result', '请输入有效金额'); return; }
+  let neg = val.startsWith('-');
+  if (neg) val = val.slice(1);
+  let parts = val.split('.');
+  let intPart = parts[0].replace(/^0+/, '') || '0';
+  let decPart = parts[1] || '';
+
+  function convertInt(s) {
+    if (s === '0') return '零';
+    let result = '';
+    let len = s.length;
+    let groupIdx = 0;
+    while (len > 0) {
+      let seg = s.substring(Math.max(0, len - 4), len);
+      len -= 4;
+      if (parseInt(seg) === 0) { groupIdx++; continue; }
+      let segStr = '';
+      for (let i = 0; i < seg.length; i++) {
+        let d = parseInt(seg[i]);
+        let u = CN_UNITS[seg.length - 1 - i];
+        if (d === 0) {
+          if (segStr && !segStr.endsWith('零')) segStr += '零';
+        } else {
+          segStr += CN_DIGITS[d] + u;
+        }
+      }
+      result = segStr.replace(/零$/, '') + CN_BIG[groupIdx] + result;
+      groupIdx++;
+    }
+    return result.replace(/零+/g, '零').replace(/零$/, '');
+  }
+
+  let result = (neg ? '负' : '') + convertInt(intPart) + '元';
+  if (decPart) {
+    let jiao = decPart[0] || '0';
+    let fen = decPart[1] || '0';
+    if (jiao !== '0') result += CN_DIGITS[parseInt(jiao)] + '角';
+    else if (fen !== '0') result += '零';
+    if (fen !== '0') result += CN_DIGITS[parseInt(fen)] + '分';
+  } else {
+    result += '整';
+  }
+  showResult('amount-result', result);
+}
+
+// ============ Simplified/Traditional Chinese ============
+const S2T_MAP = {
+  '万': '萬', '与': '與', '丑': '醜', '专': '專', '业': '業', '丛': '叢', '东': '東', '丝': '絲',
+  '丢': '丟', '两': '兩', '严': '嚴', '丧': '喪', '个': '個', '临': '臨', '为': '為', '丽': '麗',
+  '举': '舉', '义': '義', '乌': '烏', '乐': '樂', '乔': '喬', '习': '習', '乡': '鄉', '书': '書',
+  '买': '買', '乱': '亂', '争': '爭', '于': '於', '亏': '虧', '云': '雲', '互': '互', '亚': '亞',
+  '产': '產', '亩': '畝', '亲': '親', '亿': '億', '仅': '僅', '从': '從', '仑': '侖', '仓': '倉',
+  '仪': '儀', '们': '們', '价': '價', '众': '眾', '优': '優', '会': '會', '伟': '偉', '传': '傳',
+  '伤': '傷', '伦': '倫', '伪': '偽', '体': '體', '余': '餘', '侠': '俠', '侣': '侶', '侥': '僥',
+  '侦': '偵', '侧': '側', '侨': '僑', '侩': '儈', '侪': '儕', '侬': '儂', '俣': '俁', '俦': '儔',
+  '俨': '儼', '俩': '倆', '俪': '儷', '俭': '儉', '债': '債', '倾': '傾', '偻': '僂', '偾': '僨',
+  '偿': '償', '傧': '儐', '储': '儲', '傩': '儺', '儿': '兒', '兑': '兌', '兔': '兔', '党': '黨',
+  '兰': '蘭', '关': '關', '兴': '興', '兹': '茲', '养': '養', '兽': '獸', '内': '內', '冈': '岡',
+  '册': '冊', '写': '寫', '军': '軍', '农': '農', '冯': '馮', '冲': '衝', '决': '決', '况': '況',
+  '冻': '凍', '净': '淨', '凄': '淒', '准': '準', '凉': '涼', '减': '減', '凑': '湊', '几': '幾',
+  '凤': '鳳', '凫': '鳧', '凭': '憑', '凯': '凱', '击': '擊', '凿': '鑿', '刍': '芻', '划': '劃',
+  '刘': '劉', '则': '則', '刚': '剛', '创': '創', '删': '刪', '别': '別', '刭': '剄', '刽': '劊',
+  '制': '製', '剧': '劇', '剑': '劍', '剂': '劑', '力': '力', '办': '辦', '功': '功', '务': '務',
+  '动': '動', '励': '勵', '劲': '勁', '劳': '勞', '势': '勢', '勋': '勳', '勚': '勩', '匀': '勻',
+  '匦': '匭', '匮': '匱', '区': '區', '医': '醫', '华': '華', '协': '協', '单': '單', '卖': '賣',
+  '卢': '盧', '卫': '衛', '却': '卻', '厅': '廳', '历': '歷', '厉': '厲', '压': '壓', '厌': '厭',
+  '厍': '厙', '县': '縣', '叁': '叄', '参': '參', '双': '雙', '发': '發', '变': '變', '叙': '敘',
+  '叠': '疊', '叶': '葉', '号': '號', '叹': '嘆', '叽': '嘰', '吁': '籲', '吕': '呂', '吗': '嗎',
+  '吨': '噸', '听': '聽', '吴': '吳', '呐': '吶', '呒': '嘸', '呕': '嘔', '呗': '唄', '员': '員',
+  '呙': '咼', '呛': '嗆', '呜': '嗚', '咏': '詠', '咙': '嚨', '咛': '嚀', '咝': '噝', '咤': '吒',
+  '咨': '諮', '咸': '鹹', '哎': '噯', '哟': '喲', '唛': '嘜', '唝': '嗊', '唠': '嘮', '唡': '啢',
+  '唢': '嗩', '唤': '喚', '啧': '嘖', '啬': '嗇', '啭': '囀', '啮': '齧', '啰': '囉', '啴': '嘽',
+  '啸': '嘯', '喷': '噴', '喽': '嘍', '喾': '嚳', '嗫': '囁', '嗳': '噯', '嘘': '噓', '嘤': '嚶',
+  '嘱': '囑', '噜': '嚕', '团': '團', '园': '園', '困': '困', '围': '圍', '国': '國', '图': '圖',
+  '圆': '圓', '圣': '聖', '场': '場', '块': '塊', '坚': '堅', '坛': '壇', '坝': '壩', '坞': '塢',
+  '坟': '墳', '坠': '墜', '垄': '壟', '垅': '壠', '垆': '壚', '垒': '壘', '垦': '墾', '垩': '堊',
+  '垫': '墊', '垭': '埡', '垲': '塏', '垴': '堖', '埙': '塤', '埚': '堝', '埝': '墊', '埯': '垵',
+  '堑': '塹', '堕': '墮', '墙': '牆', '处': '處', '备': '備', '复': '復', '夏': '夏', '够': '夠',
+  '头': '頭', '夸': '誇', '夹': '夾', '夺': '奪', '奖': '獎', '奥': '奧', '孙': '孫', '学': '學',
+  '宁': '寧', '实': '實', '宠': '寵', '审': '審', '写': '寫', '宽': '寬', '对': '對', '寻': '尋',
+  '导': '導', '寿': '壽', '将': '將', '尔': '爾', '尘': '塵', '尝': '嘗', '尧': '堯', '尴': '尷',
+  '尸': '屍', '尽': '盡', '屃': '屭', '层': '層', '届': '屆', '属': '屬', '屡': '屢', '屦': '屨',
+  '屿': '嶼', '岁': '歲', '岂': '豈', '岗': '崗', '岛': '島', '岩': '岩', '岭': '嶺', '岳': '岳',
+  '峡': '峽', '峦': '巒', '峰': '峰', '崂': '嶗', '崃': '崍', '崭': '嶄', '嵘': '嶸', '嵛': '崳',
+  '嵝': '嶁', '巅': '巔', '巩': '鞏', '巯': '巰', '币': '幣', '帅': '帥', '师': '師', '帐': '帳',
+  '帘': '簾', '帜': '幟', '带': '帶', '帧': '幀', '帮': '幫', '干': '幹', '平': '平', '年': '年',
+  '并': '並', '庄': '莊', '庆': '慶', '庐': '廬', '库': '庫', '应': '應', '庙': '廟', '庞': '龐',
+  '废': '廢', '广': '廣', '开': '開', '异': '異', '弃': '棄', '张': '張', '弥': '彌', '当': '當',
+  '归': '歸', '录': '錄', '彻': '徹', '征': '徵', '术': '術', '冲': '沖', '决': '決', '况': '況',
+  '冻': '凍', '净': '淨', '凄': '淒', '准': '准', '凉': '涼', '减': '減', '凑': '湊', '凛': '凜',
+  '击': '擊', '凿': '鑿', '刍': '芻', '划': '劃', '删': '刪', '创': '創', '剂': '劑', '剧': '劇',
+  '刘': '劉', '则': '則', '刚': '剛', '剐': '剮', '剧': '劇', '办': '辦', '务': '務', '势': '勢',
+  '劝': '勸', '双': '雙', '发': '發', '叠': '疊', '只': '隻', '台': '臺', '叶': '葉', '叹': '嘆',
+  '吗': '嗎', '吨': '噸', '启': '啟', '吴': '吳', '呕': '嘔', '员': '員', '呗': '唄', '呛': '嗆',
+  '呜': '嗚', '咏': '詠', '国': '國', '图': '圖', '圆': '圓', '场': '場', '块': '塊', '坛': '壇',
+  '坞': '塢', '坟': '墳', '坠': '墜', '垄': '壟', '备': '備', '复': '複', '头': '頭', '夹': '夾',
+  '夺': '奪', '奖': '獎', '孙': '孫', '学': '學', '实': '實', '审': '審', '对': '對', '尔': '爾',
+  '尝': '嘗', '尴': '尷', '尽': '盡', '层': '層', '属': '屬', '屡': '屢', '屿': '嶼', '岁': '歲',
+  '岂': '豈', '岗': '崗', '岛': '島', '峡': '峽', '师': '師', '带': '帶', '帮': '幫', '干': '幹',
+  '并': '並', '广': '廣', '庄': '莊', '庆': '慶', '应': '應', '庙': '廟', '废': '廢', '开': '開',
+  '异': '異', '张': '張', '强': '強', '归': '歸', '当': '當', '录': '錄', '彻': '徹', '征': '徵',
+  '后': '後', '得': '得', '从': '從', '御': '禦', '复': '復', '循': '循', '微': '微', '征': '徵',
+  '冲': '衝', '术': '術', '卫': '衛', '态': '態', '怂': '慫', '态': '態', '虑': '慮', '恳': '懇',
+  '恶': '惡', '恼': '惱', '悬': '懸', '惩': '懲', '惫': '憊', '恋': '戀', '恳': '懇', '恶': '惡',
+  '惠': '惠', '惭': '慚', '惧': '懼', '惨': '慘', '惩': '懲', '惫': '憊', '惭': '慚', '惯': '慣',
+  '愤': '憤', '慌': '慌', '惰': '惰', '惴': '惴', '惶': '惶', '愧': '愧', '愿': '願', '态': '態',
+  '战': '戰', '戏': '戲', '户': '戶', '扑': '撲', '执': '執', '扩': '擴', '扫': '掃', '扬': '揚',
+  '扰': '擾', '抚': '撫', '抛': '拋', '抟': '摶', '抠': '摳', '抡': '掄', '抢': '搶', '护': '護',
+  '报': '報', '拟': '擬', '拢': '攏', '拣': '揀', '拥': '擁', '拦': '攔', '拧': '擰', '拨': '撥',
+  '择': '擇', '括': '括', '拭': '拭', '拮': '拮', '拯': '拯', '拱': '拱', '拳': '拳', '拴': '拴',
+  '拶': '拶', '拼': '拼', '拽': '拽', '拾': '拾', '拿': '拿', '持': '持', '挂': '掛', '指': '指',
+  '挚': '摯', '挛': '攣', '挜': '掗', '挝': '撾', '挞': '撻', '挟': '挾', '挠': '撓', '挡': '擋',
+  '挢': '撟', '挣': '掙', '挤': '擠', '挥': '揮', '挦': '撏', '捞': '撈', '损': '損', '捡': '撿',
+  '换': '換', '捣': '搗', '捧': '捧', '捱': '捱', '据': '據', '捶': '捶', '捷': '捷', '捻': '捻',
+  '掀': '掀', '掂': '掂', '掳': '擄', '掴': '摑', '掷': '擲', '掸': '撣', '掺': '摻', '掼': '摜',
+  '揽': '攬', '揿': '撳', '搀': '攙', '搁': '擱', '搂': '摟', '搅': '攪', '携': '攜', '摄': '攝',
+  '摆': '擺', '摇': '搖', '摈': '擯', '摊': '攤', '撄': '攖', '撑': '撐', '撵': '攆', '撷': '擷',
+  '撸': '擼', '撺': '攛', '攒': '攢', '敌': '敵', '敛': '斂', '数': '數', '斋': '齋', '斓': '斕',
+  '斗': '鬥', '斩': '斬', '断': '斷', '无': '無', '旧': '舊', '时': '時', '旷': '曠', '旸': '暘',
+  '昙': '曇', '昼': '晝', '昽': '曨', '显': '顯', '晋': '晉', '晒': '曬', '晓': '曉', '晔': '曄',
+  '晕': '暈', '晖': '暉', '暂': '暫', '暧': '曖', '札': '劄', '术': '術', '朱': '硃', '朴': '樸',
+  '机': '機', '杀': '殺', '杂': '雜', '权': '權', '条': '條', '来': '來', '杨': '楊', '枣': '棗',
+  '枪': '槍', '枫': '楓', '柜': '櫃', '柠': '檸', '栀': '梔', '栅': '柵', '标': '標', '栈': '棧',
+  '栉': '櫛', '栊': '櫳', '栋': '棟', '栌': '櫨', '栎': '櫟', '栏': '欄', '树': '樹', '栖': '棲',
+  '栗': '慄', '桨': '槳', '桩': '樁', '梦': '夢', '检': '檢', '棂': '櫺', '椁': '槨', '椟': '櫝',
+  '椠': '槧', '椤': '欏', '椭': '橢', '楼': '樓', '榄': '欖', '榇': '櫬', '榈': '櫚', '榉': '櫸',
+  '榛': '榛', '榜': '榜', '榨': '榨', '榄': '欖', '槠': '櫧', '槭': '槭', '槲': '槲', '橱': '櫥',
+  '橹': '櫓', '檐': '簷', '檩': '檁', '欢': '歡', '欤': '歟', '欧': '歐', '欲': '慾', '款': '款',
+  '欺': '欺', '钦': '欽', '软': '軟', '轴': '軸', '轻': '輕', '载': '載', '轿': '轎', '较': '較',
+  '辅': '輔', '辆': '輛', '辈': '輩', '辉': '輝', '辊': '輥', '辐': '輻', '辑': '輯', '输': '輸',
+  '辕': '轅', '辖': '轄', '辗': '輾', '舆': '輿', '边': '邊', '辽': '遼', '达': '達', '迁': '遷',
+  '过': '過', '迈': '邁', '运': '運', '还': '還', '这': '這', '进': '進', '远': '遠', '违': '違',
+  '连': '連', '迟': '遲', '迩': '邇', '迳': '逕', '选': '選', '逊': '遜', '递': '遞', '逻': '邏',
+  '遗': '遺', '邓': '鄧', '邝': '鄺', '邬': '鄔', '邮': '郵', '邹': '鄒', '邺': '鄴', '邻': '鄰',
+  '郁': '鬱', '郏': '郟', '郐': '鄶', '郑': '鄭', '郓': '鄆', '郦': '酈', '郧': '鄖', '郸': '鄲',
+  '酝': '醞', '酦': '醱', '酱': '醬', '酾': '釃', '酿': '釀', '释': '釋', '里': '裡', '鉴': '鑒',
+  '銮': '鑾', '錾': '鏨', '钅': '釒', '钆': '釓', '钇': '釔', '针': '針', '钉': '釘', '钊': '釗',
+  '钋': '釙', '钌': '釕', '钍': '釷', '钎': '釺', '钏': '釧', '钐': '釤', '钒': '釩', '钓': '釣',
+  '钔': '鍆', '钕': '釹', '钖': '鍚', '钗': '釵', '钘': '鈃', '钙': '鈣', '钚': '鈈', '钛': '鈦',
+  '钜': '鉅', '钝': '鈍', '钞': '鈔', '钟': '鐘', '钠': '鈉', '钡': '鋇', '钢': '鋼', '钣': '鈑',
+  '钤': '鈐', '钥': '鑰', '钦': '欽', '钧': '鈞', '钨': '鎢', '钪': '鈧', '钫': '鈁', '钬': '鈥',
+  '钭': '鈄', '钮': '鈕', '钯': '鈀', '钰': '鈺', '钱': '錢', '钲': '鉦', '钳': '鉗', '钴': '鈷',
+  '钶': '鈳', '钷': '鉕', '钸': '鈽', '钹': '鈸', '钺': '鉞', '钻': '鑽', '钼': '鉬', '钽': '鉭',
+  '钾': '鉀', '钿': '鈿', '铀': '鈾', '铁': '鐵', '铂': '鉑', '铃': '鈴', '铄': '鑠', '铅': '鉛',
+  '铆': '鉚', '铇': '鉋', '铈': '鈰', '铉': '鉉', '铊': '鉈', '铋': '鉍', '铌': '鈮', '铍': '鈹',
+  '铎': '鐸', '铐': '銬', '铑': '銠', '铒': '鉺', '铓': '鋩', '铕': '銪', '铖': '鋮', '铗': '鋏',
+  '铘': '鋣', '铙': '鐃', '铚': '銍', '铛': '鐺', '铜': '銅', '铝': '鋁', '铞': '銱', '铟': '銦',
+  '铠': '鎧', '铡': '鍘', '铢': '銖', '铣': '銑', '铤': '鋌', '铥': '銩', '铧': '鏵', '铨': '銓',
+  '铩': '鎩', '铪': '鉿', '铫': '銚', '铬': '鉻', '铭': '銘', '铮': '錚', '铯': '銫', '铰': '鉸',
+  '铱': '銥', '铲': '鏟', '铳': '銃', '铴': '鐋', '铵': '銨', '银': '銀', '铷': '銣', '铸': '鑄',
+  '铹': '鐒', '铺': '鋪', '铻': '鋙', '铼': '錸', '铽': '鋱', '链': '鏈', '铿': '鏗', '锃': '鋥',
+  '锄': '鋤', '锅': '鍋', '锆': '鋯', '锇': '鋨', '锈': '鏽', '锉': '銼', '锊': '鋝', '锋': '鋒',
+  '锌': '鋅', '锍': '鋶', '锎': '鐦', '锏': '鐧', '锐': '銳', '锑': '銻', '锒': '鋃', '锓': '鋟',
+  '锔': '鋦', '锕': '錒', '锖': '錆', '锗': '鍺', '锘': '鍩', '锘': '鍩', '错': '錯', '锚': '錨',
+  '锛': '錛', '锜': '錡', '锝': '鍀', '锞': '錁', '锟': '錕', '锡': '錫', '锢': '錮', '锣': '鑼',
+  '锤': '錘', '锥': '錐', '锦': '錦', '锨': '鍁', '锩': '鐧', '锪': '鍃', '锫': '錇', '锬': '錟',
+  '锭': '錠', '键': '鍵', '锯': '鋸', '锰': '錳', '锱': '錙', '锲': '鍥', '锶': '鍶', '锷': '鍔',
+  '锸': '鍤', '锹': '鍬', '锻': '鍛', '锼': '鎪', '锾': '鍰', '锿': '鎄', '镀': '鍍', '镁': '鎂',
+  '镂': '鏤', '镃': '鎡', '镄': '鐨', '镅': '鎇', '镆': '鏌', '镇': '鎮', '镉': '鎘', '镊': '鑷',
+  '镋': '鎲', '镍': '鎳', '镎': '鎿', '镏': '鎦', '镐': '鎬', '镒': '鎰', '镓': '鎵', '镔': '鑌',
+  '镕': '鎔', '锁': '鎖', '镗': '鏜', '镘': '鏝', '镙': '鏍', '镚': '鏰', '镛': '鏞', '镜': '鏡',
+  '镝': '鏑', '镞': '鏃', '镟': '鏇', '镡': '鐔', '镢': '钁', '镣': '鐐', '镤': '鏷', '镥': '鑥',
+  '镦': '鐓', '镧': '鑭', '镨': '鐠', '镩': '鑹', '镪': '鏹', '镫': '鐙', '镬': '鑊', '镭': '鐳',
+  '镮': '鐶', '鐯': '钂', '长': '長', '门': '門', '闩': '閂', '闪': '閃', '闫': '閆', '闭': '閉',
+  '问': '問', '闯': '闖', '闰': '閏', '闱': '闈', '闲': '閒', '闳': '閎', '间': '間', '闵': '閔',
+  '闶': '閌', '闷': '悶', '闸': '閘', '闹': '鬧', '闺': '閨', '闻': '聞', '闼': '闥', '闽': '閩',
+  '闾': '閭', '闿': '闓', '阀': '閥', '阁': '閣', '阂': '閡', '阃': '閫', '阄': '鬮', '阅': '閱',
+  '阆': '閬', '阇': '闍', '阈': '閾', '阉': '閹', '阋': '鬩', '阌': '閿', '阍': '閽', '阎': '閻',
+  '阏': '閼', '阐': '闡', '阑': '闌', '阙': '闕', '阚': '闞', '队': '隊', '阳': '陽', '阴': '陰',
+  '阵': '陣', '阶': '階', '际': '際', '陆': '陸', '陈': '陳', '陕': '陝', '阶': '階', '陨': '隕',
+  '险': '險', '随': '隨', '隐': '隱', '难': '難', '电': '電', '雾': '霧', '霁': '霽', '霉': '黴',
+  '霭': '靄', '霸': '霸', '露': '露', '青': '青', '靓': '靚', '静': '靜', '非': '非', '靠': '靠',
+  '靡': '靡', '面': '面', '靥': '靨', '鞑': '韃', '鞒': '鞽', '鞯': '韉', '韦': '韋', '韧': '韌',
+  '韩': '韓', '韪': '韙', '韬': '韜', '韵': '韻', '页': '頁', '顶': '頂', '顷': '頃', '顸': '頇',
+  '项': '項', '顺': '順', '须': '須', '顼': '頊', '顽': '頑', '顾': '顧', '顿': '頓', '颀': '頎',
+  '颁': '頒', '颂': '頌', '颃': '頏', '预': '預', '颅': '顱', '领': '領', '颇': '頗', '颈': '頸',
+  '颉': '頡', '颊': '頰', '颋': '頲', '颌': '頜', '颍': '潁', '颏': '頦', '颐': '頤', '频': '頻',
+  '颓': '頹', '颔': '頷', '颖': '穎', '颗': '顆', '题': '題', '颙': '顒', '颚': '顎', '颛': '顓',
+  '颜': '顏', '额': '額', '颞': '顳', '颟': '顢', '颠': '顛', '颡': '顙', '颢': '顥', '颤': '顫',
+  '颥': '顬', '颦': '顰', '颧': '顴', '风': '風', '飑': '颮', '飒': '颯', '飓': '颶', '飔': '颸',
+  '飕': '颼', '飘': '飄', '飙': '飆', '飞': '飛', '食': '食', '飨': '饗', '餍': '饜', '饤': '飣',
+  '饥': '飢', '饦': '飥', '饧': '餳', '饨': '飩', '饩': '餼', '饪': '飪', '饫': '飫', '饬': '飭',
+  '饭': '飯', '饮': '飲', '饯': '餞', '饰': '飾', '饱': '飽', '饲': '飼', '饴': '飴', '饵': '餌',
+  '饶': '饒', '饷': '餉', '饺': '餃', '饼': '餅', '饽': '餑', '饿': '餓', '馀': '餘', '馁': '餒',
+  '馄': '餛', '馅': '餡', '馆': '館', '馇': '餷', '馈': '饋', '馊': '餿', '馋': '饞', '馍': '饃',
+  '馏': '餾', '馐': '饈', '馑': '饉', '馒': '饅', '馓': '饊', '馔': '饌', '马': '馬', '驭': '馭',
+  '驮': '馱', '驯': '馴', '驰': '馳', '驱': '驅', '驳': '駁', '驴': '驢', '驵': '駔', '驶': '駛',
+  '驷': '駟', '驸': '駙', '驹': '駒', '驺': '騶', '驻': '駐', '驼': '駝', '驽': '駑', '驾': '駕',
+  '驿': '驛', '骀': '駘', '骁': '驍', '骂': '罵', '骃': '駻', '骄': '驕', '骅': '驊', '骆': '駱',
+  '骇': '駭', '骈': '駢', '骉': '驫', '骊': '驪', '骋': '騁', '验': '驗', '骍': '騂', '骏': '駿',
+  '骐': '騏', '骑': '騎', '骒': '騍', '骓': '騅', '骖': '驂', '骗': '騙', '骘': '騭', '骚': '騷',
+  '骛': '騖', '骜': '驁', '骝': '騮', '骞': '騫', '骟': '騸', '骠': '驃', '骡': '騾', '骢': '驄',
+  '骣': '驏', '骤': '驟', '骥': '驥', '骧': '驤', '骨': '骨', '骰': '骰', '骱': '骱', '骶': '骶',
+  '骷': '骷', '骸': '骸', '骺': '骺', '骼': '骼', '骽': '骽', '骿': '骿', '髂': '髂', '髅': '髏',
+  '髋': '髖', '髌': '髕', '髑': '髑', '高': '高', '髡': '髡', '髦': '髦', '髫': '髫', '髭': '髭',
+  '髯': '髯', '髹': '髹', '髺': '髺', '髻': '髻', '鬃': '鬃', '鬈': '鬈', '鬏': '鬏', '鬒': '鬒',
+  '鬓': '鬢', '鬟': '鬟', '鬣': '鬣', '鬼': '鬼', '魁': '魁', '魂': '魂', '魃': '魃', '魄': '魄',
+  '魅': '魅', '魇': '魘', '魈': '魈', '魉': '魎', '魊': '魊', '魋': '魋', '魌': '魌', '魍': '魍',
+  '魎': '魎', '魏': '魏', '魑': '魑', '魒': '魒', '魓': '魓', '魔': '魔', '鱼': '魚', '鱽': '魛',
+  '鱿': '魷', '鲀': '魨', '鲁': '魯', '鲂': '魴', '鲃': '䰾', '鲄': '魺', '鲅': '鮁', '鲆': '鮃',
+  '鲇': '鯰', '鲈': '鱸', '鲉': '鮋', '鲊': '鮓', '鲋': '鮒', '鲌': '鮊', '鲍': '鮑', '鲎': '鱟',
+  '鲏': '鮍', '鲐': '鮐', '鲑': '鮭', '鲒': '鮚', '鲓': '鮳', '鲔': '鮪', '鲕': '鮞', '鲖': '鮦',
+  '鲗': '鰂', '鲘': '鮜', '鲙': '鱠', '鲚': '鱭', '鲛': '鮫', '鲜': '鮮', '鲝': '鮺', '鲞': '鯗',
+  '鲟': '鱘', '鲠': '鯁', '鲡': '鱺', '鲢': '鰱', '鲣': '鰹', '鲤': '鯉', '鲥': '鰣', '鲦': '鰷',
+  '鲧': '鯀', '鲨': '鯊', '鲩': '鯇', '鲪': '鮶', '鲫': '鯽', '鲬': '鯒', '鲭': '鯖', '鲮': '鯪',
+  '鲯': '鯕', '鲰': '鯫', '鲱': '鯡', '鲲': '鯤', '鲳': '鯧', '鲴': '鯝', '鲵': '鯢', '鲶': '鯰',
+  '鲷': '鯛', '鲸': '鯨', '鲹': '鰺', '鲺': '鯴', '鲻': '鯔', '鲼': '鱝', '鲽': '鰈', '鲾': '鰏',
+  '鲿': '鱨', '鳀': '鯷', '鳁': '鰮', '鳂': '鰃', '鳃': '鰓', '鳅': '鰍', '鳆': '鰒', '鳇': '鰉',
+  '鳈': '鰁', '鳊': '鯿', '鳋': '鰠', '鳌': '鰲', '鳍': '鰭', '鳎': '鰨', '鳏': '鰥', '鳐': '鰩',
+  '鳑': '鰟', '鳒': '鰜', '鳓': '鰳', '鳔': '鰾', '鳕': '鱈', '鳖': '鱉', '鳗': '鰻', '鳘': '鰵',
+  '鳙': '鱅', '鳚': '䲁', '鳛': '鰼', '鳜': '鱖', '鳝': '鱔', '鳞': '鱗', '鳟': '鱒', '鳢': '鱧',
+  '鸟': '鳥', '鸠': '鳩', '鸡': '雞', '鸢': '鳶', '鸣': '鳴', '鸥': '鷗', '鸦': '鴉', '鸭': '鴨',
+  '鸯': '鴦', '鸨': '鴇', '鸩': '鴆', '鸪': '鴣', '鸫': '鶇', '鸬': '鸕', '鸭': '鴨', '鸮': '鴞',
+  '鸰': '鴒', '鸱': '鴟', '鸲': '鴝', '鸴': '鷽', '鸵': '鴕', '鸶': '鶿', '鸷': '鷙', '鸹': '鴰',
+  '鸺': '鵂', '鸻': '鴴', '鸼': '鵃', '鸽': '鴿', '鸾': '鸞', '鸿': '鴻', '鹁': '鵓', '鹂': '鸝',
+  '鹃': '鵑', '鹄': '鵠', '鹅': '鵝', '鹆': '鵒', '鹇': '鷳', '鹈': '鵜', '鹉': '鵡', '鹊': '鵲',
+  '鹋': '鶓', '鹌': '鵪', '鹍': '鶤', '鹎': '鵯', '鹏': '鵬', '鹐': '鵮', '鹑': '鵪', '鹒': '鶊',
+  '鹓': '鵷', '鹔': '鷫', '鹕': '鶘', '鹖': '鶡', '鹗': '鶚', '鹘': '鶻', '鹙': '鶖', '鹚': '鷀',
+  '鹛': '鶥', '鹜': '鶩', '鹞': '鷂', '鹟': '鶲', '鹠': '鶹', '鹡': '鶺', '鹢': '鷁', '鹣': '鶼',
+  '鹤': '鶴', '鹥': '鷖', '鹦': '鸚', '鹧': '鷓', '鹨': '鷚', '鹩': '鷯', '鹪': '鷦', '鹫': '鷲',
+  '鹬': '鷸', '鹭': '鷺', '鹮': '䴉', '鹯': '鸇', '鹰': '鷹', '鹱': '鸌', '鹲': '鸏', '鹳': '鸛',
+  '鹴': '鸘', '碱': '鹼', '盐': '鹽', '麦': '麥', '麸': '麩', '黄': '黃', '黉': '黌', '黑': '黑',
+  '默': '默', '黛': '黛', '黜': '黜', '黝': '黝', '黟': '黟', '黠': '黠', '黡': '黶', '黩': '黷',
+  '黪': '黲', '黯': '黯', '鼢': '鼢', '鼬': '鼬', '鼯': '鼯', '鼹': '鼴', '鼻': '鼻', '鼾': '鼾',
+  '齐': '齊', '齿': '齒', '龀': '齔', '龃': '齟', '龄': '齡', '龅': '齙', '龆': '齠', '龇': '齜',
+  '龈': '齦', '龊': '齪', '龋': '齲', '龌': '齷', '龙': '龍', '庞': '龐', '龚': '龔', '龛': '龕',
+  '龟': '龜',
+};
+function toTraditional() {
+  const text = document.getElementById('chinese-input').value;
+  let result = '';
+  for (const ch of text) {
+    result += S2T_MAP[ch] || ch;
+  }
+  showResult('chinese-result', result);
+}
+function toSimplified() {
+  // Build reverse map dynamically
+  if (!toSimplified._revMap) {
+    toSimplified._revMap = {};
+    for (const [k, v] of Object.entries(S2T_MAP)) {
+      if (!toSimplified._revMap[v]) toSimplified._revMap[v] = k;
+    }
+  }
+  const text = document.getElementById('chinese-input').value;
+  let result = '';
+  for (const ch of text) {
+    result += toSimplified._revMap[ch] || ch;
+  }
+  showResult('chinese-result', result);
+}
+
+// ============ Unit Converter ============
+const UNIT_DATA = {
+  length: {
+    units: ['米 (m)', '千米 (km)', '厘米 (cm)', '毫米 (mm)', '英里 (mi)', '英尺 (ft)', '英寸 (in)', '码 (yd)', '海里 (nmi)'],
+    toBase: [1, 1000, 0.01, 0.001, 1609.344, 0.3048, 0.0254, 0.9144, 1852],
+  },
+  weight: {
+    units: ['千克 (kg)', '克 (g)', '毫克 (mg)', '吨 (t)', '磅 (lb)', '盎司 (oz)', '斤', '两'],
+    toBase: [1, 0.001, 0.000001, 1000, 0.453592, 0.0283495, 0.5, 0.05],
+  },
+  temperature: {
+    units: ['摄氏度 (°C)', '华氏度 (°F)', '开尔文 (K)'],
+    toBase: null, // special handling
+  },
+  area: {
+    units: ['平方米 (m²)', '平方千米 (km²)', '公顷 (ha)', '亩', '平方英尺 (ft²)', '英亩 (acre)'],
+    toBase: [1, 1e6, 10000, 666.667, 0.092903, 4046.86],
+  },
+  volume: {
+    units: ['升 (L)', '毫升 (mL)', '立方米 (m³)', '加仑 (gal)', '夸脱 (qt)', '杯 (cup)'],
+    toBase: [1, 0.001, 1000, 3.78541, 0.946353, 0.236588],
+  },
+  speed: {
+    units: ['米/秒 (m/s)', '千米/时 (km/h)', '英里/时 (mph)', '节 (kn)', '马赫 (Mach)'],
+    toBase: [1, 0.277778, 0.44704, 0.514444, 340.3],
+  },
+};
+function updateUnitOptions() {
+  const cat = document.getElementById('unit-category').value;
+  const data = UNIT_DATA[cat];
+  const fromSel = document.getElementById('unit-from');
+  const toSel = document.getElementById('unit-to');
+  fromSel.innerHTML = toSel.innerHTML = '';
+  data.units.forEach((u, i) => {
+    fromSel.innerHTML += `<option value="${i}">${u}</option>`;
+    toSel.innerHTML += `<option value="${i}">${u}</option>`;
+  });
+  toSel.selectedIndex = Math.min(1, data.units.length - 1);
+  convertUnit();
+}
+function convertUnit() {
+  const cat = document.getElementById('unit-category').value;
+  const val = parseFloat(document.getElementById('unit-value').value);
+  const data = UNIT_DATA[cat];
+  if (isNaN(val)) { document.getElementById('unit-result').style.display = 'none'; return; }
+  const from = parseInt(document.getElementById('unit-from').value);
+  const to = parseInt(document.getElementById('unit-to').value);
+  let result;
+  if (cat === 'temperature') {
+    if (from === to) result = val;
+    else if (from === 0 && to === 1) result = val * 9/5 + 32;
+    else if (from === 0 && to === 2) result = val + 273.15;
+    else if (from === 1 && to === 0) result = (val - 32) * 5/9;
+    else if (from === 1 && to === 2) result = (val - 32) * 5/9 + 273.15;
+    else if (from === 2 && to === 0) result = val - 273.15;
+    else if (from === 2 && to === 1) result = (val - 273.15) * 9/5 + 32;
+  } else {
+    const base = val * data.toBase[from];
+    result = base / data.toBase[to];
+  }
+  result = Math.round(result * 1e10) / 1e10;
+  document.getElementById('unit-result').style.display = 'block';
+  document.getElementById('unit-result-text').textContent = `${val} ${data.units[from]} = ${result} ${data.units[to]}`;
+}
+function swapUnits() {
+  const from = document.getElementById('unit-from');
+  const to = document.getElementById('unit-to');
+  [from.value, to.value] = [to.value, from.value];
+  convertUnit();
+}
+updateUnitOptions();
+
+// ============ Text Diff ============
+function computeDiff() {
+  const oldText = document.getElementById('diff-old').value;
+  const newText = document.getElementById('diff-new').value;
+  if (!oldText && !newText) { showResult('diff-result', '请粘贴文本'); return; }
+  const oldLines = oldText.split('\n');
+  const newLines = newText.split('\n');
+  // Simple LCS-based diff
+  const m = oldLines.length, n = newLines.length;
+  const dp = Array.from({length: m + 1}, () => new Array(n + 1).fill(0));
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (oldLines[i-1] === newLines[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+      else dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+    }
+  }
+  // Backtrack
+  let html = '';
+  let i = m, j = n;
+  const ops = [];
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && oldLines[i-1] === newLines[j-1]) {
+      ops.unshift(['same', oldLines[i-1]]);
+      i--; j--;
+    } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+      ops.unshift(['add', newLines[j-1]]);
+      j--;
+    } else {
+      ops.unshift(['del', oldLines[i-1]]);
+      i--;
+    }
+  }
+  for (const [op, line] of ops) {
+    const escaped = line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    if (op === 'add') html += `<div style="background:rgba(34,197,94,0.15);color:#22c55e;padding:2px 8px;">+ ${escaped || '&nbsp;'}</div>`;
+    else if (op === 'del') html += `<div style="background:rgba(239,68,68,0.15);color:#ef4444;padding:2px 8px;">- ${escaped || '&nbsp;'}</div>`;
+    else html += `<div style="padding:2px 8px;color:var(--text-secondary);">  ${escaped || '&nbsp;'}</div>`;
+  }
+  document.getElementById('diff-result').style.display = 'block';
+  document.getElementById('diff-result').innerHTML = html;
+}
+function swapDiff() {
+  const oldEl = document.getElementById('diff-old');
+  const newEl = document.getElementById('diff-new');
+  [oldEl.value, newEl.value] = [newEl.value, oldEl.value];
+  computeDiff();
+}
+
+// ============ Search & Theme ============
+function filterTools() {
+  const q = document.getElementById('tool-search').value.toLowerCase();
+  const links = document.querySelectorAll('.tool-nav li a[data-tool]');
+  const categories = document.querySelectorAll('.tool-nav .category');
+  let anyVisible = false;
+  links.forEach(a => {
+    const text = a.textContent.toLowerCase();
+    const visible = !q || text.includes(q);
+    a.classList.toggle('hidden', !visible);
+    if (visible) anyVisible = true;
+  });
+  categories.forEach(c => {
+    // Show category if any sibling link is visible
+    let el = c.nextElementSibling;
+    let hasVisible = false;
+    while (el && el.tagName === 'LI') {
+      const a = el.querySelector('a[data-tool]');
+      if (a && !a.classList.contains('hidden')) hasVisible = true;
+      el = el.nextElementSibling;
+    }
+    c.style.display = hasVisible ? '' : 'none';
+  });
+}
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  document.querySelector('.theme-toggle span').textContent = isLight ? '☀️ 亮色模式' : '🌙 暗色模式';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+// Load saved theme
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light');
+  document.querySelector('.theme-toggle span').textContent = '☀️ 亮色模式';
 }
 
 // ============ Browser Info ============
