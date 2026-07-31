@@ -4,7 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、文本统计、URL编解码、Base64、颜色转换、二维码生成、密码生成、UUID生成、时间戳转换、哈希计算、正则测试、Markdown预览">
+<meta name="description" content="免费在线工具集合：JSON格式化、进制转换、HTML实体编解码、CSS格式化、SQL格式化、文本统计、URL编解码、Base64、颜色转换、二维码生成、密码生成、UUID生成、时间戳转换、哈希计算、正则测试、Markdown预览等20个实用工具">
+<meta name="theme-color" content="#6366f1">
+<meta property="og:title" content="万能工具箱 - 免费在线工具集合">
+<meta property="og:description" content="JSON格式化、进制转换、CSS格式化、二维码生成、密码生成、Base64编解码等20个实用在线工具，免费、无广告、本地运行。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cnjxdy.github.io/DY-/">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🔧</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "万能工具箱",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等20个实用工具",
+  "url": "https://cnjxdy.github.io/DY-/",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" }
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
@@ -278,6 +297,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#text-dedup" data-tool="text-dedup"><span class="icon">📋</span>文本去重排序</a></li>
     <li><a href="#countdown" data-tool="countdown"><span class="icon">⏳</span>倒计时计算</a></li>
     <li><a href="#ip-info" data-tool="ip-info"><span class="icon">🌐</span>IP/浏览器信息</a></li>
+    <li class="category">开发者工具</li>
+    <li><a href="#number-base" data-tool="number-base"><span class="icon">🔢</span>进制转换</a></li>
+    <li><a href="#html-entity" data-tool="html-entity"><span class="icon">🏷️</span>HTML实体编解码</a></li>
+    <li><a href="#css-formatter" data-tool="css-formatter"><span class="icon">🎨</span>CSS格式化</a></li>
+    <li><a href="#sql-formatter" data-tool="sql-formatter"><span class="icon">🗄️</span>SQL格式化</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -559,15 +583,102 @@ console.log('代码块');
     <div class="result-box" id="ip-info-result" style="display:none;"></div>
   </section>
 
+  <!-- Number Base Converter -->
+  <section class="tool-panel" id="panel-number-base">
+    <h2>进制转换</h2>
+    <p class="desc">在二进制、八进制、十进制、十六进制之间自由转换。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">输入数值</div>
+        <input type="text" id="base-input" placeholder="输入数字，如 255" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">输入进制</div>
+        <select id="base-from" style="font-family:inherit;">
+          <option value="2">二进制 (Binary)</option>
+          <option value="8">八进制 (Octal)</option>
+          <option value="10" selected>十进制 (Decimal)</option>
+          <option value="16">十六进制 (Hexadecimal)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="convertBase()">🔄 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('base-result')">📋 复制全部</button>
+    </div>
+    <div class="result-box" id="base-result" style="display:none;"></div>
+  </section>
+
+  <!-- HTML Entity Encoder/Decoder -->
+  <section class="tool-panel" id="panel-html-entity">
+    <h2>HTML 实体编解码</h2>
+    <p class="desc">将 HTML 特殊字符（&lt; &gt; &amp; &quot; 等）与实体编码互转。</p>
+    <textarea id="entity-input" placeholder="输入要编码或解码的 HTML 文本..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="entityEncode()">🔒 HTML编码</button>
+      <button class="btn btn-secondary" onclick="entityDecode()">🔓 HTML解码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('entity')">📋 复制</button>
+    </div>
+    <div class="result-box" id="entity-result" style="display:none;"></div>
+  </section>
+
+  <!-- CSS Formatter -->
+  <section class="tool-panel" id="panel-css-formatter">
+    <h2>CSS 格式化</h2>
+    <p class="desc">压缩或美化 CSS 代码，支持缩进调整。</p>
+    <textarea id="css-input" placeholder="粘贴 CSS 代码..."></textarea>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+      <div class="label" style="margin-bottom:0;">缩进空格数</div>
+      <input type="number" id="css-indent" value="2" min="1" max="8" style="width:60px;min-height:auto;font-family:inherit;">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="formatCSS()">✨ 格式化</button>
+      <button class="btn btn-secondary" onclick="minifyCSS()">📦 压缩</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('css')">📋 复制</button>
+    </div>
+    <div class="result-box" id="css-result" style="display:none;"></div>
+  </section>
+
+  <!-- SQL Formatter -->
+  <section class="tool-panel" id="panel-sql-formatter">
+    <h2>SQL 格式化</h2>
+    <p class="desc">美化 SQL 语句，关键字大写，自动缩进。</p>
+    <textarea id="sql-input" placeholder="粘贴 SQL 语句，如：SELECT id,name FROM users WHERE age>18 ORDER BY id DESC"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="formatSQL()">✨ 格式化</button>
+      <button class="btn btn-secondary" onclick="minifySQL()">📦 压缩</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('sql')">📋 复制</button>
+    </div>
+    <div class="result-box" id="sql-result" style="display:none;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
   </div>
+
+  <!-- Footer -->
+  <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 20个实用工具</p>
+    <p style="margin-top:6px;">
+      <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
+      <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
+      <a href="/DY-/sitemap.xml" style="color:var(--accent-hover);text-decoration:none;">Sitemap</a>
+    </p>
+  </footer>
 </main>
+
+<!-- Back to top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:30px;right:30px;width:44px;height:44px;background:var(--accent);color:white;border:none;border-radius:50%;cursor:pointer;font-size:20px;display:none;z-index:99;box-shadow:0 4px 12px rgba(99,102,241,0.4);transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">↑</button>
 
 <div class="toast" id="toast"></div>
 
 <script>
+// ============ Back to top ============
+window.addEventListener('scroll', () => {
+  document.getElementById('back-to-top').style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
 // ============ Navigation ============
 document.querySelectorAll('.tool-nav a').forEach(link => {
   link.addEventListener('click', e => {
@@ -870,6 +981,123 @@ function calcDateAfter() {
   showResult('countdown-result', `${document.getElementById('countdown-start').value} 的 ${days} 天后是:\n${future.toISOString().split('T')[0]}`);
 }
 
+// ============ Number Base Converter ============
+function convertBase() {
+  const input = document.getElementById('base-input').value.trim();
+  const from = parseInt(document.getElementById('base-from').value);
+  if (!input) { showResult('base-result', '请输入数值'); return; }
+  let num;
+  try {
+    if (from === 10) { num = BigInt(input); }
+    else { num = BigInt('0' + (from === 16 ? 'x' : from === 8 ? 'o' : 'b') + input); }
+  } catch(e) { showResult('base-result', '❌ 输入格式错误，请检查数值是否匹配所选进制'); return; }
+  const isNeg = num < 0n;
+  if (isNeg) num = -num;
+  showResult('base-result', [
+    `二进制 (BIN): ${isNeg ? '-' : ''}0b${num.toString(2)}`,
+    `八进制 (OCT): ${isNeg ? '-' : ''}0o${num.toString(8)}`,
+    `十进制 (DEC): ${isNeg ? '-' : ''}${num.toString(10)}`,
+    `十六进制 (HEX): ${isNeg ? '-' : ''}0x${num.toString(16).toUpperCase()}`,
+  ].join('\n'));
+}
+
+// ============ HTML Entity ============
+const entityMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' };
+function entityEncode() {
+  const text = document.getElementById('entity-input').value;
+  showResult('entity-result', text.replace(/[&<>"'`]/g, c => entityMap[c]));
+}
+function entityDecode() {
+  const text = document.getElementById('entity-input').value;
+  const txt = document.createElement('textarea');
+  txt.innerHTML = text;
+  showResult('entity-result', txt.value);
+}
+
+// ============ CSS Formatter ============
+function formatCSS() {
+  const css = document.getElementById('css-input').value.trim();
+  if (!css) { showResult('css-result', '请粘贴 CSS 代码'); return; }
+  const indent = ' '.repeat(parseInt(document.getElementById('css-indent').value) || 2);
+  let result = '';
+  let level = 0;
+  let inComment = false, inString = false, stringChar = '';
+  // Remove comments and normalize whitespace first
+  let tokens = css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim();
+  // Tokenize: split by meaningful boundaries
+  tokens = tokens.replace(/([{}(),;])/g, ' $1 ').replace(/\s+/g, ' ').trim();
+  const parts = tokens.split(/\s+/);
+  let i = 0;
+  while (i < parts.length) {
+    const p = parts[i];
+    if (p === '}') { level = Math.max(0, level - 1); result = result.trimEnd() + '\n' + indent.repeat(level) + p; i++; }
+    else if (p === '{') {
+      result = result.trimEnd() + ' ' + p + '\n';
+      level++;
+      i++;
+    } else if (p === ';') {
+      result = result.trimEnd() + p + '\n' + indent.repeat(level);
+      i++;
+    } else if (p === ',') {
+      result = result.trimEnd() + p + ' ';
+      i++;
+    } else {
+      result += (result && !result.endsWith('\n') && !result.endsWith(' ') ? ' ' : '') + p;
+      i++;
+    }
+  }
+  showResult('css-result', result.trim());
+}
+function minifyCSS() {
+  const css = document.getElementById('css-input').value;
+  showResult('css-result', css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/;\s*/g, ';').replace(/\s*\{\s*/g, '{').replace(/\s*\}\s*/g, '}').replace(/\s*:\s*/g, ':').replace(/\s*,\s*/g, ',').trim());
+}
+
+// ============ SQL Formatter ============
+const SQL_MAJOR = ['SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'ORDER BY', 'GROUP BY', 'HAVING', 'LIMIT', 'OFFSET', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 'JOIN', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'FULL JOIN', 'CROSS JOIN', 'ON', 'UNION', 'UNION ALL', 'AS', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END', 'IN', 'NOT IN', 'EXISTS', 'BETWEEN', 'LIKE', 'IS NULL', 'IS NOT NULL', 'ASC', 'DESC', 'DISTINCT', 'COUNT', 'SUM', 'AVG', 'MAX', 'MIN', 'BEGIN', 'COMMIT', 'ROLLBACK', 'WITH', 'RETURNING'];
+function formatSQL() {
+  let sql = document.getElementById('sql-input').value.trim();
+  if (!sql) { showResult('sql-result', '请粘贴 SQL 语句'); return; }
+  // Normalize whitespace
+  sql = sql.replace(/\s+/g, ' ').trim();
+  // Uppercase keywords
+  SQL_MAJOR.forEach(kw => {
+    const re = new RegExp('\\b' + kw.replace(/ /g, '\\s+') + '\\b', 'gi');
+    sql = sql.replace(re, kw.toUpperCase());
+  });
+  // Add newlines before major clauses
+  const breaks = ['SELECT', 'FROM', 'WHERE', 'ORDER BY', 'GROUP BY', 'HAVING', 'LIMIT', 'OFFSET',
+    'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE',
+    'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'FULL JOIN', 'CROSS JOIN', 'JOIN', 'ON',
+    'UNION', 'UNION ALL', 'AND', 'OR', 'WHEN', 'ELSE', 'END', 'BEGIN', 'COMMIT', 'ROLLBACK', 'WITH', 'RETURNING'];
+  let result = sql;
+  breaks.forEach(kw => {
+    result = result.replace(new RegExp('\\b' + kw + '\\b', 'g'), '\n' + kw);
+  });
+  // Clean up: remove leading newline, collapse multiple newlines
+  result = result.replace(/^\n+/, '').replace(/\n{3,}/g, '\n\n').replace(/\n\s*\n/g, '\n');
+  // Indent: add 2-space indent after lines that end with ( or ,
+  const lines = result.split('\n');
+  let out = '';
+  let indent = 0;
+  for (let line of lines) {
+    line = line.trim();
+    if (!line) continue;
+    // Decrease indent for closing parens
+    const closeCount = (line.match(/\)/g) || []).length;
+    indent = Math.max(0, indent - closeCount);
+    out += '  '.repeat(indent) + line + '\n';
+    // Increase indent for opening parens
+    const openCount = (line.match(/\(/g) || []).length;
+    indent += openCount;
+  }
+  showResult('sql-result', out.trim());
+}
+function minifySQL() {
+  let sql = document.getElementById('sql-input').value;
+  showResult('sql-result', sql.replace(/\s+/g, ' ').trim());
+}
+
 // ============ Browser Info ============
 function showBrowserInfo() {
   const ua = navigator.userAgent;
@@ -897,6 +1125,11 @@ function showBrowserInfo() {
     `User Agent: ${ua}`,
   ];
   showResult('ip-info-result', info.join('\n'));
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 </body>
