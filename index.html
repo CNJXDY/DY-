@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、金额大写转换、简繁转换、单位换算、文本对比、进制转换、CSS格式化、SQL格式化、二维码生成等24个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等29个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、金额大写转换、简繁转换、单位换算、文本对比、进制转换、CSS格式化、SQL格式化等24个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等29个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -386,6 +386,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#chinese-convert" data-tool="chinese-convert"><span class="icon">🀄</span>简繁转换</a></li>
     <li><a href="#unit-converter" data-tool="unit-converter"><span class="icon">📏</span>单位换算</a></li>
     <li><a href="#text-diff" data-tool="text-diff"><span class="icon">📑</span>文本对比</a></li>
+    <li class="category">生活工具</li>
+    <li><a href="#random-generator" data-tool="random-generator"><span class="icon">🎲</span>随机数生成</a></li>
+    <li><a href="#mortgage-calc" data-tool="mortgage-calc"><span class="icon">🏠</span>房贷计算器</a></li>
+    <li><a href="#image-compress" data-tool="image-compress"><span class="icon">🖼️</span>图片压缩</a></li>
+    <li><a href="#morse-code" data-tool="morse-code"><span class="icon">📡</span>摩尔斯电码</a></li>
+    <li><a href="#tax-calc" data-tool="tax-calc"><span class="icon">🧾</span>个税计算器</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -825,6 +831,136 @@ console.log('代码块');
     <div class="result-box" id="diff-result" style="display:none;max-height:500px;font-family:inherit;line-height:1.8;"></div>
   </section>
 
+  <!-- Random Number Generator -->
+  <section class="tool-panel" id="panel-random-generator">
+    <h2>随机数生成器</h2>
+    <p class="desc">生成随机整数、随机小数，支持抽签、随机抽取功能。</p>
+    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+      <div style="flex:1;min-width:100px;">
+        <div class="label">最小值</div>
+        <input type="number" id="rand-min" value="1" style="font-family:inherit;">
+      </div>
+      <div style="flex:1;min-width:100px;">
+        <div class="label">最大值</div>
+        <input type="number" id="rand-max" value="100" style="font-family:inherit;">
+      </div>
+      <div style="flex:1;min-width:100px;">
+        <div class="label">生成个数</div>
+        <input type="number" id="rand-count" value="1" min="1" max="100" style="font-family:inherit;">
+      </div>
+      <div style="flex:0 0 auto;">
+        <label style="font-size:13px;display:flex;align-items:center;gap:4px;padding:12px 0;">
+          <input type="checkbox" id="rand-unique"> 不重复
+        </label>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateRandom()">🎲 生成</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('random-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="random-result" style="display:none;font-size:18px;text-align:center;padding:16px;word-break:break-all;"></div>
+  </section>
+
+  <!-- Mortgage Calculator -->
+  <section class="tool-panel" id="panel-mortgage-calc">
+    <h2>房贷计算器</h2>
+    <p class="desc">等额本息和等额本金两种还款方式对比，含月供明细。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">贷款金额（万元）</div>
+        <input type="number" id="loan-amount" value="100" min="0" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">年利率（%）</div>
+        <input type="number" id="loan-rate" value="3.85" step="0.01" min="0" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">贷款年限</div>
+        <input type="number" id="loan-years" value="30" min="1" max="50" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcMortgage()">🏠 计算</button>
+    </div>
+    <div class="result-box" id="mortgage-result" style="display:none;"></div>
+  </section>
+
+  <!-- Image Compress -->
+  <section class="tool-panel" id="panel-image-compress">
+    <h2>图片压缩</h2>
+    <p class="desc">纯前端压缩图片，调整质量和尺寸，不经过服务器，安全快速。</p>
+    <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:30px;text-align:center;cursor:pointer;" id="compress-drop-zone">
+      <p style="color:var(--text-secondary);">📁 点击或拖拽图片到这里</p>
+      <input type="file" id="compress-file-input" accept="image/*" style="display:none;">
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">压缩质量 (0-1)</div>
+        <input type="number" id="compress-quality" value="0.7" min="0.1" max="1" step="0.05" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">最大宽度 (px)</div>
+        <input type="number" id="compress-width" value="1200" min="100" max="10000" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="compressImage()" id="compress-btn" style="display:none;">🗜️ 压缩</button>
+      <button class="btn btn-secondary btn-sm" id="compress-download-btn" style="display:none;" onclick="downloadCompressed()">📥 下载</button>
+    </div>
+    <div id="compress-preview" style="margin-top:16px;text-align:center;"></div>
+    <div class="result-box" id="compress-result" style="display:none;"></div>
+  </section>
+
+  <!-- Morse Code -->
+  <section class="tool-panel" id="panel-morse-code">
+    <h2>摩尔斯电码</h2>
+    <p class="desc">文本与摩尔斯电码互转，支持字母、数字和常用标点。</p>
+    <textarea id="morse-input" placeholder="输入文本或摩尔斯电码（用 . 和 - 表示，字母间用空格分隔，单词间用 / 分隔）"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="textToMorse()">→ 文本转电码</button>
+      <button class="btn btn-secondary" onclick="morseToText()">← 电码转文本</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('morse')">📋 复制</button>
+    </div>
+    <div class="result-box" id="morse-result" style="display:none;"></div>
+  </section>
+
+  <!-- Tax Calculator -->
+  <section class="tool-panel" id="panel-tax-calc">
+    <h2>个税计算器</h2>
+    <p class="desc">中国个人所得税计算，支持月度工资薪金和年终奖两种方式。</p>
+    <div style="margin-bottom:12px;">
+      <div class="label">计算方式</div>
+      <select id="tax-type" onchange="updateTaxMode()" style="font-family:inherit;">
+        <option value="monthly">月度工资薪金</option>
+        <option value="bonus">年终奖</option>
+      </select>
+    </div>
+    <div class="flex-row">
+      <div>
+        <div class="label">税前月收入（元）</div>
+        <input type="number" id="tax-income" value="15000" min="0" style="font-family:inherit;">
+      </div>
+      <div id="tax-bonus-field" style="display:none;">
+        <div class="label">年终奖金额（元）</div>
+        <input type="number" id="tax-bonus" value="50000" min="0" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:10px;">
+      <div>
+        <div class="label">五险一金（元/月）</div>
+        <input type="number" id="tax-insurance" value="0" min="0" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">专项附加扣除（元/月）</div>
+        <input type="number" id="tax-deduction" value="0" min="0" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcTax()">🧾 计算</button>
+    </div>
+    <div class="result-box" id="tax-result" style="display:none;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -832,7 +968,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 24个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 29个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -1647,6 +1783,215 @@ function swapDiff() {
   const newEl = document.getElementById('diff-new');
   [oldEl.value, newEl.value] = [newEl.value, oldEl.value];
   computeDiff();
+}
+
+// ============ Random Number Generator ============
+function generateRandom() {
+  const min = parseInt(document.getElementById('rand-min').value) || 1;
+  const max = parseInt(document.getElementById('rand-max').value) || 100;
+  const count = parseInt(document.getElementById('rand-count').value) || 1;
+  const unique = document.getElementById('rand-unique').checked;
+  if (min > max) { showResult('random-result', '❌ 最小值不能大于最大值'); return; }
+  if (unique && count > (max - min + 1)) { showResult('random-result', '❌ 不重复模式下，生成个数不能超过范围'); return; }
+  const arr = new Uint32Array(count);
+  crypto.getRandomValues(arr);
+  let results = [];
+  if (unique) {
+    const pool = [];
+    for (let i = min; i <= max; i++) pool.push(i);
+    for (let i = 0; i < count; i++) {
+      const idx = arr[i] % pool.length;
+      results.push(pool[idx]);
+      pool.splice(idx, 1);
+    }
+  } else {
+    results = [...arr].map(x => min + (x % (max - min + 1)));
+  }
+  showResult('random-result', results.join(', '));
+}
+
+// ============ Mortgage Calculator ============
+function calcMortgage() {
+  const amount = parseFloat(document.getElementById('loan-amount').value) * 10000;
+  const rate = parseFloat(document.getElementById('loan-rate').value) / 100 / 12;
+  const months = parseInt(document.getElementById('loan-years').value) * 12;
+  if (!amount || !rate || !months) { showResult('mortgage-result', '请填写完整信息'); return; }
+  // 等额本息
+  const monthly1 = (amount * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
+  const total1 = monthly1 * months;
+  const interest1 = total1 - amount;
+  // 等额本金
+  const monthlyPrincipal = amount / months;
+  let total2 = 0, interest2 = 0;
+  const firstMonth = monthlyPrincipal + amount * rate;
+  const lastMonth = monthlyPrincipal + monthlyPrincipal * rate;
+  for (let i = 0; i < months; i++) {
+    const curInterest = (amount - monthlyPrincipal * i) * rate;
+    interest2 += curInterest;
+    total2 += monthlyPrincipal + curInterest;
+  }
+  showResult('mortgage-result',
+    `【等额本息】\n` +
+    `  月供: ${monthly1.toFixed(2)} 元\n` +
+    `  总还款: ${(total1/10000).toFixed(2)} 万元 | 利息: ${(interest1/10000).toFixed(2)} 万元\n\n` +
+    `【等额本金】\n` +
+    `  首月: ${firstMonth.toFixed(2)} 元 → 末月: ${lastMonth.toFixed(2)} 元\n` +
+    `  总还款: ${(total2/10000).toFixed(2)} 万元 | 利息: ${(interest2/10000).toFixed(2)} 万元\n\n` +
+    `【对比】等额本金比等额本息少还 ${((interest1-interest2)/10000).toFixed(2)} 万元利息`);
+}
+
+// ============ Image Compress ============
+let compressOriginalFile = null, compressBlob = null;
+const compressDrop = document.getElementById('compress-drop-zone');
+const compressFileInput = document.getElementById('compress-file-input');
+compressDrop.addEventListener('click', () => compressFileInput.click());
+compressDrop.addEventListener('dragover', e => { e.preventDefault(); compressDrop.style.borderColor = 'var(--accent)'; });
+compressDrop.addEventListener('dragleave', () => { compressDrop.style.borderColor = 'var(--border)'; });
+compressDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  compressDrop.style.borderColor = 'var(--border)';
+  if (e.dataTransfer.files[0]) loadCompressFile(e.dataTransfer.files[0]);
+});
+compressFileInput.addEventListener('change', () => {
+  if (compressFileInput.files[0]) loadCompressFile(compressFileInput.files[0]);
+});
+function loadCompressFile(file) {
+  if (!file.type.startsWith('image/')) { showToast('请选择图片文件'); return; }
+  compressOriginalFile = file;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('compress-preview').innerHTML = `<img src="${e.target.result}" style="max-width:300px;border-radius:var(--radius);border:1px solid var(--border);">`;
+    document.getElementById('compress-btn').style.display = 'inline-flex';
+    compressDrop.querySelector('p').textContent = '✅ ' + file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)';
+  };
+  reader.readAsDataURL(file);
+}
+function compressImage() {
+  if (!compressOriginalFile) return;
+  const quality = parseFloat(document.getElementById('compress-quality').value) || 0.7;
+  const maxWidth = parseInt(document.getElementById('compress-width').value) || 1200;
+  const img = new Image();
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      if (w > maxWidth) { h = h * maxWidth / w; w = maxWidth; }
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      canvas.toBlob(blob => {
+        compressBlob = blob;
+        const size = blob.size;
+        const originalSize = compressOriginalFile.size;
+        const ratio = ((1 - size / originalSize) * 100).toFixed(1);
+        showResult('compress-result', `压缩前: ${(originalSize/1024).toFixed(1)} KB\n压缩后: ${(size/1024).toFixed(1)} KB\n节省: ${ratio}%`);
+        document.getElementById('compress-preview').innerHTML = `<img src="${URL.createObjectURL(blob)}" style="max-width:300px;border-radius:var(--radius);border:1px solid var(--border);">`;
+        document.getElementById('compress-download-btn').style.display = 'inline-flex';
+      }, 'image/jpeg', quality);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(compressOriginalFile);
+}
+function downloadCompressed() {
+  if (!compressBlob) return;
+  const url = URL.createObjectURL(compressBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'compressed_' + (compressOriginalFile?.name || 'image.jpg');
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ============ Morse Code ============
+const MORSE_MAP = {
+  'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---',
+  'K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-',
+  'U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
+  '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
+  '.':'.-.-.-',',':'--..--','?':'..--..',"'":'.----.','!':'-.-.--','/':'-..-.','(':'-.--.',')':'-.--.-',
+  '&':'.-...',':':'---...',';':'-.-.-.','=':'-...-','+':'.-.-.','-':'-....-','_':'..--.-','"':'.-..-.',
+  '$':'...-..-','@':'.--.-.',
+};
+const REV_MORSE = {};
+for (const [k, v] of Object.entries(MORSE_MAP)) REV_MORSE[v] = k;
+function textToMorse() {
+  const text = document.getElementById('morse-input').value.toUpperCase().trim();
+  if (!text) { showResult('morse-result', '请输入文本'); return; }
+  const result = [...text].map(ch => {
+    if (ch === ' ') return '/';
+    return MORSE_MAP[ch] || ch;
+  }).join(' ');
+  showResult('morse-result', result);
+}
+function morseToText() {
+  const input = document.getElementById('morse-input').value.trim();
+  if (!input) { showResult('morse-result', '请输入摩尔斯电码'); return; }
+  const result = input.replace(/\s{2,}/g, ' / ').split(' ').map(code => {
+    if (code === '/') return ' ';
+    return REV_MORSE[code] || code;
+  }).join('');
+  showResult('morse-result', result);
+}
+
+// ============ Tax Calculator ============
+const TAX_BRACKETS = [
+  [0, 36000, 0.03, 0],
+  [36000, 144000, 0.1, 2520],
+  [144000, 300000, 0.2, 16920],
+  [300000, 420000, 0.25, 31920],
+  [420000, 660000, 0.3, 52920],
+  [660000, 960000, 0.35, 85920],
+  [960000, Infinity, 0.45, 181920],
+];
+function calcTaxByBrackets(income) {
+  for (const [min, max, rate, deduct] of TAX_BRACKETS) {
+    if (income <= max) return Math.max(0, income * rate - deduct);
+  }
+  return 0;
+}
+function updateTaxMode() {
+  const mode = document.getElementById('tax-type').value;
+  document.getElementById('tax-bonus-field').style.display = mode === 'bonus' ? '' : 'none';
+}
+function calcTax() {
+  const mode = document.getElementById('tax-type').value;
+  const income = parseFloat(document.getElementById('tax-income').value) || 0;
+  const insurance = parseFloat(document.getElementById('tax-insurance').value) || 0;
+  const deduction = parseFloat(document.getElementById('tax-deduction').value) || 0;
+  const threshold = 5000;
+  if (mode === 'monthly') {
+    const taxable = Math.max(0, income - insurance - deduction - threshold);
+    const tax = calcTaxByBrackets(taxable);
+    const net = income - insurance - tax;
+    showResult('tax-result',
+      `税前收入: ${income.toFixed(2)} 元\n` +
+      `五险一金: -${insurance.toFixed(2)} 元\n` +
+      `起征点: -${threshold} 元\n` +
+      `专项扣除: -${deduction.toFixed(2)} 元\n` +
+      `应纳税所得额: ${taxable.toFixed(2)} 元\n` +
+      `个税: -${tax.toFixed(2)} 元\n` +
+      `税后收入: ${net.toFixed(2)} 元`);
+  } else {
+    const bonus = parseFloat(document.getElementById('tax-bonus').value) || 0;
+    const monthlyTaxable = Math.max(0, income - insurance - deduction - threshold);
+    const monthlyTax = calcTaxByBrackets(monthlyTaxable);
+    // 年终奖单独计税: 除以12找税率
+    const bonusMonthly = bonus / 12;
+    const bonusCalc = bonusMonthly;
+    let bonusTax = 0;
+    for (const [min, max, rate, deduct] of TAX_BRACKETS) {
+      if (bonusCalc <= max / 12) { bonusTax = Math.max(0, bonus * rate - deduct); break; }
+    }
+    const totalTax = monthlyTax * 12 + bonusTax;
+    const net = income * 12 + bonus - insurance * 12 - totalTax;
+    showResult('tax-result',
+      `月度工资个税: ${monthlyTax.toFixed(2)} 元/月 × 12 = ${(monthlyTax*12).toFixed(2)} 元\n` +
+      `年终奖个税: ${bonusTax.toFixed(2)} 元\n` +
+      `全年总个税: ${totalTax.toFixed(2)} 元\n` +
+      `全年税后总收入: ${net.toFixed(2)} 元`);
+  }
 }
 
 // ============ Search & Theme ============
