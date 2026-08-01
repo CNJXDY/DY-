@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等29个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等34个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等29个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等34个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等20个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等34个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -392,6 +392,16 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#image-compress" data-tool="image-compress"><span class="icon">🖼️</span>图片压缩</a></li>
     <li><a href="#morse-code" data-tool="morse-code"><span class="icon">📡</span>摩尔斯电码</a></li>
     <li><a href="#tax-calc" data-tool="tax-calc"><span class="icon">🧾</span>个税计算器</a></li>
+    <li><a href="#pomodoro" data-tool="pomodoro"><span class="icon">🍅</span>番茄钟</a></li>
+    <li><a href="#bmi-calc" data-tool="bmi-calc"><span class="icon">⚖️</span>BMI计算器</a></li>
+    <li><a href="#date-calc" data-tool="date-calc"><span class="icon">📅</span>日期计算器</a></li>
+    <li><a href="#char-limit" data-tool="char-limit"><span class="icon">✂️</span>字数限制器</a></li>
+    <li><a href="#color-picker" data-tool="color-picker"><span class="icon">🎯</span>颜色拾取器</a></li>
+    <li><a href="#stopwatch" data-tool="stopwatch"><span class="icon">⏱️</span>秒表计时</a></li>
+    <li><a href="#food-picker" data-tool="food-picker"><span class="icon">🍜</span>今日吃什么</a></li>
+    <li><a href="#zodiac" data-tool="zodiac"><span class="icon">🔮</span>生肖星座</a></li>
+    <li><a href="#sticky-notes" data-tool="sticky-notes"><span class="icon">📝</span>备忘便签</a></li>
+    <li><a href="#delimiter" data-tool="delimiter"><span class="icon">📊</span>分隔符转换</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -961,6 +971,264 @@ console.log('代码块');
     <div class="result-box" id="tax-result" style="display:none;"></div>
   </section>
 
+  <!-- Pomodoro Timer -->
+  <section class="tool-panel" id="panel-pomodoro">
+    <h2>番茄钟</h2>
+    <p class="desc">25分钟专注+5分钟休息，提升工作效率。可自定义时长。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">专注时长（分钟）</div>
+        <input type="number" id="pomo-work" value="25" min="1" max="120" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">休息时长（分钟）</div>
+        <input type="number" id="pomo-break" value="5" min="1" max="60" style="font-family:inherit;">
+      </div>
+    </div>
+    <div style="text-align:center;margin:24px 0;">
+      <div class="password-display" id="pomo-display" style="font-size:56px;font-weight:700;letter-spacing:4px;">25:00</div>
+      <div style="color:var(--text-secondary);margin-top:8px;font-size:14px;" id="pomo-status">准备开始</div>
+    </div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" onclick="startPomodoro()" id="pomo-start">▶ 开始</button>
+      <button class="btn btn-secondary" onclick="pausePomodoro()" id="pomo-pause" style="display:none;">⏸ 暂停</button>
+      <button class="btn btn-secondary" onclick="resetPomodoro()">↺ 重置</button>
+    </div>
+  </section>
+
+  <!-- BMI Calculator -->
+  <section class="tool-panel" id="panel-bmi-calc">
+    <h2>BMI 计算器</h2>
+    <p class="desc">身体质量指数（BMI）计算，评估体重是否在健康范围内。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">身高（cm）</div>
+        <input type="number" id="bmi-height" value="170" min="50" max="300" style="font-family:inherit;" oninput="calcBMI()">
+      </div>
+      <div>
+        <div class="label">体重（kg）</div>
+        <input type="number" id="bmi-weight" value="65" min="10" max="500" style="font-family:inherit;" oninput="calcBMI()">
+      </div>
+    </div>
+    <div class="result-box" id="bmi-result" style="display:none;text-align:center;padding:20px;">
+      <div style="font-size:40px;font-weight:700;" id="bmi-value"></div>
+      <div style="font-size:16px;margin-top:8px;" id="bmi-label"></div>
+      <div style="width:100%;height:8px;background:var(--border);border-radius:4px;margin-top:16px;overflow:hidden;">
+        <div id="bmi-bar" style="height:100%;border-radius:4px;transition:width 0.3s;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);margin-top:4px;">
+        <span>偏瘦</span><span>正常</span><span>偏胖</span><span>肥胖</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Date Calculator -->
+  <section class="tool-panel" id="panel-date-calc">
+    <h2>日期计算器</h2>
+    <p class="desc">算星期几、距今多少天、两个日期相差天数、年龄计算。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">日期</div>
+        <input type="date" id="date-input" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">参考日期（可选）</div>
+        <input type="date" id="date-ref" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcDateInfo()">📅 计算</button>
+      <button class="btn btn-secondary btn-sm" onclick="document.getElementById('date-input').valueAsDate=new Date();calcDateInfo()">📍 今天</button>
+    </div>
+    <div class="result-box" id="date-result" style="display:none;"></div>
+  </section>
+
+  <!-- Character Limit Checker -->
+  <section class="tool-panel" id="panel-char-limit">
+    <h2>字数限制器</h2>
+    <p class="desc">社交媒体发帖前检查字数，支持微博(140)、小红书(1000)、抖音(500)等平台限制。</p>
+    <div style="margin-bottom:10px;">
+      <div class="label">平台</div>
+      <select id="platform-select" onchange="updateCharLimit()" style="font-family:inherit;">
+        <option value="140">微博 (140字)</option>
+        <option value="280">Twitter/X (280字)</option>
+        <option value="500">抖音 (500字)</option>
+        <option value="1000">小红书 (1000字)</option>
+        <option value="2000">知乎 (2000字)</option>
+        <option value="custom">自定义</option>
+      </select>
+      <input type="number" id="custom-limit" value="500" min="1" style="display:none;margin-top:8px;font-family:inherit;width:120px;" placeholder="自定义字数" oninput="checkCharLimit()">
+    </div>
+    <textarea id="char-limit-input" placeholder="在这里输入文本..." oninput="checkCharLimit()"></textarea>
+    <div class="stats" id="char-stats" style="margin-top:10px;">
+      <div class="stat-card"><div class="num" id="char-count">0</div><div class="lbl">当前字数</div></div>
+      <div class="stat-card"><div class="num" id="char-remaining">0</div><div class="lbl">剩余字数</div></div>
+      <div class="stat-card"><div class="num" id="char-lines-count">0</div><div class="lbl">行数</div></div>
+    </div>
+    <div style="width:100%;height:6px;background:var(--border);border-radius:3px;margin-top:10px;overflow:hidden;">
+      <div id="char-progress" style="height:100%;background:var(--accent);border-radius:3px;transition:width 0.2s,background 0.3s;width:0%;"></div>
+    </div>
+  </section>
+
+  <!-- Color Picker -->
+  <section class="tool-panel" id="panel-color-picker">
+    <h2>颜色拾取器</h2>
+    <p class="desc">可视化颜色选择，自动转换 HEX、RGB、HSL 格式，一键复制。</p>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+      <div style="flex:0 0 auto;">
+        <input type="color" id="native-color-picker" value="#6366f1" oninput="updateColorPicker()" style="width:100px;height:100px;border:none;border-radius:var(--radius);cursor:pointer;background:transparent;">
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <div class="label">HEX</div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="text" id="picker-hex" value="#6366F1" style="font-family:monospace;font-size:16px;text-transform:uppercase;" oninput="updateFromHex()">
+          <button class="btn btn-secondary btn-sm" onclick="copyText('picker-hex')">📋</button>
+        </div>
+        <div class="label" style="margin-top:10px;">RGB</div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="text" id="picker-rgb" value="rgb(99, 102, 241)" style="font-family:monospace;font-size:14px;" readonly>
+          <button class="btn btn-secondary btn-sm" onclick="copyText('picker-rgb')">📋</button>
+        </div>
+        <div class="label" style="margin-top:10px;">HSL</div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="text" id="picker-hsl" value="hsl(239, 84%, 67%)" style="font-family:monospace;font-size:14px;" readonly>
+          <button class="btn btn-secondary btn-sm" onclick="copyText('picker-hsl')">📋</button>
+        </div>
+      </div>
+    </div>
+    <div class="color-preview" id="picker-preview" style="background:#6366f1;height:80px;margin-top:14px;border-radius:var(--radius);"></div>
+  </section>
+
+  <!-- Stopwatch -->
+  <section class="tool-panel" id="panel-stopwatch">
+    <h2>秒表计时</h2>
+    <p class="desc">精准计时器，支持开始/暂停/计次/重置，适合运动、烹饪、演讲等场景。</p>
+    <div style="text-align:center;margin:20px 0;">
+      <div class="password-display" id="stopwatch-display" style="font-size:56px;font-weight:700;letter-spacing:4px;font-family:monospace;">00:00:00.0</div>
+    </div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" onclick="startStopwatch()" id="sw-start">▶ 开始</button>
+      <button class="btn btn-secondary" onclick="lapStopwatch()" id="sw-lap" style="display:none;">🏁 计次</button>
+      <button class="btn btn-secondary" onclick="pauseStopwatch()" id="sw-pause" style="display:none;">⏸ 暂停</button>
+      <button class="btn btn-secondary" onclick="resetStopwatch()">↺ 重置</button>
+    </div>
+    <div class="result-box" id="stopwatch-laps" style="display:none;max-height:200px;margin-top:12px;"></div>
+  </section>
+
+  <!-- Food Picker -->
+  <section class="tool-panel" id="panel-food-picker">
+    <h2>今日吃什么</h2>
+    <p class="desc">选择困难症救星！随机帮你决定今天吃什么，支持自定义菜单。</p>
+    <div style="margin-bottom:10px;">
+      <div class="label">可选菜单（每行一道菜，可自行修改）</div>
+      <textarea id="food-list" style="min-height:120px;">麻辣烫
+黄焖鸡
+沙县小吃
+兰州拉面
+螺蛳粉
+麻辣香锅
+酸菜鱼
+火锅
+烤肉
+日料
+披萨
+汉堡
+煲仔饭
+水饺
+馄饨
+麻辣拌
+小炒肉
+蛋炒饭
+重庆小面
+刀削面</textarea>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="pickFood()">🎲 随机选一个</button>
+      <button class="btn btn-secondary" onclick="pickFoods(3)">🎲 三选一</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetFoodList()">🔄 恢复默认</button>
+    </div>
+    <div class="result-box" id="food-result" style="display:none;font-size:24px;text-align:center;padding:20px;font-weight:700;"></div>
+  </section>
+
+  <!-- Zodiac -->
+  <section class="tool-panel" id="panel-zodiac">
+    <h2>生肖星座查询</h2>
+    <p class="desc">输入出生日期，查询生肖属相和星座。</p>
+    <div style="margin-bottom:12px;">
+      <div class="label">出生日期</div>
+      <input type="date" id="zodiac-birth" style="font-family:inherit;">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="queryZodiac()">🔮 查询</button>
+      <button class="btn btn-secondary btn-sm" onclick="document.getElementById('zodiac-birth').valueAsDate=new Date();queryZodiac()">📍 今天</button>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">
+      <div class="stat-card" style="flex:1;min-width:120px;">
+        <div class="num" id="zodiac-animal" style="font-size:36px;">🐉</div>
+        <div class="lbl">生肖属相</div>
+      </div>
+      <div class="stat-card" style="flex:1;min-width:120px;">
+        <div class="num" id="zodiac-sign" style="font-size:36px;">♈</div>
+        <div class="lbl">星座</div>
+      </div>
+      <div class="stat-card" style="flex:1;min-width:120px;">
+        <div class="num" id="zodiac-age" style="font-size:28px;">--</div>
+        <div class="lbl">周岁</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Notes -->
+  <section class="tool-panel" id="panel-sticky-notes">
+    <h2>备忘便签</h2>
+    <p class="desc">随手记下灵感、待办事项，数据保存在浏览器本地，不会丢失。</p>
+    <div class="btn-group" style="margin-bottom:10px;">
+      <button class="btn" onclick="addNote()">+ 新建便签</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearAllNotes()">🗑 清空全部</button>
+    </div>
+    <div id="notes-container" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;"></div>
+  </section>
+
+  <!-- Delimiter Converter -->
+  <section class="tool-panel" id="panel-delimiter">
+    <h2>分隔符转换</h2>
+    <p class="desc">在逗号、制表符、换行、分号、竖线等分隔符之间自由转换，适合处理表格数据。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">输入分隔符</div>
+        <select id="delim-from" style="font-family:inherit;">
+          <option value="\n">换行</option>
+          <option value=",">逗号 (,)</option>
+          <option value="\t">制表符 (Tab)</option>
+          <option value=";">分号 (;)</option>
+          <option value="|">竖线 (|)</option>
+          <option value=" ">空格</option>
+          <option value="custom">自定义</option>
+        </select>
+        <input type="text" id="delim-from-custom" placeholder="自定义分隔符" style="display:none;margin-top:6px;font-family:inherit;" oninput="convertDelimiter()">
+      </div>
+      <div>
+        <div class="label">输出分隔符</div>
+        <select id="delim-to" style="font-family:inherit;" onchange="convertDelimiter()">
+          <option value="\n">换行</option>
+          <option value="," selected>逗号 (,)</option>
+          <option value="\t">制表符 (Tab)</option>
+          <option value=";">分号 (;)</option>
+          <option value="|">竖线 (|)</option>
+          <option value=" ">空格</option>
+          <option value="custom">自定义</option>
+        </select>
+        <input type="text" id="delim-to-custom" placeholder="自定义分隔符" style="display:none;margin-top:6px;font-family:inherit;" oninput="convertDelimiter()">
+      </div>
+    </div>
+    <textarea id="delim-input" placeholder="粘贴要转换的文本..." style="margin-top:12px;" oninput="convertDelimiter()"></textarea>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('delim-output')">📋 复制</button>
+      <button class="btn btn-secondary btn-sm" onclick="swapDelimiter()">🔄 交换</button>
+    </div>
+    <div class="result-box" id="delim-output" style="display:none;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -968,7 +1236,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 29个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 34个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -1992,6 +2260,382 @@ function calcTax() {
       `全年总个税: ${totalTax.toFixed(2)} 元\n` +
       `全年税后总收入: ${net.toFixed(2)} 元`);
   }
+}
+
+// ============ Pomodoro Timer ============
+let pomoTimer = null, pomoRemaining = 0, pomoIsWork = true, pomoRunning = false;
+function updatePomoDisplay() {
+  const m = Math.floor(pomoRemaining / 60);
+  const s = pomoRemaining % 60;
+  document.getElementById('pomo-display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+function startPomodoro() {
+  if (pomoRunning) return;
+  if (pomoRemaining === 0) {
+    pomoIsWork = true;
+    pomoRemaining = parseInt(document.getElementById('pomo-work').value) * 60;
+  }
+  pomoRunning = true;
+  document.getElementById('pomo-start').style.display = 'none';
+  document.getElementById('pomo-pause').style.display = 'inline-flex';
+  document.getElementById('pomo-status').textContent = pomoIsWork ? '🔴 专注中...' : '🟢 休息中...';
+  updatePomoDisplay();
+  pomoTimer = setInterval(() => {
+    pomoRemaining--;
+    updatePomoDisplay();
+    if (pomoRemaining <= 0) {
+      clearInterval(pomoTimer);
+      pomoTimer = null;
+      pomoRunning = false;
+      if (pomoIsWork) {
+        pomoIsWork = false;
+        pomoRemaining = parseInt(document.getElementById('pomo-break').value) * 60;
+        document.getElementById('pomo-status').textContent = '✅ 专注结束！开始休息';
+      } else {
+        pomoIsWork = true;
+        pomoRemaining = parseInt(document.getElementById('pomo-work').value) * 60;
+        document.getElementById('pomo-status').textContent = '☕ 休息结束！开始新轮';
+      }
+      updatePomoDisplay();
+      document.getElementById('pomo-start').style.display = 'inline-flex';
+      document.getElementById('pomo-pause').style.display = 'none';
+      try { new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAf39/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B/f3+Af39/gH9/f4B').play().catch(()=>{}); } catch(e) {}
+    }
+  }, 1000);
+}
+function pausePomodoro() {
+  if (!pomoRunning) return;
+  clearInterval(pomoTimer);
+  pomoTimer = null;
+  pomoRunning = false;
+  document.getElementById('pomo-start').style.display = 'inline-flex';
+  document.getElementById('pomo-pause').style.display = 'none';
+  document.getElementById('pomo-status').textContent = '⏸ 已暂停';
+}
+function resetPomodoro() {
+  clearInterval(pomoTimer);
+  pomoTimer = null;
+  pomoRunning = false;
+  pomoIsWork = true;
+  pomoRemaining = parseInt(document.getElementById('pomo-work').value) * 60;
+  updatePomoDisplay();
+  document.getElementById('pomo-start').style.display = 'inline-flex';
+  document.getElementById('pomo-pause').style.display = 'none';
+  document.getElementById('pomo-status').textContent = '准备开始';
+}
+updatePomoDisplay();
+
+// ============ BMI Calculator ============
+function calcBMI() {
+  const h = parseFloat(document.getElementById('bmi-height').value) / 100;
+  const w = parseFloat(document.getElementById('bmi-weight').value);
+  if (!h || !w || h <= 0) { document.getElementById('bmi-result').style.display = 'none'; return; }
+  const bmi = w / (h * h);
+  let label, color, barPct;
+  if (bmi < 18.5) { label = '偏瘦'; color = '#3b82f6'; barPct = 20; }
+  else if (bmi < 24) { label = '正常'; color = '#22c55e'; barPct = 45; }
+  else if (bmi < 28) { label = '偏胖'; color = '#f59e0b'; barPct = 70; }
+  else { label = '肥胖'; color = '#ef4444'; barPct = 95; }
+  document.getElementById('bmi-result').style.display = 'block';
+  document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+  document.getElementById('bmi-value').style.color = color;
+  document.getElementById('bmi-label').textContent = label;
+  document.getElementById('bmi-label').style.color = color;
+  document.getElementById('bmi-bar').style.width = barPct + '%';
+  document.getElementById('bmi-bar').style.background = color;
+}
+
+// ============ Date Calculator ============
+const WEEKDAYS = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+function calcDateInfo() {
+  const d = new Date(document.getElementById('date-input').value + 'T00:00:00');
+  if (isNaN(d.getTime())) { showResult('date-result', '请选择日期'); return; }
+  const refVal = document.getElementById('date-ref').value;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const ref = refVal ? new Date(refVal + 'T00:00:00') : today;
+  const diffDays = Math.floor((d - ref) / 86400000);
+  const ageYears = Math.floor(diffDays / 365.25);
+  let lines = [
+    `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${WEEKDAYS[d.getDay()]}`,
+    `该年第 ${Math.ceil((d - new Date(d.getFullYear(),0,1)) / 86400000) + 1} 天`,
+    refVal ? `距 ${refVal} ${diffDays >= 0 ? '晚' : '早'} ${Math.abs(diffDays)} 天` : `距今 ${diffDays >= 0 ? '已过' : '还剩'} ${Math.abs(diffDays)} 天`,
+  ];
+  if (diffDays < 0) lines.push(`约 ${Math.abs(ageYears)} 岁（按出生日期估算）`);
+  showResult('date-result', lines.join('\n'));
+}
+// Init today
+document.getElementById('date-input').valueAsDate = new Date();
+
+// ============ Character Limit Checker ============
+function updateCharLimit() {
+  const val = document.getElementById('platform-select').value;
+  const custom = document.getElementById('custom-limit');
+  custom.style.display = val === 'custom' ? '' : 'none';
+  checkCharLimit();
+}
+function checkCharLimit() {
+  const text = document.getElementById('char-limit-input').value;
+  let limitVal = document.getElementById('platform-select').value;
+  const limit = limitVal === 'custom' ? (parseInt(document.getElementById('custom-limit').value) || 500) : parseInt(limitVal);
+  const count = text.length;
+  const remaining = limit - count;
+  document.getElementById('char-count').textContent = count;
+  document.getElementById('char-remaining').textContent = Math.max(0, remaining);
+  document.getElementById('char-lines-count').textContent = text ? text.split('\n').length : 0;
+  const pct = Math.min(100, (count / limit) * 100);
+  const bar = document.getElementById('char-progress');
+  bar.style.width = pct + '%';
+  bar.style.background = pct > 100 ? '#ef4444' : pct > 80 ? '#f59e0b' : 'var(--accent)';
+}
+
+// ============ Color Picker ============
+function updateColorPicker() {
+  const hex = document.getElementById('native-color-picker').value;
+  document.getElementById('picker-hex').value = hex.toUpperCase();
+  const r = parseInt(hex.slice(1,3), 16), g = parseInt(hex.slice(3,5), 16), b = parseInt(hex.slice(5,7), 16);
+  document.getElementById('picker-rgb').value = `rgb(${r}, ${g}, ${b})`;
+  // RGB to HSL
+  const [rr, gg, bb] = [r/255, g/255, b/255];
+  const max = Math.max(rr, gg, bb), min = Math.min(rr, gg, bb);
+  let h = 0, s = 0, l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    h = max === rr ? ((gg - bb) / d + (gg < bb ? 6 : 0)) : max === gg ? ((bb - rr) / d + 2) : ((rr - gg) / d + 4);
+    h /= 6;
+  }
+  document.getElementById('picker-hsl').value = `hsl(${Math.round(h*360)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+  document.getElementById('picker-preview').style.background = hex;
+}
+function updateFromHex() {
+  let hex = document.getElementById('picker-hex').value.trim();
+  if (/^#?[0-9a-fA-F]{6}$/.test(hex)) {
+    if (!hex.startsWith('#')) hex = '#' + hex;
+    document.getElementById('native-color-picker').value = hex;
+    updateColorPicker();
+  }
+}
+
+// ============ Stopwatch ============
+let swTimer = null, swRunning = false, swStartTime = 0, swElapsed = 0, swLaps = [];
+function updateStopwatchDisplay() {
+  const total = swRunning ? swElapsed + (Date.now() - swStartTime) : swElapsed;
+  const ms = Math.floor(total / 100) % 10;
+  const s = Math.floor(total / 1000) % 60;
+  const m = Math.floor(total / 60000) % 60;
+  const h = Math.floor(total / 3600000);
+  document.getElementById('stopwatch-display').textContent =
+    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${ms}`;
+}
+function startStopwatch() {
+  if (swRunning) return;
+  swRunning = true;
+  swStartTime = Date.now();
+  document.getElementById('sw-start').style.display = 'none';
+  document.getElementById('sw-pause').style.display = 'inline-flex';
+  document.getElementById('sw-lap').style.display = 'inline-flex';
+  swTimer = setInterval(updateStopwatchDisplay, 50);
+  updateStopwatchDisplay();
+}
+function pauseStopwatch() {
+  if (!swRunning) return;
+  swRunning = false;
+  swElapsed += Date.now() - swStartTime;
+  clearInterval(swTimer);
+  swTimer = null;
+  document.getElementById('sw-start').style.display = 'inline-flex';
+  document.getElementById('sw-start').textContent = '▶ 继续';
+  document.getElementById('sw-pause').style.display = 'none';
+  document.getElementById('sw-lap').style.display = 'none';
+  updateStopwatchDisplay();
+}
+function lapStopwatch() {
+  if (!swRunning) return;
+  swLaps.unshift(document.getElementById('stopwatch-display').textContent);
+  if (swLaps.length > 50) swLaps.pop();
+  const el = document.getElementById('stopwatch-laps');
+  el.style.display = 'block';
+  el.innerHTML = swLaps.map((t, i) =>
+    `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);">
+      <span>计次 ${swLaps.length - i}</span><span style="font-family:monospace;">${t}</span></div>`
+  ).join('');
+}
+function resetStopwatch() {
+  clearInterval(swTimer);
+  swTimer = null;
+  swRunning = false;
+  swElapsed = 0;
+  swLaps = [];
+  document.getElementById('sw-start').style.display = 'inline-flex';
+  document.getElementById('sw-start').textContent = '▶ 开始';
+  document.getElementById('sw-pause').style.display = 'none';
+  document.getElementById('sw-lap').style.display = 'none';
+  document.getElementById('stopwatch-laps').style.display = 'none';
+  updateStopwatchDisplay();
+}
+
+// ============ Food Picker ============
+const DEFAULT_FOODS = `麻辣烫
+黄焖鸡
+沙县小吃
+兰州拉面
+螺蛳粉
+麻辣香锅
+酸菜鱼
+火锅
+烤肉
+日料
+披萨
+汉堡
+煲仔饭
+水饺
+馄饨
+麻辣拌
+小炒肉
+蛋炒饭
+重庆小面
+刀削面`;
+function pickFood() {
+  const foods = document.getElementById('food-list').value.split('\n').map(s => s.trim()).filter(Boolean);
+  if (foods.length === 0) { showResult('food-result', '请先添加菜单项！'); return; }
+  const idx = Math.floor(Math.random() * foods.length);
+  showResult('food-result', '🎉 ' + foods[idx]);
+}
+function pickFoods(n) {
+  const foods = document.getElementById('food-list').value.split('\n').map(s => s.trim()).filter(Boolean);
+  if (foods.length < n) { showResult('food-result', `菜单不足${n}项，请先添加更多！`); return; }
+  const shuffled = [...foods].sort(() => Math.random() - 0.5);
+  showResult('food-result', shuffled.slice(0, n).map((f, i) => `${i + 1}. ${f}`).join('\n'));
+}
+function resetFoodList() {
+  document.getElementById('food-list').value = DEFAULT_FOODS;
+  document.getElementById('food-result').style.display = 'none';
+}
+
+// ============ Zodiac ============
+const ZODIAC_ANIMALS = ['🐒 猴', '🐔 鸡', '🐶 狗', '🐷 猪', '🐭 鼠', '🐮 牛', '🐯 虎', '🐰 兔', '🐉 龙', '🐍 蛇', '🐴 马', '🐏 羊'];
+const ZODIAC_SIGNS = [
+  { name: '♑ 摩羯座', end: [1, 19] },
+  { name: '♒ 水瓶座', end: [2, 18] },
+  { name: '♓ 双鱼座', end: [3, 20] },
+  { name: '♈ 白羊座', end: [4, 19] },
+  { name: '♉ 金牛座', end: [5, 20] },
+  { name: '♊ 双子座', end: [6, 21] },
+  { name: '♋ 巨蟹座', end: [7, 22] },
+  { name: '♌ 狮子座', end: [8, 22] },
+  { name: '♍ 处女座', end: [9, 22] },
+  { name: '♎ 天秤座', end: [10, 23] },
+  { name: '♏ 天蝎座', end: [11, 22] },
+  { name: '♐ 射手座', end: [12, 21] },
+  { name: '♑ 摩羯座', end: [12, 31] },
+];
+function queryZodiac() {
+  const d = new Date(document.getElementById('zodiac-birth').value + 'T00:00:00');
+  if (isNaN(d.getTime())) { showToast('请选择日期'); return; }
+  const year = d.getFullYear();
+  const animal = ZODIAC_ANIMALS[year % 12];
+  const month = d.getMonth() + 1, day = d.getDate();
+  let sign = ZODIAC_SIGNS[11]; // default 摩羯座
+  for (const s of ZODIAC_SIGNS) {
+    if (month < s.end[0] || (month === s.end[0] && day <= s.end[1])) { sign = s.name; break; }
+  }
+  const today = new Date(); today.setHours(0,0,0,0);
+  let age = today.getFullYear() - year;
+  const birthThisYear = new Date(today.getFullYear(), month - 1, day);
+  if (today < birthThisYear) age--;
+  document.getElementById('zodiac-animal').textContent = animal;
+  document.getElementById('zodiac-sign').textContent = sign;
+  document.getElementById('zodiac-age').textContent = age;
+}
+document.getElementById('zodiac-birth').valueAsDate = new Date(new Date().getFullYear() - 25, 0, 1);
+
+// ============ Sticky Notes ============
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem('sticky-notes') || '[]'); } catch(e) { return []; }
+}
+function saveNotes(notes) { localStorage.setItem('sticky-notes', JSON.stringify(notes)); }
+function renderNotes() {
+  const notes = loadNotes();
+  const container = document.getElementById('notes-container');
+  if (notes.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-secondary);padding:20px;text-align:center;width:100%;">还没有便签，点击上方按钮创建吧~</div>';
+    return;
+  }
+  container.innerHTML = notes.map((n, i) => `
+    <div style="background:${n.color || '#fef3c7'};color:#1e293b;border-radius:var(--radius);padding:12px;width:200px;min-height:120px;position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+      <textarea style="width:100%;min-height:80px;background:transparent;border:none;resize:none;font-family:inherit;font-size:13px;color:#1e293b;outline:none;"
+        oninput="updateNote(${i}, this.value)">${n.text || ''}</textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+        <input type="color" value="${n.color || '#fef3c7'}" onchange="updateNoteColor(${i}, this.value)" style="width:24px;height:24px;border:none;border-radius:4px;cursor:pointer;background:transparent;padding:0;">
+        <span style="font-size:10px;color:#94a3b8;">${n.time || ''}</span>
+        <button onclick="deleteNote(${i})" style="background:none;border:none;cursor:pointer;font-size:14px;color:#ef4444;">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+function addNote() {
+  const notes = loadNotes();
+  const colors = ['#fef3c7', '#dbeafe', '#dcfce7', '#fce7f3', '#e0e7ff', '#fef9c3', '#ccfbf1', '#f5f5f4'];
+  notes.push({ text: '', color: colors[Math.floor(Math.random() * colors.length)], time: new Date().toLocaleString('zh-CN') });
+  saveNotes(notes);
+  renderNotes();
+}
+function updateNote(idx, text) {
+  const notes = loadNotes();
+  if (notes[idx]) { notes[idx].text = text; saveNotes(notes); }
+}
+function updateNoteColor(idx, color) {
+  const notes = loadNotes();
+  if (notes[idx]) { notes[idx].color = color; saveNotes(notes); renderNotes(); }
+}
+function deleteNote(idx) {
+  const notes = loadNotes();
+  notes.splice(idx, 1);
+  saveNotes(notes);
+  renderNotes();
+}
+function clearAllNotes() {
+  if (confirm('确定要清空所有便签吗？')) { localStorage.removeItem('sticky-notes'); renderNotes(); }
+}
+renderNotes();
+
+// ============ Delimiter Converter ============
+function getDelimiter(selectId, customId) {
+  const val = document.getElementById(selectId).value;
+  if (val === 'custom') return document.getElementById(customId).value || '';
+  if (val === '\\n') return '\n';
+  if (val === '\\t') return '\t';
+  return val;
+}
+function convertDelimiter() {
+  const input = document.getElementById('delim-input').value;
+  const from = getDelimiter('delim-from', 'delim-from-custom');
+  const to = getDelimiter('delim-to', 'delim-to-custom');
+  if (!from || !to) { document.getElementById('delim-output').style.display = 'none'; return; }
+  if (!input) { document.getElementById('delim-output').style.display = 'none'; return; }
+  const parts = input.split(from).map(s => s.trim()).filter(Boolean);
+  const result = parts.join(to);
+  showResult('delim-output', result);
+}
+// Show/hide custom delimiter inputs
+['delim-from', 'delim-to'].forEach(id => {
+  document.getElementById(id).addEventListener('change', function() {
+    const customId = id === 'delim-from' ? 'delim-from-custom' : 'delim-to-custom';
+    document.getElementById(customId).style.display = this.value === 'custom' ? '' : 'none';
+    convertDelimiter();
+  });
+});
+function swapDelimiter() {
+  const from = document.getElementById('delim-from');
+  const to = document.getElementById('delim-to');
+  [from.value, to.value] = [to.value, from.value];
+  // Also swap custom values
+  const fromCustom = document.getElementById('delim-from-custom');
+  const toCustom = document.getElementById('delim-to-custom');
+  [fromCustom.value, toCustom.value] = [toCustom.value, fromCustom.value];
+  from.dispatchEvent(new Event('change'));
+  to.dispatchEvent(new Event('change'));
+  convertDelimiter();
 }
 
 // ============ Search & Theme ============
