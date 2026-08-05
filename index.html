@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等44个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等49个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等44个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等49个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等44个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等49个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -412,6 +412,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#reaction" data-tool="reaction"><span class="icon">⚡</span>反应测试</a></li>
     <li><a href="#json-csv" data-tool="json-csv"><span class="icon">📊</span>JSON/CSV互转</a></li>
     <li><a href="#palette" data-tool="palette"><span class="icon">🎨</span>配色方案</a></li>
+    <li><a href="#quotes" data-tool="quotes"><span class="icon">💬</span>名言鸡汤</a></li>
+    <li><a href="#countdown-days" data-tool="countdown-days"><span class="icon">🎉</span>节日倒计时</a></li>
+    <li><a href="#age-calc" data-tool="age-calc"><span class="icon">🧮</span>年龄计算器</a></li>
+    <li><a href="#white-noise" data-tool="white-noise"><span class="icon">🎵</span>白噪音</a></li>
+    <li><a href="#breathing" data-tool="breathing"><span class="icon">🧘</span>呼吸练习</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -1472,6 +1477,113 @@ console.log('代码块');
     <div id="palette-colors" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;"></div>
   </section>
 
+  <!-- Quotes -->
+  <section class="tool-panel" id="panel-quotes">
+    <h2>💬 名言 & 鸡汤</h2>
+    <p class="desc">随机获取励志名言、心灵鸡汤，给你每日正能量。</p>
+    <div style="text-align:center;padding:30px 20px;">
+      <div style="font-size:18px;line-height:1.8;min-height:100px;display:flex;flex-direction:column;justify-content:center;align-items:center;" id="quote-display">
+        <div style="font-size:40px;margin-bottom:10px;">💡</div>
+        <div style="max-width:500px;font-style:italic;color:var(--text);" id="quote-text">点击下方按钮获取一句名言</div>
+        <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);" id="quote-author"></div>
+      </div>
+      <div class="btn-group" style="justify-content:center;margin-top:20px;">
+        <button class="btn" onclick="showRandomQuote()">✨ 随机一句</button>
+        <button class="btn btn-secondary" onclick="copyText('quote-text')">📋 复制</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Holiday Countdown -->
+  <section class="tool-panel" id="panel-countdown-days">
+    <h2>🎉 节日倒计时</h2>
+    <p class="desc">查看下一个重要节日还有多少天，不再错过重要日子。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div id="countdown-display" style="font-size:48px;font-weight:700;color:var(--accent-hover);margin-bottom:8px;">--</div>
+      <div id="countdown-label" style="font-size:16px;color:var(--text-secondary);margin-bottom:24px;">加载中...</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('newyear')">🎊 元旦</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('spring')">🧧 春节</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('qingming')">🌸 清明</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('labor')">💪 劳动节</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('dragon')">🐉 端午</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('midautumn')">🌙 中秋</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('national')">🇨🇳 国庆</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('xmas')">🎄 圣诞</button>
+        <button class="btn btn-secondary btn-sm" onclick="showHolidayCountdown('next')">⏭️ 下一个</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Age Calculator -->
+  <section class="tool-panel" id="panel-age-calc">
+    <h2>🧮 年龄计算器</h2>
+    <p class="desc">精确计算你的年龄，包括年、月、日以及总天数。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">出生日期</div>
+        <input type="date" id="age-birth" value="2000-01-01" style="font-family:inherit;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcAge()">📅 计算年龄</button>
+    </div>
+    <div id="age-result" style="margin-top:16px;">
+      <div class="stats">
+        <div class="stat-card"><div class="num" id="age-years">--</div><div class="lbl">岁 (年)</div></div>
+        <div class="stat-card"><div class="num" id="age-months">--</div><div class="lbl">个月</div></div>
+        <div class="stat-card"><div class="num" id="age-days">--</div><div class="lbl">天</div></div>
+        <div class="stat-card"><div class="num" id="age-total-days">--</div><div class="lbl">总天数</div></div>
+        <div class="stat-card"><div class="num" id="age-weeks">--</div><div class="lbl">总周数</div></div>
+        <div class="stat-card"><div class="num" id="age-hours">--</div><div class="lbl">总小时</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- White Noise -->
+  <section class="tool-panel" id="panel-white-noise">
+    <h2>🎵 白噪音 & 专注音</h2>
+    <p class="desc">播放白噪音、雨声、海浪声等，帮助你集中注意力或放松入睡。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:60px;margin-bottom:16px;" id="noise-icon">🌊</div>
+      <div style="font-size:18px;font-weight:600;margin-bottom:20px;" id="noise-label">选择一种声音开始</div>
+      <div class="btn-group" style="justify-content:center;">
+        <button class="btn" onclick="startNoise('white')" id="noise-btn-white">🤍 白噪音</button>
+        <button class="btn btn-secondary" onclick="startNoise('rain')" id="noise-btn-rain">🌧️ 雨声</button>
+        <button class="btn btn-secondary" onclick="startNoise('ocean')" id="noise-btn-ocean">🌊 海浪</button>
+        <button class="btn btn-secondary" onclick="startNoise('wind')" id="noise-btn-wind">💨 风声</button>
+        <button class="btn btn-secondary btn-sm" onclick="stopNoise()" id="noise-btn-stop">⏹️ 停止</button>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="label" style="text-align:center;">音量</div>
+        <input type="range" id="noise-volume" min="0" max="100" value="50" oninput="updateNoiseVolume(this.value)" style="width:200px;max-width:80%;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Breathing Exercise -->
+  <section class="tool-panel" id="panel-breathing">
+    <h2>🧘 呼吸练习引导</h2>
+    <p class="desc">跟随动画引导进行深呼吸，缓解压力、放松身心。4-7-8 呼吸法。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="position:relative;width:200px;height:200px;margin:0 auto 20px;">
+        <svg viewBox="0 0 200 200" style="width:200px;height:200px;transform:rotate(-90deg);">
+          <circle cx="100" cy="100" r="85" fill="none" stroke="var(--border)" stroke-width="8"/>
+          <circle cx="100" cy="100" r="85" fill="none" stroke="var(--accent)" stroke-width="8" stroke-dasharray="534" stroke-dashoffset="534" stroke-linecap="round" id="breath-circle"/>
+        </svg>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;font-weight:700;color:var(--accent-hover);" id="breath-text">准备</div>
+      </div>
+      <div style="font-size:16px;color:var(--text-secondary);margin-bottom:16px;" id="breath-phase">点击开始</div>
+      <div class="btn-group" style="justify-content:center;">
+        <button class="btn" onclick="startBreathing()" id="breath-btn">▶️ 开始</button>
+        <button class="btn btn-secondary btn-sm" onclick="resetBreathing()">⏹️ 重置</button>
+      </div>
+      <div style="margin-top:16px;font-size:13px;color:var(--text-secondary);max-width:400px;margin-left:auto;margin-right:auto;">
+        <p>4-7-8 呼吸法：吸气4秒 → 屏气7秒 → 呼气8秒</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -1479,7 +1591,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 44个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 49个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -3330,6 +3442,208 @@ function updatePaletteFromHex() {
   }
 }
 generatePalette();
+
+// ============ Quotes ============
+const QUOTES = [
+  { text: '生活不止眼前的苟且，还有诗和远方的田野。', author: '高晓松' },
+  { text: '世界上只有一种真正的英雄主义，那就是在认清生活真相之后依然热爱生活。', author: '罗曼·罗兰' },
+  { text: '种一棵树最好的时间是十年前，其次是现在。', author: '佚名' },
+  { text: '千里之行，始于足下。', author: '老子' },
+  { text: '天行健，君子以自强不息。', author: '《周易》' },
+  { text: '不积跬步，无以至千里；不积小流，无以成江海。', author: '荀子' },
+  { text: '人生没有白走的路，每一步都算数。', author: '李宗盛' },
+  { text: '不忘初心，方得始终。', author: '《华严经》' },
+  { text: '所谓无底深渊，下去，也是前程万里。', author: '木心' },
+  { text: '既然选择了远方，便只顾风雨兼程。', author: '汪国真' },
+  { text: '每一个优秀的人，都有一段沉默的时光。', author: '佚名' },
+  { text: '你若盛开，蝴蝶自来。', author: '佚名' },
+  { text: '明天又是新的一天。', author: '玛格丽特·米切尔' },
+  { text: '人生如逆旅，我亦是行人。', author: '苏轼' },
+  { text: '长风破浪会有时，直挂云帆济沧海。', author: '李白' },
+  { text: '会当凌绝顶，一览众山小。', author: '杜甫' },
+  { text: '路漫漫其修远兮，吾将上下而求索。', author: '屈原' },
+  { text: '竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。', author: '苏轼' },
+  { text: '天生我材必有用，千金散尽还复来。', author: '李白' },
+  { text: '莫愁前路无知己，天下谁人不识君。', author: '高适' },
+  { text: '人生得意须尽欢，莫使金樽空对月。', author: '李白' },
+  { text: '山重水复疑无路，柳暗花明又一村。', author: '陆游' },
+  { text: '沉舟侧畔千帆过，病树前头万木春。', author: '刘禹锡' },
+  { text: '千磨万击还坚劲，任尔东西南北风。', author: '郑燮' },
+  { text: '宝剑锋从磨砺出，梅花香自苦寒来。', author: '《警世贤文》' },
+  { text: '业精于勤，荒于嬉；行成于思，毁于随。', author: '韩愈' },
+  { text: '世上无难事，只怕有心人。', author: '佚名' },
+  { text: '志当存高远。', author: '诸葛亮' },
+  { text: '非淡泊无以明志，非宁静无以致远。', author: '诸葛亮' },
+  { text: '少壮不努力，老大徒伤悲。', author: '《长歌行》' },
+];
+function showRandomQuote() {
+  const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  document.getElementById('quote-text').textContent = '「' + q.text + '」';
+  document.getElementById('quote-author').textContent = '—— ' + q.author;
+}
+showRandomQuote();
+
+// ============ Holiday Countdown ============
+const HOLIDAYS = {
+  newyear: { month: 1, day: 1, name: '元旦' },
+  spring: { month: 1, day: 29, name: '春节', year: 2026 },
+  qingming: { month: 4, day: 5, name: '清明节' },
+  labor: { month: 5, day: 1, name: '劳动节' },
+  dragon: { month: 5, day: 31, name: '端午节', year: 2026 },
+  midautumn: { month: 10, day: 6, name: '中秋节', year: 2026 },
+  national: { month: 10, day: 1, name: '国庆节' },
+  xmas: { month: 12, day: 25, name: '圣诞节' },
+};
+function getNextHolidayDate(h) {
+  const now = new Date();
+  const year = h.year || now.getFullYear();
+  let d = new Date(year, h.month - 1, h.day);
+  if (d < now) d = new Date(year + 1, h.month - 1, h.day);
+  return d;
+}
+function showHolidayCountdown(key) {
+  if (key === 'next') {
+    let best = null, bestKey = null;
+    for (const k in HOLIDAYS) {
+      const d = getNextHolidayDate(HOLIDAYS[k]);
+      if (!best || d < best) { best = d; bestKey = k; }
+    }
+    if (bestKey) showHolidayCountdown(bestKey);
+    return;
+  }
+  const h = HOLIDAYS[key];
+  const target = getNextHolidayDate(h);
+  const now = new Date();
+  const diff = target - now;
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  document.getElementById('countdown-display').textContent = days > 0 ? days + '天' : '今天！';
+  document.getElementById('countdown-label').textContent = `距离${h.name}还有 ${days} 天 ${hours} 小时 (${target.toLocaleDateString('zh-CN')})`;
+}
+
+// ============ Age Calculator ============
+function calcAge() {
+  const birth = new Date(document.getElementById('age-birth').value);
+  const now = new Date();
+  if (isNaN(birth.getTime())) return alert('请选择有效的出生日期');
+  let years = now.getFullYear() - birth.getFullYear();
+  let months = now.getMonth() - birth.getMonth();
+  let days = now.getDate() - birth.getDate();
+  if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const totalDays = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
+  const totalHours = Math.floor((now - birth) / (1000 * 60 * 60));
+  const totalWeeks = Math.floor(totalDays / 7);
+  document.getElementById('age-years').textContent = years;
+  document.getElementById('age-months').textContent = years * 12 + months;
+  document.getElementById('age-days').textContent = days;
+  document.getElementById('age-total-days').textContent = totalDays.toLocaleString();
+  document.getElementById('age-weeks').textContent = totalWeeks.toLocaleString();
+  document.getElementById('age-hours').textContent = totalHours.toLocaleString();
+}
+
+// ============ White Noise ============
+let noiseCtx = null, noiseNode = null, noiseGain = null, noiseType = 'white';
+function startNoise(type) {
+  stopNoise();
+  noiseType = type;
+  noiseCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const sr = noiseCtx.sampleRate;
+  const len = sr * 4;
+  const buf = noiseCtx.createBuffer(1, len, sr);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) {
+    if (type === 'white') {
+      data[i] = Math.random() * 2 - 1;
+    } else if (type === 'rain') {
+      data[i] = (Math.random() * 2 - 1) * (0.3 + 0.7 * Math.sin(i / sr * 8));
+    } else if (type === 'ocean') {
+      data[i] = (Math.random() * 2 - 1) * (0.2 + 0.8 * (Math.sin(i / sr * 0.5) * 0.5 + 0.5));
+    } else if (type === 'wind') {
+      const t = i / sr;
+      data[i] = (Math.random() * 2 - 1) * (0.1 + 0.9 * (Math.sin(t * 0.3) * 0.5 + 0.5));
+    }
+  }
+  noiseNode = noiseCtx.createBufferSource();
+  noiseNode.buffer = buf;
+  noiseNode.loop = true;
+  noiseGain = noiseCtx.createGain();
+  noiseGain.gain.value = document.getElementById('noise-volume').value / 100;
+  const lp = noiseCtx.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = type === 'white' ? 8000 : 3000;
+  noiseNode.connect(lp);
+  lp.connect(noiseGain);
+  noiseGain.connect(noiseCtx.destination);
+  noiseNode.start();
+  const icons = { white: '🤍', rain: '🌧️', ocean: '🌊', wind: '💨' };
+  const labels = { white: '白噪音', rain: '雨声', ocean: '海浪声', wind: '风声' };
+  document.getElementById('noise-icon').textContent = icons[type];
+  document.getElementById('noise-label').textContent = '正在播放：' + labels[type];
+  document.querySelectorAll('#panel-white-noise .btn-group .btn').forEach(b => b.classList.remove('btn'));
+  document.querySelectorAll('#panel-white-noise .btn-group .btn-secondary').forEach(b => b.classList.remove('btn-secondary'));
+  document.getElementById('noise-btn-' + type).className = 'btn';
+  document.getElementById('noise-btn-stop').className = 'btn btn-secondary btn-sm';
+}
+function stopNoise() {
+  if (noiseCtx) { noiseCtx.close(); noiseCtx = null; noiseNode = null; noiseGain = null; }
+  document.getElementById('noise-icon').textContent = '🎵';
+  document.getElementById('noise-label').textContent = '选择一种声音开始';
+  document.querySelectorAll('#panel-white-noise .btn-group .btn').forEach(b => { b.className = 'btn btn-secondary'; });
+  document.getElementById('noise-btn-stop').className = 'btn btn-secondary btn-sm';
+}
+function updateNoiseVolume(val) {
+  if (noiseGain) noiseGain.gain.value = val / 100;
+}
+
+// ============ Breathing Exercise ============
+let breathTimer = null, breathRunning = false;
+function startBreathing() {
+  if (breathRunning) { clearInterval(breathTimer); breathRunning = false; document.getElementById('breath-btn').textContent = '▶️ 开始'; return; }
+  breathRunning = true;
+  document.getElementById('breath-btn').textContent = '⏸️ 暂停';
+  const circle = document.getElementById('breath-circle');
+  const text = document.getElementById('breath-text');
+  const phase = document.getElementById('breath-phase');
+  const total = 534;
+  let step = 0;
+  const INHALE = 4, HOLD = 7, EXHALE = 8;
+  const totalSteps = INHALE + HOLD + EXHALE;
+  function tick() {
+    const s = step % totalSteps;
+    let offset, label, phaseText;
+    if (s < INHALE) {
+      const p = s / INHALE;
+      offset = total * (1 - p);
+      label = '吸';
+      phaseText = '🌬️ 吸气...';
+    } else if (s < INHALE + HOLD) {
+      offset = 0;
+      label = '屏';
+      phaseText = '🤫 屏住呼吸...';
+    } else {
+      const p = (s - INHALE - HOLD) / EXHALE;
+      offset = total * p;
+      label = '呼';
+      phaseText = '😮‍💨 呼气...';
+    }
+    circle.setAttribute('stroke-dashoffset', offset);
+    text.textContent = label;
+    phase.textContent = phaseText;
+    step++;
+    if (step >= totalSteps) step = 0;
+  }
+  tick();
+  breathTimer = setInterval(tick, 1000);
+}
+function resetBreathing() {
+  if (breathTimer) { clearInterval(breathTimer); breathTimer = null; }
+  breathRunning = false;
+  document.getElementById('breath-btn').textContent = '▶️ 开始';
+  document.getElementById('breath-circle').setAttribute('stroke-dashoffset', '534');
+  document.getElementById('breath-text').textContent = '准备';
+  document.getElementById('breath-phase').textContent = '点击开始';
+}
 
 // ============ Search & Theme ============
 function filterTools() {
