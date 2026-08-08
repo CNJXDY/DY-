@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等49个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等59个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等49个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等59个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等49个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等59个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -417,6 +417,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#age-calc" data-tool="age-calc"><span class="icon">🧮</span>年龄计算器</a></li>
     <li><a href="#white-noise" data-tool="white-noise"><span class="icon">🎵</span>白噪音</a></li>
     <li><a href="#breathing" data-tool="breathing"><span class="icon">🧘</span>呼吸练习</a></li>
+    <li><a href="#emoji" data-tool="emoji"><span class="icon">😊</span>Emoji大全</a></li>
+    <li><a href="#draw" data-tool="draw"><span class="icon">✍️</span>手写板</a></li>
+    <li><a href="#fortune" data-tool="fortune"><span class="icon">🔮</span>今日运势</a></li>
+    <li><a href="#muyu" data-tool="muyu"><span class="icon">🐟</span>敲木鱼</a></li>
+    <li><a href="#history" data-tool="history"><span class="icon">📜</span>历史上的今天</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -1584,6 +1589,100 @@ console.log('代码块');
     </div>
   </section>
 
+  <!-- Emoji Picker -->
+  <section class="tool-panel" id="panel-emoji">
+    <h2>😊 Emoji 大全</h2>
+    <p class="desc">分类浏览常用Emoji表情，点击即可复制。</p>
+    <div class="btn-group" style="margin-bottom:12px;justify-content:center;">
+      <button class="btn btn-sm" onclick="showEmojiCategory('face')">😀 笑脸</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('hand')">👋 手势</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('heart')">❤️ 爱心</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('food')">🍎 食物</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('animal')">🐱 动物</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('activity')">⚽ 活动</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('symbol')">🔣 符号</button>
+    </div>
+    <div id="emoji-grid" style="display:flex;flex-wrap:wrap;gap:6px;max-height:400px;overflow-y:auto;padding:8px;background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);"></div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-secondary);text-align:center;">点击任意Emoji即可复制到剪贴板</div>
+  </section>
+
+  <!-- Drawing Board -->
+  <section class="tool-panel" id="panel-draw">
+    <h2>✍️ 手写板 / 涂鸦</h2>
+    <p class="desc">自由涂鸦、手写笔记，支持保存为图片。</p>
+    <div style="text-align:center;">
+      <canvas id="draw-canvas" width="600" height="350" style="width:100%;height:auto;max-width:600px;background:white;border-radius:var(--radius);border:1px solid var(--border);cursor:crosshair;touch-action:none;"></canvas>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
+        <div class="label" style="display:flex;align-items:center;gap:6px;margin:0;">
+          颜色: <input type="color" id="draw-color" value="#1e293b" style="width:36px;height:32px;border:none;border-radius:4px;cursor:pointer;background:transparent;">
+        </div>
+        <div class="label" style="display:flex;align-items:center;gap:6px;margin:0;">
+          粗细: <input type="range" id="draw-size" min="1" max="20" value="3" style="width:80px;">
+        </div>
+      </div>
+      <div class="btn-group" style="justify-content:center;">
+        <button class="btn btn-secondary btn-sm" onclick="clearDraw()">🗑️ 清空</button>
+        <button class="btn btn-secondary btn-sm" onclick="undoDraw()">↩️ 撤销</button>
+        <button class="btn" onclick="saveDraw()">💾 保存图片</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fortune -->
+  <section class="tool-panel" id="panel-fortune">
+    <h2>🔮 今日运势</h2>
+    <p class="desc">看看今天的运势如何，娱乐一下，仅供参考哦~</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:64px;margin-bottom:10px;" id="fortune-icon">🔮</div>
+      <div style="font-size:28px;font-weight:700;margin-bottom:6px;" id="fortune-level">--</div>
+      <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;" id="fortune-score"></div>
+      <div style="max-width:400px;margin:0 auto 20px;padding:16px;background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="label" style="text-align:center;">💡 今日建议</div>
+        <div style="font-size:15px;line-height:1.6;margin-top:8px;" id="fortune-advice">点击按钮查看今日运势</div>
+      </div>
+      <div class="btn-group" style="justify-content:center;">
+        <button class="btn" onclick="generateFortune()">🔮 算一卦</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Muyu (Wooden Fish) -->
+  <section class="tool-panel" id="panel-muyu">
+    <h2>🐟 敲木鱼</h2>
+    <p class="desc">点击木鱼，积攒功德，静心解压。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:100px;cursor:pointer;user-select:none;transition:transform 0.1s;display:inline-block;" id="muyu-icon" onclick="hitMuyu()">🐟</div>
+      <div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">点击木鱼敲一下</div>
+      <div style="margin-top:20px;">
+        <div class="stat-card" style="display:inline-block;min-width:160px;">
+          <div class="num" id="muyu-count">0</div>
+          <div class="lbl">功德</div>
+        </div>
+      </div>
+      <div id="muyu-message" style="margin-top:12px;font-size:16px;color:var(--accent-hover);min-height:24px;"></div>
+      <div class="btn-group" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-secondary btn-sm" onclick="resetMuyu()">↺ 重置功德</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Today in History -->
+  <section class="tool-panel" id="panel-history">
+    <h2>📜 历史上的今天</h2>
+    <p class="desc">看看历史上的今天都发生了哪些大事。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:10px;">📅</div>
+      <div style="font-size:16px;color:var(--text-secondary);margin-bottom:20px;" id="history-date">8月5日</div>
+      <div id="history-events" style="text-align:left;max-width:550px;margin:0 auto;">
+        <div style="text-align:center;color:var(--text-secondary);">点击按钮查看</div>
+      </div>
+      <div class="btn-group" style="justify-content:center;margin-top:16px;">
+        <button class="btn" onclick="showTodayHistory()">📜 查看今天</button>
+        <button class="btn btn-secondary" onclick="showRandomHistory()">🎲 随机一天</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -1591,7 +1690,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 49个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 59个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -3644,6 +3743,176 @@ function resetBreathing() {
   document.getElementById('breath-text').textContent = '准备';
   document.getElementById('breath-phase').textContent = '点击开始';
 }
+
+// ============ Emoji Picker ============
+const EMOJI_DATA = {
+  face: ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','🥰','😘','😗','😙','😚','🙂','🤗','🤩','🤔','🤨','😐','😑','😶','🙄','😏','😣','😥','😮','🤐','😯','😪','😫','😴','😌','😛','😜','😝','🤤','😒','😓','😔','😕','🙃','🤑','😲','☹️','🙁','😖','😞','😟','😤','😢','😭','😦','😧','😨','😩','🤯','😬','😰','😱','🥵','🥶','😳','🤪','😵','😡','😠','🤬'],
+  hand: ['👋','🤚','🖐️','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💅','🤳','💪'],
+  heart: ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💕','💞','💓','💗','💖','💘','💝','💟','❣️','💔','❤️‍🔥','❤️‍🩹','💑','💏','💌','💋'],
+  food: ['🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🥭','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥬','🥒','🌽','🥕','🧄','🧅','🥔','🍠','🥐','🍞','🥖','🥨','🧀','🥚','🍳','🥞','🧇','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🥪','🥙','🧆','🌮','🌯','🥗','🥘','🫕','🥫','🍝','🍜','🍲','🍛','🍣','🍱','🥟','🦪','🍤','🍙','🍚','🍘','🍥','🥠','🥮','🍢','🍡','🍧','🍨','🍦','🥧','🧁','🍰','🎂','🍮','🍭','🍬','🍫','🍿','🍩','🍪','🌰','🥜','🍯'],
+  animal: ['🐱','🐶','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','🦟','🦗','🕷️','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🐅','🐆','🦓','🦍','🦧','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🪶','🐓','🦃','🦤','🦚','🦜','🦢','🦩','🕊️','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🐀','🐿️','🦔','🐾','🐉','🐲'],
+  activity: ['⚽','🏀','🏈','⚾','🥎','🎾','🏐','🏉','🥏','🎱','🪀','🏓','🏸','🏒','🏑','🥍','🏏','🪃','🥅','⛳','🪁','🏹','🎣','🤿','🥊','🥋','🎽','🛹','🛼','🛷','⛸️','🥌','🎿','⛷️','🏂','🪂','🏋️','🤼','🤸','🤺','⛹️','🤾','🏌️','🏇','🧘','🏄','🏊','🤽','🚣','🧗','🚵','🚴','🎪','🎭','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🪘','🎷','🎺','🪗','🎸','🪕','🎻','🎲','♟️','🎯','🎳','🎮','🕹️'],
+  symbol: ['✅','❌','❓','❔','❗','‼️','⁉️','➕','➖','➗','✖️','♾️','💲','💱','©️','®️','™️','🔴','🟠','🟡','🟢','🔵','🟣','🟤','⚫','⚪','🔘','🛑','⭕','🚫','📵','🔞','☢️','☣️','⚠️','🚸','⛔','🚱','🚳','🚭','🚯','♿','🆑','🆚','🆔','🆖','🆗','🆙','🆒','🆕','🆓','🆘','🉑','🈶','🈚','🈸','🈺','🈴','🈵','🈲','🈳','🈹','🈷️','🈁','🉐','🈯','🈂️']
+};
+function showEmojiCategory(cat) {
+  const emojis = EMOJI_DATA[cat] || EMOJI_DATA.face;
+  const grid = document.getElementById('emoji-grid');
+  grid.innerHTML = emojis.map(e => `<span style="font-size:28px;cursor:pointer;padding:6px;border-radius:6px;transition:background 0.15s;line-height:1;" onclick="copyEmoji('${e}')" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='transparent'">${e}</span>`).join('');
+  document.querySelectorAll('#panel-emoji .btn-group .btn-sm').forEach(b => b.className = 'btn btn-secondary btn-sm');
+  event.target.className = 'btn btn-sm';
+}
+function copyEmoji(e) {
+  navigator.clipboard.writeText(e).then(() => {
+    document.getElementById('emoji-grid').innerHTML = `<div style="text-align:center;padding:20px;color:var(--success);font-size:16px;width:100%;">✅ 已复制 ${e}</div>`;
+    setTimeout(() => showEmojiCategory('face'), 800);
+  });
+}
+showEmojiCategory('face');
+
+// ============ Drawing Board ============
+let drawCanvas, drawCtx, isDrawing = false, drawHistory = [];
+function initDraw() {
+  drawCanvas = document.getElementById('draw-canvas');
+  drawCtx = drawCanvas.getContext('2d');
+  drawCtx.fillStyle = 'white';
+  drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+  drawCtx.strokeStyle = '#1e293b';
+  drawCtx.lineWidth = 3;
+  drawCtx.lineCap = 'round';
+  drawCtx.lineJoin = 'round';
+  saveDrawState();
+  drawCanvas.addEventListener('mousedown', startDraw);
+  drawCanvas.addEventListener('mousemove', draw);
+  drawCanvas.addEventListener('mouseup', endDraw);
+  drawCanvas.addEventListener('mouseleave', endDraw);
+  drawCanvas.addEventListener('touchstart', e => { e.preventDefault(); const t = e.touches[0]; startDraw({ offsetX: t.clientX - drawCanvas.getBoundingClientRect().left, offsetY: t.clientY - drawCanvas.getBoundingClientRect().top }); });
+  drawCanvas.addEventListener('touchmove', e => { e.preventDefault(); const t = e.touches[0]; draw({ offsetX: t.clientX - drawCanvas.getBoundingClientRect().left, offsetY: t.clientY - drawCanvas.getBoundingClientRect().top }); });
+  drawCanvas.addEventListener('touchend', endDraw);
+}
+function startDraw(e) { isDrawing = true; drawCtx.beginPath(); drawCtx.moveTo(e.offsetX, e.offsetY); }
+function draw(e) {
+  if (!isDrawing) return;
+  drawCtx.strokeStyle = document.getElementById('draw-color').value;
+  drawCtx.lineWidth = document.getElementById('draw-size').value;
+  drawCtx.lineTo(e.offsetX, e.offsetY);
+  drawCtx.stroke();
+}
+function endDraw() { if (isDrawing) { isDrawing = false; saveDrawState(); } }
+function saveDrawState() { drawHistory.push(drawCanvas.toDataURL()); if (drawHistory.length > 30) drawHistory.shift(); }
+function clearDraw() { drawCtx.fillStyle = 'white'; drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height); saveDrawState(); }
+function undoDraw() {
+  if (drawHistory.length < 2) return;
+  drawHistory.pop();
+  const img = new Image();
+  img.onload = () => { drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height); drawCtx.drawImage(img, 0, 0); };
+  img.src = drawHistory[drawHistory.length - 1];
+}
+function saveDraw() {
+  const link = document.createElement('a');
+  link.download = '涂鸦_' + new Date().toISOString().slice(0,10) + '.png';
+  link.href = drawCanvas.toDataURL();
+  link.click();
+}
+setTimeout(initDraw, 100);
+
+// ============ Fortune ============
+const FORTUNE_LEVELS = [
+  { level: '大吉', icon: '🌟', min: 90, max: 100, desc: '万事如意，诸事顺利！今天是你的一天！' },
+  { level: '上吉', icon: '✨', min: 75, max: 89, desc: '运势不错，宜主动出击，把握机会！' },
+  { level: '中吉', icon: '🌈', min: 55, max: 74, desc: '平稳中带有小确幸，适合稳步前进。' },
+  { level: '小吉', icon: '🌤️', min: 35, max: 54, desc: '略有波折，但好事多磨，耐心等待。' },
+  { level: '末吉', icon: '☁️', min: 15, max: 34, desc: '宜静不宜动，韬光养晦，明日更好。' },
+  { level: '凶', icon: '🌧️', min: 0, max: 14, desc: '否极泰来，低谷之后必有反弹！' },
+];
+const FORTUNE_ADVICE = [
+  '适合穿红色衣服，提升气场。',
+  '今天宜多吃水果，补充维生素。',
+  '适合与老朋友联系，会有意外收获。',
+  '出门前默念三遍"今天会很好"，好运自来。',
+  '遇到困难先深呼吸，冷静思考再行动。',
+  '今天适合学习新技能，效率会很高。',
+  '宜多喝水，保持身心通畅。',
+  '适合做善事，积攒好运。',
+  '今天不宜做重大决定，先收集信息。',
+  '适合独处思考，会有灵感迸发。',
+  '注意交通安全，小心驶得万年船。',
+  '今天适合运动，出出汗心情会很好。',
+  '宜整理房间，清理杂物也清理心情。',
+  '适合听音乐放松，会有好心情。',
+  '今天适合表白，成功率很高！',
+  '注意说话方式，避免无心之言伤人。',
+  '适合制定计划，为未来做好准备。',
+  '今天财运不错，适合理财规划。',
+];
+function generateFortune() {
+  const score = Math.floor(Math.random() * 101);
+  const level = FORTUNE_LEVELS.find(l => score >= l.min && score <= l.max);
+  const advice = FORTUNE_ADVICE[Math.floor(Math.random() * FORTUNE_ADVICE.length)];
+  document.getElementById('fortune-icon').textContent = level.icon;
+  document.getElementById('fortune-level').textContent = level.level + ' (' + score + '分)';
+  document.getElementById('fortune-level').style.color = score > 50 ? 'var(--success)' : 'var(--danger)';
+  document.getElementById('fortune-score').textContent = level.desc;
+  document.getElementById('fortune-advice').textContent = advice;
+}
+
+// ============ Wooden Fish (Muyu) ============
+let muyuCount = parseInt(localStorage.getItem('muyuCount') || '0');
+function hitMuyu() {
+  muyuCount++;
+  localStorage.setItem('muyuCount', muyuCount);
+  document.getElementById('muyu-count').textContent = muyuCount;
+  const icon = document.getElementById('muyu-icon');
+  icon.style.transform = 'scale(0.85)';
+  setTimeout(() => icon.style.transform = 'scale(1)', 100);
+  const msgs = ['功德+1 🙏', '善哉善哉 📿', '福报+1 ☸️', '心静自然凉 🧘', '随喜赞叹 🌸', '阿弥陀佛 🙏'];
+  const msg = document.getElementById('muyu-message');
+  msg.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+  if (muyuCount % 100 === 0) msg.textContent = '🎉 功德圆满 ' + muyuCount + '！';
+  if (muyuCount % 50 === 0) msg.textContent = '🌟 功德 ' + muyuCount + '，善哉善哉！';
+}
+function resetMuyu() {
+  if (confirm('确定要重置功德吗？')) { muyuCount = 0; localStorage.setItem('muyuCount', '0'); document.getElementById('muyu-count').textContent = '0'; document.getElementById('muyu-message').textContent = '功德已重置'; }
+}
+document.getElementById('muyu-count').textContent = muyuCount;
+
+// ============ Today in History ============
+const HISTORY_DATA = {
+  '1-1': ['1912年 - 中华民国成立', '1942年 - 中国与英美等国签署《联合国家宣言》', '1979年 - 中美正式建交'],
+  '1-15': ['1935年 - 遵义会议召开', '1949年 - 天津解放', '1982年 - 我国首次人工合成酵母丙氨酸转移核糖核酸'],
+  '2-1': ['1662年 - 郑成功收复台湾', '1942年 - 毛泽东发表《整顿党的作风》', '1986年 - 中国发射第一颗实用通信广播卫星'],
+  '3-12': ['1925年 - 孙中山逝世', '1979年 - 我国开始植树节', '1993年 - 王震逝世'],
+  '4-1': ['1948年 - 毛泽东提出新民主主义革命总路线', '2001年 - 中美南海撞机事件', '2003年 - 中国首次载人航天任务进入准备阶段'],
+  '5-4': ['1919年 - 五四运动爆发', '1949年 - 中华全国青年联合会成立', '1997年 - 中国女排获世界冠军'],
+  '6-1': ['1936年 - 中国人民抗日红军大学成立', '1950年 - 新中国第一个儿童节', '1999年 - 中国首次北极科学考察'],
+  '7-1': ['1921年 - 中国共产党成立', '1997年 - 香港回归祖国', '2006年 - 青藏铁路全线通车'],
+  '8-1': ['1927年 - 南昌起义', '1950年 - 中国民航正式开航', '2008年 - 京津城际铁路开通运营'],
+  '8-5': ['1895年 - 恩格斯逝世', '1962年 - 好莱坞影星玛丽莲·梦露逝世', '2003年 - 中国首次成功发射载人飞船神舟五号的前期试验', '2012年 -  Curiosity号火星车登陆火星'],
+  '9-3': ['1945年 - 抗日战争胜利纪念日', '1954年 - 中国人民志愿军全部撤离朝鲜', '2015年 - 纪念抗战胜利70周年阅兵'],
+  '10-1': ['1949年 - 中华人民共和国成立', '1984年 - 国庆35周年阅兵', '2010年 - 嫦娥二号卫星发射'],
+  '11-11': ['1918年 - 第一次世界大战结束', '1949年 - 中国人民解放军空军成立', '2001年 - 中国加入世界贸易组织(WTO)'],
+  '12-20': ['1999年 - 澳门回归祖国', '2009年 - 中国首次火星探测任务启动', '2019年 - 澳门回归20周年'],
+  '12-25': ['1936年 - 西安事变和平解决', '1970年 - 中国第一颗人造卫星东方红一号研制成功', '1991年 - 苏联解体'],
+};
+function getTodayHistory() {
+  const d = new Date();
+  return (d.getMonth() + 1) + '-' + d.getDate();
+}
+function showTodayHistory() {
+  const key = getTodayHistory();
+  const events = HISTORY_DATA[key] || ['今天暂无收录的历史事件。'];
+  document.getElementById('history-date').textContent = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' });
+  document.getElementById('history-events').innerHTML = events.map((e, i) => `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.6;">${i+1}. ${e}</div>`).join('');
+}
+function showRandomHistory() {
+  const keys = Object.keys(HISTORY_DATA);
+  const key = keys[Math.floor(Math.random() * keys.length)];
+  const [m, d] = key.split('-');
+  const events = HISTORY_DATA[key];
+  const date = new Date(2024, parseInt(m)-1, parseInt(d));
+  document.getElementById('history-date').textContent = date.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' });
+  document.getElementById('history-events').innerHTML = events.map((e, i) => `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.6;">${i+1}. ${e}</div>`).join('');
+}
+showTodayHistory();
 
 // ============ Search & Theme ============
 function filterTools() {
