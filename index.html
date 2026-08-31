@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等64个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等69个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等64个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等69个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等64个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等69个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -427,6 +427,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#pwd-strength" data-tool="pwd-strength"><span class="icon">🔐</span>密码强度</a></li>
     <li><a href="#img-filter" data-tool="img-filter"><span class="icon">🖼️</span>图片滤镜</a></li>
     <li><a href="#game-2048" data-tool="game-2048"><span class="icon">🎮</span>2048游戏</a></li>
+    <li><a href="#discount" data-tool="discount"><span class="icon">🏷️</span>折扣计算</a></li>
+    <li><a href="#compound" data-tool="compound"><span class="icon">💰</span>复利计算</a></li>
+    <li><a href="#sleep" data-tool="sleep"><span class="icon">😴</span>睡眠周期</a></li>
+    <li><a href="#redpacket" data-tool="redpacket"><span class="icon">🧧</span>红包生成</a></li>
+    <li><a href="#metronome" data-tool="metronome"><span class="icon">🎼</span>节拍器</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -1802,6 +1807,148 @@ console.log('代码块');
     </div>
   </section>
 
+  <!-- Discount Calculator -->
+  <section class="tool-panel" id="panel-discount">
+    <h2>🏷️ 折扣计算器</h2>
+    <p class="desc">快速计算打折后的价格、优惠金额和折扣率。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">原价 (元)</div>
+        <input type="number" id="discount-price" value="100" step="0.01" min="0" oninput="calcDiscount()">
+      </div>
+      <div>
+        <div class="label">折扣</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="number" id="discount-rate" value="8" step="0.1" min="0" max="10" oninput="calcDiscount()" style="width:80px;">
+          <span style="font-size:14px;">折</span>
+          <button class="btn btn-secondary btn-sm" onclick="setDiscount(0.5)">5折</button>
+          <button class="btn btn-secondary btn-sm" onclick="setDiscount(0.7)">7折</button>
+          <button class="btn btn-secondary btn-sm" onclick="setDiscount(0.8)">8折</button>
+          <button class="btn btn-secondary btn-sm" onclick="setDiscount(0.9)">9折</button>
+        </div>
+      </div>
+    </div>
+    <div id="discount-result" style="margin-top:16px;">
+      <div class="stats">
+        <div class="stat-card"><div class="num" id="discount-pay">--</div><div class="lbl">折后价 (元)</div></div>
+        <div class="stat-card"><div class="num" id="discount-save">--</div><div class="lbl">节省 (元)</div></div>
+        <div class="stat-card"><div class="num" id="discount-percent">--</div><div class="lbl">省了 %</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compound Interest -->
+  <section class="tool-panel" id="panel-compound">
+    <h2>💰 复利计算器</h2>
+    <p class="desc">计算本金按复利增值后的终值，看看"利滚利"的力量。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">初始本金 (元)</div>
+        <input type="number" id="compound-principal" value="10000" step="100" min="0" oninput="calcCompound()">
+      </div>
+      <div>
+        <div class="label">年利率 (%)</div>
+        <input type="number" id="compound-rate" value="5" step="0.1" min="0" oninput="calcCompound()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">定投 (元/月，可填0)</div>
+        <input type="number" id="compound-monthly" value="1000" step="100" min="0" oninput="calcCompound()">
+      </div>
+      <div>
+        <div class="label">投资年限</div>
+        <input type="number" id="compound-years" value="10" step="1" min="1" oninput="calcCompound()">
+      </div>
+    </div>
+    <div id="compound-result" style="margin-top:16px;">
+      <div class="stats">
+        <div class="stat-card"><div class="num" id="compound-future">--</div><div class="lbl">终值 (元)</div></div>
+        <div class="stat-card"><div class="num" id="compound-invest">--</div><div class="lbl">投入本金 (元)</div></div>
+        <div class="stat-card"><div class="num" id="compound-profit">--</div><div class="lbl">收益 (元)</div></div>
+        <div class="stat-card"><div class="num" id="compound-multiply">--</div><div class="lbl">翻倍倍数</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sleep Cycle -->
+  <section class="tool-panel" id="panel-sleep">
+    <h2>😴 睡眠周期计算器</h2>
+    <p class="desc">睡眠周期约90分钟，在周期结束时醒来最清醒。计算最佳起床/入睡时间。</p>
+    <div style="margin-bottom:12px;">
+      <div class="label">计算方式</div>
+      <div class="btn-group">
+        <button class="btn btn-sm" id="sleep-mode-wake" onclick="setSleepMode('wake')">🌅 几点入睡</button>
+        <button class="btn btn-secondary btn-sm" id="sleep-mode-sleep" onclick="setSleepMode('sleep')">🌙 几点起床</button>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label" id="sleep-label">预计起床时间</div>
+        <input type="time" id="sleep-input" value="07:00" style="font-family:inherit;" onchange="calcSleep()">
+      </div>
+      <div>
+        <div class="label">周期数</div>
+        <select id="sleep-cycles" onchange="calcSleep()" style="font-family:inherit;">
+          <option value="4">4个周期 (6小时)</option>
+          <option value="5" selected>5个周期 (7.5小时)</option>
+          <option value="6">6个周期 (9小时)</option>
+        </select>
+      </div>
+    </div>
+    <div class="result-box" id="sleep-result" style="display:none;"></div>
+  </section>
+
+  <!-- Red Packet -->
+  <section class="tool-panel" id="panel-redpacket">
+    <h2>🧧 红包生成器</h2>
+    <p class="desc">模拟微信/支付宝随机红包分配，每个红包金额随机且总额精确等于设定值。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">红包总金额 (元)</div>
+        <input type="number" id="rp-total" value="100" step="0.01" min="0.01" oninput="previewRedPacket()">
+      </div>
+      <div>
+        <div class="label">红包个数</div>
+        <input type="number" id="rp-count" value="10" step="1" min="1" max="100" oninput="previewRedPacket()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-bottom:12px;">
+      <button class="btn" onclick="generateRedPacket()">🧧 生成红包</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyRedPacket()">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="rp-result" style="max-height:300px;">点击"生成红包"按钮，看看每个红包能分到多少钱！</div>
+  </section>
+
+  <!-- Metronome -->
+  <section class="tool-panel" id="panel-metronome">
+    <h2>🎼 在线节拍器</h2>
+    <p class="desc">练习乐器或节奏的音乐工具，支持调节速度和拍号。</p>
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:64px;line-height:1;margin-bottom:16px;" id="metro-beam">🎵</div>
+      <div style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">当前速度：<span id="metro-bpm-label" style="font-weight:700;color:var(--accent-hover);font-size:20px;">120</span> BPM</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;">
+        <button class="btn btn-secondary btn-sm" onclick="changeBPM(-10)">-10</button>
+        <input type="range" id="metro-bpm" min="40" max="240" value="120" oninput="changeBPMSlider(this.value)" style="width:220px;max-width:60%;">
+        <button class="btn btn-secondary btn-sm" onclick="changeBPM(10)">+10</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:12px;">
+        <span style="font-size:13px;color:var(--text-secondary);line-height:2.2;">拍号：</span>
+        <select id="metro-time" onchange="metroReset()" style="font-family:inherit;width:80px;">
+          <option value="4">4/4</option>
+          <option value="3">3/4</option>
+          <option value="2">2/4</option>
+          <option value="6">6/8</option>
+        </select>
+      </div>
+      <div class="btn-group" style="justify-content:center;">
+        <button class="btn" onclick="toggleMetronome()" id="metro-btn">▶️ 开始</button>
+        <button class="btn btn-secondary btn-sm" onclick="tapTempo()">👆 打拍定速</button>
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:var(--text-secondary);">提示：点击"打拍定速"连续点击几次，自动计算你的节奏速度</div>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -1809,7 +1956,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 64个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 69个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -4328,6 +4475,232 @@ C2048.addEventListener('touchend', e => {
   t2048Start = null;
 });
 document.getElementById('game-best').textContent = best2048;
+
+// ============ Discount Calculator ============
+function calcDiscount() {
+  const price = parseFloat(document.getElementById('discount-price').value) || 0;
+  const rate = parseFloat(document.getElementById('discount-rate').value) || 0;
+  const pay = price * rate / 10;
+  const save = price - pay;
+  const percent = price > 0 ? Math.round(save / price * 100) : 0;
+  document.getElementById('discount-pay').textContent = '¥' + pay.toFixed(2);
+  document.getElementById('discount-save').textContent = '¥' + save.toFixed(2);
+  document.getElementById('discount-percent').textContent = percent + '%';
+}
+function setDiscount(r) {
+  document.getElementById('discount-rate').value = r * 10;
+  calcDiscount();
+}
+calcDiscount();
+
+// ============ Compound Interest ============
+function calcCompound() {
+  const principal = parseFloat(document.getElementById('compound-principal').value) || 0;
+  const annualRate = (parseFloat(document.getElementById('compound-rate').value) || 0) / 100;
+  const monthly = parseFloat(document.getElementById('compound-monthly').value) || 0;
+  const years = parseFloat(document.getElementById('compound-years').value) || 1;
+  const months = years * 12;
+  const r = annualRate / 12;
+  // 本金复利
+  const future = principal * Math.pow(1 + r, months);
+  // 每月定投年金复利（期末年金）
+  let invest = principal;
+  let futureWithMonthly = future;
+  if (monthly > 0) {
+    const annuity = r > 0 ? monthly * ((Math.pow(1 + r, months) - 1) / r) : monthly * months;
+    futureWithMonthly += annuity;
+    invest += monthly * months;
+  }
+  const profit = futureWithMonthly - invest;
+  const multiple = invest > 0 ? (futureWithMonthly / invest).toFixed(2) : '--';
+  document.getElementById('compound-future').textContent = '¥' + Math.round(futureWithMonthly).toLocaleString();
+  document.getElementById('compound-invest').textContent = '¥' + Math.round(invest).toLocaleString();
+  document.getElementById('compound-profit').textContent = '¥' + Math.round(profit).toLocaleString();
+  document.getElementById('compound-multiply').textContent = multiple + 'x';
+}
+calcCompound();
+
+// ============ Sleep Cycle ============
+let sleepMode = 'wake';
+function setSleepMode(mode) {
+  sleepMode = mode;
+  document.getElementById('sleep-mode-wake').className = mode === 'wake' ? 'btn btn-sm' : 'btn btn-secondary btn-sm';
+  document.getElementById('sleep-mode-sleep').className = mode === 'sleep' ? 'btn btn-sm' : 'btn btn-secondary btn-sm';
+  document.getElementById('sleep-label').textContent = mode === 'wake' ? '预计起床时间' : '预计入睡时间';
+  const el = document.getElementById('sleep-input');
+  el.value = mode === 'wake' ? '07:00' : '23:00';
+  calcSleep();
+}
+function sleepTimeAdd(t, minutes) {
+  const [h, m] = t.split(':').map(Number);
+  const total = h * 60 + m + minutes;
+  const nh = ((total % 1440) + 1440) % 1440;
+  return String(Math.floor(nh / 60)).padStart(2, '0') + ':' + String(nh % 60).padStart(2, '0');
+}
+function formatSleepTime(t) {
+  const [h, m] = t.split(':').map(Number);
+  return h + ':' + String(m).padStart(2, '0');
+}
+function calcSleep() {
+  const input = document.getElementById('sleep-input').value || '07:00';
+  const cycles = parseInt(document.getElementById('sleep-cycles').value) || 5;
+  const totalMin = cycles * 90; // 睡眠时长
+  const fallAsleep = 14; // 假设入睡需14分钟
+  let html = '';
+  if (sleepMode === 'wake') {
+    const bedtime = sleepTimeAdd(input, -(totalMin + fallAsleep));
+    html = `<b>🌙 建议入睡时间：</b><span style="font-size:20px;color:var(--accent-hover);font-weight:700;">${formatSleepTime(bedtime)}</span><br>
+    <span style="font-size:13px;color:var(--text-secondary);">
+    ☝️ ${formatSleepTime(bedtime)} 入睡 → 睡眠 ${cycles} 个周期（${totalMin/60} 小时）→ ${formatSleepTime(input)} 起床<br>
+    💤 请预留 ${fallAsleep} 分钟入睡时间，在建议时间前躺下最佳。<br>
+    🎯 建议在睡眠周期结束时起床（${formatSleepTime(input)}），如果此时醒来会无比清醒！</span>`;
+  } else {
+    const wakeTime = sleepTimeAdd(input, totalMin + fallAsleep);
+    html = `<b>🌅 建议起床时间：</b><span style="font-size:20px;color:var(--accent-hover);font-weight:700;">${formatSleepTime(wakeTime)}</span><br>
+    <span style="font-size:13px;color:var(--text-secondary);">
+    ☝️ ${formatSleepTime(input)} 入睡 → 睡眠 ${cycles} 个周期（${totalMin/60} 小时）→ ${formatSleepTime(wakeTime)} 起床<br>
+    💤 AI建议把闹钟设在周期结束时刻：${formatSleepTime(wakeTime)}，那时醒来最精神！</span>`;
+  }
+  document.getElementById('sleep-result').style.display = 'block';
+  document.getElementById('sleep-result').innerHTML = html;
+}
+setSleepMode('wake');
+
+// ============ Red Packet ============
+let lastRedPacket = null;
+function generateRedPacket() {
+  const total = parseFloat(document.getElementById('rp-total').value) || 0;
+  const count = Math.min(100, Math.max(1, parseInt(document.getElementById('rp-count').value) || 1));
+  if (total <= 0) { alert('请输入有效的红包总金额'); return; }
+  if (total < count * 0.01) { alert('金额太少了，每个红包至少0.01元'); return; }
+  // 二倍均值法 - 微信红包算法
+  let remain = total, times = count;
+  const amounts = [];
+  for (let i = 0; i < count; i++) {
+    if (i === count - 1) {
+      amounts.push(Math.round(remain * 100) / 100);
+    } else {
+      const max = remain / times * 2;
+      let amt = Math.random() * max;
+      amt = Math.max(0.01, Math.round(amt * 100) / 100);
+      // 保证剩余的钱够分
+      if (remain - amt < (count - i - 1) * 0.01) amt = Math.round((remain - (count - i - 1) * 0.01) * 100) / 100;
+      amounts.push(amt);
+      remain = Math.round((remain - amt) * 100) / 100;
+    }
+    times--;
+  }
+  lastRedPacket = { amounts, total: Math.round(total * 100) / 100 };
+  renderRedPacket();
+}
+function renderRedPacket() {
+  if (!lastRedPacket) return;
+  const { amounts, total } = lastRedPacket;
+  const sum = amounts.reduce((a, b) => a + b, 0);
+  const maxIdx = amounts.indexOf(Math.max(...amounts));
+  const html = amounts.map((a, i) => {
+    const pct = total > 0 ? Math.round(a / total * 100) : 0;
+    const isMax = i === maxIdx ? '🏆 手气最佳' : '';
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px dashed var(--border);">
+      <span>第${i+1}个红包 ${isMax}</span>
+      <span style="font-weight:700;color:var(--accent-hover);">¥${a.toFixed(2)} <span style="font-size:11px;color:var(--text-secondary);font-weight:400;">(${pct}%)</span></span>
+    </div>`;
+  }).join('');
+  document.getElementById('rp-result').innerHTML = 
+    `<div style="padding:8px 10px;margin-bottom:6px;color:var(--text-secondary);font-size:13px;">总额：<b style="color:var(--text);">¥${total.toFixed(2)}</b> | 共 ${amounts.length} 个 | 最大：¥${Math.max(...amounts).toFixed(2)}</div>` + html;
+}
+function copyRedPacket() {
+  if (!lastRedPacket) { alert('请先生成红包'); return; }
+  const { amounts, total } = lastRedPacket;
+  const lines = amounts.map((a, i) => `红包${i+1}：¥${a.toFixed(2)}`).join('\n');
+  const text = `🧧 红包分配结果（总额 ¥${total.toFixed(2)}，${amounts.length}个）：\n${lines}\n最大红包：¥${Math.max(...amounts).toFixed(2)}`;
+  navigator.clipboard.writeText(text).then(() => alert('已复制红包结果！'));
+}
+generateRedPacket();
+
+// ============ Metronome ============
+let metroTimer = null, metroBeat = 0, metroCtx = null, metroRunning = false, metroInterval = 500;
+let lastTapTime = 0, tapTimings = [];
+function changeBPM(delta) {
+  const s = document.getElementById('metro-bpm');
+  s.value = Math.max(40, Math.min(240, parseInt(s.value) + delta));
+  updateBPMUI();
+}
+function changeBPMSlider(v) {
+  document.getElementById('metro-bpm-label').textContent = v;
+  if (metroRunning) metroRestart();
+}
+function updateBPMUI() {
+  document.getElementById('metro-bpm-label').textContent = document.getElementById('metro-bpm').value;
+  if (metroRunning) metroRestart();
+}
+function metroBeep(isDownbeat) {
+  if (!metroCtx) metroCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = metroCtx.createOscillator();
+  const gain = metroCtx.createGain();
+  osc.type = 'square';
+  osc.frequency.value = isDownbeat ? 1568 : 1046;
+  gain.gain.setValueAtTime(0.001, metroCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.25, metroCtx.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.001, metroCtx.currentTime + 0.08);
+  osc.connect(gain);
+  gain.connect(metroCtx.destination);
+  osc.start();
+  osc.stop(metroCtx.currentTime + 0.1);
+  const beam = document.getElementById('metro-beam');
+  beam.style.transform = 'scale(1.3)';
+  beam.style.color = isDownbeat ? 'var(--danger)' : 'var(--accent-hover)';
+  setTimeout(() => { beam.style.transform = 'scale(1)'; beam.style.color = ''; }, 120);
+}
+function toggleMetronome() {
+  if (metroRunning) {
+    metroStop();
+  } else {
+    metroRunning = true;
+    document.getElementById('metro-btn').textContent = '⏹️ 停止';
+    metroRestart();
+  }
+}
+function metroRestart() {
+  if (metroTimer) clearInterval(metroTimer);
+  const bpm = parseInt(document.getElementById('metro-bpm').value) || 120;
+  metroInterval = 60000 / bpm;
+  metroBeat = 0;
+  const ts = parseInt(document.getElementById('metro-time').value) || 4;
+  metroTimer = setInterval(() => {
+    metroBeep(metroBeat % ts === 0);
+    metroBeat++;
+  }, metroInterval);
+  metroBeep(true);
+}
+function metroReset() {
+  if (metroRunning) metroRestart();
+}
+function metroStop() {
+  metroRunning = false;
+  clearInterval(metroTimer);
+  metroTimer = null;
+  document.getElementById('metro-btn').textContent = '▶️ 开始';
+  document.getElementById('metro-beam').style.transform = 'scale(1)';
+}
+function tapTempo() {
+  const now = Date.now();
+  if (lastTapTime && now - lastTapTime < 3000) {
+    tapTimings.push(now - lastTapTime);
+    if (tapTimings.length > 8) tapTimings.shift();
+    if (tapTimings.length >= 2) {
+      const avg = tapTimings.reduce((a, b) => a + b, 0) / tapTimings.length;
+      const bpm = Math.round(60000 / avg);
+      const s = document.getElementById('metro-bpm');
+      s.value = Math.max(40, Math.min(240, bpm));
+      updateBPMUI();
+      alert('检测到节奏：' + s.value + ' BPM');
+    }
+  } else {
+    tapTimings = [];
+  }
+  lastTapTime = now;
+}
 
 // ============ Search & Theme ============
 function filterTools() {
