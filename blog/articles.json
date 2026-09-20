@@ -1,7 +1,17 @@
 {
-"updated": "2026-09-20T00:05:09.311490",
-  "total": 15,
+  "updated": "2026-09-20T00:17:45.021766",
+  "total": 16,
   "articles": [
+    {
+      "title": "在线图片格式转换指南：JPG、PNG、WebP 怎么选",
+      "slug": "8d8c98ed",
+      "filename": "8d8c98ed.html",
+      "category": "工具教程",
+      "keywords": "图片格式转换,jpg转png,webp转换,在线图片转换",
+      "desc": "不同图片格式各有优劣，JPG适合照片、PNG适合透明图、WebP体积更小。本文教你如何在线转换图片格式。",
+      "words": 441,
+      "date": "2026-09-20"
+    },
     {
       "title": "JSON格式化工具推荐：这5个在线工具让你效率翻倍",
       "slug": "c2364fce",
@@ -143,7 +153,7 @@
       "date": "2026-07-30"
     },
     {
-"title": "不用Postman也能测试API：5个轻量级替代方案",
+      "title": "不用Postman也能测试API：5个轻量级替代方案",
       "slug": "df685788",
       "filename": "df685788.html",
       "category": "开发工具",
