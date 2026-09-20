@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T00:12:05.901106",
+"updated": "2026-09-20T00:05:09.311490",
   "total": 15,
   "articles": [
     {
@@ -143,14 +143,14 @@
       "date": "2026-07-30"
     },
     {
-      "title": "AI写作工具横评：2024年哪款AI写作助手最好用？",
-      "slug": "fc4f4da5",
-      "filename": "fc4f4da5.html",
-      "category": "热点科普",
-      "keywords": "AI写作,人工智能写作,AI生成文章",
-      "desc": "对比了ChatGPT、Claude、文心一言、通义千问等主流AI写作工具，帮你找到最适合自己的写作助手。",
-      "words": 515,
-      "date": "2026-09-19"
+"title": "不用Postman也能测试API：5个轻量级替代方案",
+      "slug": "df685788",
+      "filename": "df685788.html",
+      "category": "开发工具",
+      "keywords": "API测试,接口调试,在线API工具",
+      "desc": "Postman虽然强大但太臃肿了？试试这些轻量级API测试工具，安装快、启动快、使用简单。",
+      "words": 545,
+      "date": "2026-09-20"
     }
   ]
 }
