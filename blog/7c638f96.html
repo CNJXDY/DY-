@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub入门指南：从注册到提交第一个Pull Request - 万能工具箱</title>
+<meta name="description" content="写给完全零基础的新手GitHub教程，从注册账号、安装Git、创建仓库到提交PR，一步步教你。">
+<meta name="keywords" content="GitHub加速,开源项目,Git教程">
+<style>
+:root {
+  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
+  --text-secondary: #94a3b8; --accent: #6366f1; --accent-hover: #818cf8;
+  --border: #334155; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.9; font-size: 16px;
+}
+.container { max-width: 750px; margin: 0 auto; padding: 20px; }
+.header {
+  padding: 30px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 30px;
+}
+.header .back { margin-bottom: 12px; }
+.header .back a { color: var(--accent); text-decoration: none; font-size: 14px; }
+.header .back a:hover { color: var(--accent-hover); }
+.header .category {
+  display: inline-block; background: rgba(99,102,241,0.2); color: var(--accent-hover);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;
+}
+.header h1 { font-size: 26px; font-weight: 700; line-height: 1.4; }
+.header .meta { color: var(--text-secondary); font-size: 13px; margin-top: 8px; }
+.content { padding: 0 0 40px; }
+.content p { margin-bottom: 18px; color: #cbd5e1; }
+.content h2 { font-size: 20px; margin: 28px 0 12px; }
+.content h3 { font-size: 17px; margin: 20px 0 10px; }
+.content ul, .content ol { margin: 10px 0 18px 24px; color: #cbd5e1; }
+.content li { margin-bottom: 6px; }
+.content strong { color: var(--text); }
+.content a { color: var(--accent); text-decoration: none; }
+.content a:hover { color: var(--accent-hover); }
+.related { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+.related h3 { font-size: 16px; margin-bottom: 12px; }
+.related a { display: block; color: var(--accent); text-decoration: none; padding: 6px 0; font-size: 14px; }
+.related a:hover { color: var(--accent-hover); }
+.footer { text-align: center; padding: 30px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); }
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="back"><a href="index.html">← 返回博客列表</a> | <a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
+    <div class="category">开发工具</div>
+    <h1>GitHub入门指南：从注册到提交第一个Pull Request</h1>
+    <div class="meta">2026-09-24 · 624字 · 开发工具</div>
+  </div>
+  <div class="content">
+    <p>GitHub是全球最大的程序员社区，也是学习编程最好的地方。但它对新手来说有点复杂，今天写一篇零基础教程。</p>
+    <p>第一步：注册GitHub账号。去 github.com 注册，起个好记的用户名（以后可以当作品牌）。</p>
+    <p>第二步：安装Git。Windows去 git-scm.com 下载安装；Mac用终端输入 git --version 会提示安装；Linux用 apt install git 或 brew install git。</p>
+    <p>第三步：配置Git。打开终端，输入 git config --global user.name '你的名字' 和 git config --global user.email '你的邮箱'。</p>
+    <p>第四步：创建仓库。在GitHub网站上点右上角+号，选New repository，起个名字，选Public，点Create。</p>
+    <p>第五步：克隆仓库到本地。git clone 你的仓库地址，然后就可以在本地编辑代码了。</p>
+    <p>第六步：提交代码。git add .（添加所有修改）、git commit -m '描述'（提交）、git push（推送到GitHub）。</p>
+    <p>第七步：参与开源项目。在别人的仓库里点Fork（复制到自己账号），修改后提交Pull Request，等待项目作者审核合并。</p>
+    <p>GitHub不止是存代码的地方，你的GitHub主页就是你的技术名片。好好维护，对找工作很有帮助。</p>
+    <p>一开始可能会觉得Git很难，但坚持用一个星期，你会发现离不开它。</p>
+  </div>
+  <div class="related">
+    <h3>相关文章</h3>
+    <a href="df685788.html">不用Postman也能测试API：5个轻量级替代方案</a>
+    <a href="53ae79b5.html">文件格式转换大全：PDF转Word、图片转PDF、视频转MP4</a>
+    <a href="4d6ceb34.html">这20个电脑快捷键，学会之后你就不想用鼠标了</a>
+    <a href="9bda6652.html">在线CSS格式化工具：让你的样式代码整洁又易读</a>
+    <a href="8e8fb2c9.html">短视频剪辑入门：从零开始学剪视频，推荐5款免费剪辑软件</a>
+  </div>
+  <div class="footer">
+    <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
+    <p style="margin-top:4px;">所有工具数据均在浏览器本地处理，不上传服务器</p>
+  </div>
+</div>
+</body>
+</html>
