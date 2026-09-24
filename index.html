@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等69个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等74个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等69个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等74个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等69个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等74个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -432,6 +432,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#sleep" data-tool="sleep"><span class="icon">😴</span>睡眠周期</a></li>
     <li><a href="#redpacket" data-tool="redpacket"><span class="icon">🧧</span>红包生成</a></li>
     <li><a href="#metronome" data-tool="metronome"><span class="icon">🎼</span>节拍器</a></li>
+    <li><a href="#world-clock" data-tool="world-clock"><span class="icon">🌍</span>世界时钟</a></li>
+    <li><a href="#tts" data-tool="tts"><span class="icon">🔊</span>文本朗读</a></li>
+    <li><a href="#css-units" data-tool="css-units"><span class="icon">📐</span>CSS单位转换</a></li>
+    <li><a href="#watermark" data-tool="watermark"><span class="icon">💧</span>图片加水印</a></li>
+    <li><a href="#bank-card" data-tool="bank-card"><span class="icon">💳</span>银行卡识别</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -574,7 +579,7 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
       </div>
       <div>
         <div class="label">日期 → 时间戳</div>
-        <input type="text" id="date-input" placeholder="如 2024-01-01 12:00:00">
+        <input type="text" id="timestamp-date-input" placeholder="如 2024-01-01 12:00:00">
         <div class="btn-group">
           <button class="btn btn-sm" onclick="dateToTs()">转换</button>
         </div>
@@ -1070,7 +1075,7 @@ console.log('代码块');
       <button class="btn" onclick="calcDateInfo()">📅 计算</button>
       <button class="btn btn-secondary btn-sm" onclick="document.getElementById('date-input').valueAsDate=new Date();calcDateInfo()">📍 今天</button>
     </div>
-    <div class="result-box" id="date-result" style="display:none;"></div>
+    <div class="result-box" id="date-calc-result" style="display:none;"></div>
   </section>
 
   <!-- Character Limit Checker -->
@@ -1604,13 +1609,13 @@ console.log('代码块');
     <h2>😊 Emoji 大全</h2>
     <p class="desc">分类浏览常用Emoji表情，点击即可复制。</p>
     <div class="btn-group" style="margin-bottom:12px;justify-content:center;">
-      <button class="btn btn-sm" onclick="showEmojiCategory('face')">😀 笑脸</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('hand')">👋 手势</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('heart')">❤️ 爱心</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('food')">🍎 食物</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('animal')">🐱 动物</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('activity')">⚽ 活动</button>
-      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('symbol')">🔣 符号</button>
+      <button class="btn btn-sm" onclick="showEmojiCategory('face', this)">😀 笑脸</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('hand', this)">👋 手势</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('heart', this)">❤️ 爱心</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('food', this)">🍎 食物</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('animal', this)">🐱 动物</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('activity', this)">⚽ 活动</button>
+      <button class="btn btn-secondary btn-sm" onclick="showEmojiCategory('symbol', this)">🔣 符号</button>
     </div>
     <div id="emoji-grid" style="display:flex;flex-wrap:wrap;gap:6px;max-height:400px;overflow-y:auto;padding:8px;background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);"></div>
     <div style="margin-top:8px;font-size:12px;color:var(--text-secondary);text-align:center;">点击任意Emoji即可复制到剪贴板</div>
@@ -1746,7 +1751,7 @@ console.log('代码块');
     <div class="stats" style="margin-top:16px;">
       <div class="stat-card"><div class="num" id="pwd-score">0</div><div class="lbl">分数 (0-100)</div></div>
       <div class="stat-card"><div class="num" id="pwd-level">--</div><div class="lbl">等级</div></div>
-      <div class="stat-card"><div class="num" id="pwd-length">0</div><div class="lbl">长度</div></div>
+      <div class="stat-card"><div class="num" id="pwd-strength-length">0</div><div class="lbl">长度</div></div>
     </div>
     <div id="pwd-suggestions" style="margin-top:14px;padding:12px;background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;line-height:1.8;">
       请在上方输入密码查看检测结果...
@@ -1949,6 +1954,154 @@ console.log('代码块');
     </div>
   </section>
 
+  <!-- World Clock -->
+  <section class="tool-panel" id="panel-world-clock">
+    <h2>🌍 世界时钟</h2>
+    <p class="desc">查看全球主要城市的当前时间和与本地时差，出国、跨时区沟通必备。</p>
+    <div style="text-align:center;padding:10px 0 20px;">
+      <div style="font-size:13px;color:var(--text-secondary);">本地时间</div>
+      <div style="font-size:40px;font-weight:700;font-family:monospace;color:var(--accent-hover);" id="wc-local-time">--:--:--</div>
+      <div style="font-size:13px;color:var(--text-secondary);" id="wc-local-date">--</div>
+    </div>
+    <div id="wc-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;"></div>
+    <div class="btn-group" style="margin-top:16px;justify-content:center;">
+      <button class="btn btn-secondary btn-sm" onclick="toggleWorldClock24()" id="wc-format-btn">🕐 切换12/24小时</button>
+    </div>
+  </section>
+
+  <!-- Text to Speech -->
+  <section class="tool-panel" id="panel-tts">
+    <h2>🔊 文本朗读 (TTS)</h2>
+    <p class="desc">输入文字，让浏览器朗读出来。可调节语速、音调和音量，支持中英文。</p>
+    <div class="label">要朗读的文字</div>
+    <textarea id="tts-text" placeholder="输入或粘贴要朗读的文字..." style="min-height:120px;">你好，欢迎使用万能工具箱。这是一个免费的在线文本朗读工具。</textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">语速 <span id="tts-rate-val" style="color:var(--accent-hover);">1.0</span>x</div>
+        <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('tts-rate-val').textContent=this.value">
+      </div>
+      <div>
+        <div class="label">音调 <span id="tts-pitch-val" style="color:var(--accent-hover);">1.0</span></div>
+        <input type="range" id="tts-pitch" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('tts-pitch-val').textContent=this.value">
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="label">音色</div>
+      <select id="tts-voice" style="font-family:inherit;"></select>
+    </div>
+    <div class="btn-group" style="margin-top:14px;">
+      <button class="btn" onclick="speakText()">▶️ 开始朗读</button>
+      <button class="btn btn-secondary" onclick="pauseSpeak()">⏸️ 暂停/继续</button>
+      <button class="btn btn-secondary" onclick="stopSpeak()">⏹️ 停止</button>
+    </div>
+    <div id="tts-status" style="margin-top:12px;font-size:13px;color:var(--text-secondary);text-align:center;">提示：部分浏览器需要先点击页面才能播放声音</div>
+  </section>
+
+  <!-- CSS Units Converter -->
+  <section class="tool-panel" id="panel-css-units">
+    <h2>📐 CSS 单位转换器</h2>
+    <p class="desc">在 px、rem、em、pt、%、vw 等 CSS 单位之间互相换算，前端开发必备。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">数值</div>
+        <input type="number" id="cu-value" value="16" step="any" oninput="convertUnits()">
+      </div>
+      <div>
+        <div class="label">从</div>
+        <select id="cu-from" onchange="convertUnits()" style="font-family:inherit;">
+          <option value="px" selected>px (像素)</option>
+          <option value="rem">rem</option>
+          <option value="em">em</option>
+          <option value="pt">pt (点)</option>
+          <option value="pc">pc (派卡)</option>
+          <option value="in">in (英寸)</option>
+          <option value="cm">cm (厘米)</option>
+          <option value="mm">mm (毫米)</option>
+          <option value="vw">vw (视口宽)</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">根字号 (html font-size, px)</div>
+        <input type="number" id="cu-root" value="16" step="any" oninput="convertUnits()">
+      </div>
+      <div>
+        <div class="label">视口宽度 (px，用于vw)</div>
+        <input type="number" id="cu-viewport" value="1920" step="any" oninput="convertUnits()">
+      </div>
+    </div>
+    <div class="label" style="margin-top:14px;">转换结果（点击可复制）</div>
+    <div id="cu-results" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:8px;"></div>
+  </section>
+
+  <!-- Image Watermark -->
+  <section class="tool-panel" id="panel-watermark">
+    <h2>💧 图片加水印</h2>
+    <p class="desc">给图片添加文字水印，可调整位置、大小、透明度和颜色，全部本地处理。</p>
+    <input type="file" id="wm-file" accept="image/*" onchange="loadWatermarkImage(event)" style="margin-bottom:12px;">
+    <div class="flex-row" style="margin-bottom:10px;">
+      <div>
+        <div class="label">水印文字</div>
+        <input type="text" id="wm-text" value="万能工具箱" oninput="drawWatermark()">
+      </div>
+      <div>
+        <div class="label">位置</div>
+        <select id="wm-pos" onchange="drawWatermark()" style="font-family:inherit;">
+          <option value="bottom-right" selected>右下角</option>
+          <option value="bottom-left">左下角</option>
+          <option value="top-right">右上角</option>
+          <option value="top-left">左上角</option>
+          <option value="center">居中</option>
+          <option value="tile">平铺全图</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-bottom:10px;">
+      <div>
+        <div class="label">字号 <span id="wm-size-val" style="color:var(--accent-hover);">24</span>px</div>
+        <input type="range" id="wm-size" min="10" max="80" value="24" oninput="document.getElementById('wm-size-val').textContent=this.value;drawWatermark()">
+      </div>
+      <div>
+        <div class="label">透明度 <span id="wm-opacity-val" style="color:var(--accent-hover);">50</span>%</div>
+        <input type="range" id="wm-opacity" min="5" max="100" value="50" oninput="document.getElementById('wm-opacity-val').textContent=this.value;drawWatermark()">
+      </div>
+      <div>
+        <div class="label">颜色</div>
+        <input type="color" id="wm-color" value="#ffffff" oninput="drawWatermark()" style="width:100%;height:44px;border:none;border-radius:6px;cursor:pointer;background:transparent;">
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:14px;">
+      <canvas id="wm-canvas" width="600" height="400" style="background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);max-width:100%;height:auto;"></canvas>
+    </div>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" onclick="downloadWatermark()">💾 保存图片</button>
+    </div>
+  </section>
+
+  <!-- Bank Card Tool -->
+  <section class="tool-panel" id="panel-bank-card">
+    <h2>💳 银行卡识别 & 校验</h2>
+    <p class="desc">识别银行卡所属银行和卡类型，并用 Luhn 算法校验卡号是否有效。仅在本地计算，不会上传。</p>
+    <div class="label">银行卡号</div>
+    <input type="text" id="bc-input" placeholder="输入银行卡号（自动忽略空格）..." oninput="checkBankCard()" maxlength="30">
+    <div class="btn-group" style="margin-top:10px;">
+      <button class="btn btn-secondary btn-sm" onclick="document.getElementById('bc-input').value='';checkBankCard()">🗑️ 清空</button>
+      <button class="btn btn-secondary btn-sm" onclick="formatBankCard()">✨ 格式化卡号</button>
+    </div>
+    <div id="bc-result" style="margin-top:16px;">
+      <div class="stats">
+        <div class="stat-card"><div class="num" id="bc-valid">--</div><div class="lbl">校验结果</div></div>
+        <div class="stat-card"><div class="num" id="bc-bank" style="font-size:16px;">--</div><div class="lbl">所属银行</div></div>
+        <div class="stat-card"><div class="num" id="bc-type" style="font-size:16px;">--</div><div class="lbl">卡组织</div></div>
+        <div class="stat-card"><div class="num" id="bc-length">0</div><div class="lbl">卡号位数</div></div>
+      </div>
+      <div id="bc-detail" style="margin-top:14px;padding:12px;background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);font-size:13px;line-height:1.9;color:var(--text-secondary);">
+        输入卡号后自动识别...
+      </div>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -1956,7 +2109,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 69个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 74个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -1998,15 +2151,38 @@ function showToast(msg) {
 }
 
 // ============ Copy Helpers ============
+// 统一复制：优先用 Clipboard API，非安全上下文（http 等）降级到 execCommand
+function writeClipboard(text) {
+  return new Promise(resolve => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => resolve(true)).catch(() => resolve(fallbackCopy(text)));
+    } else {
+      resolve(fallbackCopy(text));
+    }
+  });
+}
+function fallbackCopy(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch (err) { return false; }
+}
 function copyResult(tool) {
   const el = document.getElementById(tool + '-result');
   if (el && el.style.display !== 'none') {
-    navigator.clipboard.writeText(el.textContent).then(() => showToast('已复制！'));
+    writeClipboard(el.textContent).then(() => showToast('已复制！'));
   }
 }
 function copyText(id) {
   const el = document.getElementById(id);
-  if (el) navigator.clipboard.writeText(el.textContent).then(() => showToast('已复制！'));
+  if (el) writeClipboard(el.textContent).then(() => showToast('已复制！'));
 }
 
 // ============ JSON ============
@@ -2015,6 +2191,16 @@ function showResult(id, text) {
   el.style.display = 'block';
   el.textContent = text;
 }
+// 安全执行初始化：单个工具初始化失败不影响其他工具
+function safeInit(fn, label) {
+  try {
+    if (typeof fn === 'function') fn();
+    else if (label) console.warn('[init skipped]', label);
+  } catch (err) {
+    console.warn('[init failed] ' + (label || (fn && fn.name) || 'anonymous') + ':', err.message);
+  }
+}
+
 function formatJSON() {
   try {
     const obj = JSON.parse(document.getElementById('json-input').value);
@@ -2113,8 +2299,7 @@ function updateNowTs() {
   document.getElementById('now-ts').textContent = Math.floor(Date.now() / 1000);
 }
 setInterval(updateNowTs, 1000);
-updateNowTs();
-
+safeInit(() => updateNowTs(), 'updateNowTs');
 function tsToDate() {
   const ts = parseInt(document.getElementById('ts-input').value);
   if (isNaN(ts)) { showResult('ts-result', '❌ 请输入有效的时间戳'); return; }
@@ -2122,7 +2307,7 @@ function tsToDate() {
   showResult('ts-result', `UTC: ${d.toUTCString()}\n本地: ${d.toLocaleString('zh-CN')}\nISO: ${d.toISOString()}`);
 }
 function dateToTs() {
-  const d = new Date(document.getElementById('date-input').value);
+  const d = new Date(document.getElementById('timestamp-date-input').value);
   if (isNaN(d.getTime())) { showResult('date-result', '❌ 请输入有效的日期时间'); return; }
   showResult('date-result', `秒: ${Math.floor(d.getTime() / 1000)}\n毫秒: ${d.getTime()}`);
 }
@@ -2213,8 +2398,7 @@ function updateMarkdown() {
   document.getElementById('md-preview').innerHTML = marked.parse(md);
 }
 document.getElementById('md-input').addEventListener('input', updateMarkdown);
-updateMarkdown();
-
+safeInit(() => updateMarkdown(), 'updateMarkdown');
 // ============ Image to Base64 ============
 const dropZone = document.getElementById('image-drop-zone');
 const fileInput = document.getElementById('image-file-input');
@@ -2723,8 +2907,7 @@ function swapUnits() {
   [from.value, to.value] = [to.value, from.value];
   convertUnit();
 }
-updateUnitOptions();
-
+safeInit(() => updateUnitOptions(), 'updateUnitOptions');
 // ============ Text Diff ============
 function computeDiff() {
   const oldText = document.getElementById('diff-old').value;
@@ -3043,8 +3226,7 @@ function resetPomodoro() {
   document.getElementById('pomo-pause').style.display = 'none';
   document.getElementById('pomo-status').textContent = '准备开始';
 }
-updatePomoDisplay();
-
+safeInit(() => updatePomoDisplay(), 'updatePomoDisplay');
 // ============ BMI Calculator ============
 function calcBMI() {
   const h = parseFloat(document.getElementById('bmi-height').value) / 100;
@@ -3069,7 +3251,7 @@ function calcBMI() {
 const WEEKDAYS = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 function calcDateInfo() {
   const d = new Date(document.getElementById('date-input').value + 'T00:00:00');
-  if (isNaN(d.getTime())) { showResult('date-result', '请选择日期'); return; }
+  if (isNaN(d.getTime())) { showResult('date-calc-result', '请选择日期'); return; }
   const refVal = document.getElementById('date-ref').value;
   const today = new Date(); today.setHours(0,0,0,0);
   const ref = refVal ? new Date(refVal + 'T00:00:00') : today;
@@ -3081,10 +3263,17 @@ function calcDateInfo() {
     refVal ? `距 ${refVal} ${diffDays >= 0 ? '晚' : '早'} ${Math.abs(diffDays)} 天` : `距今 ${diffDays >= 0 ? '已过' : '还剩'} ${Math.abs(diffDays)} 天`,
   ];
   if (diffDays < 0) lines.push(`约 ${Math.abs(ageYears)} 岁（按出生日期估算）`);
-  showResult('date-result', lines.join('\n'));
+  showResult('date-calc-result', lines.join('\n'));
 }
 // Init today
-document.getElementById('date-input').valueAsDate = new Date();
+(function initDateCalc() {
+  const el = document.getElementById('date-input');
+  if (!el) return;
+  try {
+    if (el.type === 'date') el.valueAsDate = new Date();
+    else el.value = new Date().toISOString().slice(0, 10);
+  } catch (err) { el.value = new Date().toISOString().slice(0, 10); }
+})();
 
 // ============ Character Limit Checker ============
 function updateCharLimit() {
@@ -3317,8 +3506,7 @@ function deleteNote(idx) {
 function clearAllNotes() {
   if (confirm('确定要清空所有便签吗？')) { localStorage.removeItem('sticky-notes'); renderNotes(); }
 }
-renderNotes();
-
+safeInit(() => renderNotes(), 'renderNotes');
 // ============ Delimiter Converter ============
 function getDelimiter(selectId, customId) {
   const val = document.getElementById(selectId).value;
@@ -3505,8 +3693,7 @@ function randomGradient() {
   updateGradient();
 }
 // Init gradient
-updateGradient();
-
+safeInit(() => updateGradient(), 'updateGradient');
 // ============ Kaomoji ============
 const KAOMOJI_DATA = {
   emoji: ['(◕‿◕)', '(≧▽≦)', '(╯‵□′)╯︵┻━┻', '¯\\_(ツ)_/¯', '(◔_◔)', '(￣▽￣)', '(•̀ᴗ•́)و', '(◣_◢)', '(╥﹏╥)', '(◕‿◕✿)',
@@ -3533,11 +3720,10 @@ function showKaomoji(category) {
   ).join('');
 }
 function copyKaomoji(text) {
-  navigator.clipboard.writeText(text).then(() => showToast('已复制：' + text));
+  writeClipboard(text).then(() => showToast('已复制：' + text));
 }
 // Init kaomoji
-showKaomoji('emoji');
-
+safeInit(() => showKaomoji('emoji'), 'showKaomoji');
 // ============ Dice Lottery ============
 const DICE_ICONS = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 function rollDice(count) {
@@ -3593,8 +3779,7 @@ function calcBloodType() {
   const lines = sorted.map(([type, p]) => `${type}型: ${p}%`);
   showResult('blood-type-result', `父 ${f}型 + 母 ${m}型\n\n子女血型概率:\n${lines.join('\n')}`);
 }
-calcBloodType();
-
+safeInit(() => calcBloodType(), 'calcBloodType');
 // ============ Reaction Speed Test ============
 let reactionState = 'idle'; // idle -> waiting -> ready -> done
 let reactionStartTime = 0;
@@ -3806,8 +3991,7 @@ function updatePaletteFromHex() {
     generatePalette();
   }
 }
-generatePalette();
-
+safeInit(() => generatePalette(), 'generatePalette');
 // ============ Quotes ============
 const QUOTES = [
   { text: '生活不止眼前的苟且，还有诗和远方的田野。', author: '高晓松' },
@@ -3846,8 +4030,7 @@ function showRandomQuote() {
   document.getElementById('quote-text').textContent = '「' + q.text + '」';
   document.getElementById('quote-author').textContent = '—— ' + q.author;
 }
-showRandomQuote();
-
+safeInit(() => showRandomQuote(), 'showRandomQuote');
 // ============ Holiday Countdown ============
 const HOLIDAYS = {
   newyear: { month: 1, day: 1, name: '元旦' },
@@ -4020,21 +4203,24 @@ const EMOJI_DATA = {
   activity: ['⚽','🏀','🏈','⚾','🥎','🎾','🏐','🏉','🥏','🎱','🪀','🏓','🏸','🏒','🏑','🥍','🏏','🪃','🥅','⛳','🪁','🏹','🎣','🤿','🥊','🥋','🎽','🛹','🛼','🛷','⛸️','🥌','🎿','⛷️','🏂','🪂','🏋️','🤼','🤸','🤺','⛹️','🤾','🏌️','🏇','🧘','🏄','🏊','🤽','🚣','🧗','🚵','🚴','🎪','🎭','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🪘','🎷','🎺','🪗','🎸','🪕','🎻','🎲','♟️','🎯','🎳','🎮','🕹️'],
   symbol: ['✅','❌','❓','❔','❗','‼️','⁉️','➕','➖','➗','✖️','♾️','💲','💱','©️','®️','™️','🔴','🟠','🟡','🟢','🔵','🟣','🟤','⚫','⚪','🔘','🛑','⭕','🚫','📵','🔞','☢️','☣️','⚠️','🚸','⛔','🚱','🚳','🚭','🚯','♿','🆑','🆚','🆔','🆖','🆗','🆙','🆒','🆕','🆓','🆘','🉑','🈶','🈚','🈸','🈺','🈴','🈵','🈲','🈳','🈹','🈷️','🈁','🉐','🈯','🈂️']
 };
-function showEmojiCategory(cat) {
+const EMOJI_CATS = ['face', 'hand', 'heart', 'food', 'animal', 'activity', 'symbol'];
+function showEmojiCategory(cat, btn) {
   const emojis = EMOJI_DATA[cat] || EMOJI_DATA.face;
   const grid = document.getElementById('emoji-grid');
+  if (!grid) return;
   grid.innerHTML = emojis.map(e => `<span style="font-size:28px;cursor:pointer;padding:6px;border-radius:6px;transition:background 0.15s;line-height:1;" onclick="copyEmoji('${e}')" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='transparent'">${e}</span>`).join('');
-  document.querySelectorAll('#panel-emoji .btn-group .btn-sm').forEach(b => b.className = 'btn btn-secondary btn-sm');
-  event.target.className = 'btn btn-sm';
+  const btns = document.querySelectorAll('#panel-emoji .btn-group .btn-sm');
+  btns.forEach(b => b.className = 'btn btn-secondary btn-sm');
+  const target = btn || btns[EMOJI_CATS.indexOf(cat)];
+  if (target) target.className = 'btn btn-sm';
 }
 function copyEmoji(e) {
-  navigator.clipboard.writeText(e).then(() => {
+  writeClipboard(e).then(() => {
     document.getElementById('emoji-grid').innerHTML = `<div style="text-align:center;padding:20px;color:var(--success);font-size:16px;width:100%;">✅ 已复制 ${e}</div>`;
     setTimeout(() => showEmojiCategory('face'), 800);
   });
 }
-showEmojiCategory('face');
-
+safeInit(() => showEmojiCategory('face'), 'showEmojiCategory');
 // ============ Drawing Board ============
 let drawCanvas, drawCtx, isDrawing = false, drawHistory = [];
 function initDraw() {
@@ -4178,8 +4364,7 @@ function showRandomHistory() {
   document.getElementById('history-date').textContent = date.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' });
   document.getElementById('history-events').innerHTML = events.map((e, i) => `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.6;">${i+1}. ${e}</div>`).join('');
 }
-showTodayHistory();
-
+safeInit(() => showTodayHistory(), 'showTodayHistory');
 // ============ Typing Speed Test ============
 const TYPING_TEXTS = [
   'The quick brown fox jumps over the lazy dog. 练习打字可以提高你的输入速度。',
@@ -4271,7 +4456,7 @@ document.addEventListener('keydown', (e) => {
 function checkPasswordStrength(pwd) {
   let score = 0;
   const tips = [];
-  document.getElementById('pwd-length').textContent = pwd.length;
+  document.getElementById('pwd-strength-length').textContent = pwd.length;
   if (pwd.length === 0) {
     updatePwdBar(0, 0);
     document.getElementById('pwd-suggestions').textContent = '请在上方输入密码查看检测结果...';
@@ -4491,8 +4676,7 @@ function setDiscount(r) {
   document.getElementById('discount-rate').value = r * 10;
   calcDiscount();
 }
-calcDiscount();
-
+safeInit(() => calcDiscount(), 'calcDiscount');
 // ============ Compound Interest ============
 function calcCompound() {
   const principal = parseFloat(document.getElementById('compound-principal').value) || 0;
@@ -4518,8 +4702,7 @@ function calcCompound() {
   document.getElementById('compound-profit').textContent = '¥' + Math.round(profit).toLocaleString();
   document.getElementById('compound-multiply').textContent = multiple + 'x';
 }
-calcCompound();
-
+safeInit(() => calcCompound(), 'calcCompound');
 // ============ Sleep Cycle ============
 let sleepMode = 'wake';
 function setSleepMode(mode) {
@@ -4564,8 +4747,7 @@ function calcSleep() {
   document.getElementById('sleep-result').style.display = 'block';
   document.getElementById('sleep-result').innerHTML = html;
 }
-setSleepMode('wake');
-
+safeInit(() => setSleepMode('wake'), 'setSleepMode');
 // ============ Red Packet ============
 let lastRedPacket = null;
 function generateRedPacket() {
@@ -4614,10 +4796,9 @@ function copyRedPacket() {
   const { amounts, total } = lastRedPacket;
   const lines = amounts.map((a, i) => `红包${i+1}：¥${a.toFixed(2)}`).join('\n');
   const text = `🧧 红包分配结果（总额 ¥${total.toFixed(2)}，${amounts.length}个）：\n${lines}\n最大红包：¥${Math.max(...amounts).toFixed(2)}`;
-  navigator.clipboard.writeText(text).then(() => alert('已复制红包结果！'));
+  writeClipboard(text).then(() => alert('已复制红包结果！'));
 }
-generateRedPacket();
-
+safeInit(() => generateRedPacket(), 'generateRedPacket');
 // ============ Metronome ============
 let metroTimer = null, metroBeat = 0, metroCtx = null, metroRunning = false, metroInterval = 500;
 let lastTapTime = 0, tapTimings = [];
@@ -4700,6 +4881,314 @@ function tapTempo() {
     tapTimings = [];
   }
   lastTapTime = now;
+}
+
+// ============ World Clock ============
+const WORLD_CITIES = [
+  { name: '北京', tz: 'Asia/Shanghai', flag: '🇨🇳' },
+  { name: '东京', tz: 'Asia/Tokyo', flag: '🇯🇵' },
+  { name: '首尔', tz: 'Asia/Seoul', flag: '🇰🇷' },
+  { name: '新加坡', tz: 'Asia/Singapore', flag: '🇸🇬' },
+  { name: '曼谷', tz: 'Asia/Bangkok', flag: '🇹🇭' },
+  { name: '迪拜', tz: 'Asia/Dubai', flag: '🇦🇪' },
+  { name: '莫斯科', tz: 'Europe/Moscow', flag: '🇷🇺' },
+  { name: '柏林', tz: 'Europe/Berlin', flag: '🇩🇪' },
+  { name: '巴黎', tz: 'Europe/Paris', flag: '🇫🇷' },
+  { name: '伦敦', tz: 'Europe/London', flag: '🇬🇧' },
+  { name: '纽约', tz: 'America/New_York', flag: '🇺🇸' },
+  { name: '洛杉矶', tz: 'America/Los_Angeles', flag: '🇺🇸' },
+  { name: '圣保罗', tz: 'America/Sao_Paulo', flag: '🇧🇷' },
+  { name: '悉尼', tz: 'Australia/Sydney', flag: '🇦🇺' },
+];
+let wc24 = true;
+function renderWorldClock() {
+  const now = new Date();
+  const timeOpts = { hour12: !wc24, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  document.getElementById('wc-local-time').textContent = now.toLocaleTimeString('zh-CN', timeOpts);
+  document.getElementById('wc-local-date').textContent = now.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  document.getElementById('wc-list').innerHTML = WORLD_CITIES.map(c => {
+    let timeStr = '--:--:--', dateStr = '', diffStr = '';
+    try {
+      timeStr = now.toLocaleTimeString('zh-CN', Object.assign({ timeZone: c.tz }, timeOpts));
+      dateStr = now.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric', timeZone: c.tz });
+      const cityLocal = new Date(now.toLocaleString('en-US', { timeZone: c.tz }));
+      const here = new Date(now.toLocaleString('en-US'));
+      const diff = Math.round((cityLocal - here) / 3600000);
+      diffStr = diff === 0 ? '与本地同时' : (diff > 0 ? '快 ' + diff + ' 小时' : '慢 ' + Math.abs(diff) + ' 小时');
+    } catch (err) { diffStr = '时区不可用'; }
+    return `<div class="stat-card" style="text-align:left;padding:12px;">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;">${c.flag} ${c.name}</div>
+      <div style="font-size:22px;font-weight:700;font-family:monospace;color:var(--accent-hover);">${timeStr}</div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">${dateStr} · ${diffStr}</div>
+    </div>`;
+  }).join('');
+}
+function toggleWorldClock24() { wc24 = !wc24; renderWorldClock(); }
+safeInit(() => renderWorldClock(), 'renderWorldClock');
+setInterval(() => {
+  const active = document.querySelector('.tool-panel.active');
+  if (active && active.id === 'panel-world-clock') renderWorldClock();
+}, 1000);
+
+// ============ Text to Speech ============
+let ttsVoices = [];
+function loadTTSVoices() {
+  const sel = document.getElementById('tts-voice');
+  if (!('speechSynthesis' in window)) {
+    sel.innerHTML = '<option>浏览器不支持</option>';
+    document.getElementById('tts-status').textContent = '❌ 当前浏览器不支持语音合成功能';
+    return;
+  }
+  ttsVoices = window.speechSynthesis.getVoices();
+  if (!ttsVoices.length) return;
+  sel.innerHTML = ttsVoices.map((v, i) => `<option value="${i}">${v.name} (${v.lang})</option>`).join('');
+  const zhIdx = ttsVoices.findIndex(v => v.lang && v.lang.toLowerCase().indexOf('zh') === 0);
+  if (zhIdx >= 0) sel.value = zhIdx;
+}
+safeInit(() => loadTTSVoices(), 'loadTTSVoices');
+if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = loadTTSVoices;
+function speakText() {
+  if (!('speechSynthesis' in window)) return alert('当前浏览器不支持语音合成');
+  window.speechSynthesis.cancel();
+  const text = document.getElementById('tts-text').value.trim();
+  if (!text) return alert('请输入要朗读的文字');
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = ttsVoices.length ? ttsVoices : window.speechSynthesis.getVoices();
+  const idx = parseInt(document.getElementById('tts-voice').value);
+  if (voices[idx]) { u.voice = voices[idx]; u.lang = voices[idx].lang; }
+  u.rate = parseFloat(document.getElementById('tts-rate').value);
+  u.pitch = parseFloat(document.getElementById('tts-pitch').value);
+  const status = document.getElementById('tts-status');
+  u.onstart = () => status.textContent = '🔊 正在朗读...';
+  u.onend = () => status.textContent = '✅ 朗读完成';
+  u.onerror = () => status.textContent = '⚠️ 朗读出错，请换个音色再试';
+  window.speechSynthesis.speak(u);
+}
+function pauseSpeak() {
+  if (!('speechSynthesis' in window)) return;
+  const s = window.speechSynthesis;
+  const status = document.getElementById('tts-status');
+  if (s.paused) { s.resume(); status.textContent = '🔊 继续朗读...'; }
+  else if (s.speaking) { s.pause(); status.textContent = '⏸️ 已暂停'; }
+}
+function stopSpeak() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  document.getElementById('tts-status').textContent = '⏹️ 已停止';
+}
+
+// ============ CSS Units Converter ============
+const CU_FACTORS = { px: 1, rem: 'root', em: 'root', pt: 96 / 72, pc: 16, in: 96, cm: 96 / 2.54, mm: 96 / 25.4, vw: 'viewport' };
+function cuFactor(u, root, vw) {
+  const f = CU_FACTORS[u];
+  if (f === 'root') return root;
+  if (f === 'viewport') return vw / 100;
+  return f;
+}
+function convertUnits() {
+  const val = parseFloat(document.getElementById('cu-value').value);
+  const from = document.getElementById('cu-from').value;
+  const root = parseFloat(document.getElementById('cu-root').value) || 16;
+  const vw = parseFloat(document.getElementById('cu-viewport').value) || 1920;
+  const box = document.getElementById('cu-results');
+  if (isNaN(val)) { box.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;">请输入数值</div>'; return; }
+  const pxVal = val * cuFactor(from, root, vw);
+  box.innerHTML = Object.keys(CU_FACTORS).map(u => {
+    const out = pxVal / cuFactor(u, root, vw);
+    const display = Math.abs(out) < 0.0001 ? out.toExponential(4) : String(Math.round(out * 10000) / 10000);
+    const isSame = u === from;
+    return `<div onclick="copyUnitValue('${display}${u}')" title="点击复制" style="cursor:pointer;padding:10px;background:var(--input-bg);border:1px solid ${isSame ? 'var(--accent)' : 'var(--border)'};border-radius:var(--radius);text-align:center;transition:border-color 0.2s;">
+      <div style="font-size:17px;font-weight:700;font-family:monospace;color:var(--accent-hover);">${display}${u}</div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">${isSame ? '原始值' : '点击复制'}</div>
+    </div>`;
+  }).join('');
+}
+function copyUnitValue(v) {
+  writeClipboard(v).then(() => {
+    const t = document.createElement('div');
+    t.textContent = '✅ 已复制 ' + v;
+    t.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:999;';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 1200);
+  });
+}
+safeInit(() => convertUnits(), 'convertUnits');
+// ============ Image Watermark ============
+let wmImage = null;
+function loadWatermarkImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    wmImage = new Image();
+    wmImage.onload = () => {
+      const c = document.getElementById('wm-canvas');
+      const maxW = 900, maxH = 600;
+      let w = wmImage.width, h = wmImage.height;
+      if (w > maxW) { h = h * maxW / w; w = maxW; }
+      if (h > maxH) { w = w * maxH / h; h = maxH; }
+      c.width = Math.round(w);
+      c.height = Math.round(h);
+      drawWatermark();
+    };
+    wmImage.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function hexToRgba(hex, a) {
+  const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+function drawWatermark() {
+  const c = document.getElementById('wm-canvas');
+  const ctx = c.getContext('2d');
+  if (!wmImage) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = 'rgba(148,163,184,0.5)';
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('请先上传一张图片', c.width / 2, c.height / 2);
+    return;
+  }
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.drawImage(wmImage, 0, 0, c.width, c.height);
+  const text = document.getElementById('wm-text').value;
+  if (!text) return;
+  const size = parseInt(document.getElementById('wm-size').value);
+  const opacity = parseInt(document.getElementById('wm-opacity').value) / 100;
+  const color = document.getElementById('wm-color').value;
+  const pos = document.getElementById('wm-pos').value;
+  const pad = Math.max(10, size * 0.6);
+  ctx.font = `bold ${size}px -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif`;
+  ctx.fillStyle = hexToRgba(color, opacity);
+  ctx.strokeStyle = hexToRgba('#000000', opacity * 0.45);
+  ctx.lineWidth = Math.max(1, size / 14);
+  ctx.textBaseline = 'middle';
+  if (pos === 'tile') {
+    ctx.textAlign = 'center';
+    const width = ctx.measureText(text).width;
+    const stepX = width + size * 4;
+    const stepY = size * 4.5;
+    ctx.save();
+    ctx.translate(c.width / 2, c.height / 2);
+    ctx.rotate(-Math.PI / 7);
+    const range = c.width + c.height;
+    for (let y = -range / 2; y < range / 2; y += stepY) {
+      for (let x = -range / 2; x < range / 2; x += stepX) {
+        ctx.strokeText(text, x, y);
+        ctx.fillText(text, x, y);
+      }
+    }
+    ctx.restore();
+    return;
+  }
+  let x, y;
+  if (pos === 'bottom-right') { ctx.textAlign = 'right'; x = c.width - pad; y = c.height - pad; }
+  else if (pos === 'bottom-left') { ctx.textAlign = 'left'; x = pad; y = c.height - pad; }
+  else if (pos === 'top-right') { ctx.textAlign = 'right'; x = c.width - pad; y = pad + size * 0.5; }
+  else if (pos === 'top-left') { ctx.textAlign = 'left'; x = pad; y = pad + size * 0.5; }
+  else { ctx.textAlign = 'center'; x = c.width / 2; y = c.height / 2; }
+  ctx.strokeText(text, x, y);
+  ctx.fillText(text, x, y);
+}
+function downloadWatermark() {
+  const c = document.getElementById('wm-canvas');
+  if (!wmImage) return alert('请先上传图片');
+  const link = document.createElement('a');
+  link.download = 'watermark_' + Date.now() + '.png';
+  link.href = c.toDataURL('image/png');
+  link.click();
+}
+safeInit(() => drawWatermark(), 'drawWatermark');
+// ============ Bank Card ============
+const BANK_BINS = [
+  { name: '中国工商银行', prefixes: ['622200', '622202', '622203', '622208', '622210', '621226', '621225', '621227', '621281', '621723', '955880', '955881', '955882', '620200', '621558', '621559'] },
+  { name: '中国农业银行', prefixes: ['622840', '622841', '622843', '622845', '622846', '622848', '622849', '955998', '95599', '621282', '621336', '621671', '621672', '622836'] },
+  { name: '中国银行', prefixes: ['621660', '621661', '621662', '621663', '621665', '621666', '621667', '621668', '621669', '621670', '621673', '621674', '621785', '621786', '621787', '621788', '621789', '621790', '601382', '456351'] },
+  { name: '中国建设银行', prefixes: ['621081', '621082', '621083', '621084', '621700', '622280', '622700', '436742', '620058', '621598'] },
+  { name: '交通银行', prefixes: ['621069', '621335', '621436', '622258', '622259', '622260', '622262', '405512', '601428'] },
+  { name: '招商银行', prefixes: ['621286', '621483', '621484', '621485', '621486', '622575', '622576', '622577', '622578', '622579', '622580', '622581', '622582', '622583', '622584', '622585', '622586', '622587', '622588', '622589', '622598', '622599'] },
+  { name: '中国邮政储蓄银行', prefixes: ['621095', '621096', '621098', '621622', '622150', '622151', '622181', '622188', '955100', '620062', '621285'] },
+  { name: '中信银行', prefixes: ['622690', '622691', '622692', '622696', '622698', '622998', '622999', '433671', '621771', '621773'] },
+  { name: '中国民生银行', prefixes: ['622615', '622616', '622617', '622618', '622619', '622620', '622621', '622622', '622623', '415599', '421393', '421865', '427570', '427571', '472067', '472068', '421869', '421870', '421871', '512466', '517636'] },
+  { name: '中国光大银行', prefixes: ['622660', '622661', '622662', '622663', '622664', '622665', '622666', '622667', '622668', '622669', '620518', '620535', '620537'] },
+  { name: '上海浦东发展银行', prefixes: ['622521', '622522', '622523', '622528', '622529', '984301', '984303', '621351', '621390', '621391'] },
+  { name: '广发银行', prefixes: ['622568', '622569', '622570', '685800', '621462'] },
+  { name: '平安银行', prefixes: ['622126', '622160', '622161', '622162', '622163', '998801', '998802', '621626', '623058'] },
+  { name: '华夏银行', prefixes: ['622630', '622631', '622632', '622633', '622634', '539867', '539868'] },
+  { name: '兴业银行', prefixes: ['622908', '622909', '622900', '622901', '622902', '966666', '621599'] },
+];
+function luhnCheck(num) {
+  let sum = 0, alt = false;
+  for (let i = num.length - 1; i >= 0; i--) {
+    let d = parseInt(num[i], 10);
+    if (alt) { d *= 2; if (d > 9) d -= 9; }
+    sum += d;
+    alt = !alt;
+  }
+  return sum % 10 === 0;
+}
+function getCardOrg(num) {
+  if (/^4/.test(num)) return 'Visa';
+  if (/^(5[1-5]|2[2-7])/.test(num)) return 'MasterCard';
+  if (/^3[47]/.test(num)) return 'American Express';
+  if (/^35/.test(num)) return 'JCB';
+  if (/^62/.test(num)) return '中国银联';
+  if (/^(6011|65)/.test(num)) return 'Discover';
+  return '未知';
+}
+function identifyBank(num) {
+  for (const b of BANK_BINS) {
+    for (const p of b.prefixes) {
+      if (num.indexOf(p) === 0) return b.name;
+    }
+  }
+  return '未知';
+}
+function checkBankCard() {
+  const raw = document.getElementById('bc-input').value.replace(/\s|-/g, '');
+  const validEl = document.getElementById('bc-valid');
+  const detail = document.getElementById('bc-detail');
+  document.getElementById('bc-length').textContent = raw.length;
+  if (!raw) {
+    validEl.textContent = '--';
+    validEl.style.color = '';
+    document.getElementById('bc-bank').textContent = '--';
+    document.getElementById('bc-type').textContent = '--';
+    detail.innerHTML = '输入卡号后自动识别...';
+    return;
+  }
+  if (!/^\d+$/.test(raw)) {
+    validEl.textContent = '无效';
+    validEl.style.color = 'var(--danger)';
+    document.getElementById('bc-bank').textContent = '--';
+    document.getElementById('bc-type').textContent = '--';
+    detail.innerHTML = '⚠️ 卡号只能包含数字';
+    return;
+  }
+  const ok = luhnCheck(raw);
+  validEl.textContent = ok ? '通过' : '未通过';
+  validEl.style.color = ok ? 'var(--success)' : 'var(--danger)';
+  const bank = identifyBank(raw);
+  const org = getCardOrg(raw);
+  document.getElementById('bc-bank').textContent = bank;
+  document.getElementById('bc-type').textContent = org;
+  const lenHint = raw.length === 16 ? '16位（常见借记卡/信用卡）' : raw.length === 19 ? '19位（常见借记卡）' : raw.length === 15 ? '15位（常见American Express）' : raw.length + '位';
+  const luhnHint = ok ? '✅ Luhn 校验通过，卡号格式合法' : '❌ Luhn 校验未通过，卡号可能有误';
+  detail.innerHTML = `
+    <div>${luhnHint}</div>
+    <div>🏦 银行识别：${bank}</div>
+    <div>💳 卡组织：${org}</div>
+    <div>🔢 卡号长度：${lenHint}</div>
+    <div>🔒 分组显示：${raw.replace(/(.{4})/g, '$1 ').trim()}</div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-secondary);">说明：银行识别基于公开的 BIN 前缀库，仅供参考，最终以发卡行为准。所有计算均在本地完成，不会上传任何数据。</div>`;
+}
+function formatBankCard() {
+  const raw = document.getElementById('bc-input').value.replace(/\s|-/g, '');
+  if (!raw) return;
+  document.getElementById('bc-input').value = raw.replace(/(.{4})/g, '$1 ').trim();
+  checkBankCard();
 }
 
 // ============ Search & Theme ============
