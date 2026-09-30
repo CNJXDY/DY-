@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等79个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等84个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等79个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等84个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等79个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等84个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -442,6 +442,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#minesweeper" data-tool="minesweeper"><span class="icon">💣</span>扫雷游戏</a></li>
     <li><a href="#almanac" data-tool="almanac"><span class="icon">📜</span>今日黄历</a></li>
     <li><a href="#translator" data-tool="translator"><span class="icon">🌐</span>文本翻译</a></li>
+    <li><a href="#aa-split" data-tool="aa-split"><span class="icon">🧾</span>聚餐AA分摊</a></li>
+    <li><a href="#cron-parser" data-tool="cron-parser"><span class="icon">⏱️</span>Cron解析</a></li>
+    <li><a href="#case-converter" data-tool="case-converter"><span class="icon">🔤</span>命名风格转换</a></li>
+    <li><a href="#water-intake" data-tool="water-intake"><span class="icon">💧</span>每日饮水量</a></li>
+    <li><a href="#memory-game" data-tool="memory-game"><span class="icon">🃏</span>记忆翻牌</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2235,6 +2240,133 @@ console.log('代码块');
     <div style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：翻译通过浏览器内置接口在本地完成（或调用免费翻译API），请勿用于机密内容。</div>
   </section>
 
+  <!-- Bill Split (AA) -->
+  <section class="tool-panel" id="panel-aa-split">
+    <h2>🧾 聚餐AA分摊</h2>
+    <p class="desc">聚餐、拼单后按人数平摊费用，支持小费与服务费，自动算到分，免去心算烦恼。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">总金额 (元)</div>
+        <input type="number" id="aa-total" value="300" step="0.01" min="0" oninput="calcAASplit()">
+      </div>
+      <div>
+        <div class="label">人数</div>
+        <input type="number" id="aa-people" value="4" step="1" min="1" oninput="calcAASplit()">
+      </div>
+      <div>
+        <div class="label">小费/服务费 (%)</div>
+        <input type="number" id="aa-tip" value="0" step="1" min="0" max="100" oninput="calcAASplit()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-sm" onclick="calcAASplit()">🧮 计算</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetAASplit()">↺ 重置</button>
+    </div>
+    <div class="stats" style="margin-top:16px;">
+      <div class="stat-card"><div class="num" id="aa-per">--</div><div class="lbl">每人应付 (元)</div></div>
+      <div class="stat-card"><div class="num" id="aa-grand">--</div><div class="lbl">含小费总额 (元)</div></div>
+      <div class="stat-card"><div class="num" id="aa-tipamt">--</div><div class="lbl">小费金额 (元)</div></div>
+    </div>
+    <div class="result-box" id="aa-detail" style="display:none;margin-top:12px;"></div>
+  </section>
+
+  <!-- Cron Parser -->
+  <section class="tool-panel" id="panel-cron-parser">
+    <h2>⏱️ Cron 表达式解析</h2>
+    <p class="desc">解析 Linux Crontab 五段表达式（分 时 日 月 周），用中文说明含义并预测接下来 5 次执行时间。</p>
+    <div class="label">Cron 表达式</div>
+    <input type="text" id="cron-input" value="*/5 * * * *" oninput="parseCron()" placeholder="例如：0 9 * * 1-5">
+    <div class="btn-group" style="margin-top:10px;">
+      <button class="btn btn-secondary btn-sm" onclick="setCron('*/5 * * * *')">每5分钟</button>
+      <button class="btn btn-secondary btn-sm" onclick="setCron('0 * * * *')">每小时</button>
+      <button class="btn btn-secondary btn-sm" onclick="setCron('0 9 * * 1-5')">工作日9点</button>
+      <button class="btn btn-secondary btn-sm" onclick="setCron('30 3 1 * *')">每月1号3:30</button>
+    </div>
+    <div class="result-box" id="cron-desc" style="margin-top:12px;">--</div>
+    <div class="label" style="margin-top:14px;">接下来 5 次执行时间</div>
+    <div class="result-box" id="cron-next" style="min-height:60px;">--</div>
+  </section>
+
+  <!-- Case Converter -->
+  <section class="tool-panel" id="panel-case-converter">
+    <h2>🔤 命名风格转换</h2>
+    <p class="desc">一键在驼峰、下划线、短横线等命名风格间转换，写代码、建数据库字段时的效率利器。</p>
+    <div class="label">输入文本</div>
+    <textarea id="case-input" placeholder="例如：user profile name" oninput="convertCase('camel')" style="min-height:80px;">user profile name</textarea>
+    <div class="btn-group" style="margin-top:10px;">
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('camel')">camelCase</button>
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('pascal')">PascalCase</button>
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('snake')">snake_case</button>
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('kebab')">kebab-case</button>
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('constant')">CONSTANT_CASE</button>
+      <button class="btn btn-secondary btn-sm" onclick="convertCase('title')">Title Case</button>
+    </div>
+    <div class="label" style="margin-top:14px;">转换结果</div>
+    <div class="result-box" id="case-result" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+      <span id="case-output" style="word-break:break-all;">--</span>
+      <button class="btn btn-secondary btn-sm" onclick="copyCaseResult()">📋 复制</button>
+    </div>
+  </section>
+
+  <!-- Water Intake -->
+  <section class="tool-panel" id="panel-water-intake">
+    <h2>💧 每日饮水量计算</h2>
+    <p class="desc">根据体重与活动量估算每日建议饮水量，并帮你记录今天喝了几杯水，养成健康习惯。</p>
+    <div class="flex-row" style="margin-bottom:12px;">
+      <div>
+        <div class="label">体重 (kg)</div>
+        <input type="number" id="water-weight" value="60" min="20" max="200" oninput="calcWater()">
+      </div>
+      <div>
+        <div class="label">活动强度</div>
+        <select id="water-activity" onchange="calcWater()" style="font-family:inherit;">
+          <option value="1">久坐少动</option>
+          <option value="1.1" selected>轻度活动</option>
+          <option value="1.2">中度活动</option>
+          <option value="1.3">高强度运动</option>
+        </select>
+      </div>
+    </div>
+    <div class="stats" style="margin-bottom:8px;">
+      <div class="stat-card"><div class="num" id="water-total">--</div><div class="lbl">建议饮水量 (ml)</div></div>
+      <div class="stat-card"><div class="num" id="water-cups">--</div><div class="lbl">约合 250ml 杯数</div></div>
+    </div>
+    <div class="label">今日记录：已喝 <span id="water-drank">0</span> 杯</div>
+    <div style="width:100%;height:10px;background:var(--border);border-radius:5px;margin:8px 0;overflow:hidden;">
+      <div id="water-bar" style="height:100%;width:0;background:var(--accent);border-radius:5px;transition:width 0.3s;"></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-sm" onclick="addWaterCup()">💧 喝一杯</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetWaterCups()">↺ 重置</button>
+    </div>
+    <div class="result-box" id="water-tip" style="margin-top:12px;">--</div>
+  </section>
+
+  <!-- Memory Game -->
+  <section class="tool-panel" id="panel-memory-game">
+    <h2>🃏 记忆翻牌</h2>
+    <p class="desc">翻开卡片找出所有相同图案，考验记忆力与专注力，支持两种难度。</p>
+    <div class="flex-row" style="margin-bottom:10px;">
+      <div>
+        <div class="label">难度</div>
+        <select id="mem-level" onchange="startMemoryGame()" style="font-family:inherit;">
+          <option value="6">简单 (4×3)</option>
+          <option value="8">普通 (4×4)</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button class="btn btn-sm" onclick="startMemoryGame()" style="width:100%;">🎮 开始 / 重开</button>
+      </div>
+    </div>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="mem-moves">0</div><div class="lbl">步数</div></div>
+      <div class="stat-card"><div class="num" id="mem-pairs">0</div><div class="lbl">已配对</div></div>
+      <div class="stat-card"><div class="num" id="mem-time">0s</div><div class="lbl">用时</div></div>
+    </div>
+    <div id="mem-board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:360px;margin:0 auto;"></div>
+    <div class="result-box" id="mem-msg" style="display:none;margin-top:12px;text-align:center;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2242,7 +2374,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 79个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 84个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -5617,6 +5749,299 @@ function copyTrResult() {
     writeClipboard(out.textContent).then(() => alert('已复制译文！'));
   }
 }
+
+// ============ Bill Split (AA) ============
+function calcAASplit() {
+  const totalEl = document.getElementById('aa-total');
+  if (!totalEl) return;
+  const total = parseFloat(totalEl.value) || 0;
+  const people = Math.max(1, parseInt(document.getElementById('aa-people').value) || 1);
+  const tip = Math.max(0, parseFloat(document.getElementById('aa-tip').value) || 0);
+  const tipAmt = total * tip / 100;
+  const grand = total + tipAmt;
+  const per = Math.ceil((grand / people) * 100) / 100; // 向上取整到分
+  document.getElementById('aa-per').textContent = per.toFixed(2);
+  document.getElementById('aa-grand').textContent = grand.toFixed(2);
+  document.getElementById('aa-tipamt').textContent = tipAmt.toFixed(2);
+  const box = document.getElementById('aa-detail');
+  box.style.display = 'block';
+  let html = '<div style="line-height:2;">';
+  html += `总金额：<b>￥${total.toFixed(2)}</b>` + (tip > 0 ? `（含 ${tip}% 小费 ￥${tipAmt.toFixed(2)}，合计 <b>￥${grand.toFixed(2)}</b>）` : '') + '<br>';
+  html += `按 <b>${people}</b> 人平摊，每人应付 <b style="color:var(--accent-hover);">￥${per.toFixed(2)}</b>` + (per * people > grand + 0.001 ? '（已向上取整到分）' : '') + '<br>';
+  html += `若每人按整元支付：￥${Math.ceil(grand / people)}`;
+  html += '</div>';
+  box.innerHTML = html;
+}
+function resetAASplit() {
+  document.getElementById('aa-total').value = 300;
+  document.getElementById('aa-people').value = 4;
+  document.getElementById('aa-tip').value = 0;
+  calcAASplit();
+}
+
+// ============ Cron Parser ============
+const CRON_ALIAS = { '@yearly': '0 0 1 1 *', '@annually': '0 0 1 1 *', '@monthly': '0 0 1 * *', '@weekly': '0 0 * * 0', '@daily': '0 0 * * *', '@midnight': '0 0 * * *', '@hourly': '0 * * * *' };
+function cronParseField(expr, min, max) {
+  const set = new Set();
+  expr.split(',').forEach(part => {
+    let step = 1;
+    let seg = part;
+    if (seg.includes('/')) {
+      const s = seg.split('/');
+      seg = s[0];
+      step = parseInt(s[1], 10) || 1;
+    }
+    let lo = min, hi = max;
+    if (seg === '*') { /* 全范围 */ }
+    else if (seg.includes('-')) {
+      const r = seg.split('-');
+      lo = parseInt(r[0], 10); hi = parseInt(r[1], 10);
+    } else {
+      lo = hi = parseInt(seg, 10);
+    }
+    if (isNaN(lo) || isNaN(hi)) throw new Error('非法字段：' + part);
+    for (let v = lo; v <= hi; v += step) set.add(v);
+  });
+  return set;
+}
+function cronPartLabel(part, unit) {
+  if (part === '*') return '每' + unit;
+  if (/^\*\/\d+$/.test(part)) return '每 ' + part.split('/')[1] + ' ' + unit;
+  return '第 ' + part + ' ' + unit;
+}
+function cronDowText(part) {
+  const names = { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六', 7: '日' };
+  return part.split(',').map(x => names[x.trim()] ? names[x.trim()] : x).join('、');
+}
+function parseCron() {
+  const inputEl = document.getElementById('cron-input');
+  if (!inputEl) return;
+  const descEl = document.getElementById('cron-desc');
+  const nextEl = document.getElementById('cron-next');
+  let raw = (inputEl.value || '').trim();
+  if (CRON_ALIAS[raw.toLowerCase()]) raw = CRON_ALIAS[raw.toLowerCase()];
+  const parts = raw.split(/\s+/);
+  if (parts.length !== 5) {
+    descEl.innerHTML = '❌ 需要 5 个字段：分 时 日 月 周（例：<code>*/5 * * * *</code>）';
+    nextEl.textContent = '--';
+    return;
+  }
+  let minS, hourS, domS, monS, dowS;
+  try {
+    minS = cronParseField(parts[0], 0, 59);
+    hourS = cronParseField(parts[1], 0, 23);
+    domS = cronParseField(parts[2], 1, 31);
+    monS = cronParseField(parts[3], 1, 12);
+    dowS = cronParseField(parts[4], 0, 7);
+  } catch (e) {
+    descEl.innerHTML = '❌ ' + e.message;
+    nextEl.textContent = '--';
+    return;
+  }
+  if (dowS.has(7)) dowS.add(0);
+  const domRestricted = parts[2] !== '*';
+  const dowRestricted = parts[4] !== '*';
+  function dayMatch(d) {
+    const domOk = domS.has(d.getDate());
+    const dowOk = dowS.has(d.getDay());
+    if (domRestricted && dowRestricted) return domOk || dowOk;
+    if (domRestricted) return domOk;
+    if (dowRestricted) return dowOk;
+    return true;
+  }
+  // 中文含义
+  let summary = '';
+  if (!domRestricted && !dowRestricted && parts[3] === '*') summary = '每天';
+  else {
+    if (parts[3] !== '*') summary += `每年 ${parts[3]} 月 `;
+    if (domRestricted && !dowRestricted) summary += `${parts[2]} 号 `;
+    if (dowRestricted) summary += `每周 ${cronDowText(parts[4])} `;
+    if (domRestricted && dowRestricted) summary += `${parts[2]} 号 `;
+  }
+  if (parts[1] === '*') summary += '每小时 ';
+  else if (/^\*\/\d+$/.test(parts[1])) summary += `每 ${parts[1].split('/')[1]} 小时 `;
+  else summary += `${parts[1]} 点 `;
+  if (parts[0] === '*') summary += '每分钟';
+  else summary += `${parts[0]} 分`;
+  descEl.innerHTML =
+    `<div style="margin-bottom:6px;">✅ 字段含义：${cronPartLabel(parts[0], '分钟')}，${cronPartLabel(parts[1], '小时')}，${cronPartLabel(parts[2], '日')}，${cronPartLabel(parts[3], '月')}，${cronPartLabel(parts[4], '周')}</div>` +
+    `<div>📝 大致含义：<b>${summary}</b></div>`;
+  // 接下来 5 次执行时间
+  const results = [];
+  const d = new Date();
+  d.setSeconds(0, 0);
+  d.setMinutes(d.getMinutes() + 1);
+  const limit = 366 * 24 * 60;
+  const wd = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  for (let i = 0; i < limit && results.length < 5; i++) {
+    if (monS.has(d.getMonth() + 1) && dayMatch(d) && hourS.has(d.getHours()) && minS.has(d.getMinutes())) {
+      results.push(new Date(d.getTime()));
+    }
+    d.setMinutes(d.getMinutes() + 1);
+  }
+  if (!results.length) {
+    nextEl.innerHTML = '⚠️ 未来一年内没有匹配的执行时间，请检查表达式。';
+  } else {
+    nextEl.innerHTML = results.map(t => {
+      const p = n => String(n).padStart(2, '0');
+      return `${t.getFullYear()}-${p(t.getMonth() + 1)}-${p(t.getDate())} ${p(t.getHours())}:${p(t.getMinutes())} ${wd[t.getDay()]}`;
+    }).join('<br>') + (results.length < 5 ? '<br><span style="color:var(--text-secondary);">（未来一年内仅找到以上时间）</span>' : '');
+  }
+}
+function setCron(v) {
+  document.getElementById('cron-input').value = v;
+  parseCron();
+}
+
+// ============ Case Converter ============
+function caseWords(str) {
+  return str
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .split(/[\s_\-\/\.\+]+/)
+    .filter(Boolean);
+}
+function convertCase(type) {
+  const inputEl = document.getElementById('case-input');
+  if (!inputEl) return;
+  const words = caseWords(inputEl.value);
+  const lower = words.map(w => w.toLowerCase());
+  let out = '';
+  if (type === 'camel') out = lower.map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)).join('');
+  else if (type === 'pascal') out = lower.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+  else if (type === 'snake') out = lower.join('_');
+  else if (type === 'kebab') out = lower.join('-');
+  else if (type === 'constant') out = lower.map(w => w.toUpperCase()).join('_');
+  else if (type === 'title') out = lower.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  document.getElementById('case-output').textContent = out || '--';
+}
+function copyCaseResult() {
+  const t = document.getElementById('case-output').textContent;
+  if (t && t !== '--') writeClipboard(t).then(() => alert('已复制！'));
+}
+
+// ============ Water Intake ============
+let waterCups = 0;
+function calcWater() {
+  const wEl = document.getElementById('water-weight');
+  if (!wEl) return;
+  const weight = Math.max(1, parseFloat(wEl.value) || 60);
+  const act = parseFloat(document.getElementById('water-activity').value) || 1;
+  const ml = Math.round(weight * 35 * act);
+  const cups = Math.max(1, Math.ceil(ml / 250));
+  document.getElementById('water-total').textContent = ml;
+  document.getElementById('water-cups').textContent = cups;
+  let advice = ml < 1500 ? '建议少量多次补水，别等口渴才喝。' : (ml > 3000 ? '饮水量偏高，请结合自身情况适当调整。' : '均匀分配到全天饮用效果最佳。');
+  document.getElementById('water-tip').innerHTML = `💡 目标约 <b>${(ml / 1000).toFixed(2)} L</b>（${cups} 杯 × 250ml）。${advice}运动或高温天气请额外补充。`;
+  updateWaterProgress();
+}
+function addWaterCup() {
+  waterCups++;
+  updateWaterProgress();
+}
+function resetWaterCups() {
+  waterCups = 0;
+  updateWaterProgress();
+}
+function updateWaterProgress() {
+  const drankEl = document.getElementById('water-drank');
+  if (!drankEl) return;
+  const cups = parseInt(document.getElementById('water-cups').textContent) || 0;
+  const bar = document.getElementById('water-bar');
+  const pct = cups > 0 ? Math.min(100, Math.round(waterCups / cups * 100)) : 0;
+  bar.style.width = pct + '%';
+  if (cups > 0 && waterCups >= cups) {
+    bar.style.background = 'var(--success)';
+    drankEl.textContent = waterCups + ' 🎉 达标';
+  } else {
+    bar.style.background = 'var(--accent)';
+    drankEl.textContent = waterCups;
+  }
+}
+
+// ============ Memory Game ============
+const MEM_EMOJIS = ['🍎', '🍌', '🍇', '🍓', '🍑', '🍍', '🥝', '🍉', '🍒', '🥥'];
+let memState = { first: null, lock: false, moves: 0, pairs: 0, totalPairs: 0, timer: null, seconds: 0 };
+function startMemoryGame() {
+  const levelEl = document.getElementById('mem-level');
+  if (!levelEl) return;
+  const pairs = parseInt(levelEl.value) || 6;
+  if (memState.timer) { clearInterval(memState.timer); memState.timer = null; }
+  memState = { first: null, lock: false, moves: 0, pairs: 0, totalPairs: pairs, timer: null, seconds: 0 };
+  document.getElementById('mem-msg').style.display = 'none';
+  document.getElementById('mem-moves').textContent = '0';
+  document.getElementById('mem-pairs').textContent = '0';
+  document.getElementById('mem-time').textContent = '0s';
+  const deck = [];
+  for (let i = 0; i < pairs; i++) { deck.push(MEM_EMOJIS[i], MEM_EMOJIS[i]); }
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  const board = document.getElementById('mem-board');
+  board.innerHTML = '';
+  board.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  deck.forEach(emoji => {
+    const card = document.createElement('div');
+    card.dataset.emoji = emoji;
+    card.style.cssText = 'aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:10px;background:var(--card-bg);border:1px solid var(--border);cursor:pointer;user-select:none;transition:all 0.2s;';
+    card.onclick = () => flipMemoryCard(card);
+    board.appendChild(card);
+  });
+  memState.timer = setInterval(() => {
+    memState.seconds++;
+    document.getElementById('mem-time').textContent = memState.seconds + 's';
+  }, 1000);
+}
+function flipMemoryCard(card) {
+  if (memState.lock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  card.textContent = card.dataset.emoji;
+  card.classList.add('flipped');
+  card.style.background = 'var(--input-bg)';
+  if (!memState.first) { memState.first = card; return; }
+  memState.moves++;
+  document.getElementById('mem-moves').textContent = memState.moves;
+  if (memState.first.dataset.emoji === card.dataset.emoji) {
+    memState.first.classList.add('matched');
+    card.classList.add('matched');
+    memState.first.style.background = 'var(--success)';
+    card.style.background = 'var(--success)';
+    memState.first = null;
+    memState.pairs++;
+    document.getElementById('mem-pairs').textContent = memState.pairs;
+    if (memState.pairs === memState.totalPairs) winMemoryGame();
+  } else {
+    memState.lock = true;
+    const first = memState.first;
+    memState.first = null;
+    setTimeout(() => {
+      first.textContent = '';
+      card.textContent = '';
+      first.classList.remove('flipped');
+      card.classList.remove('flipped');
+      first.style.background = 'var(--card-bg)';
+      card.style.background = 'var(--card-bg)';
+      memState.lock = false;
+    }, 700);
+  }
+}
+function winMemoryGame() {
+  if (memState.timer) { clearInterval(memState.timer); memState.timer = null; }
+  const msg = document.getElementById('mem-msg');
+  msg.style.display = 'block';
+  msg.innerHTML = `🎉 全部配对完成！共 <b>${memState.moves}</b> 步，用时 <b>${memState.seconds}</b> 秒。`;
+}
+function initMemoryGame() {
+  const board = document.getElementById('mem-board');
+  if (!board) return;
+  board.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:24px 0;">点击上方「开始 / 重开」按钮开始游戏</div>';
+}
+
+safeInit(() => calcAASplit(), 'calcAASplit');
+safeInit(() => parseCron(), 'parseCron');
+safeInit(() => convertCase('camel'), 'convertCase');
+safeInit(() => calcWater(), 'calcWater');
+safeInit(() => initMemoryGame(), 'initMemoryGame');
 
 // ============ Search & Theme ============
 function filterTools() {
