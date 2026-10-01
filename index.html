@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等84个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等89个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等84个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等89个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等84个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等89个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -447,6 +447,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#case-converter" data-tool="case-converter"><span class="icon">🔤</span>命名风格转换</a></li>
     <li><a href="#water-intake" data-tool="water-intake"><span class="icon">💧</span>每日饮水量</a></li>
     <li><a href="#memory-game" data-tool="memory-game"><span class="icon">🃏</span>记忆翻牌</a></li>
+    <li><a href="#electricity-cost" data-tool="electricity-cost"><span class="icon">💡</span>电费计算器</a></li>
+    <li><a href="#snake-game" data-tool="snake-game"><span class="icon">🐍</span>贪吃蛇</a></li>
+    <li><a href="#jwt-decoder" data-tool="jwt-decoder"><span class="icon">🎫</span>JWT解析</a></li>
+    <li><a href="#calorie-calc" data-tool="calorie-calc"><span class="icon">🍎</span>热量需求计算</a></li>
+    <li><a href="#caesar-cipher" data-tool="caesar-cipher"><span class="icon">🔏</span>凯撒密码</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2367,6 +2372,163 @@ console.log('代码块');
     <div class="result-box" id="mem-msg" style="display:none;margin-top:12px;text-align:center;"></div>
   </section>
 
+  <!-- Electricity Cost Calculator -->
+  <section class="tool-panel" id="panel-electricity-cost">
+    <h2>💡 电费计算器</h2>
+    <p class="desc">输入电器功率与使用时长，快速估算耗电量与电费开支，支持自定义电价。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">电器功率 (W)</div>
+        <input type="number" id="ele-power" value="1000" min="1" oninput="calcElectricity()">
+      </div>
+      <div>
+        <div class="label">每日使用 (小时)</div>
+        <input type="number" id="ele-hours" value="8" min="0" step="0.5" oninput="calcElectricity()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">使用天数</div>
+        <input type="number" id="ele-days" value="30" min="1" oninput="calcElectricity()">
+      </div>
+      <div>
+        <div class="label">电价 (元/度)</div>
+        <input type="number" id="ele-price" value="0.6" min="0" step="0.01" oninput="calcElectricity()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcElectricity()">⚡ 计算</button>
+      <button class="btn btn-secondary" onclick="copyText('ele-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ele-kwh">--</div><div class="lbl">总耗电量 (度)</div></div>
+      <div class="stat-card"><div class="num" id="ele-cost">--</div><div class="lbl">总电费 (元)</div></div>
+      <div class="stat-card"><div class="num" id="ele-daily">--</div><div class="lbl">日均电费 (元)</div></div>
+    </div>
+    <div class="result-box" id="ele-result">--</div>
+  </section>
+
+  <!-- Snake Game -->
+  <section class="tool-panel" id="panel-snake-game">
+    <h2>🐍 贪吃蛇</h2>
+    <p class="desc">经典贪吃蛇小游戏，使用方向键或屏幕按钮控制小蛇吃到食物即可变长，撞墙或撞到自己则结束。</p>
+    <div class="flex-row" style="margin-bottom:10px;">
+      <div>
+        <div class="label">难度</div>
+        <select id="snake-speed" onchange="snakeChangeSpeed()" style="font-family:inherit;">
+          <option value="160">简单</option>
+          <option value="110" selected>普通</option>
+          <option value="70">困难</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button class="btn btn-sm" id="snake-btn" onclick="toggleSnake()" style="width:100%;">🎮 开始游戏</button>
+      </div>
+    </div>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="snake-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="snake-best">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <canvas id="snake-canvas" width="400" height="400" style="width:100%;max-width:400px;display:block;margin:0 auto;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);"></canvas>
+    <div style="display:grid;grid-template-columns:repeat(3,56px);gap:6px;justify-content:center;margin-top:12px;">
+      <div></div>
+      <button class="btn btn-sm" onclick="setSnakeDir('up')">↑</button>
+      <div></div>
+      <button class="btn btn-sm" onclick="setSnakeDir('left')">←</button>
+      <button class="btn btn-sm" onclick="setSnakeDir('down')">↓</button>
+      <button class="btn btn-sm" onclick="setSnakeDir('right')">→</button>
+    </div>
+    <div class="result-box" id="snake-msg" style="margin-top:12px;text-align:center;">点击「开始游戏」，用方向键控制小蛇。</div>
+  </section>
+
+  <!-- JWT Decoder -->
+  <section class="tool-panel" id="panel-jwt-decoder">
+    <h2>🎫 JWT 解析</h2>
+    <p class="desc">解析 JWT 令牌的 Header 与 Payload，并显示签发/过期时间。所有数据仅在浏览器本地处理。</p>
+    <textarea id="jwt-input" placeholder="粘贴 JWT，例如：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0In0.signature" style="min-height:120px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="decodeJWT()">🔍 解析</button>
+      <button class="btn btn-secondary" onclick="loadJWTSample()">📄 示例</button>
+      <button class="btn btn-secondary" onclick="clearJWT()">🗑️ 清空</button>
+    </div>
+    <div class="result-box" id="jwt-status" style="margin-top:12px;">--</div>
+    <div class="label" style="margin-top:16px;">Header</div>
+    <div class="result-box" id="jwt-header" style="display:none;"></div>
+    <div class="label" style="margin-top:16px;">Payload</div>
+    <div class="result-box" id="jwt-payload" style="display:none;"></div>
+  </section>
+
+  <!-- Calorie Calculator -->
+  <section class="tool-panel" id="panel-calorie-calc">
+    <h2>🍎 热量需求计算</h2>
+    <p class="desc">基于 Mifflin-St Jeor 公式估算基础代谢 (BMR) 与每日总消耗 (TDEE)，并给出减脂/增肌建议。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">性别</div>
+        <select id="cal-gender" onchange="calcCalorie()" style="font-family:inherit;">
+          <option value="male" selected>男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">年龄</div>
+        <input type="number" id="cal-age" value="25" min="1" oninput="calcCalorie()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">身高 (cm)</div>
+        <input type="number" id="cal-height" value="170" min="1" oninput="calcCalorie()">
+      </div>
+      <div>
+        <div class="label">体重 (kg)</div>
+        <input type="number" id="cal-weight" value="65" min="1" step="0.1" oninput="calcCalorie()">
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="label">活动强度</div>
+      <select id="cal-activity" onchange="calcCalorie()" style="font-family:inherit;">
+        <option value="1.2">久坐（几乎不运动）</option>
+        <option value="1.375" selected>轻度活动（每周 1-3 次）</option>
+        <option value="1.55">中度活动（每周 3-5 次）</option>
+        <option value="1.725">高度活动（每周 6-7 次）</option>
+        <option value="1.9">极高强度（体力劳动 / 运动员）</option>
+      </select>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcCalorie()">🔥 计算</button>
+      <button class="btn btn-secondary" onclick="copyText('cal-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="cal-bmr">--</div><div class="lbl">基础代谢 (kcal)</div></div>
+      <div class="stat-card"><div class="num" id="cal-tdee">--</div><div class="lbl">每日消耗 (kcal)</div></div>
+    </div>
+    <div class="result-box" id="cal-result">--</div>
+  </section>
+
+  <!-- Caesar Cipher -->
+  <section class="tool-panel" id="panel-caesar-cipher">
+    <h2>🔏 凯撒密码</h2>
+    <p class="desc">经典移位加密法，支持自定义位移量的加密/解密以及 ROT13 快速转换（仅处理英文字母）。</p>
+    <textarea id="caesar-input" placeholder="输入要加密或解密的英文文本..." style="min-height:140px;"></textarea>
+    <div class="flex-row" style="margin-top:12px;align-items:flex-end;">
+      <div>
+        <div class="label">位移量 (0-25)</div>
+        <input type="number" id="caesar-shift" value="3" min="0" max="25">
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-sm" onclick="applyCaesar('encrypt')" style="flex:1;">🔒 加密</button>
+        <button class="btn btn-secondary btn-sm" onclick="applyCaesar('decrypt')" style="flex:1;">🔓 解密</button>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="applyCaesar('rot13')">🔄 ROT13</button>
+      <button class="btn btn-secondary" onclick="copyText('caesar-output')">📋 复制结果</button>
+    </div>
+    <div class="label" style="margin-top:16px;">结果</div>
+    <div class="result-box" id="caesar-output">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2374,7 +2536,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 84个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 89个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -6042,6 +6204,311 @@ safeInit(() => parseCron(), 'parseCron');
 safeInit(() => convertCase('camel'), 'convertCase');
 safeInit(() => calcWater(), 'calcWater');
 safeInit(() => initMemoryGame(), 'initMemoryGame');
+
+// ============ 电费计算器 ============
+function calcElectricity() {
+  const power = parseFloat(document.getElementById('ele-power').value) || 0;
+  const hours = parseFloat(document.getElementById('ele-hours').value) || 0;
+  const days = parseFloat(document.getElementById('ele-days').value) || 0;
+  const price = parseFloat(document.getElementById('ele-price').value) || 0;
+  const kwh = power / 1000 * hours * days;
+  const cost = kwh * price;
+  const daily = days > 0 ? cost / days : 0;
+  document.getElementById('ele-kwh').textContent = kwh.toFixed(2);
+  document.getElementById('ele-cost').textContent = cost.toFixed(2);
+  document.getElementById('ele-daily').textContent = daily.toFixed(2);
+  document.getElementById('ele-result').textContent =
+    `电器功率：${power} W\n` +
+    `每天使用：${hours} 小时\n` +
+    `使用天数：${days} 天\n` +
+    `电价：${price} 元/度\n\n` +
+    `总耗电量：${kwh.toFixed(2)} 度\n` +
+    `总电费：${cost.toFixed(2)} 元\n` +
+    `日均电费：${daily.toFixed(2)} 元\n` +
+    `按月（30 天）估算：${(power / 1000 * hours * 30 * price).toFixed(2)} 元`;
+}
+
+// ============ 贪吃蛇 ============
+const snakeState = {
+  cells: 20, snake: [], food: { x: 10, y: 10 },
+  dir: { x: 1, y: 0 }, nextDir: { x: 1, y: 0 },
+  timer: null, score: 0, best: 0, running: false, over: true
+};
+function snakeMsg(text) {
+  const el = document.getElementById('snake-msg');
+  if (el) el.textContent = text;
+}
+function snakeSpeed() {
+  const sel = document.getElementById('snake-speed');
+  return parseInt(sel && sel.value, 10) || 110;
+}
+function snakeDraw() {
+  const cvs = document.getElementById('snake-canvas');
+  if (!cvs) return;
+  const ctx = cvs.getContext('2d');
+  if (!ctx) return;
+  const cs = getComputedStyle(document.documentElement);
+  const bg = (cs.getPropertyValue('--input-bg') || '#0f172a').trim();
+  const accent = (cs.getPropertyValue('--accent') || '#6366f1').trim();
+  const danger = (cs.getPropertyValue('--danger') || '#ef4444').trim();
+  const n = snakeState.cells, s = cvs.width / n;
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, cvs.width, cvs.height);
+  if (snakeState.food) {
+    ctx.fillStyle = danger;
+    ctx.beginPath();
+    ctx.arc(snakeState.food.x * s + s / 2, snakeState.food.y * s + s / 2, s * 0.35, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  snakeState.snake.forEach((p, i) => {
+    ctx.globalAlpha = i === 0 ? 1 : 0.65;
+    ctx.fillStyle = accent;
+    ctx.fillRect(p.x * s + 1, p.y * s + 1, s - 2, s - 2);
+  });
+  ctx.globalAlpha = 1;
+}
+function snakePlaceFood() {
+  const n = snakeState.cells;
+  const empty = [];
+  for (let x = 0; x < n; x++) {
+    for (let y = 0; y < n; y++) {
+      if (!snakeState.snake.some(p => p.x === x && p.y === y)) empty.push({ x, y });
+    }
+  }
+  snakeState.food = empty.length ? empty[Math.floor(Math.random() * empty.length)] : { x: 0, y: 0 };
+}
+function snakeSetTimer(ms) {
+  if (snakeState.timer) clearInterval(snakeState.timer);
+  snakeState.timer = setInterval(snakeTick, ms);
+}
+function snakeTick() {
+  const panel = document.getElementById('panel-snake-game');
+  if (panel && !panel.classList.contains('active')) { snakePause('游戏已暂停'); return; }
+  if (!snakeState.running) return;
+  snakeState.dir = snakeState.nextDir;
+  const n = snakeState.cells;
+  const head = { x: snakeState.snake[0].x + snakeState.dir.x, y: snakeState.snake[0].y + snakeState.dir.y };
+  if (head.x < 0 || head.y < 0 || head.x >= n || head.y >= n) { snakeGameOver(); return; }
+  if (snakeState.snake.some(p => p.x === head.x && p.y === head.y)) { snakeGameOver(); return; }
+  snakeState.snake.unshift(head);
+  if (head.x === snakeState.food.x && head.y === snakeState.food.y) {
+    snakeState.score += 10;
+    document.getElementById('snake-score').textContent = snakeState.score;
+    snakePlaceFood();
+  } else {
+    snakeState.snake.pop();
+  }
+  snakeDraw();
+}
+function snakeStart() {
+  snakeState.snake = [{ x: 8, y: 10 }, { x: 7, y: 10 }, { x: 6, y: 10 }];
+  snakeState.dir = { x: 1, y: 0 };
+  snakeState.nextDir = { x: 1, y: 0 };
+  snakeState.score = 0;
+  snakeState.over = false;
+  snakeState.running = true;
+  document.getElementById('snake-score').textContent = '0';
+  snakePlaceFood();
+  snakeDraw();
+  snakeSetTimer(snakeSpeed());
+  document.getElementById('snake-btn').textContent = '⏸️ 暂停';
+  snakeMsg('游戏进行中，使用方向键或下方按钮控制');
+}
+function snakePause(text) {
+  snakeState.running = false;
+  if (snakeState.timer) { clearInterval(snakeState.timer); snakeState.timer = null; }
+  document.getElementById('snake-btn').textContent = snakeState.over ? '🎮 重新开始' : '▶️ 继续';
+  if (text) snakeMsg(text);
+}
+function snakeGameOver() {
+  snakeState.over = true;
+  if (snakeState.score > snakeState.best) {
+    snakeState.best = snakeState.score;
+    document.getElementById('snake-best').textContent = snakeState.best;
+    try { localStorage.setItem('snake-best', String(snakeState.best)); } catch (err) {}
+  }
+  snakePause(`💀 游戏结束！本局得分 ${snakeState.score}，点击「重新开始」再来一局。`);
+}
+function toggleSnake() {
+  if (snakeState.running) { snakePause('游戏已暂停'); return; }
+  if (snakeState.over || !snakeState.snake.length) { snakeStart(); return; }
+  snakeState.running = true;
+  snakeSetTimer(snakeSpeed());
+  document.getElementById('snake-btn').textContent = '⏸️ 暂停';
+  snakeMsg('游戏进行中，使用方向键或下方按钮控制');
+}
+function setSnakeDir(dir) {
+  if (!snakeState.snake.length) return;
+  const cur = snakeState.nextDir;
+  if (dir === 'up' && cur.y === 0) snakeState.nextDir = { x: 0, y: -1 };
+  else if (dir === 'down' && cur.y === 0) snakeState.nextDir = { x: 0, y: 1 };
+  else if (dir === 'left' && cur.x === 0) snakeState.nextDir = { x: -1, y: 0 };
+  else if (dir === 'right' && cur.x === 0) snakeState.nextDir = { x: 1, y: 0 };
+}
+function snakeChangeSpeed() {
+  if (snakeState.running) snakeSetTimer(snakeSpeed());
+}
+function initSnakeGame() {
+  try {
+    const saved = parseInt(localStorage.getItem('snake-best') || '0', 10) || 0;
+    snakeState.best = saved;
+  } catch (err) {}
+  document.getElementById('snake-best').textContent = snakeState.best;
+  snakeState.snake = [];
+  snakeState.food = { x: 10, y: 10 };
+  snakeDraw();
+}
+document.addEventListener('keydown', e => {
+  const panel = document.getElementById('panel-snake-game');
+  if (!panel || !panel.classList.contains('active')) return;
+  const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+  const dir = map[e.key];
+  if (!dir) return;
+  e.preventDefault();
+  if (!snakeState.running) return;
+  setSnakeDir(dir);
+});
+
+// ============ JWT 解析 ============
+function jwtBase64UrlDecode(str) {
+  let s = String(str).replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  const bin = atob(s);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes);
+}
+function decodeJWT(token) {
+  const statusEl = document.getElementById('jwt-status');
+  const headerEl = document.getElementById('jwt-header');
+  const payloadEl = document.getElementById('jwt-payload');
+  const input = (token !== undefined ? token : document.getElementById('jwt-input').value).trim();
+  if (!input) {
+    statusEl.textContent = '⚠️ 请先粘贴 JWT 令牌';
+    headerEl.style.display = 'none';
+    payloadEl.style.display = 'none';
+    return;
+  }
+  const parts = input.split('.');
+  if (parts.length < 2) {
+    statusEl.textContent = '❌ 格式错误：JWT 应由英文句点分隔的三段组成';
+    headerEl.style.display = 'none';
+    payloadEl.style.display = 'none';
+    return;
+  }
+  try {
+    const header = JSON.parse(jwtBase64UrlDecode(parts[0]));
+    const payload = JSON.parse(jwtBase64UrlDecode(parts[1]));
+    headerEl.style.display = 'block';
+    headerEl.textContent = JSON.stringify(header, null, 2);
+    payloadEl.style.display = 'block';
+    payloadEl.textContent = JSON.stringify(payload, null, 2);
+    let info = '✅ 解析成功（仅解码展示，未校验签名）\n';
+    if (header.alg) info += `签名算法：${header.alg}\n`;
+    if (payload.iat) info += `签发时间：${new Date(payload.iat * 1000).toLocaleString()}\n`;
+    if (payload.nbf) info += `生效时间：${new Date(payload.nbf * 1000).toLocaleString()}\n`;
+    if (payload.exp) {
+      const expired = Date.now() > payload.exp * 1000;
+      info += `过期时间：${new Date(payload.exp * 1000).toLocaleString()}（${expired ? '已过期' : '仍有效'}）`;
+    }
+    statusEl.textContent = info.trim();
+  } catch (err) {
+    statusEl.textContent = '❌ 解析失败：' + err.message;
+    headerEl.style.display = 'none';
+    payloadEl.style.display = 'none';
+  }
+}
+function jwtEncode(obj) {
+  const bytes = new TextEncoder().encode(JSON.stringify(obj));
+  let bin = '';
+  bytes.forEach(b => { bin += String.fromCharCode(b); });
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function loadJWTSample() {
+  const now = Math.floor(Date.now() / 1000);
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const payload = { sub: '1234567890', name: '万能工具箱', role: 'user', iat: now, exp: now + 3600 };
+  document.getElementById('jwt-input').value =
+    jwtEncode(header) + '.' + jwtEncode(payload) + '.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+  decodeJWT();
+}
+function clearJWT() {
+  document.getElementById('jwt-input').value = '';
+  document.getElementById('jwt-status').textContent = '--';
+  const headerEl = document.getElementById('jwt-header');
+  const payloadEl = document.getElementById('jwt-payload');
+  headerEl.textContent = '';
+  payloadEl.textContent = '';
+  headerEl.style.display = 'none';
+  payloadEl.style.display = 'none';
+}
+function initJWT() {
+  document.getElementById('jwt-input').value = '';
+  clearJWT();
+}
+
+// ============ 热量需求计算 ============
+function calcCalorie() {
+  const gender = document.getElementById('cal-gender').value;
+  const age = parseFloat(document.getElementById('cal-age').value) || 0;
+  const height = parseFloat(document.getElementById('cal-height').value) || 0;
+  const weight = parseFloat(document.getElementById('cal-weight').value) || 0;
+  const act = parseFloat(document.getElementById('cal-activity').value) || 1.2;
+  const bmrEl = document.getElementById('cal-bmr');
+  const tdeeEl = document.getElementById('cal-tdee');
+  const resEl = document.getElementById('cal-result');
+  if (age <= 0 || height <= 0 || weight <= 0) {
+    bmrEl.textContent = '--';
+    tdeeEl.textContent = '--';
+    resEl.textContent = '请输入有效的年龄、身高和体重';
+    return;
+  }
+  const bmr = gender === 'male'
+    ? 10 * weight + 6.25 * height - 5 * age + 5
+    : 10 * weight + 6.25 * height - 5 * age - 161;
+  const tdee = bmr * act;
+  bmrEl.textContent = Math.round(bmr);
+  tdeeEl.textContent = Math.round(tdee);
+  resEl.textContent =
+    `基础代谢 (BMR)：${Math.round(bmr)} kcal/天\n` +
+    `每日总消耗 (TDEE)：${Math.round(tdee)} kcal/天\n\n` +
+    `🍃 减脂期建议：约 ${Math.round(tdee - 400)} kcal/天（缺口约 400 kcal）\n` +
+    `⚖️ 维持体重：约 ${Math.round(tdee)} kcal/天\n` +
+    `💪 增肌期建议：约 ${Math.round(tdee + 300)} kcal/天（盈余约 300 kcal）\n\n` +
+    `提示：结果为估算值，实际需求受肌肉量、基因等因素影响。`;
+}
+
+// ============ 凯撒密码 ============
+function caesarShift(text, shift) {
+  const s = ((shift % 26) + 26) % 26;
+  return String(text).replace(/[a-zA-Z]/g, ch => {
+    const base = ch <= 'Z' ? 65 : 97;
+    return String.fromCharCode((ch.charCodeAt(0) - base + s) % 26 + base);
+  });
+}
+function applyCaesar(mode) {
+  const input = document.getElementById('caesar-input').value;
+  const out = document.getElementById('caesar-output');
+  if (!input) { out.textContent = '请输入需要处理的文本'; return; }
+  let shift = parseInt(document.getElementById('caesar-shift').value, 10);
+  if (isNaN(shift)) shift = 3;
+  let result, label;
+  if (mode === 'decrypt') { result = caesarShift(input, -shift); label = '解密（位移 ' + shift + '）'; }
+  else if (mode === 'rot13') { result = caesarShift(input, 13); label = 'ROT13'; }
+  else { result = caesarShift(input, shift); label = '加密（位移 ' + shift + '）'; }
+  out.textContent = result;
+  showToast(label + '完成');
+}
+function initCaesar() {
+  const out = document.getElementById('caesar-output');
+  if (out) out.textContent = '输入文本后点击「加密 / 解密 / ROT13」';
+}
+
+safeInit(() => calcElectricity(), 'calcElectricity');
+safeInit(() => initSnakeGame(), 'initSnakeGame');
+safeInit(() => initJWT(), 'initJWT');
+safeInit(() => calcCalorie(), 'calcCalorie');
+safeInit(() => initCaesar(), 'initCaesar');
 
 // ============ Search & Theme ============
 function filterTools() {
