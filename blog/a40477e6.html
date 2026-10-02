@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>不用Postman也能测试API：5个轻量级替代方案 - 万能工具箱</title>
-<meta name="description" content="Postman虽然强大但太臃肿了？试试这些轻量级API测试工具，安装快、启动快、使用简单。">
-<meta name="keywords" content="API测试,接口调试,在线API工具">
+<title>在线进制转换工具：二进制、八进制、十进制、十六进制互转教程 - 万能工具箱</title>
+<meta name="description" content="二进制、八进制、十进制、十六进制怎么互转？本文介绍在线进制转换工具和手动换算方法，程序员必备。">
+<meta name="keywords" content="进制转换,二进制转十进制,十六进制转换,在线进制工具">
 <style>
 :root {
   --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
@@ -52,27 +52,24 @@ body {
   <div class="header">
     <div class="back"><a href="index.html">← 返回博客列表</a> | <a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
     <div class="category">开发工具</div>
-    <h1>不用Postman也能测试API：5个轻量级替代方案</h1>
-    <div class="meta">2026-09-20 · 545字 · 开发工具</div>
+    <h1>在线进制转换工具：二进制、八进制、十进制、十六进制互转教程</h1>
+    <div class="meta">2026-09-25 · 298字 · 开发工具</div>
   </div>
   <div class="content">
-    <p>Postman 是API测试的标配，但很多人不知道的是，它现在已经变得非常臃肿了。启动慢、占内存大、还要注册账号。</p>
-    <p>如果你只是想偶尔测试一下API，完全不需要装 Postman。下面推荐几个轻量级替代方案。</p>
-    <p>VS Code 的 REST Client 插件：在 VS Code 里直接写 .http 文件，发送请求，查看响应。不需要切换窗口，开发体验极佳。</p>
-    <p>curl 命令行：最经典的HTTP客户端，几乎所有系统都自带。虽然界面不友好，但功能强大，可以写脚本批量测试。</p>
-    <p>httpie：curl 的升级版，语法更友好，输出自动高亮。支持 JSON、表单、文件上传等。pip install httpie 就能装。</p>
-    <p>Insomnia：开源免费的API客户端，界面简洁，支持 GraphQL、gRPC。比 Postman 轻量很多。</p>
-    <p>浏览器自带的开发者工具：Chrome 和 Edge 的 Network 面板可以直接查看请求和响应，F12 就能打开。</p>
-    <p>选择建议：如果你用 VS Code，首选 REST Client 插件；如果喜欢命令行，httpie 比 curl 更友好；如果想要图形界面，Insomnia 是个不错的选择。</p>
-    <p>轻量级工具的好处是：不占资源、启动快、不需要账号。对于日常开发来说，已经足够了。</p>
+    <p>进制转换是程序员的基本功。计算机内部用二进制存储数据，但人类更习惯十进制。不同进制之间经常需要转换。</p>
+    <p>常见的进制有四种：二进制（base 2）、八进制（base 8）、十进制（base 10）、十六进制（base 16）。十六进制因为能紧凑表示二进制（一位十六进制等于四位二进制），在内存地址、颜色值、编码中广泛使用。</p>
+    <p>手动转换方法：十进制转其他进制用「除基取余法」；其他进制转十进制用「按权展开求和法」。比如十进制 255 转二进制：255 ÷ 2 = 127 余 1，127 ÷ 2 = 63 余 1……一直除到商为 0，把余数倒过来就是 11111111。</p>
+    <p>十六进制转二进制更简单，每位十六进制对应四位二进制。比如 0xFF = 1111 1111 = 255。记住 0-F 对应的二进制组合即可。</p>
+    <p>在线进制转换工具能省掉手动计算的麻烦，输入一个值自动显示其他进制结果，部分工具还支持任意进制（2-36）转换。</p>
+    <p>推荐万能工具箱的进制转换工具，支持大整数、浮点，还能查看转换过程，适合学习和日常使用。</p>
   </div>
   <div class="related">
     <h3>相关文章</h3>
-    <a href="3585aa6a.html">ChatGPT高效使用指南：10个让你事半功倍的提示词技巧</a>
-    <a href="c476b73d.html">2024年最好用的免费截图工具盘点：总有一款适合你</a>
-    <a href="3714582a.html">文件太大传不出去？试试这5个在线压缩工具</a>
-    <a href="ac6c57d1.html">你的个人信息可能已经泄露了：10个保护隐私的实用建议</a>
-    <a href="6228608c.html">电脑桌面乱成一团？教你5分钟整理出清爽的桌面</a>
+    <a href="501f871e.html">在线Mock数据工具：前端开发必备的假数据生成器</a>
+    <a href="1d72cae3.html">在线JSON转XML工具：数据格式互转不求人</a>
+    <a href="7c638f96.html">GitHub入门指南：从注册到提交第一个Pull Request</a>
+    <a href="80b64bc3.html">正则表达式入门：从害怕到掌握，看这一篇就够了</a>
+    <a href="9bda6652.html">在线CSS格式化工具：让你的样式代码整洁又易读</a>
   </div>
   <div class="footer">
     <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
