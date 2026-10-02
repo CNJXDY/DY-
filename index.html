@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等89个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等94个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等89个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等94个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等89个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等94个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -452,6 +452,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#jwt-decoder" data-tool="jwt-decoder"><span class="icon">🎫</span>JWT解析</a></li>
     <li><a href="#calorie-calc" data-tool="calorie-calc"><span class="icon">🍎</span>热量需求计算</a></li>
     <li><a href="#caesar-cipher" data-tool="caesar-cipher"><span class="icon">🔏</span>凯撒密码</a></li>
+    <li class="category">新增工具</li>
+    <li><a href="#pace-calc" data-tool="pace-calc"><span class="icon">🏃</span>配速计算器</a></li>
+    <li><a href="#http-status" data-tool="http-status"><span class="icon">🌐</span>HTTP状态码</a></li>
+    <li><a href="#text-tidy" data-tool="text-tidy"><span class="icon">🧹</span>文本整理</a></li>
+    <li><a href="#fuel-cost" data-tool="fuel-cost"><span class="icon">⛽</span>油费计算器</a></li>
+    <li><a href="#whack-mole" data-tool="whack-mole"><span class="icon">🔨</span>打地鼠</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2529,6 +2535,159 @@ console.log('代码块');
     <div class="result-box" id="caesar-output">--</div>
   </section>
 
+  <!-- Pace Calculator -->
+  <section class="tool-panel" id="panel-pace-calc">
+    <h2>🏃 配速计算器</h2>
+    <p class="desc">根据距离与用时计算配速、时速，或按目标配速估算完赛时间，支持 5K、10K、半马、全马等常见距离。</p>
+    <div class="label">计算模式</div>
+    <select id="pace-mode" onchange="switchPaceMode()" style="font-family:inherit;">
+      <option value="time" selected>按用时算配速</option>
+      <option value="predicted">按目标配速算时间</option>
+    </select>
+    <div style="margin-top:12px;">
+      <div class="label">距离</div>
+      <div class="flex-row" style="margin-top:6px;">
+        <input type="number" id="pace-distance" value="10" min="0.01" step="0.01" oninput="calcPace()">
+        <select id="pace-unit" onchange="calcPace()" style="font-family:inherit;">
+          <option value="km" selected>公里 (km)</option>
+          <option value="mi">英里 (mi)</option>
+        </select>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-secondary btn-sm" onclick="quickPaceDistance(5)">5K</button>
+        <button class="btn btn-secondary btn-sm" onclick="quickPaceDistance(10)">10K</button>
+        <button class="btn btn-secondary btn-sm" onclick="quickPaceDistance(21.0975)">半马</button>
+        <button class="btn btn-secondary btn-sm" onclick="quickPaceDistance(42.195)">全马</button>
+      </div>
+    </div>
+    <div id="pace-time-inputs" style="margin-top:12px;">
+      <div class="label">用时（时 : 分 : 秒）</div>
+      <div class="flex-row" style="margin-top:6px;">
+        <input type="number" id="pace-h" value="0" min="0" oninput="calcPace()" placeholder="时">
+        <input type="number" id="pace-m" value="50" min="0" max="59" oninput="calcPace()" placeholder="分">
+        <input type="number" id="pace-s" value="0" min="0" max="59" oninput="calcPace()" placeholder="秒">
+      </div>
+    </div>
+    <div id="pace-target-inputs" style="margin-top:12px;display:none;">
+      <div class="label">目标配速（分 : 秒 / 公里）</div>
+      <div class="flex-row" style="margin-top:6px;">
+        <input type="number" id="pace-target-m" value="5" min="0" oninput="calcPace()" placeholder="分">
+        <input type="number" id="pace-target-s" value="30" min="0" max="59" oninput="calcPace()" placeholder="秒">
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pace-pace">--</div><div class="lbl">配速 (每公里)</div></div>
+      <div class="stat-card"><div class="num" id="pace-speed">--</div><div class="lbl">时速 (km/h)</div></div>
+    </div>
+    <div class="result-box" id="pace-result">--</div>
+  </section>
+
+  <!-- HTTP Status -->
+  <section class="tool-panel" id="panel-http-status">
+    <h2>🌐 HTTP 状态码查询</h2>
+    <p class="desc">快速查询常见 HTTP 状态码的含义、使用场景与排查建议，覆盖 1xx 至 5xx 全部常用状态码。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">搜索</div>
+        <input type="text" id="http-search" placeholder="输入状态码或关键词，如 404、超时" oninput="filterHttpStatus()">
+      </div>
+      <div>
+        <div class="label">分类</div>
+        <select id="http-category" onchange="filterHttpStatus()" style="font-family:inherit;">
+          <option value="all" selected>全部</option>
+          <option value="1">1xx 信息</option>
+          <option value="2">2xx 成功</option>
+          <option value="3">3xx 重定向</option>
+          <option value="4">4xx 客户端错误</option>
+          <option value="5">5xx 服务端错误</option>
+        </select>
+      </div>
+    </div>
+    <div class="result-box" id="http-list" style="max-height:420px;overflow-y:auto;"></div>
+  </section>
+
+  <!-- Text Tidy -->
+  <section class="tool-panel" id="panel-text-tidy">
+    <h2>🧹 文本整理</h2>
+    <p class="desc">一键清理文本中的行首尾空格、空行、连续空格与 HTML 标签，适合整理从网页或文档复制的内容。</p>
+    <textarea id="tidy-input" placeholder="粘贴需要整理的文本..." style="min-height:160px;" oninput="updateTidyStats()"></textarea>
+    <div style="margin-top:12px;">
+      <label style="display:inline-flex;align-items:center;gap:6px;margin-right:16px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="tidy-trim" checked> 去行首尾空格
+      </label>
+      <label style="display:inline-flex;align-items:center;gap:6px;margin-right:16px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="tidy-empty" checked> 删除空行
+      </label>
+      <label style="display:inline-flex;align-items:center;gap:6px;margin-right:16px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="tidy-space" checked> 合并连续空格
+      </label>
+      <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;">
+        <input type="checkbox" id="tidy-html"> 去除 HTML 标签
+      </label>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="applyTextTidy()">🧹 整理文本</button>
+      <button class="btn btn-secondary" onclick="copyText('tidy-output')">📋 复制结果</button>
+      <button class="btn btn-secondary" onclick="clearTextTidy()">🗑️ 清空</button>
+    </div>
+    <div class="label" style="margin-top:16px;">结果 <span id="tidy-stats" style="color:var(--text-secondary);font-weight:400;"></span></div>
+    <div class="result-box" id="tidy-output">--</div>
+  </section>
+
+  <!-- Fuel Cost -->
+  <section class="tool-panel" id="panel-fuel-cost">
+    <h2>⛽ 油费计算器</h2>
+    <p class="desc">根据行驶里程、百公里油耗与油价，快速估算油费与每公里成本，支持往返行程与多人分摊。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">行驶距离 (km)</div>
+        <input type="number" id="fuel-distance" value="300" min="0" step="0.1" oninput="calcFuelCost()">
+      </div>
+      <div>
+        <div class="label">百公里油耗 (L)</div>
+        <input type="number" id="fuel-consumption" value="7.5" min="0" step="0.1" oninput="calcFuelCost()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">油价 (元/L)</div>
+        <input type="number" id="fuel-price" value="7.8" min="0" step="0.01" oninput="calcFuelCost()">
+      </div>
+      <div>
+        <div class="label">分摊人数</div>
+        <input type="number" id="fuel-people" value="1" min="1" step="1" oninput="calcFuelCost()">
+      </div>
+    </div>
+    <label style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;cursor:pointer;font-size:13px;">
+      <input type="checkbox" id="fuel-round" onchange="calcFuelCost()"> 往返行程（距离 ×2）
+    </label>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="fuel-total">--</div><div class="lbl">总油费 (元)</div></div>
+      <div class="stat-card"><div class="num" id="fuel-per-km">--</div><div class="lbl">每公里 (元)</div></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcFuelCost()">⛽ 计算</button>
+      <button class="btn btn-secondary" onclick="copyText('fuel-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="fuel-result">--</div>
+  </section>
+
+  <!-- Whack a Mole -->
+  <section class="tool-panel" id="panel-whack-mole">
+    <h2>🔨 打地鼠</h2>
+    <p class="desc">30 秒限时挑战，点击随机冒出的地鼠得分。考验反应速度，支持暂停与最高分记录。</p>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="whack-score-num">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="whack-time-num">30</div><div class="lbl">剩余秒数</div></div>
+      <div class="stat-card"><div class="num" id="whack-best-num">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <div id="whack-board" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;"></div>
+    <div class="btn-group">
+      <button class="btn" id="whack-btn" onclick="toggleWhackMole()">▶️ 开始游戏</button>
+    </div>
+    <div class="result-box" id="whack-result">点击「开始游戏」，30 秒内尽可能多地敲中地鼠！</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2536,7 +2695,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 89个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 94个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -6509,6 +6668,334 @@ safeInit(() => initSnakeGame(), 'initSnakeGame');
 safeInit(() => initJWT(), 'initJWT');
 safeInit(() => calcCalorie(), 'calcCalorie');
 safeInit(() => initCaesar(), 'initCaesar');
+
+// ============ 配速计算器 ============
+function switchPaceMode() {
+  const mode = document.getElementById('pace-mode').value;
+  document.getElementById('pace-time-inputs').style.display = mode === 'time' ? 'block' : 'none';
+  document.getElementById('pace-target-inputs').style.display = mode === 'predicted' ? 'block' : 'none';
+  calcPace();
+}
+function quickPaceDistance(d) {
+  document.getElementById('pace-distance').value = d;
+  document.getElementById('pace-unit').value = 'km';
+  calcPace();
+}
+function formatPaceDuration(sec) {
+  sec = Math.max(0, Math.round(sec));
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+  const pad = n => String(n).padStart(2, '0');
+  return (h > 0 ? h + ':' + pad(m) : String(m)) + ':' + pad(s);
+}
+function calcPace() {
+  const mode = document.getElementById('pace-mode').value;
+  const unit = document.getElementById('pace-unit').value;
+  const distInput = parseFloat(document.getElementById('pace-distance').value);
+  const paceEl = document.getElementById('pace-pace');
+  const speedEl = document.getElementById('pace-speed');
+  const resEl = document.getElementById('pace-result');
+  if (!(distInput > 0)) {
+    paceEl.textContent = '--'; speedEl.textContent = '--';
+    resEl.textContent = '请输入有效的距离';
+    return;
+  }
+  const distKm = unit === 'mi' ? distInput * 1.609344 : distInput;
+  const unitLabel = unit === 'mi' ? '英里' : '公里';
+  if (mode === 'predicted') {
+    const tm = parseFloat(document.getElementById('pace-target-m').value) || 0;
+    const ts = parseFloat(document.getElementById('pace-target-s').value) || 0;
+    const paceSec = tm * 60 + ts;
+    if (paceSec <= 0) {
+      paceEl.textContent = '--'; speedEl.textContent = '--';
+      resEl.textContent = '请输入有效的目标配速';
+      return;
+    }
+    const totalSec = paceSec * distKm;
+    const speed = distKm / (totalSec / 3600);
+    paceEl.textContent = formatPaceDuration(paceSec) + ' /km';
+    speedEl.textContent = speed.toFixed(2);
+    resEl.textContent =
+      `距离：${distInput} ${unitLabel}（约 ${distKm.toFixed(2)} km）\n` +
+      `目标配速：${formatPaceDuration(paceSec)} /km\n` +
+      `预计用时：${formatPaceDuration(totalSec)}（${(totalSec / 3600).toFixed(2)} 小时）\n` +
+      `平均时速：${speed.toFixed(2)} km/h`;
+    return;
+  }
+  const h = parseFloat(document.getElementById('pace-h').value) || 0;
+  const m = parseFloat(document.getElementById('pace-m').value) || 0;
+  const s = parseFloat(document.getElementById('pace-s').value) || 0;
+  const totalSec = h * 3600 + m * 60 + s;
+  if (totalSec <= 0) {
+    paceEl.textContent = '--'; speedEl.textContent = '--';
+    resEl.textContent = '请输入有效的用时';
+    return;
+  }
+  const paceSec = totalSec / distKm;
+  const speed = distKm / (totalSec / 3600);
+  paceEl.textContent = formatPaceDuration(paceSec) + ' /km';
+  speedEl.textContent = speed.toFixed(2);
+  resEl.textContent =
+    `距离：${distInput} ${unitLabel}（约 ${distKm.toFixed(2)} km）\n` +
+    `用时：${formatPaceDuration(totalSec)}\n` +
+    `配速：${formatPaceDuration(paceSec)} /km（每英里 ${formatPaceDuration(paceSec * 1.609344)} /mi）\n` +
+    `平均时速：${speed.toFixed(2)} km/h\n\n` +
+    `常见距离预计：5K ${formatPaceDuration(paceSec * 5)}、10K ${formatPaceDuration(paceSec * 10)}、半马 ${formatPaceDuration(paceSec * 21.0975)}、全马 ${formatPaceDuration(paceSec * 42.195)}`;
+}
+function initPace() {
+  switchPaceMode();
+}
+
+// ============ HTTP 状态码查询 ============
+const HTTP_STATUS = [
+  { code: 100, name: 'Continue', cat: '1', desc: '服务器已收到请求头，客户端应继续发送请求体。', tips: '上传大文件或使用 100-continue 流程时会看到。' },
+  { code: 101, name: 'Switching Protocols', cat: '1', desc: '服务器同意切换协议。', tips: 'WebSocket 协议升级时常见。' },
+  { code: 200, name: 'OK', cat: '2', desc: '请求成功，响应中包含结果。', tips: '最常见的成功状态。' },
+  { code: 201, name: 'Created', cat: '2', desc: '请求成功并创建了新资源。', tips: 'POST 创建资源后返回。' },
+  { code: 204, name: 'No Content', cat: '2', desc: '请求成功，但无返回内容。', tips: 'DELETE 或 CORS 预检请求常见。' },
+  { code: 206, name: 'Partial Content', cat: '2', desc: '返回部分内容，用于断点续传或范围请求。', tips: '视频拖动进度条时会用到。' },
+  { code: 301, name: 'Moved Permanently', cat: '3', desc: '资源已永久重定向到新地址。', tips: '会转移 SEO 权重，配置后慎改。' },
+  { code: 302, name: 'Found', cat: '3', desc: '资源临时重定向。', tips: '登录后跳转常用。' },
+  { code: 304, name: 'Not Modified', cat: '3', desc: '资源未修改，可使用本地缓存。', tips: '配合 ETag / Last-Modified 使用。' },
+  { code: 307, name: 'Temporary Redirect', cat: '3', desc: '临时重定向且保持请求方法不变。', tips: '需要保留 POST 方法时使用。' },
+  { code: 308, name: 'Permanent Redirect', cat: '3', desc: '永久重定向且保持请求方法不变。', tips: '301 的保持方法版本。' },
+  { code: 400, name: 'Bad Request', cat: '4', desc: '请求语法错误，服务器无法理解。', tips: '检查参数格式与 JSON 结构。' },
+  { code: 401, name: 'Unauthorized', cat: '4', desc: '未认证，需要登录或提供凭证。', tips: '检查 Token 是否携带或已过期。' },
+  { code: 403, name: 'Forbidden', cat: '4', desc: '已认证但无权限访问该资源。', tips: '检查账号权限或 IP 白名单。' },
+  { code: 404, name: 'Not Found', cat: '4', desc: '请求的资源不存在。', tips: '检查 URL 路径或资源是否被删除。' },
+  { code: 405, name: 'Method Not Allowed', cat: '4', desc: '请求方法不被允许。', tips: '如接口只支持 POST 却用了 GET。' },
+  { code: 408, name: 'Request Timeout', cat: '4', desc: '服务器等待请求超时。', tips: '客户端网络慢或请求体过大。' },
+  { code: 409, name: 'Conflict', cat: '4', desc: '请求与服务器当前状态冲突。', tips: '并发更新同一资源时常见。' },
+  { code: 410, name: 'Gone', cat: '4', desc: '资源已被永久删除。', tips: '比 404 更明确的删除语义。' },
+  { code: 413, name: 'Payload Too Large', cat: '4', desc: '请求体超过服务器允许的大小。', tips: '减小上传文件或调整服务端限制。' },
+  { code: 414, name: 'URI Too Long', cat: '4', desc: '请求的 URL 过长。', tips: '改用 POST 提交参数。' },
+  { code: 415, name: 'Unsupported Media Type', cat: '4', desc: '不支持的请求内容类型。', tips: '检查请求头 Content-Type。' },
+  { code: 422, name: 'Unprocessable Entity', cat: '4', desc: '请求格式正确但语义有误。', tips: '表单校验失败常返回此码。' },
+  { code: 429, name: 'Too Many Requests', cat: '4', desc: '请求过于频繁，已被限流。', tips: '降低频率或做退避重试。' },
+  { code: 500, name: 'Internal Server Error', cat: '5', desc: '服务器内部错误。', tips: '查看服务端日志定位异常。' },
+  { code: 501, name: 'Not Implemented', cat: '5', desc: '服务器不支持该请求方法。', tips: '确认服务端已实现对应功能。' },
+  { code: 502, name: 'Bad Gateway', cat: '5', desc: '网关或代理从上游收到无效响应。', tips: '检查上游服务是否存活。' },
+  { code: 503, name: 'Service Unavailable', cat: '5', desc: '服务暂时不可用，通常因过载或维护。', tips: '稍后重试并检查负载情况。' },
+  { code: 504, name: 'Gateway Timeout', cat: '5', desc: '网关等待上游响应超时。', tips: '上游处理过慢或网络异常。' },
+  { code: 505, name: 'HTTP Version Not Supported', cat: '5', desc: '服务器不支持请求使用的 HTTP 版本。', tips: '检查客户端协议版本。' },
+];
+function renderHttpStatus() {
+  const listEl = document.getElementById('http-list');
+  if (!listEl) return;
+  const q = (document.getElementById('http-search').value || '').trim().toLowerCase();
+  const cat = document.getElementById('http-category').value;
+  listEl.innerHTML = '';
+  let count = 0;
+  HTTP_STATUS.forEach(item => {
+    if (cat !== 'all' && item.cat !== cat) return;
+    const text = (item.code + ' ' + item.name + ' ' + item.desc + ' ' + item.tips).toLowerCase();
+    if (q && text.indexOf(q) === -1) return;
+    count++;
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;background:var(--input-bg);';
+    const title = document.createElement('div');
+    title.style.cssText = 'font-weight:600;color:var(--accent-hover);';
+    title.textContent = item.code + ' ' + item.name;
+    const desc = document.createElement('div');
+    desc.style.cssText = 'font-size:13px;color:var(--text-secondary);margin-top:4px;';
+    desc.textContent = item.desc;
+    const tips = document.createElement('div');
+    tips.style.cssText = 'font-size:12px;color:var(--text-secondary);margin-top:4px;';
+    tips.textContent = '💡 ' + item.tips;
+    wrap.appendChild(title); wrap.appendChild(desc); wrap.appendChild(tips);
+    listEl.appendChild(wrap);
+  });
+  if (!count) {
+    const empty = document.createElement('div');
+    empty.style.cssText = 'padding:12px;color:var(--text-secondary);';
+    empty.textContent = '未找到匹配的状态码';
+    listEl.appendChild(empty);
+  }
+}
+function filterHttpStatus() { renderHttpStatus(); }
+function initHttpStatus() { renderHttpStatus(); }
+
+// ============ 文本整理 ============
+function updateTidyStats() {
+  const stat = document.getElementById('tidy-stats');
+  if (!stat) return;
+  const src = document.getElementById('tidy-input').value;
+  if (!src) { stat.textContent = ''; return; }
+  const out = document.getElementById('tidy-output').textContent;
+  const outLen = (out === '--' || out === '') ? src.length : out.length;
+  stat.textContent = `（原 ${src.length} 字符 → 整理后 ${outLen} 字符）`;
+}
+function applyTextTidy() {
+  const out = document.getElementById('tidy-output');
+  let text = document.getElementById('tidy-input').value;
+  if (!text) { out.textContent = '请先粘贴需要整理的文本'; updateTidyStats(); return; }
+  text = text.replace(/\r\n?/g, '\n');
+  if (document.getElementById('tidy-html').checked) {
+    text = text.replace(/<[^>]*>/g, '');
+  }
+  if (document.getElementById('tidy-trim').checked) {
+    text = text.split('\n').map(l => l.trim()).join('\n');
+  }
+  if (document.getElementById('tidy-empty').checked) {
+    text = text.split('\n').filter(l => l.trim() !== '').join('\n');
+  }
+  if (document.getElementById('tidy-space').checked) {
+    text = text.replace(/[ \t\u3000]{2,}/g, ' ');
+  }
+  out.textContent = text || '（整理后为空）';
+  updateTidyStats();
+  showToast('文本整理完成');
+}
+function clearTextTidy() {
+  document.getElementById('tidy-input').value = '';
+  document.getElementById('tidy-output').textContent = '--';
+  updateTidyStats();
+}
+function initTextTidy() {
+  document.getElementById('tidy-output').textContent = '--';
+  updateTidyStats();
+}
+
+// ============ 油费计算器 ============
+function calcFuelCost() {
+  const distance = parseFloat(document.getElementById('fuel-distance').value) || 0;
+  const consumption = parseFloat(document.getElementById('fuel-consumption').value) || 0;
+  const price = parseFloat(document.getElementById('fuel-price').value) || 0;
+  const people = Math.max(1, parseInt(document.getElementById('fuel-people').value, 10) || 1);
+  const round = document.getElementById('fuel-round').checked;
+  const totalEl = document.getElementById('fuel-total');
+  const perKmEl = document.getElementById('fuel-per-km');
+  const resEl = document.getElementById('fuel-result');
+  if (distance <= 0 || consumption <= 0 || price <= 0) {
+    totalEl.textContent = '--'; perKmEl.textContent = '--';
+    resEl.textContent = '请输入有效的距离、油耗与油价';
+    return;
+  }
+  const realDistance = round ? distance * 2 : distance;
+  const liters = (realDistance / 100) * consumption;
+  const total = liters * price;
+  const perKm = total / realDistance;
+  const perPerson = total / people;
+  totalEl.textContent = total.toFixed(2);
+  perKmEl.textContent = perKm.toFixed(3);
+  resEl.textContent =
+    `行驶距离：${distance} km${round ? '（往返 ' + realDistance + ' km）' : ''}\n` +
+    `百公里油耗：${consumption} L\n` +
+    `油价：${price} 元/L\n\n` +
+    `预计耗油：${liters.toFixed(2)} L\n` +
+    `总油费：${total.toFixed(2)} 元\n` +
+    `每公里成本：${perKm.toFixed(3)} 元` +
+    (people > 1 ? `\n${people} 人分摊，每人 ${perPerson.toFixed(2)} 元` : '');
+}
+function initFuelCost() { calcFuelCost(); }
+
+// ============ 打地鼠 ============
+const whackState = { score: 0, time: 30, best: 0, status: 'idle', timer: null, moleTimer: null, activeHole: -1, holes: [] };
+function whackShowMole() {
+  if (whackState.activeHole >= 0 && whackState.holes[whackState.activeHole]) {
+    whackState.holes[whackState.activeHole].textContent = '🕳️';
+  }
+  const i = Math.floor(Math.random() * whackState.holes.length);
+  whackState.activeHole = i;
+  whackState.holes[i].textContent = '🐹';
+}
+function whackTick() {
+  whackState.time -= 1;
+  document.getElementById('whack-time-num').textContent = whackState.time;
+  if (whackState.time <= 0) whackEnd();
+}
+function whackEnd() {
+  whackState.status = 'over';
+  if (whackState.timer) { clearInterval(whackState.timer); whackState.timer = null; }
+  if (whackState.moleTimer) { clearInterval(whackState.moleTimer); whackState.moleTimer = null; }
+  if (whackState.activeHole >= 0 && whackState.holes[whackState.activeHole]) {
+    whackState.holes[whackState.activeHole].textContent = '🕳️';
+    whackState.activeHole = -1;
+  }
+  if (whackState.score > whackState.best) {
+    whackState.best = whackState.score;
+    document.getElementById('whack-best-num').textContent = whackState.best;
+    try { localStorage.setItem('whack-best', String(whackState.best)); } catch (err) {}
+  }
+  document.getElementById('whack-btn').textContent = '🎮 重新开始';
+  document.getElementById('whack-result').textContent = `⏰ 时间到！本局得分 ${whackState.score}，最高分 ${whackState.best}。`;
+}
+function whackStart() {
+  whackState.score = 0;
+  whackState.time = 30;
+  whackState.status = 'running';
+  whackState.activeHole = -1;
+  whackState.holes.forEach(h => { h.textContent = '🕳️'; });
+  document.getElementById('whack-score-num').textContent = '0';
+  document.getElementById('whack-time-num').textContent = '30';
+  document.getElementById('whack-btn').textContent = '⏸️ 暂停';
+  document.getElementById('whack-result').textContent = '游戏进行中，点击冒出的地鼠得分！';
+  whackShowMole();
+  whackState.timer = setInterval(whackTick, 1000);
+  whackState.moleTimer = setInterval(whackShowMole, 750);
+}
+function whackPause() {
+  whackState.status = 'paused';
+  if (whackState.timer) { clearInterval(whackState.timer); whackState.timer = null; }
+  if (whackState.moleTimer) { clearInterval(whackState.moleTimer); whackState.moleTimer = null; }
+  if (whackState.activeHole >= 0 && whackState.holes[whackState.activeHole]) {
+    whackState.holes[whackState.activeHole].textContent = '🕳️';
+    whackState.activeHole = -1;
+  }
+  document.getElementById('whack-btn').textContent = '▶️ 继续';
+  document.getElementById('whack-result').textContent = '⏸️ 游戏已暂停，点击「继续」恢复。';
+}
+function whackResume() {
+  whackState.status = 'running';
+  document.getElementById('whack-btn').textContent = '⏸️ 暂停';
+  document.getElementById('whack-result').textContent = '游戏进行中，点击冒出的地鼠得分！';
+  whackShowMole();
+  whackState.timer = setInterval(whackTick, 1000);
+  whackState.moleTimer = setInterval(whackShowMole, 750);
+}
+function toggleWhackMole() {
+  if (whackState.status === 'running') { whackPause(); return; }
+  if (whackState.status === 'paused') { whackResume(); return; }
+  whackStart();
+}
+function whackCellClick(i) {
+  if (whackState.status !== 'running' || i !== whackState.activeHole) return;
+  whackState.score += 1;
+  document.getElementById('whack-score-num').textContent = whackState.score;
+  whackState.holes[i].textContent = '🕳️';
+  whackState.activeHole = -1;
+}
+function initWhackMole() {
+  const board = document.getElementById('whack-board');
+  if (!board) return;
+  board.innerHTML = '';
+  whackState.holes = [];
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('button');
+    cell.type = 'button';
+    cell.textContent = '🕳️';
+    cell.style.cssText = 'font-size:32px;line-height:1;padding:18px 0;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:transform 0.1s;';
+    cell.addEventListener('click', () => whackCellClick(i));
+    board.appendChild(cell);
+    whackState.holes.push(cell);
+  }
+  whackState.status = 'idle';
+  whackState.time = 30;
+  whackState.score = 0;
+  try { whackState.best = parseInt(localStorage.getItem('whack-best') || '0', 10) || 0; } catch (err) {}
+  document.getElementById('whack-score-num').textContent = '0';
+  document.getElementById('whack-time-num').textContent = '30';
+  document.getElementById('whack-best-num').textContent = whackState.best;
+  document.getElementById('whack-btn').textContent = '▶️ 开始游戏';
+  document.getElementById('whack-result').textContent = '点击「开始游戏」，30 秒内尽可能多地敲中地鼠！';
+}
+
+safeInit(() => initPace(), 'initPace');
+safeInit(() => initHttpStatus(), 'initHttpStatus');
+safeInit(() => initTextTidy(), 'initTextTidy');
+safeInit(() => initFuelCost(), 'initFuelCost');
+safeInit(() => initWhackMole(), 'initWhackMole');
 
 // ============ Search & Theme ============
 function filterTools() {
