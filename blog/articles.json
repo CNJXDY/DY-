@@ -1,7 +1,17 @@
 {
-  "updated": "2026-10-01T16:12:41.316270+00:00",
-  "total": 35,
+  "updated": "2026-10-02T16:11:21.169334+00:00",
+  "total": 36,
   "articles": [
+    {
+      "title": "在线HTML格式化工具：让你的网页代码整洁易读",
+      "slug": "35bba62b",
+      "filename": "35bba62b.html",
+      "category": "开发工具",
+      "keywords": "html格式化,html美化,在线html,网页代码",
+      "desc": "HTML代码写得又长又乱？用在线HTML格式化工具，一键美化缩进，让代码结构清晰易读。",
+      "words": 476,
+      "date": "2026-10-02"
+    },
     {
       "title": "在线取色器工具：一键提取网页颜色的RGB、HEX、HSL值",
       "slug": "a22acf23",
