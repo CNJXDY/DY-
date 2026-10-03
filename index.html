@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等94个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等99个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等94个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等99个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等94个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等99个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -458,6 +458,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#text-tidy" data-tool="text-tidy"><span class="icon">🧹</span>文本整理</a></li>
     <li><a href="#fuel-cost" data-tool="fuel-cost"><span class="icon">⛽</span>油费计算器</a></li>
     <li><a href="#whack-mole" data-tool="whack-mole"><span class="icon">🔨</span>打地鼠</a></li>
+    <li class="category">最新工具</li>
+    <li><a href="#gpa-calc" data-tool="gpa-calc"><span class="icon">🎓</span>GPA计算器</a></li>
+    <li><a href="#contrast-checker" data-tool="contrast-checker"><span class="icon">🔲</span>对比度检测</a></li>
+    <li><a href="#box-shadow" data-tool="box-shadow"><span class="icon">🌓</span>CSS阴影生成</a></li>
+    <li><a href="#tictactoe" data-tool="tictactoe"><span class="icon">⭕</span>井字棋</a></li>
+    <li><a href="#fullwidth" data-tool="fullwidth"><span class="icon">🔤</span>全角半角转换</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2688,6 +2694,169 @@ console.log('代码块');
     <div class="result-box" id="whack-result">点击「开始游戏」，30 秒内尽可能多地敲中地鼠！</div>
   </section>
 
+  <!-- GPA Calculator -->
+  <section class="tool-panel" id="panel-gpa-calc">
+    <h2>🎓 GPA 计算器</h2>
+    <p class="desc">输入每门课程的学分与百分制成绩，自动计算加权平均分与 GPA，支持 4.0 制与 5.0 制。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;font-size:12px;color:var(--text-secondary);font-weight:600;padding:0 2px;">
+      <div>学分</div><div>成绩 (0-100)</div><div style="width:44px;"></div>
+    </div>
+    <div id="gpa-rows" style="margin-top:8px;"></div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="addGpaRow()">➕ 添加课程</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearGpaRows()">🗑️ 清空重置</button>
+    </div>
+    <div class="flex-row" style="margin-top:14px;">
+      <div>
+        <div class="label">GPA 制式</div>
+        <select id="gpa-scale" onchange="calcGPA()">
+          <option value="4" selected>4.0 制（常用换算表）</option>
+          <option value="5">5.0 制（成绩 ÷ 20）</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button class="btn" style="width:100%;" onclick="calcGPA()">🎓 计算 GPA</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="gpa-stat-gpa">--</div><div class="lbl">GPA</div></div>
+      <div class="stat-card"><div class="num" id="gpa-stat-avg">--</div><div class="lbl">加权平均分</div></div>
+      <div class="stat-card"><div class="num" id="gpa-stat-credits">--</div><div class="lbl">总学分</div></div>
+      <div class="stat-card"><div class="num" id="gpa-stat-count">--</div><div class="lbl">课程数</div></div>
+    </div>
+    <div class="result-box" id="gpa-result">请输入学分与成绩后点击「计算 GPA」。</div>
+  </section>
+
+  <!-- Contrast Checker -->
+  <section class="tool-panel" id="panel-contrast-checker">
+    <h2>🔲 颜色对比度检测</h2>
+    <p class="desc">检测前景色与背景色的 WCAG 对比度，判断是否满足 AA / AAA 无障碍阅读标准。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">前景色（文字）</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="color" id="ct-fg" value="#e2e8f0" oninput="updateContrast()" style="width:48px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:transparent;padding:2px;flex:0 0 auto;">
+          <input type="text" id="ct-fg-hex" value="#E2E8F0" style="font-family:monospace;text-transform:uppercase;" oninput="syncContrastHex('fg')">
+        </div>
+      </div>
+      <div>
+        <div class="label">背景色</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="color" id="ct-bg" value="#0f172a" oninput="updateContrast()" style="width:48px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:transparent;padding:2px;flex:0 0 auto;">
+          <input type="text" id="ct-bg-hex" value="#0F172A" style="font-family:monospace;text-transform:uppercase;" oninput="syncContrastHex('bg')">
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="swapContrast()">🔄 交换前景 / 背景</button>
+    </div>
+    <div id="ct-preview" style="margin-top:16px;padding:24px;border-radius:var(--radius);border:1px solid var(--border);background:#0f172a;color:#e2e8f0;">
+      <div style="font-size:24px;font-weight:700;">大号文字示例 Large Text</div>
+      <div style="font-size:14px;margin-top:8px;">小号正文示例 Normal Text，用于检测阅读舒适度。</div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ct-ratio">--</div><div class="lbl">对比度</div></div>
+      <div class="stat-card"><div class="num" id="ct-aa">--</div><div class="lbl">AA 正文 4.5</div></div>
+      <div class="stat-card"><div class="num" id="ct-aaa">--</div><div class="lbl">AAA 正文 7.0</div></div>
+    </div>
+    <div class="result-box" id="ct-result">--</div>
+  </section>
+
+  <!-- Box Shadow -->
+  <section class="tool-panel" id="panel-box-shadow">
+    <h2>🌓 CSS 阴影生成器</h2>
+    <p class="desc">可视化调节 box-shadow 参数，实时预览效果，一键复制生成的 CSS 代码。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">水平偏移 X <span id="bs-x-val" style="color:var(--accent-hover);">0px</span></div>
+        <input type="range" id="bs-x" min="-50" max="50" value="0" oninput="updateBoxShadow()" style="width:100%;">
+      </div>
+      <div>
+        <div class="label">垂直偏移 Y <span id="bs-y-val" style="color:var(--accent-hover);">10px</span></div>
+        <input type="range" id="bs-y" min="-50" max="50" value="10" oninput="updateBoxShadow()" style="width:100%;">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">模糊半径 <span id="bs-blur-val" style="color:var(--accent-hover);">20px</span></div>
+        <input type="range" id="bs-blur" min="0" max="100" value="20" oninput="updateBoxShadow()" style="width:100%;">
+      </div>
+      <div>
+        <div class="label">扩散半径 <span id="bs-spread-val" style="color:var(--accent-hover);">0px</span></div>
+        <input type="range" id="bs-spread" min="-30" max="50" value="0" oninput="updateBoxShadow()" style="width:100%;">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">阴影颜色</div>
+        <input type="color" id="bs-color" value="#6366f1" oninput="updateBoxShadow()" style="width:100%;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:transparent;padding:2px;">
+      </div>
+      <div>
+        <div class="label">不透明度 <span id="bs-alpha-val" style="color:var(--accent-hover);">40%</span></div>
+        <input type="range" id="bs-alpha" min="0" max="100" value="40" oninput="updateBoxShadow()" style="width:100%;">
+      </div>
+    </div>
+    <label style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;cursor:pointer;font-size:13px;">
+      <input type="checkbox" id="bs-inset" onchange="updateBoxShadow()"> 内阴影 (inset)
+    </label>
+    <div style="margin-top:24px;padding:40px;display:flex;justify-content:center;">
+      <div id="bs-preview" style="width:180px;height:110px;border-radius:14px;background:var(--card-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:13px;transition:box-shadow 0.15s;">预览</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('bs-code')">📋 复制 CSS</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetBoxShadow()">↺ 重置</button>
+    </div>
+    <div class="result-box" id="bs-code">--</div>
+  </section>
+
+  <!-- Tic Tac Toe -->
+  <section class="tool-panel" id="panel-tictactoe">
+    <h2>⭕ 井字棋</h2>
+    <p class="desc">经典三连棋游戏，支持人机对战与双人对战。先连成一条直线者获胜。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">对战模式</div>
+        <select id="tt-mode" onchange="resetTicTacToe()">
+          <option value="ai" selected>人机对战</option>
+          <option value="double">双人对战</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">AI 难度</div>
+        <select id="tt-difficulty" onchange="resetTicTacToe()">
+          <option value="easy">简单</option>
+          <option value="normal" selected>普通</option>
+          <option value="hard">困难</option>
+        </select>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="tt-score-x">0</div><div class="lbl">X 得分</div></div>
+      <div class="stat-card"><div class="num" id="tt-score-o">0</div><div class="lbl">O 得分</div></div>
+      <div class="stat-card"><div class="num" id="tt-score-draw">0</div><div class="lbl">平局</div></div>
+    </div>
+    <div id="tt-board" style="display:grid;grid-template-columns:repeat(3,84px);gap:8px;justify-content:center;margin:20px auto;"></div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" id="tt-btn" onclick="resetTicTacToe()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="tt-result">请落子，X 先行。</div>
+  </section>
+
+  <!-- Fullwidth Converter -->
+  <section class="tool-panel" id="panel-fullwidth">
+    <h2>🔤 全角半角转换</h2>
+    <p class="desc">在中文全角字符与英文半角字符之间互相转换，方便处理从文档、表格或网页复制的内容。</p>
+    <textarea id="fw-input" placeholder="粘贴需要转换的文本，例如：ＡＢＣ１２３，你好！" style="min-height:160px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="convertFullwidth('half')">→ 转半角</button>
+      <button class="btn" onclick="convertFullwidth('full')">→ 转全角</button>
+      <button class="btn btn-secondary" onclick="copyText('fw-output')">📋 复制结果</button>
+      <button class="btn btn-secondary" onclick="clearFullwidth()">🗑️ 清空</button>
+    </div>
+    <div class="label" style="margin-top:16px;">结果</div>
+    <div class="result-box" id="fw-output">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2695,7 +2864,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 94个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 99个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -6996,6 +7165,327 @@ safeInit(() => initHttpStatus(), 'initHttpStatus');
 safeInit(() => initTextTidy(), 'initTextTidy');
 safeInit(() => initFuelCost(), 'initFuelCost');
 safeInit(() => initWhackMole(), 'initWhackMole');
+
+// ============ GPA 计算器 ============
+const GPA_TABLE = [
+  [90, 4.0], [85, 3.7], [82, 3.3], [78, 3.0], [75, 2.7],
+  [72, 2.3], [68, 2.0], [64, 1.5], [60, 1.0], [0, 0]
+];
+function gpaPoint(score, scale) {
+  if (scale === '5') return Math.max(0, Math.min(5, score / 20));
+  for (let i = 0; i < GPA_TABLE.length; i++) {
+    if (score >= GPA_TABLE[i][0]) return GPA_TABLE[i][1];
+  }
+  return 0;
+}
+function addGpaRow(credit, score) {
+  const box = document.getElementById('gpa-rows');
+  if (!box) return;
+  const row = document.createElement('div');
+  row.className = 'gpa-row';
+  row.style.cssText = 'display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;';
+  row.innerHTML = '<input type="number" class="gpa-credit" min="0" step="0.5" placeholder="学分" style="font-family:inherit;">' +
+    '<input type="number" class="gpa-score" min="0" max="100" step="0.1" placeholder="成绩" style="font-family:inherit;">' +
+    '<button type="button" class="btn btn-secondary btn-sm" style="padding:8px 12px;">✕</button>';
+  const creditEl = row.querySelector('.gpa-credit');
+  const scoreEl = row.querySelector('.gpa-score');
+  if (credit !== undefined) creditEl.value = credit;
+  if (score !== undefined) scoreEl.value = score;
+  creditEl.addEventListener('input', calcGPA);
+  scoreEl.addEventListener('input', calcGPA);
+  row.querySelector('button').addEventListener('click', () => { row.remove(); calcGPA(); });
+  box.appendChild(row);
+}
+function clearGpaRows() {
+  const box = document.getElementById('gpa-rows');
+  if (box) box.innerHTML = '';
+  addGpaRow(3, 90);
+  addGpaRow(4, 85);
+  addGpaRow(2, 78);
+  calcGPA();
+}
+function calcGPA() {
+  const scaleEl = document.getElementById('gpa-scale');
+  const scale = scaleEl ? scaleEl.value : '4';
+  const credits = document.querySelectorAll('#gpa-rows .gpa-credit');
+  const scores = document.querySelectorAll('#gpa-rows .gpa-score');
+  let sumCredit = 0, sumWeightedScore = 0, sumWeightedGpa = 0, count = 0;
+  for (let i = 0; i < credits.length; i++) {
+    const c = parseFloat(credits[i].value);
+    const s = parseFloat(scores[i].value);
+    if (isNaN(c) || c <= 0 || isNaN(s)) continue;
+    sumCredit += c;
+    sumWeightedScore += c * s;
+    sumWeightedGpa += c * gpaPoint(s, scale);
+    count++;
+  }
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  if (count === 0 || sumCredit === 0) {
+    set('gpa-stat-gpa', '--'); set('gpa-stat-avg', '--'); set('gpa-stat-credits', '--'); set('gpa-stat-count', '0');
+    showResult('gpa-result', '请输入有效的学分与成绩（学分需大于 0，成绩范围 0-100）。');
+    return;
+  }
+  const gpa = sumWeightedGpa / sumCredit;
+  const avg = sumWeightedScore / sumCredit;
+  set('gpa-stat-gpa', gpa.toFixed(2));
+  set('gpa-stat-avg', avg.toFixed(1));
+  set('gpa-stat-credits', String(sumCredit));
+  set('gpa-stat-count', String(count));
+  const scaleLabel = scale === '5' ? '5.0 制' : '4.0 制';
+  showResult('gpa-result', '📊 共 ' + count + ' 门课程，总学分 ' + sumCredit + '\n🎓 ' + scaleLabel + ' GPA：' + gpa.toFixed(2) + '\n📈 加权平均分：' + avg.toFixed(2));
+}
+function initGpaCalc() {
+  const box = document.getElementById('gpa-rows');
+  if (!box) return;
+  if (!box.children.length) {
+    addGpaRow(3, 90);
+    addGpaRow(4, 85);
+    addGpaRow(2, 78);
+  }
+  calcGPA();
+}
+
+// ============ 颜色对比度检测 ============
+function ctLuminance(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
+  if (!m) return null;
+  const n = parseInt(m[1], 16);
+  const rgb = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  const v = rgb.map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+  return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+}
+function ctRatio(hex1, hex2) {
+  const l1 = ctLuminance(hex1), l2 = ctLuminance(hex2);
+  if (l1 === null || l2 === null) return null;
+  const hi = Math.max(l1, l2), lo = Math.min(l1, l2);
+  return (hi + 0.05) / (lo + 0.05);
+}
+function syncContrastHex(which) {
+  const isFg = which === 'fg';
+  const hexEl = document.getElementById(isFg ? 'ct-fg-hex' : 'ct-bg-hex');
+  const colorEl = document.getElementById(isFg ? 'ct-fg' : 'ct-bg');
+  if (!hexEl || !colorEl) return;
+  const val = hexEl.value.trim();
+  if (/^#?[0-9a-f]{6}$/i.test(val)) {
+    colorEl.value = '#' + val.replace('#', '').toLowerCase();
+    updateContrast();
+  }
+}
+function updateContrast() {
+  const fgEl = document.getElementById('ct-fg');
+  const bgEl = document.getElementById('ct-bg');
+  if (!fgEl || !bgEl) return;
+  const fg = fgEl.value, bg = bgEl.value;
+  const fgHex = document.getElementById('ct-fg-hex');
+  const bgHex = document.getElementById('ct-bg-hex');
+  if (fgHex) fgHex.value = fg.toUpperCase();
+  if (bgHex) bgHex.value = bg.toUpperCase();
+  const preview = document.getElementById('ct-preview');
+  if (preview) { preview.style.background = bg; preview.style.color = fg; }
+  const r = ctRatio(fg, bg) || 0;
+  const ratioEl = document.getElementById('ct-ratio');
+  if (ratioEl) ratioEl.textContent = r.toFixed(2) + ':1';
+  const set = (id, ok) => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = ok ? '✅ 通过' : '❌ 未通过'; el.style.color = ok ? 'var(--success)' : 'var(--danger)'; }
+  };
+  set('ct-aa', r >= 4.5);
+  set('ct-aaa', r >= 7);
+  showResult('ct-result', '对比度：' + r.toFixed(2) + ' : 1\n' +
+    'AA 标准　正文(4.5) ' + (r >= 4.5 ? '✅' : '❌') + '　大号(3.0) ' + (r >= 3 ? '✅' : '❌') + '\n' +
+    'AAA 标准　正文(7.0) ' + (r >= 7 ? '✅' : '❌') + '　大号(4.5) ' + (r >= 4.5 ? '✅' : '❌'));
+}
+function swapContrast() {
+  const fgEl = document.getElementById('ct-fg');
+  const bgEl = document.getElementById('ct-bg');
+  if (!fgEl || !bgEl) return;
+  const t = fgEl.value; fgEl.value = bgEl.value; bgEl.value = t;
+  updateContrast();
+}
+function initContrastChecker() { updateContrast(); }
+
+// ============ CSS 阴影生成器 ============
+function bsHexToRgba(hex, alpha) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
+  if (!m) return 'rgba(99,102,241,' + alpha + ')';
+  const n = parseInt(m[1], 16);
+  return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + alpha + ')';
+}
+function updateBoxShadow() {
+  const ids = ['bs-x', 'bs-y', 'bs-blur', 'bs-spread', 'bs-alpha'];
+  const vals = {};
+  ids.forEach(id => { const el = document.getElementById(id); vals[id] = el ? el.value : '0'; });
+  const colorEl = document.getElementById('bs-color');
+  const insetEl = document.getElementById('bs-inset');
+  const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setTxt('bs-x-val', vals['bs-x'] + 'px');
+  setTxt('bs-y-val', vals['bs-y'] + 'px');
+  setTxt('bs-blur-val', vals['bs-blur'] + 'px');
+  setTxt('bs-spread-val', vals['bs-spread'] + 'px');
+  setTxt('bs-alpha-val', vals['bs-alpha'] + '%');
+  const alpha = (parseInt(vals['bs-alpha'], 10) / 100).toFixed(2);
+  const rgba = bsHexToRgba(colorEl ? colorEl.value : '#6366f1', alpha);
+  const css = (insetEl && insetEl.checked ? 'inset ' : '') +
+    vals['bs-x'] + 'px ' + vals['bs-y'] + 'px ' + vals['bs-blur'] + 'px ' + vals['bs-spread'] + 'px ' + rgba;
+  const preview = document.getElementById('bs-preview');
+  if (preview) preview.style.boxShadow = css;
+  showResult('bs-code', 'box-shadow: ' + css + ';');
+}
+function resetBoxShadow() {
+  const defaults = { 'bs-x': 0, 'bs-y': 10, 'bs-blur': 20, 'bs-spread': 0, 'bs-alpha': 40 };
+  Object.keys(defaults).forEach(id => { const el = document.getElementById(id); if (el) el.value = defaults[id]; });
+  const c = document.getElementById('bs-color'); if (c) c.value = '#6366f1';
+  const ins = document.getElementById('bs-inset'); if (ins) ins.checked = false;
+  updateBoxShadow();
+}
+function initBoxShadow() { updateBoxShadow(); }
+
+// ============ 井字棋 ============
+const ttState = { board: ['', '', '', '', '', '', '', '', ''], turn: 'X', over: false, locked: false, scores: { X: 0, O: 0, D: 0 }, cells: [] };
+const TT_LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+function ttWinner(bd) {
+  for (let i = 0; i < TT_LINES.length; i++) {
+    const l = TT_LINES[i];
+    if (bd[l[0]] && bd[l[0]] === bd[l[1]] && bd[l[1]] === bd[l[2]]) return { winner: bd[l[0]], line: l };
+  }
+  for (let i = 0; i < bd.length; i++) if (!bd[i]) return null;
+  return { winner: 'draw', line: null };
+}
+function ttRender() {
+  ttState.cells.forEach((cell, i) => {
+    if (!cell) return;
+    cell.textContent = ttState.board[i] || '';
+    cell.style.color = ttState.board[i] === 'X' ? 'var(--accent-hover)' : 'var(--danger)';
+  });
+}
+function ttSetStatus(msg) { showResult('tt-result', msg); }
+function ttUpdateScores() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('tt-score-x', ttState.scores.X);
+  set('tt-score-o', ttState.scores.O);
+  set('tt-score-draw', ttState.scores.D);
+}
+function ttFinish(res) {
+  ttState.over = true;
+  ttState.locked = false;
+  if (res.winner === 'draw') {
+    ttState.scores.D++;
+    ttSetStatus('🤝 平局！点击「重新开始」再来一局。');
+  } else {
+    ttState.scores[res.winner]++;
+    const modeEl = document.getElementById('tt-mode');
+    const who = (modeEl && modeEl.value === 'ai') ? (res.winner === 'X' ? '（玩家）' : '（电脑）') : '';
+    ttSetStatus('🎉 ' + res.winner + who + ' 获胜！点击「重新开始」再来一局。');
+  }
+  if (res.line) {
+    res.line.forEach(i => { if (ttState.cells[i]) ttState.cells[i].style.background = 'rgba(99,102,241,0.3)'; });
+  }
+  ttUpdateScores();
+}
+function ttMove(i) {
+  if (ttState.over || ttState.locked || ttState.board[i]) return;
+  ttState.board[i] = ttState.turn;
+  ttRender();
+  const res = ttWinner(ttState.board);
+  if (res) { ttFinish(res); return; }
+  ttState.turn = ttState.turn === 'X' ? 'O' : 'X';
+  const modeEl = document.getElementById('tt-mode');
+  if (modeEl && modeEl.value === 'ai' && ttState.turn === 'O') {
+    ttState.locked = true;
+    ttSetStatus('电脑思考中…');
+    setTimeout(() => { ttState.locked = false; ttAiMove(); }, 350);
+  } else {
+    ttSetStatus('轮到 ' + ttState.turn + ' 落子。');
+  }
+}
+function ttBestMove(bd, player) {
+  const res = ttWinner(bd);
+  if (res) {
+    if (res.winner === 'draw') return { score: 0, move: -1 };
+    return { score: res.winner === 'O' ? 10 : -10, move: -1 };
+  }
+  const opponent = player === 'O' ? 'X' : 'O';
+  let best = null;
+  for (let i = 0; i < 9; i++) {
+    if (bd[i]) continue;
+    const next = bd.slice();
+    next[i] = player;
+    const score = ttBestMove(next, opponent).score;
+    if (best === null || (player === 'O' ? score > best.score : score < best.score)) {
+      best = { score: score, move: i };
+    }
+  }
+  return best || { score: 0, move: -1 };
+}
+function ttAiMove() {
+  if (ttState.over) return;
+  const diffEl = document.getElementById('tt-difficulty');
+  const diff = diffEl ? diffEl.value : 'normal';
+  const empty = [];
+  for (let i = 0; i < 9; i++) if (!ttState.board[i]) empty.push(i);
+  if (!empty.length) return;
+  let move;
+  if (diff === 'easy' || (diff === 'normal' && Math.random() < 0.25)) {
+    move = empty[Math.floor(Math.random() * empty.length)];
+  } else {
+    move = ttBestMove(ttState.board, 'O').move;
+  }
+  if (move === -1 || move === undefined) move = empty[0];
+  ttMove(move);
+}
+function resetTicTacToe() {
+  ttState.board = ['', '', '', '', '', '', '', '', ''];
+  ttState.turn = 'X';
+  ttState.over = false;
+  ttState.locked = false;
+  ttState.cells.forEach(c => { c.textContent = ''; c.style.background = 'var(--input-bg)'; c.style.color = 'var(--text)'; });
+  ttUpdateScores();
+  ttSetStatus('请落子，X 先行。');
+}
+function initTicTacToe() {
+  const board = document.getElementById('tt-board');
+  if (!board) return;
+  board.innerHTML = '';
+  ttState.cells = [];
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('button');
+    cell.type = 'button';
+    cell.style.cssText = 'width:84px;height:84px;font-size:38px;font-weight:700;line-height:1;background:var(--input-bg);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:background 0.15s,transform 0.1s;';
+    cell.addEventListener('click', () => ttMove(i));
+    board.appendChild(cell);
+    ttState.cells.push(cell);
+  }
+  ttState.scores = { X: 0, O: 0, D: 0 };
+  resetTicTacToe();
+}
+
+// ============ 全角半角转换 ============
+function convertFullwidth(mode) {
+  const input = document.getElementById('fw-input');
+  if (!input) return;
+  const text = input.value;
+  if (!text) { showResult('fw-output', '请输入需要转换的文本。'); return; }
+  let result;
+  if (mode === 'half') {
+    result = text.replace(/[\uFF01-\uFF5E]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/\u3000/g, ' ');
+  } else {
+    result = text.replace(/[\u0021-\u007E]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xFEE0)).replace(/ /g, '\u3000');
+  }
+  showResult('fw-output', result);
+  showToast(mode === 'half' ? '已转换为半角' : '已转换为全角');
+}
+function clearFullwidth() {
+  const input = document.getElementById('fw-input');
+  if (input) input.value = '';
+  showResult('fw-output', '--');
+}
+function initFullwidth() { showResult('fw-output', '--'); }
+
+safeInit(() => initGpaCalc(), 'initGpaCalc');
+safeInit(() => initContrastChecker(), 'initContrastChecker');
+safeInit(() => initBoxShadow(), 'initBoxShadow');
+safeInit(() => initTicTacToe(), 'initTicTacToe');
+safeInit(() => initFullwidth(), 'initFullwidth');
 
 // ============ Search & Theme ============
 function filterTools() {
