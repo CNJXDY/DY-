@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等99个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等104个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等99个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等104个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等99个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等104个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -464,6 +464,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#box-shadow" data-tool="box-shadow"><span class="icon">🌓</span>CSS阴影生成</a></li>
     <li><a href="#tictactoe" data-tool="tictactoe"><span class="icon">⭕</span>井字棋</a></li>
     <li><a href="#fullwidth" data-tool="fullwidth"><span class="icon">🔤</span>全角半角转换</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#percent-calc" data-tool="percent-calc"><span class="icon">📊</span>百分比计算器</a></li>
+    <li><a href="#body-fat-calc" data-tool="body-fat-calc"><span class="icon">💪</span>体脂率计算器</a></li>
+    <li><a href="#text-sum" data-tool="text-sum"><span class="icon">🧮</span>文本数字统计</a></li>
+    <li><a href="#query-parser" data-tool="query-parser"><span class="icon">🔎</span>URL参数解析</a></li>
+    <li><a href="#guess-number" data-tool="guess-number"><span class="icon">🎯</span>猜数字游戏</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2857,6 +2863,116 @@ console.log('代码块');
     <div class="result-box" id="fw-output">--</div>
   </section>
 
+  <!-- 百分比计算器 -->
+  <section class="tool-panel" id="panel-percent-calc">
+    <h2>📊 百分比计算器</h2>
+    <p class="desc">快速处理常见百分比场景：A 是 B 的百分之几、B 的百分之 A 是多少、从 A 变化到 B 的增减幅度。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">数值 A</div>
+        <input type="number" id="pct-a" value="25">
+      </div>
+      <div>
+        <div class="label">数值 B</div>
+        <input type="number" id="pct-b" value="200">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPercentTool('of')">A 是 B 的百分之几</button>
+      <button class="btn btn-secondary" onclick="calcPercentTool('val')">B 的 A% 是多少</button>
+      <button class="btn btn-secondary" onclick="calcPercentTool('change')">从 A 到 B 的增减</button>
+    </div>
+    <div class="result-box" id="pct-result">--</div>
+  </section>
+
+  <!-- 体脂率计算器 -->
+  <section class="tool-panel" id="panel-body-fat-calc">
+    <h2>💪 体脂率计算器</h2>
+    <p class="desc">基于美国海军法，通过身高、腰围、颈围（女性需臀围）估算体脂率，结果仅供健康参考。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">性别</div>
+        <select id="bf-gender" onchange="calcBodyFat()">
+          <option value="male" selected>男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">身高 (cm)</div>
+        <input type="number" id="bf-height" value="175" oninput="calcBodyFat()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">腰围 (cm)</div>
+        <input type="number" id="bf-waist" value="80" oninput="calcBodyFat()">
+      </div>
+      <div>
+        <div class="label">颈围 (cm)</div>
+        <input type="number" id="bf-neck" value="37" oninput="calcBodyFat()">
+      </div>
+      <div>
+        <div class="label">臀围 (cm，女性)</div>
+        <input type="number" id="bf-hip" value="95" oninput="calcBodyFat()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcBodyFat()">🧮 计算体脂率</button>
+    </div>
+    <div class="result-box" id="bf-result">--</div>
+  </section>
+
+  <!-- 文本数字统计 -->
+  <section class="tool-panel" id="panel-text-sum">
+    <h2>🧮 文本数字统计</h2>
+    <p class="desc">从任意文本中自动提取所有数字，统计个数、总和、平均值、最大值与最小值，适合快速核对账单、清单数据。</p>
+    <textarea id="tsum-input" placeholder="粘贴包含数字的文本，例如：苹果 3.5 元，香蕉 2 元，牛奶 12.8 元" oninput="calcTextSum()" style="min-height:160px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="calcTextSum()">🔄 重新统计</button>
+      <button class="btn btn-secondary" onclick="clearTextSum()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="tsum-count">0</div><div class="lbl">数字个数</div></div>
+      <div class="stat-card"><div class="num" id="tsum-sum">0</div><div class="lbl">总和</div></div>
+      <div class="stat-card"><div class="num" id="tsum-avg">0</div><div class="lbl">平均值</div></div>
+      <div class="stat-card"><div class="num" id="tsum-min">0</div><div class="lbl">最小值</div></div>
+      <div class="stat-card"><div class="num" id="tsum-max">0</div><div class="lbl">最大值</div></div>
+    </div>
+  </section>
+
+  <!-- URL 参数解析 -->
+  <section class="tool-panel" id="panel-query-parser">
+    <h2>🔎 URL 参数解析</h2>
+    <p class="desc">粘贴完整 URL 或查询字符串，自动拆解为参数名与参数值并完成 URL 解码，方便调试接口与链接。</p>
+    <textarea id="qp-input" placeholder="例如：https://example.com/search?q=%E5%B7%A5%E5%85%B7&page=2&sort=desc" oninput="parseQueryParams()" style="min-height:120px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="parseQueryParams()">🔍 解析参数</button>
+      <button class="btn btn-secondary" onclick="clearQueryParams()">🗑️ 清空</button>
+    </div>
+    <div class="result-box" id="qp-result">--</div>
+  </section>
+
+  <!-- 猜数字游戏 -->
+  <section class="tool-panel" id="panel-guess-number">
+    <h2>🎯 猜数字游戏</h2>
+    <p class="desc">系统随机生成一个 1~100 的整数，根据「太大 / 太小」的提示逐步逼近答案，看看你几次能猜中。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">输入你的猜测 (1~100)</div>
+        <input type="number" id="gn-input" min="1" max="100" placeholder="输入 1~100 的整数" onkeydown="if(event.key==='Enter')submitGuess()">
+      </div>
+      <div style="max-width:140px;">
+        <div class="label">已猜次数</div>
+        <div class="stat-card"><div class="num" id="gn-tries">0</div><div class="lbl">次</div></div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="submitGuess()">🎯 提交猜测</button>
+      <button class="btn btn-secondary" onclick="newGuessGame()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="gn-result">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2864,7 +2980,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 99个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 104个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -7486,6 +7602,156 @@ safeInit(() => initContrastChecker(), 'initContrastChecker');
 safeInit(() => initBoxShadow(), 'initBoxShadow');
 safeInit(() => initTicTacToe(), 'initTicTacToe');
 safeInit(() => initFullwidth(), 'initFullwidth');
+
+// ============ 百分比计算器 ============
+function calcPercentTool(mode) {
+  const a = parseFloat(document.getElementById('pct-a').value);
+  const b = parseFloat(document.getElementById('pct-b').value);
+  if (isNaN(a) || isNaN(b)) { showResult('pct-result', '请输入有效的数值 A 和 B。'); return; }
+  let out = '';
+  if (mode === 'of') {
+    if (b === 0) { out = '❌ 数值 B 不能为 0。'; }
+    else { out = a + ' 是 ' + b + ' 的 ' + (a / b * 100).toFixed(2) + '%'; }
+  } else if (mode === 'val') {
+    out = b + ' 的 ' + a + '% = ' + (b * a / 100).toFixed(4).replace(/\.?0+$/, '');
+  } else if (mode === 'change') {
+    if (a === 0) { out = '❌ 起始值 A 不能为 0。'; }
+    else {
+      const d = (b - a) / a * 100;
+      const dir = d > 0 ? '增长' : (d < 0 ? '下降' : '不变');
+      out = '从 ' + a + ' 到 ' + b + '：' + dir + ' ' + Math.abs(d).toFixed(2) + '%';
+    }
+  }
+  showResult('pct-result', out);
+}
+function initPercentCalc() { calcPercentTool('of'); }
+
+// ============ 体脂率计算器 ============
+function calcBodyFat() {
+  const gender = document.getElementById('bf-gender').value;
+  const h = parseFloat(document.getElementById('bf-height').value);
+  const waist = parseFloat(document.getElementById('bf-waist').value);
+  const neck = parseFloat(document.getElementById('bf-neck').value);
+  const hip = parseFloat(document.getElementById('bf-hip').value);
+  if (isNaN(h) || isNaN(waist) || isNaN(neck) || (gender === 'female' && isNaN(hip))) {
+    showResult('bf-result', '请填写完整的身高、腰围、颈围' + (gender === 'female' ? '和臀围' : '') + '。');
+    return;
+  }
+  let bf;
+  if (gender === 'male') {
+    const v = waist - neck;
+    if (v <= 0) { showResult('bf-result', '❌ 腰围应大于颈围，请检查输入。'); return; }
+    bf = 495 / (1.0324 - 0.19077 * Math.log10(v) + 0.15456 * Math.log10(h)) - 450;
+  } else {
+    const v = waist + hip - neck;
+    if (v <= 0) { showResult('bf-result', '❌ 腰围 + 臀围应大于颈围，请检查输入。'); return; }
+    bf = 495 / (1.29579 - 0.35004 * Math.log10(v) + 0.22100 * Math.log10(h)) - 450;
+  }
+  if (!isFinite(bf) || bf <= 0) { showResult('bf-result', '输入数值超出合理范围，请检查。'); return; }
+  const val = bf.toFixed(1);
+  let cat;
+  if (gender === 'male') {
+    cat = bf < 6 ? '偏低' : bf < 14 ? '运动员' : bf < 18 ? '健康' : bf < 25 ? '偏高' : '肥胖';
+  } else {
+    cat = bf < 14 ? '偏低' : bf < 21 ? '运动员' : bf < 25 ? '健康' : bf < 32 ? '偏高' : '肥胖';
+  }
+  showResult('bf-result', '体脂率约 ' + val + '%（美国海军法估算）\n参考区间：' + cat);
+}
+function initBodyFat() { calcBodyFat(); }
+
+// ============ 文本数字统计 ============
+function calcTextSum() {
+  const text = document.getElementById('tsum-input').value;
+  const matches = text.match(/-?\d+(?:\.\d+)?/g) || [];
+  const nums = matches.map(Number).filter(n => isFinite(n));
+  if (!nums.length) {
+    ['count', 'sum', 'avg', 'min', 'max'].forEach(k => {
+      document.getElementById('tsum-' + k).textContent = '0';
+    });
+    return;
+  }
+  const sum = nums.reduce((x, y) => x + y, 0);
+  document.getElementById('tsum-count').textContent = nums.length;
+  document.getElementById('tsum-sum').textContent = +(sum.toFixed(4));
+  document.getElementById('tsum-avg').textContent = +((sum / nums.length).toFixed(4));
+  document.getElementById('tsum-min').textContent = Math.min.apply(null, nums);
+  document.getElementById('tsum-max').textContent = Math.max.apply(null, nums);
+}
+function clearTextSum() {
+  document.getElementById('tsum-input').value = '';
+  calcTextSum();
+}
+function initTextSum() { calcTextSum(); }
+
+// ============ URL 参数解析 ============
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function parseQueryParams() {
+  const raw = document.getElementById('qp-input').value.trim();
+  const box = document.getElementById('qp-result');
+  if (!raw) { box.innerHTML = '<span style="color:var(--text-secondary)">请输入包含查询参数的 URL 或参数字符串。</span>'; return; }
+  let qs = raw;
+  const qi = raw.indexOf('?');
+  if (qi !== -1) qs = raw.slice(qi + 1);
+  if (qs.charAt(0) === '?') qs = qs.slice(1);
+  const hi = qs.indexOf('#');
+  if (hi !== -1) qs = qs.slice(0, hi);
+  if (!qs) { box.innerHTML = '<span style="color:var(--text-secondary)">未发现查询参数。</span>'; return; }
+  const pairs = qs.split('&').filter(Boolean);
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+    '<tr><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border);">参数</th>' +
+    '<th style="text-align:left;padding:6px;border-bottom:1px solid var(--border);">值</th></tr>';
+  pairs.forEach(p => {
+    const i = p.indexOf('=');
+    const k = i === -1 ? p : p.slice(0, i);
+    const v = i === -1 ? '' : p.slice(i + 1);
+    const dk = decodeURIComponent(k.replace(/\+/g, ' '));
+    const dv = decodeURIComponent(v.replace(/\+/g, ' '));
+    html += '<tr><td style="padding:6px;border-bottom:1px solid var(--border);color:var(--accent-hover);word-break:break-all;">' + escapeHtml(dk) + '</td>' +
+      '<td style="padding:6px;border-bottom:1px solid var(--border);word-break:break-all;">' + escapeHtml(dv) + '</td></tr>';
+  });
+  html += '</table><div style="margin-top:8px;color:var(--text-secondary)">共 ' + pairs.length + ' 个参数</div>';
+  box.innerHTML = html;
+}
+function clearQueryParams() {
+  document.getElementById('qp-input').value = '';
+  parseQueryParams();
+}
+function initQueryParser() { parseQueryParams(); }
+
+// ============ 猜数字游戏 ============
+let gnTarget = 0, gnTries = 0, gnOver = false;
+function newGuessGame() {
+  gnTarget = Math.floor(Math.random() * 100) + 1;
+  gnTries = 0; gnOver = false;
+  document.getElementById('gn-input').value = '';
+  document.getElementById('gn-tries').textContent = '0';
+  showResult('gn-result', '🎯 我已想好一个 1~100 的数字，开始猜吧！');
+}
+function submitGuess() {
+  if (gnOver) { showResult('gn-result', '本局已结束，点「重新开始」再来一局。'); return; }
+  const v = parseInt(document.getElementById('gn-input').value, 10);
+  if (isNaN(v) || v < 1 || v > 100) { showResult('gn-result', '请输入 1~100 之间的整数。'); return; }
+  gnTries++;
+  document.getElementById('gn-tries').textContent = gnTries;
+  if (v === gnTarget) {
+    gnOver = true;
+    showResult('gn-result', '🎉 猜对了！答案就是 ' + gnTarget + '，你用了 ' + gnTries + ' 次。');
+  } else if (v < gnTarget) {
+    showResult('gn-result', '📈 太小了，再大一点！（已猜 ' + gnTries + ' 次）');
+  } else {
+    showResult('gn-result', '📉 太大了，再小一点！（已猜 ' + gnTries + ' 次）');
+  }
+  document.getElementById('gn-input').value = '';
+}
+function initGuessNumber() { newGuessGame(); }
+
+safeInit(() => initPercentCalc(), 'initPercentCalc');
+safeInit(() => initBodyFat(), 'initBodyFat');
+safeInit(() => initTextSum(), 'initTextSum');
+safeInit(() => initQueryParser(), 'initQueryParser');
+safeInit(() => initGuessNumber(), 'initGuessNumber');
 
 // ============ Search & Theme ============
 function filterTools() {
