@@ -1,7 +1,17 @@
 {
-  "updated": "2026-10-04T16:10:45.314128",
-  "total": 39,
+  "updated": "2026-10-06T00:11:15.688895+08:00",
+  "total": 40,
   "articles": [
+    {
+      "title": "云服务是什么？IaaS、PaaS、SaaS区别",
+      "slug": "7f571de4",
+      "filename": "7f571de4.html",
+      "category": "热点科普",
+      "keywords": "云计算,云服务,IaaS,PaaS,SaaS",
+      "desc": "云计算已经无处不在，但 IaaS、PaaS、SaaS 这些概念总让人混淆。本文用通俗的比喻解释三种云服务模式的区别。",
+      "words": 232,
+      "date": "2026-10-06"
+    },
     {
       "title": "在线字数统计工具：写论文、发推文必备的字数计算器",
       "slug": "d6f4315d",
