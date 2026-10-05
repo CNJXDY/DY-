@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等104个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等109个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等104个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等109个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等104个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等109个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -470,6 +470,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#text-sum" data-tool="text-sum"><span class="icon">🧮</span>文本数字统计</a></li>
     <li><a href="#query-parser" data-tool="query-parser"><span class="icon">🔎</span>URL参数解析</a></li>
     <li><a href="#guess-number" data-tool="guess-number"><span class="icon">🎯</span>猜数字游戏</a></li>
+    <li class="category">最新新增</li>
+    <li><a href="#due-date" data-tool="due-date"><span class="icon">🍼</span>预产期计算器</a></li>
+    <li><a href="#gomoku" data-tool="gomoku"><span class="icon">⚫</span>五子棋</a></li>
+    <li><a href="#json-to-ts" data-tool="json-to-ts"><span class="icon">🧬</span>JSON转TS接口</a></li>
+    <li><a href="#roman-numeral" data-tool="roman-numeral"><span class="icon">🏛️</span>罗马数字转换</a></li>
+    <li><a href="#meta-tags" data-tool="meta-tags"><span class="icon">🏷️</span>Meta标签生成</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -2973,6 +2979,124 @@ console.log('代码块');
     <div class="result-box" id="gn-result">--</div>
   </section>
 
+  <!-- 预产期计算器 -->
+  <section class="tool-panel" id="panel-due-date">
+    <h2>🍼 预产期计算器</h2>
+    <p class="desc">根据末次月经第一天与月经周期长度，按内格勒法则估算预产期，并显示当前孕周、剩余天数与所处孕期。结果仅供参考，请以医生诊断为准。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">末次月经第一天</div>
+        <input type="date" id="dd-lmp" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">月经周期（天）</div>
+        <input type="number" id="dd-cycle" value="28" min="20" max="45">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcDueDate()">🍼 计算预产期</button>
+      <button class="btn btn-secondary" onclick="resetDueDate()">🔄 重置</button>
+    </div>
+    <div class="result-box" id="dd-result" style="display:none;">--</div>
+  </section>
+
+  <!-- 五子棋 -->
+  <section class="tool-panel" id="panel-gomoku">
+    <h2>⚫ 五子棋</h2>
+    <p class="desc">15×15 标准棋盘，你执黑先行，与简易电脑 AI 对战。横、竖、斜任意方向先连成五子者获胜。</p>
+    <div style="display:flex;justify-content:center;">
+      <canvas id="gk-canvas" width="450" height="450" style="background:var(--input-bg);border-radius:var(--radius);border:1px solid var(--border);max-width:100%;height:auto;touch-action:none;cursor:pointer;"></canvas>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="newGomokuGame()">🔄 重新开始</button>
+      <button class="btn btn-secondary" onclick="gomokuUndo()">↩️ 悔棋</button>
+    </div>
+    <div class="result-box" id="gk-result">⚫ 你执黑先行，点击棋盘落子。</div>
+  </section>
+
+  <!-- JSON 转 TypeScript 接口 -->
+  <section class="tool-panel" id="panel-json-to-ts">
+    <h2>🧬 JSON 转 TypeScript 接口</h2>
+    <p class="desc">粘贴 JSON 数据，自动推导并生成 TypeScript interface 定义，支持嵌套对象与数组，可用于快速编写类型声明。</p>
+    <textarea id="j2t-input" placeholder='粘贴 JSON，例如：{"id":1,"name":"张三","tags":["a","b"],"address":{"city":"北京","zip":"100000"}}' style="min-height:140px;"></textarea>
+    <div style="max-width:260px;margin-top:12px;">
+      <div class="label">根接口名称</div>
+      <input type="text" id="j2t-name" value="Root">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="jsonToTs()">🧬 生成接口</button>
+      <button class="btn btn-secondary" onclick="copyText('j2t-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="j2t-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 罗马数字转换 -->
+  <section class="tool-panel" id="panel-roman-numeral">
+    <h2>🏛️ 罗马数字转换</h2>
+    <p class="desc">阿拉伯数字与罗马数字双向转换，支持 1 ~ 3999 的标准罗马数字写法，可用于年份、章节编号等场景。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">阿拉伯数字（1~3999）</div>
+        <input type="number" id="rn-number" min="1" max="3999" placeholder="例如 2026" onkeydown="if(event.key==='Enter')romanFromNumber()">
+      </div>
+      <div>
+        <div class="label">罗马数字</div>
+        <input type="text" id="rn-roman-input" placeholder="例如 MMXXVI" onkeydown="if(event.key==='Enter')romanFromRoman()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="romanFromNumber()">➡️ 数字转罗马</button>
+      <button class="btn" onclick="romanFromRoman()">⬅️ 罗马转数字</button>
+      <button class="btn btn-secondary" onclick="romanSwap()">🔄 互换</button>
+    </div>
+    <div class="result-box" id="rn-result" style="display:none;">--</div>
+  </section>
+
+  <!-- Meta 标签生成器 -->
+  <section class="tool-panel" id="panel-meta-tags">
+    <h2>🏷️ Meta 标签生成器</h2>
+    <p class="desc">填写页面信息，一键生成 SEO 基础标签、Open Graph 与 Twitter Card 分享标签，复制后粘贴到网页 &lt;head&gt; 即可。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">页面标题</div>
+        <input type="text" id="mt-title" placeholder="例如 万能工具箱 - 免费在线工具集合">
+      </div>
+      <div>
+        <div class="label">站点名称</div>
+        <input type="text" id="mt-sitename" placeholder="例如 万能工具箱">
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="label">页面描述</div>
+      <textarea id="mt-desc" placeholder="150 字以内的页面摘要描述..." style="min-height:80px;"></textarea>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">关键词（逗号分隔）</div>
+        <input type="text" id="mt-keywords" placeholder="在线工具, 免费工具, 实用工具">
+      </div>
+      <div>
+        <div class="label">作者</div>
+        <input type="text" id="mt-author" placeholder="选填">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">页面 URL</div>
+        <input type="text" id="mt-url" placeholder="https://example.com/">
+      </div>
+      <div>
+        <div class="label">分享图片 URL</div>
+        <input type="text" id="mt-image" placeholder="https://example.com/cover.png">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="genMetaTags()">🏷️ 生成标签</button>
+      <button class="btn btn-secondary" onclick="copyText('meta-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="meta-result" style="display:none;">--</pre>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -2980,7 +3104,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 104个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 109个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -7752,6 +7876,328 @@ safeInit(() => initBodyFat(), 'initBodyFat');
 safeInit(() => initTextSum(), 'initTextSum');
 safeInit(() => initQueryParser(), 'initQueryParser');
 safeInit(() => initGuessNumber(), 'initGuessNumber');
+
+// ============ 预产期计算器 ============
+function calcDueDate() {
+  const out = document.getElementById('dd-result');
+  const lmpVal = document.getElementById('dd-lmp').value;
+  if (!lmpVal) { out.style.display = 'block'; out.textContent = '⚠️ 请先选择末次月经第一天日期。'; return; }
+  const p = lmpVal.split('-').map(Number);
+  const lmp = new Date(p[0], p[1] - 1, p[2]);
+  if (isNaN(lmp.getTime())) { out.style.display = 'block'; out.textContent = '⚠️ 日期无效，请重新选择。'; return; }
+  let cycle = parseInt(document.getElementById('dd-cycle').value, 10);
+  if (isNaN(cycle)) cycle = 28;
+  cycle = Math.max(20, Math.min(45, cycle));
+  const edd = new Date(lmp.getTime());
+  edd.setDate(edd.getDate() + 280 + (cycle - 28));
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const DAY = 86400000;
+  const daysPreg = Math.floor((today - lmp) / DAY);
+  const remain = Math.ceil((edd - today) / DAY);
+  const fmt = d => d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  const lines = [];
+  lines.push('📅 预产期：' + fmt(edd));
+  if (daysPreg < 0) {
+    lines.push('⏳ 距离末次月经还有 ' + Math.abs(daysPreg) + ' 天，请确认所选日期是否正确。');
+  } else {
+    const w = Math.floor(daysPreg / 7), d2 = daysPreg % 7;
+    const tri = daysPreg < 98 ? '孕早期（第 1~13 周）' : (daysPreg < 196 ? '孕中期（第 14~27 周）' : '孕晚期（第 28 周及以后）');
+    lines.push('👶 当前孕周：' + w + ' 周 ' + d2 + ' 天');
+    lines.push('📌 所处阶段：' + tri);
+    if (remain > 0) lines.push('⏰ 距离预产期还有 ' + remain + ' 天');
+    else if (remain === 0) lines.push('🎉 今天就是预产期！');
+    else lines.push('⚠️ 已超过预产期 ' + Math.abs(remain) + ' 天，请及时就医。');
+  }
+  lines.push('');
+  lines.push('※ 预产期为按末次月经估算的结果，个体差异较大，请以医生诊断为准。');
+  out.style.display = 'block';
+  out.textContent = lines.join('\n');
+}
+function resetDueDate() {
+  document.getElementById('dd-lmp').value = '';
+  document.getElementById('dd-cycle').value = '28';
+  const out = document.getElementById('dd-result');
+  out.style.display = 'none'; out.textContent = '--';
+}
+
+// ============ 五子棋 ============
+const GK_SIZE = 15, GK_PAD = 20, GK_CELL = (450 - GK_PAD * 2) / (GK_SIZE - 1);
+let gkBoard = [], gkOver = false, gkTurn = 1, gkHistory = [], gkCtx = null;
+function initGomoku() {
+  const cv = document.getElementById('gk-canvas');
+  if (!cv) return;
+  gkCtx = cv.getContext('2d');
+  cv.addEventListener('click', gomokuClick);
+  newGomokuGame();
+}
+function newGomokuGame() {
+  gkBoard = [];
+  for (let i = 0; i < GK_SIZE; i++) gkBoard.push(new Array(GK_SIZE).fill(0));
+  gkOver = false; gkTurn = 1; gkHistory = [];
+  setGomokuStatus('⚫ 你执黑先行，点击棋盘落子。');
+  drawGomoku();
+}
+function setGomokuStatus(t) {
+  const el = document.getElementById('gk-result');
+  if (el) el.textContent = t;
+}
+function drawGomoku() {
+  if (!gkCtx) return;
+  const ctx = gkCtx, S = 450, P = GK_PAD, C = GK_CELL;
+  ctx.clearRect(0, 0, S, S);
+  ctx.strokeStyle = 'rgba(128,128,128,0.55)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < GK_SIZE; i++) {
+    const v = P + i * C;
+    ctx.beginPath(); ctx.moveTo(P, v); ctx.lineTo(S - P, v); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(v, P); ctx.lineTo(v, S - P); ctx.stroke();
+  }
+  const stars = [[3, 3], [3, 11], [11, 3], [11, 11], [7, 7]];
+  ctx.fillStyle = 'rgba(128,128,128,0.8)';
+  stars.forEach(pt => { ctx.beginPath(); ctx.arc(P + pt[1] * C, P + pt[0] * C, 3, 0, Math.PI * 2); ctx.fill(); });
+  for (let r = 0; r < GK_SIZE; r++) for (let c = 0; c < GK_SIZE; c++) {
+    if (gkBoard[r][c]) drawStone(P + c * C, P + r * C, gkBoard[r][c]);
+  }
+}
+function drawStone(x, y, turn) {
+  const ctx = gkCtx, rad = GK_CELL * 0.42;
+  const g = ctx.createRadialGradient(x - rad * 0.35, y - rad * 0.35, rad * 0.15, x, y, rad);
+  if (turn === 1) { g.addColorStop(0, '#6a6a6a'); g.addColorStop(1, '#111111'); }
+  else { g.addColorStop(0, '#ffffff'); g.addColorStop(1, '#c9c9c9'); }
+  ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2);
+  ctx.fillStyle = g; ctx.fill();
+  ctx.strokeStyle = turn === 1 ? '#000000' : '#9a9a9a';
+  ctx.lineWidth = 1; ctx.stroke();
+}
+function gomokuClick(e) {
+  if (gkOver) return;
+  const cv = document.getElementById('gk-canvas');
+  const rect = cv.getBoundingClientRect();
+  const x = (e.clientX - rect.left) * (cv.width / rect.width);
+  const y = (e.clientY - rect.top) * (cv.height / rect.height);
+  const c = Math.round((x - GK_PAD) / GK_CELL);
+  const r = Math.round((y - GK_PAD) / GK_CELL);
+  if (r < 0 || r >= GK_SIZE || c < 0 || c >= GK_SIZE) return;
+  if (gkBoard[r][c] !== 0) return;
+  gomokuPlace(r, c, 1);
+  if (gkOver) return;
+  const mv = gomokuAI();
+  if (mv) gomokuPlace(mv[0], mv[1], 2);
+}
+function gomokuPlace(r, c, turn) {
+  gkBoard[r][c] = turn;
+  gkHistory.push([r, c]);
+  drawGomoku();
+  if (gomokuWin(r, c, turn)) {
+    gkOver = true;
+    setGomokuStatus(turn === 1 ? '🎉 恭喜，你赢了！点击「重新开始」再来一局。' : '🤖 电脑获胜，点击「重新开始」再挑战一次。');
+  } else if (gkHistory.length >= GK_SIZE * GK_SIZE) {
+    gkOver = true;
+    setGomokuStatus('🤝 棋盘已满，双方平局。');
+  } else {
+    setGomokuStatus(turn === 1 ? '🤖 电脑思考中...' : '⚫ 轮到你落子。');
+  }
+}
+function gomokuUndo() {
+  if (!gkHistory.length) return;
+  for (let i = 0; i < 2 && gkHistory.length; i++) {
+    const step = gkHistory.pop();
+    gkBoard[step[0]][step[1]] = 0;
+  }
+  gkOver = false;
+  setGomokuStatus('↩️ 已悔棋，轮到你落子。');
+  drawGomoku();
+}
+const GK_DIRS = [[0, 1], [1, 0], [1, 1], [1, -1]];
+function gomokuWin(r, c, turn) {
+  for (let d = 0; d < GK_DIRS.length; d++) {
+    const dr = GK_DIRS[d][0], dc = GK_DIRS[d][1];
+    let n = 1;
+    for (let s = 1; s < 5; s++) { const rr = r + dr * s, cc = c + dc * s; if (rr < 0 || rr >= GK_SIZE || cc < 0 || cc >= GK_SIZE || gkBoard[rr][cc] !== turn) break; n++; }
+    for (let s = 1; s < 5; s++) { const rr = r - dr * s, cc = c - dc * s; if (rr < 0 || rr >= GK_SIZE || cc < 0 || cc >= GK_SIZE || gkBoard[rr][cc] !== turn) break; n++; }
+    if (n >= 5) return true;
+  }
+  return false;
+}
+function gomokuScore(r, c, turn) {
+  let total = 0;
+  for (let d = 0; d < GK_DIRS.length; d++) {
+    const dr = GK_DIRS[d][0], dc = GK_DIRS[d][1];
+    let count = 1, openA = 0, openB = 0;
+    for (let s = 1; s < 5; s++) { const rr = r + dr * s, cc = c + dc * s; if (rr < 0 || rr >= GK_SIZE || cc < 0 || cc >= GK_SIZE) break; if (gkBoard[rr][cc] === turn) count++; else { if (gkBoard[rr][cc] === 0) openA = 1; break; } }
+    for (let s = 1; s < 5; s++) { const rr = r - dr * s, cc = c - dc * s; if (rr < 0 || rr >= GK_SIZE || cc < 0 || cc >= GK_SIZE) break; if (gkBoard[rr][cc] === turn) count++; else { if (gkBoard[rr][cc] === 0) openB = 1; break; } }
+    const open = openA + openB;
+    if (count >= 5) total += 1000000;
+    else if (count === 4) total += open >= 1 ? 100000 : 12000;
+    else if (count === 3) total += open === 2 ? 12000 : (open === 1 ? 1200 : 0);
+    else if (count === 2) total += open === 2 ? 1000 : (open === 1 ? 120 : 0);
+    else total += open === 2 ? 40 : 10;
+  }
+  return total;
+}
+function gomokuNear(r, c) {
+  for (let dr = -2; dr <= 2; dr++) for (let dc = -2; dc <= 2; dc++) {
+    const rr = r + dr, cc = c + dc;
+    if (rr >= 0 && rr < GK_SIZE && cc >= 0 && cc < GK_SIZE && gkBoard[rr][cc]) return true;
+  }
+  return false;
+}
+function gomokuAI() {
+  let best = null, bestScore = -1, hasStone = false;
+  for (let r = 0; r < GK_SIZE; r++) for (let c = 0; c < GK_SIZE; c++) if (gkBoard[r][c]) hasStone = true;
+  if (!hasStone) return [7, 7];
+  for (let r = 0; r < GK_SIZE; r++) for (let c = 0; c < GK_SIZE; c++) {
+    if (gkBoard[r][c] !== 0 || !gomokuNear(r, c)) continue;
+    const score = gomokuScore(r, c, 2) * 1.1 + gomokuScore(r, c, 1);
+    if (score > bestScore) { bestScore = score; best = [r, c]; }
+  }
+  if (!best) {
+    for (let r = 0; r < GK_SIZE && !best; r++) for (let c = 0; c < GK_SIZE; c++) if (gkBoard[r][c] === 0) { best = [r, c]; break; }
+  }
+  return best;
+}
+
+// ============ JSON 转 TypeScript 接口 ============
+function jsonToTs() {
+  const out = document.getElementById('j2t-result');
+  const raw = document.getElementById('j2t-input').value.trim();
+  if (!raw) { out.style.display = 'block'; out.textContent = '⚠️ 请先粘贴 JSON 内容。'; return; }
+  let root;
+  try { root = JSON.parse(raw); } catch (e) { out.style.display = 'block'; out.textContent = '❌ JSON 解析失败：' + e.message; return; }
+  const defs = [], used = {};
+  function pascal(s) {
+    const parts = String(s).replace(/[^A-Za-z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean);
+    let n = parts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+    if (!n) n = 'Item';
+    if (/^[0-9]/.test(n)) n = 'T' + n;
+    return n;
+  }
+  function uniq(base) {
+    base = pascal(base);
+    let n = base, i = 1;
+    while (used[n]) { n = base + i; i++; }
+    used[n] = true;
+    return n;
+  }
+  function keyOf(k) { return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(k) ? k : JSON.stringify(k); }
+  function typeOf(v, hint) {
+    if (v === null) return 'null';
+    if (Array.isArray(v)) {
+      if (!v.length) return 'any[]';
+      const ts = [];
+      v.forEach(item => { const t = typeOf(item, hint); if (ts.indexOf(t) === -1) ts.push(t); });
+      return (ts.length > 1 ? '(' + ts.join(' | ') + ')' : ts[0]) + '[]';
+    }
+    if (typeof v === 'object') return gen(v, hint);
+    return typeof v;
+  }
+  function gen(obj, hint) {
+    const name = uniq(hint);
+    const rec = { name: name, body: [] };
+    defs.push(rec);
+    rec.body = Object.keys(obj).map(k => '  ' + keyOf(k) + ': ' + typeOf(obj[k], k) + ';');
+    return name;
+  }
+  const rootName = pascal(document.getElementById('j2t-name').value.trim() || 'Root');
+  const chunks = [];
+  if (root !== null && typeof root === 'object' && !Array.isArray(root)) {
+    gen(root, rootName);
+  } else {
+    chunks.push('export type ' + rootName + ' = ' + typeOf(root, rootName + 'Item') + ';');
+    chunks.push('');
+  }
+  defs.forEach(d => {
+    chunks.push('export interface ' + d.name + ' {');
+    d.body.forEach(l => chunks.push(l));
+    chunks.push('}');
+    chunks.push('');
+  });
+  out.style.display = 'block';
+  out.textContent = chunks.join('\n').trim();
+}
+
+// ============ 罗马数字转换 ============
+const RN_MAP = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+function toRoman(n) {
+  let s = '';
+  for (let i = 0; i < RN_MAP.length; i++) { while (n >= RN_MAP[i][0]) { s += RN_MAP[i][1]; n -= RN_MAP[i][0]; } }
+  return s;
+}
+function fromRoman(str) {
+  const map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+  const s = String(str).toUpperCase().replace(/\s+/g, '');
+  if (!s || !/^[IVXLCDM]+$/.test(s)) return null;
+  let total = 0;
+  for (let i = 0; i < s.length; i++) {
+    const cur = map[s[i]], next = map[s[i + 1]];
+    if (next && cur < next) total -= cur; else total += cur;
+  }
+  if (total < 1 || total > 3999 || toRoman(total) !== s) return null;
+  return total;
+}
+function romanFromNumber() {
+  const out = document.getElementById('rn-result');
+  const v = parseInt(document.getElementById('rn-number').value, 10);
+  out.style.display = 'block';
+  if (isNaN(v)) { out.textContent = '⚠️ 请输入 1 ~ 3999 之间的整数。'; return; }
+  if (v < 1 || v > 3999) { out.textContent = '⚠️ 仅支持 1 ~ 3999 之间的整数。'; return; }
+  const r = toRoman(v);
+  out.textContent = v + '  →  ' + r;
+  document.getElementById('rn-roman-input').value = r;
+}
+function romanFromRoman() {
+  const out = document.getElementById('rn-result');
+  const raw = document.getElementById('rn-roman-input').value.trim();
+  out.style.display = 'block';
+  if (!raw) { out.textContent = '⚠️ 请输入罗马数字。'; return; }
+  const v = fromRoman(raw);
+  if (v === null) { out.textContent = '❌ 无法识别：请使用 I、V、X、L、C、D、M，且为 1~3999 的标准写法。'; return; }
+  out.textContent = raw.toUpperCase().replace(/\s+/g, '') + '  →  ' + v;
+  document.getElementById('rn-number').value = v;
+}
+function romanSwap() {
+  const a = document.getElementById('rn-number'), b = document.getElementById('rn-roman-input');
+  const t = a.value; a.value = b.value; b.value = t;
+  const out = document.getElementById('rn-result');
+  out.style.display = 'none'; out.textContent = '--';
+}
+
+// ============ Meta 标签生成器 ============
+function escapeMeta(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function genMetaTags() {
+  const out = document.getElementById('meta-result');
+  const val = id => document.getElementById(id).value.trim();
+  const title = val('mt-title'), site = val('mt-sitename'), desc = val('mt-desc'),
+        keywords = val('mt-keywords'), author = val('mt-author'), url = val('mt-url'), image = val('mt-image');
+  if (!title && !desc) { out.style.display = 'block'; out.textContent = '⚠️ 请至少填写「页面标题」或「页面描述」。'; return; }
+  const e = escapeMeta;
+  const lines = [];
+  if (title) lines.push('<title>' + e(title) + '</title>');
+  if (desc) lines.push('<meta name="description" content="' + e(desc) + '">');
+  if (keywords) lines.push('<meta name="keywords" content="' + e(keywords) + '">');
+  if (author) lines.push('<meta name="author" content="' + e(author) + '">');
+  if (url) lines.push('<link rel="canonical" href="' + e(url) + '">');
+  lines.push('');
+  lines.push('<!-- Open Graph -->');
+  lines.push('<meta property="og:type" content="website">');
+  if (title) lines.push('<meta property="og:title" content="' + e(title) + '">');
+  if (desc) lines.push('<meta property="og:description" content="' + e(desc) + '">');
+  if (url) lines.push('<meta property="og:url" content="' + e(url) + '">');
+  if (image) lines.push('<meta property="og:image" content="' + e(image) + '">');
+  if (site) lines.push('<meta property="og:site_name" content="' + e(site) + '">');
+  lines.push('');
+  lines.push('<!-- Twitter Card -->');
+  lines.push('<meta name="twitter:card" content="' + (image ? 'summary_large_image' : 'summary') + '">');
+  if (title) lines.push('<meta name="twitter:title" content="' + e(title) + '">');
+  if (desc) lines.push('<meta name="twitter:description" content="' + e(desc) + '">');
+  if (image) lines.push('<meta name="twitter:image" content="' + e(image) + '">');
+  out.style.display = 'block';
+  out.textContent = lines.join('\n');
+}
+
+safeInit(() => initGomoku(), 'initGomoku');
 
 // ============ Search & Theme ============
 function filterTools() {
