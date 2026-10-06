@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等109个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等114个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等109个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等114个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等109个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等114个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -476,6 +476,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#json-to-ts" data-tool="json-to-ts"><span class="icon">🧬</span>JSON转TS接口</a></li>
     <li><a href="#roman-numeral" data-tool="roman-numeral"><span class="icon">🏛️</span>罗马数字转换</a></li>
     <li><a href="#meta-tags" data-tool="meta-tags"><span class="icon">🏷️</span>Meta标签生成</a></li>
+    <li class="category">每日新增</li>
+    <li><a href="#subnet-calc" data-tool="subnet-calc"><span class="icon">🔌</span>子网掩码计算器</a></li>
+    <li><a href="#lorem-generator" data-tool="lorem-generator"><span class="icon">✍️</span>Lorem 占位文本</a></li>
+    <li><a href="#heart-rate" data-tool="heart-rate"><span class="icon">❤️</span>心率区间计算</a></li>
+    <li><a href="#rps" data-tool="rps"><span class="icon">✊</span>石头剪刀布</a></li>
+    <li><a href="#duration-calc" data-tool="duration-calc"><span class="icon">🕒</span>时长换算器</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3097,6 +3103,128 @@ console.log('代码块');
     <pre class="result-box" id="meta-result" style="display:none;">--</pre>
   </section>
 
+  <!-- 子网掩码计算器 -->
+  <section class="tool-panel" id="panel-subnet-calc">
+    <h2>子网掩码计算器</h2>
+    <p class="desc">输入 IP 地址与 CIDR 前缀，快速计算网络地址、广播地址、可用主机范围与主机数量。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">IP 地址</div>
+        <input type="text" id="sn-ip" placeholder="例如 192.168.1.10" value="192.168.1.10">
+      </div>
+      <div>
+        <div class="label">CIDR 前缀 (0-32)</div>
+        <input type="number" id="sn-prefix" min="0" max="32" value="24">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcSubnet()">🔌 计算</button>
+      <button class="btn btn-secondary" onclick="copyText('sn-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="sn-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- Lorem Ipsum 生成器 -->
+  <section class="tool-panel" id="panel-lorem-generator">
+    <h2>Lorem Ipsum 占位文本</h2>
+    <p class="desc">一键生成拉丁文占位文本，支持段落、句子、单词三种模式，适合排版与设计稿填充。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">生成类型</div>
+        <select id="lorem-type">
+          <option value="paragraphs">段落</option>
+          <option value="sentences">句子</option>
+          <option value="words">单词</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">数量 (1-50)</div>
+        <input type="number" id="lorem-count" min="1" max="50" value="3">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateLorem()">✨ 生成</button>
+      <button class="btn btn-secondary" onclick="copyText('lorem-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="lorem-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 心率区间计算器 -->
+  <section class="tool-panel" id="panel-heart-rate">
+    <h2>心率区间计算器</h2>
+    <p class="desc">根据年龄（可选填静息心率）估算最大心率，划分五个训练心率区间，科学指导有氧与燃脂运动。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">年龄</div>
+        <input type="number" id="hr-age" min="10" max="100" value="30">
+      </div>
+      <div>
+        <div class="label">静息心率（选填）</div>
+        <input type="number" id="hr-rest" min="30" max="120" placeholder="例如 65">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcHeartRate()">❤️ 计算区间</button>
+      <button class="btn btn-secondary" onclick="copyText('hr-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="hr-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 石头剪刀布 -->
+  <section class="tool-panel" id="panel-rps">
+    <h2>石头剪刀布</h2>
+    <p class="desc">经典猜拳小游戏，与电脑实时对战，自动记录胜负比分。</p>
+    <div class="flex-row" style="gap:8px;">
+      <button class="btn" onclick="rpsPlay('rock')">✊ 石头</button>
+      <button class="btn" onclick="rpsPlay('scissors')">✌️ 剪刀</button>
+      <button class="btn" onclick="rpsPlay('paper')">✋ 布</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="rps-player">❔</div><div class="lbl">你的出拳</div></div>
+      <div class="stat-card"><div class="num" id="rps-computer">❔</div><div class="lbl">电脑出拳</div></div>
+      <div class="stat-card"><div class="num" id="rps-score">0:0</div><div class="lbl">胜 : 负</div></div>
+    </div>
+    <div class="result-box" id="rps-result">点击上方按钮开始游戏</div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="rpsReset()">🔄 重置比分</button>
+    </div>
+  </section>
+
+  <!-- 时长换算器 -->
+  <section class="tool-panel" id="panel-duration-calc">
+    <h2>时长换算器</h2>
+    <p class="desc">在「天 / 时 / 分 / 秒」与「总秒数」之间双向换算，视频剪辑、任务计时换算都很方便。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">天</div>
+        <input type="number" id="dur-d" min="0" value="0">
+      </div>
+      <div>
+        <div class="label">时</div>
+        <input type="number" id="dur-h" min="0" value="0">
+      </div>
+      <div>
+        <div class="label">分</div>
+        <input type="number" id="dur-m" min="0" value="0">
+      </div>
+      <div>
+        <div class="label">秒</div>
+        <input type="number" id="dur-s" min="0" value="0">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="durFromParts()">⏳ 转换为总秒数</button>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="label">总秒数</div>
+      <input type="number" id="dur-total" min="0" value="0" placeholder="例如 3661">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="durFromSeconds()">🔄 拆分为天时分秒</button>
+    </div>
+    <pre class="result-box" id="dur-result" style="display:none;">--</pre>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3104,7 +3232,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 109个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 114个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -8198,6 +8326,170 @@ function genMetaTags() {
 }
 
 safeInit(() => initGomoku(), 'initGomoku');
+
+// ============ 子网掩码计算器 ============
+function calcSubnet() {
+  const out = document.getElementById('sn-result');
+  out.style.display = 'block';
+  const ipStr = document.getElementById('sn-ip').value.trim();
+  const prefix = parseInt(document.getElementById('sn-prefix').value, 10);
+  const parts = ipStr.split('.');
+  const validIp = parts.length === 4 && parts.every(p => /^\d{1,3}$/.test(p) && +p <= 255);
+  if (!validIp) { out.textContent = '❌ 请输入合法的 IPv4 地址，例如 192.168.1.10'; return; }
+  if (isNaN(prefix) || prefix < 0 || prefix > 32) { out.textContent = '❌ CIDR 前缀需为 0 ~ 32 之间的整数。'; return; }
+  const numToIp = n => [24, 16, 8, 0].map(s => (n >>> s) & 255).join('.');
+  const ipNum = parts.reduce((a, p) => ((a << 8) >>> 0) + (+p), 0) >>> 0;
+  const maskNum = prefix === 0 ? 0 : (0xFFFFFFFF << (32 - prefix)) >>> 0;
+  const netNum = (ipNum & maskNum) >>> 0;
+  const bcastNum = (netNum | (~maskNum >>> 0)) >>> 0;
+  let hostLine, hostCount;
+  if (prefix === 32) { hostCount = 1; hostLine = numToIp(netNum) + '（单主机 /32）'; }
+  else if (prefix === 31) { hostCount = 2; hostLine = numToIp(netNum) + ' ~ ' + numToIp(bcastNum) + '（点对点 /31）'; }
+  else { hostCount = Math.pow(2, 32 - prefix) - 2; hostLine = numToIp(netNum + 1) + ' ~ ' + numToIp(bcastNum - 1); }
+  out.textContent = [
+    'IP 地址: ' + ipStr,
+    'CIDR: ' + ipStr + '/' + prefix,
+    '子网掩码: ' + numToIp(maskNum),
+    '反掩码: ' + numToIp(~maskNum >>> 0),
+    '网络地址: ' + numToIp(netNum),
+    '广播地址: ' + numToIp(bcastNum),
+    '可用主机范围: ' + hostLine,
+    '可用主机数: ' + hostCount
+  ].join('\n');
+}
+
+// ============ Lorem Ipsum 生成器 ============
+const LOREM_WORDS = ('lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum').split(' ');
+function loremSentence() {
+  const len = 8 + Math.floor(Math.random() * 8);
+  const words = [];
+  for (let i = 0; i < len; i++) words.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
+  const s = words.join(' ');
+  return s.charAt(0).toUpperCase() + s.slice(1) + '.';
+}
+function loremRandomSentences(n) {
+  const arr = [];
+  for (let i = 0; i < n; i++) arr.push(loremSentence());
+  return arr.join(' ');
+}
+function generateLorem() {
+  const out = document.getElementById('lorem-result');
+  out.style.display = 'block';
+  const type = document.getElementById('lorem-type').value;
+  let count = parseInt(document.getElementById('lorem-count').value, 10);
+  if (isNaN(count)) count = 1;
+  count = Math.max(1, Math.min(50, count));
+  document.getElementById('lorem-count').value = count;
+  const intro = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+  let text = '';
+  if (type === 'words') {
+    const words = ['lorem', 'ipsum', 'dolor', 'sit', 'amet'];
+    while (words.length < count) words.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
+    text = words.slice(0, count).join(' ');
+  } else if (type === 'sentences') {
+    text = count === 1 ? intro : intro + ' ' + loremRandomSentences(count - 1);
+  } else {
+    const paras = [];
+    for (let i = 0; i < count; i++) {
+      const body = loremRandomSentences(3 + Math.floor(Math.random() * 3));
+      paras.push((i === 0 ? intro + ' ' : '') + body);
+    }
+    text = paras.join('\n\n');
+  }
+  out.textContent = text || intro;
+}
+
+// ============ 心率区间计算器 ============
+function calcHeartRate() {
+  const out = document.getElementById('hr-result');
+  out.style.display = 'block';
+  const age = parseInt(document.getElementById('hr-age').value, 10);
+  const restRaw = document.getElementById('hr-rest').value.trim();
+  const rest = restRaw === '' ? null : parseInt(restRaw, 10);
+  if (isNaN(age) || age < 10 || age > 100) { out.textContent = '❌ 请输入 10 ~ 100 之间的年龄。'; return; }
+  if (rest !== null && (isNaN(rest) || rest < 30 || rest > 120)) { out.textContent = '❌ 静息心率请输入 30 ~ 120 之间的数值，或留空。'; return; }
+  const maxHR = 220 - age;
+  const range = (lo, hi) => {
+    const calc = r => Math.round(rest === null ? maxHR * r : rest + (maxHR - rest) * r);
+    return calc(lo) + ' ~ ' + calc(hi) + ' bpm';
+  };
+  const lines = [
+    '估算最大心率: ' + maxHR + ' bpm' + (rest === null ? '（220 - 年龄）' : '（Karvonen 公式，静息心率 ' + rest + '）'),
+    '',
+    '区间1  热身恢复   50%-60%    ' + range(0.5, 0.6),
+    '区间2  燃脂塑形   60%-70%    ' + range(0.6, 0.7),
+    '区间3  有氧耐力   70%-80%    ' + range(0.7, 0.8),
+    '区间4  无氧强化   80%-90%    ' + range(0.8, 0.9),
+    '区间5  极限冲刺   90%-100%   ' + range(0.9, 1.0),
+    '',
+    '建议：日常减脂以区间2为主，提升心肺可穿插区间3，区间4-5 请循序渐进。'
+  ];
+  out.textContent = lines.join('\n');
+}
+
+// ============ 石头剪刀布 ============
+let RPS_WIN = 0, RPS_LOSE = 0;
+const RPS_NAME = { rock: '✊ 石头', scissors: '✌️ 剪刀', paper: '✋ 布' };
+const RPS_BEATS = { rock: 'scissors', scissors: 'paper', paper: 'rock' };
+function rpsPlay(player) {
+  const options = ['rock', 'scissors', 'paper'];
+  const computer = options[Math.floor(Math.random() * options.length)];
+  document.getElementById('rps-player').textContent = RPS_NAME[player];
+  document.getElementById('rps-computer').textContent = RPS_NAME[computer];
+  let msg;
+  if (player === computer) { msg = '🤝 平局！双方都是 ' + RPS_NAME[player]; }
+  else if (RPS_BEATS[player] === computer) { RPS_WIN++; msg = '🎉 你赢了！' + RPS_NAME[player] + ' 胜过 ' + RPS_NAME[computer]; }
+  else { RPS_LOSE++; msg = '😵 你输了！' + RPS_NAME[computer] + ' 胜过 ' + RPS_NAME[player]; }
+  document.getElementById('rps-score').textContent = RPS_WIN + ':' + RPS_LOSE;
+  document.getElementById('rps-result').textContent = msg;
+}
+function rpsReset() {
+  RPS_WIN = 0; RPS_LOSE = 0;
+  document.getElementById('rps-score').textContent = '0:0';
+  document.getElementById('rps-player').textContent = '❔';
+  document.getElementById('rps-computer').textContent = '❔';
+  document.getElementById('rps-result').textContent = '比分已重置，点击上方按钮开始新的一局。';
+}
+
+// ============ 时长换算器 ============
+function durNum(id) { const v = parseInt(document.getElementById(id).value, 10); return isNaN(v) ? 0 : v; }
+function durFormat(total) {
+  const d = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  const parts = [];
+  if (d) parts.push(d + ' 天');
+  if (h) parts.push(h + ' 小时');
+  if (m) parts.push(m + ' 分');
+  if (s || parts.length === 0) parts.push(s + ' 秒');
+  return parts.join(' ');
+}
+function durFromParts() {
+  const out = document.getElementById('dur-result');
+  out.style.display = 'block';
+  const d = durNum('dur-d'), h = durNum('dur-h'), m = durNum('dur-m'), s = durNum('dur-s');
+  if ([d, h, m, s].some(v => v < 0)) { out.textContent = '❌ 请输入非负整数。'; return; }
+  const total = d * 86400 + h * 3600 + m * 60 + s;
+  document.getElementById('dur-total').value = total;
+  out.textContent = '总秒数: ' + total + ' 秒\n格式化: ' + durFormat(total);
+}
+function durFromSeconds() {
+  const out = document.getElementById('dur-result');
+  out.style.display = 'block';
+  const total = durNum('dur-total');
+  if (total < 0) { out.textContent = '❌ 总秒数不能为负数。'; return; }
+  document.getElementById('dur-d').value = Math.floor(total / 86400);
+  document.getElementById('dur-h').value = Math.floor((total % 86400) / 3600);
+  document.getElementById('dur-m').value = Math.floor((total % 3600) / 60);
+  document.getElementById('dur-s').value = total % 60;
+  out.textContent = total + ' 秒 = ' + durFormat(total);
+}
+
+safeInit(() => calcSubnet(), 'calcSubnet');
+safeInit(() => generateLorem(), 'generateLorem');
+safeInit(() => calcHeartRate(), 'calcHeartRate');
+safeInit(() => durFromParts(), 'durFromParts');
 
 // ============ Search & Theme ============
 function filterTools() {
