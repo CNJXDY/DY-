@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线进制转换工具：二进制、八进制、十进制、十六进制互转教程 - 万能工具箱</title>
+<meta name="description" content="二进制、八进制、十进制、十六进制怎么互转？本文介绍在线进制转换工具和手动换算方法，程序员必备。">
+<meta name="keywords" content="进制转换,二进制转十进制,十六进制转换,在线进制工具">
+<style>
+:root {
+  --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
+  --text-secondary: #94a3b8; --accent: #6366f1; --accent-hover: #818cf8;
+  --border: #334155; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.9; font-size: 16px;
+}
+.container { max-width: 750px; margin: 0 auto; padding: 20px; }
+.header {
+  padding: 30px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 30px;
+}
+.header .back { margin-bottom: 12px; }
+.header .back a { color: var(--accent); text-decoration: none; font-size: 14px; }
+.header .back a:hover { color: var(--accent-hover); }
+.header .category {
+  display: inline-block; background: rgba(99,102,241,0.2); color: var(--accent-hover);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;
+}
+.header h1 { font-size: 26px; font-weight: 700; line-height: 1.4; }
+.header .meta { color: var(--text-secondary); font-size: 13px; margin-top: 8px; }
+.content { padding: 0 0 40px; }
+.content p { margin-bottom: 18px; color: #cbd5e1; }
+.content h2 { font-size: 20px; margin: 28px 0 12px; }
+.content h3 { font-size: 17px; margin: 20px 0 10px; }
+.content ul, .content ol { margin: 10px 0 18px 24px; color: #cbd5e1; }
+.content li { margin-bottom: 6px; }
+.content strong { color: var(--text); }
+.content a { color: var(--accent); text-decoration: none; }
+.content a:hover { color: var(--accent-hover); }
+.related { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+.related h3 { font-size: 16px; margin-bottom: 12px; }
+.related a { display: block; color: var(--accent); text-decoration: none; padding: 6px 0; font-size: 14px; }
+.related a:hover { color: var(--accent-hover); }
+.footer { text-align: center; padding: 30px 0; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); }
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="back"><a href="index.html">← 返回博客列表</a> | <a href="https://CNJXDY.github.io/DY-/">← 返回工具箱</a></div>
+    <div class="category">开发工具</div>
+    <h1>在线进制转换工具：二进制、八进制、十进制、十六进制互转教程</h1>
+    <div class="meta">2026-09-25 · 298字 · 开发工具</div>
+  </div>
+  <div class="content">
+    <p>进制转换是程序员的基本功。计算机内部用二进制存储数据，但人类更习惯十进制。不同进制之间经常需要转换。</p>
+    <p>常见的进制有四种：二进制（base 2）、八进制（base 8）、十进制（base 10）、十六进制（base 16）。十六进制因为能紧凑表示二进制（一位十六进制等于四位二进制），在内存地址、颜色值、编码中广泛使用。</p>
+    <p>手动转换方法：十进制转其他进制用「除基取余法」；其他进制转十进制用「按权展开求和法」。比如十进制 255 转二进制：255 ÷ 2 = 127 余 1，127 ÷ 2 = 63 余 1……一直除到商为 0，把余数倒过来就是 11111111。</p>
+    <p>十六进制转二进制更简单，每位十六进制对应四位二进制。比如 0xFF = 1111 1111 = 255。记住 0-F 对应的二进制组合即可。</p>
+    <p>在线进制转换工具能省掉手动计算的麻烦，输入一个值自动显示其他进制结果，部分工具还支持任意进制（2-36）转换。</p>
+    <p>推荐万能工具箱的进制转换工具，支持大整数、浮点，还能查看转换过程，适合学习和日常使用。</p>
+  </div>
+  <div class="related">
+    <h3>相关文章</h3>
+    <a href="501f871e.html">在线Mock数据工具：前端开发必备的假数据生成器</a>
+    <a href="1d72cae3.html">在线JSON转XML工具：数据格式互转不求人</a>
+    <a href="7c638f96.html">GitHub入门指南：从注册到提交第一个Pull Request</a>
+    <a href="80b64bc3.html">正则表达式入门：从害怕到掌握，看这一篇就够了</a>
+    <a href="9bda6652.html">在线CSS格式化工具：让你的样式代码整洁又易读</a>
+  </div>
+  <div class="footer">
+    <p>万能工具箱 - 免费在线工具集合 | <a href="https://CNJXDY.github.io/DY-/">返回首页</a></p>
+    <p style="margin-top:4px;">所有工具数据均在浏览器本地处理，不上传服务器</p>
+  </div>
+</div>
+</body>
+</html>
