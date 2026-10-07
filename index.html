@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等114个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等119个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等114个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等119个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等114个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等119个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -482,6 +482,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#heart-rate" data-tool="heart-rate"><span class="icon">❤️</span>心率区间计算</a></li>
     <li><a href="#rps" data-tool="rps"><span class="icon">✊</span>石头剪刀布</a></li>
     <li><a href="#duration-calc" data-tool="duration-calc"><span class="icon">🕒</span>时长换算器</a></li>
+    <li class="category">今日上新</li>
+    <li><a href="#slide-puzzle" data-tool="slide-puzzle"><span class="icon">🧩</span>数字华容道</a></li>
+    <li><a href="#full-reduction" data-tool="full-reduction"><span class="icon">🛒</span>满减凑单计算</a></li>
+    <li><a href="#alcohol-calc" data-tool="alcohol-calc"><span class="icon">🍺</span>酒精代谢计算</a></li>
+    <li><a href="#installment-rate" data-tool="installment-rate"><span class="icon">💳</span>分期真实利率</a></li>
+    <li><a href="#xml-formatter" data-tool="xml-formatter"><span class="icon">📐</span>XML 格式化</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3225,6 +3231,126 @@ console.log('代码块');
     <pre class="result-box" id="dur-result" style="display:none;">--</pre>
   </section>
 
+  <!-- 数字华容道 -->
+  <section class="tool-panel" id="panel-slide-puzzle">
+    <h2>数字华容道</h2>
+    <p class="desc">经典 15 数字拼图，点击空格旁的方块滑动，把 1~15 按顺序归位。自动统计步数与用时。</p>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sp-moves">0</div><div class="lbl">步数</div></div>
+      <div class="stat-card"><div class="num" id="sp-time">0s</div><div class="lbl">用时</div></div>
+    </div>
+    <div id="sp-board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;max-width:320px;"></div>
+    <div class="btn-group">
+      <button class="btn" onclick="spShuffle()">🔀 打乱开始</button>
+      <button class="btn btn-secondary" onclick="spReset()">🔄 复原</button>
+    </div>
+    <div class="result-box" id="sp-result">点击「打乱开始」开始游戏</div>
+  </section>
+
+  <!-- 满减凑单计算器 -->
+  <section class="tool-panel" id="panel-full-reduction">
+    <h2>满减凑单计算器</h2>
+    <p class="desc">输入满减活动档位与购物车金额，算出当前优惠、实付金额，并判断向上凑单到底划不划算。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">活动档位（门槛:减免）</div>
+        <input type="text" id="fr-tiers" value="200:20,400:50,600:80" placeholder="例如 200:20,400:50,600:80">
+      </div>
+      <div>
+        <div class="label">购物车金额（元）</div>
+        <input type="number" id="fr-amount" min="0" step="0.01" value="380">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcFullReduction()">🛒 计算</button>
+      <button class="btn btn-secondary" onclick="copyText('fr-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="fr-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 酒精代谢计算器 -->
+  <section class="tool-panel" id="panel-alcohol-calc">
+    <h2>酒精代谢计算器</h2>
+    <p class="desc">依据 Widmark 公式估算血液酒精浓度与代谢时间，了解酒驾/醉驾标准。结果仅供参考，切勿据此判断能否驾车。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">体重（kg）</div>
+        <input type="number" id="alc-weight" min="30" max="200" value="70">
+      </div>
+      <div>
+        <div class="label">性别</div>
+        <select id="alc-gender">
+          <option value="male">男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div>
+        <div class="label">饮酒量（ml）</div>
+        <input type="number" id="alc-volume" min="1" value="500">
+      </div>
+      <div>
+        <div class="label">酒精度（%vol）</div>
+        <input type="number" id="alc-abv" min="0" max="100" step="0.1" value="4">
+      </div>
+      <div>
+        <div class="label">已过时间（小时）</div>
+        <input type="number" id="alc-hours" min="0" max="48" step="0.5" value="1">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcAlcohol()">🍺 估算</button>
+      <button class="btn btn-secondary" onclick="copyText('alc-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="alc-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 分期真实利率计算器 -->
+  <section class="tool-panel" id="panel-installment-rate">
+    <h2>分期真实利率计算器</h2>
+    <p class="desc">信用卡、花呗、白条分期常用「每期费率」宣传，用 IRR 算出被隐藏的真实年化利率，帮你识破「低费率」。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">分期金额（元）</div>
+        <input type="number" id="inst-amount" min="1" value="10000">
+      </div>
+      <div>
+        <div class="label">分期期数</div>
+        <select id="inst-term">
+          <option value="3">3 期</option>
+          <option value="6">6 期</option>
+          <option value="9">9 期</option>
+          <option value="12" selected>12 期</option>
+          <option value="18">18 期</option>
+          <option value="24">24 期</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">每期费率（%）</div>
+        <input type="number" id="inst-fee" min="0" max="10" step="0.01" value="0.6">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcInstallment()">💳 计算真实利率</button>
+      <button class="btn btn-secondary" onclick="copyText('inst-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="inst-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- XML 格式化 -->
+  <section class="tool-panel" id="panel-xml-formatter">
+    <h2>XML 格式化 / 压缩</h2>
+    <p class="desc">美化或压缩 XML，自动缩进并校验标签是否一一闭合配对，方便查看接口返回与配置文件。</p>
+    <textarea id="xml-input" placeholder="粘贴 XML 内容..."><?xml version="1.0" encoding="UTF-8"?><bookstore><book id="1"><title>深入理解计算机系统</title><price>128</price></book></bookstore></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="xmlFormat()">✨ 格式化</button>
+      <button class="btn btn-secondary" onclick="xmlMinify()">📦 压缩</button>
+      <button class="btn btn-secondary" onclick="copyText('xml-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="xml-result" style="display:none;">--</pre>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3232,7 +3358,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 114个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 119个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -8490,6 +8616,274 @@ safeInit(() => calcSubnet(), 'calcSubnet');
 safeInit(() => generateLorem(), 'generateLorem');
 safeInit(() => calcHeartRate(), 'calcHeartRate');
 safeInit(() => durFromParts(), 'durFromParts');
+
+// ============ 数字华容道 ============
+const SP_SOLVED = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
+let SP_BOARD = SP_SOLVED.slice();
+let SP_MOVES = 0, SP_SECONDS = 0, SP_TIMER = null, SP_ACTIVE = false;
+function spFmtTime(s) {
+  const m = Math.floor(s / 60), sec = s % 60;
+  return m > 0 ? m + '分' + sec + '秒' : sec + 's';
+}
+function spRender() {
+  const board = document.getElementById('sp-board');
+  board.innerHTML = '';
+  SP_BOARD.forEach((val, idx) => {
+    const b = document.createElement('button');
+    const empty = val === 0;
+    b.textContent = empty ? '' : val;
+    b.style.cssText = 'height:64px;font-size:20px;font-weight:700;border-radius:8px;' +
+      'border:1px solid var(--border);color:var(--text);transition:background 0.15s;' +
+      'background:' + (empty ? 'transparent' : 'var(--card-bg)') + ';' +
+      'cursor:' + (empty ? 'default' : 'pointer') + ';visibility:' + (empty ? 'hidden' : 'visible') + ';';
+    if (!empty) b.onclick = () => spMove(idx);
+    board.appendChild(b);
+  });
+  document.getElementById('sp-moves').textContent = SP_MOVES;
+}
+function spMove(idx) {
+  if (!SP_ACTIVE) return;
+  const empty = SP_BOARD.indexOf(0);
+  const r1 = Math.floor(idx / 4), c1 = idx % 4, r2 = Math.floor(empty / 4), c2 = empty % 4;
+  if (Math.abs(r1 - r2) + Math.abs(c1 - c2) !== 1) return;
+  SP_BOARD[empty] = SP_BOARD[idx];
+  SP_BOARD[idx] = 0;
+  SP_MOVES++;
+  spRender();
+  if (SP_BOARD.every((v, i) => v === SP_SOLVED[i])) spWin();
+}
+function spShuffle() {
+  SP_BOARD = SP_SOLVED.slice();
+  let empty = 15;
+  for (let i = 0; i < 200; i++) {
+    const r = Math.floor(empty / 4), c = empty % 4, moves = [];
+    if (r > 0) moves.push(empty - 4);
+    if (r < 3) moves.push(empty + 4);
+    if (c > 0) moves.push(empty - 1);
+    if (c < 3) moves.push(empty + 1);
+    const pick = moves[Math.floor(Math.random() * moves.length)];
+    SP_BOARD[empty] = SP_BOARD[pick];
+    SP_BOARD[pick] = 0;
+    empty = pick;
+  }
+  if (SP_BOARD.every((v, i) => v === SP_SOLVED[i])) { SP_BOARD[0] = SP_BOARD[1]; SP_BOARD[1] = 0; }
+  SP_MOVES = 0; SP_SECONDS = 0; SP_ACTIVE = true;
+  document.getElementById('sp-time').textContent = '0s';
+  document.getElementById('sp-result').textContent = '拼图已打乱，开始滑动吧！';
+  spRender();
+  if (SP_TIMER) clearInterval(SP_TIMER);
+  SP_TIMER = setInterval(() => {
+    SP_SECONDS++;
+    document.getElementById('sp-time').textContent = spFmtTime(SP_SECONDS);
+  }, 1000);
+}
+function spReset() {
+  if (SP_TIMER) clearInterval(SP_TIMER);
+  SP_TIMER = null; SP_ACTIVE = false; SP_MOVES = 0; SP_SECONDS = 0;
+  SP_BOARD = SP_SOLVED.slice();
+  document.getElementById('sp-moves').textContent = '0';
+  document.getElementById('sp-time').textContent = '0s';
+  document.getElementById('sp-result').textContent = '点击「打乱开始」开始游戏';
+  spRender();
+}
+function spWin() {
+  if (SP_TIMER) clearInterval(SP_TIMER);
+  SP_TIMER = null; SP_ACTIVE = false;
+  document.getElementById('sp-result').textContent =
+    '🎉 恭喜完成！用了 ' + SP_MOVES + ' 步，耗时 ' + spFmtTime(SP_SECONDS) + '。';
+}
+
+// ============ 满减凑单计算器 ============
+function frParseTiers(str) {
+  return str.split(/[,，;；\s]+/).map(s => s.trim()).filter(Boolean).map(s => {
+    const parts = s.split(/[:：\-~]/);
+    return { full: parseFloat(parts[0]), cut: parseFloat(parts[1]) };
+  }).filter(t => !isNaN(t.full) && !isNaN(t.cut) && t.full > 0 && t.cut > 0)
+    .sort((a, b) => a.full - b.full);
+}
+function calcFullReduction() {
+  const out = document.getElementById('fr-result');
+  out.style.display = 'block';
+  const tiers = frParseTiers(document.getElementById('fr-tiers').value);
+  const amount = parseFloat(document.getElementById('fr-amount').value);
+  if (!tiers.length) { out.textContent = '❌ 活动档位格式有误，请参考示例：200:20,400:50,600:80'; return; }
+  if (isNaN(amount) || amount < 0) { out.textContent = '❌ 请输入有效的购物车金额。'; return; }
+  let cur = null;
+  tiers.forEach(t => { if (amount >= t.full) cur = t; });
+  const discount = cur ? cur.cut : 0;
+  const pay = Math.max(0, amount - discount);
+  const lines = [];
+  lines.push('购物车金额: ' + amount.toFixed(2) + ' 元');
+  lines.push('当前优惠: ' + (cur ? '满' + cur.full + '减' + cur.cut + '，优惠 ' + cur.cut + ' 元' : '未达到任何档位'));
+  lines.push('预计实付: ' + pay.toFixed(2) + ' 元' + (amount > 0 ? '（相当于 ' + (pay / amount * 10).toFixed(2) + ' 折）' : ''));
+  const higher = tiers.filter(t => t.full > amount);
+  if (higher.length) {
+    lines.push('');
+    lines.push('—— 向上凑单建议 ——');
+    higher.forEach(t => {
+      const need = t.full - amount;
+      const extraCut = t.cut - discount;
+      const benefit = extraCut - need;
+      lines.push('满' + t.full + '减' + t.cut + '：还需凑 ' + need.toFixed(2) + ' 元，多减 ' + extraCut.toFixed(2) +
+        ' 元 → ' + (benefit > 0 ? '划算，净省 ' + benefit.toFixed(2) + ' 元' : '不划算，相当于多花 ' + (-benefit).toFixed(2) + ' 元'));
+    });
+  } else if (cur) {
+    lines.push('');
+    lines.push('已达成最高档位，无需凑单。');
+  }
+  if (amount > 0) lines.push('', '提示：凑单请只买本就需要的东西，别为了优惠买闲置商品。');
+  out.textContent = lines.join('\n');
+}
+
+// ============ 酒精代谢计算器 ============
+function calcAlcohol() {
+  const out = document.getElementById('alc-result');
+  out.style.display = 'block';
+  const weight = parseFloat(document.getElementById('alc-weight').value);
+  const gender = document.getElementById('alc-gender').value;
+  const volume = parseFloat(document.getElementById('alc-volume').value);
+  const abv = parseFloat(document.getElementById('alc-abv').value);
+  const hoursRaw = document.getElementById('alc-hours').value.trim();
+  const hours = hoursRaw === '' ? 0 : parseFloat(hoursRaw);
+  if (isNaN(weight) || weight < 30 || weight > 200) { out.textContent = '❌ 请输入 30 ~ 200 kg 之间的体重。'; return; }
+  if (isNaN(volume) || volume <= 0) { out.textContent = '❌ 请输入有效的饮酒量（毫升）。'; return; }
+  if (isNaN(abv) || abv < 0 || abv > 100) { out.textContent = '❌ 请输入 0 ~ 100 之间的酒精度数。'; return; }
+  if (isNaN(hours) || hours < 0 || hours > 48) { out.textContent = '❌ 经过时间请输入 0 ~ 48 小时。'; return; }
+  const grams = volume * (abv / 100) * 0.789;
+  const r = gender === 'female' ? 0.55 : 0.68;
+  let bac = grams / (weight * r * 10) - 0.015 * hours;
+  if (bac < 0) bac = 0;
+  const mg = bac * 1000;
+  let status;
+  if (mg <= 0) status = '体内酒精已基本代谢完毕';
+  else if (mg < 20) status = '未达酒驾标准（< 20 mg/100mL）';
+  else if (mg < 80) status = '已达酒后驾驶标准（20 ~ 80 mg/100mL）';
+  else status = '已达醉酒驾驶标准（≥ 80 mg/100mL）';
+  const toZero = bac > 0 ? bac / 0.015 : 0;
+  const toSafe = mg > 20 ? (mg - 20) / 15 : 0;
+  const lines = [
+    '摄入酒精量: ' + grams.toFixed(2) + ' g',
+    '体重 / 性别系数: ' + weight + ' kg / ' + r.toFixed(2),
+    '',
+    '估算血液酒精浓度: ' + mg.toFixed(1) + ' mg/100mL（约 ' + bac.toFixed(3) + '% BAC）',
+    '状态提示: ' + status,
+    '',
+    '完全代谢（归零）预计还需: ' + toZero.toFixed(1) + ' 小时',
+    mg > 20 ? '降至酒驾线（20mg/100mL）以下预计还需: ' + toSafe.toFixed(1) + ' 小时' : '',
+    '',
+    '参考标准：饮酒驾车 ≥ 20mg/100mL，醉酒驾车 ≥ 80mg/100mL。',
+    '⚠️ 以上为理论估算，个体差异极大（肝代谢能力、空腹、服药等），绝不可作为能否开车的依据，喝酒不开车！'
+  ];
+  out.textContent = lines.filter(l => l !== '').join('\n');
+}
+
+// ============ 分期真实利率计算器 ============
+function instIrr(principal, n, feeRate) {
+  const pmt = principal / n + principal * feeRate;
+  const npv = i => {
+    let s = 0;
+    for (let k = 1; k <= n; k++) s += pmt / Math.pow(1 + i, k);
+    return s - principal;
+  };
+  let lo = 0, hi = 1;
+  for (let it = 0; it < 200; it++) {
+    const mid = (lo + hi) / 2;
+    if (npv(mid) > 0) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+function calcInstallment() {
+  const out = document.getElementById('inst-result');
+  out.style.display = 'block';
+  const amount = parseFloat(document.getElementById('inst-amount').value);
+  const term = parseInt(document.getElementById('inst-term').value, 10);
+  const feeRate = parseFloat(document.getElementById('inst-fee').value);
+  if (isNaN(amount) || amount <= 0) { out.textContent = '❌ 请输入有效的分期金额。'; return; }
+  if (isNaN(term) || term < 1) { out.textContent = '❌ 请选择分期期数。'; return; }
+  if (isNaN(feeRate) || feeRate < 0 || feeRate > 10) { out.textContent = '❌ 每期费率请输入 0 ~ 10 之间（百分数）。'; return; }
+  const f = feeRate / 100;
+  const pmt = amount / term + amount * f;
+  const totalFee = amount * f * term;
+  const totalPay = amount + totalFee;
+  const nominal = totalFee / amount * 100;
+  const monthly = instIrr(amount, term, f);
+  const realApr = monthly * 12 * 100;
+  const lines = [
+    '分期金额: ' + amount.toFixed(2) + ' 元',
+    '分期期数: ' + term + ' 期',
+    '每期费率: ' + feeRate + '%',
+    '',
+    '每期还款: ' + pmt.toFixed(2) + ' 元',
+    '总手续费: ' + totalFee.toFixed(2) + ' 元',
+    '还款总额: ' + totalPay.toFixed(2) + ' 元',
+    '名义总费率: ' + nominal.toFixed(2) + '%（平台常宣传的口径）',
+    '',
+    '⭐ 估算真实年化利率（IRR）: ' + realApr.toFixed(2) + '%'
+  ];
+  if (feeRate > 0) {
+    lines.push('约为「每期费率 × 12 = ' + (feeRate * 12).toFixed(2) + '%」的 ' + (realApr / (feeRate * 12)).toFixed(2) + ' 倍');
+  }
+  lines.push('', '说明：手续费按全额本金计算，但本金逐月减少，所以真实年化远高于名义费率。');
+  out.textContent = lines.join('\n');
+}
+
+// ============ XML 格式化 ============
+function xmlTokenize(str) {
+  const reg = /(<\?[\s\S]*?\?>|<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<!DOCTYPE[^>]*>|<\/[^>]+>|<[^>]+>|[^<]+)/g;
+  return str.match(reg) || [];
+}
+function xmlFormat() {
+  const out = document.getElementById('xml-result');
+  out.style.display = 'block';
+  const input = document.getElementById('xml-input').value.trim();
+  if (!input) { out.textContent = '❌ 请输入 XML 内容。'; return; }
+  const tokens = xmlTokenize(input);
+  const lines = [];
+  const stack = [];
+  let depth = 0, error = '';
+  const pad = d => '  '.repeat(d);
+  for (let i = 0; i < tokens.length; i++) {
+    const tok = tokens[i].trim();
+    if (!tok) continue;
+    if (tok.startsWith('<?') || tok.startsWith('<!--') || tok.startsWith('<!')) {
+      lines.push(pad(depth) + tok);
+      continue;
+    }
+    if (tok.startsWith('</')) {
+      if (!stack.length) { error = '多余的结束标签：' + tok; break; }
+      const open = stack.pop();
+      if (open !== tok.slice(2, -1).trim()) { error = '标签不匹配：<' + open + '> 与 ' + tok; break; }
+      depth = Math.max(0, depth - 1);
+      lines.push(pad(depth) + tok);
+      continue;
+    }
+    if (tok.startsWith('<')) {
+      if (/\/>\s*$/.test(tok)) { lines.push(pad(depth) + tok); continue; }
+      const tag = tok.replace(/^</, '').split(/[\s>]/)[0];
+      lines.push(pad(depth) + tok);
+      depth++;
+      stack.push(tag);
+      continue;
+    }
+    lines.push(pad(depth) + tok);
+  }
+  if (!error && stack.length) error = '未闭合的标签：<' + stack[stack.length - 1] + '>';
+  if (error) { out.textContent = '❌ XML 解析错误：' + error; return; }
+  out.textContent = lines.join('\n');
+}
+function xmlMinify() {
+  const out = document.getElementById('xml-result');
+  out.style.display = 'block';
+  const input = document.getElementById('xml-input').value.trim();
+  if (!input) { out.textContent = '❌ 请输入 XML 内容。'; return; }
+  out.textContent = input.replace(/>\s+</g, '><').trim();
+}
+
+safeInit(() => spRender(), 'spRender');
+safeInit(() => calcFullReduction(), 'calcFullReduction');
+safeInit(() => calcAlcohol(), 'calcAlcohol');
+safeInit(() => calcInstallment(), 'calcInstallment');
+safeInit(() => xmlFormat(), 'xmlFormat');
 
 // ============ Search & Theme ============
 function filterTools() {
