@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等119个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等124个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等119个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等124个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等119个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等124个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -488,6 +488,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#alcohol-calc" data-tool="alcohol-calc"><span class="icon">🍺</span>酒精代谢计算</a></li>
     <li><a href="#installment-rate" data-tool="installment-rate"><span class="icon">💳</span>分期真实利率</a></li>
     <li><a href="#xml-formatter" data-tool="xml-formatter"><span class="icon">📐</span>XML 格式化</a></li>
+    <li class="category">今日推荐</li>
+    <li><a href="#overtime-calc" data-tool="overtime-calc"><span class="icon">🕐</span>加班费计算器</a></li>
+    <li><a href="#child-height" data-tool="child-height"><span class="icon">📏</span>子女身高预测</a></li>
+    <li><a href="#unicode-escape" data-tool="unicode-escape"><span class="icon">🔡</span>Unicode转义转换</a></li>
+    <li><a href="#md-table" data-tool="md-table"><span class="icon">📋</span>Markdown表格生成</a></li>
+    <li><a href="#sudoku" data-tool="sudoku"><span class="icon">🧩</span>数独游戏</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3351,6 +3357,129 @@ console.log('代码块');
     <pre class="result-box" id="xml-result" style="display:none;">--</pre>
   </section>
 
+  <!-- 加班费计算器 -->
+  <section class="tool-panel" id="panel-overtime-calc">
+    <h2>加班费计算器</h2>
+    <p class="desc">按《劳动法》常见口径估算加班工资：工作日 1.5 倍、休息日 2 倍、法定节假日 3 倍（月计薪天数默认 21.75 天，日工时 8 小时）。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">月工资（元）</div>
+        <input type="number" id="ovt-salary" min="0" step="0.01" value="8000">
+      </div>
+      <div>
+        <div class="label">月计薪天数</div>
+        <input type="number" id="ovt-days" min="1" step="0.01" value="21.75">
+      </div>
+    </div>
+    <div class="flex-row">
+      <div>
+        <div class="label">工作日加班（小时）</div>
+        <input type="number" id="ovt-weekday" min="0" step="0.5" value="10">
+      </div>
+      <div>
+        <div class="label">休息日加班（小时）</div>
+        <input type="number" id="ovt-weekend" min="0" step="0.5" value="8">
+      </div>
+      <div>
+        <div class="label">节假日加班（小时）</div>
+        <input type="number" id="ovt-holiday" min="0" step="0.5" value="0">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcOvertime()">🕐 计算加班费</button>
+      <button class="btn btn-secondary" onclick="copyText('ovt-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="ovt-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 子女身高预测 -->
+  <section class="tool-panel" id="panel-child-height">
+    <h2>子女身高预测</h2>
+    <p class="desc">依据父母身高用「遗传靶身高」公式估算孩子成年身高及 ±5cm 正常范围，仅供家庭参考。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">父亲身高（cm）</div>
+        <input type="number" id="chh-father" min="100" max="250" step="0.1" value="175">
+      </div>
+      <div>
+        <div class="label">母亲身高（cm）</div>
+        <input type="number" id="chh-mother" min="100" max="250" step="0.1" value="162">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcChildHeight()">📏 预测身高</button>
+      <button class="btn btn-secondary" onclick="copyText('chh-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="chh-boy">--</div><div class="lbl">男孩预测(cm)</div></div>
+      <div class="stat-card"><div class="num" id="chh-girl">--</div><div class="lbl">女孩预测(cm)</div></div>
+    </div>
+    <pre class="result-box" id="chh-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- Unicode 转义转换 -->
+  <section class="tool-panel" id="panel-unicode-escape">
+    <h2>Unicode 转义转换</h2>
+    <p class="desc">在普通文本与 \uXXXX 转义序列之间互转，支持中英文与 emoji 混排，处理前后端乱码时很实用。</p>
+    <textarea id="uni-input">你好，World！</textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="uniEncode()">🔒 转 Unicode</button>
+      <button class="btn" onclick="uniDecode()">🔓 还原文本</button>
+      <button class="btn btn-secondary" onclick="uniSwap()">🔁 结果回填</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('uni-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="uni-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- Markdown 表格生成器 -->
+  <section class="tool-panel" id="panel-md-table">
+    <h2>Markdown 表格生成器</h2>
+    <p class="desc">粘贴来自 Excel / CSV / 纯文本的表格数据（支持逗号、制表符、竖线分隔），一键生成对齐的 Markdown 表格。</p>
+    <textarea id="mdt-input">姓名,年龄,城市
+张三,25,北京
+李四,30,上海</textarea>
+    <div class="flex-row">
+      <div>
+        <div class="label">对齐方式</div>
+        <select id="mdt-align">
+          <option value="left">左对齐</option>
+          <option value="center">居中</option>
+          <option value="right">右对齐</option>
+          <option value="none">不对齐</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">首行作为表头</div>
+        <select id="mdt-header">
+          <option value="yes">是</option>
+          <option value="no">否</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="genMdTable()">📋 生成表格</button>
+      <button class="btn btn-secondary" onclick="copyText('mdt-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="mdt-result" style="display:none;">--</pre>
+  </section>
+
+  <!-- 数独游戏 -->
+  <section class="tool-panel" id="panel-sudoku">
+    <h2>数独游戏</h2>
+    <p class="desc">经典 9×9 数独，每行、每列、每个 3×3 宫都要填入 1-9 且不重复。点击空格输入数字，支持检查与查看答案。</p>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sud-filled">0/81</div><div class="lbl">已填格子</div></div>
+      <div class="stat-card"><div class="num" id="sud-time">0s</div><div class="lbl">用时</div></div>
+    </div>
+    <div id="sud-board" style="display:grid;grid-template-columns:repeat(9,1fr);gap:2px;margin-top:16px;max-width:400px;background:var(--border);padding:2px;border-radius:var(--radius);"></div>
+    <div class="btn-group">
+      <button class="btn" onclick="sudNew()">🔀 新一局</button>
+      <button class="btn btn-secondary" onclick="sudCheck()">✅ 检查</button>
+      <button class="btn btn-secondary" onclick="sudSolve()">💡 查看答案</button>
+    </div>
+    <div class="result-box" id="sud-result">点击「新一局」开始游戏</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3358,7 +3487,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 119个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 124个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -8884,6 +9013,265 @@ safeInit(() => calcFullReduction(), 'calcFullReduction');
 safeInit(() => calcAlcohol(), 'calcAlcohol');
 safeInit(() => calcInstallment(), 'calcInstallment');
 safeInit(() => xmlFormat(), 'xmlFormat');
+
+// ============ 加班费计算器 ============
+function ovtNum(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function calcOvertime() {
+  const out = document.getElementById('ovt-result');
+  out.style.display = 'block';
+  const salary = ovtNum('ovt-salary');
+  const days = ovtNum('ovt-days');
+  const wd = ovtNum('ovt-weekday');
+  const we = ovtNum('ovt-weekend');
+  const hol = ovtNum('ovt-holiday');
+  if (salary <= 0 || days <= 0) { out.textContent = '❌ 月工资与月计薪天数需大于 0。'; return; }
+  if (wd < 0 || we < 0 || hol < 0) { out.textContent = '❌ 加班小时数不能为负数。'; return; }
+  const daily = salary / days;
+  const hourly = daily / 8;
+  const p1 = hourly * 1.5 * wd;
+  const p2 = hourly * 2 * we;
+  const p3 = hourly * 3 * hol;
+  const total = p1 + p2 + p3;
+  const money = n => '¥' + n.toFixed(2);
+  out.textContent =
+    '日工资: ' + money(daily) + '\n' +
+    '时工资: ' + money(hourly) + '\n' +
+    '--------------------------------\n' +
+    '工作日加班 (' + wd + 'h × 1.5 倍): ' + money(p1) + '\n' +
+    '休息日加班 (' + we + 'h × 2.0 倍): ' + money(p2) + '\n' +
+    '节假日加班 (' + hol + 'h × 3.0 倍): ' + money(p3) + '\n' +
+    '--------------------------------\n' +
+    '加班费合计: ' + money(total) + '\n' +
+    '总加班时长: ' + (wd + we + hol) + ' 小时\n' +
+    '本月应发合计: ' + money(salary + total);
+}
+
+// ============ 子女身高预测 ============
+function chhNum(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function calcChildHeight() {
+  const out = document.getElementById('chh-result');
+  out.style.display = 'block';
+  const f = chhNum('chh-father'), m = chhNum('chh-mother');
+  if (f <= 0 || m <= 0) { out.textContent = '❌ 请输入父母身高。'; return; }
+  if (f < 100 || f > 250 || m < 100 || m > 250) { out.textContent = '❌ 身高请填写 100~250 cm 之间的数值。'; return; }
+  const boy = (f + m + 13) / 2;
+  const girl = (f + m - 13) / 2;
+  document.getElementById('chh-boy').textContent = boy.toFixed(1);
+  document.getElementById('chh-girl').textContent = girl.toFixed(1);
+  const range = v => (v - 5).toFixed(1) + ' ~ ' + (v + 5).toFixed(1) + ' cm';
+  out.textContent =
+    '👦 男孩预测身高: ' + boy.toFixed(1) + ' cm\n' +
+    '   正常范围(±5cm): ' + range(boy) + '\n' +
+    '👧 女孩预测身高: ' + girl.toFixed(1) + ' cm\n' +
+    '   正常范围(±5cm): ' + range(girl) + '\n' +
+    '--------------------------------\n' +
+    '父母平均身高: ' + ((f + m) / 2).toFixed(1) + ' cm\n' +
+    '注：遗传约决定 70%，营养、睡眠、运动同样重要，结果仅供参考。';
+}
+
+// ============ Unicode 转义转换 ============
+function uniEncode() {
+  const out = document.getElementById('uni-result');
+  out.style.display = 'block';
+  const text = document.getElementById('uni-input').value;
+  if (!text) { out.textContent = '❌ 请输入需要转换的文本。'; return; }
+  let res = '';
+  for (const ch of text) {
+    const code = ch.codePointAt(0);
+    if (code > 0xFFFF) {
+      const h = code - 0x10000;
+      const hi = 0xD800 + (h >> 10);
+      const lo = 0xDC00 + (h & 0x3FF);
+      res += '\\u' + hi.toString(16).padStart(4, '0') + '\\u' + lo.toString(16).padStart(4, '0');
+    } else {
+      res += '\\u' + code.toString(16).padStart(4, '0');
+    }
+  }
+  out.textContent = res;
+}
+function uniDecode() {
+  const out = document.getElementById('uni-result');
+  out.style.display = 'block';
+  const text = document.getElementById('uni-input').value;
+  if (!text) { out.textContent = '❌ 请输入需要还原的内容。'; return; }
+  let found = false;
+  const decoded = text.replace(/\\u\{([0-9a-fA-F]+)\}|\\u([0-9a-fA-F]{4})/g, (mt, brace, plain) => {
+    found = true;
+    return String.fromCodePoint(parseInt(brace || plain, 16));
+  });
+  out.textContent = found ? decoded : '（未发现 \\uXXXX 转义序列，原样输出）\n' + text;
+}
+function uniSwap() {
+  const out = document.getElementById('uni-result');
+  if (out.style.display === 'none' || !out.textContent || out.textContent === '--') {
+    showToast('请先生成结果'); return;
+  }
+  document.getElementById('uni-input').value = out.textContent;
+}
+
+// ============ Markdown 表格生成器 ============
+function genMdTable() {
+  const out = document.getElementById('mdt-result');
+  out.style.display = 'block';
+  const raw = document.getElementById('mdt-input').value.trim();
+  if (!raw) { out.textContent = '❌ 请粘贴表格数据。'; return; }
+  const hasHeader = document.getElementById('mdt-header').value === 'yes';
+  const align = document.getElementById('mdt-align').value;
+  const splitLine = l => {
+    if (l.includes('\t')) return l.split('\t').map(c => c.trim());
+    if (l.includes('|')) return l.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+    return l.split(',').map(c => c.trim());
+  };
+  let matrix = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(splitLine);
+  matrix = matrix.filter(r => !r.every(c => c === '' || /^:?-{2,}:?$/.test(c)));
+  if (!matrix.length) { out.textContent = '❌ 未能解析出表格数据。'; return; }
+  const cols = Math.max(...matrix.map(r => r.length));
+  matrix = matrix.map(r => { const c = r.slice(); while (c.length < cols) c.push(''); return c; });
+  const esc = s => s.replace(/\|/g, '\\|');
+  let header, body;
+  if (hasHeader) { header = matrix[0]; body = matrix.slice(1); }
+  else { header = Array.from({ length: cols }, (_, i) => '列' + (i + 1)); body = matrix; }
+  const sep = Array.from({ length: cols }, () => {
+    if (align === 'center') return ':---:';
+    if (align === 'right') return '---:';
+    if (align === 'left') return ':---';
+    return '---';
+  });
+  const line = arr => '| ' + arr.map(esc).join(' | ') + ' |';
+  out.textContent = [line(header), line(sep), ...body.map(line)].join('\n');
+}
+
+// ============ 数独游戏 ============
+let SUD_SOLUTION = [], SUD_ELAPSED = 0, SUD_TIMER = null, SUD_STARTED = false;
+function sudShuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+function sudValid(g, r, c, v) {
+  for (let i = 0; i < 9; i++) { if (g[r][i] === v || g[i][c] === v) return false; }
+  const br = Math.floor(r / 3) * 3, bc = Math.floor(c / 3) * 3;
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) if (g[br + i][bc + j] === v) return false;
+  return true;
+}
+function sudFill(g) {
+  for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) {
+    if (g[r][c] === 0) {
+      const nums = sudShuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      for (let k = 0; k < nums.length; k++) {
+        if (sudValid(g, r, c, nums[k])) {
+          g[r][c] = nums[k];
+          if (sudFill(g)) return true;
+          g[r][c] = 0;
+        }
+      }
+      return false;
+    }
+  }
+  return true;
+}
+function sudBuildBoard() {
+  const board = document.getElementById('sud-board');
+  if (board.childElementCount === 81) return;
+  board.innerHTML = '';
+  for (let i = 0; i < 81; i++) {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.maxLength = 1;
+    inp.setAttribute('inputmode', 'numeric');
+    inp.style.cssText = 'width:100%;aspect-ratio:1/1;text-align:center;padding:0;font-size:18px;border:none;border-radius:4px;background:var(--card-bg);color:var(--text);';
+    inp.addEventListener('input', () => {
+      inp.value = inp.value.replace(/[^1-9]/g, '').slice(0, 1);
+      sudUpdateCount();
+    });
+    board.appendChild(inp);
+  }
+}
+function sudUpdateCount() {
+  const cells = document.querySelectorAll('#sud-board input');
+  if (!cells.length) return;
+  let filled = 0;
+  cells.forEach(inp => { if (inp.value) filled++; });
+  document.getElementById('sud-filled').textContent = filled + '/81';
+}
+function sudNew() {
+  sudBuildBoard();
+  const g = Array.from({ length: 9 }, () => Array(9).fill(0));
+  sudFill(g);
+  SUD_SOLUTION = g.map(r => r.slice());
+  const puzzle = g.map(r => r.slice());
+  let removed = 0, guard = 0;
+  while (removed < 45 && guard < 800) {
+    guard++;
+    const r = Math.floor(Math.random() * 9), c = Math.floor(Math.random() * 9);
+    if (puzzle[r][c] !== 0) { puzzle[r][c] = 0; removed++; }
+  }
+  const cells = document.querySelectorAll('#sud-board input');
+  cells.forEach((inp, i) => {
+    const r = Math.floor(i / 9), c = i % 9, v = puzzle[r][c];
+    inp.value = v ? v : '';
+    inp.readOnly = !!v;
+    inp.style.outline = '';
+    inp.style.fontWeight = v ? '700' : '400';
+    inp.style.color = v ? 'var(--accent-hover)' : 'var(--text)';
+    inp.style.background = v ? 'var(--input-bg)' : 'var(--card-bg)';
+  });
+  SUD_ELAPSED = 0; SUD_STARTED = true;
+  document.getElementById('sud-time').textContent = '0s';
+  if (SUD_TIMER) clearInterval(SUD_TIMER);
+  SUD_TIMER = setInterval(() => {
+    if (!SUD_STARTED) return;
+    SUD_ELAPSED++;
+    document.getElementById('sud-time').textContent = SUD_ELAPSED + 's';
+  }, 1000);
+  sudUpdateCount();
+  document.getElementById('sud-result').textContent = '已生成新题目，点击空格输入 1-9 开始挑战！';
+}
+function sudReadGrid() {
+  const g = Array.from({ length: 9 }, () => Array(9).fill(0));
+  document.querySelectorAll('#sud-board input').forEach((inp, i) => {
+    g[Math.floor(i / 9)][i % 9] = inp.value ? parseInt(inp.value, 10) : 0;
+  });
+  return g;
+}
+function sudCheck() {
+  const out = document.getElementById('sud-result');
+  if (!SUD_STARTED) { out.textContent = '请先点击「新一局」开始游戏。'; return; }
+  const g = sudReadGrid();
+  const cells = document.querySelectorAll('#sud-board input');
+  let empty = 0, wrong = 0;
+  cells.forEach((inp, i) => {
+    const r = Math.floor(i / 9), c = i % 9, v = g[r][c];
+    inp.style.outline = '';
+    if (v === 0) { empty++; if (!inp.readOnly) inp.style.outline = '1px dashed var(--text-secondary)'; return; }
+    if (SUD_SOLUTION[r][c] !== v) { wrong++; inp.style.outline = '2px solid var(--danger)'; }
+  });
+  if (wrong) { out.textContent = '❌ 有 ' + wrong + ' 个数字填错啦（已用红框标出）。'; return; }
+  if (empty) { out.textContent = '✅ 目前填入的数字全部正确，还剩 ' + empty + ' 个空格。'; return; }
+  if (SUD_TIMER) clearInterval(SUD_TIMER);
+  out.textContent = '🎉 恭喜完成！本局用时 ' + SUD_ELAPSED + ' 秒。';
+}
+function sudSolve() {
+  const out = document.getElementById('sud-result');
+  if (!SUD_STARTED) { out.textContent = '请先点击「新一局」开始游戏。'; return; }
+  document.querySelectorAll('#sud-board input').forEach((inp, i) => {
+    const r = Math.floor(i / 9), c = i % 9;
+    inp.value = SUD_SOLUTION[r][c];
+    inp.style.outline = '';
+    if (!inp.readOnly) inp.style.color = 'var(--accent-hover)';
+  });
+  if (SUD_TIMER) clearInterval(SUD_TIMER);
+  sudUpdateCount();
+  out.textContent = '💡 已显示正确答案，点击「新一局」再来一局吧。';
+}
+
+safeInit(() => calcOvertime(), 'calcOvertime');
+safeInit(() => calcChildHeight(), 'calcChildHeight');
+safeInit(() => uniEncode(), 'uniEncode');
+safeInit(() => genMdTable(), 'genMdTable');
+safeInit(() => sudNew(), 'sudNew');
 
 // ============ Search & Theme ============
 function filterTools() {
