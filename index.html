@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等129个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等134个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等129个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等134个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等129个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等134个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -500,6 +500,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#base32" data-tool="base32"><span class="icon">🔡</span>Base32 编解码</a></li>
     <li><a href="#vigenere" data-tool="vigenere"><span class="icon">🔑</span>维吉尼亚密码</a></li>
     <li><a href="#simon-game" data-tool="simon-game"><span class="icon">🎮</span>颜色记忆</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#tetris" data-tool="tetris"><span class="icon">🎮</span>俄罗斯方块</a></li>
+    <li><a href="#gitignore-generator" data-tool="gitignore-generator"><span class="icon">🚫</span>.gitignore 生成器</a></li>
+    <li><a href="#blood-pressure" data-tool="blood-pressure"><span class="icon">🩺</span>血压健康评估</a></li>
+    <li><a href="#pet-age" data-tool="pet-age"><span class="icon">🐾</span>宠物年龄换算</a></li>
+    <li><a href="#aes-crypto" data-tool="aes-crypto"><span class="icon">🔐</span>AES 加解密</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3577,6 +3583,105 @@ console.log('代码块');
     <div class="result-box" id="simon-status">点击「开始游戏」，记住颜色闪烁的顺序并依次点出。</div>
   </section>
 
+  <!-- 俄罗斯方块 -->
+  <section class="tool-panel" id="panel-tetris">
+    <h2>🎮 俄罗斯方块</h2>
+    <p class="desc">经典俄罗斯方块：旋转并移动下落的方块，铺满整行即可消除。使用 ← → 移动、↑ 旋转、↓ 加速，空格暂停。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="tetris-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="tetris-lines">0</div><div class="lbl">消除行</div></div>
+      <div class="stat-card"><div class="num" id="tetris-best">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <canvas id="tetris-canvas" width="300" height="600" style="width:100%;max-width:300px;display:block;margin:0 auto;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn btn-sm" onclick="tetrisMove(-1)">←</button>
+      <button class="btn btn-sm" onclick="tetrisRotate()">⟳ 旋转</button>
+      <button class="btn btn-sm" onclick="tetrisMove(1)">→</button>
+      <button class="btn btn-sm" onclick="tetrisSoftDrop()">↓ 下落</button>
+      <button class="btn" id="tetris-btn" onclick="tetrisToggle()">🎮 开始游戏</button>
+    </div>
+    <div class="result-box" id="tetris-msg" style="margin-top:12px;text-align:center;">点击「开始游戏」，用方向键控制方块。</div>
+  </section>
+
+  <!-- .gitignore 生成器 -->
+  <section class="tool-panel" id="panel-gitignore-generator">
+    <h2>🚫 .gitignore 生成器</h2>
+    <p class="desc">勾选常用的开发语言、框架与操作系统，一键生成对应的 .gitignore 文件内容，支持复制或下载。</p>
+    <div id="gi-options" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;"></div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="genGitignore()">⚙️ 生成 .gitignore</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('gi-result')">📋 复制</button>
+      <button class="btn btn-secondary btn-sm" onclick="downloadGitignore()">⬇️ 下载</button>
+    </div>
+    <pre class="result-box" id="gi-result">勾选上方选项后点击「生成 .gitignore」</pre>
+  </section>
+
+  <!-- 血压健康评估 -->
+  <section class="tool-panel" id="panel-blood-pressure">
+    <h2>🩺 血压健康评估</h2>
+    <p class="desc">输入收缩压与舒张压，快速判断所处血压区间并给出生活建议。结果仅供参考，不能替代医生诊断。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">收缩压（高压 mmHg）</div>
+        <input type="number" id="bp-sys" placeholder="如 120" min="40" max="300">
+      </div>
+      <div>
+        <div class="label">舒张压（低压 mmHg）</div>
+        <input type="number" id="bp-dia" placeholder="如 80" min="20" max="200">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="assessBP()">🩺 评估</button>
+      <button class="btn btn-secondary btn-sm" onclick="loadBPSample()">📄 示例</button>
+    </div>
+    <div class="result-box" id="bp-result">请输入血压数值后点击「评估」</div>
+  </section>
+
+  <!-- 宠物年龄换算 -->
+  <section class="tool-panel" id="panel-pet-age">
+    <h2>🐾 宠物年龄换算</h2>
+    <p class="desc">把猫或狗的年龄换算成相当于人类的年龄。狗的换算会根据体型大小有所差异，帮助更准确地了解宠物的生理阶段。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">宠物类型</div>
+        <select id="pet-type" style="font-family:inherit;" onchange="petAgeSync()">
+          <option value="dog-small">狗（小型 &lt;10kg）</option>
+          <option value="dog-medium">狗（中型 10-25kg）</option>
+          <option value="dog-large">狗（大型 &gt;25kg）</option>
+          <option value="cat">猫</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">宠物年龄（岁）</div>
+        <input type="number" id="pet-years" placeholder="如 3" min="0" max="40" step="0.5" value="3">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPetAge()">🐾 换算</button>
+    </div>
+    <div class="result-box" id="pet-result" style="display:none;"></div>
+  </section>
+
+  <!-- AES 加解密 -->
+  <section class="tool-panel" id="panel-aes-crypto">
+    <h2>🔐 AES 加解密</h2>
+    <p class="desc">使用 AES 对称加密对文本进行加密或解密，密钥由你自定义。所有运算均在浏览器本地完成，数据不会上传。</p>
+    <div class="label">文本 / 密文</div>
+    <textarea id="aes-input" placeholder="输入要加密的明文，或粘贴要解密的 Base64 密文……" style="min-height:140px;"></textarea>
+    <div class="flex-row">
+      <div>
+        <div class="label">密钥（自定义密码）</div>
+        <input type="text" id="aes-key" placeholder="请输入密钥，如 my-secret-key">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="aesEncrypt()">🔒 加密</button>
+      <button class="btn btn-secondary" onclick="aesDecrypt()">🔓 解密</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('aes-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="aes-result">结果将显示在这里</pre>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3584,7 +3689,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 129个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 134个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -9534,6 +9639,324 @@ function simonPress(i) {
 }
 
 safeInit(() => simonInit(), 'simonInit');
+
+// ============ 俄罗斯方块（Tetris） ============
+const TETRIS_COLS = 10, TETRIS_ROWS = 20, TETRIS_CELL = 30;
+const TETRIS_SHAPES = [
+  [[1,1,1,1]],
+  [[1,1],[1,1]],
+  [[0,1,0],[1,1,1]],
+  [[1,0,0],[1,1,1]],
+  [[0,0,1],[1,1,1]],
+  [[0,1,1],[1,1,0]],
+  [[1,1,0],[0,1,1]],
+];
+const TETRIS_COLORS = ['#22d3ee','#eab308','#a855f7','#3b82f6','#f97316','#22c55e','#ef4444'];
+const tetrisState = { board: [], piece: null, color: '', x: 0, y: 0, timer: null, running: false, over: false, score: 0, lines: 0, best: 0 };
+function tetrisBoardClear() { return Array.from({ length: TETRIS_ROWS }, () => new Array(TETRIS_COLS).fill(null)); }
+function tetrisCollide(px, py, shape) {
+  for (let y = 0; y < shape.length; y++) {
+    for (let x = 0; x < shape[y].length; x++) {
+      if (!shape[y][x]) continue;
+      const nx = px + x, ny = py + y;
+      if (nx < 0 || nx >= TETRIS_COLS || ny >= TETRIS_ROWS) return true;
+      if (ny >= 0 && tetrisState.board[ny][nx]) return true;
+    }
+  }
+  return false;
+}
+function tetrisSpawn() {
+  const t = Math.floor(Math.random() * TETRIS_SHAPES.length);
+  tetrisState.piece = TETRIS_SHAPES[t].map(r => r.slice());
+  tetrisState.color = TETRIS_COLORS[t];
+  tetrisState.x = Math.floor((TETRIS_COLS - tetrisState.piece[0].length) / 2);
+  tetrisState.y = 0;
+  if (tetrisCollide(tetrisState.x, tetrisState.y, tetrisState.piece)) tetrisGameOver();
+}
+function tetrisCellDraw(ctx, x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x * TETRIS_CELL + 1, y * TETRIS_CELL + 1, TETRIS_CELL - 2, TETRIS_CELL - 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.fillRect(x * TETRIS_CELL + 1, y * TETRIS_CELL + 1, TETRIS_CELL - 2, 4);
+}
+function tetrisDraw() {
+  const c = document.getElementById('tetris-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = 'rgba(128,128,128,0.15)';
+  ctx.lineWidth = 1;
+  for (let x = 1; x < TETRIS_COLS; x++) { ctx.beginPath(); ctx.moveTo(x * TETRIS_CELL, 0); ctx.lineTo(x * TETRIS_CELL, c.height); ctx.stroke(); }
+  for (let y = 1; y < TETRIS_ROWS; y++) { ctx.beginPath(); ctx.moveTo(0, y * TETRIS_CELL); ctx.lineTo(c.width, y * TETRIS_CELL); ctx.stroke(); }
+  for (let y = 0; y < TETRIS_ROWS; y++) {
+    for (let x = 0; x < TETRIS_COLS; x++) {
+      if (tetrisState.board[y][x]) tetrisCellDraw(ctx, x, y, tetrisState.board[y][x]);
+    }
+  }
+  if (tetrisState.piece) {
+    tetrisState.piece.forEach((row, dy) => row.forEach((v, dx) => {
+      if (v) tetrisCellDraw(ctx, tetrisState.x + dx, tetrisState.y + dy, tetrisState.color);
+    }));
+  }
+}
+function tetrisLock() {
+  tetrisState.piece.forEach((row, dy) => row.forEach((v, dx) => {
+    if (v) {
+      const ny = tetrisState.y + dy, nx = tetrisState.x + dx;
+      if (ny >= 0) tetrisState.board[ny][nx] = tetrisState.color;
+    }
+  }));
+  let cleared = 0;
+  tetrisState.board = tetrisState.board.filter(row => {
+    if (row.every(cell => cell)) { cleared++; return false; }
+    return true;
+  });
+  while (tetrisState.board.length < TETRIS_ROWS) tetrisState.board.unshift(new Array(TETRIS_COLS).fill(null));
+  if (cleared) {
+    tetrisState.lines += cleared;
+    tetrisState.score += cleared * 100;
+    document.getElementById('tetris-lines').textContent = tetrisState.lines;
+    document.getElementById('tetris-score').textContent = tetrisState.score;
+  }
+  tetrisSpawn();
+}
+function tetrisSpeed() {
+  const lvl = Math.floor(tetrisState.lines / 10);
+  return Math.max(120, 600 - lvl * 60);
+}
+function tetrisSetTimer(ms) {
+  if (tetrisState.timer) clearInterval(tetrisState.timer);
+  tetrisState.timer = setInterval(tetrisTick, ms);
+}
+function tetrisTick() {
+  if (!tetrisState.running) return;
+  const panel = document.getElementById('panel-tetris');
+  if (!panel || !panel.classList.contains('active')) { tetrisPause(); return; }
+  if (!tetrisCollide(tetrisState.x, tetrisState.y + 1, tetrisState.piece)) tetrisState.y++;
+  else tetrisLock();
+  tetrisDraw();
+}
+function tetrisMove(dx) {
+  if (!tetrisState.running) return;
+  if (!tetrisCollide(tetrisState.x + dx, tetrisState.y, tetrisState.piece)) {
+    tetrisState.x += dx;
+    tetrisDraw();
+  }
+}
+function tetrisRotate() {
+  if (!tetrisState.running) return;
+  const p = tetrisState.piece;
+  const rotated = p[0].map((_, i) => p.map(r => r[i]).reverse());
+  [-1, 0, 1, 2, -2].some(off => {
+    if (!tetrisCollide(tetrisState.x + off, tetrisState.y, rotated)) {
+      tetrisState.x += off;
+      tetrisState.piece = rotated;
+      return true;
+    }
+    return false;
+  });
+  tetrisDraw();
+}
+function tetrisSoftDrop() { if (tetrisState.running) tetrisTick(); }
+function tetrisStart() {
+  tetrisState.board = tetrisBoardClear();
+  tetrisState.score = 0; tetrisState.lines = 0; tetrisState.over = false; tetrisState.running = true;
+  document.getElementById('tetris-score').textContent = '0';
+  document.getElementById('tetris-lines').textContent = '0';
+  tetrisSpawn();
+  tetrisDraw();
+  tetrisSetTimer(tetrisSpeed());
+  document.getElementById('tetris-btn').textContent = '⏸️ 暂停';
+  document.getElementById('tetris-msg').textContent = '游戏进行中，使用方向键控制方块。';
+}
+function tetrisPause() {
+  tetrisState.running = false;
+  if (tetrisState.timer) { clearInterval(tetrisState.timer); tetrisState.timer = null; }
+  document.getElementById('tetris-btn').textContent = tetrisState.over ? '🎮 重新开始' : '▶️ 继续';
+}
+function tetrisGameOver() {
+  tetrisState.over = true;
+  tetrisState.running = false;
+  if (tetrisState.timer) { clearInterval(tetrisState.timer); tetrisState.timer = null; }
+  if (tetrisState.score > tetrisState.best) {
+    tetrisState.best = tetrisState.score;
+    document.getElementById('tetris-best').textContent = tetrisState.best;
+    try { localStorage.setItem('tetris-best', String(tetrisState.best)); } catch (err) {}
+  }
+  document.getElementById('tetris-btn').textContent = '🎮 重新开始';
+  document.getElementById('tetris-msg').textContent = '💀 游戏结束！本局得分 ' + tetrisState.score + '，点击「重新开始」再来一局。';
+}
+function tetrisToggle() {
+  if (tetrisState.running) { tetrisPause(); document.getElementById('tetris-msg').textContent = '游戏已暂停'; return; }
+  if (tetrisState.over || !tetrisState.piece) { tetrisStart(); return; }
+  tetrisState.running = true;
+  tetrisSetTimer(tetrisSpeed());
+  document.getElementById('tetris-btn').textContent = '⏸️ 暂停';
+  document.getElementById('tetris-msg').textContent = '游戏进行中，使用方向键控制方块。';
+}
+function initTetris() {
+  try { tetrisState.best = parseInt(localStorage.getItem('tetris-best') || '0', 10) || 0; } catch (err) {}
+  const el = document.getElementById('tetris-best');
+  if (el) el.textContent = tetrisState.best;
+  tetrisState.board = tetrisBoardClear();
+  tetrisDraw();
+}
+document.addEventListener('keydown', e => {
+  const panel = document.getElementById('panel-tetris');
+  if (!panel || !panel.classList.contains('active')) return;
+  if (e.key === ' ') { e.preventDefault(); tetrisToggle(); return; }
+  const map = { ArrowLeft: () => tetrisMove(-1), ArrowRight: () => tetrisMove(1), ArrowDown: tetrisSoftDrop, ArrowUp: tetrisRotate };
+  if (map[e.key]) { e.preventDefault(); if (tetrisState.running) map[e.key](); }
+});
+
+// ============ .gitignore 生成器 ============
+const GITIGNORE_PRESETS = {
+  'Node.js': ['node_modules/', 'npm-debug.log*', 'yarn-debug.log*', 'yarn-error.log*', '.pnpm-debug.log*', 'coverage/'],
+  'Python': ['__pycache__/', '*.py[cod]', '*.egg-info/', '.venv/', 'venv/', '.pytest_cache/', '.mypy_cache/'],
+  'Java': ['*.class', 'target/', '*.jar', '*.war', 'build/'],
+  'Go': ['*.exe', '*.test', '*.out', 'vendor/'],
+  'Rust': ['/target/', '**/*.rs.bk'],
+  'Vue / React': ['dist/', '.cache/', '.vite/', 'dist-ssr/', 'node_modules/'],
+  'macOS': ['.DS_Store', '.AppleDouble', '.LSOverride', '._*'],
+  'Windows': ['Thumbs.db', 'ehthumbs.db', 'Desktop.ini', '$RECYCLE.BIN/'],
+  'Linux': ['*~', '.directory', '.Trash-*'],
+  'IDE / 编辑器': ['.idea/', '.vscode/', '*.swp', '*.swo', '.history/'],
+  '环境变量': ['.env', '.env.local', '.env.*.local'],
+  '日志 / 缓存': ['*.log', 'logs/', '.cache/', 'tmp/', '*.tmp'],
+};
+function initGitignore() {
+  const box = document.getElementById('gi-options');
+  if (!box || box.dataset.ready) return;
+  box.innerHTML = Object.keys(GITIGNORE_PRESETS).map((k, i) =>
+    '<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;">' +
+    '<input type="checkbox" class="gi-check" value="' + k + '"' + (i < 4 ? ' checked' : '') + '>' + k + '</label>'
+  ).join('');
+  box.dataset.ready = '1';
+  genGitignore();
+}
+function genGitignore() {
+  const out = document.getElementById('gi-result');
+  if (!out) return;
+  const checks = document.querySelectorAll('.gi-check:checked');
+  if (!checks.length) { out.textContent = '请至少勾选一项开发环境或系统。'; return; }
+  const parts = ['# 由万能工具箱 .gitignore 生成器生成'];
+  checks.forEach(c => {
+    parts.push('', '# ' + c.value);
+    (GITIGNORE_PRESETS[c.value] || []).forEach(line => parts.push(line));
+  });
+  out.textContent = parts.join('\n');
+}
+function downloadGitignore() {
+  const text = document.getElementById('gi-result').textContent;
+  if (!text || text.indexOf('请至少勾选') === 0) { showToast('请先生成内容'); return; }
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = '.gitignore';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast('已下载 .gitignore');
+}
+
+// ============ 血压健康评估 ============
+function bpCategory(sys, dia) {
+  if (sys < 90 || dia < 60) return { level: '低血压', color: '#3b82f6', advice: '血压偏低，注意补充水分与营养，起身时动作放缓，如常感头晕乏力请及时就医。' };
+  if (sys < 120 && dia < 80) return { level: '理想血压', color: '#22c55e', advice: '血压处于理想范围，继续保持规律作息、均衡饮食与适量运动。' };
+  if (sys < 130 && dia < 85) return { level: '正常血压', color: '#22c55e', advice: '血压正常，建议保持健康生活方式并定期监测。' };
+  if (sys < 140 && dia < 90) return { level: '正常高值', color: '#eab308', advice: '血压偏高但尚未达到高血压标准，建议减少盐分摄入、控制体重并规律运动。' };
+  if (sys < 160 && dia < 100) return { level: '1 级高血压', color: '#f97316', advice: '已达 1 级高血压，建议改善生活方式并尽早咨询医生是否需要用药。' };
+  if (sys < 180 && dia < 110) return { level: '2 级高血压', color: '#ef4444', advice: '已达 2 级高血压，请尽快就医评估并进行规范治疗。' };
+  return { level: '3 级高血压', color: '#dc2626', advice: '血压严重升高，请立即就医，避免剧烈活动与情绪波动。' };
+}
+function assessBP() {
+  const out = document.getElementById('bp-result');
+  const sys = parseFloat(document.getElementById('bp-sys').value);
+  const dia = parseFloat(document.getElementById('bp-dia').value);
+  if (!sys || !dia) { out.textContent = '⚠️ 请输入收缩压和舒张压数值。'; return; }
+  if (sys < 40 || sys > 300 || dia < 20 || dia > 200) { out.textContent = '⚠️ 数值超出合理范围，请检查输入。'; return; }
+  const r = bpCategory(sys, dia);
+  out.innerHTML = '血压：' + sys + ' / ' + dia + ' mmHg\n评估结果：<span style="color:' + r.color + ';font-weight:700;">' + r.level + '</span>\n\n建议：' + r.advice + '\n\n（本结果仅供参考，不能替代专业医疗诊断）';
+}
+function loadBPSample() {
+  document.getElementById('bp-sys').value = '135';
+  document.getElementById('bp-dia').value = '88';
+  assessBP();
+}
+function initBP() {
+  const out = document.getElementById('bp-result');
+  if (out) out.textContent = '请输入血压数值后点击「评估」';
+}
+
+// ============ 宠物年龄换算 ============
+function petHumanAge(type, years) {
+  let rate = 4;
+  if (type === 'dog-medium') rate = 5;
+  else if (type === 'dog-large') rate = 6;
+  let human;
+  if (years <= 1) human = years * 15;
+  else if (years <= 2) human = 15 + (years - 1) * 9;
+  else human = 24 + (years - 2) * rate;
+  return human;
+}
+function petStage(human) {
+  if (human < 12) return '幼年阶段';
+  if (human < 25) return '青少年阶段';
+  if (human < 45) return '成年阶段';
+  if (human < 60) return '中年阶段';
+  return '老年阶段';
+}
+function calcPetAge() {
+  const type = document.getElementById('pet-type').value;
+  const years = parseFloat(document.getElementById('pet-years').value);
+  const out = document.getElementById('pet-result');
+  if (isNaN(years) || years < 0) { out.style.display = 'block'; out.textContent = '⚠️ 请输入有效的宠物年龄。'; return; }
+  const human = petHumanAge(type, years);
+  const typeName = { 'cat': '猫', 'dog-small': '小型犬', 'dog-medium': '中型犬', 'dog-large': '大型犬' }[type];
+  out.style.display = 'block';
+  out.innerHTML = '宠物：' + typeName + '，' + years + ' 岁\n相当于人类年龄：约 ' + human.toFixed(1) + ' 岁\n所处阶段：' + petStage(human) + '\n\n换算说明：第 1 年约等于人类 15 岁，第 2 年增至约 24 岁，之后每年按体型换算（猫/小型犬 +4，中型犬 +5，大型犬 +6）。';
+}
+function petAgeSync() { if (document.getElementById('pet-years').value) calcPetAge(); }
+function initPetAge() {
+  const out = document.getElementById('pet-result');
+  if (out) out.style.display = 'none';
+}
+
+// ============ AES 加解密 ============
+function aesEncrypt() {
+  const out = document.getElementById('aes-result');
+  const text = document.getElementById('aes-input').value;
+  const key = document.getElementById('aes-key').value;
+  if (!text) { out.textContent = '⚠️ 请输入要加密的文本。'; return; }
+  if (!key) { out.textContent = '⚠️ 请先设置密钥。'; return; }
+  try {
+    out.textContent = CryptoJS.AES.encrypt(text, key).toString();
+  } catch (err) {
+    out.textContent = '❌ 加密失败：' + err.message;
+  }
+}
+function aesDecrypt() {
+  const out = document.getElementById('aes-result');
+  const text = document.getElementById('aes-input').value.trim();
+  const key = document.getElementById('aes-key').value;
+  if (!text) { out.textContent = '⚠️ 请粘贴要解密的密文。'; return; }
+  if (!key) { out.textContent = '⚠️ 请先输入密钥。'; return; }
+  try {
+    const decoded = CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
+    out.textContent = decoded || '❌ 解密失败：密钥不正确或密文已损坏。';
+  } catch (err) {
+    out.textContent = '❌ 解密失败：密钥不正确或密文格式有误。';
+  }
+}
+function initAes() {
+  const out = document.getElementById('aes-result');
+  if (out) out.textContent = '结果将显示在这里';
+}
+
+safeInit(() => initTetris(), 'initTetris');
+safeInit(() => initGitignore(), 'initGitignore');
+safeInit(() => initBP(), 'initBP');
+safeInit(() => initPetAge(), 'initPetAge');
+safeInit(() => initAes(), 'initAes');
 
 // ============ Search & Theme ============
 function filterTools() {
