@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等134个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等139个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等134个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等139个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等134个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等139个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -506,6 +506,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#blood-pressure" data-tool="blood-pressure"><span class="icon">🩺</span>血压健康评估</a></li>
     <li><a href="#pet-age" data-tool="pet-age"><span class="icon">🐾</span>宠物年龄换算</a></li>
     <li><a href="#aes-crypto" data-tool="aes-crypto"><span class="icon">🔐</span>AES 加解密</a></li>
+    <li class="category">今日上新</li>
+    <li><a href="#paint-calc" data-tool="paint-calc"><span class="icon">🎨</span>乳胶漆用量计算</a></li>
+    <li><a href="#game-24" data-tool="game-24"><span class="icon">🎯</span>24点游戏</a></li>
+    <li><a href="#curl-to-code" data-tool="curl-to-code"><span class="icon">🌀</span>CURL 转代码</a></li>
+    <li><a href="#period-calc" data-tool="period-calc"><span class="icon">🌸</span>经期排卵计算</a></li>
+    <li><a href="#line-sort" data-tool="line-sort"><span class="icon">🔤</span>文本行排序</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3682,6 +3688,142 @@ console.log('代码块');
     <pre class="result-box" id="aes-result">结果将显示在这里</pre>
   </section>
 
+  <!-- 乳胶漆用量计算器 -->
+  <section class="tool-panel" id="panel-paint-calc">
+    <h2>🎨 乳胶漆用量计算器</h2>
+    <p class="desc">输入房间尺寸，估算刷墙所需的乳胶漆用量（按每升约刷 10㎡/遍 计），帮你准确备料、避免浪费。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">房间长（米）</div>
+        <input type="number" id="paint-length" placeholder="如 4" min="0" step="0.1">
+      </div>
+      <div>
+        <div class="label">房间宽（米）</div>
+        <input type="number" id="paint-width" placeholder="如 3" min="0" step="0.1">
+      </div>
+      <div>
+        <div class="label">层高（米）</div>
+        <input type="number" id="paint-height" placeholder="如 2.8" min="0" step="0.1">
+      </div>
+    </div>
+    <div class="flex-row">
+      <div>
+        <div class="label">涂刷遍数</div>
+        <input type="number" id="paint-coats" value="2" min="1" max="5">
+      </div>
+      <div>
+        <div class="label">门窗面积合计（㎡，可填 0）</div>
+        <input type="number" id="paint-openings" value="0" min="0" step="0.1">
+      </div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--text-secondary);">
+      <input type="checkbox" id="paint-ceiling" style="width:auto;"> 同时涂刷天花板
+    </label>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPaint()">🎨 计算用量</button>
+    </div>
+    <div class="result-box" id="paint-result">请输入房间尺寸后点击「计算用量」</div>
+  </section>
+
+  <!-- 24点游戏 -->
+  <section class="tool-panel" id="panel-game-24">
+    <h2>🎯 24点游戏</h2>
+    <p class="desc">用给出的 4 个数字和 + - × ÷ 以及括号，让计算结果等于 24。每个数字必须且只能使用一次。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card">
+        <div class="num" id="g24-numbers" style="letter-spacing:4px;">— — — —</div>
+        <div class="lbl">本轮数字</div>
+      </div>
+    </div>
+    <div class="label">输入你的算式（例如 (3+3)*(2+2)）</div>
+    <input type="text" id="g24-input" placeholder="用 + - * / ( ) 组合上面的数字">
+    <div class="btn-group">
+      <button class="btn" onclick="g24Check()">✅ 验证</button>
+      <button class="btn btn-secondary" onclick="g24Hint()">💡 提示</button>
+      <button class="btn btn-secondary" onclick="g24New()">🔄 换一组</button>
+    </div>
+    <div class="result-box" id="g24-result">点击「换一组」开始，或直接挑战上面的数字。</div>
+  </section>
+
+  <!-- CURL 转代码 -->
+  <section class="tool-panel" id="panel-curl-to-code">
+    <h2>🌀 CURL 转代码</h2>
+    <p class="desc">粘贴一条 curl 命令，一键转换成 fetch、axios、Python requests、PHP 等常用代码，方便接口调试与对接。</p>
+    <div class="label">curl 命令</div>
+    <textarea id="curl-input" placeholder="curl 'https://api.example.com/login' -X POST -H 'Content-Type: application/json' -d '{&quot;user&quot;:&quot;admin&quot;}'" style="min-height:120px;"></textarea>
+    <div class="flex-row">
+      <div>
+        <div class="label">目标语言</div>
+        <select id="curl-target" style="font-family:inherit;">
+          <option value="fetch">JavaScript (fetch)</option>
+          <option value="axios">JavaScript (axios)</option>
+          <option value="python">Python (requests)</option>
+          <option value="php">PHP (cURL)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="curlGenerate()">🌀 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('curl-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="curl-result">转换结果将显示在这里</pre>
+  </section>
+
+  <!-- 经期与排卵期计算器 -->
+  <section class="tool-panel" id="panel-period-calc">
+    <h2>🌸 经期与排卵期计算器</h2>
+    <p class="desc">根据最近一次月经首日和平均周期，推算未来几个月的经期、排卵日与易孕窗口。结果仅供参考，周期不规律者请咨询医生。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">上次月经首日</div>
+        <input type="date" id="period-last" style="font-family:inherit;">
+      </div>
+      <div>
+        <div class="label">平均周期（天）</div>
+        <input type="number" id="period-cycle" value="28" min="15" max="60">
+      </div>
+    </div>
+    <div class="flex-row">
+      <div>
+        <div class="label">经期天数</div>
+        <input type="number" id="period-days" value="5" min="1" max="15">
+      </div>
+      <div>
+        <div class="label">预测周期数</div>
+        <input type="number" id="period-count" value="6" min="1" max="12">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPeriod()">🌸 计算</button>
+      <button class="btn btn-secondary btn-sm" onclick="periodToday()">📅 用今天</button>
+    </div>
+    <div class="result-box" id="period-result">请选择日期后点击「计算」</div>
+  </section>
+
+  <!-- 文本行排序 -->
+  <section class="tool-panel" id="panel-line-sort">
+    <h2>🔤 文本行排序</h2>
+    <p class="desc">对多行文本按字母、长度或数值排序，支持升序降序、去重、忽略大小写与空行，处理名单、代码清单都很方便。</p>
+    <div class="label">原始文本（每行一条）</div>
+    <textarea id="linesort-input" placeholder="苹果&#10;香蕉&#10;橙子&#10;苹果" style="min-height:140px;"></textarea>
+    <div class="btn-group">
+      <button class="btn btn-sm" onclick="lineSort('asc')">A→Z 升序</button>
+      <button class="btn btn-sm" onclick="lineSort('desc')">Z→A 降序</button>
+      <button class="btn btn-sm" onclick="lineSort('len')">按长度</button>
+      <button class="btn btn-sm" onclick="lineSort('num')">按数值</button>
+      <button class="btn btn-secondary btn-sm" onclick="lineSort('shuffle')">🔀 打乱</button>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--text-secondary);">
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="linesort-dedupe" style="width:auto;">去重</label>
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="linesort-ignorecase" style="width:auto;">忽略大小写</label>
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="linesort-ignoreblank" style="width:auto;" checked>忽略空行</label>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('linesort-output')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="linesort-output">排序结果将显示在这里</pre>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3689,7 +3831,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 134个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 139个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -9957,6 +10099,298 @@ safeInit(() => initGitignore(), 'initGitignore');
 safeInit(() => initBP(), 'initBP');
 safeInit(() => initPetAge(), 'initPetAge');
 safeInit(() => initAes(), 'initAes');
+
+// ============ 乳胶漆用量计算器 ============
+function calcPaint() {
+  const L = parseFloat(document.getElementById('paint-length').value);
+  const W = parseFloat(document.getElementById('paint-width').value);
+  const H = parseFloat(document.getElementById('paint-height').value);
+  const coats = parseInt(document.getElementById('paint-coats').value, 10) || 2;
+  const openings = parseFloat(document.getElementById('paint-openings').value) || 0;
+  const ceiling = document.getElementById('paint-ceiling').checked;
+  if (!(L > 0) || !(W > 0) || !(H > 0)) {
+    showResult('paint-result', '⚠️ 请填写有效的房间长、宽、层高（均需大于 0）。');
+    return;
+  }
+  const wall = 2 * (L + W) * H;
+  const ceil = ceiling ? L * W : 0;
+  const net = Math.max(wall + ceil - openings, 0);
+  const COVER = 10; // 每升约可涂刷 10 ㎡（一遍）
+  const liters = (net * coats) / COVER;
+  const buckets = Math.ceil(liters / 5);
+  const lines = [
+    '墙面面积：' + wall.toFixed(2) + ' ㎡',
+    ceiling ? '天花板面积：' + ceil.toFixed(2) + ' ㎡' : null,
+    '需涂刷净面积：' + net.toFixed(2) + ' ㎡（已扣除门窗 ' + openings + ' ㎡）',
+    '涂刷遍数：' + coats + ' 遍（每升约刷 ' + COVER + ' ㎡/遍）',
+    '————————',
+    '预计需漆量：约 ' + liters.toFixed(2) + ' 升',
+    '建议购买：5L 装 ' + buckets + ' 桶（留出一定余量更稳妥）'
+  ].filter(Boolean);
+  showResult('paint-result', lines.join('\n'));
+}
+function initPaintCalc() { showResult('paint-result', '请输入房间尺寸后点击「计算用量」'); }
+
+// ============ 24点游戏 ============
+let g24Nums = [];
+let g24Solution = '';
+function g24Solve(nums) {
+  const ops = ['+', '-', '*', '/'];
+  function rec(list) {
+    if (list.length === 1) {
+      return Math.abs(list[0].v - 24) < 1e-6 ? list[0].s : null;
+    }
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list.length; j++) {
+        if (i === j) continue;
+        const a = list[i], b = list[j];
+        const rest = list.filter((_, k) => k !== i && k !== j);
+        for (let oi = 0; oi < ops.length; oi++) {
+          const op = ops[oi];
+          if (op === '/' && Math.abs(b.v) < 1e-9) continue;
+          let v;
+          if (op === '+') v = a.v + b.v;
+          else if (op === '-') v = a.v - b.v;
+          else if (op === '*') v = a.v * b.v;
+          else v = a.v / b.v;
+          const r = rec(rest.concat([{ v: v, s: '(' + a.s + op + b.s + ')' }]));
+          if (r) return r;
+        }
+      }
+    }
+    return null;
+  }
+  return rec(nums.map(n => ({ v: n, s: String(n) })));
+}
+function g24New() {
+  let tries = 0, sol = null, nums = null;
+  do {
+    nums = [0, 0, 0, 0].map(() => 1 + Math.floor(Math.random() * 13));
+    sol = g24Solve(nums);
+    tries++;
+  } while (!sol && tries < 400);
+  g24Nums = nums;
+  g24Solution = sol || '';
+  document.getElementById('g24-numbers').textContent = nums.join('  ');
+  document.getElementById('g24-input').value = '';
+  showResult('g24-result', '请用 ' + nums.join('、') + ' 及 + - * / ( ) 算出 24，然后点「验证」。');
+}
+function g24Check() {
+  if (!g24Nums.length) { showResult('g24-result', '请先点「换一组」获取数字。'); return; }
+  const expr = document.getElementById('g24-input').value.trim();
+  if (!expr) { showResult('g24-result', '⚠️ 请先输入你的算式。'); return; }
+  if (!/^[\d+\-*/().\s]+$/.test(expr)) {
+    showResult('g24-result', '⚠️ 算式只能包含数字与 + - * / ( ) 等符号。');
+    return;
+  }
+  const used = (expr.match(/\d+/g) || []).map(Number);
+  const target = g24Nums.slice().sort((a, b) => a - b).join(',');
+  const got = used.slice().sort((a, b) => a - b).join(',');
+  if (target !== got) {
+    showResult('g24-result', '⚠️ 必须且只能使用给出的 4 个数字各一次（当前用了：' + (used.join('、') || '无') + '）。');
+    return;
+  }
+  let val;
+  try { val = Function('"use strict";return (' + expr + ')')(); }
+  catch (err) { showResult('g24-result', '❌ 算式无法计算，请检查括号与运算符。'); return; }
+  if (typeof val !== 'number' || !isFinite(val)) { showResult('g24-result', '❌ 算式结果无效。'); return; }
+  if (Math.abs(val - 24) < 1e-6) showResult('g24-result', '🎉 正确！' + expr + ' = 24');
+  else showResult('g24-result', '❌ ' + expr + ' = ' + (Math.round(val * 1000) / 1000) + '，不等于 24，再试试。');
+}
+function g24Hint() {
+  if (!g24Solution) { showResult('g24-result', '请先点「换一组」获取数字。'); return; }
+  showResult('g24-result', '💡 一种解法：' + g24Solution + ' = 24');
+}
+function initGame24() { g24New(); }
+
+// ============ CURL 转代码 ============
+function curlTokenize(str) {
+  const tokens = [];
+  let cur = '', quote = null;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+    if (quote) {
+      if (ch === quote) quote = null;
+      else cur += ch;
+    } else if (ch === '"' || ch === "'") {
+      quote = ch;
+    } else if (ch === '\\' && (str[i + 1] === '\n' || str[i + 1] === '\r')) {
+      i++;
+    } else if (/\s/.test(ch)) {
+      if (cur) { tokens.push(cur); cur = ''; }
+    } else {
+      cur += ch;
+    }
+  }
+  if (cur) tokens.push(cur);
+  return tokens;
+}
+function parseCurl(cmd) {
+  const tokens = curlTokenize(cmd.replace(/\\\r?\n/g, ' ').replace(/\^\r?\n/g, ' ').replace(/\$\s*$/gm, ''));
+  const out = { method: '', url: '', headers: [], data: '', auth: '' };
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (t === 'curl' || /^curl(\.exe)?$/i.test(t)) continue;
+    if (t === '-X' || t === '--request') out.method = (tokens[++i] || '').toUpperCase();
+    else if (t === '-H' || t === '--header') out.headers.push(tokens[++i] || '');
+    else if (t === '-d' || t === '--data' || t === '--data-raw' || t === '--data-binary' || t === '--data-urlencode') out.data = tokens[++i] || '';
+    else if (t === '-u' || t === '--user') out.auth = tokens[++i] || '';
+    else if (t === '-b' || t === '--cookie') out.headers.push('Cookie: ' + (tokens[++i] || ''));
+    else if (t === '--url') out.url = tokens[++i] || '';
+    else if (/^https?:\/\//i.test(t)) { if (!out.url) out.url = t; }
+  }
+  if (!out.method) out.method = out.data ? 'POST' : 'GET';
+  return out;
+}
+function phpStr(s) { return "'" + String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'"; }
+function curlGenerate() {
+  const raw = document.getElementById('curl-input').value.trim();
+  const lang = document.getElementById('curl-target').value;
+  if (!raw) { showResult('curl-result', '⚠️ 请先粘贴 curl 命令。'); return; }
+  const p = parseCurl(raw);
+  if (!p.url) { showResult('curl-result', '❌ 未识别到 URL，请检查命令中是否包含完整的 http(s) 链接。'); return; }
+  const headers = {};
+  p.headers.forEach(h => {
+    const idx = h.indexOf(':');
+    if (idx > 0) headers[h.slice(0, idx).trim()] = h.slice(idx + 1).trim();
+  });
+  const hasHeaders = Object.keys(headers).length > 0;
+  let out = '';
+  if (lang === 'fetch') {
+    const opts = { method: p.method };
+    if (hasHeaders) opts.headers = headers;
+    if (p.data) opts.body = p.data;
+    out = 'fetch(' + JSON.stringify(p.url) + ', ' + JSON.stringify(opts, null, 2) + ')\n' +
+      '  .then(res => res.json())\n' +
+      '  .then(data => console.log(data))\n' +
+      '  .catch(err => console.error(err));';
+  } else if (lang === 'axios') {
+    let body = 'axios({\n  method: ' + JSON.stringify(p.method.toLowerCase()) + ',\n  url: ' + JSON.stringify(p.url);
+    if (hasHeaders) body += ',\n  headers: ' + JSON.stringify(headers, null, 2).replace(/\n/g, '\n  ');
+    if (p.data) body += ',\n  data: ' + JSON.stringify(p.data);
+    body += '\n})\n  .then(res => console.log(res.data))\n  .catch(err => console.error(err));';
+    out = body;
+  } else if (lang === 'python') {
+    const lines = ['import requests', '', 'url = ' + JSON.stringify(p.url)];
+    if (hasHeaders) {
+      lines.push('headers = {');
+      Object.keys(headers).forEach(k => lines.push('    ' + JSON.stringify(k) + ': ' + JSON.stringify(headers[k]) + ','));
+      lines.push('}');
+    }
+    if (p.data) lines.push('payload = ' + JSON.stringify(p.data));
+    if (p.auth) lines.push('auth = (' + p.auth.split(':').map(JSON.stringify).join(', ') + ')');
+    lines.push('');
+    const args = ['url'];
+    if (hasHeaders) args.push('headers=headers');
+    if (p.data) args.push('data=payload');
+    if (p.auth) args.push('auth=auth');
+    lines.push('resp = requests.' + p.method.toLowerCase() + '(' + args.join(', ') + ')');
+    lines.push('print(resp.text)');
+    out = lines.join('\n');
+  } else {
+    const lines = ['<?php', '$ch = curl_init();'];
+    lines.push('curl_setopt($ch, CURLOPT_URL, ' + phpStr(p.url) + ');');
+    lines.push('curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);');
+    lines.push('curl_setopt($ch, CURLOPT_CUSTOMREQUEST, ' + phpStr(p.method) + ');');
+    if (hasHeaders) {
+      lines.push('curl_setopt($ch, CURLOPT_HTTPHEADER, [');
+      Object.keys(headers).forEach(k => lines.push('    ' + phpStr(k + ': ' + headers[k]) + ','));
+      lines.push(']);');
+    }
+    if (p.data) lines.push('curl_setopt($ch, CURLOPT_POSTFIELDS, ' + phpStr(p.data) + ');');
+    if (p.auth) lines.push('curl_setopt($ch, CURLOPT_USERPWD, ' + phpStr(p.auth) + ');');
+    lines.push('$response = curl_exec($ch);');
+    lines.push('curl_close($ch);');
+    lines.push('echo $response;');
+    out = lines.join('\n');
+  }
+  showResult('curl-result', out);
+}
+function initCurlToCode() { showResult('curl-result', '转换结果将显示在这里'); }
+
+// ============ 经期与排卵期计算器 ============
+function fmtDate(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + dd;
+}
+function calcPeriod() {
+  const lastVal = document.getElementById('period-last').value;
+  if (!lastVal) { showResult('period-result', '⚠️ 请先选择上次月经首日，或点「用今天」。'); return; }
+  const cycle = parseInt(document.getElementById('period-cycle').value, 10);
+  const days = parseInt(document.getElementById('period-days').value, 10);
+  const count = parseInt(document.getElementById('period-count').value, 10);
+  if (!(cycle >= 15 && cycle <= 60)) { showResult('period-result', '⚠️ 平均周期需在 15~60 天之间。'); return; }
+  if (!(days >= 1 && days <= 15)) { showResult('period-result', '⚠️ 经期天数需在 1~15 天之间。'); return; }
+  if (!(count >= 1 && count <= 12)) { showResult('period-result', '⚠️ 预测周期数需在 1~12 之间。'); return; }
+  const base = new Date(lastVal + 'T00:00:00');
+  if (isNaN(base.getTime())) { showResult('period-result', '⚠️ 日期格式无效。'); return; }
+  const DAY = 86400000;
+  const lines = [];
+  for (let i = 0; i < count; i++) {
+    const start = new Date(base.getTime() + i * cycle * DAY);
+    const end = new Date(start.getTime() + (days - 1) * DAY);
+    const ovu = new Date(start.getTime() + (cycle - 14) * DAY);
+    const fS = new Date(ovu.getTime() - 5 * DAY);
+    const fE = new Date(ovu.getTime() + 1 * DAY);
+    lines.push('第 ' + (i + 1) + ' 个周期：' + fmtDate(start) + ' ~ ' + fmtDate(end));
+    lines.push('    排卵日约 ' + fmtDate(ovu) + '，易孕期 ' + fmtDate(fS) + ' ~ ' + fmtDate(fE));
+  }
+  const header = '上次首日 ' + fmtDate(base) + '｜周期 ' + cycle + ' 天｜经期 ' + days + ' 天\n————————';
+  showResult('period-result', header + '\n' + lines.join('\n') + '\n\n※ 以上为按平均周期推算，个体差异较大，仅供参考。');
+}
+function periodToday() {
+  document.getElementById('period-last').value = fmtDate(new Date());
+}
+function initPeriodCalc() {
+  const el = document.getElementById('period-last');
+  if (el && !el.value) el.value = fmtDate(new Date());
+  showResult('period-result', '请确认日期后点击「计算」');
+}
+
+// ============ 文本行排序 ============
+function lineSort(mode) {
+  const src = document.getElementById('linesort-input').value;
+  if (!src) { showResult('linesort-output', '⚠️ 请先输入要排序的文本。'); return; }
+  const dedupe = document.getElementById('linesort-dedupe').checked;
+  const ignoreCase = document.getElementById('linesort-ignorecase').checked;
+  const ignoreBlank = document.getElementById('linesort-ignoreblank').checked;
+  let lines = src.split(/\r?\n/);
+  if (ignoreBlank) lines = lines.filter(l => l.trim() !== '');
+  if (dedupe) {
+    const seen = new Set();
+    lines = lines.filter(l => {
+      const k = ignoreCase ? l.trim().toLowerCase() : l.trim();
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+  }
+  const key = l => ignoreCase ? l.toLowerCase() : l;
+  if (mode === 'asc') lines.sort((a, b) => key(a).localeCompare(key(b), 'zh'));
+  else if (mode === 'desc') lines.sort((a, b) => key(b).localeCompare(key(a), 'zh'));
+  else if (mode === 'len') lines.sort((a, b) => a.length - b.length || key(a).localeCompare(key(b), 'zh'));
+  else if (mode === 'num') lines.sort((a, b) => {
+    const na = parseFloat(a), nb = parseFloat(b);
+    if (!isNaN(na) && !isNaN(nb)) return na - nb;
+    return key(a).localeCompare(key(b), 'zh');
+  });
+  else if (mode === 'shuffle') {
+    for (let i = lines.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = lines[i]; lines[i] = lines[j]; lines[j] = tmp;
+    }
+  }
+  showResult('linesort-output', lines.length ? lines.join('\n') : '（无内容）');
+}
+function initLineSort() { showResult('linesort-output', '排序结果将显示在这里'); }
+
+safeInit(() => initPaintCalc(), 'initPaintCalc');
+safeInit(() => initGame24(), 'initGame24');
+safeInit(() => initCurlToCode(), 'initCurlToCode');
+safeInit(() => initPeriodCalc(), 'initPeriodCalc');
+safeInit(() => initLineSort(), 'initLineSort');
 
 // ============ Search & Theme ============
 function filterTools() {
