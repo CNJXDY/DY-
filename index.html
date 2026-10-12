@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等139个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等144个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等139个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等144个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等139个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等144个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -512,6 +512,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#curl-to-code" data-tool="curl-to-code"><span class="icon">🌀</span>CURL 转代码</a></li>
     <li><a href="#period-calc" data-tool="period-calc"><span class="icon">🌸</span>经期排卵计算</a></li>
     <li><a href="#line-sort" data-tool="line-sort"><span class="icon">🔤</span>文本行排序</a></li>
+    <li class="category">每日新增</li>
+    <li><a href="#team-split" data-tool="team-split"><span class="icon">🎲</span>随机分组器</a></li>
+    <li><a href="#privacy-mask" data-tool="privacy-mask"><span class="icon">🕵️</span>敏感信息脱敏</a></li>
+    <li><a href="#waist-hip" data-tool="waist-hip"><span class="icon">📐</span>腰臀比计算器</a></li>
+    <li><a href="#mime-lookup" data-tool="mime-lookup"><span class="icon">🗂️</span>MIME类型查询</a></li>
+    <li><a href="#blackjack" data-tool="blackjack"><span class="icon">♠️</span>21点游戏</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3824,6 +3830,110 @@ console.log('代码块');
     <pre class="result-box" id="linesort-output">排序结果将显示在这里</pre>
   </section>
 
+  <!-- 随机分组器 -->
+  <section class="tool-panel" id="panel-team-split">
+    <h2>🎲 随机分组器</h2>
+    <p class="desc">把名单随机打乱后分成若干组，支持「按组数」或「按每组人数」两种方式，团建、分组游戏、值日排班都很方便。</p>
+    <div class="label">名单（每行一个）</div>
+    <textarea id="teamsplit-names" placeholder="张三&#10;李四&#10;王五&#10;赵六&#10;钱七&#10;孙八" style="min-height:140px;"></textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">分组方式</div>
+        <select id="teamsplit-mode" style="font-family:inherit;">
+          <option value="groups">按组数</option>
+          <option value="size">按每组人数</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">组数 / 每组人数</div>
+        <input type="number" id="teamsplit-count" value="2" min="1" max="50">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="teamSplit()">🎲 随机分组</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('teamsplit-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="teamsplit-result">点击「随机分组」生成分组结果</pre>
+  </section>
+
+  <!-- 敏感信息脱敏 -->
+  <section class="tool-panel" id="panel-privacy-mask">
+    <h2>🕵️ 敏感信息脱敏</h2>
+    <p class="desc">一键打码文本中的手机号、邮箱、身份证号和银行卡号，方便分享聊天记录、日志或截图前的隐私处理，全部在本地完成。</p>
+    <div class="label">原始文本</div>
+    <textarea id="mask-input" placeholder="联系方式：13812345678，邮箱 test@example.com，身份证 11010119900307123X" style="min-height:140px;"></textarea>
+    <div style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--text-secondary);">
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="mask-phone" style="width:auto;" checked>手机号</label>
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="mask-email" style="width:auto;" checked>邮箱</label>
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="mask-id" style="width:auto;" checked>身份证号</label>
+      <label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="mask-bank" style="width:auto;" checked>银行卡号</label>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="maskText()">🕵️ 一键脱敏</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('mask-result')">📋 复制结果</button>
+    </div>
+    <pre class="result-box" id="mask-result">脱敏结果将显示在这里</pre>
+  </section>
+
+  <!-- 腰臀比计算器 -->
+  <section class="tool-panel" id="panel-waist-hip">
+    <h2>📐 腰臀比计算器</h2>
+    <p class="desc">根据腰围与臀围计算腰臀比（WHR），并按 WHO 标准评估腹部肥胖与心血管代谢风险，帮助你了解自身体型健康状况。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">性别</div>
+        <select id="whr-sex" style="font-family:inherit;">
+          <option value="male">男性</option>
+          <option value="female">女性</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">腰围（厘米）</div>
+        <input type="number" id="whr-waist" value="80" min="30" max="200" step="0.1">
+      </div>
+      <div>
+        <div class="label">臀围（厘米）</div>
+        <input type="number" id="whr-hip" value="95" min="30" max="200" step="0.1">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcWHR()">📐 计算腰臀比</button>
+    </div>
+    <pre class="result-box" id="whr-result">请输入腰围与臀围后点击「计算」</pre>
+  </section>
+
+  <!-- MIME 类型查询 -->
+  <section class="tool-panel" id="panel-mime-lookup">
+    <h2>🗂️ MIME 类型查询</h2>
+    <p class="desc">输入扩展名或关键词，快速查询常见文件的 MIME 类型（Content-Type），配置服务器、上传校验或写代码时随手可用。</p>
+    <div class="label">搜索（扩展名或关键词，如 json、image、视频）</div>
+    <input type="text" id="mime-query" placeholder="例如：json / image / pdf" oninput="mimeSearch()">
+    <div class="btn-group">
+      <button class="btn btn-sm" onclick="mimeSearch('text')">📄 文本类</button>
+      <button class="btn btn-sm" onclick="mimeSearch('image')">🖼️ 图片类</button>
+      <button class="btn btn-sm" onclick="mimeSearch('video')">🎬 视频类</button>
+      <button class="btn btn-sm" onclick="mimeSearch('audio')">🎵 音频类</button>
+      <button class="btn btn-secondary btn-sm" onclick="mimeReset()">↺ 全部</button>
+    </div>
+    <div class="result-box" id="mime-result" style="max-height:360px;"></div>
+  </section>
+
+  <!-- 21点游戏 -->
+  <section class="tool-panel" id="panel-blackjack">
+    <h2>♠️ 21点游戏</h2>
+    <p class="desc">经典 Blackjack 比大小：手牌点数尽量接近 21 且不超过，超过 21 即爆牌。A 可算 1 或 11，庄家点数小于 17 必须继续要牌。</p>
+    <div class="result-box" id="bj-table" style="min-height:120px;line-height:2;">
+      <div>庄家：<span id="bj-dealer">—</span></div>
+      <div>玩家：<span id="bj-player">—</span></div>
+      <div style="margin-top:8px;color:var(--accent-hover);font-weight:600;" id="bj-status">点击「开始新局」发牌</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="bj-start" onclick="bjStart()">🃏 开始新局</button>
+      <button class="btn btn-sm" id="bj-hit" onclick="bjHit()" disabled>➕ 要牌</button>
+      <button class="btn btn-sm" id="bj-stand" onclick="bjStand()" disabled>✋ 停牌</button>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3831,7 +3941,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 139个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 144个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -10391,6 +10501,243 @@ safeInit(() => initGame24(), 'initGame24');
 safeInit(() => initCurlToCode(), 'initCurlToCode');
 safeInit(() => initPeriodCalc(), 'initPeriodCalc');
 safeInit(() => initLineSort(), 'initLineSort');
+
+// ============ 随机分组器 ============
+function teamSplit() {
+  const raw = document.getElementById('teamsplit-names').value;
+  let names = raw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  if (names.length < 2) { showResult('teamsplit-result', '⚠️ 请至少输入 2 个名字（每行一个）。'); return; }
+  const mode = document.getElementById('teamsplit-mode').value;
+  let n = parseInt(document.getElementById('teamsplit-count').value, 10);
+  if (!(n >= 1)) n = 1;
+  for (let i = names.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = names[i]; names[i] = names[j]; names[j] = tmp;
+  }
+  const groups = [];
+  if (mode === 'size') {
+    for (let i = 0; i < names.length; i += n) groups.push(names.slice(i, i + n));
+  } else {
+    const g = Math.min(n, names.length);
+    for (let i = 0; i < g; i++) groups.push([]);
+    names.forEach((nm, i) => groups[i % g].push(nm));
+  }
+  const out = groups.map((grp, i) => '第 ' + (i + 1) + ' 组（' + grp.length + ' 人）：' + grp.join('、')).join('\n');
+  showResult('teamsplit-result', out + '\n\n共 ' + names.length + ' 人，分为 ' + groups.length + ' 组');
+}
+function initTeamSplit() { showResult('teamsplit-result', '点击「随机分组」生成分组结果'); }
+
+// ============ 敏感信息脱敏 ============
+function maskText() {
+  const src = document.getElementById('mask-input').value;
+  if (!src) { showResult('mask-result', '⚠️ 请先粘贴需要脱敏的文本。'); return; }
+  let t = src;
+  if (document.getElementById('mask-id').checked) {
+    t = t.replace(/(?<!\d)(\d{6})(\d{8})(\d{3}[\dXx])(?!\d)/g, (m, a, b, c) => a + '********' + c);
+  }
+  if (document.getElementById('mask-phone').checked) {
+    t = t.replace(/(?<!\d)(1[3-9]\d)(\d{4})(\d{4})(?!\d)/g, (m, a, b, c) => a + '****' + c);
+  }
+  if (document.getElementById('mask-email').checked) {
+    t = t.replace(/([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, (m, u, d) => {
+      const keep = u.length <= 2 ? u.slice(0, 1) : u.slice(0, 2);
+      return keep + '***@' + d;
+    });
+  }
+  if (document.getElementById('mask-bank').checked) {
+    t = t.replace(/(?<!\d)(\d{4})\d{8,15}(\d{4})(?!\d)/g, (m, a, b) => a + ' **** **** ' + b);
+  }
+  showResult('mask-result', t);
+}
+function initPrivacyMask() { showResult('mask-result', '脱敏结果将显示在这里'); }
+
+// ============ 腰臀比计算器 ============
+function calcWHR() {
+  const sex = document.getElementById('whr-sex').value;
+  const waist = parseFloat(document.getElementById('whr-waist').value);
+  const hip = parseFloat(document.getElementById('whr-hip').value);
+  if (!(waist > 0) || !(hip > 0)) { showResult('whr-result', '⚠️ 请输入有效的腰围和臀围数值（厘米）。'); return; }
+  const whr = waist / hip;
+  const male = sex === 'male';
+  let level, advice;
+  if (male) {
+    if (whr < 0.90) { level = '正常（低风险）'; advice = '腰臀比处于健康范围，继续保持规律运动与均衡饮食。'; }
+    else if (whr < 1.00) { level = '偏高（中风险）'; advice = '建议增加有氧运动，控制腹部脂肪堆积。'; }
+    else { level = '过高（高风险）'; advice = '腹部肥胖较明显，建议就医评估并调整生活方式。'; }
+  } else {
+    if (whr < 0.80) { level = '正常（低风险）'; advice = '腰臀比处于健康范围，继续保持规律运动与均衡饮食。'; }
+    else if (whr < 0.85) { level = '偏高（中风险）'; advice = '建议增加有氧运动，控制腹部脂肪堆积。'; }
+    else { level = '过高（高风险）'; advice = '腹部肥胖较明显，建议就医评估并调整生活方式。'; }
+  }
+  const waistWarn = male ? 90 : 80;
+  const waistNote = waist >= waistWarn ? '已达腹型肥胖警戒线（' + (male ? '男' : '女') + '性 ≥ ' + waistWarn + ' cm）' : '在正常范围内';
+  const out = '腰臀比 WHR = ' + whr.toFixed(2) + '\n'
+    + '腰围：' + waist + ' cm（' + waistNote + '）\n'
+    + '臀围：' + hip + ' cm\n'
+    + '评估：' + level + '\n'
+    + '建议：' + advice + '\n\n'
+    + '※ 参考 WHO 腰臀比标准，结果仅供参考，不能替代医学诊断。';
+  showResult('whr-result', out);
+}
+function initWHR() { showResult('whr-result', '请输入腰围与臀围后点击「计算」'); }
+
+// ============ MIME 类型查询 ============
+const MIME_DATA = [
+  ['html', 'text/html', 'HTML 网页'],
+  ['htm', 'text/html', 'HTML 网页'],
+  ['css', 'text/css', '层叠样式表'],
+  ['js', 'text/javascript', 'JavaScript 脚本'],
+  ['mjs', 'text/javascript', 'JavaScript 模块'],
+  ['json', 'application/json', 'JSON 数据'],
+  ['xml', 'application/xml', 'XML 文档'],
+  ['csv', 'text/csv', 'CSV 表格'],
+  ['txt', 'text/plain', '纯文本'],
+  ['md', 'text/markdown', 'Markdown 文档'],
+  ['pdf', 'application/pdf', 'PDF 文档'],
+  ['zip', 'application/zip', 'ZIP 压缩包'],
+  ['gz', 'application/gzip', 'Gzip 压缩'],
+  ['tar', 'application/x-tar', 'TAR 归档'],
+  ['rar', 'application/vnd.rar', 'RAR 压缩包'],
+  ['7z', 'application/x-7z-compressed', '7z 压缩包'],
+  ['doc', 'application/msword', 'Word 文档'],
+  ['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'Word 文档'],
+  ['xls', 'application/vnd.ms-excel', 'Excel 表格'],
+  ['xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Excel 表格'],
+  ['ppt', 'application/vnd.ms-powerpoint', 'PowerPoint 演示'],
+  ['pptx', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'PowerPoint 演示'],
+  ['png', 'image/png', 'PNG 图片'],
+  ['jpg', 'image/jpeg', 'JPEG 图片'],
+  ['jpeg', 'image/jpeg', 'JPEG 图片'],
+  ['gif', 'image/gif', 'GIF 动图'],
+  ['webp', 'image/webp', 'WebP 图片'],
+  ['svg', 'image/svg+xml', '矢量图 SVG'],
+  ['ico', 'image/x-icon', '网站图标'],
+  ['bmp', 'image/bmp', '位图 BMP'],
+  ['tif', 'image/tiff', 'TIFF 图片'],
+  ['mp3', 'audio/mpeg', 'MP3 音频'],
+  ['wav', 'audio/wav', 'WAV 音频'],
+  ['ogg', 'audio/ogg', 'OGG 音频'],
+  ['m4a', 'audio/mp4', 'M4A 音频'],
+  ['flac', 'audio/flac', 'FLAC 无损音频'],
+  ['mp4', 'video/mp4', 'MP4 视频'],
+  ['webm', 'video/webm', 'WebM 视频'],
+  ['mov', 'video/quicktime', 'QuickTime 视频'],
+  ['avi', 'video/x-msvideo', 'AVI 视频'],
+  ['mkv', 'video/x-matroska', 'Matroska 视频'],
+  ['m3u8', 'application/vnd.apple.mpegurl', 'HLS 播放列表'],
+  ['woff', 'font/woff', 'WOFF 字体'],
+  ['woff2', 'font/woff2', 'WOFF2 字体'],
+  ['ttf', 'font/ttf', 'TrueType 字体'],
+  ['otf', 'font/otf', 'OpenType 字体'],
+  ['wasm', 'application/wasm', 'WebAssembly'],
+  ['apk', 'application/vnd.android.package-archive', '安卓安装包'],
+  ['exe', 'application/vnd.microsoft.portable-executable', 'Windows 可执行文件']
+];
+function mimeRender(list) {
+  const box = document.getElementById('mime-result');
+  if (!list.length) { box.textContent = '未找到匹配的 MIME 类型，请换个关键词试试。'; return; }
+  box.innerHTML = list.map(it =>
+    '<div style="display:flex;gap:10px;padding:5px 0;border-bottom:1px solid var(--border);">'
+    + '<span style="min-width:64px;color:var(--text-secondary);">.' + it[0] + '</span>'
+    + '<span style="color:var(--accent-hover);">' + it[1] + '</span>'
+    + '<span style="margin-left:auto;color:var(--text-secondary);font-size:12px;">' + it[2] + '</span>'
+    + '</div>').join('')
+    + '<div style="margin-top:8px;color:var(--text-secondary);font-size:12px;">共 ' + list.length + ' 条</div>';
+}
+function mimeSearch(kw) {
+  if (typeof kw === 'string') document.getElementById('mime-query').value = kw;
+  const q = (typeof kw === 'string' ? kw : (document.getElementById('mime-query').value || '')).trim().toLowerCase();
+  const list = MIME_DATA.filter(it => !q || it[0].includes(q) || it[1].toLowerCase().includes(q) || it[2].toLowerCase().includes(q));
+  mimeRender(list);
+}
+function mimeReset() { document.getElementById('mime-query').value = ''; mimeRender(MIME_DATA); }
+function initMimeLookup() { mimeRender(MIME_DATA); }
+
+// ============ 21点游戏 ============
+let bjState = null;
+const BJ_SUITS = ['♠', '♥', '♦', '♣'];
+const BJ_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+function bjNewDeck() {
+  const deck = [];
+  BJ_SUITS.forEach(s => BJ_RANKS.forEach(r => deck.push({ s: s, r: r })));
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = deck[i]; deck[i] = deck[j]; deck[j] = tmp;
+  }
+  return deck;
+}
+function bjCardValue(rank) {
+  if (rank === 'A') return 11;
+  if (rank === 'J' || rank === 'Q' || rank === 'K') return 10;
+  return parseInt(rank, 10);
+}
+function bjHandValue(hand) {
+  let sum = 0, aces = 0;
+  hand.forEach(c => { sum += bjCardValue(c.r); if (c.r === 'A') aces++; });
+  while (sum > 21 && aces > 0) { sum -= 10; aces--; }
+  return sum;
+}
+function bjFormat(hand) { return hand.map(c => c.s + c.r).join(' ') || '—'; }
+function bjRender(reveal) {
+  if (!bjState) return;
+  const pv = bjHandValue(bjState.player);
+  document.getElementById('bj-player').textContent = bjFormat(bjState.player) + '  （' + pv + ' 点）';
+  if (reveal) {
+    const dv = bjHandValue(bjState.dealer);
+    document.getElementById('bj-dealer').textContent = bjFormat(bjState.dealer) + '  （' + dv + ' 点）';
+  } else {
+    document.getElementById('bj-dealer').textContent = '🂠 ' + bjFormat(bjState.dealer.slice(1)) + '  （暗牌）';
+  }
+}
+function bjStatus(msg) { document.getElementById('bj-status').textContent = msg; }
+function bjSetButtons(playing) {
+  document.getElementById('bj-hit').disabled = !playing;
+  document.getElementById('bj-stand').disabled = !playing;
+}
+function bjFinish(msg) {
+  bjState.over = true;
+  bjSetButtons(false);
+  bjRender(true);
+  bjStatus(msg);
+}
+function bjStart() {
+  const deck = bjNewDeck();
+  bjState = { deck: deck, player: [deck.pop(), deck.pop()], dealer: [deck.pop(), deck.pop()], over: false };
+  bjSetButtons(true);
+  bjRender(false);
+  bjStatus('你的回合：选择「要牌」或「停牌」');
+  if (bjHandValue(bjState.player) === 21) bjFinish('🎉 开局 21 点，直接获胜！');
+}
+function bjHit() {
+  if (!bjState || bjState.over) return;
+  bjState.player.push(bjState.deck.pop());
+  const pv = bjHandValue(bjState.player);
+  bjRender(false);
+  if (pv > 21) bjFinish('💥 爆牌！玩家 ' + pv + ' 点，本局失败。');
+  else if (pv === 21) bjStand();
+}
+function bjStand() {
+  if (!bjState || bjState.over) return;
+  while (bjHandValue(bjState.dealer) < 17) bjState.dealer.push(bjState.deck.pop());
+  const pv = bjHandValue(bjState.player);
+  const dv = bjHandValue(bjState.dealer);
+  let msg;
+  if (dv > 21) msg = '🎉 庄家爆牌（' + dv + ' 点），你赢了！';
+  else if (pv > dv) msg = '🎉 你赢了！玩家 ' + pv + ' 点 vs 庄家 ' + dv + ' 点';
+  else if (pv === dv) msg = '🤝 平局，玩家与庄家均为 ' + pv + ' 点';
+  else msg = '😢 你输了，玩家 ' + pv + ' 点 vs 庄家 ' + dv + ' 点';
+  bjFinish(msg);
+}
+function initBlackjack() {
+  bjSetButtons(false);
+  document.getElementById('bj-status').textContent = '点击「开始新局」发牌';
+}
+
+safeInit(() => initTeamSplit(), 'initTeamSplit');
+safeInit(() => initPrivacyMask(), 'initPrivacyMask');
+safeInit(() => initWHR(), 'initWHR');
+safeInit(() => initMimeLookup(), 'initMimeLookup');
+safeInit(() => initBlackjack(), 'initBlackjack');
 
 // ============ Search & Theme ============
 function filterTools() {
