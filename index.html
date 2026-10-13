@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等144个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等149个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等144个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等149个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等144个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等149个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -518,6 +518,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#waist-hip" data-tool="waist-hip"><span class="icon">📐</span>腰臀比计算器</a></li>
     <li><a href="#mime-lookup" data-tool="mime-lookup"><span class="icon">🗂️</span>MIME类型查询</a></li>
     <li><a href="#blackjack" data-tool="blackjack"><span class="icon">♠️</span>21点游戏</a></li>
+    <li class="category">最新工具</li>
+    <li><a href="#tip-calc" data-tool="tip-calc"><span class="icon">💵</span>小费计算器</a></li>
+    <li><a href="#breakout" data-tool="breakout"><span class="icon">🧱</span>打砖块游戏</a></li>
+    <li><a href="#ascii-table" data-tool="ascii-table"><span class="icon">🔤</span>ASCII 码对照表</a></li>
+    <li><a href="#eye-test" data-tool="eye-test"><span class="icon">👁️</span>视力测试</a></li>
+    <li><a href="#word-frequency" data-tool="word-frequency"><span class="icon">📈</span>词频统计</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -3934,6 +3940,113 @@ console.log('代码块');
     </div>
   </section>
 
+  <!-- 小费计算器 -->
+  <section class="tool-panel" id="panel-tip-calc">
+    <h2>💵 小费计算器</h2>
+    <p class="desc">外出就餐、打车或外卖时快速计算小费与人均费用。输入账单金额、选择小费比例与人数即可自动得出结果。</p>
+    <div class="label">账单金额（元）</div>
+    <input type="number" id="tip-bill" placeholder="例如：268" min="0" step="0.01" oninput="calcTip()">
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">小费比例</div>
+        <select id="tip-rate" onchange="onTipRateChange()" style="font-family:inherit;">
+          <option value="10">10%</option>
+          <option value="15" selected>15%</option>
+          <option value="18">18%</option>
+          <option value="20">20%</option>
+          <option value="custom">自定义</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">自定义比例（%）</div>
+        <input type="number" id="tip-rate-custom" value="12" min="0" step="0.5" disabled oninput="calcTip()">
+      </div>
+      <div>
+        <div class="label">用餐人数</div>
+        <input type="number" id="tip-people" value="1" min="1" step="1" oninput="calcTip()">
+      </div>
+    </div>
+    <pre class="result-box" id="tip-result">输入账单金额后自动计算</pre>
+  </section>
+
+  <!-- 打砖块游戏 -->
+  <section class="tool-panel" id="panel-breakout">
+    <h2>🧱 打砖块游戏</h2>
+    <p class="desc">经典打砖块小游戏：移动挡板接住小球，击碎全部砖块即可通关。可用鼠标移动或方向键控制挡板，点击画布发射小球。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="breakout-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="breakout-lives">3</div><div class="lbl">剩余生命</div></div>
+      <div class="stat-card"><div class="num" id="breakout-best">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <canvas id="breakout-canvas" width="480" height="360" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#0f172a;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn btn-sm" onclick="breakoutMove(-1)">←</button>
+      <button class="btn" id="breakout-btn" onclick="breakoutToggle()">🎮 开始游戏</button>
+      <button class="btn btn-sm" onclick="breakoutMove(1)">→</button>
+    </div>
+    <div class="result-box" id="breakout-msg" style="margin-top:12px;text-align:center;">点击「开始游戏」，用鼠标或方向键移动挡板。</div>
+  </section>
+
+  <!-- ASCII 码对照表 -->
+  <section class="tool-panel" id="panel-ascii-table">
+    <h2>🔤 ASCII 码对照表</h2>
+    <p class="desc">查询标准 ASCII 字符的十进制、十六进制、二进制与八进制编码。支持输入字符或编码反向查询，写代码、调试时随手可用。</p>
+    <div class="label">查询（字符 / 十进制 / 十六进制 / 二进制，如 A、65、0x41、01000001）</div>
+    <input type="text" id="ascii-query" placeholder="例如：A / 65 / 0x41 / 01000001" oninput="asciiFilter()">
+    <div class="btn-group">
+      <button class="btn btn-sm" onclick="asciiQuick('control')">控制字符</button>
+      <button class="btn btn-sm" onclick="asciiQuick('printable')">可打印字符</button>
+      <button class="btn btn-secondary btn-sm" onclick="asciiReset()">↺ 全部</button>
+    </div>
+    <div class="result-box" id="ascii-result" style="max-height:420px;overflow:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:13px;"></div>
+  </section>
+
+  <!-- 视力测试 -->
+  <section class="tool-panel" id="panel-eye-test">
+    <h2>👁️ 视力测试</h2>
+    <p class="desc">模拟视力表 E 字方向判断：屏幕会随机显示朝上、下、左、右的「E」，请选择正确的开口方向。答对则字号逐渐变小，难度递增。请保持屏幕与眼睛约 40–50cm 距离，结果仅供娱乐参考。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="eye-level">1</div><div class="lbl">当前等级</div></div>
+      <div class="stat-card"><div class="num" id="eye-score">0</div><div class="lbl">答对</div></div>
+      <div class="stat-card"><div class="num" id="eye-wrong">0</div><div class="lbl">答错</div></div>
+    </div>
+    <div id="eye-stage" style="min-height:180px;display:flex;align-items:center;justify-content:center;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <span id="eye-char" style="font-weight:700;line-height:1;color:var(--accent-hover);transition:font-size .15s;">E</span>
+    </div>
+    <div class="btn-group" style="justify-content:center;margin-top:14px;">
+      <button class="btn btn-sm" onclick="eyeAnswer('up')">↑ 上</button>
+      <button class="btn btn-sm" onclick="eyeAnswer('left')">← 左</button>
+      <button class="btn btn-sm" onclick="eyeAnswer('down')">↓ 下</button>
+      <button class="btn btn-sm" onclick="eyeAnswer('right')">→ 右</button>
+    </div>
+    <div class="btn-group" style="justify-content:center;margin-top:8px;">
+      <button class="btn btn-secondary btn-sm" onclick="eyeStart()">↻ 重新开始</button>
+    </div>
+    <div class="result-box" id="eye-msg" style="margin-top:12px;text-align:center;">点击「重新开始」开始测试</div>
+  </section>
+
+  <!-- 词频统计 -->
+  <section class="tool-panel" id="panel-word-frequency">
+    <h2>📈 词频统计</h2>
+    <p class="desc">粘贴一段文本，自动统计出现频率最高的词语（英文按单词、中文按二字词），并以条形图展示，适合写作、SEO 与文本分析。</p>
+    <textarea id="wf-input" placeholder="在此粘贴文本，例如：一段中文或英文内容……" style="min-height:140px;"></textarea>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px;">
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span class="label" style="margin:0;">显示数量</span>
+        <select id="wf-top" onchange="wfRun()" style="font-family:inherit;width:auto;">
+          <option value="10">前 10</option>
+          <option value="20" selected>前 20</option>
+          <option value="30">前 30</option>
+        </select>
+      </div>
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;color:var(--text-secondary);font-size:13px;">
+        <input type="checkbox" id="wf-stop" checked onchange="wfRun()"> 过滤常见虚词
+      </label>
+      <button class="btn btn-sm" onclick="wfRun()">📊 统计</button>
+    </div>
+    <div class="result-box" id="wf-result" style="max-height:420px;overflow:auto;">粘贴文本后点击「统计」查看词频</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -3941,7 +4054,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 144个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 149个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -10738,6 +10851,383 @@ safeInit(() => initPrivacyMask(), 'initPrivacyMask');
 safeInit(() => initWHR(), 'initWHR');
 safeInit(() => initMimeLookup(), 'initMimeLookup');
 safeInit(() => initBlackjack(), 'initBlackjack');
+
+// ============ 小费计算器 ============
+function onTipRateChange() {
+  const r = document.getElementById('tip-rate').value;
+  document.getElementById('tip-rate-custom').disabled = (r !== 'custom');
+  calcTip();
+}
+function calcTip() {
+  const bill = parseFloat(document.getElementById('tip-bill').value);
+  const people = Math.max(1, parseInt(document.getElementById('tip-people').value, 10) || 1);
+  const sel = document.getElementById('tip-rate').value;
+  const rate = sel === 'custom'
+    ? parseFloat(document.getElementById('tip-rate-custom').value)
+    : parseFloat(sel);
+  if (!(bill > 0)) { showResult('tip-result', '请输入有效的账单金额。'); return; }
+  const r = (rate >= 0 && isFinite(rate)) ? rate : 0;
+  const tip = bill * r / 100;
+  const total = bill + tip;
+  showResult('tip-result',
+    '账单金额：¥' + bill.toFixed(2) + '\n'
+    + '小费比例：' + r + '%\n'
+    + '小费金额：¥' + tip.toFixed(2) + '\n'
+    + '总计金额：¥' + total.toFixed(2) + '\n'
+    + '人均分摊：¥' + (total / people).toFixed(2) + '（共 ' + people + ' 人）');
+}
+function initTipCalc() {
+  document.getElementById('tip-rate-custom').disabled = true;
+  showResult('tip-result', '输入账单金额后自动计算');
+}
+
+// ============ 打砖块游戏 ============
+const BREAKOUT_W = 480, BREAKOUT_H = 360;
+let breakoutState = null;
+let breakoutBest = 0;
+let breakoutRaf = null;
+let breakoutLastT = 0;
+let breakoutAcc = 0;
+let breakoutKeys = { left: false, right: false };
+function breakoutBuildBricks() {
+  const bricks = [];
+  const cols = 8, rows = 4, pad = 6, offTop = 48, offLeft = 24, bh = 16;
+  const bw = (BREAKOUT_W - offLeft * 2 - pad * (cols - 1)) / cols;
+  const colors = ['#f87171', '#fb923c', '#facc15', '#4ade80'];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      bricks.push({ x: offLeft + c * (bw + pad), y: offTop + r * (bh + pad), w: bw, h: bh, alive: true, color: colors[r % colors.length] });
+    }
+  }
+  return bricks;
+}
+function breakoutNewState() {
+  return {
+    paddle: { x: BREAKOUT_W / 2 - 45, y: BREAKOUT_H - 22, w: 90, h: 10, speed: 6 },
+    ball: { x: BREAKOUT_W / 2, y: BREAKOUT_H - 40, r: 7, vx: 0, vy: 0, stuck: true },
+    bricks: breakoutBuildBricks(),
+    score: 0, lives: 3, running: false, over: false
+  };
+}
+function breakoutSyncBall() {
+  const s = breakoutState;
+  if (!s || !s.ball.stuck) return;
+  s.ball.x = s.paddle.x + s.paddle.w / 2;
+  s.ball.y = s.paddle.y - s.ball.r - 1;
+}
+function breakoutLaunch() {
+  if (!breakoutState || !breakoutState.running) return;
+  const b = breakoutState.ball;
+  if (b.stuck) {
+    b.vx = 3.4 * (Math.random() < 0.5 ? -1 : 1);
+    b.vy = -3.6;
+    b.stuck = false;
+  }
+}
+function breakoutUpdateStats() {
+  document.getElementById('breakout-best').textContent = breakoutBest;
+  if (!breakoutState) return;
+  document.getElementById('breakout-score').textContent = breakoutState.score;
+  document.getElementById('breakout-lives').textContent = breakoutState.lives;
+}
+function breakoutDraw() {
+  const cv = document.getElementById('breakout-canvas');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, BREAKOUT_W, BREAKOUT_H);
+  if (!breakoutState) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('点击「开始游戏」', BREAKOUT_W / 2, BREAKOUT_H / 2);
+    return;
+  }
+  breakoutState.bricks.forEach(function (b) {
+    if (!b.alive) return;
+    ctx.fillStyle = b.color;
+    ctx.fillRect(b.x, b.y, b.w, b.h);
+  });
+  const p = breakoutState.paddle;
+  ctx.fillStyle = '#818cf8';
+  ctx.fillRect(p.x, p.y, p.w, p.h);
+  const ball = breakoutState.ball;
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+  ctx.fillStyle = '#e2e8f0';
+  ctx.fill();
+}
+function breakoutStep() {
+  const s = breakoutState;
+  if (!s || !s.running) return;
+  const p = s.paddle, ball = s.ball;
+  if (breakoutKeys.left) p.x -= p.speed;
+  if (breakoutKeys.right) p.x += p.speed;
+  p.x = Math.max(0, Math.min(BREAKOUT_W - p.w, p.x));
+  if (ball.stuck) { breakoutSyncBall(); return; }
+  ball.x += ball.vx;
+  ball.y += ball.vy;
+  if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx = Math.abs(ball.vx); }
+  if (ball.x + ball.r > BREAKOUT_W) { ball.x = BREAKOUT_W - ball.r; ball.vx = -Math.abs(ball.vx); }
+  if (ball.y - ball.r < 0) { ball.y = ball.r; ball.vy = Math.abs(ball.vy); }
+  if (ball.vy > 0 && ball.y + ball.r >= p.y && ball.y - ball.r <= p.y + p.h && ball.x >= p.x && ball.x <= p.x + p.w) {
+    ball.y = p.y - ball.r;
+    const hit = (ball.x - (p.x + p.w / 2)) / (p.w / 2);
+    ball.vx = hit * 4.5;
+    ball.vy = -Math.abs(ball.vy);
+  }
+  for (let i = 0; i < s.bricks.length; i++) {
+    const b = s.bricks[i];
+    if (!b.alive) continue;
+    if (ball.x + ball.r > b.x && ball.x - ball.r < b.x + b.w && ball.y + ball.r > b.y && ball.y - ball.r < b.y + b.h) {
+      const oX = Math.min(ball.x + ball.r - b.x, b.x + b.w - (ball.x - ball.r));
+      const oY = Math.min(ball.y + ball.r - b.y, b.y + b.h - (ball.y - ball.r));
+      if (oX < oY) ball.vx = -ball.vx; else ball.vy = -ball.vy;
+      b.alive = false;
+      s.score += 10;
+      breakoutUpdateStats();
+      break;
+    }
+  }
+  if (s.bricks.every(function (b) { return !b.alive; })) {
+    s.running = false;
+    breakoutBest = Math.max(breakoutBest, s.score);
+    breakoutUpdateStats();
+    document.getElementById('breakout-btn').textContent = '🎮 再玩一次';
+    document.getElementById('breakout-msg').textContent = '🎉 恭喜通关！最终得分 ' + s.score;
+    return;
+  }
+  if (ball.y - ball.r > BREAKOUT_H) {
+    s.lives -= 1;
+    if (s.lives <= 0) {
+      s.running = false; s.over = true;
+      breakoutBest = Math.max(breakoutBest, s.score);
+      breakoutUpdateStats();
+      document.getElementById('breakout-btn').textContent = '🎮 再玩一次';
+      document.getElementById('breakout-msg').textContent = '💥 游戏结束，得分 ' + s.score + '。点击「再玩一次」重来。';
+    } else {
+      ball.stuck = true; ball.vx = 0; ball.vy = 0;
+      breakoutSyncBall();
+      document.getElementById('breakout-msg').textContent = '还剩 ' + s.lives + ' 条命，点击画布或按空格继续发球。';
+    }
+  }
+}
+function breakoutLoop(t) {
+  breakoutRaf = requestAnimationFrame(breakoutLoop);
+  const panel = document.getElementById('panel-breakout');
+  if (!panel || !panel.classList.contains('active')) { breakoutLastT = t; return; }
+  if (!breakoutLastT) breakoutLastT = t;
+  breakoutAcc += (t - breakoutLastT);
+  breakoutLastT = t;
+  if (breakoutAcc > 100) breakoutAcc = 0;
+  let guard = 0;
+  while (breakoutAcc >= 16.67 && guard < 5) { breakoutStep(); breakoutAcc -= 16.67; guard++; }
+  breakoutDraw();
+}
+function breakoutSetPaddleByX(clientX) {
+  const cv = document.getElementById('breakout-canvas');
+  if (!cv || !breakoutState) return;
+  const rect = cv.getBoundingClientRect();
+  const x = (clientX - rect.left) * (BREAKOUT_W / rect.width);
+  const p = breakoutState.paddle;
+  p.x = Math.max(0, Math.min(BREAKOUT_W - p.w, x - p.w / 2));
+  breakoutSyncBall();
+}
+function breakoutMove(dir) {
+  if (!breakoutState) return;
+  const p = breakoutState.paddle;
+  p.x = Math.max(0, Math.min(BREAKOUT_W - p.w, p.x + dir * 26));
+  breakoutSyncBall();
+  breakoutDraw();
+}
+function breakoutToggle() {
+  if (!breakoutState || breakoutState.over || !breakoutState.bricks.some(function (b) { return b.alive; })) {
+    breakoutState = breakoutNewState();
+    breakoutState.running = true;
+    breakoutUpdateStats();
+    document.getElementById('breakout-btn').textContent = '⏸ 暂停';
+    document.getElementById('breakout-msg').textContent = '点击画布或按空格发射小球';
+    breakoutDraw();
+    return;
+  }
+  breakoutState.running = !breakoutState.running;
+  document.getElementById('breakout-btn').textContent = breakoutState.running ? '⏸ 暂停' : '▶ 继续';
+  document.getElementById('breakout-msg').textContent = breakoutState.running ? '游戏中……' : '⏸ 已暂停';
+}
+function initBreakout() {
+  const cv = document.getElementById('breakout-canvas');
+  if (!cv) return;
+  cv.addEventListener('mousemove', function (e) { if (breakoutState) { breakoutSetPaddleByX(e.clientX); breakoutDraw(); } });
+  cv.addEventListener('touchmove', function (e) { if (e.touches[0]) { e.preventDefault(); breakoutSetPaddleByX(e.touches[0].clientX); breakoutDraw(); } }, { passive: false });
+  cv.addEventListener('click', function () { breakoutLaunch(); });
+  document.addEventListener('keydown', function (e) {
+    const panel = document.getElementById('panel-breakout');
+    if (!panel || !panel.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') { breakoutKeys.left = true; e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { breakoutKeys.right = true; e.preventDefault(); }
+    else if (e.key === ' ' || e.key === 'Spacebar') { breakoutLaunch(); e.preventDefault(); }
+  });
+  document.addEventListener('keyup', function (e) {
+    if (e.key === 'ArrowLeft') breakoutKeys.left = false;
+    else if (e.key === 'ArrowRight') breakoutKeys.right = false;
+  });
+  breakoutState = null;
+  breakoutUpdateStats();
+  breakoutDraw();
+  if (!breakoutRaf) breakoutRaf = requestAnimationFrame(breakoutLoop);
+}
+
+// ============ ASCII 码对照表 ============
+const ASCII_CTRL = ['NUL', 'SOH', 'STX', 'ETX', 'EOT', 'ENQ', 'ACK', 'BEL', 'BS', 'TAB', 'LF', 'VT', 'FF', 'CR', 'SO', 'SI', 'DLE', 'DC1', 'DC2', 'DC3', 'DC4', 'NAK', 'SYN', 'ETB', 'CAN', 'EM', 'SUB', 'ESC', 'FS', 'GS', 'RS', 'US'];
+let asciiMode = 'all';
+function asciiEsc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function asciiChar(code) {
+  if (code < 32) return ASCII_CTRL[code];
+  if (code === 32) return '空格';
+  if (code === 127) return 'DEL';
+  return asciiEsc(String.fromCharCode(code));
+}
+function asciiRender() {
+  const q = (document.getElementById('ascii-query').value || '').trim().toLowerCase();
+  let rows = '', count = 0;
+  for (let c = 0; c <= 127; c++) {
+    if (asciiMode === 'control' && !(c < 32 || c === 127)) continue;
+    if (asciiMode === 'printable' && !(c >= 32 && c <= 126)) continue;
+    const dec = String(c);
+    let hex = c.toString(16).toUpperCase();
+    if (hex.length < 2) hex = '0' + hex;
+    const bin = c.toString(2).padStart(8, '0');
+    const oct = c.toString(8);
+    const ch = asciiChar(c);
+    const hay = (dec + ' ' + hex + ' 0x' + hex + ' ' + bin + ' ' + oct + ' ' + ch).toLowerCase();
+    if (q && hay.indexOf(q) === -1) continue;
+    count++;
+    rows += '<div style="display:flex;gap:10px;padding:4px 0;border-bottom:1px solid var(--border);align-items:center;white-space:nowrap;">'
+      + '<span style="min-width:40px;color:var(--text-secondary);">' + dec + '</span>'
+      + '<span style="min-width:58px;color:var(--accent-hover);">0x' + hex + '</span>'
+      + '<span style="color:var(--text-secondary);">' + bin + '</span>'
+      + '<span style="min-width:40px;color:var(--text-secondary);">' + oct + '</span>'
+      + '<span style="min-width:60px;font-weight:600;">' + ch + '</span>'
+      + '</div>';
+  }
+  document.getElementById('ascii-result').innerHTML = rows
+    ? rows + '<div style="margin-top:8px;color:var(--text-secondary);font-size:12px;">共 ' + count + ' 条</div>'
+    : '<div style="color:var(--text-secondary);">未找到匹配项</div>';
+}
+function asciiFilter() { asciiRender(); }
+function asciiQuick(mode) { asciiMode = mode; document.getElementById('ascii-query').value = ''; asciiRender(); }
+function asciiReset() { asciiMode = 'all'; document.getElementById('ascii-query').value = ''; asciiRender(); }
+function initAsciiTable() { asciiMode = 'all'; asciiRender(); }
+
+// ============ 视力测试 ============
+const EYE_SIZES = [150, 116, 90, 70, 54, 42, 32, 24, 18, 13];
+const EYE_ACUITY = ['0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.5'];
+const EYE_DIRS = [
+  { deg: 0, dir: 'right', name: '右' },
+  { deg: 90, dir: 'down', name: '下' },
+  { deg: 180, dir: 'left', name: '左' },
+  { deg: 270, dir: 'up', name: '上' }
+];
+let eyeState = null;
+function eyeUpdateStats() {
+  if (!eyeState) return;
+  document.getElementById('eye-level').textContent = (eyeState.level + 1);
+  document.getElementById('eye-score').textContent = eyeState.score;
+  document.getElementById('eye-wrong').textContent = eyeState.wrong;
+}
+function eyeNewRound() {
+  const pick = EYE_DIRS[Math.floor(Math.random() * EYE_DIRS.length)];
+  eyeState.current = pick;
+  const ch = document.getElementById('eye-char');
+  ch.style.fontSize = EYE_SIZES[eyeState.level] + 'px';
+  ch.style.transform = 'rotate(' + pick.deg + 'deg)';
+  eyeUpdateStats();
+}
+function eyeStart() {
+  eyeState = { level: 0, score: 0, wrong: 0, wrongAtLevel: 0, ended: false, current: null };
+  document.getElementById('eye-msg').textContent = '请选择「E」的开口方向';
+  eyeNewRound();
+}
+function eyeFinish(msg) {
+  eyeState.ended = true;
+  const acuity = EYE_ACUITY[Math.max(0, eyeState.level)];
+  document.getElementById('eye-msg').textContent = msg + '（约相当于视力 ' + acuity + '，仅供参考）';
+}
+function eyeAnswer(d) {
+  if (!eyeState || eyeState.ended) { document.getElementById('eye-msg').textContent = '请先点击「重新开始」'; return; }
+  if (d === eyeState.current.dir) {
+    eyeState.score++;
+    eyeState.wrongAtLevel = 0;
+    if (eyeState.level >= EYE_SIZES.length - 1) {
+      eyeUpdateStats();
+      eyeFinish('🎉 全部通过，视力表现非常好！');
+      return;
+    }
+    eyeState.level++;
+    document.getElementById('eye-msg').textContent = '✅ 正确！进入第 ' + (eyeState.level + 1) + ' 级';
+    eyeNewRound();
+  } else {
+    eyeState.wrong++;
+    eyeState.wrongAtLevel++;
+    eyeUpdateStats();
+    if (eyeState.wrongAtLevel >= 2) {
+      eyeFinish('本轮结束：连续答错，正确答案是「' + eyeState.current.name + '」。');
+    } else {
+      document.getElementById('eye-msg').textContent = '❌ 方向错误，再试一次（第 ' + (eyeState.level + 1) + ' 级）';
+      eyeNewRound();
+    }
+  }
+}
+function initEyeTest() {
+  eyeState = null;
+  document.getElementById('eye-msg').textContent = '点击「重新开始」开始测试';
+}
+
+// ============ 词频统计 ============
+const WF_ZH_STOP = ['的', '了', '和', '是', '我', '你', '他', '她', '它', '这', '那', '在', '有', '就', '不', '也', '都', '而', '与', '及', '或', '被', '把', '让', '对', '从', '到', '很', '会', '能', '要', '着', '之', '其', '一个', '什么', '我们', '你们', '他们', '因为', '所以', '如果', '可以', '这个', '那个'];
+const WF_EN_STOP = ['the', 'a', 'an', 'and', 'or', 'of', 'to', 'in', 'on', 'is', 'are', 'was', 'were', 'it', 'this', 'that', 'for', 'with', 'as', 'be', 'by', 'at', 'from', 'we', 'you', 'they', 'i', 'he', 'she', 'not', 'but', 'have', 'has', 'had', 'will', 'would', 'can', 'could', 'should', 'do', 'does', 'did', 'so', 'if', 'then', 'than', 'too', 'very', 'my', 'your', 'our', 'their', 'its', 'me', 'us', 'them'];
+function wfEsc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function wfRun() {
+  const raw = document.getElementById('wf-input').value || '';
+  const filterStop = document.getElementById('wf-stop').checked;
+  const topN = parseInt(document.getElementById('wf-top').value, 10) || 20;
+  const box = document.getElementById('wf-result');
+  if (!raw.trim()) { box.innerHTML = '<div style="color:var(--text-secondary);">请先粘贴需要统计的文本。</div>'; return; }
+  const counts = {};
+  const enWords = raw.toLowerCase().match(/[a-z][a-z0-9']*/g) || [];
+  enWords.forEach(function (w) {
+    if (filterStop && (WF_EN_STOP.indexOf(w) !== -1 || w.length < 2)) return;
+    counts[w] = (counts[w] || 0) + 1;
+  });
+  const zhText = raw.replace(/[^\u4e00-\u9fa5]/g, ' ');
+  zhText.split(/\s+/).forEach(function (seg) {
+    for (let i = 0; i + 2 <= seg.length; i++) {
+      const g = seg.substr(i, 2);
+      if (filterStop && WF_ZH_STOP.indexOf(g) !== -1) continue;
+      counts[g] = (counts[g] || 0) + 1;
+    }
+  });
+  const keys = Object.keys(counts);
+  const arr = keys.map(function (k) { return { k: k, n: counts[k] }; })
+    .sort(function (a, b) { return b.n - a.n || (a.k < b.k ? -1 : 1); })
+    .slice(0, topN);
+  if (!arr.length) { box.innerHTML = '<div style="color:var(--text-secondary);">未统计到有效词语，请检查输入内容。</div>'; return; }
+  const max = arr[0].n;
+  box.innerHTML = arr.map(function (o, i) {
+    const pct = Math.round(o.n / max * 100);
+    return '<div style="padding:5px 0;">'
+      + '<div style="display:flex;justify-content:space-between;font-size:13px;"><span>' + (i + 1) + '. ' + wfEsc(o.k) + '</span><span style="color:var(--text-secondary);">' + o.n + ' 次</span></div>'
+      + '<div style="height:8px;background:var(--border);border-radius:4px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:' + pct + '%;background:var(--accent);"></div></div>'
+      + '</div>';
+  }).join('') + '<div style="margin-top:8px;color:var(--text-secondary);font-size:12px;">共统计到 ' + keys.length + ' 个不同词语，显示前 ' + arr.length + ' 个</div>';
+}
+function initWordFreq() { document.getElementById('wf-result').innerHTML = '粘贴文本后点击「统计」查看词频'; }
+
+safeInit(() => initTipCalc(), 'initTipCalc');
+safeInit(() => initBreakout(), 'initBreakout');
+safeInit(() => initAsciiTable(), 'initAsciiTable');
+safeInit(() => initEyeTest(), 'initEyeTest');
+safeInit(() => initWordFreq(), 'initWordFreq');
 
 // ============ Search & Theme ============
 function filterTools() {
