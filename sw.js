@@ -1,5 +1,5 @@
 // Service Worker for 万能工具箱 PWA
-const CACHE_NAME = 'toolbox-v28';
+const CACHE_NAME = 'toolbox-v29';
 const ASSETS = [
   '/DY-/',
   '/DY-/index.html',
@@ -9,6 +9,7 @@ const ASSETS = [
   'https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js',
   'https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.js',
   'https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js',
+  'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js',
 ];
 
 self.addEventListener('install', event => {

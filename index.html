@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等149个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等154个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等149个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等154个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等149个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等154个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -27,6 +27,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <style>
 :root {
   --bg: #0f172a;
@@ -524,6 +525,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#ascii-table" data-tool="ascii-table"><span class="icon">🔤</span>ASCII 码对照表</a></li>
     <li><a href="#eye-test" data-tool="eye-test"><span class="icon">👁️</span>视力测试</a></li>
     <li><a href="#word-frequency" data-tool="word-frequency"><span class="icon">📈</span>词频统计</a></li>
+    <li class="category">今日更新</li>
+    <li><a href="#shoe-size" data-tool="shoe-size"><span class="icon">🦶</span>鞋码换算器</a></li>
+    <li><a href="#yaml-json" data-tool="yaml-json"><span class="icon">🧾</span>YAML ⇄ JSON 转换</a></li>
+    <li><a href="#one-rm-calc" data-tool="one-rm-calc"><span class="icon">🏋️</span>1RM 力量计算器</a></li>
+    <li><a href="#html-to-text" data-tool="html-to-text"><span class="icon">📄</span>HTML 转纯文本</a></li>
+    <li><a href="#pong" data-tool="pong"><span class="icon">🏓</span>乒乓球游戏</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -4047,6 +4054,92 @@ console.log('代码块');
     <div class="result-box" id="wf-result" style="max-height:420px;overflow:auto;">粘贴文本后点击「统计」查看词频</div>
   </section>
 
+  <!-- 鞋码换算器 -->
+  <section class="tool-panel" id="panel-shoe-size">
+    <h2>🦶 鞋码换算器</h2>
+    <p class="desc">输入脚长（厘米）或中国码，自动换算欧码、美码（男/女）、英码等常见尺码体系。买鞋前量一下脚长，网购选码更准（各品牌存在差异，结果仅供参考）。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">脚长 (cm)</div>
+        <input type="number" id="shoe-cm" step="0.1" min="15" max="35" placeholder="如 25.0" oninput="shoeCalc('cm')">
+      </div>
+      <div>
+        <div class="label">中国码</div>
+        <input type="number" id="shoe-cn" step="1" min="20" max="55" placeholder="如 40" oninput="shoeCalc('cn')">
+      </div>
+    </div>
+    <div class="result-box" id="shoe-result" style="max-height:none;">输入脚长或中国码，自动换算各体系尺码</div>
+  </section>
+
+  <!-- YAML ⇄ JSON 转换 -->
+  <section class="tool-panel" id="panel-yaml-json">
+    <h2>🧾 YAML ⇄ JSON 转换</h2>
+    <p class="desc">在 YAML 与 JSON 之间互相转换：粘贴 YAML 一键转 JSON，或粘贴 JSON 一键转 YAML，并自动校验语法。写配置文件、K8s / CI 编排时很实用。</p>
+    <div class="btn-group">
+      <button class="btn btn-sm" id="yj-btn-y2j" onclick="yjSet('yaml2json')">YAML → JSON</button>
+      <button class="btn btn-sm btn-secondary" id="yj-btn-j2y" onclick="yjSet('json2yaml')">JSON → YAML</button>
+      <button class="btn btn-secondary btn-sm" onclick="yjExample()">示例</button>
+      <button class="btn btn-secondary btn-sm" onclick="yjClear()">清空</button>
+    </div>
+    <textarea id="yj-input" placeholder="在此粘贴 YAML 或 JSON 内容……" style="min-height:180px;margin-top:12px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="yjConvert()">🔄 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('yj-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="yj-result" style="max-height:360px;">结果将显示在这里</div>
+  </section>
+
+  <!-- 1RM 力量计算器 -->
+  <section class="tool-panel" id="panel-one-rm-calc">
+    <h2>🏋️ 1RM 力量计算器</h2>
+    <p class="desc">根据你举起的重量与完成次数，估算单次最大力量（1RM），并给出常见训练强度百分比对应的参考重量，适合力量举 / 增肌训练安排负荷。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">重量 (kg)</div>
+        <input type="number" id="orm-weight" step="0.5" min="0" placeholder="如 60" oninput="calcOneRM()">
+      </div>
+      <div>
+        <div class="label">次数 (reps)</div>
+        <input type="number" id="orm-reps" step="1" min="1" max="30" placeholder="如 8" oninput="calcOneRM()">
+      </div>
+    </div>
+    <div class="result-box" id="orm-result" style="max-height:none;">输入重量与次数，自动估算 1RM</div>
+  </section>
+
+  <!-- HTML 转纯文本 -->
+  <section class="tool-panel" id="panel-html-to-text">
+    <h2>📄 HTML 转纯文本</h2>
+    <p class="desc">粘贴 HTML 源码，一键去除所有标签、提取可读纯文本，可选保留段落换行、解码 HTML 实体。整理邮件、清洗爬取内容、提取正文时很实用。</p>
+    <textarea id="h2t-input" placeholder="<p>Hello <b>世界</b></p>" style="min-height:140px;"></textarea>
+    <div class="btn-group">
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;color:var(--text-secondary);font-size:13px;">
+        <input type="checkbox" id="h2t-br" checked> 保留段落换行
+      </label>
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;color:var(--text-secondary);font-size:13px;">
+        <input type="checkbox" id="h2t-decode" checked> 解码 HTML 实体
+      </label>
+      <button class="btn btn-sm" onclick="doHtmlToText()">🧹 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyResult('h2t-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="h2t-result" style="min-height:120px;">结果将显示在这里</div>
+  </section>
+
+  <!-- 乒乓球游戏 -->
+  <section class="tool-panel" id="panel-pong">
+    <h2>🏓 乒乓球游戏</h2>
+    <p class="desc">经典 Pong 对战：用鼠标或 ↑ / ↓ 键移动左侧球拍，与电脑对打，先得 5 分者赢下一局。考验反应与预判。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="pong-you">0</div><div class="lbl">你</div></div>
+      <div class="stat-card"><div class="num" id="pong-ai">0</div><div class="lbl">电脑</div></div>
+      <div class="stat-card"><div class="num" id="pong-best">0</div><div class="lbl">最佳连胜</div></div>
+    </div>
+    <canvas id="pong-canvas" width="480" height="320" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#0f172a;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="pong-btn" onclick="pongToggle()">🎮 开始游戏</button>
+    </div>
+    <div class="result-box" id="pong-msg" style="margin-top:12px;text-align:center;">点击「开始游戏」，用鼠标或 ↑ / ↓ 键移动球拍。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -4054,7 +4147,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 149个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 154个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -11228,6 +11321,365 @@ safeInit(() => initBreakout(), 'initBreakout');
 safeInit(() => initAsciiTable(), 'initAsciiTable');
 safeInit(() => initEyeTest(), 'initEyeTest');
 safeInit(() => initWordFreq(), 'initWordFreq');
+
+// ============ 鞋码换算器 ============
+const SHOE_TABLE = [
+  { cn: 35, cm: 22.5, eu: 35, usM: 3.0, usW: 4.5, uk: 2.5 },
+  { cn: 36, cm: 23.0, eu: 36, usM: 3.5, usW: 5.0, uk: 3.0 },
+  { cn: 37, cm: 23.5, eu: 37, usM: 4.0, usW: 5.5, uk: 3.5 },
+  { cn: 38, cm: 24.0, eu: 38, usM: 4.5, usW: 6.0, uk: 4.0 },
+  { cn: 39, cm: 24.5, eu: 39, usM: 5.5, usW: 7.0, uk: 5.0 },
+  { cn: 40, cm: 25.0, eu: 40, usM: 6.5, usW: 8.0, uk: 6.0 },
+  { cn: 41, cm: 25.5, eu: 41, usM: 7.0, usW: 8.5, uk: 6.5 },
+  { cn: 42, cm: 26.0, eu: 42, usM: 7.5, usW: 9.0, uk: 7.0 },
+  { cn: 43, cm: 26.5, eu: 43, usM: 8.5, usW: 10.0, uk: 8.0 },
+  { cn: 44, cm: 27.0, eu: 44, usM: 9.5, usW: 11.0, uk: 9.0 },
+  { cn: 45, cm: 27.5, eu: 45, usM: 10.5, usW: 12.0, uk: 10.0 },
+  { cn: 46, cm: 28.0, eu: 46, usM: 11.0, usW: 12.5, uk: 10.5 },
+  { cn: 47, cm: 28.5, eu: 47, usM: 12.0, usW: 13.5, uk: 11.5 },
+  { cn: 48, cm: 29.0, eu: 48, usM: 13.0, usW: 14.5, uk: 12.5 }
+];
+function shoeHalf(n) { return Math.round(n * 2) / 2; }
+function shoeInterp(cm, key) {
+  const T = SHOE_TABLE;
+  if (cm <= T[0].cm) return T[0][key];
+  if (cm >= T[T.length - 1].cm) return T[T.length - 1][key];
+  for (let i = 0; i < T.length - 1; i++) {
+    if (cm >= T[i].cm && cm <= T[i + 1].cm) {
+      const t = (cm - T[i].cm) / (T[i + 1].cm - T[i].cm);
+      return T[i][key] + t * (T[i + 1][key] - T[i][key]);
+    }
+  }
+  return T[T.length - 1][key];
+}
+function shoeCalc(src) {
+  const box = 'shoe-result';
+  let cm;
+  if (src === 'cn') {
+    const cn = parseFloat(document.getElementById('shoe-cn').value);
+    if (!isFinite(cn) || cn <= 0) { showResult(box, '输入脚长（cm）或中国码，自动换算各体系尺码'); return; }
+    cm = (cn + 10) / 2;
+    document.getElementById('shoe-cm').value = Math.round(cm * 10) / 10;
+  } else {
+    cm = parseFloat(document.getElementById('shoe-cm').value);
+    if (!isFinite(cm) || cm <= 0) { showResult(box, '输入脚长（cm）或中国码，自动换算各体系尺码'); return; }
+  }
+  showResult(box,
+    '脚长：' + cm.toFixed(1) + ' cm\n'
+    + '中国码：' + shoeHalf(shoeInterp(cm, 'cn')) + '\n'
+    + '欧码 (EU)：' + shoeHalf(shoeInterp(cm, 'eu')) + '\n'
+    + '美码 · 男 (US M)：' + shoeHalf(shoeInterp(cm, 'usM')) + '\n'
+    + '美码 · 女 (US W)：' + shoeHalf(shoeInterp(cm, 'usW')) + '\n'
+    + '英码 (UK)：' + shoeHalf(shoeInterp(cm, 'uk')) + '\n\n'
+    + '提示：不同品牌楦型存在差异，宽脚 / 高脚背建议偏大半码，结果仅供参考。');
+}
+function initShoeSize() {
+  document.getElementById('shoe-cm').value = '';
+  document.getElementById('shoe-cn').value = '';
+  shoeCalc('cm');
+}
+
+// ============ YAML ⇄ JSON 转换 ============
+let yjMode = 'yaml2json';
+function yjSet(mode) {
+  yjMode = mode;
+  document.getElementById('yj-btn-y2j').className = 'btn btn-sm' + (mode === 'yaml2json' ? '' : ' btn-secondary');
+  document.getElementById('yj-btn-j2y').className = 'btn btn-sm' + (mode === 'json2yaml' ? '' : ' btn-secondary');
+  document.getElementById('yj-input').placeholder = mode === 'yaml2json' ? '在此粘贴 YAML 内容……' : '在此粘贴 JSON 内容……';
+  if (document.getElementById('yj-input').value.trim()) yjConvert();
+}
+function yjExample() {
+  document.getElementById('yj-input').value = yjMode === 'yaml2json'
+    ? 'name: 万能工具箱\nversion: 1.0\nonline: true\ntools:\n  - json-format\n  - yaml-json\nsite: "https://cnjxdy.github.io/DY-/"'
+    : '{\n  "name": "万能工具箱",\n  "version": 1,\n  "online": true,\n  "tools": ["json-format", "yaml-json"]\n}';
+  yjConvert();
+}
+function yjClear() {
+  document.getElementById('yj-input').value = '';
+  showResult('yj-result', '结果将显示在这里');
+}
+function yjConvert() {
+  const raw = document.getElementById('yj-input').value;
+  const box = 'yj-result';
+  if (!raw.trim()) { showResult(box, '请先粘贴要转换的内容'); return; }
+  if (typeof jsyaml === 'undefined') { showResult(box, '⚠️ YAML 解析库未加载（可能离线），请联网后刷新页面再试。'); return; }
+  try {
+    if (yjMode === 'yaml2json') {
+      const obj = jsyaml.load(raw);
+      showResult(box, JSON.stringify(obj === undefined ? null : obj, null, 2));
+    } else {
+      const obj = JSON.parse(raw);
+      showResult(box, jsyaml.dump(obj, { indent: 2, lineWidth: -1, noRefs: true }));
+    }
+  } catch (e) {
+    showResult(box, '❌ 转换失败：' + e.message);
+  }
+}
+function initYamlJson() { yjSet('yaml2json'); }
+
+// ============ 1RM 力量计算器 ============
+function calcOneRM() {
+  const box = 'orm-result';
+  const w = parseFloat(document.getElementById('orm-weight').value);
+  const r = parseInt(document.getElementById('orm-reps').value, 10);
+  if (!(w > 0) || !(r > 0)) { showResult(box, '输入重量与次数，自动估算 1RM'); return; }
+  let orm, note;
+  if (r === 1) {
+    orm = w; note = '（次数为 1，即为实测最大重量）';
+  } else if (r <= 12) {
+    const epley = w * (1 + r / 30);
+    const brzycki = w / (1.0278 - 0.0278 * r);
+    orm = (epley + brzycki) / 2;
+    note = '（Epley 与 Brzycki 公式取平均）';
+  } else {
+    orm = w * (1 + r / 30);
+    note = '（次数较多，采用 Epley 公式，误差偏大，仅供参考）';
+  }
+  const rows = [
+    [100, '1 次'], [95, '2 次'], [90, '4 次'], [85, '6 次'], [80, '8 次'],
+    [75, '10 次'], [70, '12 次'], [65, '15 次'], [60, '18 次']
+  ];
+  let out = '估算 1RM：' + orm.toFixed(1) + ' kg ' + note + '\n\n训练强度参考：\n';
+  rows.forEach(function (row) {
+    const pct = row[0];
+    out += '  ' + String(pct).padStart(3, ' ') + '%  ≈ ' + (orm * pct / 100).toFixed(1).padStart(6, ' ') + ' kg   （约 ' + row[1] + '）\n';
+  });
+  out += '\n依据：' + w + ' kg × ' + r + ' 次';
+  showResult(box, out);
+}
+function initOneRM() {
+  document.getElementById('orm-weight').value = '';
+  document.getElementById('orm-reps').value = '';
+  calcOneRM();
+}
+
+// ============ HTML 转纯文本 ============
+function h2tDecode(s) {
+  const ta = document.createElement('textarea');
+  ta.innerHTML = s;
+  return ta.value;
+}
+function doHtmlToText() {
+  const raw = document.getElementById('h2t-input').value;
+  const keepBr = document.getElementById('h2t-br').checked;
+  const decode = document.getElementById('h2t-decode').checked;
+  const box = 'h2t-result';
+  if (!raw.trim()) { showResult(box, '请先粘贴 HTML 内容'); return; }
+  let s = raw
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ');
+  if (keepBr) {
+    s = s.replace(/<\s*br\s*\/?>/gi, '\n')
+      .replace(/<\s*li[^>]*>/gi, '\n• ')
+      .replace(/<\/(p|div|li|tr|h[1-6]|section|article|header|footer|blockquote|pre)>/gi, '\n')
+      .replace(/<[^>]+>/g, '');
+  } else {
+    s = s.replace(/<[^>]+>/g, ' ');
+  }
+  if (decode) s = h2tDecode(s);
+  if (keepBr) {
+    s = s.replace(/[ \t\r\f\v\u00a0]+/g, ' ').replace(/ ?\n ?/g, '\n').replace(/\n{3,}/g, '\n\n');
+  } else {
+    s = s.replace(/[ \t\r\f\v\u00a0\n]+/g, ' ');
+  }
+  s = s.trim();
+  showResult(box, s || '（转换结果为空）');
+}
+function initHtmlToText() {
+  document.getElementById('h2t-input').value = '';
+  showResult('h2t-result', '结果将显示在这里');
+}
+
+// ============ 乒乓球游戏 ============
+const PONG_W = 480, PONG_H = 320;
+let pongState = null;
+let pongBest = 0;
+let pongStreak = 0;
+let pongRaf = null;
+let pongLastT = 0;
+let pongAcc = 0;
+let pongKeys = { up: false, down: false };
+function pongNewState() {
+  return {
+    player: { x: 14, y: PONG_H / 2 - 36, w: 10, h: 72, speed: 5.4 },
+    ai: { x: PONG_W - 24, y: PONG_H / 2 - 36, w: 10, h: 72, speed: 3.0 },
+    ball: { x: PONG_W / 2, y: PONG_H / 2, r: 6, vx: 3.4, vy: 1.7 },
+    you: 0, aiScore: 0, target: 5, running: false, over: false, serve: 1
+  };
+}
+function pongUpdateStats() {
+  document.getElementById('pong-best').textContent = pongBest;
+  if (!pongState) return;
+  document.getElementById('pong-you').textContent = pongState.you;
+  document.getElementById('pong-ai').textContent = pongState.aiScore;
+}
+function pongServe(dir) {
+  const s = pongState;
+  s.ball.x = PONG_W / 2;
+  s.ball.y = PONG_H / 2;
+  s.ball.vx = 3.4 * dir;
+  s.ball.vy = (Math.random() * 2 - 1) * 2.2;
+}
+function pongDraw() {
+  const cv = document.getElementById('pong-canvas');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, PONG_W, PONG_H);
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6, 8]);
+  ctx.beginPath();
+  ctx.moveTo(PONG_W / 2, 0);
+  ctx.lineTo(PONG_W / 2, PONG_H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  if (!pongState) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('点击「开始游戏」', PONG_W / 2, PONG_H / 2);
+    return;
+  }
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#475569';
+  ctx.font = 'bold 40px sans-serif';
+  ctx.fillText(String(pongState.you), PONG_W / 2 - 60, 46);
+  ctx.fillText(String(pongState.aiScore), PONG_W / 2 + 60, 46);
+  ctx.fillStyle = '#818cf8';
+  ctx.fillRect(pongState.player.x, pongState.player.y, pongState.player.w, pongState.player.h);
+  ctx.fillStyle = '#f472b6';
+  ctx.fillRect(pongState.ai.x, pongState.ai.y, pongState.ai.w, pongState.ai.h);
+  ctx.beginPath();
+  ctx.arc(pongState.ball.x, pongState.ball.y, pongState.ball.r, 0, Math.PI * 2);
+  ctx.fillStyle = '#e2e8f0';
+  ctx.fill();
+}
+function pongStep() {
+  const s = pongState;
+  if (!s || !s.running) return;
+  const p = s.player, a = s.ai, b = s.ball;
+  if (pongKeys.up) p.y -= p.speed;
+  if (pongKeys.down) p.y += p.speed;
+  p.y = Math.max(0, Math.min(PONG_H - p.h, p.y));
+  if (a.y + a.h / 2 < b.y - 4) a.y += a.speed;
+  else if (a.y + a.h / 2 > b.y + 4) a.y -= a.speed;
+  a.y = Math.max(0, Math.min(PONG_H - a.h, a.y));
+  b.x += b.vx;
+  b.y += b.vy;
+  if (b.y - b.r < 0) { b.y = b.r; b.vy = Math.abs(b.vy); }
+  if (b.y + b.r > PONG_H) { b.y = PONG_H - b.r; b.vy = -Math.abs(b.vy); }
+  if (b.vx < 0 && b.x - b.r <= p.x + p.w && b.x + b.r >= p.x && b.y >= p.y && b.y <= p.y + p.h) {
+    b.x = p.x + p.w + b.r;
+    const hit = (b.y - (p.y + p.h / 2)) / (p.h / 2);
+    b.vx = Math.min(8, Math.abs(b.vx) * 1.03);
+    b.vy = hit * 4.2;
+  }
+  if (b.vx > 0 && b.x + b.r >= a.x && b.x - b.r <= a.x + a.w && b.y >= a.y && b.y <= a.y + a.h) {
+    b.x = a.x - b.r;
+    const hit = (b.y - (a.y + a.h / 2)) / (a.h / 2);
+    b.vx = -Math.min(8, Math.abs(b.vx) * 1.03);
+    b.vy = hit * 4.2;
+  }
+  if (b.x + b.r < 0) {
+    s.aiScore++;
+    pongUpdateStats();
+    if (s.aiScore >= s.target) { pongEnd(false); return; }
+    pongServe(1);
+    document.getElementById('pong-msg').textContent = '电脑得分，比分 ' + s.you + ' : ' + s.aiScore;
+    return;
+  }
+  if (b.x - b.r > PONG_W) {
+    s.you++;
+    pongUpdateStats();
+    if (s.you >= s.target) { pongEnd(true); return; }
+    pongServe(-1);
+    document.getElementById('pong-msg').textContent = '你得 1 分！比分 ' + s.you + ' : ' + s.aiScore;
+  }
+}
+function pongEnd(win) {
+  const s = pongState;
+  s.running = false;
+  s.over = true;
+  let msg;
+  if (win) {
+    pongStreak++;
+    if (pongStreak > pongBest) pongBest = pongStreak;
+    msg = '🎉 你赢了这一局！比分 ' + s.you + ' : ' + s.aiScore + '（当前连胜 ' + pongStreak + '）';
+  } else {
+    pongStreak = 0;
+    msg = '💻 电脑获胜，比分 ' + s.you + ' : ' + s.aiScore + '。点击「再玩一次」重来。';
+  }
+  pongUpdateStats();
+  document.getElementById('pong-btn').textContent = '🎮 再玩一次';
+  document.getElementById('pong-msg').textContent = msg;
+}
+function pongToggle() {
+  if (!pongState || pongState.over) {
+    pongState = pongNewState();
+    pongState.running = true;
+    pongUpdateStats();
+    document.getElementById('pong-btn').textContent = '⏸ 暂停';
+    document.getElementById('pong-msg').textContent = '游戏开始！用鼠标或 ↑ / ↓ 键移动球拍。';
+    pongDraw();
+    return;
+  }
+  pongState.running = !pongState.running;
+  document.getElementById('pong-btn').textContent = pongState.running ? '⏸ 暂停' : '▶ 继续';
+  document.getElementById('pong-msg').textContent = pongState.running ? '游戏中……' : '⏸ 已暂停';
+}
+function pongLoop(t) {
+  pongRaf = requestAnimationFrame(pongLoop);
+  const panel = document.getElementById('panel-pong');
+  if (!panel || !panel.classList.contains('active')) { pongLastT = t; return; }
+  if (!pongLastT) pongLastT = t;
+  pongAcc += (t - pongLastT);
+  pongLastT = t;
+  if (pongAcc > 100) pongAcc = 0;
+  let guard = 0;
+  while (pongAcc >= 16.67 && guard < 5) { pongStep(); pongAcc -= 16.67; guard++; }
+  pongDraw();
+}
+function pongSetPlayerByY(clientY) {
+  const cv = document.getElementById('pong-canvas');
+  if (!cv || !pongState) return;
+  const rect = cv.getBoundingClientRect();
+  const y = (clientY - rect.top) * (PONG_H / rect.height);
+  const p = pongState.player;
+  p.y = Math.max(0, Math.min(PONG_H - p.h, y - p.h / 2));
+  pongDraw();
+}
+function initPong() {
+  const cv = document.getElementById('pong-canvas');
+  if (!cv) return;
+  cv.addEventListener('mousemove', function (e) { pongSetPlayerByY(e.clientY); });
+  cv.addEventListener('touchmove', function (e) {
+    if (!e.touches[0]) return;
+    e.preventDefault();
+    pongSetPlayerByY(e.touches[0].clientY);
+  }, { passive: false });
+  document.addEventListener('keydown', function (e) {
+    const panel = document.getElementById('panel-pong');
+    if (!panel || !panel.classList.contains('active')) return;
+    if (e.key === 'ArrowUp') { pongKeys.up = true; e.preventDefault(); }
+    else if (e.key === 'ArrowDown') { pongKeys.down = true; e.preventDefault(); }
+  });
+  document.addEventListener('keyup', function (e) {
+    if (e.key === 'ArrowUp') pongKeys.up = false;
+    else if (e.key === 'ArrowDown') pongKeys.down = false;
+  });
+  pongState = pongNewState();
+  pongUpdateStats();
+  pongDraw();
+  if (!pongRaf) pongRaf = requestAnimationFrame(pongLoop);
+}
+
+safeInit(() => initShoeSize(), 'initShoeSize');
+safeInit(() => initYamlJson(), 'initYamlJson');
+safeInit(() => initOneRM(), 'initOneRM');
+safeInit(() => initHtmlToText(), 'initHtmlToText');
+safeInit(() => initPong(), 'initPong');
 
 // ============ Search & Theme ============
 function filterTools() {
