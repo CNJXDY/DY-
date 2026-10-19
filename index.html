@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等159个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等164个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等159个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等164个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等159个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等164个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -537,6 +537,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#protein-calc" data-tool="protein-calc"><span class="icon">🥚</span>蛋白质摄入计算</a></li>
     <li><a href="#lights-out" data-tool="lights-out"><span class="icon">💡</span>灭灯游戏</a></li>
     <li><a href="#business-days" data-tool="business-days"><span class="icon">🗓️</span>工作日计算器</a></li>
+    <li class="category">全新上线</li>
+    <li><a href="#exercise-calorie" data-tool="exercise-calorie"><span class="icon">🏋️</span>运动消耗热量</a></li>
+    <li><a href="#wheel-spinner" data-tool="wheel-spinner"><span class="icon">🎡</span>幸运大转盘</a></li>
+    <li><a href="#mock-data" data-tool="mock-data"><span class="icon">🧪</span>Mock数据生成</a></li>
+    <li><a href="#line-number" data-tool="line-number"><span class="icon">🔢</span>文本加行号</a></li>
+    <li><a href="#glucose-converter" data-tool="glucose-converter"><span class="icon">🩸</span>血糖单位换算</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -4265,6 +4271,167 @@ console.log('代码块');
     <div class="result-box" id="bd-addresult" style="display:none;"></div>
   </section>
 
+  <!-- 运动消耗热量计算器 -->
+  <section class="tool-panel" id="panel-exercise-calorie">
+    <h2>🏋️ 运动消耗热量计算器</h2>
+    <p class="desc">根据体重、运动类型与时长，基于 MET 代谢当量估算本次运动消耗的卡路里，并换算成米饭、可乐等常见热量参考，帮你更直观地了解运动量。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">体重 (kg)</div>
+        <input type="number" id="ec-weight" min="20" max="250" step="0.1" value="60" oninput="calcExercise()">
+      </div>
+      <div>
+        <div class="label">运动时长（分钟）</div>
+        <input type="number" id="ec-minutes" min="1" max="600" step="1" value="30" oninput="calcExercise()">
+      </div>
+    </div>
+    <div class="label">运动类型</div>
+    <select id="ec-type" style="font-family:inherit;" onchange="calcExercise()">
+      <option value="3">散步 / 慢走（3.0 MET）</option>
+      <option value="3.5">快走（3.5 MET）</option>
+      <option value="7" selected>慢跑（7.0 MET）</option>
+      <option value="9.8">跑步（9.8 MET）</option>
+      <option value="6">骑行（6.0 MET）</option>
+      <option value="6">游泳（6.0 MET）</option>
+      <option value="11.8">跳绳（11.8 MET）</option>
+      <option value="2.5">瑜伽（2.5 MET）</option>
+      <option value="5">力量训练（5.0 MET）</option>
+      <option value="6.5">篮球（6.5 MET）</option>
+      <option value="5.5">羽毛球（5.5 MET）</option>
+      <option value="7">足球（7.0 MET）</option>
+      <option value="4.8">跳舞（4.8 MET）</option>
+      <option value="8">爬楼梯（8.0 MET）</option>
+      <option value="5">椭圆机（5.0 MET）</option>
+      <option value="3">太极（3.0 MET）</option>
+      <option value="4">乒乓球（4.0 MET）</option>
+      <option value="7.3">网球（7.3 MET）</option>
+    </select>
+    <div class="btn-group">
+      <button class="btn" onclick="calcExercise()">🔥 计算消耗</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ec-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="ec-result" style="white-space:pre-wrap;"></div>
+  </section>
+
+  <!-- 幸运大转盘 -->
+  <section class="tool-panel" id="panel-wheel-spinner">
+    <h2>🎡 幸运大转盘</h2>
+    <p class="desc">把需要随机决定的事项写进转盘（每行一个），点击「开始转动」让转盘帮你做选择，适合抽奖、点餐、分组等选择困难场景。</p>
+    <textarea id="wheel-options" style="min-height:120px;">吃火锅
+吃烧烤
+点外卖
+吃日料
+回家做饭
+随便吃点</textarea>
+    <div class="btn-group">
+      <button class="btn" id="wheel-spin-btn" onclick="spinWheel()">🎯 开始转动</button>
+    </div>
+    <div style="text-align:center;margin-top:16px;">
+      <canvas id="wheel-canvas" width="320" height="320" style="max-width:100%;"></canvas>
+    </div>
+    <div class="result-box" id="wheel-result" style="text-align:center;">把选项填入上方文本框，点击「开始转动」。</div>
+  </section>
+
+  <!-- Mock 数据生成器 -->
+  <section class="tool-panel" id="panel-mock-data">
+    <h2>🧪 Mock 数据生成器</h2>
+    <p class="desc">快速生成测试用的中文假数据（姓名、手机号、邮箱、地址、公司等），支持 JSON / CSV 输出，方便填充原型、接口联调与数据库种子数据。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">生成条数</div>
+        <input type="number" id="mock-count" min="1" max="200" step="1" value="5">
+      </div>
+      <div>
+        <div class="label">输出格式</div>
+        <select id="mock-format" style="font-family:inherit;">
+          <option value="json">JSON</option>
+          <option value="csv">CSV</option>
+        </select>
+      </div>
+    </div>
+    <div class="label" style="margin-top:12px;">包含字段</div>
+    <div class="flex-row" style="flex-wrap:wrap;gap:10px 18px;margin-top:6px;">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="name" checked> 姓名</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="gender" checked> 性别</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="age" checked> 年龄</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="phone" checked> 手机号</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="email" checked> 邮箱</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="city"> 城市</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="address"> 地址</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="company"> 公司</label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" class="mock-field" value="idcard"> 身份证</label>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="genMock()">🧪 生成数据</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('mock-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="mock-result" style="white-space:pre;overflow:auto;max-height:320px;">点击「生成数据」查看结果</pre>
+  </section>
+
+  <!-- 文本加行号 -->
+  <section class="tool-panel" id="panel-line-number">
+    <h2>🔢 文本加行号</h2>
+    <p class="desc">给多行文本自动添加序号，可自定义起始值、步长、分隔符与序号位数（补零），适合整理清单、对齐代码行号与文档编号。</p>
+    <textarea id="ln-input" style="min-height:150px;" oninput="numLines()">第一行内容
+第二行内容
+第三行内容</textarea>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">起始序号</div>
+        <input type="number" id="ln-start" value="1" step="1" oninput="numLines()">
+      </div>
+      <div>
+        <div class="label">步长</div>
+        <input type="number" id="ln-step" value="1" step="1" oninput="numLines()">
+      </div>
+      <div>
+        <div class="label">分隔符</div>
+        <select id="ln-sep" style="font-family:inherit;" onchange="numLines()">
+          <option value="dot">. 英文点</option>
+          <option value="paren">) 括号</option>
+          <option value="colon">：中文冒号</option>
+          <option value="dash"> - 短横</option>
+          <option value="tab">制表符</option>
+          <option value="space">空格</option>
+          <option value="none">无（仅数字）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">补零位数</div>
+        <input type="number" id="ln-pad" value="0" min="0" max="6" step="1" oninput="numLines()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="numLines()">🔢 生成</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ln-result')">📋 复制</button>
+    </div>
+    <pre class="result-box" id="ln-result" style="white-space:pre;overflow:auto;max-height:320px;"></pre>
+  </section>
+
+  <!-- 血糖单位换算 -->
+  <section class="tool-panel" id="panel-glucose-converter">
+    <h2>🩸 血糖单位换算</h2>
+    <p class="desc">在 mmol/L 与 mg/dL 两种血糖单位间双向换算（1 mmol/L ≈ 18.02 mg/dL），并附带空腹、餐后等常见参考区间，帮助看懂体检报告。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">mmol/L</div>
+        <input type="number" id="gl-mmol" step="0.1" min="0" placeholder="例如 5.6" oninput="convGlucose('mmol')">
+      </div>
+      <div>
+        <div class="label">mg/dL</div>
+        <input type="number" id="gl-mgdl" step="1" min="0" placeholder="例如 100" oninput="convGlucose('mgdl')">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="convGlucose('clear')">🧹 清空</button>
+    </div>
+    <div class="result-box" id="gl-result" style="white-space:pre-wrap;">输入任一单位数值，自动换算另一种单位。</div>
+    <div class="label" style="margin-top:14px;">参考范围</div>
+    <div class="result-box" style="white-space:pre-wrap;">正常空腹：3.9 – 6.1 mmol/L（70 – 110 mg/dL）
+餐后 2 小时：&lt; 7.8 mmol/L（&lt; 140 mg/dL）
+空腹 ≥ 7.0 mmol/L（126 mg/dL）或餐后 ≥ 11.1 mmol/L（200 mg/dL）建议就医评估</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -4272,7 +4439,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 159个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 164个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -12190,6 +12357,239 @@ safeInit(() => initDotenvJson(), 'initDotenvJson');
 safeInit(() => initProtein(), 'initProtein');
 safeInit(() => initLightsOut(), 'initLightsOut');
 safeInit(() => initBizDays(), 'initBizDays');
+
+// ============ 运动消耗热量计算器 ============
+function calcExercise() {
+  const w = parseFloat(document.getElementById('ec-weight').value);
+  const mins = parseFloat(document.getElementById('ec-minutes').value);
+  const sel = document.getElementById('ec-type');
+  const met = parseFloat(sel.value);
+  const name = sel.options[sel.selectedIndex].text.split('（')[0].trim();
+  if (!w || !mins || w <= 0 || mins <= 0) {
+    showResult('ec-result', '请输入有效的体重和运动时长。');
+    return;
+  }
+  const kcal = met * w * (mins / 60);
+  const rice = kcal / 116;
+  const cola = kcal / 43 * 100;
+  const walk = kcal / (4.3 * w / 60);
+  showResult('ec-result',
+    name + ' · ' + mins + ' 分钟\n' +
+    '预计消耗约 ' + kcal.toFixed(1) + ' 千卡 (kcal)\n' +
+    '≈ 米饭 ' + rice.toFixed(2) + ' 碗（约 116 kcal/碗）\n' +
+    '≈ 可乐 ' + cola.toFixed(0) + ' ml（约 43 kcal/100ml）\n' +
+    '≈ 相当于快走 ' + walk.toFixed(0) + ' 分钟');
+}
+function initExerciseCal() {
+  document.getElementById('ec-type').value = '7';
+  calcExercise();
+}
+
+// ============ 幸运大转盘 ============
+let wheelAngle = 0;
+let wheelSpinning = false;
+const WHEEL_COLORS = ['#6366f1', '#a78bfa', '#f472b6', '#fb7185', '#fbbf24', '#34d399', '#22d3ee', '#60a5fa'];
+function wheelItems() {
+  return document.getElementById('wheel-options').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+}
+function wheelDraw(angle) {
+  const cv = document.getElementById('wheel-canvas');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const cx = cv.width / 2, cy = cv.height / 2, R = Math.min(cx, cy) - 10;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  const items = wheelItems();
+  if (!items.length) {
+    ctx.fillStyle = 'rgba(148,163,184,.35)';
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fill();
+  } else {
+    const n = items.length;
+    const seg = Math.PI * 2 / n;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    for (let i = 0; i < n; i++) {
+      const a0 = i * seg, a1 = a0 + seg;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R, a0, a1); ctx.closePath();
+      ctx.fillStyle = WHEEL_COLORS[i % WHEEL_COLORS.length];
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,.65)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.save();
+      ctx.rotate(a0 + seg / 2);
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      const label = items[i].length > 10 ? items[i].slice(0, 10) + '…' : items[i];
+      ctx.fillText(label, R - 14, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+  // 固定指针（顶部，指向圆心）
+  ctx.fillStyle = '#ef4444';
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - R + 2);
+  ctx.lineTo(cx - 11, cy - R - 16);
+  ctx.lineTo(cx + 11, cy - R - 16);
+  ctx.closePath();
+  ctx.fill();
+  // 中心圆
+  ctx.beginPath(); ctx.arc(cx, cy, 16, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff'; ctx.fill();
+  ctx.strokeStyle = '#6366f1'; ctx.lineWidth = 3; ctx.stroke();
+}
+function spinWheel() {
+  if (wheelSpinning) return;
+  const items = wheelItems();
+  if (items.length < 2) {
+    showResult('wheel-result', '请至少填写 2 个选项（每行一个）。');
+    return;
+  }
+  wheelSpinning = true;
+  document.getElementById('wheel-result').textContent = '转动中…';
+  const n = items.length;
+  const seg = Math.PI * 2 / n;
+  const idx = Math.floor(Math.random() * n);
+  let targetMod = (Math.PI * 1.5 - (idx + 0.5) * seg) % (Math.PI * 2);
+  if (targetMod < 0) targetMod += Math.PI * 2;
+  const start = wheelAngle;
+  const base = start - (start % (Math.PI * 2));
+  const end = base + Math.PI * 2 * 6 + targetMod;
+  const dur = 3800;
+  const t0 = performance.now();
+  function frame(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    wheelAngle = start + (end - start) * ease;
+    wheelDraw(wheelAngle);
+    if (p < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      wheelAngle = targetMod;
+      wheelSpinning = false;
+      showResult('wheel-result', '🎉 结果：' + items[idx]);
+      showToast('结果：' + items[idx]);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+function initWheel() {
+  const ta = document.getElementById('wheel-options');
+  if (!ta) return;
+  ta.addEventListener('input', function () { if (!wheelSpinning) wheelDraw(wheelAngle); });
+  wheelDraw(wheelAngle);
+}
+
+// ============ Mock 数据生成器 ============
+const MOCK_SURNAMES = ['王','李','张','刘','陈','杨','赵','黄','周','吴','徐','孙','马','朱','胡','郭','何','林','罗','郑'];
+const MOCK_GIVEN = ['伟','芳','娜','敏','静','丽','强','磊','军','洋','勇','艳','杰','娟','涛','明','超','霞','平','刚','雪','鹏','宇','浩','晨','欣','悦','思远','雨薇','梓涵'];
+const MOCK_CITIES = ['北京市','上海市','广州市','深圳市','杭州市','成都市','武汉市','南京市','西安市','重庆市','苏州市','长沙市'];
+const MOCK_DISTRICTS = ['朝阳区','海淀区','天河区','南山区','西湖区','武侯区','洪山区','鼓楼区','雁塔区','渝中区','工业园区','岳麓区'];
+const MOCK_COMPANY_PRE = ['云','星辰','蓝','未来','智','恒','华','天','光','博','远','新'];
+const MOCK_COMPANY_SUF = ['科技','网络','信息','数据','智能','电子商务','文化传媒','软件'];
+const MOCK_FIELD_LABELS = { name: '姓名', gender: '性别', age: '年龄', phone: '手机号', email: '邮箱', city: '城市', address: '地址', company: '公司', idcard: '身份证' };
+function mockRand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function mockDigits(n) { let s = ''; for (let i = 0; i < n; i++) s += Math.floor(Math.random() * 10); return s; }
+function mockPerson() {
+  const name = mockRand(MOCK_SURNAMES) + mockRand(MOCK_GIVEN);
+  const gender = Math.random() < 0.5 ? '男' : '女';
+  const age = 18 + Math.floor(Math.random() * 43);
+  const phone = '1' + mockRand(['3', '5', '6', '7', '8', '9']) + mockDigits(9);
+  const email = mockDigits(6) + '@' + mockRand(['qq.com', '163.com', 'gmail.com', 'outlook.com', '126.com']);
+  const city = mockRand(MOCK_CITIES);
+  const address = city + mockRand(MOCK_DISTRICTS) + mockRand(['人民', '建设', '中山', '解放', '和平', '幸福', '科技', '花园', '长虹', '光明']) + '路' + (1 + Math.floor(Math.random() * 200)) + '号';
+  const company = mockRand(MOCK_COMPANY_PRE) + mockRand(MOCK_COMPANY_SUF) + '有限公司';
+  const birthYear = new Date().getFullYear() - age;
+  const idcard = mockDigits(6) + birthYear + String(1 + Math.floor(Math.random() * 12)).padStart(2, '0') + String(1 + Math.floor(Math.random() * 28)).padStart(2, '0') + mockDigits(3) + '0123456789X'[Math.floor(Math.random() * 11)];
+  return { name: name, gender: gender, age: age, phone: phone, email: email, city: city, address: address, company: company, idcard: idcard };
+}
+function genMock() {
+  const n = Math.max(1, Math.min(200, parseInt(document.getElementById('mock-count').value, 10) || 1));
+  const fmt = document.getElementById('mock-format').value;
+  const fields = Array.prototype.slice.call(document.querySelectorAll('.mock-field:checked')).map(function (c) { return c.value; });
+  if (!fields.length) { showResult('mock-result', '请至少选择一个字段。'); return; }
+  const rows = [];
+  for (let i = 0; i < n; i++) rows.push(mockPerson());
+  let out;
+  if (fmt === 'json') {
+    out = JSON.stringify(rows.map(function (r) {
+      const o = {};
+      fields.forEach(function (f) { o[f] = r[f]; });
+      return o;
+    }), null, 2);
+  } else {
+    const header = fields.map(function (f) { return MOCK_FIELD_LABELS[f]; }).join(',');
+    const lines = rows.map(function (r) {
+      return fields.map(function (f) {
+        const v = String(r[f]);
+        return /[,"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+      }).join(',');
+    });
+    out = header + '\n' + lines.join('\n');
+  }
+  showResult('mock-result', out);
+}
+function initMockData() {
+  genMock();
+}
+
+// ============ 文本加行号 ============
+const LN_SEP = { dot: '. ', paren: ') ', colon: '：', dash: ' - ', tab: '\t', space: ' ', none: '' };
+function numLines() {
+  const raw = document.getElementById('ln-input').value;
+  if (!raw) { showResult('ln-result', ''); return; }
+  let start = parseFloat(document.getElementById('ln-start').value);
+  if (isNaN(start)) start = 1;
+  let step = parseFloat(document.getElementById('ln-step').value);
+  if (isNaN(step)) step = 1;
+  const pad = Math.max(0, Math.min(6, parseInt(document.getElementById('ln-pad').value, 10) || 0));
+  const sep = LN_SEP[document.getElementById('ln-sep').value];
+  const sepStr = sep === undefined ? '. ' : sep;
+  const lines = raw.split('\n');
+  const out = lines.map(function (ln, i) {
+    let num = start + i * step;
+    let ns = String(Math.round(num * 100) / 100);
+    if (pad > 0) ns = ns.padStart(pad, '0');
+    return ns + sepStr + ln;
+  }).join('\n');
+  showResult('ln-result', out);
+}
+function initLineNumber() {
+  numLines();
+}
+
+// ============ 血糖单位换算 ============
+const GL_FACTOR = 18.0182;
+function convGlucose(src) {
+  const mmolEl = document.getElementById('gl-mmol');
+  const mgdlEl = document.getElementById('gl-mgdl');
+  const hint = '输入任一单位数值，自动换算另一种单位。';
+  if (src === 'clear') {
+    mmolEl.value = ''; mgdlEl.value = '';
+    showResult('gl-result', hint);
+    return;
+  }
+  if (src === 'mmol') {
+    const v = parseFloat(mmolEl.value);
+    if (isNaN(v)) { mgdlEl.value = ''; showResult('gl-result', hint); return; }
+    mgdlEl.value = (v * GL_FACTOR).toFixed(1);
+  } else {
+    const v = parseFloat(mgdlEl.value);
+    if (isNaN(v)) { mmolEl.value = ''; showResult('gl-result', hint); return; }
+    mmolEl.value = (v / GL_FACTOR).toFixed(2);
+  }
+  showResult('gl-result', parseFloat(mmolEl.value) + ' mmol/L  =  ' + parseFloat(mgdlEl.value) + ' mg/dL');
+}
+function initGlucose() {
+  convGlucose('clear');
+}
+
+safeInit(() => initExerciseCal(), 'initExerciseCal');
+safeInit(() => initWheel(), 'initWheel');
+safeInit(() => initMockData(), 'initMockData');
+safeInit(() => initLineNumber(), 'initLineNumber');
+safeInit(() => initGlucose(), 'initGlucose');
 
 // ============ Search & Theme ============
 function filterTools() {
