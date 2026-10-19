@@ -1,7 +1,17 @@
 {
-  "updated": "2026-10-16T16:12:06.578856",
-  "total": 57,
+  "updated": "2026-10-19T16:11:18.172484",
+  "total": 58,
   "articles": [
+    {
+      "title": "在线Cron表达式生成器：定时任务时间配置不用愁",
+      "slug": "94f9f158",
+      "filename": "94f9f158.html",
+      "category": "开发工具",
+      "keywords": "cron表达式,定时任务,cron生成器,Linux定时",
+      "desc": "Cron表达式看不懂？用在线Cron表达式生成器，可视化配置定时任务执行时间，自动生成正确的Cron表达式。",
+      "words": 515,
+      "date": "2026-10-19"
+    },
     {
       "title": "在线URL编解码工具：一键处理网址中的特殊字符",
       "slug": "accb553a",
