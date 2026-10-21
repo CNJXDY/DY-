@@ -1,5 +1,5 @@
 // Service Worker for 万能工具箱 PWA
-const CACHE_NAME = 'toolbox-v32';
+const CACHE_NAME = 'toolbox-v33';
 const ASSETS = [
   '/DY-/',
   '/DY-/index.html',

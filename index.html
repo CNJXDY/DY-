@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等169个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等174个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等169个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等174个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等169个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等174个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -549,6 +549,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#commit-generator" data-tool="commit-generator"><span class="icon">📝</span>Git提交生成器</a></li>
     <li><a href="#caffeine-calc" data-tool="caffeine-calc"><span class="icon">☕</span>咖啡因摄入计算</a></li>
     <li><a href="#batch-text" data-tool="batch-text"><span class="icon">🧾</span>批量文本生成</a></li>
+    <li><a href="#tile-calc" data-tool="tile-calc"><span class="icon">🧱</span>瓷砖用量计算</a></li>
+    <li><a href="#volumetric-weight" data-tool="volumetric-weight"><span class="icon">📦</span>快递体积重计算</a></li>
+    <li><a href="#border-radius-gen" data-tool="border-radius-gen"><span class="icon">⭕</span>CSS 圆角生成</a></li>
+    <li><a href="#punctuation-convert" data-tool="punctuation-convert"><span class="icon">🔠</span>中英标点转换</a></li>
+    <li><a href="#car-tax-calc" data-tool="car-tax-calc"><span class="icon">🚗</span>车辆购置税计算</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -4596,6 +4601,183 @@ console.log('代码块');
     <div class="result-box" id="btext-result">填写模板与条目后点击「生成文本」。</div>
   </section>
 
+  <!-- 瓷砖用量计算器 -->
+  <section class="tool-panel" id="panel-tile-calc">
+    <h2>🧱 瓷砖用量计算器</h2>
+    <p class="desc">按房间面积与瓷砖规格估算所需瓷砖片数、整箱数量与材料预算，自动计入切割损耗，装修买砖不浪费。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">房间长度 (m)</div>
+        <input type="number" id="tile-length" min="0" step="0.01" value="5" oninput="calcTile()">
+      </div>
+      <div>
+        <div class="label">房间宽度 (m)</div>
+        <input type="number" id="tile-width" min="0" step="0.01" value="4" oninput="calcTile()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">瓷砖长 (cm)</div>
+        <input type="number" id="tile-tile-l" min="1" step="1" value="80" oninput="calcTile()">
+      </div>
+      <div>
+        <div class="label">瓷砖宽 (cm)</div>
+        <input type="number" id="tile-tile-w" min="1" step="1" value="80" oninput="calcTile()">
+      </div>
+      <div>
+        <div class="label">损耗率 (%)</div>
+        <input type="number" id="tile-loss" min="0" max="30" step="1" value="5" oninput="calcTile()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">每箱片数</div>
+        <input type="number" id="tile-per-box" min="1" step="1" value="3" oninput="calcTile()">
+      </div>
+      <div>
+        <div class="label">单价 (元/片，可选)</div>
+        <input type="number" id="tile-price" min="0" step="0.01" placeholder="例如 35" oninput="calcTile()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcTile()">🧮 计算用量</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('tile-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="tile-result">输入房间与瓷砖尺寸后自动计算。</div>
+  </section>
+
+  <!-- 快递体积重计算器 -->
+  <section class="tool-panel" id="panel-volumetric-weight">
+    <h2>📦 快递体积重计算器</h2>
+    <p class="desc">输入包裹长宽高与实际重量，按不同抛比系数计算体积重和最终计费重量，寄快递前先估算运费重量，避免抛货多花钱。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">长 (cm)</div>
+        <input type="number" id="vw-length" min="0" step="0.1" value="40" oninput="calcVolumetricWeight()">
+      </div>
+      <div>
+        <div class="label">宽 (cm)</div>
+        <input type="number" id="vw-width" min="0" step="0.1" value="30" oninput="calcVolumetricWeight()">
+      </div>
+      <div>
+        <div class="label">高 (cm)</div>
+        <input type="number" id="vw-height" min="0" step="0.1" value="30" oninput="calcVolumetricWeight()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">实际重量 (kg)</div>
+        <input type="number" id="vw-weight" min="0" step="0.01" value="2" oninput="calcVolumetricWeight()">
+      </div>
+      <div>
+        <div class="label">抛比系数</div>
+        <select id="vw-divisor" style="font-family:inherit;" onchange="calcVolumetricWeight()">
+          <option value="6000" selected>6000（常用快递）</option>
+          <option value="5000">5000（部分空运）</option>
+          <option value="8000">8000（部分电商件）</option>
+          <option value="12000">12000（大件陆运）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">计费进位</div>
+        <select id="vw-round" style="font-family:inherit;" onchange="calcVolumetricWeight()">
+          <option value="0.5" selected>0.5 kg</option>
+          <option value="1">1 kg</option>
+          <option value="0.1">0.1 kg</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcVolumetricWeight()">⚖️ 计算计费重</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('vw-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="vw-result">输入包裹尺寸与重量后自动计算。</div>
+  </section>
+
+  <!-- CSS 圆角生成器 -->
+  <section class="tool-panel" id="panel-border-radius-gen">
+    <h2>⭕ CSS 圆角生成器</h2>
+    <p class="desc">分别调节四个角的圆角半径，实时预览效果并一键复制 border-radius 代码，支持 px 与百分比单位。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">左上 (top-left)</div>
+        <input type="number" id="brg-tl" min="0" step="1" value="16" oninput="updateBorderRadius()">
+      </div>
+      <div>
+        <div class="label">右上 (top-right)</div>
+        <input type="number" id="brg-tr" min="0" step="1" value="16" oninput="updateBorderRadius()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">右下 (bottom-right)</div>
+        <input type="number" id="brg-br" min="0" step="1" value="16" oninput="updateBorderRadius()">
+      </div>
+      <div>
+        <div class="label">左下 (bottom-left)</div>
+        <input type="number" id="brg-bl" min="0" step="1" value="16" oninput="updateBorderRadius()">
+      </div>
+      <div>
+        <div class="label">单位</div>
+        <select id="brg-unit" style="font-family:inherit;" onchange="updateBorderRadius()">
+          <option value="px" selected>px</option>
+          <option value="%">%</option>
+        </select>
+      </div>
+    </div>
+    <div id="brg-preview" style="margin-top:16px;height:180px;background:linear-gradient(135deg,var(--accent),#a78bfa);border-radius:16px;transition:border-radius 0.15s;"></div>
+    <div class="btn-group">
+      <button class="btn" onclick="updateBorderRadius()">🎨 生成代码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('brg-result')">📋 复制 CSS</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetBorderRadius()">🧹 重置</button>
+    </div>
+    <div class="result-box" id="brg-result">border-radius: 16px 16px 16px 16px;</div>
+  </section>
+
+  <!-- 中英标点转换 -->
+  <section class="tool-panel" id="panel-punctuation-convert">
+    <h2>🔠 中英标点转换</h2>
+    <p class="desc">在中文全角标点与英文半角标点之间互相转换，智能保留小数点和千分位逗号，适合整理中英文混排文档。</p>
+    <div class="label">转换方向</div>
+    <select id="punct-dir" style="font-family:inherit;max-width:320px;">
+      <option value="zh2en" selected>中文标点 → 英文标点</option>
+      <option value="en2zh">英文标点 → 中文标点</option>
+    </select>
+    <div class="label" style="margin-top:12px;">原文</div>
+    <textarea id="punct-input" style="min-height:120px;">你好，世界！这是一个测试：包含“引号”、（括号）和省略号……</textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="convertPunctuation()">🔄 转换</button>
+      <button class="btn btn-secondary btn-sm" onclick="swapPunctuation()">↔️ 互换方向</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearPunctuation()">🧹 清空</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('punct-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="punct-result">点击「转换」查看结果。</div>
+  </section>
+
+  <!-- 车辆购置税计算器 -->
+  <section class="tool-panel" id="panel-car-tax-calc">
+    <h2>🚗 车辆购置税计算器</h2>
+    <p class="desc">按裸车含税价估算车辆购置税：燃油车按 10% 计征；新能源车按 2026-2027 年减半政策（5%）计算，并计入 1.5 万元减免上限，结果仅供参考。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">裸车价（含增值税，元）</div>
+        <input type="number" id="car-price" min="0" step="100" value="150000" oninput="calcCarTax()">
+      </div>
+      <div>
+        <div class="label">车辆类型</div>
+        <select id="car-type" style="font-family:inherit;" onchange="calcCarTax()">
+          <option value="fuel" selected>燃油车（10%）</option>
+          <option value="nev">新能源车（减半征收）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcCarTax()">🧮 计算购置税</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('car-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="car-result">输入裸车价后自动计算。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -4603,7 +4785,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 169个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 174个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -12924,6 +13106,181 @@ function initBatchText() { genBatchText(); }
 safeInit(() => initCreditFree(), 'initCreditFree');
 safeInit(() => initHangman(), 'initHangman');
 safeInit(() => initBatchText(), 'initBatchText');
+
+// ============ 瓷砖用量计算器 ============
+function calcTile() {
+  const L = parseFloat(document.getElementById('tile-length').value);
+  const W = parseFloat(document.getElementById('tile-width').value);
+  const tl = parseFloat(document.getElementById('tile-tile-l').value);
+  const tw = parseFloat(document.getElementById('tile-tile-w').value);
+  const lossRaw = parseFloat(document.getElementById('tile-loss').value);
+  const perBox = parseInt(document.getElementById('tile-per-box').value, 10);
+  const price = parseFloat(document.getElementById('tile-price').value);
+  if (!(L > 0 && W > 0 && tl > 0 && tw > 0)) {
+    showResult('tile-result', '❌ 请填写有效的房间尺寸与瓷砖规格。');
+    return;
+  }
+  const loss = isNaN(lossRaw) || lossRaw < 0 ? 0 : lossRaw;
+  const area = L * W;
+  const tileArea = (tl / 100) * (tw / 100);
+  const raw = area / tileArea;
+  const need = Math.ceil(raw * (1 + loss / 100));
+  let out = '房间面积：' + area.toFixed(2) + ' m²\n';
+  out += '单块瓷砖面积：' + tileArea.toFixed(4) + ' m²\n';
+  out += '理论用量：' + Math.ceil(raw) + ' 片\n';
+  out += '含 ' + loss + '% 损耗建议购买：' + need + ' 片';
+  if (perBox > 0) {
+    const boxes = Math.ceil(need / perBox);
+    out += '\n整箱购买：' + boxes + ' 箱（共 ' + (boxes * perBox) + ' 片）';
+    if (price > 0) out += '\n按整箱估算材料费：¥' + (boxes * perBox * price).toFixed(2);
+  } else if (price > 0) {
+    out += '\n估算材料费：¥' + (need * price).toFixed(2);
+  }
+  out += '\n提示：异形铺贴、拼花或大面积切割建议将损耗率提高到 8%-10%。';
+  showResult('tile-result', out);
+}
+
+// ============ 快递体积重计算器 ============
+function calcVolumetricWeight() {
+  const l = parseFloat(document.getElementById('vw-length').value);
+  const w = parseFloat(document.getElementById('vw-width').value);
+  const h = parseFloat(document.getElementById('vw-height').value);
+  const weightRaw = parseFloat(document.getElementById('vw-weight').value);
+  if (!(l > 0 && w > 0 && h > 0)) {
+    showResult('vw-result', '❌ 请填写有效的包裹长、宽、高。');
+    return;
+  }
+  const actual = isNaN(weightRaw) || weightRaw < 0 ? 0 : weightRaw;
+  const divisor = parseFloat(document.getElementById('vw-divisor').value) || 6000;
+  const step = parseFloat(document.getElementById('vw-round').value) || 0.5;
+  const volume = l * w * h;
+  const volWeight = volume / divisor;
+  const chargeable = Math.max(actual, volWeight);
+  const billed = Math.ceil(chargeable / step - 1e-9) * step;
+  const isBulky = volWeight > actual;
+  let out = '包裹体积：' + volume.toFixed(0) + ' cm³（' + (volume / 1000000).toFixed(4) + ' m³）\n';
+  out += '体积重：' + volWeight.toFixed(2) + ' kg（抛比系数 ' + divisor + '）\n';
+  out += '实际重量：' + actual.toFixed(2) + ' kg\n';
+  out += '计费重量：' + billed.toFixed(2) + ' kg（按 ' + step + ' kg 进位）\n';
+  out += isBulky ? '判定：抛货，体积重高于实际重量，按体积重计费。' : '判定：重货，按实际重量计费。';
+  showResult('vw-result', out);
+}
+
+// ============ CSS 圆角生成器 ============
+function updateBorderRadius() {
+  const ids = ['brg-tl', 'brg-tr', 'brg-br', 'brg-bl'];
+  const unit = document.getElementById('brg-unit').value;
+  const vals = ids.map(function (id) {
+    const v = parseFloat(document.getElementById(id).value);
+    return isNaN(v) || v < 0 ? 0 : v;
+  });
+  const css = vals.map(function (v) { return v + unit; }).join(' ');
+  document.getElementById('brg-preview').style.borderRadius = css;
+  showResult('brg-result', 'border-radius: ' + css + ';');
+}
+function resetBorderRadius() {
+  ['brg-tl', 'brg-tr', 'brg-br', 'brg-bl'].forEach(function (id) { document.getElementById(id).value = 16; });
+  document.getElementById('brg-unit').value = 'px';
+  updateBorderRadius();
+}
+
+// ============ 中英标点转换 ============
+function enToZhPunctuation(text) {
+  const map = { ',': '，', '.': '。', '!': '！', '?': '？', ';': '；', ':': '：', '(': '（', ')': '）', '[': '【', ']': '】' };
+  let out = '';
+  let dq = 0, sq = 0;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const prev = text[i - 1] || '';
+    const next = text[i + 1] || '';
+    if (ch === '.' && next === '.' && text[i + 2] === '.') {
+      out += '……';
+      i += 2;
+      continue;
+    }
+    if (ch === '.' && /\d/.test(prev) && /\d/.test(next)) { out += ch; continue; }
+    if (ch === ',' && /\d/.test(prev) && /\d/.test(next)) { out += ch; continue; }
+    if (ch === ':' && /\d/.test(prev) && /\d/.test(next)) { out += ch; continue; }
+    if (ch === '"') { out += dq % 2 === 0 ? '“' : '”'; dq++; continue; }
+    if (ch === "'") { out += sq % 2 === 0 ? '‘' : '’'; sq++; continue; }
+    out += map[ch] || ch;
+  }
+  return out;
+}
+function convertPunctuation() {
+  const src = document.getElementById('punct-input').value;
+  if (!src.trim()) {
+    showResult('punct-result', '请输入需要转换的文本。');
+    return;
+  }
+  const dir = document.getElementById('punct-dir').value;
+  let out;
+  if (dir === 'zh2en') {
+    const map = {
+      '，': ',', '。': '.', '！': '!', '？': '?', '；': ';', '：': ':', '、': ',',
+      '“': '"', '”': '"', '‘': "'", '’': "'", '（': '(', '）': ')',
+      '《': '<', '》': '>', '【': '[', '】': ']', '「': '[', '」': ']',
+      '—': '-', '–': '-', '…': '...', '·': '.', '～': '~', '　': ' '
+    };
+    out = src.replace(/……/g, '…').replace(/[，。！？；：、“”‘’（）《》【】「」—–…·～　]/g, function (ch) {
+      return map[ch] || ch;
+    });
+  } else {
+    out = enToZhPunctuation(src);
+  }
+  showResult('punct-result', out);
+}
+function swapPunctuation() {
+  const input = document.getElementById('punct-input');
+  const result = document.getElementById('punct-result').textContent;
+  if (!result || result.indexOf('点击') === 0 || result.indexOf('请输入') === 0) return;
+  input.value = result;
+  const dir = document.getElementById('punct-dir');
+  dir.value = dir.value === 'zh2en' ? 'en2zh' : 'zh2en';
+  convertPunctuation();
+}
+function clearPunctuation() {
+  document.getElementById('punct-input').value = '';
+  showResult('punct-result', '点击「转换」查看结果。');
+}
+
+// ============ 车辆购置税计算器 ============
+function calcCarTax() {
+  const price = parseFloat(document.getElementById('car-price').value);
+  if (!(price > 0)) {
+    showResult('car-result', '❌ 请输入有效的裸车价（含增值税）。');
+    return;
+  }
+  const base = price / 1.13;
+  const type = document.getElementById('car-type').value;
+  let tax = base * 0.10;
+  let typeName = '燃油车';
+  let note = '燃油车购置税 = 计税价格 × 10%。';
+  if (type === 'nev') {
+    typeName = '新能源车';
+    const half = base * 0.05;
+    const reduction = Math.min(half, 15000);
+    tax = Math.max(0, base * 0.10 - reduction);
+    note = half > 15000
+      ? '新能源车购置税减半，但减免额上限 15000 元，超出部分需缴纳。'
+      : '新能源车 2026-2027 年购置税减半征收（按 5% 计征）。';
+  }
+  const money = function (n) { return n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  let out = '裸车价（含增值税）：¥' + money(price) + '\n';
+  out += '计税价格（不含增值税）：¥' + money(base) + '\n';
+  out += '车辆类型：' + typeName + '\n';
+  out += '购置税：¥' + money(tax) + '\n';
+  out += '落地参考（裸车价 + 购置税）：¥' + money(price + tax) + '\n';
+  out += '说明：' + note + '\n';
+  out += '提示：实际税额以税务机关核定的最低计税价格为准，本结果仅供参考。';
+  showResult('car-result', out);
+}
+
+safeInit(() => calcTile(), 'calcTile');
+safeInit(() => calcVolumetricWeight(), 'calcVolumetricWeight');
+safeInit(() => updateBorderRadius(), 'updateBorderRadius');
+safeInit(() => convertPunctuation(), 'convertPunctuation');
+safeInit(() => calcCarTax(), 'calcCarTax');
 
 // ============ Search & Theme ============
 function filterTools() {
