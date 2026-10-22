@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等174个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等179个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等174个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等179个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等174个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等179个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -554,6 +554,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#border-radius-gen" data-tool="border-radius-gen"><span class="icon">⭕</span>CSS 圆角生成</a></li>
     <li><a href="#punctuation-convert" data-tool="punctuation-convert"><span class="icon">🔠</span>中英标点转换</a></li>
     <li><a href="#car-tax-calc" data-tool="car-tax-calc"><span class="icon">🚗</span>车辆购置税计算</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#lunar-calendar" data-tool="lunar-calendar"><span class="icon">🗓️</span>公历农历转换</a></li>
+    <li><a href="#unit-price-compare" data-tool="unit-price-compare"><span class="icon">🛒</span>商品单价比较</a></li>
+    <li><a href="#shelf-life" data-tool="shelf-life"><span class="icon">🥫</span>食品保质期计算</a></li>
+    <li><a href="#json-schema-gen" data-tool="json-schema-gen"><span class="icon">🧬</span>JSON Schema 生成</a></li>
+    <li><a href="#text-card" data-tool="text-card"><span class="icon">🖼️</span>文字卡片生成</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -4778,6 +4784,201 @@ console.log('代码块');
     <div class="result-box" id="car-result">输入裸车价后自动计算。</div>
   </section>
 
+  <!-- 公历农历转换 -->
+  <section class="tool-panel" id="panel-lunar-calendar">
+    <h2>🗓️ 公历农历转换</h2>
+    <p class="desc">公历与农历日期双向转换，显示农历月份、日期、干支纪年与生肖，支持闰月，适合查生日、传统节日和择日参考。</p>
+    <div class="label">转换方向</div>
+    <select id="lunar-mode" style="font-family:inherit;max-width:320px;" onchange="switchLunarMode()">
+      <option value="s2l" selected>公历 → 农历</option>
+      <option value="l2s">农历 → 公历</option>
+    </select>
+    <div class="flex-row" id="lunar-solar-inputs" style="margin-top:12px;">
+      <div>
+        <div class="label">公历日期</div>
+        <input type="date" id="lunar-solar-date" style="font-family:inherit;" onchange="convertLunar()">
+      </div>
+    </div>
+    <div class="flex-row" id="lunar-lunar-inputs" style="margin-top:12px;display:none;">
+      <div>
+        <div class="label">农历年份</div>
+        <input type="number" id="lunar-year" min="1900" max="2100" step="1" value="2026" oninput="convertLunar()">
+      </div>
+      <div>
+        <div class="label">农历月份</div>
+        <select id="lunar-month" style="font-family:inherit;" onchange="convertLunar()">
+          <option value="正月">正月</option>
+          <option value="二月">二月</option>
+          <option value="三月">三月</option>
+          <option value="四月">四月</option>
+          <option value="五月">五月</option>
+          <option value="六月">六月</option>
+          <option value="七月">七月</option>
+          <option value="八月">八月</option>
+          <option value="九月">九月</option>
+          <option value="十月">十月</option>
+          <option value="十一月">十一月</option>
+          <option value="腊月">腊月</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">农历日期</div>
+        <select id="lunar-day" style="font-family:inherit;" onchange="convertLunar()"></select>
+      </div>
+      <div>
+        <div class="label">闰月</div>
+        <select id="lunar-leap" style="font-family:inherit;" onchange="convertLunar()">
+          <option value="0" selected>否</option>
+          <option value="1">是（闰月）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="convertLunar()">🗓️ 转换日期</button>
+      <button class="btn btn-secondary btn-sm" onclick="setLunarToday()">📅 回到今天</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('lunar-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="lunar-result">选择日期后点击「转换日期」。</div>
+  </section>
+
+  <!-- 商品单价比较 -->
+  <section class="tool-panel" id="panel-unit-price-compare">
+    <h2>🛒 商品单价比较</h2>
+    <p class="desc">输入两件商品的售价与规格，自动换算成统一单价（元/100g、元/100ml 或元/个），快速判断哪个更划算，超市比价不再算错。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">商品 A 价格（元）</div>
+        <input type="number" id="upc-price-a" min="0" step="0.01" value="12.9" oninput="compareUnitPrice()">
+      </div>
+      <div>
+        <div class="label">规格数量</div>
+        <input type="number" id="upc-qty-a" min="0.01" step="0.01" value="500" oninput="compareUnitPrice()">
+      </div>
+      <div>
+        <div class="label">单位</div>
+        <select id="upc-unit-a" style="font-family:inherit;" onchange="compareUnitPrice()">
+          <option value="g" selected>克 (g)</option>
+          <option value="ml">毫升 (ml)</option>
+          <option value="pc">个 / 件</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">商品 B 价格（元）</div>
+        <input type="number" id="upc-price-b" min="0" step="0.01" value="18.5" oninput="compareUnitPrice()">
+      </div>
+      <div>
+        <div class="label">规格数量</div>
+        <input type="number" id="upc-qty-b" min="0.01" step="0.01" value="750" oninput="compareUnitPrice()">
+      </div>
+      <div>
+        <div class="label">单位</div>
+        <select id="upc-unit-b" style="font-family:inherit;" onchange="compareUnitPrice()">
+          <option value="g" selected>克 (g)</option>
+          <option value="ml">毫升 (ml)</option>
+          <option value="pc">个 / 件</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="compareUnitPrice()">🛒 比较单价</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('upc-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetUnitPrice()">🧹 重置</button>
+    </div>
+    <div class="result-box" id="upc-result">输入两件商品的价格与规格后自动比较。</div>
+  </section>
+
+  <!-- 食品保质期计算 -->
+  <section class="tool-panel" id="panel-shelf-life">
+    <h2>🥫 食品保质期计算</h2>
+    <p class="desc">输入生产日期与保质期，自动推算到期日期和剩余天数，并提示是否已过期，帮助清理冰箱囤货、避免误食。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">生产日期</div>
+        <input type="date" id="shelf-date" style="font-family:inherit;" onchange="calcShelfLife()">
+      </div>
+      <div>
+        <div class="label">保质期时长</div>
+        <input type="number" id="shelf-value" min="1" step="1" value="12" oninput="calcShelfLife()">
+      </div>
+      <div>
+        <div class="label">时长单位</div>
+        <select id="shelf-unit" style="font-family:inherit;" onchange="calcShelfLife()">
+          <option value="month" selected>个月</option>
+          <option value="day">天</option>
+          <option value="year">年</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcShelfLife()">📅 计算到期日</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('shelf-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="shelf-result">输入生产日期与保质期后自动计算。</div>
+  </section>
+
+  <!-- JSON Schema 生成 -->
+  <section class="tool-panel" id="panel-json-schema-gen">
+    <h2>🧬 JSON Schema 生成器</h2>
+    <p class="desc">粘贴一段 JSON 示例，自动推断字段类型、嵌套结构并生成 Draft-07 JSON Schema，可选全部字段必填，前后端联调省时省力。</p>
+    <div class="label">JSON 示例</div>
+    <textarea id="jsg-input" style="min-height:180px;">{
+  "id": 1001,
+  "name": "万能工具箱",
+  "active": true,
+  "tags": ["实用", "免费"],
+  "author": {
+    "nickname": "小明",
+    "age": 28
+  }
+}</textarea>
+    <div style="margin-top:12px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);">
+      <input type="checkbox" id="jsg-required" checked style="width:auto;" onchange="generateJsonSchema()">
+      <label for="jsg-required" style="cursor:pointer;">将所有对象字段设为必填（required）</label>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateJsonSchema()">🧬 生成 Schema</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('jsg-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearJsonSchema()">🧹 清空</button>
+    </div>
+    <div class="result-box" id="jsg-result" style="max-height:400px;">粘贴 JSON 后点击「生成 Schema」。</div>
+  </section>
+
+  <!-- 文字卡片生成 -->
+  <section class="tool-panel" id="panel-text-card">
+    <h2>🖼️ 文字卡片生成</h2>
+    <p class="desc">输入一段文字，选择渐变配色与字号，实时生成适合分享的竖版文字卡片，可一键下载为 PNG 图片，纯本地绘制不上传。</p>
+    <div class="label">卡片文字</div>
+    <textarea id="card-text" style="min-height:120px;" oninput="generateTextCard()">把复杂的事情做简单，
+把简单的事情做极致。
+—— 万能工具箱</textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">配色主题</div>
+        <select id="card-theme" style="font-family:inherit;" onchange="generateTextCard()">
+          <option value="sunset" selected>日落橙</option>
+          <option value="ocean">深海蓝</option>
+          <option value="forest">森林绿</option>
+          <option value="night">午夜黑</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">字号（px）</div>
+        <input type="number" id="card-size" min="16" max="64" step="1" value="34" oninput="generateTextCard()">
+      </div>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+      <canvas id="card-canvas" width="600" height="800" style="width:100%;max-width:420px;border-radius:var(--radius);border:1px solid var(--border);"></canvas>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateTextCard()">🎨 生成卡片</button>
+      <button class="btn btn-secondary btn-sm" onclick="downloadTextCard()">⬇️ 下载 PNG</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetTextCard()">🧹 重置文字</button>
+    </div>
+    <div class="result-box" id="card-result">卡片会随输入实时更新，点击「下载 PNG」保存图片。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -4785,7 +4986,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 174个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 179个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -13281,6 +13482,428 @@ safeInit(() => calcVolumetricWeight(), 'calcVolumetricWeight');
 safeInit(() => updateBorderRadius(), 'updateBorderRadius');
 safeInit(() => convertPunctuation(), 'convertPunctuation');
 safeInit(() => calcCarTax(), 'calcCarTax');
+
+// ============ 公历农历转换 ============
+const LUNAR_DAY_NAMES = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
+  '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+  '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
+const LUNAR_ZODIAC = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+let lunarFormatter = null;
+
+function getLunarFormatter() {
+  if (!lunarFormatter) {
+    lunarFormatter = new Intl.DateTimeFormat('zh-CN-u-ca-chinese', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  }
+  return lunarFormatter;
+}
+
+function getLunarParts(date) {
+  const parts = getLunarFormatter().formatToParts(date);
+  const pick = function (type) {
+    const item = parts.find(function (p) { return p.type === type; });
+    return item ? item.value : '';
+  };
+  return {
+    relatedYear: parseInt(pick('relatedYear'), 10),
+    yearName: pick('yearName'),
+    month: pick('month'),
+    day: parseInt(pick('day'), 10)
+  };
+}
+
+function pad2(n) { return n < 10 ? '0' + n : String(n); }
+function formatDateInput(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function formatSolarDate(d) { return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日'; }
+function weekdayName(d) { return '星期' + ['日', '一', '二', '三', '四', '五', '六'][d.getDay()]; }
+
+function switchLunarMode() {
+  const mode = document.getElementById('lunar-mode').value;
+  document.getElementById('lunar-solar-inputs').style.display = mode === 's2l' ? 'flex' : 'none';
+  document.getElementById('lunar-lunar-inputs').style.display = mode === 'l2s' ? 'flex' : 'none';
+  if (mode === 'l2s') syncLunarInputsFromSolar();
+  convertLunar();
+}
+
+function syncLunarInputsFromSolar() {
+  const val = document.getElementById('lunar-solar-date').value;
+  if (!val) return;
+  const arr = val.split('-').map(Number);
+  const d = new Date(arr[0], arr[1] - 1, arr[2], 12);
+  if (isNaN(d.getTime())) return;
+  try {
+    const lp = getLunarParts(d);
+    document.getElementById('lunar-year').value = lp.relatedYear;
+    document.getElementById('lunar-month').value = lp.month.replace(/^闰/, '');
+    document.getElementById('lunar-leap').value = lp.month.indexOf('闰') === 0 ? '1' : '0';
+    document.getElementById('lunar-day').value = String(lp.day);
+  } catch (err) { /* 浏览器不支持农历日历时保持原值 */ }
+}
+
+function setLunarToday() {
+  const now = new Date();
+  document.getElementById('lunar-solar-date').value = formatDateInput(now);
+  syncLunarInputsFromSolar();
+  convertLunar();
+}
+
+function convertLunar() {
+  const resultId = 'lunar-result';
+  if (!document.getElementById('lunar-result')) return;
+  const mode = document.getElementById('lunar-mode').value;
+  let out = '';
+  try {
+    if (mode === 's2l') {
+      const val = document.getElementById('lunar-solar-date').value;
+      if (!val) { showResult(resultId, '❌ 请先选择公历日期。'); return; }
+      const arr = val.split('-').map(Number);
+      const d = new Date(arr[0], arr[1] - 1, arr[2], 12);
+      if (isNaN(d.getTime())) { showResult(resultId, '❌ 日期格式无效。'); return; }
+      const lp = getLunarParts(d);
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const target = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      const diff = Math.round((target - today) / 86400000);
+      const diffText = diff === 0 ? '今天' : (diff > 0 ? '还有 ' + diff + ' 天' : '已过去 ' + (-diff) + ' 天');
+      out = '公历：' + formatSolarDate(d) + ' ' + weekdayName(d) + '\n';
+      out += '农历：' + lp.yearName + '年 ' + lp.month + LUNAR_DAY_NAMES[lp.day - 1] + '\n';
+      out += '生肖：' + LUNAR_ZODIAC[((lp.relatedYear - 4) % 12 + 12) % 12] + '（农历 ' + lp.relatedYear + ' 年）\n';
+      out += '距今天：' + diffText;
+    } else {
+      const year = parseInt(document.getElementById('lunar-year').value, 10);
+      const monthName = document.getElementById('lunar-month').value;
+      const day = parseInt(document.getElementById('lunar-day').value, 10);
+      const isLeap = document.getElementById('lunar-leap').value === '1';
+      if (!(year >= 1900 && year <= 2100)) {
+        showResult(resultId, '❌ 农历年份请输入 1900 - 2100 之间的整数。');
+        return;
+      }
+      if (!(day >= 1 && day <= 30)) { showResult(resultId, '❌ 请选择有效的农历日期。'); return; }
+      const targetMonth = (isLeap ? '闰' : '') + monthName;
+      const start = new Date(year, 0, 1, 12);
+      const end = new Date(year + 1, 1, 20, 12);
+      let found = null;
+      for (let t = start.getTime(); t <= end.getTime(); t += 86400000) {
+        const cursor = new Date(t);
+        const lp = getLunarParts(cursor);
+        if (lp.relatedYear === year && lp.month === targetMonth && lp.day === day) {
+          found = cursor;
+          break;
+        }
+      }
+      if (!found) {
+        out = '❌ 未找到对应日期。\n可能原因：该农历年没有「' + targetMonth + '」，或者该月没有三十日。\n请检查闰月选项与日期后重试。';
+        showResult(resultId, out);
+        return;
+      }
+      out = '农历：' + year + '年 ' + targetMonth + LUNAR_DAY_NAMES[day - 1] + '\n';
+      out += '公历：' + formatSolarDate(found) + ' ' + weekdayName(found) + '\n';
+      out += '干支：' + getLunarParts(found).yearName + '年\n';
+      out += '生肖：' + LUNAR_ZODIAC[((year - 4) % 12 + 12) % 12] + '\n';
+      out += '提示：农历与公历换算以中国标准时间（UTC+8）为准。';
+    }
+  } catch (err) {
+    out = '❌ 当前浏览器不支持农历换算：' + err.message;
+  }
+  showResult(resultId, out);
+}
+
+function initLunarCalendar() {
+  const daySel = document.getElementById('lunar-day');
+  if (!daySel) return;
+  if (daySel.options.length === 0) {
+    LUNAR_DAY_NAMES.forEach(function (name, idx) {
+      const opt = document.createElement('option');
+      opt.value = String(idx + 1);
+      opt.textContent = name;
+      daySel.appendChild(opt);
+    });
+  }
+  setLunarToday();
+}
+
+// ============ 商品单价比较 ============
+function unitPriceLabel(unit) {
+  if (unit === 'g') return '元/100g';
+  if (unit === 'ml') return '元/100ml';
+  return '元/个';
+}
+function unitPriceValue(price, qty, unit) {
+  return unit === 'pc' ? price / qty : (price / qty) * 100;
+}
+function formatUnitPrice(n) { return n >= 1 ? n.toFixed(2) : n.toFixed(3); }
+
+function compareUnitPrice() {
+  if (!document.getElementById('upc-result')) return;
+  const priceA = parseFloat(document.getElementById('upc-price-a').value);
+  const qtyA = parseFloat(document.getElementById('upc-qty-a').value);
+  const priceB = parseFloat(document.getElementById('upc-price-b').value);
+  const qtyB = parseFloat(document.getElementById('upc-qty-b').value);
+  const unitA = document.getElementById('upc-unit-a').value;
+  const unitB = document.getElementById('upc-unit-b').value;
+  if (!(priceA > 0 && qtyA > 0 && priceB > 0 && qtyB > 0)) {
+    showResult('upc-result', '❌ 请填写两件商品的有效价格与规格数量。');
+    return;
+  }
+  if (unitA !== unitB) {
+    showResult('upc-result', '⚠️ 两件商品的单位不同，无法直接比较。\n请将单位统一为克、毫升或个后再试。');
+    return;
+  }
+  const ua = unitPriceValue(priceA, qtyA, unitA);
+  const ub = unitPriceValue(priceB, qtyB, unitB);
+  const label = unitPriceLabel(unitA);
+  let out = '商品 A：¥' + priceA.toFixed(2) + ' / ' + qtyA + ' ' + (unitA === 'pc' ? '个' : unitA) + ' → ¥' + formatUnitPrice(ua) + ' ' + label + '\n';
+  out += '商品 B：¥' + priceB.toFixed(2) + ' / ' + qtyB + ' ' + (unitB === 'pc' ? '个' : unitB) + ' → ¥' + formatUnitPrice(ub) + ' ' + label + '\n';
+  if (Math.abs(ua - ub) < 1e-9) {
+    out += '结论：两件商品单价相同，可按包装、口味或便利性选择。';
+  } else {
+    const cheap = ua < ub ? 'A' : 'B';
+    const cheapPrice = Math.min(ua, ub);
+    const expensivePrice = Math.max(ua, ub);
+    const pct = ((expensivePrice - cheapPrice) / cheapPrice) * 100;
+    out += '结论：商品 ' + cheap + ' 更划算。\n';
+    out += '每 ' + (unitA === 'pc' ? '个' : '100' + unitA) + ' 便宜 ¥' + formatUnitPrice(expensivePrice - cheapPrice) + '，相当于便宜 ' + pct.toFixed(1) + '%。';
+  }
+  out += '\n提示：仅比较单价，未考虑品质、口味、运费与包装差异。';
+  showResult('upc-result', out);
+}
+function resetUnitPrice() {
+  document.getElementById('upc-price-a').value = 12.9;
+  document.getElementById('upc-qty-a').value = 500;
+  document.getElementById('upc-unit-a').value = 'g';
+  document.getElementById('upc-price-b').value = 18.5;
+  document.getElementById('upc-qty-b').value = 750;
+  document.getElementById('upc-unit-b').value = 'g';
+  compareUnitPrice();
+}
+
+// ============ 食品保质期计算 ============
+function calcShelfLife() {
+  if (!document.getElementById('shelf-result')) return;
+  const val = document.getElementById('shelf-date').value;
+  const amount = parseFloat(document.getElementById('shelf-value').value);
+  const unit = document.getElementById('shelf-unit').value;
+  if (!val) { showResult('shelf-result', '❌ 请先选择生产日期。'); return; }
+  if (!(amount > 0)) { showResult('shelf-result', '❌ 保质期时长必须大于 0。'); return; }
+  const arr = val.split('-').map(Number);
+  const produce = new Date(arr[0], arr[1] - 1, arr[2]);
+  if (isNaN(produce.getTime())) { showResult('shelf-result', '❌ 生产日期格式无效。'); return; }
+  let expiry;
+  if (unit === 'day') {
+    expiry = new Date(produce.getFullYear(), produce.getMonth(), produce.getDate() + Math.round(amount));
+  } else {
+    const months = Math.round(unit === 'year' ? amount * 12 : amount);
+    const base = new Date(produce.getFullYear(), produce.getMonth() + months, 1);
+    const lastDay = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+    base.setDate(Math.min(produce.getDate(), lastDay));
+    expiry = base;
+  }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const expZero = new Date(expiry.getFullYear(), expiry.getMonth(), expiry.getDate());
+  const diff = Math.round((expZero - today) / 86400000);
+  let status;
+  if (diff > 0) status = '✅ 在保质期内，还剩 ' + diff + ' 天';
+  else if (diff === 0) status = '⚠️ 今天到期，请尽快食用';
+  else status = '❌ 已过期 ' + (-diff) + ' 天，不建议食用';
+  let out = '生产日期：' + formatSolarDate(produce) + '\n';
+  out += '保质期：' + amount + (unit === 'day' ? ' 天' : unit === 'year' ? ' 年' : ' 个月') + '\n';
+  out += '到期日期：' + formatSolarDate(expiry) + ' ' + weekdayName(expiry) + '\n';
+  out += '状态：' + status + '\n';
+  out += '提示：到期日按生产日期顺延计算；若包装标注「保质期至 / 此日期前食用最佳」，请以包装标注为准。';
+  showResult('shelf-result', out);
+}
+function initShelfLife() {
+  document.getElementById('shelf-date').value = formatDateInput(new Date());
+  calcShelfLife();
+}
+
+// ============ JSON Schema 生成 ============
+function jsgInfer(value, allRequired) {
+  if (value === null) return { type: 'null' };
+  if (Array.isArray(value)) {
+    if (value.length === 0) return { type: 'array', items: {} };
+    return { type: 'array', items: jsgMerge(value.map(function (v) { return jsgInfer(v, allRequired); })) };
+  }
+  if (typeof value === 'object') {
+    const properties = {};
+    const required = [];
+    Object.keys(value).forEach(function (key) {
+      properties[key] = jsgInfer(value[key], allRequired);
+      required.push(key);
+    });
+    const schema = { type: 'object', properties: properties };
+    if (allRequired && required.length) schema.required = required;
+    return schema;
+  }
+  if (typeof value === 'string') return { type: 'string' };
+  if (typeof value === 'number') return { type: Number.isInteger(value) ? 'integer' : 'number' };
+  if (typeof value === 'boolean') return { type: 'boolean' };
+  return {};
+}
+function jsgMerge(list) {
+  const valid = list.filter(function (s) { return s && Object.keys(s).length > 0; });
+  if (!valid.length) return {};
+  const types = Array.from(new Set(valid.map(function (s) { return s.type; })));
+  if (types.length === 1 && types[0] === 'object') {
+    const props = {};
+    const counts = {};
+    valid.forEach(function (s) {
+      Object.keys(s.properties || {}).forEach(function (key) {
+        props[key] = props[key] ? jsgMerge([props[key], s.properties[key]]) : s.properties[key];
+      });
+      (s.required || []).forEach(function (key) { counts[key] = (counts[key] || 0) + 1; });
+    });
+    const merged = { type: 'object', properties: props };
+    const required = Object.keys(counts).filter(function (key) { return counts[key] === valid.length; });
+    if (required.length) merged.required = required;
+    return merged;
+  }
+  if (types.length === 1 && types[0] === 'array') {
+    return { type: 'array', items: jsgMerge(valid.map(function (s) { return s.items || {}; })) };
+  }
+  if (types.length === 1) return valid[0];
+  return { anyOf: valid };
+}
+function generateJsonSchema() {
+  if (!document.getElementById('jsg-result')) return;
+  const raw = document.getElementById('jsg-input').value;
+  if (!raw.trim()) { showResult('jsg-result', '请输入 JSON 示例后再生成。'); return; }
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (err) {
+    showResult('jsg-result', '❌ JSON 解析失败：' + err.message);
+    return;
+  }
+  const allRequired = document.getElementById('jsg-required').checked;
+  const inferred = jsgInfer(data, allRequired);
+  const schema = Object.assign({
+    '$schema': 'http://json-schema.org/draft-07/schema#',
+    title: 'GeneratedSchema'
+  }, inferred);
+  showResult('jsg-result', JSON.stringify(schema, null, 2));
+}
+function clearJsonSchema() {
+  document.getElementById('jsg-input').value = '';
+  showResult('jsg-result', '粘贴 JSON 后点击「生成 Schema」。');
+}
+
+// ============ 文字卡片生成 ============
+const CARD_THEMES = {
+  sunset: ['#ff7e5f', '#feb47b'],
+  ocean: ['#2193b0', '#6dd5ed'],
+  forest: ['#134e5e', '#71b280'],
+  night: ['#141e30', '#243b55']
+};
+function wrapCanvasLine(ctx, text, maxWidth) {
+  const lines = [];
+  let line = '';
+  Array.from(text).forEach(function (ch) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      lines.push(line);
+      line = ch;
+    } else {
+      line = test;
+    }
+  });
+  if (line) lines.push(line);
+  return lines;
+}
+function generateTextCard() {
+  const canvas = document.getElementById('card-canvas');
+  if (!canvas || !canvas.getContext) return;
+  const W = 600, H = 800, DPR = 2;
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const themeKey = document.getElementById('card-theme').value;
+  const theme = CARD_THEMES[themeKey] || CARD_THEMES.sunset;
+  const grad = ctx.createLinearGradient(0, 0, W, H);
+  grad.addColorStop(0, theme[0]);
+  grad.addColorStop(1, theme[1]);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  ctx.beginPath();
+  ctx.arc(520, 120, 170, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(70, 700, 120, 0, Math.PI * 2);
+  ctx.fill();
+  const fontFamily = '"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  const raw = document.getElementById('card-text').value.trim();
+  const content = raw || '在下方输入文字，生成属于你的卡片。';
+  const paragraphs = content.replace(/\r/g, '').split('\n');
+  let size = parseInt(document.getElementById('card-size').value, 10);
+  if (isNaN(size)) size = 34;
+  size = Math.max(16, Math.min(64, size));
+  let lines = [];
+  let lineHeight = size * 1.7;
+  for (let attempt = 0; attempt < 10; attempt++) {
+    ctx.font = '600 ' + size + 'px ' + fontFamily;
+    lines = [];
+    paragraphs.forEach(function (p) {
+      if (!p.trim()) { lines.push(''); return; }
+      lines = lines.concat(wrapCanvasLine(ctx, p, W - 140));
+    });
+    lineHeight = size * 1.7;
+    if (lines.length * lineHeight <= H - 240 || size <= 16) break;
+    size -= 2;
+  }
+  const maxLines = Math.max(1, Math.floor((H - 240) / lineHeight));
+  if (lines.length > maxLines) {
+    lines = lines.slice(0, maxLines);
+    lines[maxLines - 1] = lines[maxLines - 1].replace(/.$/, '') + '…';
+  }
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.18)';
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetY = 3;
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '600 ' + size + 'px ' + fontFamily;
+  const startY = H / 2 - 20 - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach(function (line, idx) {
+    ctx.fillText(line, W / 2, startY + idx * lineHeight);
+  });
+  ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = '500 18px ' + fontFamily;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('万能工具箱 · 文字卡片', W / 2, H - 58);
+  showResult('card-result', '✅ 卡片已生成（' + W + '×' + H + '），点击「下载 PNG」保存图片。');
+}
+function downloadTextCard() {
+  const canvas = document.getElementById('card-canvas');
+  if (!canvas || !canvas.toDataURL) return;
+  try {
+    const link = document.createElement('a');
+    link.download = 'text-card-' + Date.now() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    showToast('图片已开始下载');
+  } catch (err) {
+    showResult('card-result', '❌ 下载失败：' + err.message);
+  }
+}
+function resetTextCard() {
+  document.getElementById('card-text').value = '把复杂的事情做简单，\n把简单的事情做极致。\n—— 万能工具箱';
+  document.getElementById('card-theme').value = 'sunset';
+  document.getElementById('card-size').value = 34;
+  generateTextCard();
+}
+
+safeInit(() => initLunarCalendar(), 'initLunarCalendar');
+safeInit(() => compareUnitPrice(), 'compareUnitPrice');
+safeInit(() => initShelfLife(), 'initShelfLife');
+safeInit(() => generateJsonSchema(), 'generateJsonSchema');
+safeInit(() => generateTextCard(), 'generateTextCard');
 
 // ============ Search & Theme ============
 function filterTools() {
