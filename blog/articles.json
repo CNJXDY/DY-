@@ -1,7 +1,17 @@
 {
-  "updated": "2026-10-23T00:10:43.684773",
-  "total": 59,
+  "updated": "2026-10-24T00:11:52.154755",
+  "total": 60,
   "articles": [
+    {
+      "title": "Windows和Mac系统自带功能大全：你可能不知道的隐藏技巧",
+      "slug": "de6fc9c3",
+      "filename": "de6fc9c3.html",
+      "category": "效率提升",
+      "keywords": "Windows快捷键,Mac快捷键,系统操作技巧",
+      "desc": "操作系统自带了很多好用的功能，但很多人不知道。整理了Windows和Mac上最实用的隐藏功能。",
+      "words": 494,
+      "date": "2026-10-24"
+    },
     {
       "title": "区块链入门：去中心化技术原理解析",
       "slug": "d29d8728",
