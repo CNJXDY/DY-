@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等179个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等184个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等179个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等184个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等179个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等184个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -560,6 +560,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#shelf-life" data-tool="shelf-life"><span class="icon">🥫</span>食品保质期计算</a></li>
     <li><a href="#json-schema-gen" data-tool="json-schema-gen"><span class="icon">🧬</span>JSON Schema 生成</a></li>
     <li><a href="#text-card" data-tool="text-card"><span class="icon">🖼️</span>文字卡片生成</a></li>
+    <li><a href="#html-formatter" data-tool="html-formatter"><span class="icon">📐</span>HTML 格式化</a></li>
+    <li><a href="#text-extract" data-tool="text-extract"><span class="icon">🔎</span>文本信息提取</a></li>
+    <li><a href="#clothing-size" data-tool="clothing-size"><span class="icon">👕</span>衣服尺码换算</a></li>
+    <li><a href="#rent-yield" data-tool="rent-yield"><span class="icon">🏢</span>房租回报率计算</a></li>
+    <li><a href="#flappy-bird" data-tool="flappy-bird"><span class="icon">🐦</span>像素小鸟</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -4979,6 +4984,117 @@ console.log('代码块');
     <div class="result-box" id="card-result">卡片会随输入实时更新，点击「下载 PNG」保存图片。</div>
   </section>
 
+  <!-- HTML 格式化 / 压缩 -->
+  <section class="tool-panel" id="panel-html-formatter">
+    <h2>📐 HTML 格式化 / 压缩</h2>
+    <p class="desc">粘贴杂乱的 HTML 代码，一键按层级缩进美化或压缩成单行。能识别 void 标签，并原样保留 script / style / pre / textarea 内部内容。</p>
+    <div class="label">HTML 源码</div>
+    <textarea id="htmlf-input" style="min-height:220px;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;示例页面&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;div class="box"&gt;&lt;h1&gt;你好&lt;/h1&gt;&lt;p&gt;这是一段&lt;strong&gt;示例&lt;/strong&gt;文本。&lt;/p&gt;&lt;img src="a.png" alt="图"&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="htmlFormat()">✨ 格式化</button>
+      <button class="btn btn-secondary" onclick="htmlMinify()">📦 压缩</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('htmlf-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearHtmlFormatter()">🧹 清空</button>
+    </div>
+    <div class="result-box" id="htmlf-result" style="max-height:420px;">点击「格式化」查看结果。</div>
+  </section>
+
+  <!-- 文本信息提取 -->
+  <section class="tool-panel" id="panel-text-extract">
+    <h2>🔎 文本信息提取</h2>
+    <p class="desc">从杂乱文本中自动提取邮箱、手机号、网址和 IPv4 地址，自动去重并统计数量，适合整理客户名单、日志和聊天记录。</p>
+    <div class="label">原始文本</div>
+    <textarea id="ext-input" style="min-height:200px;" oninput="extractTextInfo()">联系邮箱：service@example.com，备用 admin@test.cn
+客服手机：13800138000、+86 139-1234-5678
+官网 https://example.com/docs?id=1 ，服务器 IP：192.168.1.10 和 8.8.8.8</textarea>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--text-secondary);">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" id="ext-email" checked style="width:auto;" onchange="extractTextInfo()"> 邮箱</label>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" id="ext-phone" checked style="width:auto;" onchange="extractTextInfo()"> 手机号</label>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" id="ext-url" checked style="width:auto;" onchange="extractTextInfo()"> 网址</label>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" id="ext-ip" checked style="width:auto;" onchange="extractTextInfo()"> IPv4</label>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="extractTextInfo()">🔎 提取信息</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ext-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="clearTextExtract()">🧹 清空</button>
+    </div>
+    <div class="result-box" id="ext-result" style="max-height:380px;">输入文本后自动提取。</div>
+  </section>
+
+  <!-- 衣服尺码换算 -->
+  <section class="tool-panel" id="panel-clothing-size">
+    <h2>👕 衣服尺码换算</h2>
+    <p class="desc">选择性别与中国码（如 175/92A），快速换算国际码、美国码、欧洲码和英国码，并给出适合的身高与胸围区间。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">性别</div>
+        <select id="cs-gender" style="font-family:inherit;" onchange="renderClothingSize()">
+          <option value="male" selected>男装</option>
+          <option value="female">女装</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">中国尺码（上衣）</div>
+        <select id="cs-cn" style="font-family:inherit;" onchange="renderClothingSize()"></select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="renderClothingSize()">👕 换算尺码</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('cs-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="cs-result">选择尺码后自动显示对照结果。</div>
+  </section>
+
+  <!-- 房租回报率计算 -->
+  <section class="tool-panel" id="panel-rent-yield">
+    <h2>🏢 房租回报率计算</h2>
+    <p class="desc">输入房屋总价与月租金，计算毛/净租金回报率、租售比和静态回本年限，支持扣除每年物业费、取暖费等持有成本与空置月份。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">房屋总价（万元）</div>
+        <input type="number" id="rent-price" min="0" step="0.1" value="200" oninput="calcRentYield()">
+      </div>
+      <div>
+        <div class="label">月租金（元）</div>
+        <input type="number" id="rent-month" min="0" step="100" value="3500" oninput="calcRentYield()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">年持有成本（元）</div>
+        <input type="number" id="rent-cost" min="0" step="100" value="3000" oninput="calcRentYield()">
+      </div>
+      <div>
+        <div class="label">每年空置月数</div>
+        <input type="number" id="rent-vacant" min="0" max="12" step="1" value="0" oninput="calcRentYield()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcRentYield()">🏢 计算回报率</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('rent-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetRentYield()">🧹 重置</button>
+    </div>
+    <div class="result-box" id="rent-result">输入总价与租金后自动计算。</div>
+  </section>
+
+  <!-- 像素小鸟 -->
+  <section class="tool-panel" id="panel-flappy-bird">
+    <h2>🐦 像素小鸟</h2>
+    <p class="desc">点击画面、按空格键或 ↑ 键让小鸟扇动翅膀，穿过管道缝隙。撞到管道或地面即结束，挑战最高分。</p>
+    <div class="stats" style="max-width:480px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="bird-score">0</div><div class="lbl">本局得分</div></div>
+      <div class="stat-card"><div class="num" id="bird-best">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <canvas id="bird-canvas" width="480" height="360" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#0f172a;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="bird-btn" onclick="flappyToggle()">▶ 开始游戏</button>
+      <button class="btn btn-secondary btn-sm" onclick="flappyReset()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="bird-msg" style="text-align:center;">点击「开始游戏」，然后用空格或点击控制小鸟。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -4986,7 +5102,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 179个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 184个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -13904,6 +14020,469 @@ safeInit(() => compareUnitPrice(), 'compareUnitPrice');
 safeInit(() => initShelfLife(), 'initShelfLife');
 safeInit(() => generateJsonSchema(), 'generateJsonSchema');
 safeInit(() => generateTextCard(), 'generateTextCard');
+
+// ============ HTML 格式化 / 压缩 ============
+const HTMLF_VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+const HTMLF_INLINE = new Set(['a', 'abbr', 'b', 'bdi', 'bdo', 'br', 'button', 'cite', 'code', 'data', 'dfn', 'em', 'i', 'img', 'input', 'kbd', 'label', 'mark', 'option', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr']);
+function htmlfTokenize(str) {
+  const reg = /(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<pre[\s\S]*?<\/pre>|<textarea[\s\S]*?<\/textarea>|<!--[\s\S]*?-->|<!\[CDATA\[[\s\S]*?\]\]>|<!DOCTYPE[^>]*>|<\?[\s\S]*?\?>|<\/?[A-Za-z][^>]*>|[^<]+)/gi;
+  return str.match(reg) || [];
+}
+function htmlFormat() {
+  const out = document.getElementById('htmlf-result');
+  if (!out) return;
+  out.style.display = 'block';
+  const input = document.getElementById('htmlf-input').value.trim();
+  if (!input) { out.textContent = '❌ 请输入 HTML 内容。'; return; }
+  const tokens = htmlfTokenize(input);
+  const lines = [];
+  let depth = 0, line = '', lineDepth = 0;
+  const pad = d => '  '.repeat(Math.max(0, d));
+  function flush() {
+    if (line.trim()) lines.push(pad(lineDepth) + line.trim());
+    line = '';
+  }
+  function append(text, d) {
+    if (!line) lineDepth = d;
+    line += text;
+  }
+  tokens.forEach(tok => {
+    const t = tok.trim();
+    if (!t) return;
+    if (t.startsWith('<!--') || t.startsWith('<!') || t.startsWith('<?')) {
+      flush();
+      lines.push(pad(depth) + t);
+      return;
+    }
+    const raw = t.match(/^<(script|style|pre|textarea)([^>]*)>([\s\S]*)<\/\1>$/i);
+    if (raw) {
+      flush();
+      const tag = raw[1];
+      lines.push(pad(depth) + '<' + tag + raw[2] + '>');
+      if (raw[3].trim()) {
+        raw[3].split(/\r?\n/).forEach(l => { if (l.trim()) lines.push(pad(depth + 1) + l.trim()); });
+      }
+      lines.push(pad(depth) + '</' + tag + '>');
+      return;
+    }
+    if (t.startsWith('</')) {
+      const name = (t.match(/^<\/\s*([A-Za-z][\w-]*)/) || [])[1] || '';
+      if (HTMLF_INLINE.has(name.toLowerCase())) { append(t, depth); return; }
+      flush();
+      depth = Math.max(0, depth - 1);
+      lines.push(pad(depth) + t);
+      return;
+    }
+    if (t.startsWith('<')) {
+      const name = (t.match(/^<\s*([A-Za-z][\w-]*)/) || [])[1] || '';
+      if (!name) { append(t, depth); return; }
+      const lower = name.toLowerCase();
+      if (t.endsWith('/>') || HTMLF_VOID.has(lower)) {
+        flush();
+        lines.push(pad(depth) + t);
+        return;
+      }
+      if (HTMLF_INLINE.has(lower)) { append(t, depth); return; }
+      flush();
+      lines.push(pad(depth) + t);
+      depth++;
+      return;
+    }
+    const text = t.replace(/\s+/g, ' ').trim();
+    if (!text) return;
+    append(text, depth);
+  });
+  flush();
+  out.textContent = lines.join('\n');
+}
+function htmlMinify() {
+  const out = document.getElementById('htmlf-result');
+  if (!out) return;
+  out.style.display = 'block';
+  const input = document.getElementById('htmlf-input').value.trim();
+  if (!input) { out.textContent = '❌ 请输入 HTML 内容。'; return; }
+  const blocks = [];
+  let s = input.replace(/<(pre|textarea|script|style)\b[\s\S]*?<\/\1>/gi, m => {
+    blocks.push(m);
+    return '\u0000' + (blocks.length - 1) + '\u0000';
+  });
+  s = s.replace(/<!--(?!\[if)[\s\S]*?-->/g, '')
+       .replace(/\s+/g, ' ')
+       .replace(/>\s+</g, '><')
+       .trim();
+  s = s.replace(/\u0000(\d+)\u0000/g, (m, i) => blocks[Number(i)]);
+  out.textContent = s;
+}
+function clearHtmlFormatter() {
+  const input = document.getElementById('htmlf-input');
+  const out = document.getElementById('htmlf-result');
+  if (input) input.value = '';
+  if (out) out.textContent = '已清空，粘贴新的 HTML 后点击「格式化」。';
+}
+
+// ============ 文本信息提取 ============
+function extractTextInfo() {
+  const input = document.getElementById('ext-input');
+  const out = document.getElementById('ext-result');
+  if (!input || !out) return;
+  const raw = input.value;
+  const defs = [
+    { key: 'email', label: '邮箱', el: 'ext-email', re: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g },
+    { key: 'phone', label: '手机号', el: 'ext-phone', re: /(?:\+?86[-\s]?)?1[3-9]\d(?:[-\s]?\d){8}/g },
+    { key: 'url', label: '网址', el: 'ext-url', re: /https?:\/\/[^\s<>"'）)】》，。；、]+/g },
+    { key: 'ip', label: 'IPv4', el: 'ext-ip', re: /\b(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\b/g }
+  ];
+  const blocks = [];
+  let total = 0;
+  defs.forEach(d => {
+    const box = document.getElementById(d.el);
+    if (!box || !box.checked) return;
+    const found = raw.match(d.re) || [];
+    const uniq = Array.from(new Set(found.map(v => v.trim())));
+    total += uniq.length;
+    blocks.push('【' + d.label + '】' + uniq.length + ' 个');
+    blocks.push(uniq.length ? uniq.map((v, i) => (i + 1) + '. ' + v).join('\n') : '（未找到）');
+    blocks.push('');
+  });
+  out.style.display = 'block';
+  if (!blocks.length) { out.textContent = '请至少勾选一种信息类型。'; return; }
+  out.textContent = '共提取 ' + total + ' 条信息\n\n' + blocks.join('\n').trim();
+}
+function clearTextExtract() {
+  const input = document.getElementById('ext-input');
+  if (input) input.value = '';
+  extractTextInfo();
+}
+
+// ============ 衣服尺码换算 ============
+const CLOTHING_DATA = {
+  male: [
+    { cn: '165/84A', intl: 'S', us: 'XS', eu: '44', uk: '34', height: '163-167', chest: '82-86' },
+    { cn: '170/88A', intl: 'M', us: 'S', eu: '46', uk: '36', height: '168-172', chest: '86-90' },
+    { cn: '175/92A', intl: 'L', us: 'M', eu: '48', uk: '38', height: '173-177', chest: '90-94' },
+    { cn: '180/96A', intl: 'XL', us: 'L', eu: '50', uk: '40', height: '178-182', chest: '94-98' },
+    { cn: '185/100A', intl: 'XXL', us: 'XL', eu: '52', uk: '42', height: '183-187', chest: '98-102' },
+    { cn: '190/104A', intl: 'XXXL', us: 'XXL', eu: '54', uk: '44', height: '188-192', chest: '102-106' }
+  ],
+  female: [
+    { cn: '155/80A', intl: 'XS', us: '2', eu: '34', uk: '6', height: '153-157', chest: '78-82' },
+    { cn: '160/84A', intl: 'S', us: '4', eu: '36', uk: '8', height: '158-162', chest: '82-86' },
+    { cn: '165/88A', intl: 'M', us: '6', eu: '38', uk: '10', height: '163-167', chest: '86-90' },
+    { cn: '170/92A', intl: 'L', us: '8', eu: '40', uk: '12', height: '168-172', chest: '90-94' },
+    { cn: '175/96A', intl: 'XL', us: '10', eu: '42', uk: '14', height: '173-177', chest: '94-98' },
+    { cn: '180/100A', intl: 'XXL', us: '12', eu: '44', uk: '16', height: '178-182', chest: '98-102' }
+  ]
+};
+function renderClothingSize() {
+  const genderEl = document.getElementById('cs-gender');
+  const sel = document.getElementById('cs-cn');
+  const out = document.getElementById('cs-result');
+  if (!genderEl || !sel || !out) return;
+  const gender = genderEl.value === 'female' ? 'female' : 'male';
+  const list = CLOTHING_DATA[gender];
+  if (sel.dataset.gender !== gender) {
+    sel.innerHTML = list.map(item => '<option value="' + item.cn + '">' + item.cn + '（' + item.intl + '）</option>').join('');
+    sel.dataset.gender = gender;
+    sel.value = list[2].cn;
+  }
+  const item = list.find(x => x.cn === sel.value) || list[0];
+  const lines = [
+    '性别：' + (gender === 'male' ? '男装' : '女装'),
+    '中国码：' + item.cn,
+    '国际码：' + item.intl,
+    '美国码：' + item.us,
+    '欧洲码：' + item.eu,
+    '英国码：' + item.uk,
+    '适合身高：' + item.height + ' cm',
+    '适合胸围：' + item.chest + ' cm',
+    '',
+    '说明：以上为常见成人上衣尺码对照，不同品牌版型（修身/宽松）存在差异，下单前请以商品详情页尺码表为准。'
+  ];
+  out.style.display = 'block';
+  out.textContent = lines.join('\n');
+}
+
+// ============ 房租回报率计算 ============
+function calcRentYield() {
+  const out = document.getElementById('rent-result');
+  if (!out) return;
+  const priceWan = parseFloat(document.getElementById('rent-price').value);
+  const monthly = parseFloat(document.getElementById('rent-month').value);
+  const cost = parseFloat(document.getElementById('rent-cost').value) || 0;
+  let vacant = parseFloat(document.getElementById('rent-vacant').value) || 0;
+  out.style.display = 'block';
+  if (!(priceWan > 0) || !(monthly > 0)) {
+    out.textContent = '❌ 请输入有效的房屋总价与月租金。';
+    return;
+  }
+  vacant = Math.max(0, Math.min(12, vacant));
+  const price = priceWan * 10000;
+  const months = 12 - vacant;
+  const gross = monthly * 12;
+  const effective = monthly * months;
+  const net = effective - cost;
+  const grossRate = gross / price * 100;
+  const netRate = net / price * 100;
+  const ratio = gross > 0 ? price / gross : Infinity;
+  const years = net > 0 ? price / net : Infinity;
+  const fmt = n => n.toLocaleString('zh-CN', { maximumFractionDigits: 2 });
+  const lines = [
+    '房屋总价：' + fmt(priceWan) + ' 万元（' + fmt(price) + ' 元）',
+    '月租金：' + fmt(monthly) + ' 元 ｜ 每年空置：' + fmt(vacant) + ' 个月',
+    '年持有成本：' + fmt(cost) + ' 元/年',
+    '',
+    '毛租金回报率：' + grossRate.toFixed(2) + '%',
+    '净租金回报率：' + (net >= 0 ? netRate.toFixed(2) + '%' : '负数（持有成本高于租金收入）'),
+    '租售比：1 : ' + (isFinite(ratio) ? Math.round(ratio) : '-'),
+    '静态回本年限：' + (isFinite(years) ? years.toFixed(1) + ' 年' : '无法回本'),
+    '',
+    '计算口径：毛回报率 = 年租金 ÷ 总价；净回报率 =（有效租金 − 年持有成本）÷ 总价。',
+    '一般住宅毛回报率 2%~4% 属常见区间，结果仅供参考，不构成投资建议。'
+  ];
+  out.textContent = lines.join('\n');
+}
+function resetRentYield() {
+  document.getElementById('rent-price').value = 200;
+  document.getElementById('rent-month').value = 3500;
+  document.getElementById('rent-cost').value = 3000;
+  document.getElementById('rent-vacant').value = 0;
+  calcRentYield();
+}
+
+// ============ 像素小鸟 ============
+const BIRD_W = 480, BIRD_H = 360, BIRD_GROUND = 40;
+let birdState = null;
+let birdBest = 0;
+let birdRaf = null;
+let birdLast = 0;
+let birdAcc = 0;
+function flappyNewState() {
+  return {
+    bird: { x: 110, y: BIRD_H / 2 - 12, r: 12, vy: 0 },
+    pipes: [],
+    score: 0,
+    started: false,
+    running: false,
+    over: false,
+    spawnTimer: 0
+  };
+}
+function flappyUpdateScore() {
+  const scoreEl = document.getElementById('bird-score');
+  const bestEl = document.getElementById('bird-best');
+  if (scoreEl && birdState) scoreEl.textContent = birdState.score;
+  if (bestEl) bestEl.textContent = birdBest;
+}
+function flappySpawnPipe() {
+  const playH = BIRD_H - BIRD_GROUND;
+  const gapY = 40 + Math.random() * (playH - 120 - 80);
+  birdState.pipes.push({ x: BIRD_W + 10, gapY: gapY, passed: false });
+}
+function flappyDraw() {
+  const cv = document.getElementById('bird-canvas');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const groundY = BIRD_H - BIRD_GROUND;
+  const bg = ctx.createLinearGradient(0, 0, 0, BIRD_H);
+  bg.addColorStop(0, '#0b1222');
+  bg.addColorStop(1, '#16233b');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, BIRD_W, BIRD_H);
+  const s = birdState;
+  if (s) {
+    s.pipes.forEach(p => {
+      ctx.fillStyle = '#22c55e';
+      ctx.fillRect(p.x, 0, 58, p.gapY);
+      ctx.fillRect(p.x, p.gapY + 120, 58, groundY - (p.gapY + 120));
+      ctx.fillStyle = '#16a34a';
+      ctx.fillRect(p.x - 3, Math.max(0, p.gapY - 12), 64, 12);
+      ctx.fillRect(p.x - 3, p.gapY + 120, 64, 12);
+    });
+    ctx.fillStyle = '#b45309';
+    ctx.fillRect(0, groundY, BIRD_W, BIRD_GROUND);
+    ctx.fillStyle = '#92400e';
+    ctx.fillRect(0, groundY, BIRD_W, 6);
+    const b = s.bird;
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.rotate(Math.max(-0.5, Math.min(0.9, b.vy / 12)));
+    ctx.fillStyle = '#facc15';
+    ctx.beginPath();
+    ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#fb923c';
+    ctx.beginPath();
+    ctx.moveTo(b.r - 2, 0);
+    ctx.lineTo(b.r + 9, 3);
+    ctx.lineTo(b.r - 2, 6);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.arc(4, -4, 2.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    ctx.fillStyle = '#e2e8f0';
+    ctx.font = 'bold 28px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(String(s.score), BIRD_W / 2, 44);
+    if (!s.started) {
+      flappyOverlay(ctx, '点击开始');
+    } else if (s.over) {
+      flappyOverlay(ctx, '游戏结束');
+    } else if (!s.running) {
+      flappyOverlay(ctx, '已暂停');
+    }
+  } else {
+    ctx.fillStyle = '#b45309';
+    ctx.fillRect(0, groundY, BIRD_W, BIRD_GROUND);
+    flappyOverlay(ctx, '点击开始');
+  }
+}
+function flappyOverlay(ctx, text) {
+  ctx.fillStyle = 'rgba(15,23,42,0.6)';
+  ctx.fillRect(0, 0, BIRD_W, BIRD_H);
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(text, BIRD_W / 2, BIRD_H / 2);
+}
+function flappyStep() {
+  const s = birdState;
+  if (!s || !s.running) return;
+  const b = s.bird;
+  b.vy += 0.42;
+  b.y += b.vy;
+  if (b.y - b.r < 0) { b.y = b.r; b.vy = 0; }
+  if (b.y + b.r >= BIRD_H - BIRD_GROUND) {
+    b.y = BIRD_H - BIRD_GROUND - b.r;
+    flappyEnd();
+    return;
+  }
+  s.spawnTimer++;
+  if (s.spawnTimer >= 95) {
+    s.spawnTimer = 0;
+    flappySpawnPipe();
+  }
+  for (let i = s.pipes.length - 1; i >= 0; i--) {
+    const p = s.pipes[i];
+    p.x -= 2.2;
+    if (!p.passed && p.x + 58 < b.x - b.r) {
+      p.passed = true;
+      s.score++;
+      flappyUpdateScore();
+    }
+    if (p.x + 58 < 0) { s.pipes.splice(i, 1); continue; }
+    if (b.x + b.r > p.x && b.x - b.r < p.x + 58) {
+      if (b.y - b.r < p.gapY || b.y + b.r > p.gapY + 120) {
+        flappyEnd();
+        return;
+      }
+    }
+  }
+}
+function flappyStart() {
+  birdState = flappyNewState();
+  birdState.started = true;
+  birdState.running = true;
+  birdState.bird.vy = -4;
+  birdAcc = 0;
+  birdBest = birdBest || 0;
+  flappyUpdateScore();
+  const btn = document.getElementById('bird-btn');
+  const msg = document.getElementById('bird-msg');
+  if (btn) btn.textContent = '⏸ 暂停';
+  if (msg) msg.textContent = '游戏开始！点击画面或按空格 / ↑ 让小鸟向上飞。';
+  flappyDraw();
+}
+function flappyEnd() {
+  const s = birdState;
+  if (!s) return;
+  s.running = false;
+  s.over = true;
+  if (s.score > birdBest) {
+    birdBest = s.score;
+    try { localStorage.setItem('toolbox-bird-best', String(birdBest)); } catch (e) {}
+  }
+  flappyUpdateScore();
+  const btn = document.getElementById('bird-btn');
+  const msg = document.getElementById('bird-msg');
+  if (btn) btn.textContent = '🎮 再玩一次';
+  if (msg) msg.textContent = '💥 撞到障碍了！本局得分 ' + s.score + '，最高分 ' + birdBest + '。点击画面重新开始。';
+}
+function flappyToggle() {
+  if (!birdState || birdState.over || !birdState.started) {
+    flappyStart();
+    return;
+  }
+  birdState.running = !birdState.running;
+  const btn = document.getElementById('bird-btn');
+  const msg = document.getElementById('bird-msg');
+  if (btn) btn.textContent = birdState.running ? '⏸ 暂停' : '▶ 继续';
+  if (msg) msg.textContent = birdState.running ? '游戏中……点击画面或按空格继续飞。' : '⏸ 已暂停，点击「继续」恢复。';
+}
+function flappyReset() {
+  birdState = flappyNewState();
+  birdAcc = 0;
+  flappyUpdateScore();
+  const btn = document.getElementById('bird-btn');
+  const msg = document.getElementById('bird-msg');
+  if (btn) btn.textContent = '▶ 开始游戏';
+  if (msg) msg.textContent = '已重置。点击「开始游戏」，然后用空格或点击控制小鸟。';
+  flappyDraw();
+}
+function flappyCanvasClick() {
+  if (!birdState) return;
+  if (birdState.over || !birdState.started) { flappyStart(); return; }
+  if (!birdState.running) {
+    birdState.running = true;
+    const btn = document.getElementById('bird-btn');
+    if (btn) btn.textContent = '⏸ 暂停';
+  }
+  birdState.bird.vy = -6.6;
+}
+function flappyLoop(t) {
+  birdRaf = requestAnimationFrame(flappyLoop);
+  const panel = document.getElementById('panel-flappy-bird');
+  if (!panel || !panel.classList.contains('active')) { birdLast = t; return; }
+  if (!birdLast) birdLast = t;
+  let dt = t - birdLast;
+  birdLast = t;
+  if (dt > 100) dt = 100;
+  birdAcc += dt;
+  let guard = 0;
+  while (birdAcc >= 16.67 && guard < 5) {
+    flappyStep();
+    birdAcc -= 16.67;
+    guard++;
+  }
+  flappyDraw();
+}
+function flappyInit() {
+  const cv = document.getElementById('bird-canvas');
+  if (!cv) return;
+  try { birdBest = parseInt(localStorage.getItem('toolbox-bird-best'), 10) || 0; } catch (e) { birdBest = 0; }
+  birdState = flappyNewState();
+  flappyUpdateScore();
+  cv.addEventListener('click', flappyCanvasClick);
+  cv.addEventListener('touchstart', function (e) { e.preventDefault(); flappyCanvasClick(); }, { passive: false });
+  document.addEventListener('keydown', function (e) {
+    const panel = document.getElementById('panel-flappy-bird');
+    if (!panel || !panel.classList.contains('active')) return;
+    if (e.code === 'Space' || e.key === 'ArrowUp' || e.key === ' ') {
+      e.preventDefault();
+      flappyCanvasClick();
+    }
+  });
+  if (!birdRaf) birdRaf = requestAnimationFrame(flappyLoop);
+  flappyDraw();
+}
+
+safeInit(() => htmlFormat(), 'htmlFormat');
+safeInit(() => extractTextInfo(), 'extractTextInfo');
+safeInit(() => renderClothingSize(), 'renderClothingSize');
+safeInit(() => calcRentYield(), 'calcRentYield');
+safeInit(() => flappyInit(), 'flappyInit');
 
 // ============ Search & Theme ============
 function filterTools() {
