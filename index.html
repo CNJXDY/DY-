@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等184个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等189个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等184个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等189个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等184个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等189个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -565,6 +565,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#clothing-size" data-tool="clothing-size"><span class="icon">👕</span>衣服尺码换算</a></li>
     <li><a href="#rent-yield" data-tool="rent-yield"><span class="icon">🏢</span>房租回报率计算</a></li>
     <li><a href="#flappy-bird" data-tool="flappy-bird"><span class="icon">🐦</span>像素小鸟</a></li>
+    <li class="category">今日上新</li>
+    <li><a href="#excel-col" data-tool="excel-col"><span class="icon">📊</span>Excel 列号转换</a></li>
+    <li><a href="#chmod-calc" data-tool="chmod-calc"><span class="icon">🔐</span>Linux 权限计算器</a></li>
+    <li><a href="#slug-generator" data-tool="slug-generator"><span class="icon">🔗</span>URL Slug 生成器</a></li>
+    <li><a href="#ac-tonnage" data-tool="ac-tonnage"><span class="icon">❄️</span>空调匹数计算器</a></li>
+    <li><a href="#piano-tiles" data-tool="piano-tiles"><span class="icon">🎹</span>别踩白块</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -5095,6 +5101,150 @@ console.log('代码块');
     <div class="result-box" id="bird-msg" style="text-align:center;">点击「开始游戏」，然后用空格或点击控制小鸟。</div>
   </section>
 
+  <!-- Excel 列号转换 -->
+  <section class="tool-panel" id="panel-excel-col">
+    <h2>📊 Excel 列号转换</h2>
+    <p class="desc">在 Excel 列字母（A、Z、AA、AB…）与数字列号之间互相转换，写公式或处理表格数据时可快速定位列。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">列字母</div>
+        <input type="text" id="xcol-letter" value="AB" placeholder="例如 AB" oninput="excelColFromLetter()">
+      </div>
+      <div>
+        <div class="label">列号</div>
+        <input type="number" id="xcol-number" value="28" min="1" max="16384" oninput="excelColFromNumber()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="excelColFromLetter()">🔁 字母转列号</button>
+      <button class="btn btn-secondary" onclick="excelColFromNumber()">🔁 列号转字母</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('xcol-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="xcol-result">AB = 第 28 列</div>
+  </section>
+
+  <!-- Linux 权限计算器 -->
+  <section class="tool-panel" id="panel-chmod-calc">
+    <h2>🔐 Linux 权限计算器</h2>
+    <p class="desc">勾选所有者、用户组和其他人的读/写/执行权限，实时得到八进制数字、rwx 符号表示和 chmod 命令。</p>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">所有者（u）</div>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-owner-r" checked onchange="updateChmod()"> 读 r (4)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-owner-w" checked onchange="updateChmod()"> 写 w (2)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-owner-x" onchange="updateChmod()"> 执行 x (1)</label>
+      </div>
+      <div>
+        <div class="label">用户组（g）</div>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-group-r" checked onchange="updateChmod()"> 读 r (4)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-group-w" onchange="updateChmod()"> 写 w (2)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-group-x" onchange="updateChmod()"> 执行 x (1)</label>
+      </div>
+      <div>
+        <div class="label">其他人（o）</div>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-other-r" checked onchange="updateChmod()"> 读 r (4)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-other-w" onchange="updateChmod()"> 写 w (2)</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="chmod-other-x" onchange="updateChmod()"> 执行 x (1)</label>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">八进制权限</div>
+        <input type="text" id="chmod-octal" value="644" maxlength="3" oninput="applyChmodOctal()">
+      </div>
+      <div>
+        <div class="label">符号权限</div>
+        <input type="text" id="chmod-symbolic" value="rw-r--r--" readonly>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="applyChmodOctal()">🔐 按八进制设置</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('chmod-result')">📋 复制命令</button>
+    </div>
+    <div class="result-box" id="chmod-result">chmod 644 文件名</div>
+  </section>
+
+  <!-- URL Slug 生成器 -->
+  <section class="tool-panel" id="panel-slug-generator">
+    <h2>🔗 URL Slug 生成器</h2>
+    <p class="desc">把标题或句子转换成适合网址的短横线/下划线格式，自动去除重音、多余空格和特殊符号。</p>
+    <textarea id="slug-input" placeholder="输入标题，例如：万能工具箱 Tool Box 2026">万能工具箱 Tool Box 2026</textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">分隔符</div>
+        <select id="slug-sep" style="font-family:inherit;" onchange="generateSlug()">
+          <option value="-" selected>短横线 -</option>
+          <option value="_">下划线 _</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">选项</div>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="slug-lower" checked onchange="generateSlug()"> 转为小写</label>
+        <label style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:13px;cursor:pointer;"><input type="checkbox" id="slug-cjk" checked onchange="generateSlug()"> 保留中文</label>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateSlug()">🔗 生成 Slug</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('slug-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="slug-result">万能工具箱-tool-box-2026</div>
+  </section>
+
+  <!-- 空调匹数计算器 -->
+  <section class="tool-panel" id="panel-ac-tonnage">
+    <h2>❄️ 空调匹数计算器</h2>
+    <p class="desc">根据房间面积、层高、朝向和保温情况估算所需制冷量，推荐合适的空调匹数，避免买小不制冷或买大浪费。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">房间面积（㎡）</div>
+        <input type="number" id="ac-area" value="15" min="1" step="0.5" oninput="calcAcTonnage()">
+      </div>
+      <div>
+        <div class="label">层高（米）</div>
+        <input type="number" id="ac-height" value="2.8" min="2" max="5" step="0.1" oninput="calcAcTonnage()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">朝向 / 位置</div>
+        <select id="ac-sun" style="font-family:inherit;" onchange="calcAcTonnage()">
+          <option value="normal" selected>普通房间</option>
+          <option value="west">西晒房间</option>
+          <option value="top">顶层 / 阁楼</option>
+          <option value="glass">大面积落地窗</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">保温情况</div>
+        <select id="ac-insulation" style="font-family:inherit;" onchange="calcAcTonnage()">
+          <option value="good">保温良好</option>
+          <option value="normal" selected>一般</option>
+          <option value="poor">保温较差</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcAcTonnage()">❄️ 计算匹数</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ac-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="ac-result">输入面积和层高后自动计算。</div>
+  </section>
+
+  <!-- 别踩白块 -->
+  <section class="tool-panel" id="panel-piano-tiles">
+    <h2>🎹 别踩白块</h2>
+    <p class="desc">在方块滑出底部前点击最下面一行的亮色方块，每点中一个得 1 分，速度会越来越快；点到白色方块或超时即结束。</p>
+    <div class="stats" style="max-width:360px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="piano-score">0</div><div class="lbl">本局得分</div></div>
+      <div class="stat-card"><div class="num" id="piano-best">0</div><div class="lbl">最高分</div></div>
+    </div>
+    <div id="piano-board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:360px;margin:0 auto;padding:6px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);touch-action:manipulation;"></div>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="piano-btn" onclick="pianoToggle()">▶ 开始游戏</button>
+    </div>
+    <div class="result-box" id="piano-msg" style="text-align:center;">点击「开始游戏」，然后点击最下面一行亮色方块。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -5102,7 +5252,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 184个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 189个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -14483,6 +14633,257 @@ safeInit(() => extractTextInfo(), 'extractTextInfo');
 safeInit(() => renderClothingSize(), 'renderClothingSize');
 safeInit(() => calcRentYield(), 'calcRentYield');
 safeInit(() => flappyInit(), 'flappyInit');
+
+// ============ Excel 列号转换 ============
+function excelColFromLetter() {
+  const raw = document.getElementById('xcol-letter').value.trim().toUpperCase();
+  if (!/^[A-Z]{1,3}$/.test(raw)) {
+    showResult('xcol-result', '❌ 请输入 1-3 位英文字母，例如 A、Z、AA、XFD。');
+    return;
+  }
+  let num = 0;
+  for (let i = 0; i < raw.length; i++) num = num * 26 + (raw.charCodeAt(i) - 64);
+  if (num > 16384) {
+    showResult('xcol-result', '❌ 超出 Excel 最大列 XFD（第 16384 列）。');
+    return;
+  }
+  document.getElementById('xcol-number').value = num;
+  showResult('xcol-result', raw + ' = 第 ' + num + ' 列');
+}
+function excelColFromNumber() {
+  const n = parseInt(document.getElementById('xcol-number').value, 10);
+  if (!Number.isInteger(n) || n < 1) {
+    showResult('xcol-result', '❌ 请输入大于 0 的整数列号。');
+    return;
+  }
+  if (n > 16384) {
+    showResult('xcol-result', '❌ 超出 Excel 最大列 XFD（第 16384 列）。');
+    return;
+  }
+  let x = n, letters = '';
+  while (x > 0) {
+    const r = (x - 1) % 26;
+    letters = String.fromCharCode(65 + r) + letters;
+    x = Math.floor((x - 1) / 26);
+  }
+  document.getElementById('xcol-letter').value = letters;
+  showResult('xcol-result', '第 ' + n + ' 列 = ' + letters);
+}
+function excelColInit() {
+  excelColFromNumber();
+}
+
+// ============ Linux 权限计算器 ============
+function chmodBits(role) {
+  let v = 0;
+  if (document.getElementById('chmod-' + role + '-r').checked) v += 4;
+  if (document.getElementById('chmod-' + role + '-w').checked) v += 2;
+  if (document.getElementById('chmod-' + role + '-x').checked) v += 1;
+  return v;
+}
+function chmodSymbol(role) {
+  return (document.getElementById('chmod-' + role + '-r').checked ? 'r' : '-') +
+         (document.getElementById('chmod-' + role + '-w').checked ? 'w' : '-') +
+         (document.getElementById('chmod-' + role + '-x').checked ? 'x' : '-');
+}
+function updateChmod() {
+  const o = chmodBits('owner'), g = chmodBits('group'), a = chmodBits('other');
+  const octal = '' + o + g + a;
+  const sym = chmodSymbol('owner') + chmodSymbol('group') + chmodSymbol('other');
+  document.getElementById('chmod-octal').value = octal;
+  document.getElementById('chmod-symbolic').value = sym;
+  showResult('chmod-result', 'chmod ' + octal + ' 文件名\n符号表示：' + sym +
+    '\n所有者 ' + chmodSymbol('owner') + ' | 用户组 ' + chmodSymbol('group') + ' | 其他人 ' + chmodSymbol('other'));
+}
+function applyChmodOctal() {
+  const raw = document.getElementById('chmod-octal').value.trim();
+  if (!/^[0-7]{3}$/.test(raw)) {
+    showResult('chmod-result', '❌ 请输入 3 位八进制数字（0-7），例如 644、755。');
+    return;
+  }
+  const roles = ['owner', 'group', 'other'];
+  for (let i = 0; i < 3; i++) {
+    const d = parseInt(raw[i], 10);
+    document.getElementById('chmod-' + roles[i] + '-r').checked = !!(d & 4);
+    document.getElementById('chmod-' + roles[i] + '-w').checked = !!(d & 2);
+    document.getElementById('chmod-' + roles[i] + '-x').checked = !!(d & 1);
+  }
+  updateChmod();
+}
+
+// ============ URL Slug 生成器 ============
+function generateSlug() {
+  const src = document.getElementById('slug-input').value;
+  const sep = document.getElementById('slug-sep').value;
+  const lower = document.getElementById('slug-lower').checked;
+  const keepCjk = document.getElementById('slug-cjk').checked;
+  let s = src.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  if (lower) s = s.toLowerCase();
+  const allow = 'a-zA-Z0-9' + (keepCjk ? '\u4e00-\u9fa5' : '');
+  s = s.replace(new RegExp('[^' + allow + ']+', 'g'), sep);
+  s = s.split(sep).filter(Boolean).join(sep);
+  s = s.replace(/^[-_]+|[-_]+$/g, '');
+  if (!s) {
+    showResult('slug-result', '⚠️ 没有可用的字符，请检查输入内容或勾选「保留中文」。');
+    return;
+  }
+  showResult('slug-result', s + '\n\n长度：' + s.length + ' 个字符');
+}
+
+// ============ 空调匹数计算器 ============
+function calcAcTonnage() {
+  const area = parseFloat(document.getElementById('ac-area').value);
+  const height = parseFloat(document.getElementById('ac-height').value);
+  if (!isFinite(area) || area <= 0 || !isFinite(height) || height < 2 || height > 5) {
+    showResult('ac-result', '❌ 请输入有效的房间面积和层高（层高 2-5 米）。');
+    return;
+  }
+  const sunFactor = { normal: 1, west: 1.15, top: 1.2, glass: 1.1 }[document.getElementById('ac-sun').value] || 1;
+  const insFactor = { good: 0.9, normal: 1, poor: 1.15 }[document.getElementById('ac-insulation').value] || 1;
+  const heightFactor = Math.min(1.5, Math.max(0.8, height / 2.8));
+  const load = area * 150 * sunFactor * insFactor * heightFactor;
+  const need = load * 1.05;
+  const models = [[1, 2500], [1.5, 3500], [2, 5000], [2.5, 6200], [3, 7200], [5, 12000]];
+  let pick = models[models.length - 1];
+  for (let i = 0; i < models.length; i++) {
+    if (models[i][1] >= need) { pick = models[i]; break; }
+  }
+  if (need > models[models.length - 1][1]) {
+    showResult('ac-result', '所需制冷量约 ' + Math.round(load) + ' W，超过单台 5 匹的常见范围，建议使用多台空调或咨询专业人员。');
+    return;
+  }
+  let text = '所需制冷量：约 ' + Math.round(load) + ' W（含 5% 余量约 ' + Math.round(need) + ' W）\n' +
+    '推荐：' + pick[0] + ' 匹（约 ' + pick[1] + ' W 制冷量）';
+  const idx = models.indexOf(pick);
+  if (idx > 0) text += '\n可选范围：' + models[idx - 1][0] + '–' + pick[0] + ' 匹';
+  showResult('ac-result', text);
+}
+
+// ============ 别踩白块 ============
+let pianoState = null;
+let pianoTimer = null;
+let pianoBest = 0;
+const PIANO_COLS = 4;
+function pianoRandomCol() { return Math.floor(Math.random() * PIANO_COLS); }
+function pianoNewState() {
+  return {
+    rows: [pianoRandomCol(), pianoRandomCol(), pianoRandomCol(), pianoRandomCol()],
+    score: 0, running: false, over: false, speed: 1000
+  };
+}
+function pianoRender() {
+  const board = document.getElementById('piano-board');
+  if (!board || !pianoState) return;
+  board.innerHTML = '';
+  for (let r = 0; r < 4; r++) {
+    for (let c = 0; c < PIANO_COLS; c++) {
+      const cell = document.createElement('div');
+      const isTile = pianoState.rows[r] === c;
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      cell.style.cssText = 'aspect-ratio:1;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;user-select:none;';
+      if (isTile) {
+        cell.style.background = r === 3 ? 'var(--accent)' : 'var(--accent-hover)';
+        cell.style.cursor = 'pointer';
+        if (r === 3) cell.textContent = '⬇';
+      } else {
+        cell.style.background = 'var(--card-bg)';
+        cell.style.cursor = 'default';
+      }
+      board.appendChild(cell);
+    }
+  }
+}
+function pianoUpdateScore() {
+  const scoreEl = document.getElementById('piano-score');
+  const bestEl = document.getElementById('piano-best');
+  if (scoreEl) scoreEl.textContent = pianoState ? pianoState.score : 0;
+  if (bestEl) bestEl.textContent = pianoBest;
+}
+function pianoSchedule() {
+  clearTimeout(pianoTimer);
+  if (!pianoState || !pianoState.running) return;
+  pianoTimer = setTimeout(pianoTick, pianoState.speed);
+}
+function pianoTick() {
+  if (!pianoState || !pianoState.running) return;
+  pianoEnd('⏰ 超时了！方块已经滑出底部。');
+}
+function pianoEnd(reason) {
+  if (!pianoState) return;
+  pianoState.running = false;
+  pianoState.over = true;
+  clearTimeout(pianoTimer);
+  if (pianoState.score > pianoBest) {
+    pianoBest = pianoState.score;
+    try { localStorage.setItem('toolbox-piano-best', String(pianoBest)); } catch (e) {}
+  }
+  pianoUpdateScore();
+  const btn = document.getElementById('piano-btn');
+  const msg = document.getElementById('piano-msg');
+  if (btn) btn.textContent = '🎮 再玩一次';
+  if (msg) msg.textContent = reason + ' 本局得分 ' + pianoState.score + '，最高分 ' + pianoBest + '。';
+}
+function pianoStart() {
+  clearTimeout(pianoTimer);
+  pianoState = pianoNewState();
+  pianoState.running = true;
+  pianoRender();
+  pianoUpdateScore();
+  const btn = document.getElementById('piano-btn');
+  const msg = document.getElementById('piano-msg');
+  if (btn) btn.textContent = '⏸ 暂停';
+  if (msg) msg.textContent = '点击最下面一行亮色方块，速度会越来越快！';
+  pianoSchedule();
+}
+function pianoToggle() {
+  if (!pianoState || pianoState.over) { pianoStart(); return; }
+  const btn = document.getElementById('piano-btn');
+  const msg = document.getElementById('piano-msg');
+  if (pianoState.running) {
+    pianoState.running = false;
+    clearTimeout(pianoTimer);
+    if (btn) btn.textContent = '▶ 继续';
+    if (msg) msg.textContent = '⏸ 已暂停，点击「继续」恢复游戏。';
+  } else {
+    pianoState.running = true;
+    if (btn) btn.textContent = '⏸ 暂停';
+    if (msg) msg.textContent = '继续！点击最下面一行亮色方块。';
+    pianoSchedule();
+  }
+}
+function pianoCellClick(row, col) {
+  if (!pianoState || !pianoState.running) return;
+  if (pianoState.rows[row] !== col) { pianoEnd('⬜ 踩到白块了！'); return; }
+  if (row !== 3) return;
+  pianoState.score++;
+  pianoState.rows.pop();
+  pianoState.rows.unshift(pianoRandomCol());
+  pianoState.speed = Math.max(420, pianoState.speed - 22);
+  pianoRender();
+  pianoUpdateScore();
+  pianoSchedule();
+}
+function pianoInit() {
+  try { pianoBest = parseInt(localStorage.getItem('toolbox-piano-best'), 10) || 0; } catch (e) { pianoBest = 0; }
+  pianoState = pianoNewState();
+  pianoRender();
+  pianoUpdateScore();
+  const board = document.getElementById('piano-board');
+  if (board) {
+    board.addEventListener('click', function (e) {
+      const cell = e.target.closest('[data-row]');
+      if (!cell) return;
+      pianoCellClick(parseInt(cell.dataset.row, 10), parseInt(cell.dataset.col, 10));
+    });
+  }
+}
+
+safeInit(() => excelColInit(), 'excelColInit');
+safeInit(() => updateChmod(), 'updateChmod');
+safeInit(() => generateSlug(), 'generateSlug');
+safeInit(() => calcAcTonnage(), 'calcAcTonnage');
+safeInit(() => pianoInit(), 'pianoInit');
 
 // ============ Search & Theme ============
 function filterTools() {
