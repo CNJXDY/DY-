@@ -1,7 +1,17 @@
 {
-  "updated": "2026-10-24T00:11:52.154755",
-  "total": 60,
+  "updated": "2026-10-28T00:12:46.216543",
+  "total": 61,
   "articles": [
+    {
+      "title": "JSON格式化工具推荐：这5个在线工具让你效率翻倍",
+      "slug": "c2364fce",
+      "filename": "c2364fce.html",
+      "category": "工具教程",
+      "keywords": "json格式化,在线json,json校验",
+      "desc": "还在手动格式化JSON？本文整理了最好用的JSON在线格式化工具，免费、快速、安全，开发必备。",
+      "words": 485,
+      "date": "2026-10-28"
+    },
     {
       "title": "Windows和Mac系统自带功能大全：你可能不知道的隐藏技巧",
       "slug": "de6fc9c3",
