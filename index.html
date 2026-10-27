@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等199个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等204个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等199个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等204个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等199个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等204个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -583,6 +583,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#json-to-java" data-tool="json-to-java"><span class="icon">☕</span>JSON 转 Java 类</a></li>
     <li><a href="#cjk-spacing" data-tool="cjk-spacing"><span class="icon">⌨️</span>中英文自动空格</a></li>
     <li><a href="#cube-timer" data-tool="cube-timer"><span class="icon">🧊</span>魔方计时器</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#mojibake-fix" data-tool="mojibake-fix"><span class="icon">🔧</span>乱码修复</a></li>
+    <li><a href="#code-stats" data-tool="code-stats"><span class="icon">📊</span>代码行数统计</a></li>
+    <li><a href="#recipe-scaler" data-tool="recipe-scaler"><span class="icon">🍳</span>做饭份量换算</a></li>
+    <li><a href="#sit-reminder" data-tool="sit-reminder"><span class="icon">🧘</span>久坐提醒</a></li>
+    <li><a href="#space-shooter" data-tool="space-shooter"><span class="icon">🚀</span>太空射击</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -5532,6 +5538,131 @@ console.log('代码块');
     <div class="result-box" id="cube-list" style="max-height:160px;">暂无记录</div>
   </section>
 
+  <!-- 乱码修复 -->
+  <section class="tool-panel" id="panel-mojibake-fix">
+    <h2>🔧 乱码修复</h2>
+    <p class="desc">粘贴出现乱码的中文（如「ä½ å¥½」），自动尝试 UTF-8 / GBK / Big5 / Shift-JIS 等编码还原原文。全程本地处理，不上传内容。</p>
+    <div class="label">乱码文本</div>
+    <textarea id="moji-input" placeholder="粘贴乱码文本，例如：ä½ å¥½" oninput="fixMojibake()" style="min-height:120px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="fixMojibake()">✨ 一键修复</button>
+      <button class="btn btn-secondary" onclick="clearMojibake()">🗑️ 清空</button>
+      <button class="btn btn-secondary" onclick="copyText('moji-output')">📋 复制结果</button>
+    </div>
+    <div class="label">修复结果</div>
+    <div class="result-box" id="moji-output" style="max-height:180px;">--</div>
+    <div class="label">其他编码尝试</div>
+    <div class="result-box" id="moji-candidates" style="max-height:200px;">--</div>
+  </section>
+
+  <!-- 代码行数统计 -->
+  <section class="tool-panel" id="panel-code-stats">
+    <h2>📊 代码行数统计</h2>
+    <p class="desc">统计代码总行数、有效代码行、注释行、空行与字符数，支持多种注释语法，也可直接选择本地文件分析。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">语言（决定注释规则）</div>
+        <select id="cs-lang" onchange="calcCodeStats()">
+          <option value="js">JavaScript / C / Java / CSS</option>
+          <option value="py">Python / Shell / YAML</option>
+          <option value="sql">SQL</option>
+          <option value="html">HTML / XML</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">或选择本地文件</div>
+        <input type="file" id="cs-file" onchange="csLoadFile(event)" style="font-family:inherit;">
+      </div>
+    </div>
+    <textarea id="cs-input" placeholder="在此粘贴代码，或选择上方文件…" oninput="calcCodeStats()" style="min-height:150px;"></textarea>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="cs-total">0</div><div class="lbl">总行数</div></div>
+      <div class="stat-card"><div class="num" id="cs-code">0</div><div class="lbl">代码行</div></div>
+      <div class="stat-card"><div class="num" id="cs-comment">0</div><div class="lbl">注释行</div></div>
+      <div class="stat-card"><div class="num" id="cs-blank">0</div><div class="lbl">空行</div></div>
+      <div class="stat-card"><div class="num" id="cs-chars">0</div><div class="lbl">字符数</div></div>
+      <div class="stat-card"><div class="num" id="cs-avg">0</div><div class="lbl">平均行长</div></div>
+    </div>
+  </section>
+
+  <!-- 做饭份量换算 -->
+  <section class="tool-panel" id="panel-recipe-scaler">
+    <h2>🍳 做饭份量换算</h2>
+    <p class="desc">按人数自动换算食材用量：输入原配方份数与目标份数，所有数字（含 1/2 这类分数）等比缩放，做饭不再靠猜。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">原配方份数</div>
+        <input type="number" id="recipe-from" value="2" min="0.1" step="0.1" oninput="scaleRecipe()">
+      </div>
+      <div>
+        <div class="label">目标份数</div>
+        <input type="number" id="recipe-to" value="3" min="0.1" step="0.1" oninput="scaleRecipe()">
+      </div>
+    </div>
+    <div class="label">食材列表（每行一项，如：牛肉 500g）</div>
+    <textarea id="recipe-input" placeholder="牛肉 500g&#10;土豆 2个&#10;食用油 1.5勺&#10;盐 3克" oninput="scaleRecipe()" style="min-height:130px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="scaleRecipe()">⚖️ 换算</button>
+      <button class="btn btn-secondary" onclick="loadRecipeSample()">📋 填入示例</button>
+      <button class="btn btn-secondary" onclick="copyText('recipe-output')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="recipe-factor">1.0</div><div class="lbl">换算倍数</div></div>
+      <div class="stat-card"><div class="num" id="recipe-items">0</div><div class="lbl">食材项数</div></div>
+    </div>
+    <div class="result-box" id="recipe-output" style="max-height:280px;">--</div>
+  </section>
+
+  <!-- 久坐提醒 -->
+  <section class="tool-panel" id="panel-sit-reminder">
+    <h2>🧘 久坐提醒</h2>
+    <p class="desc">设定久坐与休息时长，到点自动响铃提醒起身活动，循环计时，帮助保护腰椎与颈椎。页面保持打开即可。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">久坐时长（分钟）</div>
+        <input type="number" id="sit-work" value="45" min="0.05" step="0.05" onchange="sitApplySettings()">
+      </div>
+      <div>
+        <div class="label">休息时长（分钟）</div>
+        <input type="number" id="sit-rest" value="5" min="0.05" step="0.05" onchange="sitApplySettings()">
+      </div>
+    </div>
+    <div class="result-box" id="sit-display" style="text-align:center;padding:22px;">
+      <div style="font-size:13px;color:var(--text-secondary);" id="sit-phase">准备开始</div>
+      <div style="font-size:48px;font-weight:700;font-family:'SF Mono','Consolas',monospace;margin:6px 0;" id="sit-time">45:00</div>
+      <div style="font-size:13px;color:var(--text-secondary);" id="sit-tip">点击开始，专注工作，到点提醒你休息</div>
+      <div style="width:100%;height:8px;background:var(--border);border-radius:4px;margin-top:14px;overflow:hidden;">
+        <div id="sit-bar" style="height:100%;width:100%;background:var(--accent);border-radius:4px;transition:width 0.3s;"></div>
+      </div>
+    </div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" id="sit-toggle" onclick="sitToggle()">▶️ 开始</button>
+      <button class="btn btn-secondary" onclick="sitReset()">↩️ 重置</button>
+      <button class="btn btn-secondary" onclick="sitTestSound()">🔔 试听提示音</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sit-done">0</div><div class="lbl">已完成轮次</div></div>
+      <div class="stat-card"><div class="num" id="sit-total">0</div><div class="lbl">累计专注（分钟）</div></div>
+    </div>
+  </section>
+
+  <!-- 太空射击 -->
+  <section class="tool-panel" id="panel-space-shooter">
+    <h2>🚀 太空射击</h2>
+    <p class="desc">方向键或 A / D 移动飞船，空格或点击画布发射子弹。击落敌机得分，被撞到损失生命，共 3 条命。</p>
+    <div class="stats" style="max-width:480px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="ss-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="ss-best">0</div><div class="lbl">最高分</div></div>
+      <div class="stat-card"><div class="num" id="ss-lives">3</div><div class="lbl">生命</div></div>
+    </div>
+    <canvas id="ss-canvas" width="480" height="400" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#050816;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="ss-btn" onclick="ssToggle()">▶ 开始游戏</button>
+      <button class="btn btn-secondary btn-sm" onclick="ssReset()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="ss-msg" style="text-align:center;">点击「开始游戏」，使用方向键移动，空格射击。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -5539,7 +5670,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 199个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 204个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -16001,6 +16132,583 @@ safeInit(() => setMedNow(), 'setMedNow');
 safeInit(() => initJsonToJava(), 'initJsonToJava');
 safeInit(() => applyCjkSpacing(), 'applyCjkSpacing');
 safeInit(() => cubeInit(), 'cubeInit');
+
+// ============ 乱码修复 ============
+const MOJI_CP1252 = {0x20AC:0x80,0x201A:0x82,0x0192:0x83,0x201E:0x84,0x2026:0x85,0x2020:0x86,0x2021:0x87,0x02C6:0x88,0x2030:0x89,0x0160:0x8A,0x2039:0x8B,0x0152:0x8C,0x017D:0x8E,0x2018:0x91,0x2019:0x92,0x201C:0x93,0x201D:0x94,0x2022:0x95,0x2013:0x96,0x2014:0x97,0x02DC:0x98,0x2122:0x99,0x0161:0x9A,0x203A:0x9B,0x0153:0x9C,0x017E:0x9E,0x0178:0x9F};
+function mojiToBytes(str) {
+  const bytes = [];
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    if (code <= 255) bytes.push(code);
+    else if (MOJI_CP1252[code] !== undefined) bytes.push(MOJI_CP1252[code]);
+    else return null;
+  }
+  return new Uint8Array(bytes);
+}
+function mojiCount(str) {
+  let cjk = 0, bad = 0;
+  for (const ch of str) {
+    const code = ch.codePointAt(0);
+    if (code >= 0x4E00 && code <= 0x9FFF) cjk++;
+    else if (ch === '\uFFFD') bad++;
+  }
+  return { cjk: cjk, bad: bad };
+}
+function mojiUtf8Strict(bytes, spaceToNbsp) {
+  let arr = bytes;
+  if (spaceToNbsp) {
+    arr = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) arr[i] = bytes[i] === 0x20 ? 0xA0 : bytes[i];
+  }
+  try {
+    const text = new TextDecoder('utf-8', { fatal: true }).decode(arr);
+    return text && /[\u4e00-\u9fff]/.test(text) ? text : null;
+  } catch (e) { return null; }
+}
+function fixMojibake() {
+  const src = document.getElementById('moji-input').value;
+  const out = document.getElementById('moji-output');
+  const cand = document.getElementById('moji-candidates');
+  if (!src.trim()) { out.textContent = '--'; cand.textContent = '--'; return; }
+  const bytes = mojiToBytes(src);
+  if (!bytes) {
+    out.textContent = '⚠️ 文本中含有无法按单字节还原的字符，可能不是典型的 UTF-8 乱码。';
+    cand.textContent = '建议确认原始文件的编码，或直接重新导出内容。';
+    return;
+  }
+  const results = [];
+  // 最常见场景：UTF-8 字节被当成 Latin-1 / CP1252 读取，优先严格解码
+  const strict = mojiUtf8Strict(bytes, false);
+  const spaced = strict ? null : mojiUtf8Strict(bytes, true);
+  if (strict) {
+    results.push({ enc: 'UTF-8', text: strict, score: 999, strict: true });
+  } else if (spaced) {
+    results.push({ enc: 'UTF-8（空格修正）', text: spaced, score: 998, strict: true });
+  }
+  ['utf-8', 'gbk', 'big5', 'shift_jis', 'windows-1252'].forEach(enc => {
+    try {
+      const text = new TextDecoder(enc, { fatal: false }).decode(bytes);
+      if (!text || text === src) return;
+      const stat = mojiCount(text);
+      results.push({ enc: enc.toUpperCase(), text: text, score: stat.cjk * 2 - stat.bad * 10 });
+    } catch (e) { /* 浏览器不支持该编码时跳过 */ }
+  });
+  results.sort((a, b) => b.score - a.score);
+  if (!results.length) { out.textContent = '没有找到可用的解码方式。'; return; }
+  const best = results[0];
+  if (best.score <= 0) {
+    out.textContent = '未能还原出明显的中文内容，原文可能已不可逆（例如「锟斤拷」）。';
+  } else {
+    out.textContent = best.text;
+  }
+  const seen = {};
+  cand.textContent = results.filter(r => {
+    const key = r.text;
+    if (seen[key]) return false;
+    seen[key] = true;
+    return true;
+  }).map((r, i) => {
+    const stat = mojiCount(r.text);
+    return (i === 0 ? '✅ 推荐 ' : '· ') + r.enc + '｜中文 ' + stat.cjk + ' 字｜异常字符 ' + stat.bad + '\n' + r.text.slice(0, 100);
+  }).join('\n\n');
+}
+function clearMojibake() {
+  document.getElementById('moji-input').value = '';
+  fixMojibake();
+}
+
+// ============ 代码行数统计 ============
+const CS_RULES = {
+  js: { line: ['//'], block: [['/*', '*/']] },
+  py: { line: ['#'], block: [['"""', '"""'], ["'''", "'''"]] },
+  sql: { line: ['--'], block: [['/*', '*/']] },
+  html: { line: [], block: [['<!--', '-->']] }
+};
+function calcCodeStats() {
+  const text = document.getElementById('cs-input').value;
+  const lang = document.getElementById('cs-lang').value;
+  const rule = CS_RULES[lang] || CS_RULES.js;
+  const lines = text ? text.split('\n') : [];
+  let code = 0, comment = 0, blank = 0, inBlock = false, blockEnd = '';
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if (!line) { blank++; return; }
+    if (inBlock) {
+      comment++;
+      if (line.indexOf(blockEnd) !== -1) inBlock = false;
+      return;
+    }
+    let isComment = false;
+    for (const pair of rule.block) {
+      if (line.indexOf(pair[0]) === 0) {
+        isComment = true;
+        if (line.slice(pair[0].length).indexOf(pair[1]) === -1) { inBlock = true; blockEnd = pair[1]; }
+        break;
+      }
+    }
+    if (!isComment) {
+      for (const prefix of rule.line) {
+        if (prefix && line.indexOf(prefix) === 0) { isComment = true; break; }
+      }
+    }
+    if (isComment) comment++; else code++;
+  });
+  const setNum = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+  setNum('cs-total', lines.length);
+  setNum('cs-code', code);
+  setNum('cs-comment', comment);
+  setNum('cs-blank', blank);
+  setNum('cs-chars', text.length);
+  const nonBlank = code + comment;
+  setNum('cs-avg', nonBlank ? Math.round(text.replace(/\s/g, '').length / nonBlank) : 0);
+}
+function csLoadFile(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.getElementById('cs-input').value = String(reader.result || '');
+    calcCodeStats();
+  };
+  reader.readAsText(file);
+}
+
+// ============ 做饭份量换算 ============
+function formatRecipeNum(n) {
+  if (!isFinite(n)) return '0';
+  return String(Math.round(n * 100) / 100);
+}
+function scaleRecipe() {
+  const from = parseFloat(document.getElementById('recipe-from').value);
+  const to = parseFloat(document.getElementById('recipe-to').value);
+  const out = document.getElementById('recipe-output');
+  const factorEl = document.getElementById('recipe-factor');
+  const itemsEl = document.getElementById('recipe-items');
+  if (!(from > 0) || !(to > 0)) {
+    factorEl.textContent = '--';
+    out.textContent = '请输入大于 0 的份数。';
+    return;
+  }
+  const factor = to / from;
+  factorEl.textContent = formatRecipeNum(factor);
+  const text = document.getElementById('recipe-input').value;
+  if (!text.trim()) { out.textContent = '--'; itemsEl.textContent = '0'; return; }
+  let count = 0;
+  const scaled = text.split('\n').map(line => {
+    if (!line.trim()) return line;
+    count++;
+    return line.replace(/(\d+\s*\/\s*\d+|\d+(?:\.\d+)?)/g, m => {
+      let value;
+      if (m.indexOf('/') !== -1) {
+        const parts = m.split('/');
+        value = parseFloat(parts[0]) / parseFloat(parts[1]);
+      } else {
+        value = parseFloat(m);
+      }
+      if (!isFinite(value)) return m;
+      return formatRecipeNum(value * factor);
+    });
+  });
+  itemsEl.textContent = String(count);
+  out.textContent = scaled.join('\n');
+}
+function loadRecipeSample() {
+  document.getElementById('recipe-input').value = '牛肉 500g\n土豆 2个\n胡萝卜 1/2根\n食用油 1.5勺\n盐 3克\n生抽 2勺';
+  document.getElementById('recipe-from').value = '2';
+  document.getElementById('recipe-to').value = '3';
+  scaleRecipe();
+}
+
+// ============ 久坐提醒 ============
+const SIT = { running: false, phase: 'work', remain: 45 * 60, total: 45 * 60, timer: null, done: 0, minutes: 0 };
+function sitReadInputs() {
+  const work = parseFloat(document.getElementById('sit-work').value);
+  const rest = parseFloat(document.getElementById('sit-rest').value);
+  return {
+    work: isFinite(work) && work > 0 ? work : 45,
+    rest: isFinite(rest) && rest > 0 ? rest : 5
+  };
+}
+function sitFmt(sec) {
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+}
+function sitRender() {
+  const isWork = SIT.phase === 'work';
+  const phaseEl = document.getElementById('sit-phase');
+  const timeEl = document.getElementById('sit-time');
+  const tipEl = document.getElementById('sit-tip');
+  const barEl = document.getElementById('sit-bar');
+  const paused = !SIT.running && SIT.remain > 0 && SIT.remain < SIT.total;
+  if (phaseEl) phaseEl.textContent = SIT.running ? (isWork ? '🪑 专注中' : '🚶 休息中') : (paused ? '⏸ 已暂停' : (isWork ? '准备开始' : '休息时间'));
+  if (timeEl) timeEl.textContent = sitFmt(SIT.remain);
+  if (tipEl) tipEl.textContent = isWork ? '到点后会响铃提醒你起身活动' : '起身走动、远眺、拉伸一下';
+  if (barEl) {
+    const pct = SIT.total > 0 ? Math.max(0, Math.min(100, (SIT.remain / SIT.total) * 100)) : 0;
+    barEl.style.width = pct + '%';
+    barEl.style.background = isWork ? 'var(--accent)' : '#22c55e';
+  }
+  const doneEl = document.getElementById('sit-done');
+  const totalEl = document.getElementById('sit-total');
+  if (doneEl) doneEl.textContent = SIT.done;
+  if (totalEl) totalEl.textContent = Math.round(SIT.minutes);
+}
+function sitBeep(times) {
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    const ctx = new Ctx();
+    const n = times || 2;
+    for (let i = 0; i < n; i++) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const t = ctx.currentTime + i * 0.5;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, t);
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.22, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.45);
+    }
+    setTimeout(() => { try { ctx.close(); } catch (e) {} }, n * 500 + 800);
+  } catch (e) {}
+}
+function sitTestSound() { sitBeep(1); }
+function sitApplySettings() {
+  if (SIT.running) return;
+  const cfg = sitReadInputs();
+  SIT.phase = 'work';
+  SIT.total = cfg.work * 60;
+  SIT.remain = SIT.total;
+  sitRender();
+}
+function sitTick() {
+  if (!SIT.running) return;
+  SIT.remain -= 1;
+  if (SIT.remain <= 0) {
+    const cfg = sitReadInputs();
+    if (SIT.phase === 'work') {
+      SIT.done++;
+      SIT.minutes += cfg.work;
+      SIT.phase = 'rest';
+      SIT.total = cfg.rest * 60;
+      SIT.remain = SIT.total;
+      sitBeep(2);
+    } else {
+      SIT.phase = 'work';
+      SIT.total = cfg.work * 60;
+      SIT.remain = SIT.total;
+      sitBeep(1);
+    }
+  }
+  sitRender();
+}
+function sitToggle() {
+  const btn = document.getElementById('sit-toggle');
+  if (SIT.running) {
+    SIT.running = false;
+    clearInterval(SIT.timer);
+    SIT.timer = null;
+    if (btn) btn.textContent = '▶️ 继续';
+    sitRender();
+    return;
+  }
+  if (SIT.remain <= 0) {
+    const cfg = sitReadInputs();
+    SIT.phase = 'work';
+    SIT.total = cfg.work * 60;
+    SIT.remain = SIT.total;
+  }
+  SIT.running = true;
+  SIT.timer = setInterval(sitTick, 1000);
+  if (btn) btn.textContent = '⏸ 暂停';
+  sitRender();
+}
+function sitReset() {
+  clearInterval(SIT.timer);
+  SIT.timer = null;
+  const cfg = sitReadInputs();
+  SIT.running = false;
+  SIT.phase = 'work';
+  SIT.done = 0;
+  SIT.minutes = 0;
+  SIT.total = cfg.work * 60;
+  SIT.remain = SIT.total;
+  const btn = document.getElementById('sit-toggle');
+  if (btn) btn.textContent = '▶️ 开始';
+  sitRender();
+}
+
+// ============ 太空射击 ============
+const SS = {
+  running: false, over: false, score: 0, lives: 3,
+  bullets: [], enemies: [], keys: {}, stars: [],
+  player: { x: 240, w: 34, h: 26 },
+  ctx: null, cvs: null, raf: 0, last: 0, spawn: 0, shootCd: 0, initialized: false
+};
+function ssReadBest() {
+  try { return parseInt(localStorage.getItem('ss-best') || '0', 10) || 0; } catch (e) { return 0; }
+}
+function ssWriteBest(v) {
+  try { localStorage.setItem('ss-best', String(v)); } catch (e) {}
+}
+function ssSetup() {
+  const cvs = document.getElementById('ss-canvas');
+  if (!cvs) return;
+  SS.cvs = cvs;
+  SS.ctx = cvs.getContext('2d');
+  SS.player.x = cvs.width / 2;
+  SS.stars = [];
+  for (let i = 0; i < 70; i++) {
+    SS.stars.push({ x: Math.random() * cvs.width, y: Math.random() * cvs.height, r: Math.random() * 1.4 + 0.3, v: 12 + Math.random() * 26 });
+  }
+  const bestEl = document.getElementById('ss-best');
+  if (bestEl) bestEl.textContent = ssReadBest();
+  if (!SS.initialized) {
+    SS.initialized = true;
+    ssBindControls();
+  }
+  ssDraw();
+}
+function ssBindControls() {
+  document.addEventListener('keydown', e => {
+    const panel = document.getElementById('panel-space-shooter');
+    if (!panel || !panel.classList.contains('active')) return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON') return;
+    const k = (e.key || '').toLowerCase();
+    if (k === 'arrowleft' || k === 'a') { SS.keys.left = true; e.preventDefault(); }
+    else if (k === 'arrowright' || k === 'd') { SS.keys.right = true; e.preventDefault(); }
+    else if (k === ' ' || e.code === 'Space') {
+      e.preventDefault();
+      if (!SS.running) { if (!SS.over) ssToggle(); }
+      else SS.keys.fire = true;
+    }
+  });
+  document.addEventListener('keyup', e => {
+    const k = (e.key || '').toLowerCase();
+    if (k === 'arrowleft' || k === 'a') SS.keys.left = false;
+    if (k === 'arrowright' || k === 'd') SS.keys.right = false;
+    if (k === ' ' || e.code === 'Space') SS.keys.fire = false;
+  });
+  const cvs = document.getElementById('ss-canvas');
+  if (cvs) {
+    cvs.addEventListener('pointerdown', () => {
+      if (!SS.running) { if (!SS.over) ssToggle(); return; }
+      SS.keys.fire = true;
+      setTimeout(() => { SS.keys.fire = false; }, 160);
+    });
+  }
+}
+function ssToggle() {
+  if (SS.over) ssReset();
+  if (SS.running) {
+    SS.running = false;
+    cancelAnimationFrame(SS.raf);
+    const btn = document.getElementById('ss-btn');
+    if (btn) btn.textContent = '▶ 继续';
+    return;
+  }
+  if (!SS.cvs) ssSetup();
+  SS.running = true;
+  SS.last = 0;
+  const btn = document.getElementById('ss-btn');
+  if (btn) btn.textContent = '⏸ 暂停';
+  const msg = document.getElementById('ss-msg');
+  if (msg) msg.textContent = '战斗中…';
+  SS.raf = requestAnimationFrame(ssLoop);
+}
+function ssReset() {
+  cancelAnimationFrame(SS.raf);
+  SS.running = false;
+  SS.over = false;
+  SS.score = 0;
+  SS.lives = 3;
+  SS.bullets = [];
+  SS.enemies = [];
+  SS.keys = {};
+  SS.spawn = 0;
+  SS.shootCd = 0;
+  SS.last = 0;
+  if (!SS.cvs) ssSetup();
+  SS.player.x = SS.cvs.width / 2;
+  const scoreEl = document.getElementById('ss-score');
+  const livesEl = document.getElementById('ss-lives');
+  const btn = document.getElementById('ss-btn');
+  const msg = document.getElementById('ss-msg');
+  if (scoreEl) scoreEl.textContent = '0';
+  if (livesEl) livesEl.textContent = '3';
+  if (btn) btn.textContent = '▶ 开始游戏';
+  if (msg) msg.textContent = '点击「开始游戏」，使用方向键移动，空格射击。';
+  ssDraw();
+}
+function ssLoop(ts) {
+  if (!SS.running) return;
+  const panel = document.getElementById('panel-space-shooter');
+  if (!panel || !panel.classList.contains('active')) {
+    SS.running = false;
+    const btn = document.getElementById('ss-btn');
+    if (btn) btn.textContent = '▶ 继续';
+    return;
+  }
+  if (!SS.last) SS.last = ts;
+  const dt = Math.min(0.05, (ts - SS.last) / 1000);
+  SS.last = ts;
+  ssUpdate(dt);
+  ssDraw();
+  if (SS.running) SS.raf = requestAnimationFrame(ssLoop);
+}
+function ssUpdate(dt) {
+  const W = SS.cvs.width, H = SS.cvs.height;
+  const p = SS.player;
+  const speed = 320;
+  if (SS.keys.left && !SS.keys.right) p.x -= speed * dt;
+  if (SS.keys.right && !SS.keys.left) p.x += speed * dt;
+  p.x = Math.max(p.w / 2, Math.min(W - p.w / 2, p.x));
+
+  SS.stars.forEach(s => {
+    s.y += s.v * dt;
+    if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
+  });
+
+  SS.shootCd -= dt;
+  if (SS.keys.fire && SS.shootCd <= 0) {
+    SS.bullets.push({ x: p.x, y: H - 44, vy: -430 });
+    SS.shootCd = 0.24;
+  }
+  SS.bullets.forEach(b => { b.y += b.vy * dt; });
+  SS.bullets = SS.bullets.filter(b => b.y > -12);
+
+  SS.spawn -= dt;
+  if (SS.spawn <= 0) {
+    SS.spawn = Math.max(0.38, 1.15 - SS.score * 0.008);
+    const size = 26;
+    SS.enemies.push({
+      x: size / 2 + 10 + Math.random() * (W - size - 20),
+      y: -30,
+      w: size,
+      h: size,
+      vy: 50 + Math.random() * 40 + Math.min(75, SS.score * 0.5),
+      dead: false
+    });
+  }
+  SS.enemies.forEach(e => { e.y += e.vy * dt; });
+
+  for (const b of SS.bullets) {
+    if (b.y < -10) continue;
+    for (const e of SS.enemies) {
+      if (e.dead) continue;
+      if (Math.abs(b.x - e.x) < e.w / 2 + 4 && Math.abs(b.y - e.y) < e.h / 2 + 7) {
+        e.dead = true;
+        b.y = -999;
+        SS.score += 10;
+        ssUpdateHud();
+        break;
+      }
+    }
+  }
+  SS.enemies = SS.enemies.filter(e => !e.dead && e.y < H + 40);
+
+  for (const e of SS.enemies) {
+    if (e.dead) continue;
+    if (Math.abs(e.x - p.x) < e.w / 2 + p.w / 2 - 8 && Math.abs(e.y - (H - 30)) < e.h / 2 + p.h / 2 - 6) {
+      e.dead = true;
+      SS.lives--;
+      ssUpdateHud();
+      if (SS.lives <= 0) { ssGameOver(); return; }
+    }
+  }
+  SS.enemies = SS.enemies.filter(e => !e.dead);
+}
+function ssUpdateHud() {
+  const scoreEl = document.getElementById('ss-score');
+  const livesEl = document.getElementById('ss-lives');
+  if (scoreEl) scoreEl.textContent = String(SS.score);
+  if (livesEl) livesEl.textContent = String(Math.max(0, SS.lives));
+}
+function ssGameOver() {
+  SS.running = false;
+  SS.over = true;
+  cancelAnimationFrame(SS.raf);
+  const best = Math.max(SS.score, ssReadBest());
+  ssWriteBest(best);
+  const bestEl = document.getElementById('ss-best');
+  if (bestEl) bestEl.textContent = String(best);
+  const btn = document.getElementById('ss-btn');
+  const msg = document.getElementById('ss-msg');
+  if (btn) btn.textContent = '▶ 再来一局';
+  if (msg) msg.textContent = '💥 飞船被击毁，本局得分 ' + SS.score + ' 分。点击「再来一局」继续挑战。';
+  ssDraw();
+}
+function ssDraw() {
+  const ctx = SS.ctx;
+  if (!ctx || !SS.cvs) return;
+  const W = SS.cvs.width, H = SS.cvs.height;
+  ctx.fillStyle = '#050816';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(148,163,184,0.75)';
+  SS.stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.fillStyle = '#facc15';
+  SS.bullets.forEach(b => ctx.fillRect(b.x - 2, b.y - 8, 4, 10));
+  SS.enemies.forEach(e => {
+    ctx.save();
+    ctx.translate(e.x, e.y);
+    ctx.fillStyle = '#f472b6';
+    ctx.beginPath();
+    ctx.moveTo(0, e.h / 2);
+    ctx.lineTo(e.w / 2, -e.h / 2);
+    ctx.lineTo(-e.w / 2, -e.h / 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.fillRect(-6, -5, 12, 4);
+    ctx.restore();
+  });
+  const p = SS.player;
+  ctx.save();
+  ctx.translate(p.x, H - 30);
+  ctx.fillStyle = '#38bdf8';
+  ctx.beginPath();
+  ctx.moveTo(0, -p.h / 2);
+  ctx.lineTo(p.w / 2, p.h / 2);
+  ctx.lineTo(0, p.h / 4);
+  ctx.lineTo(-p.w / 2, p.h / 2);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = '#fb923c';
+  ctx.beginPath();
+  ctx.moveTo(-5, p.h / 2);
+  ctx.lineTo(5, p.h / 2);
+  ctx.lineTo(0, p.h / 2 + 9);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('得分 ' + SS.score, 12, 22);
+  ctx.textAlign = 'right';
+  ctx.fillText('生命 ' + Math.max(0, SS.lives), W - 12, 22);
+  ctx.textAlign = 'left';
+}
+
+safeInit(() => fixMojibake(), 'fixMojibake');
+safeInit(() => calcCodeStats(), 'calcCodeStats');
+safeInit(() => scaleRecipe(), 'scaleRecipe');
+safeInit(() => sitApplySettings(), 'sitApplySettings');
+safeInit(() => ssSetup(), 'ssSetup');
 
 // ============ Search & Theme ============
 function filterTools() {
