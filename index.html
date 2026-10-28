@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等204个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等209个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等204个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等209个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等204个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等209个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -589,6 +589,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#recipe-scaler" data-tool="recipe-scaler"><span class="icon">🍳</span>做饭份量换算</a></li>
     <li><a href="#sit-reminder" data-tool="sit-reminder"><span class="icon">🧘</span>久坐提醒</a></li>
     <li><a href="#space-shooter" data-tool="space-shooter"><span class="icon">🚀</span>太空射击</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#text-similarity" data-tool="text-similarity"><span class="icon">🔬</span>文本相似度</a></li>
+    <li><a href="#water-cost" data-tool="water-cost"><span class="icon">🚰</span>水费计算器</a></li>
+    <li><a href="#json-path" data-tool="json-path"><span class="icon">🧭</span>JSON 路径提取</a></li>
+    <li><a href="#coin-catch" data-tool="coin-catch"><span class="icon">🪙</span>接金币</a></li>
+    <li><a href="#contact-lens" data-tool="contact-lens"><span class="icon">👓</span>隐形眼镜度数</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -5663,6 +5669,145 @@ console.log('代码块');
     <div class="result-box" id="ss-msg" style="text-align:center;">点击「开始游戏」，使用方向键移动，空格射击。</div>
   </section>
 
+  <!-- 文本相似度 -->
+  <section class="tool-panel" id="panel-text-similarity">
+    <h2>🔬 文本相似度计算</h2>
+    <p class="desc">比较两段文本的相似程度，支持中英文。基于编辑距离（Levenshtein）计算，适合查重、版本比对、文案改写评估。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">文本 A</div>
+        <textarea id="tsim-a" placeholder="粘贴第一段文本..." style="min-height:140px;"></textarea>
+      </div>
+      <div>
+        <div class="label">文本 B</div>
+        <textarea id="tsim-b" placeholder="粘贴第二段文本..." style="min-height:140px;"></textarea>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcTextSimilarity()">🔍 计算相似度</button>
+      <button class="btn btn-secondary" onclick="tsimSample()">📋 填入示例</button>
+      <button class="btn btn-secondary" onclick="tsimClear()">🧹 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="tsim-percent">--</div><div class="lbl">相似度</div></div>
+      <div class="stat-card"><div class="num" id="tsim-dist">--</div><div class="lbl">编辑距离</div></div>
+      <div class="stat-card"><div class="num" id="tsim-len">0 / 0</div><div class="lbl">字符数 A / B</div></div>
+    </div>
+    <div class="result-box" id="tsim-result">在两段文本中输入内容后点击「计算相似度」。</div>
+  </section>
+
+  <!-- 水费计算器 -->
+  <section class="tool-panel" id="panel-water-cost">
+    <h2>🚰 水费计算器</h2>
+    <p class="desc">根据用水量、自来水单价与污水处理费估算月度水费，并可按家庭人数计算人均支出。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">用水量（吨）</div>
+        <input type="number" id="wtr-usage" value="10" min="0" step="0.1" oninput="calcWaterCost()">
+      </div>
+      <div>
+        <div class="label">自来水单价（元/吨）</div>
+        <input type="number" id="wtr-price" value="3.5" min="0" step="0.1" oninput="calcWaterCost()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">污水处理费（元/吨）</div>
+        <input type="number" id="wtr-sewage" value="1.5" min="0" step="0.1" oninput="calcWaterCost()">
+      </div>
+      <div>
+        <div class="label">家庭人数</div>
+        <input type="number" id="wtr-people" value="3" min="1" step="1" oninput="calcWaterCost()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcWaterCost()">💧 计算水费</button>
+      <button class="btn btn-secondary" onclick="copyText('wtr-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="wtr-total">--</div><div class="lbl">月度总水费（元）</div></div>
+      <div class="stat-card"><div class="num" id="wtr-per">--</div><div class="lbl">人均水费（元）</div></div>
+      <div class="stat-card"><div class="num" id="wtr-unit">--</div><div class="lbl">综合单价（元/吨）</div></div>
+    </div>
+    <div class="result-box" id="wtr-result">--</div>
+  </section>
+
+  <!-- JSON 路径提取 -->
+  <section class="tool-panel" id="panel-json-path">
+    <h2>🧭 JSON 路径提取器</h2>
+    <p class="desc">粘贴 JSON，输入类似 data.list[0].name 的路径即可提取对应值，支持点号、数组下标和中括号键名，根节点用 $ 表示。</p>
+    <div class="label">JSON 数据</div>
+    <textarea id="jsp-input" placeholder='{"user":{"name":"张三","tags":["a","b"]}}' style="min-height:160px;"></textarea>
+    <div class="label" style="margin-top:12px;">路径表达式</div>
+    <input type="text" id="jsp-path" value="$.user.name" placeholder="例如：$.user.tags[0]">
+    <div class="btn-group">
+      <button class="btn" onclick="jsonPathExtract()">🔎 提取</button>
+      <button class="btn btn-secondary" onclick="jspSample()">📋 填入示例</button>
+      <button class="btn btn-secondary" onclick="copyText('jsp-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="jsp-type">--</div><div class="lbl">结果类型</div></div>
+      <div class="stat-card"><div class="num" id="jsp-depth">0</div><div class="lbl">路径层级</div></div>
+    </div>
+    <div class="result-box" id="jsp-result">输入 JSON 与路径后点击「提取」。</div>
+  </section>
+
+  <!-- 接金币 -->
+  <section class="tool-panel" id="panel-coin-catch">
+    <h2>🪙 接金币</h2>
+    <p class="desc">移动底部篮子接住落下的金币，漏接 3 枚即结束。支持鼠标、触摸和左右方向键，分数越高金币下落越快。</p>
+    <div class="stats" style="max-width:480px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="cc-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="cc-best">0</div><div class="lbl">最高分</div></div>
+      <div class="stat-card"><div class="num" id="cc-lives">3</div><div class="lbl">剩余机会</div></div>
+    </div>
+    <canvas id="cc-canvas" width="480" height="400" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#0b1220;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="cc-btn" onclick="ccToggle()">▶ 开始游戏</button>
+      <button class="btn btn-secondary btn-sm" onclick="ccReset()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="cc-msg" style="text-align:center;">点击「开始游戏」，移动篮子接住金币。</div>
+  </section>
+
+  <!-- 隐形眼镜度数换算 -->
+  <section class="tool-panel" id="panel-contact-lens">
+    <h2>👓 隐形眼镜度数换算</h2>
+    <p class="desc">按 12mm 顶点距离把框架眼镜度数换算为隐形眼镜度数，结果按 25 度一档取整，并给出散光配镜建议。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">屈光类型</div>
+        <select id="cl-type" onchange="calcContactLens()">
+          <option value="myopia">近视</option>
+          <option value="hyperopia">远视</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">框架眼镜度数（度）</div>
+        <input type="number" id="cl-power" value="500" min="0" step="25" oninput="calcContactLens()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">散光度数（度，无则填 0）</div>
+        <input type="number" id="cl-cyl" value="0" min="0" step="25" oninput="calcContactLens()">
+      </div>
+      <div>
+        <div class="label">散光轴位（0-180，无则填 0）</div>
+        <input type="number" id="cl-axis" value="0" min="0" max="180" step="1" oninput="calcContactLens()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcContactLens()">👁️ 换算</button>
+      <button class="btn btn-secondary" onclick="copyText('cl-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="cl-result-power">--</div><div class="lbl">建议隐形度数</div></div>
+      <div class="stat-card"><div class="num" id="cl-diff">--</div><div class="lbl">与框架差值</div></div>
+      <div class="stat-card"><div class="num" id="cl-frame">--</div><div class="lbl">框架球镜</div></div>
+    </div>
+    <div class="result-box" id="cl-result">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -5670,7 +5815,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 204个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 209个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -16709,6 +16854,373 @@ safeInit(() => calcCodeStats(), 'calcCodeStats');
 safeInit(() => scaleRecipe(), 'scaleRecipe');
 safeInit(() => sitApplySettings(), 'sitApplySettings');
 safeInit(() => ssSetup(), 'ssSetup');
+
+// ============ 文本相似度 ============
+function tsimLevenshtein(A, B) {
+  const m = A.length, n = B.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = new Uint32Array(n + 1);
+  let cur = new Uint32Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    cur[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const cost = A[i - 1] === B[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    const tmp = prev; prev = cur; cur = tmp;
+  }
+  return prev[n];
+}
+function calcTextSimilarity() {
+  const A = Array.from(document.getElementById('tsim-a').value);
+  const B = Array.from(document.getElementById('tsim-b').value);
+  document.getElementById('tsim-len').textContent = A.length + ' / ' + B.length;
+  if (!A.length && !B.length) {
+    document.getElementById('tsim-percent').textContent = '--';
+    document.getElementById('tsim-dist').textContent = '--';
+    showResult('tsim-result', '请先输入两段文本。');
+    return;
+  }
+  if (A.length > 1500 || B.length > 1500) {
+    document.getElementById('tsim-percent').textContent = '--';
+    document.getElementById('tsim-dist').textContent = '--';
+    showResult('tsim-result', '⚠️ 文本过长，请将每段控制在 1500 字以内后再计算。');
+    return;
+  }
+  const dist = tsimLevenshtein(A, B);
+  const maxLen = Math.max(A.length, B.length);
+  const sim = maxLen ? (1 - dist / maxLen) * 100 : 100;
+  let level = '完全不同';
+  if (sim >= 100) level = '完全一致';
+  else if (sim >= 90) level = '高度相似';
+  else if (sim >= 70) level = '较为相似';
+  else if (sim >= 40) level = '部分相似';
+  else if (sim > 0) level = '略有相似';
+  document.getElementById('tsim-percent').textContent = sim.toFixed(1) + '%';
+  document.getElementById('tsim-dist').textContent = String(dist);
+  showResult('tsim-result', '相似度：' + sim.toFixed(2) + '%（' + level + '）\n编辑距离：' + dist + '（把一个文本改成另一个所需的最少单字增删改次数）\n字符数：' + A.length + ' / ' + B.length);
+}
+function tsimSample() {
+  document.getElementById('tsim-a').value = '万能工具箱提供免费、无广告的在线工具，所有计算都在本地浏览器完成。';
+  document.getElementById('tsim-b').value = '万能工具箱提供免费的在线小工具，所有计算均在本地浏览器中完成。';
+  calcTextSimilarity();
+}
+function tsimClear() {
+  document.getElementById('tsim-a').value = '';
+  document.getElementById('tsim-b').value = '';
+  document.getElementById('tsim-percent').textContent = '--';
+  document.getElementById('tsim-dist').textContent = '--';
+  document.getElementById('tsim-len').textContent = '0 / 0';
+  showResult('tsim-result', '在两段文本中输入内容后点击「计算相似度」。');
+}
+
+// ============ 水费计算 ============
+function calcWaterCost() {
+  const usage = parseFloat(document.getElementById('wtr-usage').value);
+  const price = parseFloat(document.getElementById('wtr-price').value);
+  const sewage = parseFloat(document.getElementById('wtr-sewage').value);
+  const people = Math.max(1, parseInt(document.getElementById('wtr-people').value, 10) || 1);
+  if (!isFinite(usage) || !isFinite(price) || !isFinite(sewage) || usage < 0 || price < 0 || sewage < 0) {
+    document.getElementById('wtr-total').textContent = '--';
+    document.getElementById('wtr-per').textContent = '--';
+    document.getElementById('wtr-unit').textContent = '--';
+    showResult('wtr-result', '请输入有效的非负数值。');
+    return;
+  }
+  const unit = price + sewage;
+  const total = usage * unit;
+  const per = total / people;
+  document.getElementById('wtr-total').textContent = total.toFixed(2);
+  document.getElementById('wtr-per').textContent = per.toFixed(2);
+  document.getElementById('wtr-unit').textContent = unit.toFixed(2);
+  showResult('wtr-result', '用水量：' + usage + ' 吨\n自来水单价：' + price.toFixed(2) + ' 元/吨\n污水处理费：' + sewage.toFixed(2) + ' 元/吨\n综合单价：' + unit.toFixed(2) + ' 元/吨\n\n月度水费合计：¥' + total.toFixed(2) + '\n家庭人数：' + people + ' 人\n人均水费：¥' + per.toFixed(2) + ' / 月');
+}
+
+// ============ JSON 路径提取 ============
+function jspParsePath(path) {
+  let p = path.trim();
+  if (p.startsWith('$')) p = p.slice(1);
+  p = p.replace(/\[["']?([^"'\[\]]+)["']?\]/g, '.$1');
+  return p.split('.').filter(s => s !== '');
+}
+function jsonPathExtract() {
+  const raw = document.getElementById('jsp-input').value.trim();
+  const path = document.getElementById('jsp-path').value.trim();
+  const typeEl = document.getElementById('jsp-type');
+  const depthEl = document.getElementById('jsp-depth');
+  if (!raw) {
+    typeEl.textContent = '--'; depthEl.textContent = '0';
+    showResult('jsp-result', '请先粘贴 JSON 数据。');
+    return;
+  }
+  let data;
+  try { data = JSON.parse(raw); }
+  catch (e) {
+    typeEl.textContent = '--'; depthEl.textContent = '0';
+    showResult('jsp-result', '❌ JSON 解析失败：' + e.message);
+    return;
+  }
+  const parts = path && path !== '$' ? jspParsePath(path) : [];
+  let cur = data;
+  for (let i = 0; i < parts.length; i++) {
+    const key = parts[i];
+    if (cur === null || typeof cur !== 'object' || !(key in cur)) {
+      typeEl.textContent = '--';
+      depthEl.textContent = String(i);
+      showResult('jsp-result', '❌ 路径不存在：' + path + '\n在第 ' + (i + 1) + ' 层「' + key + '」处中断。');
+      return;
+    }
+    cur = cur[key];
+  }
+  const typeName = cur === null ? 'null' : Array.isArray(cur) ? 'array' : typeof cur;
+  const typeMap = { string: '字符串', number: '数字', boolean: '布尔', object: '对象', array: '数组', null: '空值' };
+  typeEl.textContent = typeMap[typeName] || typeName;
+  depthEl.textContent = String(parts.length);
+  const out = cur !== null && typeof cur === 'object' ? JSON.stringify(cur, null, 2) : String(cur);
+  showResult('jsp-result', (parts.length ? '路径：' + path + '\n类型：' + typeName + '\n\n' : '') + out);
+}
+function jspSample() {
+  document.getElementById('jsp-input').value = JSON.stringify({ user: { name: '张三', age: 28, tags: ['前端', '效率工具'] }, meta: { ok: true, count: 2 } }, null, 2);
+  document.getElementById('jsp-path').value = '$.user.tags[0]';
+  jsonPathExtract();
+}
+
+// ============ 接金币游戏 ============
+const CC = { cvs: null, ctx: null, raf: 0, running: false, score: 0, best: 0, lives: 3, basket: { x: 195, w: 90, h: 16 }, coins: [], spawnTimer: 0, lastTs: 0, keys: { left: false, right: false }, pointerX: null };
+function ccCanvasX(clientX) {
+  const rect = CC.cvs.getBoundingClientRect();
+  return (clientX - rect.left) * (CC.cvs.width / rect.width);
+}
+function ccSetup() {
+  const cvs = document.getElementById('cc-canvas');
+  if (!cvs) return;
+  CC.cvs = cvs;
+  CC.ctx = cvs.getContext('2d');
+  CC.best = parseInt(localStorage.getItem('ccBest') || '0', 10) || 0;
+  CC.basket.x = (cvs.width - CC.basket.w) / 2;
+  cvs.addEventListener('mousemove', e => {
+    if (!CC.running) return;
+    CC.pointerX = ccCanvasX(e.clientX);
+  });
+  cvs.addEventListener('touchstart', e => {
+    if (e.touches[0]) CC.pointerX = ccCanvasX(e.touches[0].clientX);
+  }, { passive: true });
+  cvs.addEventListener('touchmove', e => {
+    if (!CC.running) return;
+    if (e.touches[0]) { CC.pointerX = ccCanvasX(e.touches[0].clientX); e.preventDefault(); }
+  }, { passive: false });
+  document.addEventListener('keydown', e => {
+    if (!CC.running) return;
+    const k = e.key.toLowerCase();
+    if (e.key === 'ArrowLeft' || k === 'a') CC.keys.left = true;
+    if (e.key === 'ArrowRight' || k === 'd') CC.keys.right = true;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === ' ') e.preventDefault();
+  });
+  document.addEventListener('keyup', e => {
+    const k = e.key.toLowerCase();
+    if (e.key === 'ArrowLeft' || k === 'a') CC.keys.left = false;
+    if (e.key === 'ArrowRight' || k === 'd') CC.keys.right = false;
+  });
+  ccUpdateStats();
+  ccDraw();
+}
+function ccUpdateStats() {
+  const scoreEl = document.getElementById('cc-score');
+  const livesEl = document.getElementById('cc-lives');
+  if (scoreEl) scoreEl.textContent = String(CC.score);
+  if (livesEl) livesEl.textContent = String(Math.max(0, CC.lives));
+  if (CC.score > CC.best) {
+    CC.best = CC.score;
+    try { localStorage.setItem('ccBest', String(CC.best)); } catch (err) {}
+  }
+  const bestEl = document.getElementById('cc-best');
+  if (bestEl) bestEl.textContent = String(CC.best);
+}
+function ccRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function ccDraw() {
+  if (!CC.ctx || !CC.cvs) return;
+  const ctx = CC.ctx, W = CC.cvs.width, H = CC.cvs.height;
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#0b1220');
+  bg.addColorStop(1, '#141d33');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+  CC.coins.forEach(c => {
+    const grd = ctx.createRadialGradient(c.x - 3, c.y - 3, 1, c.x, c.y, c.r);
+    grd.addColorStop(0, '#fde68a');
+    grd.addColorStop(1, '#d97706');
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+    ctx.strokeStyle = '#b45309';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = '#7c2d12';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('¥', c.x, c.y + 4);
+  });
+  const b = CC.basket, bY = H - 28;
+  const basketGrd = ctx.createLinearGradient(0, bY, 0, bY + b.h);
+  basketGrd.addColorStop(0, '#818cf8');
+  basketGrd.addColorStop(1, '#4338ca');
+  ccRoundRect(ctx, b.x, bY, b.w, b.h, 8);
+  ctx.fillStyle = basketGrd;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  if (!CC.running && CC.score === 0) {
+    ctx.fillStyle = 'rgba(226,232,240,0.55)';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('接住落下的金币，漏接 3 枚结束', W / 2, H / 2 - 10);
+  }
+  ctx.textAlign = 'left';
+}
+function ccUpdateAndDraw() {
+  ccUpdateStats();
+  ccDraw();
+}
+function ccLoop(ts) {
+  if (!CC.running) return;
+  if (!CC.lastTs) CC.lastTs = ts;
+  let dt = (ts - CC.lastTs) / 1000;
+  CC.lastTs = ts;
+  if (dt > 0.05) dt = 0.05;
+  const b = CC.basket, W = CC.cvs.width, H = CC.cvs.height;
+  if (CC.keys.left) b.x -= 420 * dt;
+  if (CC.keys.right) b.x += 420 * dt;
+  if (CC.pointerX !== null) b.x = CC.pointerX - b.w / 2;
+  b.x = Math.max(0, Math.min(W - b.w, b.x));
+  CC.spawnTimer += dt * 1000;
+  const interval = Math.max(320, 750 - CC.score * 8);
+  if (CC.spawnTimer >= interval) {
+    CC.spawnTimer = 0;
+    CC.coins.push({ x: 20 + Math.random() * (W - 40), y: -14, r: 10, vy: Math.min(300, 100 + CC.score * 3) });
+  }
+  const bY = H - 28;
+  for (let i = CC.coins.length - 1; i >= 0; i--) {
+    const c = CC.coins[i];
+    c.y += c.vy * dt;
+    if (c.y + c.r >= bY && c.y - c.r <= bY + b.h + 14 && c.x >= b.x && c.x <= b.x + b.w) {
+      CC.coins.splice(i, 1);
+      CC.score += 10;
+      ccUpdateStats();
+      continue;
+    }
+    if (c.y - c.r > H) {
+      CC.coins.splice(i, 1);
+      CC.lives--;
+      ccUpdateStats();
+      if (CC.lives <= 0) { ccGameOver(); return; }
+    }
+  }
+  ccDraw();
+  CC.raf = requestAnimationFrame(ccLoop);
+}
+function ccToggle() {
+  if (!CC.cvs) return;
+  if (CC.running) { ccPause(); return; }
+  if (CC.lives <= 0) ccReset();
+  CC.running = true;
+  CC.lastTs = 0;
+  document.getElementById('cc-btn').textContent = '⏸ 暂停';
+  document.getElementById('cc-msg').textContent = '游戏中：移动鼠标/手指或按 ← → 接金币。';
+  CC.raf = requestAnimationFrame(ccLoop);
+}
+function ccPause() {
+  CC.running = false;
+  if (CC.raf) cancelAnimationFrame(CC.raf);
+  CC.raf = 0;
+  document.getElementById('cc-btn').textContent = '▶ 继续';
+  document.getElementById('cc-msg').textContent = '已暂停，点击「继续」接着玩。';
+}
+function ccReset() {
+  if (!CC.cvs) return;
+  if (CC.raf) cancelAnimationFrame(CC.raf);
+  CC.raf = 0;
+  CC.running = false;
+  CC.score = 0;
+  CC.lives = 3;
+  CC.coins = [];
+  CC.spawnTimer = 0;
+  CC.lastTs = 0;
+  CC.keys.left = false;
+  CC.keys.right = false;
+  CC.pointerX = null;
+  CC.basket.x = (CC.cvs.width - CC.basket.w) / 2;
+  document.getElementById('cc-btn').textContent = '▶ 开始游戏';
+  document.getElementById('cc-msg').textContent = '点击「开始游戏」，移动篮子接住金币。';
+  ccUpdateAndDraw();
+}
+function ccGameOver() {
+  CC.running = false;
+  if (CC.raf) cancelAnimationFrame(CC.raf);
+  CC.raf = 0;
+  document.getElementById('cc-btn').textContent = '▶ 再来一局';
+  document.getElementById('cc-msg').textContent = '💥 漏接 3 枚金币，本局得分 ' + CC.score + '。点击「再来一局」继续挑战。';
+  ccUpdateAndDraw();
+}
+
+// ============ 隐形眼镜度数换算 ============
+function clFormatDiopter(v) {
+  return (v > 0 ? '+' : '') + v.toFixed(2);
+}
+function calcContactLens() {
+  const type = document.getElementById('cl-type').value;
+  const deg = parseFloat(document.getElementById('cl-power').value);
+  const cyl = Math.max(0, parseFloat(document.getElementById('cl-cyl').value) || 0);
+  const axis = Math.max(0, Math.min(180, parseFloat(document.getElementById('cl-axis').value) || 0));
+  if (!isFinite(deg) || deg < 0) {
+    document.getElementById('cl-result-power').textContent = '--';
+    document.getElementById('cl-diff').textContent = '--';
+    document.getElementById('cl-frame').textContent = '--';
+    showResult('cl-result', '请输入有效的框架眼镜度数（非负数值）。');
+    return;
+  }
+  const sign = type === 'myopia' ? -1 : 1;
+  let contactDeg;
+  if (deg < 400) {
+    contactDeg = deg;
+  } else {
+    const s = sign * deg / 100;
+    const c = s / (1 - 0.012 * s);
+    contactDeg = Math.round(Math.abs(c) * 4) / 4 * 100;
+  }
+  const contactVal = sign * contactDeg / 100;
+  const frameVal = sign * deg / 100;
+  const diff = contactDeg - deg;
+  document.getElementById('cl-result-power').textContent = clFormatDiopter(contactVal);
+  document.getElementById('cl-diff').textContent = (diff > 0 ? '+' : '') + diff;
+  document.getElementById('cl-frame').textContent = clFormatDiopter(frameVal);
+  const typeName = type === 'myopia' ? '近视' : '远视';
+  let cylAdvice;
+  if (cyl <= 0) {
+    cylAdvice = '无散光，可直接按上方球镜度数选配。';
+  } else if (cyl >= 75) {
+    cylAdvice = '散光 ' + cyl + ' 度，轴位 ' + axis + '°：建议选择散光定制（Toric）隐形眼镜。';
+  } else {
+    cylAdvice = '散光 ' + cyl + ' 度，轴位 ' + axis + '°：度数较低，可尝试普通球面镜片，以实际佩戴舒适度为准。';
+  }
+  showResult('cl-result', '框架度数：' + typeName + ' ' + deg + ' 度（' + clFormatDiopter(frameVal) + ' D）\n建议隐形度数：' + clFormatDiopter(contactVal) + ' D（' + contactDeg + ' 度）\n换算差值：' + (diff > 0 ? '+' : '') + diff + ' 度\n\n' + cylAdvice + '\n\n⚠️ 本结果按 12mm 顶点距离换算，仅供参考；配镜请以专业验光师的处方为准。');
+}
+
+safeInit(() => tsimClear(), 'tsimClear');
+safeInit(() => calcWaterCost(), 'calcWaterCost');
+safeInit(() => ccSetup(), 'ccSetup');
+safeInit(() => calcContactLens(), 'calcContactLens');
 
 // ============ Search & Theme ============
 function filterTools() {
