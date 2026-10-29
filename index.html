@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等209个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等214个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等209个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等214个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等209个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等214个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -595,6 +595,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#json-path" data-tool="json-path"><span class="icon">🧭</span>JSON 路径提取</a></li>
     <li><a href="#coin-catch" data-tool="coin-catch"><span class="icon">🪙</span>接金币</a></li>
     <li><a href="#contact-lens" data-tool="contact-lens"><span class="icon">👓</span>隐形眼镜度数</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#takeout-calc" data-tool="takeout-calc"><span class="icon">🥡</span>外卖满减计算</a></li>
+    <li><a href="#prepay-calc" data-tool="prepay-calc"><span class="icon">🏦</span>房贷提前还款</a></li>
+    <li><a href="#ua-parser" data-tool="ua-parser"><span class="icon">🧭</span>User-Agent 解析</a></li>
+    <li><a href="#sokoban" data-tool="sokoban"><span class="icon">📦</span>推箱子</a></li>
+    <li><a href="#ascii-art" data-tool="ascii-art"><span class="icon">🔠</span>ASCII 艺术字</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -5808,6 +5814,172 @@ console.log('代码块');
     <div class="result-box" id="cl-result">--</div>
   </section>
 
+  <!-- 外卖满减计算 -->
+  <section class="tool-panel" id="panel-takeout-calc">
+    <h2>🥡 外卖满减计算器</h2>
+    <p class="desc">输入商品金额与店铺满减规则，实时算出实付金额、还差多少可凑单，以及凑单是否划算。配送费、打包费和红包均可计入。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">商品原价（元）</div>
+        <input type="number" id="tc-price" value="28" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+      <div>
+        <div class="label">满减门槛（元）</div>
+        <input type="number" id="tc-threshold" value="30" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+      <div>
+        <div class="label">满减金额（元）</div>
+        <input type="number" id="tc-discount" value="5" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">配送费（元）</div>
+        <input type="number" id="tc-delivery" value="3" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+      <div>
+        <div class="label">打包费（元）</div>
+        <input type="number" id="tc-packing" value="1" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+      <div>
+        <div class="label">红包/优惠券（元）</div>
+        <input type="number" id="tc-coupon" value="0" min="0" step="0.01" oninput="calcTakeout()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcTakeout()">🥡 计算实付</button>
+      <button class="btn btn-secondary" onclick="copyText('tc-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="tc-pay">--</div><div class="lbl">当前实付（元）</div></div>
+      <div class="stat-card"><div class="num" id="tc-gap">--</div><div class="lbl">距离门槛（元）</div></div>
+      <div class="stat-card"><div class="num" id="tc-after">--</div><div class="lbl">凑单后实付（元）</div></div>
+      <div class="stat-card"><div class="num" id="tc-rate">--</div><div class="lbl">优惠率</div></div>
+    </div>
+    <div class="result-box" id="tc-result">输入金额后自动计算。</div>
+  </section>
+
+  <!-- 房贷提前还款计算 -->
+  <section class="tool-panel" id="panel-prepay-calc">
+    <h2>🏦 房贷提前还款计算器</h2>
+    <p class="desc">按等额本息计算提前还款能省多少利息。可选「缩短期限（月供不变）」或「减少月供（期限不变）」，结果含新月供、剩余期数与节省利息。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">剩余本金（元）</div>
+        <input type="number" id="pc-principal" value="800000" min="0" step="1000" oninput="calcPrepay()">
+      </div>
+      <div>
+        <div class="label">年利率（%）</div>
+        <input type="number" id="pc-rate" value="4.2" min="0" max="24" step="0.01" oninput="calcPrepay()">
+      </div>
+      <div>
+        <div class="label">剩余期数（月）</div>
+        <input type="number" id="pc-months" value="240" min="1" max="600" step="1" oninput="calcPrepay()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">提前还款金额（元）</div>
+        <input type="number" id="pc-prepay" value="200000" min="0" step="1000" oninput="calcPrepay()">
+      </div>
+      <div>
+        <div class="label">还款方案</div>
+        <select id="pc-mode" onchange="calcPrepay()">
+          <option value="shorten">缩短期限（月供不变）</option>
+          <option value="reduce">减少月供（期限不变）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPrepay()">🏦 计算节省</button>
+      <button class="btn btn-secondary" onclick="copyText('pp-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pc-oldpay">--</div><div class="lbl">原月供（元）</div></div>
+      <div class="stat-card"><div class="num" id="pc-newpay">--</div><div class="lbl">新月供（元）</div></div>
+      <div class="stat-card"><div class="num" id="pc-save">--</div><div class="lbl">节省利息（元）</div></div>
+      <div class="stat-card"><div class="num" id="pc-newterm">--</div><div class="lbl">剩余期数</div></div>
+    </div>
+    <div class="result-box" id="pp-result">输入贷款信息后自动计算。</div>
+  </section>
+
+  <!-- User-Agent 解析 -->
+  <section class="tool-panel" id="panel-ua-parser">
+    <h2>🧭 User-Agent 解析器</h2>
+    <p class="desc">解析浏览器 User-Agent 字符串，识别浏览器、内核、操作系统与设备类型。默认填入当前浏览器 UA，也可粘贴任意 UA 进行分析。</p>
+    <textarea id="ua-input" placeholder="粘贴 User-Agent 字符串，例如：Mozilla/5.0 (Windows NT 10.0; Win64; x64) ..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="uaParse()">🧭 解析 UA</button>
+      <button class="btn btn-secondary" onclick="uaFillCurrent()">🖥️ 使用当前浏览器</button>
+      <button class="btn btn-secondary" onclick="copyText('ua-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ua-browser">--</div><div class="lbl">浏览器</div></div>
+      <div class="stat-card"><div class="num" id="ua-os">--</div><div class="lbl">操作系统</div></div>
+      <div class="stat-card"><div class="num" id="ua-device">--</div><div class="lbl">设备类型</div></div>
+    </div>
+    <div class="result-box" id="ua-result">点击「解析 UA」查看结果。</div>
+  </section>
+
+  <!-- 推箱子 -->
+  <section class="tool-panel" id="panel-sokoban">
+    <h2>📦 推箱子</h2>
+    <p class="desc">经典仓库番小游戏：把所有箱子推到目标点上即可过关。支持方向键、WASD 和屏幕方向按钮，可随时撤销或重玩。</p>
+    <div class="stats" style="max-width:520px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="sk-level">1</div><div class="lbl">关卡</div></div>
+      <div class="stat-card"><div class="num" id="sk-steps">0</div><div class="lbl">步数</div></div>
+      <div class="stat-card"><div class="num" id="sk-status">进行中</div><div class="lbl">状态</div></div>
+    </div>
+    <div id="sk-board" style="display:grid;gap:2px;justify-content:center;margin:12px auto;user-select:none;touch-action:none;"></div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn btn-secondary btn-sm" onclick="skMove('up')">↑</button>
+      <button class="btn btn-secondary btn-sm" onclick="skMove('left')">←</button>
+      <button class="btn btn-secondary btn-sm" onclick="skMove('down')">↓</button>
+      <button class="btn btn-secondary btn-sm" onclick="skMove('right')">→</button>
+    </div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" onclick="skReset()">🔄 重新开始</button>
+      <button class="btn btn-secondary" onclick="skPrev()">⏮ 上一关</button>
+      <button class="btn btn-secondary" onclick="skNext()">⏭ 下一关</button>
+      <button class="btn btn-secondary" onclick="skUndo()">↶ 撤销</button>
+    </div>
+    <div class="result-box" id="sk-msg" style="text-align:center;">用方向键或按钮移动小人，把 📦 推到目标点。</div>
+  </section>
+
+  <!-- ASCII 艺术字 -->
+  <section class="tool-panel" id="panel-ascii-art">
+    <h2>🔠 ASCII 艺术字生成</h2>
+    <p class="desc">把英文与数字转换成大号字符画，支持自定义填充符号，适合制作终端横幅、文件名装饰和趣味文本。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">输入文本（A-Z、0-9，最多 12 个字符）</div>
+        <input type="text" id="aa-input" value="TOOLBOX" maxlength="12" oninput="generateAscii()">
+      </div>
+      <div>
+        <div class="label">填充符号</div>
+        <select id="aa-fill" onchange="generateAscii()">
+          <option value="#">#</option>
+          <option value="█">█</option>
+          <option value="@">@</option>
+          <option value="*">*</option>
+          <option value="=">=</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="generateAscii()">🔠 生成</button>
+      <button class="btn btn-secondary" onclick="copyText('aa-output')">📋 复制</button>
+      <button class="btn btn-secondary" onclick="aaClear()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="aa-chars">0</div><div class="lbl">字符数</div></div>
+      <div class="stat-card"><div class="num" id="aa-width">0</div><div class="lbl">宽度</div></div>
+      <div class="stat-card"><div class="num" id="aa-height">7</div><div class="lbl">高度</div></div>
+    </div>
+    <pre id="aa-output" style="overflow:auto;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.15;color:var(--text);white-space:pre;margin-top:10px;"></pre>
+    <div class="result-box" id="aa-msg" style="display:none;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -5815,7 +5987,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 209个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 214个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -17221,6 +17393,455 @@ safeInit(() => tsimClear(), 'tsimClear');
 safeInit(() => calcWaterCost(), 'calcWaterCost');
 safeInit(() => ccSetup(), 'ccSetup');
 safeInit(() => calcContactLens(), 'calcContactLens');
+
+// ============ 外卖满减计算 ============
+function calcTakeout() {
+  const price = parseFloat(document.getElementById('tc-price').value);
+  const threshold = parseFloat(document.getElementById('tc-threshold').value);
+  const discount = parseFloat(document.getElementById('tc-discount').value);
+  const delivery = parseFloat(document.getElementById('tc-delivery').value);
+  const packing = parseFloat(document.getElementById('tc-packing').value);
+  const coupon = parseFloat(document.getElementById('tc-coupon').value);
+  const vals = [price, threshold, discount, delivery, packing, coupon];
+  if (vals.some(v => !isFinite(v) || v < 0)) {
+    ['tc-pay', 'tc-gap', 'tc-after', 'tc-rate'].forEach(id => document.getElementById(id).textContent = '--');
+    showResult('tc-result', '请输入有效的非负数值。');
+    return;
+  }
+  const applied = price >= threshold ? discount : 0;
+  const pay = Math.max(0, price - applied + delivery + packing - coupon);
+  const gap = Math.max(0, threshold - price);
+  const after = Math.max(0, threshold - discount + delivery + packing - coupon);
+  const base = price + delivery + packing;
+  const rate = base > 0 ? (1 - pay / base) * 100 : 0;
+  document.getElementById('tc-pay').textContent = pay.toFixed(2);
+  document.getElementById('tc-gap').textContent = gap.toFixed(2);
+  document.getElementById('tc-after').textContent = after.toFixed(2);
+  document.getElementById('tc-rate').textContent = Math.max(0, rate).toFixed(1) + '%';
+  let advice;
+  if (gap <= 0) {
+    advice = discount > 0 ? '✅ 已满足满减门槛，本单立减 ¥' + discount.toFixed(2) + '。' : '当前金额已满足门槛，但满减金额为 0。';
+  } else {
+    const net = discount - gap;
+    if (net > 0) {
+      advice = '💡 再加 ¥' + gap.toFixed(2) + ' 可享 ¥' + discount.toFixed(2) + ' 满减，净省约 ¥' + net.toFixed(2) + '，凑单划算。';
+    } else if (net === 0) {
+      advice = '💡 再加 ¥' + gap.toFixed(2) + ' 刚好享 ¥' + discount.toFixed(2) + ' 满减，不赚不亏，可按需凑单。';
+    } else {
+      advice = '💡 还差 ¥' + gap.toFixed(2) + ' 才满减，但只减 ¥' + discount.toFixed(2) + '，为凑单多花钱并不划算。';
+    }
+  }
+  showResult('tc-result',
+    '商品原价：¥' + price.toFixed(2) + '\n' +
+    '满减规则：满 ¥' + threshold.toFixed(2) + ' 减 ¥' + discount.toFixed(2) + '（本单' + (applied ? '已享受' : '未享受') + '）\n' +
+    '配送费：¥' + delivery.toFixed(2) + ' · 打包费：¥' + packing.toFixed(2) + ' · 红包：¥' + coupon.toFixed(2) + '\n' +
+    '————————————\n' +
+    '当前实付：¥' + pay.toFixed(2) + '\n' +
+    '距离门槛：还差 ¥' + gap.toFixed(2) + '\n' +
+    '凑单至门槛后实付：¥' + after.toFixed(2) + '\n' +
+    '优惠率：' + Math.max(0, rate).toFixed(1) + '%\n\n' + advice);
+}
+
+// ============ 房贷提前还款计算 ============
+function pcMonthlyPayment(P, r, n) {
+  if (n <= 0) return 0;
+  if (r === 0) return P / n;
+  const f = Math.pow(1 + r, n);
+  return P * r * f / (f - 1);
+}
+function pcSimulate(P, r, pay) {
+  let bal = P, paid = 0, months = 0;
+  while (bal > 0.01 && months < 1200) {
+    const interest = bal * r;
+    paid += pay;
+    bal = bal + interest - pay;
+    months++;
+    if (bal < 0) {
+      paid += bal;
+      bal = 0;
+    }
+  }
+  return { months: months, interest: Math.max(0, paid - P) };
+}
+function calcPrepay() {
+  const P = parseFloat(document.getElementById('pc-principal').value);
+  const rate = parseFloat(document.getElementById('pc-rate').value);
+  const n = parseInt(document.getElementById('pc-months').value, 10);
+  const prepayInput = parseFloat(document.getElementById('pc-prepay').value);
+  const mode = document.getElementById('pc-mode').value;
+  const ids = ['pc-oldpay', 'pc-newpay', 'pc-save', 'pc-newterm'];
+  if (!isFinite(P) || !isFinite(rate) || !isFinite(prepayInput) || P <= 0 || rate < 0 || rate > 24 || !isFinite(n) || n < 1 || n > 600 || prepayInput < 0) {
+    ids.forEach(id => document.getElementById(id).textContent = '--');
+    showResult('pp-result', '请输入有效参数：剩余本金 > 0，年利率 0-24%，剩余期数 1-600 月，提前还款金额 ≥ 0。');
+    return;
+  }
+  const r = rate / 100 / 12;
+  const oldPay = pcMonthlyPayment(P, r, n);
+  const oldInterest = oldPay * n - P;
+  const prepay = Math.min(prepayInput, P);
+  const newP = P - prepay;
+  let newPay, newTerm, newInterest, note = '';
+  if (prepayInput > P) note = '提前还款金额超过剩余本金，已按结清处理。\n';
+  if (newP <= 0.01) {
+    newPay = 0; newTerm = 0; newInterest = 0;
+    note += '该笔提前还款可直接结清贷款。\n';
+  } else if (mode === 'reduce') {
+    newPay = pcMonthlyPayment(newP, r, n);
+    newTerm = n;
+    newInterest = newPay * n - newP;
+  } else {
+    newPay = oldPay;
+    const sim = pcSimulate(newP, r, oldPay);
+    newTerm = sim.months;
+    newInterest = sim.interest;
+  }
+  const saved = Math.max(0, oldInterest - newInterest);
+  document.getElementById('pc-oldpay').textContent = oldPay.toFixed(2);
+  document.getElementById('pc-newpay').textContent = newPay.toFixed(2);
+  document.getElementById('pc-save').textContent = Math.round(saved).toLocaleString('zh-CN');
+  document.getElementById('pc-newterm').textContent = newTerm + ' 月';
+  const modeName = mode === 'shorten' ? '缩短期限（月供不变）' : '减少月供（期限不变）';
+  showResult('pp-result',
+    (note ? '⚠️ ' + note + '\n' : '') +
+    '剩余本金：¥' + P.toFixed(2) + '\n' +
+    '年利率：' + rate.toFixed(2) + '%（月利率 ' + (r * 100).toFixed(4) + '%）\n' +
+    '原剩余期数：' + n + ' 月 · 原月供：¥' + oldPay.toFixed(2) + '\n' +
+    '原剩余利息总额：¥' + oldInterest.toFixed(2) + '\n' +
+    '————————————\n' +
+    '提前还款：¥' + prepay.toFixed(2) + '\n' +
+    '方案：' + modeName + '\n' +
+    '新月供：¥' + newPay.toFixed(2) + ' · 新剩余期数：' + newTerm + ' 月\n' +
+    '新剩余利息总额：¥' + newInterest.toFixed(2) + '\n' +
+    '节省利息：¥' + saved.toFixed(2) + '\n\n' +
+    '⚠️ 按等额本息估算，未计入银行手续费、违约金及提前还款日差异，实际以银行还款计划为准。');
+}
+
+// ============ User-Agent 解析 ============
+function uaFillCurrent() {
+  document.getElementById('ua-input').value = navigator.userAgent || '';
+  uaParse();
+}
+function uaParse() {
+  const ua = document.getElementById('ua-input').value.trim();
+  if (!ua) {
+    ['ua-browser', 'ua-os', 'ua-device'].forEach(id => document.getElementById(id).textContent = '--');
+    showResult('ua-result', '请粘贴或输入 User-Agent 字符串。');
+    return;
+  }
+  let browser = '未知浏览器', engine = '未知', ver = '';
+  if (/MicroMessenger\/([\d.]+)/.test(ua)) {
+    browser = '微信内置浏览器'; ver = RegExp.$1; engine = 'Blink / WebKit';
+  } else if (/QQBrowser\/([\d.]+)/.test(ua)) {
+    browser = 'QQ 浏览器'; ver = RegExp.$1; engine = 'Blink';
+  } else if (/Edg(?:A|iOS)?\/([\d.]+)/.test(ua)) {
+    browser = 'Microsoft Edge'; ver = RegExp.$1; engine = 'Blink';
+  } else if (/OPR\/([\d.]+)/.test(ua)) {
+    browser = 'Opera'; ver = RegExp.$1; engine = 'Blink';
+  } else if (/Firefox\/([\d.]+)/.test(ua)) {
+    browser = 'Firefox'; ver = RegExp.$1; engine = 'Gecko';
+  } else if (/CriOS\/([\d.]+)/.test(ua)) {
+    browser = 'Chrome (iOS)'; ver = RegExp.$1; engine = 'WebKit';
+  } else if (/Chrome\/([\d.]+)/.test(ua)) {
+    browser = 'Chrome / Chromium'; ver = RegExp.$1; engine = 'Blink';
+  } else if (/Version\/([\d.]+).*Safari/.test(ua)) {
+    browser = 'Safari'; ver = RegExp.$1; engine = 'WebKit';
+  } else if (/MSIE ([\d.]+)|Trident\/.*rv:([\d.]+)/.test(ua)) {
+    browser = 'Internet Explorer'; ver = RegExp.$1 || RegExp.$2; engine = 'Trident';
+  }
+  let os = '未知系统';
+  if (/Windows NT 10\.0/.test(ua)) os = 'Windows 10 / 11';
+  else if (/Windows NT 6\.3/.test(ua)) os = 'Windows 8.1';
+  else if (/Windows NT 6\.2/.test(ua)) os = 'Windows 8';
+  else if (/Windows NT 6\.1/.test(ua)) os = 'Windows 7';
+  else if (/Windows NT 6\.0/.test(ua)) os = 'Windows Vista';
+  else if (/Windows NT 5\.1/.test(ua)) os = 'Windows XP';
+  else if (/Windows/.test(ua)) os = 'Windows';
+  else if (/Android[ \/]?([\d.]+)?/.test(ua)) os = 'Android' + (RegExp.$1 ? ' ' + RegExp.$1 : '');
+  else if (/(?:iPhone|iPad|iPod).*OS ([\d_]+)/.test(ua)) os = 'iOS ' + RegExp.$1.replace(/_/g, '.');
+  else if (/Mac OS X ([\d_.]+)/.test(ua)) os = 'macOS ' + RegExp.$1.replace(/_/g, '.');
+  else if (/HarmonyOS/.test(ua)) os = 'HarmonyOS';
+  else if (/CrOS/.test(ua)) os = 'ChromeOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+  let device = '电脑';
+  if (/iPad|Tablet/i.test(ua)) device = '平板';
+  else if (/iPhone|iPod|Mobile|Android.*Mobile|HarmonyOS.*Mobile/i.test(ua)) device = '手机';
+  else if (/SmartTV|Smart-TV|TV/.test(ua)) device = '智能电视';
+  let cpu = '';
+  if (/Win64|x64|x86_64|WOW64/.test(ua)) cpu = '64 位 x86';
+  else if (/arm64|aarch64/i.test(ua)) cpu = '64 位 ARM';
+  else if (/arm/i.test(ua)) cpu = 'ARM';
+  document.getElementById('ua-browser').textContent = ver ? ver.split('.')[0] : browser.split(' ')[0];
+  document.getElementById('ua-os').textContent = os;
+  document.getElementById('ua-device').textContent = device;
+  const nav = navigator;
+  showResult('ua-result',
+    '浏览器：' + browser + (ver ? ' ' + ver : '') + '\n' +
+    '渲染内核：' + engine + '\n' +
+    '操作系统：' + os + '\n' +
+    '设备类型：' + device + '\n' +
+    (cpu ? 'CPU 架构：' + cpu + '\n' : '') +
+    '————————————\n' +
+    'UA 长度：' + ua.length + ' 字符\n' +
+    '当前窗口：' + nav.language + ' · ' + nav.platform + ' · ' + nav.hardwareConcurrency + ' 核\n' +
+    '屏幕 / 视口：' + screen.width + '×' + screen.height + ' / ' + window.innerWidth + '×' + window.innerHeight + '\n\n' +
+    '原始 UA：\n' + ua);
+}
+function uaInit() {
+  uaFillCurrent();
+}
+
+// ============ 推箱子 ============
+const SK_LEVELS = [
+  [
+    '#######',
+    '#     #',
+    '# .$@ #',
+    '#     #',
+    '#######'
+  ],
+  [
+    '########',
+    '#  .   #',
+    '#  $   #',
+    '#  @   #',
+    '#   .  #',
+    '#   $  #',
+    '#      #',
+    '########'
+  ],
+  [
+    '########',
+    '#      #',
+    '#  $   #',
+    '#  .   #',
+    '#  @   #',
+    '#      #',
+    '########'
+  ]
+];
+const SKO = { level: 0, rows: 0, cols: 0, walls: [], goals: [], boxes: [], player: { x: 0, y: 0 }, steps: 0, done: false, history: [] };
+function skLoad(idx) {
+  const level = SK_LEVELS[idx];
+  SKO.level = idx;
+  SKO.rows = level.length;
+  SKO.cols = level[0].length;
+  SKO.walls = [];
+  SKO.goals = [];
+  SKO.boxes = [];
+  SKO.steps = 0;
+  SKO.done = false;
+  SKO.history = [];
+  for (let y = 0; y < SKO.rows; y++) {
+    SKO.walls.push([]);
+    SKO.goals.push([]);
+    for (let x = 0; x < SKO.cols; x++) {
+      const c = level[y][x] || ' ';
+      SKO.walls[y][x] = c === '#';
+      SKO.goals[y][x] = (c === '.' || c === '*' || c === '+');
+      if (c === '$' || c === '*') SKO.boxes.push({ x: x, y: y });
+      if (c === '@' || c === '+') SKO.player = { x: x, y: y };
+    }
+  }
+  skRender();
+}
+function skHasBox(x, y) {
+  return SKO.boxes.some(b => b.x === x && b.y === y);
+}
+function skRender() {
+  const board = document.getElementById('sk-board');
+  if (!board) return;
+  board.style.gridTemplateColumns = 'repeat(' + SKO.cols + ', 30px)';
+  let html = '';
+  for (let y = 0; y < SKO.rows; y++) {
+    for (let x = 0; x < SKO.cols; x++) {
+      const wall = SKO.walls[y][x];
+      const cellStyle = 'width:30px;height:30px;border-radius:5px;position:relative;box-sizing:border-box;' +
+        'background:' + (wall ? '#475569' : 'var(--card-bg)') + ';' +
+        'box-shadow:inset 0 0 0 1px ' + (wall ? '#64748b' : 'var(--border)') + ';';
+      let inner = '';
+      if (SKO.goals[y][x]) {
+        inner += '<div style="position:absolute;left:11px;top:11px;width:8px;height:8px;border-radius:50%;background:rgba(250,204,21,0.55);"></div>';
+      }
+      if (skHasBox(x, y)) {
+        const onGoal = SKO.goals[y][x];
+        inner += '<div style="position:absolute;left:4px;top:4px;right:4px;bottom:4px;border-radius:6px;background:' +
+          (onGoal ? '#22c55e' : '#f59e0b') + ';box-shadow:inset 0 0 0 2px rgba(0,0,0,0.25);"></div>';
+      }
+      if (SKO.player.x === x && SKO.player.y === y) {
+        inner += '<div style="position:absolute;left:4px;top:4px;width:22px;height:22px;border-radius:50%;background:#38bdf8;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.35);"></div>';
+      }
+      html += '<div style="' + cellStyle + '">' + inner + '</div>';
+    }
+  }
+  board.innerHTML = html;
+  skUpdateStats();
+}
+function skUpdateStats() {
+  document.getElementById('sk-level').textContent = (SKO.level + 1) + ' / ' + SK_LEVELS.length;
+  document.getElementById('sk-steps').textContent = SKO.steps;
+  document.getElementById('sk-status').textContent = SKO.done ? '已完成' : '进行中';
+}
+function skMove(dir) {
+  if (!SKO.walls.length || SKO.done) return;
+  const d = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] }[dir];
+  if (!d) return;
+  const nx = SKO.player.x + d[0], ny = SKO.player.y + d[1];
+  if (nx < 0 || ny < 0 || nx >= SKO.cols || ny >= SKO.rows) return;
+  if (SKO.walls[ny][nx]) return;
+  const box = SKO.boxes.find(b => b.x === nx && b.y === ny);
+  if (box) {
+    const bx = nx + d[0], by = ny + d[1];
+    if (bx < 0 || by < 0 || bx >= SKO.cols || by >= SKO.rows) return;
+    if (SKO.walls[by][bx] || skHasBox(bx, by)) return;
+    SKO.history.push({ boxes: SKO.boxes.map(b => ({ x: b.x, y: b.y })), player: { x: SKO.player.x, y: SKO.player.y }, steps: SKO.steps, done: SKO.done });
+    box.x = bx; box.y = by;
+  } else {
+    SKO.history.push({ boxes: SKO.boxes.map(b => ({ x: b.x, y: b.y })), player: { x: SKO.player.x, y: SKO.player.y }, steps: SKO.steps, done: SKO.done });
+  }
+  SKO.player = { x: nx, y: ny };
+  SKO.steps++;
+  if (SKO.history.length > 200) SKO.history.shift();
+  if (SKO.boxes.every(b => SKO.goals[b.y][b.x])) {
+    SKO.done = true;
+    showResult('sk-msg', '🎉 过关！共用 ' + SKO.steps + ' 步。点击「下一关」挑战，或「重新开始」再走一次。');
+  } else {
+    document.getElementById('sk-msg').textContent = '继续加油：把所有 📦 推到黄色目标点上。';
+  }
+  skRender();
+}
+function skUndo() {
+  const h = SKO.history.pop();
+  if (!h) return;
+  SKO.boxes = h.boxes;
+  SKO.player = h.player;
+  SKO.steps = h.steps;
+  SKO.done = h.done;
+  if (!SKO.done) document.getElementById('sk-msg').textContent = '已撤销一步。';
+  skRender();
+}
+function skReset() {
+  skLoad(SKO.level);
+  document.getElementById('sk-msg').textContent = '已重新开始第 ' + (SKO.level + 1) + ' 关。';
+}
+function skPrev() {
+  skLoad((SKO.level - 1 + SK_LEVELS.length) % SK_LEVELS.length);
+  document.getElementById('sk-msg').textContent = '第 ' + (SKO.level + 1) + ' 关，用方向键移动小人。';
+}
+function skNext() {
+  skLoad((SKO.level + 1) % SK_LEVELS.length);
+  document.getElementById('sk-msg').textContent = '第 ' + (SKO.level + 1) + ' 关，用方向键移动小人。';
+}
+function sokobanInit() {
+  skLoad(0);
+  document.addEventListener('keydown', function (e) {
+    const panel = document.getElementById('panel-sokoban');
+    if (!panel || !panel.classList.contains('active')) return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', s: 'down', a: 'left', d: 'right', W: 'up', S: 'down', A: 'left', D: 'right' };
+    if (map[e.key]) {
+      e.preventDefault();
+      skMove(map[e.key]);
+    } else if (e.key === 'z' || e.key === 'Z') {
+      skUndo();
+    } else if (e.key === 'r' || e.key === 'R') {
+      skReset();
+    }
+  });
+}
+
+// ============ ASCII 艺术字 ============
+const AA_FONT = {
+  A: '01110|10001|10001|11111|10001|10001|10001',
+  B: '11110|10001|10001|11110|10001|10001|11110',
+  C: '01110|10001|10000|10000|10000|10001|01110',
+  D: '11110|10001|10001|10001|10001|10001|11110',
+  E: '11111|10000|10000|11110|10000|10000|11111',
+  F: '11111|10000|10000|11110|10000|10000|10000',
+  G: '01110|10001|10000|10111|10001|10001|01111',
+  H: '10001|10001|10001|11111|10001|10001|10001',
+  I: '11111|00100|00100|00100|00100|00100|11111',
+  J: '00111|00010|00010|00010|00010|10010|01100',
+  K: '10001|10010|10100|11000|10100|10010|10001',
+  L: '10000|10000|10000|10000|10000|10000|11111',
+  M: '10001|11011|10101|10101|10001|10001|10001',
+  N: '10001|11001|10101|10011|10001|10001|10001',
+  O: '01110|10001|10001|10001|10001|10001|01110',
+  P: '11110|10001|10001|11110|10000|10000|10000',
+  Q: '01110|10001|10001|10001|10101|10010|01101',
+  R: '11110|10001|10001|11110|10100|10010|10001',
+  S: '01111|10000|10000|01110|00001|00001|11110',
+  T: '11111|00100|00100|00100|00100|00100|00100',
+  U: '10001|10001|10001|10001|10001|10001|01110',
+  V: '10001|10001|10001|10001|10001|01010|00100',
+  W: '10001|10001|10001|10101|10101|11011|10001',
+  X: '10001|10001|01010|00100|01010|10001|10001',
+  Y: '10001|10001|01010|00100|00100|00100|00100',
+  Z: '11111|00001|00010|00100|01000|10000|11111',
+  '0': '01110|10001|10011|10101|11001|10001|01110',
+  '1': '00100|01100|00100|00100|00100|00100|01110',
+  '2': '01110|10001|00001|00010|00100|01000|11111',
+  '3': '11110|00001|00001|01110|00001|00001|11110',
+  '4': '00010|00110|01010|10010|11111|00010|00010',
+  '5': '11111|10000|11110|00001|00001|10001|01110',
+  '6': '01110|10000|10000|11110|10001|10001|01110',
+  '7': '11111|00001|00010|00100|01000|01000|01000',
+  '8': '01110|10001|10001|01110|10001|10001|01110',
+  '9': '01110|10001|10001|01111|00001|00001|01110',
+  ' ': '00000|00000|00000|00000|00000|00000|00000',
+  '?': '01110|10001|00001|00010|00100|00000|00100',
+  '!': '00100|00100|00100|00100|00100|00000|00100',
+  '.': '00000|00000|00000|00000|00000|00000|00100',
+  '-': '00000|00000|00000|11111|00000|00000|00000',
+  ':': '00000|00100|00000|00000|00100|00000|00000',
+  '=': '00000|00000|11111|00000|11111|00000|00000'
+};
+function generateAscii() {
+  const raw = document.getElementById('aa-input').value.toUpperCase();
+  const fill = document.getElementById('aa-fill').value || '#';
+  const chars = Array.from(raw).slice(0, 12);
+  const unsupported = chars.filter(c => !AA_FONT[c]);
+  if (!chars.length) {
+    document.getElementById('aa-output').textContent = '';
+    document.getElementById('aa-chars').textContent = '0';
+    document.getElementById('aa-width').textContent = '0';
+    document.getElementById('aa-height').textContent = '7';
+    document.getElementById('aa-msg').style.display = 'none';
+    return;
+  }
+  const rows = 7;
+  const lines = [];
+  for (let r = 0; r < rows; r++) {
+    lines.push(chars.map(c => {
+      const pattern = (AA_FONT[c] || AA_FONT['?']).split('|')[r];
+      return pattern.replace(/1/g, fill).replace(/0/g, ' ');
+    }).join(' '));
+  }
+  document.getElementById('aa-output').textContent = lines.join('\n');
+  document.getElementById('aa-chars').textContent = chars.length;
+  document.getElementById('aa-width').textContent = chars.length * 5 + (chars.length - 1);
+  document.getElementById('aa-height').textContent = rows;
+  const msg = document.getElementById('aa-msg');
+  if (unsupported.length) {
+    showResult('aa-msg', '⚠️ 字符 ' + unsupported.map(c => '「' + c + '」').join(' ') + ' 不在字库中，已用 ? 代替。仅支持 A-Z、0-9 和常见标点。');
+  } else {
+    msg.style.display = 'none';
+  }
+}
+function aaClear() {
+  document.getElementById('aa-input').value = '';
+  document.getElementById('aa-output').textContent = '';
+  document.getElementById('aa-chars').textContent = '0';
+  document.getElementById('aa-width').textContent = '0';
+  document.getElementById('aa-height').textContent = '7';
+  document.getElementById('aa-msg').style.display = 'none';
+}
+
+safeInit(() => calcTakeout(), 'calcTakeout');
+safeInit(() => calcPrepay(), 'calcPrepay');
+safeInit(() => uaInit(), 'uaInit');
+safeInit(() => sokobanInit(), 'sokobanInit');
+safeInit(() => generateAscii(), 'generateAscii');
 
 // ============ Search & Theme ============
 function filterTools() {
