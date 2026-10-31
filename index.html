@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等219个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等224个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等219个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等224个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等219个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等224个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -607,6 +607,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#odd-one-out" data-tool="odd-one-out"><span class="icon">👀</span>数字找不同</a></li>
     <li><a href="#ideal-weight" data-tool="ideal-weight"><span class="icon">⚖️</span>标准体重计算器</a></li>
     <li><a href="#rail-fence" data-tool="rail-fence"><span class="icon">🔏</span>栅栏密码</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#parking-calc" data-tool="parking-calc"><span class="icon">🅿️</span>停车费计算器</a></li>
+    <li><a href="#dino-run" data-tool="dino-run"><span class="icon">🦖</span>像素跑酷</a></li>
+    <li><a href="#grid-gen" data-tool="grid-gen"><span class="icon">🔳</span>CSS Grid 生成器</a></li>
+    <li><a href="#sleep-debt" data-tool="sleep-debt"><span class="icon">🛌</span>睡眠债务计算器</a></li>
+    <li><a href="#text-wrap" data-tool="text-wrap"><span class="icon">🧵</span>文本自动换行</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6145,6 +6151,169 @@ console.log('代码块');
     <div class="result-box" id="rf-result">结果显示在这里。</div>
   </section>
 
+  <!-- 停车费计算器 -->
+  <section class="tool-panel" id="panel-parking-calc">
+    <h2>🅿️ 停车费计算器</h2>
+    <p class="desc">输入入场与出场时间，按首小时、后续每小时与24小时封顶规则估算停车费用，不足一个计费小时按一小时计。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">入场时间</div>
+        <input type="datetime-local" id="pkc-in" style="font-family:inherit;" onchange="calcParkingFee()">
+      </div>
+      <div>
+        <div class="label">出场时间</div>
+        <input type="datetime-local" id="pkc-out" style="font-family:inherit;" onchange="calcParkingFee()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">免费时长（分钟）</div>
+        <input type="number" id="pkc-free" value="15" min="0" max="120" step="1" oninput="calcParkingFee()">
+      </div>
+      <div>
+        <div class="label">首小时费用（元）</div>
+        <input type="number" id="pkc-first" value="10" min="0" step="0.5" oninput="calcParkingFee()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">后续每小时（元）</div>
+        <input type="number" id="pkc-rate" value="5" min="0" step="0.5" oninput="calcParkingFee()">
+      </div>
+      <div>
+        <div class="label">24小时封顶（元，0=不封顶）</div>
+        <input type="number" id="pkc-cap" value="60" min="0" step="1" oninput="calcParkingFee()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcParkingFee()">🅿️ 计算费用</button>
+      <button class="btn btn-secondary" onclick="pkcNow()">🕐 填入当前时间</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('pkc-result')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pkc-duration" style="font-size:20px;">--</div><div class="lbl">停车时长</div></div>
+      <div class="stat-card"><div class="num" id="pkc-billed" style="font-size:20px;">--</div><div class="lbl">计费时长</div></div>
+      <div class="stat-card"><div class="num" id="pkc-fee">--</div><div class="lbl">停车费用（元）</div></div>
+    </div>
+    <div class="result-box" id="pkc-result" style="display:none;"></div>
+  </section>
+
+  <!-- 像素跑酷 -->
+  <section class="tool-panel" id="panel-dino-run">
+    <h2>🦖 像素跑酷</h2>
+    <p class="desc">操控小恐龙跳跃躲避仙人掌，跑得越远得分越高、速度越快。支持空格键、点击或触摸跳跃。</p>
+    <div class="stats" style="max-width:480px;margin:0 auto 12px;">
+      <div class="stat-card"><div class="num" id="dn-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="dn-best">0</div><div class="lbl">最高分</div></div>
+      <div class="stat-card"><div class="num" id="dn-speed">1.0</div><div class="lbl">速度倍率</div></div>
+    </div>
+    <canvas id="dn-canvas" width="480" height="240" style="width:100%;max-width:480px;display:block;margin:0 auto;background:#0b1220;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="dn-btn" onclick="dnToggle()">▶ 开始游戏</button>
+      <button class="btn btn-secondary btn-sm" onclick="dnReset()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="dn-msg" style="text-align:center;">点击「开始游戏」或按空格键开始，跳过迎面而来的仙人掌。</div>
+  </section>
+
+  <!-- CSS Grid 生成器 -->
+  <section class="tool-panel" id="panel-grid-gen">
+    <h2>🔳 CSS Grid 生成器</h2>
+    <p class="desc">可视化调整列数、行数、间距与对齐方式，实时预览网格布局并生成可直接复制的 CSS 代码。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">列数</div>
+        <input type="range" id="gg-cols" min="1" max="6" value="3" oninput="gridUpdate()" style="width:100%;">
+      </div>
+      <div>
+        <div class="label">行数</div>
+        <input type="range" id="gg-rows" min="1" max="6" value="2" oninput="gridUpdate()" style="width:100%;">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">间距 Gap：<span id="gg-gap-val">12</span>px</div>
+        <input type="range" id="gg-gap" min="0" max="40" value="12" oninput="gridUpdate()" style="width:100%;">
+      </div>
+      <div>
+        <div class="label">项目对齐</div>
+        <select id="gg-align" onchange="gridUpdate()" style="font-family:inherit;">
+          <option value="stretch" selected>stretch</option>
+          <option value="start">start</option>
+          <option value="center">center</option>
+          <option value="end">end</option>
+        </select>
+      </div>
+    </div>
+    <div id="gg-preview" style="margin-top:16px;padding:12px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);min-height:180px;display:grid;"></div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('gg-code')">📋 复制 CSS</button>
+    </div>
+    <div class="result-box" id="gg-code">--</div>
+  </section>
+
+  <!-- 睡眠债务计算器 -->
+  <section class="tool-panel" id="panel-sleep-debt">
+    <h2>🛌 睡眠债务计算器</h2>
+    <p class="desc">对比目标睡眠时长与近期平均睡眠，估算累计睡眠债务并给出补觉建议。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">目标每晚睡眠（小时）</div>
+        <input type="number" id="sd-target" value="8" min="5" max="12" step="0.5" oninput="calcSleepDebt()">
+      </div>
+      <div>
+        <div class="label">近期平均睡眠（小时）</div>
+        <input type="number" id="sd-avg" value="6.5" min="2" max="12" step="0.1" oninput="calcSleepDebt()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">持续天数</div>
+        <input type="number" id="sd-days" value="7" min="1" max="60" step="1" oninput="calcSleepDebt()">
+      </div>
+      <div>
+        <div class="label">今晚可额外补觉（分钟）</div>
+        <input type="number" id="sd-extra" value="60" min="0" max="180" step="15" oninput="calcSleepDebt()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcSleepDebt()">🛌 计算债务</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('sd-result')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sd-debt" style="font-size:20px;">--</div><div class="lbl">累计睡眠债务</div></div>
+      <div class="stat-card"><div class="num" id="sd-nights" style="font-size:20px;">--</div><div class="lbl">约等于整夜睡眠</div></div>
+      <div class="stat-card"><div class="num" id="sd-status" style="font-size:20px;">--</div><div class="lbl">状态评估</div></div>
+    </div>
+    <div class="result-box" id="sd-result" style="display:none;"></div>
+  </section>
+
+  <!-- 文本自动换行 -->
+  <section class="tool-panel" id="panel-text-wrap">
+    <h2>🧵 文本自动换行</h2>
+    <p class="desc">按指定字符宽度自动插入换行，适合排版短信、公众号文案、代码注释等长文本。</p>
+    <textarea id="tw-input" placeholder="粘贴需要换行的文本..." style="min-height:140px;"></textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">每行字符数</div>
+        <input type="number" id="tw-width" value="40" min="5" max="200" step="1" oninput="doTextWrap()">
+      </div>
+      <div>
+        <div class="label">选项</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;padding-top:8px;">
+          <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;"><input type="checkbox" id="tw-keep" checked onchange="doTextWrap()"> 保留原有换行</label>
+          <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;"><input type="checkbox" id="tw-word" checked onchange="doTextWrap()"> 英文单词不拆</label>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="doTextWrap()">🧵 开始换行</button>
+      <button class="btn btn-secondary" onclick="copyText('tw-output')">📋 复制结果</button>
+      <button class="btn btn-secondary" onclick="clearTextWrap()">🗑️ 清空</button>
+    </div>
+    <div class="label" style="margin-top:16px;">结果 <span id="tw-count" style="color:var(--text-secondary);font-weight:400;"></span></div>
+    <div class="result-box" id="tw-output">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6152,7 +6321,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 219个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 224个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -18256,6 +18425,425 @@ safeInit(() => flxUpdate(), 'flxUpdate');
 safeInit(() => oddInit(), 'oddInit');
 safeInit(() => calcIdealWeight(), 'calcIdealWeight');
 safeInit(() => rfInit(), 'rfInit');
+
+// ============ 停车费计算器 ============
+function pkcPad(n) { return String(n).padStart(2, '0'); }
+function pkcFmtLocal(d) {
+  return d.getFullYear() + '-' + pkcPad(d.getMonth() + 1) + '-' + pkcPad(d.getDate()) + 'T' + pkcPad(d.getHours()) + ':' + pkcPad(d.getMinutes());
+}
+function pkcSetDefault() {
+  const now = new Date();
+  const out = new Date(now.getTime() + 2 * 3600 * 1000);
+  document.getElementById('pkc-in').value = pkcFmtLocal(now);
+  document.getElementById('pkc-out').value = pkcFmtLocal(out);
+}
+function pkcNow() { pkcSetDefault(); calcParkingFee(); }
+function pkcDurationText(mins) {
+  const h = Math.floor(mins / 60), m = mins % 60;
+  if (h <= 0) return m + ' 分钟';
+  return h + ' 小时' + (m > 0 ? ' ' + m + ' 分' : '');
+}
+function calcParkingFee() {
+  const inEl = document.getElementById('pkc-in');
+  const outEl = document.getElementById('pkc-out');
+  if (!inEl || !outEl) return;
+  const start = new Date(inEl.value);
+  const end = new Date(outEl.value);
+  const durationEl = document.getElementById('pkc-duration');
+  const billedEl = document.getElementById('pkc-billed');
+  const feeEl = document.getElementById('pkc-fee');
+  if (!inEl.value || !outEl.value || isNaN(start.getTime()) || isNaN(end.getTime())) {
+    durationEl.textContent = '--'; billedEl.textContent = '--'; feeEl.textContent = '--';
+    showResult('pkc-result', '请先选择入场和出场时间。');
+    return;
+  }
+  const mins = Math.floor((end.getTime() - start.getTime()) / 60000);
+  if (mins <= 0) {
+    durationEl.textContent = '--'; billedEl.textContent = '--'; feeEl.textContent = '--';
+    showResult('pkc-result', '出场时间需晚于入场时间，请检查输入。');
+    return;
+  }
+  const freeMin = Math.max(0, parseFloat(document.getElementById('pkc-free').value) || 0);
+  const first = Math.max(0, parseFloat(document.getElementById('pkc-first').value) || 0);
+  const rate = Math.max(0, parseFloat(document.getElementById('pkc-rate').value) || 0);
+  const cap = Math.max(0, parseFloat(document.getElementById('pkc-cap').value) || 0);
+  let fee = 0, billedHours = 0, capNote = '';
+  if (mins > freeMin) {
+    billedHours = Math.ceil(mins / 60);
+    fee = first + Math.max(0, billedHours - 1) * rate;
+    if (cap > 0) {
+      const days = Math.ceil(mins / 1440);
+      const capTotal = cap * days;
+      if (fee > capTotal) { fee = capTotal; capNote = '（已按 ' + (days > 1 ? days + ' 个' : '') + '24小时封顶 ' + cap.toFixed(2) + ' 元/天计）'; }
+    }
+  }
+  durationEl.textContent = pkcDurationText(mins);
+  billedEl.textContent = billedHours > 0 ? billedHours + ' 小时' : '免费';
+  feeEl.textContent = '¥' + fee.toFixed(2);
+  const lines = [
+    '入场时间：' + pkcFmtLocal(start).replace('T', ' '),
+    '出场时间：' + pkcFmtLocal(end).replace('T', ' '),
+    '停车时长：' + pkcDurationText(mins),
+    '免费时长：' + freeMin + ' 分钟',
+    '计费时长：' + (billedHours > 0 ? billedHours + ' 小时（不足1小时按1小时）' : '在免费时长内'),
+    '计费规则：首小时 ¥' + first.toFixed(2) + '，之后 ¥' + rate.toFixed(2) + '/小时',
+    '应付费用：¥' + fee.toFixed(2) + (cap > 0 ? '，24小时封顶 ¥' + cap.toFixed(2) : '，未设封顶') + capNote,
+  ];
+  showResult('pkc-result', lines.join('\n'));
+}
+function pkcInit() {
+  pkcSetDefault();
+  calcParkingFee();
+}
+
+// ============ 像素跑酷 ============
+const DN = { cvs: null, ctx: null, raf: 0, running: false, over: false, score: 0, best: 0, speed: 180, elapsed: 0, spawnTimer: 0, lastTs: 0, groundY: 0, obstacles: [], player: { x: 46, y: 0, vy: 0, w: 24, h: 34, onGround: true } };
+function dnSetup() {
+  const cvs = document.getElementById('dn-canvas');
+  if (!cvs) return;
+  DN.cvs = cvs;
+  DN.ctx = cvs.getContext('2d');
+  DN.groundY = cvs.height - 38;
+  DN.player.y = DN.groundY - DN.player.h;
+  try { DN.best = parseInt(localStorage.getItem('dnBest') || '0', 10) || 0; } catch (e) { DN.best = 0; }
+  cvs.addEventListener('pointerdown', e => { e.preventDefault(); dnAction(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== ' ' && e.key !== 'ArrowUp' && e.key !== 'w' && e.key !== 'W') return;
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    const panel = document.getElementById('panel-dino-run');
+    if (!panel || !panel.classList.contains('active')) return;
+    e.preventDefault();
+    dnAction();
+  });
+  dnSyncStats();
+  dnDraw();
+}
+function dnSyncStats() {
+  const s = document.getElementById('dn-score');
+  const b = document.getElementById('dn-best');
+  const sp = document.getElementById('dn-speed');
+  if (s) s.textContent = String(Math.floor(DN.score));
+  if (b) b.textContent = String(DN.best);
+  if (sp) sp.textContent = (DN.speed / 180).toFixed(1);
+}
+function dnResetState() {
+  DN.score = 0; DN.speed = 180; DN.elapsed = 0; DN.spawnTimer = 0; DN.lastTs = 0;
+  DN.obstacles = [];
+  DN.player.y = DN.groundY - DN.player.h;
+  DN.player.vy = 0;
+  DN.player.onGround = true;
+}
+function dnReset() {
+  if (!DN.ctx) dnSetup();
+  if (DN.raf) cancelAnimationFrame(DN.raf);
+  DN.raf = 0; DN.running = false; DN.over = false;
+  dnResetState();
+  const btn = document.getElementById('dn-btn');
+  if (btn) btn.textContent = '▶ 开始游戏';
+  const msg = document.getElementById('dn-msg');
+  if (msg) msg.textContent = '点击「开始游戏」或按空格键开始，跳过迎面而来的仙人掌。';
+  dnSyncStats();
+  dnDraw();
+}
+function dnToggle() {
+  if (!DN.ctx) dnSetup();
+  if (!DN.cvs) return;
+  if (DN.running) {
+    DN.running = false;
+    if (DN.raf) cancelAnimationFrame(DN.raf);
+    DN.raf = 0;
+    const btn = document.getElementById('dn-btn');
+    if (btn) btn.textContent = '▶ 继续游戏';
+    const msg = document.getElementById('dn-msg');
+    if (msg) msg.textContent = '已暂停，点击「继续游戏」或画布继续。';
+    return;
+  }
+  if (DN.over) { dnResetState(); DN.over = false; }
+  DN.running = true;
+  DN.lastTs = 0;
+  const btn = document.getElementById('dn-btn');
+  if (btn) btn.textContent = '⏸ 暂停';
+  const msg = document.getElementById('dn-msg');
+  if (msg) msg.textContent = '游戏进行中：按空格或点击画布跳跃。';
+  dnSyncStats();
+  DN.raf = requestAnimationFrame(dnLoop);
+}
+function dnAction() {
+  if (DN.running) dnJump();
+  else dnToggle();
+}
+function dnJump() {
+  const p = DN.player;
+  if (p.onGround) { p.vy = -330; p.onGround = false; }
+}
+function dnGameOver() {
+  DN.running = false; DN.over = true;
+  if (DN.raf) cancelAnimationFrame(DN.raf);
+  DN.raf = 0;
+  const sc = Math.floor(DN.score);
+  if (sc > DN.best) {
+    DN.best = sc;
+    try { localStorage.setItem('dnBest', String(DN.best)); } catch (e) {}
+  }
+  const btn = document.getElementById('dn-btn');
+  if (btn) btn.textContent = '▶ 开始游戏';
+  const msg = document.getElementById('dn-msg');
+  if (msg) msg.textContent = '游戏结束！本局得分 ' + sc + '，最高 ' + DN.best + '。点击「开始游戏」或画布再战。';
+  dnSyncStats();
+  dnDraw();
+}
+function dnRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function dnDraw() {
+  if (!DN.ctx || !DN.cvs) return;
+  const ctx = DN.ctx, W = DN.cvs.width, H = DN.cvs.height, g = DN.groundY;
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#0b1220');
+  bg.addColorStop(1, '#16223c');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(148,163,184,0.35)';
+  for (let i = 0; i < 28; i++) {
+    const sx = (i * 67 + (i * i) % W) % W;
+    const sy = (i * 23) % (g - 40);
+    ctx.fillRect(sx, sy, 2, 2);
+  }
+  ctx.beginPath();
+  ctx.arc(W - 52, 46, 18, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(226,232,240,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, g);
+  ctx.lineTo(W, g);
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(148,163,184,0.25)';
+  const offset = ((DN.elapsed * DN.speed) | 0) % 40;
+  for (let x = -offset; x < W; x += 40) ctx.fillRect(x, g + 6, 14, 2);
+  DN.obstacles.forEach(o => {
+    ctx.fillStyle = '#22c55e';
+    ctx.fillRect(o.x + o.w / 2 - 3, o.y, 6, o.h);
+    ctx.fillRect(o.x, o.y + o.h * 0.35, 3, o.h * 0.35);
+    ctx.fillRect(o.x + o.w - 3, o.y + o.h * 0.5, 3, o.h * 0.3);
+  });
+  const p = DN.player;
+  ctx.fillStyle = '#64748b';
+  ctx.fillRect(p.x - 7, p.y + p.h * 0.45, 9, 6);
+  ctx.fillStyle = '#818cf8';
+  dnRoundRect(ctx, p.x, p.y, p.w, p.h, 4);
+  ctx.fill();
+  ctx.fillStyle = '#4338ca';
+  ctx.fillRect(p.x + p.w - 6, p.y + 4, 8, 8);
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillRect(p.x + p.w - 13, p.y + 8, 5, 5);
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(p.x + p.w - 11, p.y + 9, 2, 2);
+  ctx.fillStyle = '#4338ca';
+  const legPhase = DN.running ? Math.sin(DN.elapsed * 18) : 0;
+  ctx.fillRect(p.x + 4, p.y + p.h - 7 + legPhase * 2, 6, 7);
+  ctx.fillRect(p.x + p.w - 11, p.y + p.h - 7 - legPhase * 2, 6, 7);
+  if (DN.over) {
+    ctx.fillStyle = 'rgba(15,23,42,0.72)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#e2e8f0';
+    ctx.font = 'bold 22px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('GAME OVER', W / 2, H / 2);
+    ctx.font = '14px sans-serif';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('得分 ' + Math.floor(DN.score) + ' · 点击重新开始', W / 2, H / 2 + 26);
+    ctx.textAlign = 'left';
+  }
+}
+function dnLoop(ts) {
+  if (!DN.running || !DN.ctx) return;
+  if (!DN.lastTs) DN.lastTs = ts;
+  let dt = (ts - DN.lastTs) / 1000;
+  DN.lastTs = ts;
+  if (dt > 0.05) dt = 0.05;
+  DN.elapsed += dt;
+  DN.speed = Math.min(430, 180 + DN.elapsed * 5);
+  DN.score += dt * DN.speed / 12;
+  const p = DN.player, W = DN.cvs.width;
+  p.vy += 700 * dt;
+  p.y += p.vy * dt;
+  const floor = DN.groundY - p.h;
+  if (p.y >= floor) { p.y = floor; p.vy = 0; p.onGround = true; }
+  if (p.y < 0) { p.y = 0; p.vy = 0; }
+  DN.spawnTimer += dt * 1000;
+  const interval = Math.max(620, 1500 - (DN.speed - 180) * 2.2);
+  if (DN.spawnTimer >= interval) {
+    DN.spawnTimer = 0;
+    const h = 22 + Math.floor(Math.random() * 20);
+    const w = 16 + Math.floor(Math.random() * 12);
+    DN.obstacles.push({ x: W + 10, y: DN.groundY - h, w: w, h: h });
+  }
+  for (let i = DN.obstacles.length - 1; i >= 0; i--) {
+    const o = DN.obstacles[i];
+    o.x -= DN.speed * dt;
+    if (o.x + o.w < -20) {
+      DN.obstacles.splice(i, 1);
+      continue;
+    }
+    if (o.x < p.x + p.w - 4 && o.x + o.w > p.x + 4 && p.y + p.h > o.y + 4) {
+      dnGameOver();
+      return;
+    }
+  }
+  dnSyncStats();
+  dnDraw();
+  DN.raf = requestAnimationFrame(dnLoop);
+}
+
+// ============ CSS Grid 生成器 ============
+function gridUpdate() {
+  const colsEl = document.getElementById('gg-cols');
+  const rowsEl = document.getElementById('gg-rows');
+  const gapEl = document.getElementById('gg-gap');
+  const alignEl = document.getElementById('gg-align');
+  const preview = document.getElementById('gg-preview');
+  const code = document.getElementById('gg-code');
+  if (!colsEl || !rowsEl || !gapEl || !alignEl || !preview || !code) return;
+  const cols = Math.max(1, parseInt(colsEl.value, 10) || 1);
+  const rows = Math.max(1, parseInt(rowsEl.value, 10) || 1);
+  const gap = Math.max(0, parseInt(gapEl.value, 10) || 0);
+  const align = alignEl.value;
+  preview.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+  preview.style.gridTemplateRows = 'repeat(' + rows + ', 1fr)';
+  preview.style.gap = gap + 'px';
+  preview.style.alignItems = align;
+  preview.style.justifyItems = align;
+  document.getElementById('gg-gap-val').textContent = String(gap);
+  preview.innerHTML = '';
+  const colors = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4'];
+  for (let i = 0; i < cols * rows; i++) {
+    const item = document.createElement('div');
+    item.textContent = String(i + 1);
+    item.style.cssText = 'min-height:44px;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;background:' + colors[i % colors.length] + ';';
+    preview.appendChild(item);
+  }
+  code.textContent =
+    '.grid-container {\n' +
+    '  display: grid;\n' +
+    '  grid-template-columns: repeat(' + cols + ', 1fr);\n' +
+    '  grid-template-rows: repeat(' + rows + ', 1fr);\n' +
+    '  gap: ' + gap + 'px;\n' +
+    '  align-items: ' + align + ';\n' +
+    '  justify-items: ' + align + ';\n' +
+    '}';
+}
+
+// ============ 睡眠债务计算器 ============
+function calcSleepDebt() {
+  const target = parseFloat(document.getElementById('sd-target').value);
+  const avg = parseFloat(document.getElementById('sd-avg').value);
+  const days = parseInt(document.getElementById('sd-days').value, 10);
+  const extra = parseFloat(document.getElementById('sd-extra').value);
+  if (!target || !avg || !days || target <= 0 || avg <= 0 || days <= 0) {
+    document.getElementById('sd-debt').textContent = '--';
+    document.getElementById('sd-nights').textContent = '--';
+    document.getElementById('sd-status').textContent = '--';
+    showResult('sd-result', '请输入有效的目标睡眠、平均睡眠与持续天数。');
+    return;
+  }
+  const diff = target - avg;
+  const debt = Math.max(0, diff * days);
+  const surplus = Math.max(0, -diff * days);
+  const nights = target > 0 ? debt / target : 0;
+  let status, level;
+  if (debt <= 0) { status = '睡眠充足'; level = '✅'; }
+  else if (debt < 3) { status = '轻度'; level = '🌤️'; }
+  else if (debt < 8) { status = '中度'; level = '⚠️'; }
+  else { status = '重度'; level = '🚨'; }
+  document.getElementById('sd-debt').textContent = debt.toFixed(1) + ' 小时';
+  document.getElementById('sd-nights').textContent = nights.toFixed(1) + ' 晚';
+  document.getElementById('sd-status').textContent = level + ' ' + status;
+  const lines = [
+    '目标睡眠：' + target.toFixed(1) + ' 小时/晚',
+    '近期平均：' + avg.toFixed(1) + ' 小时/晚',
+    '持续天数：' + days + ' 天',
+  ];
+  if (debt > 0) {
+    lines.push('每晚睡眠缺口：' + diff.toFixed(1) + ' 小时');
+    lines.push('累计睡眠债务：' + debt.toFixed(1) + ' 小时（约 ' + nights.toFixed(1) + ' 个整夜）');
+    if (extra > 0) {
+      const perNight = extra / 60;
+      const need = Math.ceil(debt / perNight);
+      lines.push('补觉建议：每晚多睡 ' + perNight.toFixed(1) + ' 小时，约 ' + need + ' 晚可补回债务。');
+    } else {
+      lines.push('补觉建议：今晚比平时提前入睡，并尽量保证 ' + target.toFixed(1) + ' 小时睡眠。');
+    }
+    if (debt >= 8) lines.push('提示：睡眠债务较高，建议连续规律补觉，避免长期熬夜。');
+    else lines.push('提示：优先通过提前入睡补觉，白天长时间午睡可能影响夜间睡眠。');
+  } else {
+    lines.push('睡眠状态：' + (surplus > 0 ? '无睡眠债务，近期还有 ' + surplus.toFixed(1) + ' 小时睡眠盈余。' : '正好达到目标睡眠时长。'));
+    lines.push('建议：保持规律作息，继续维持当前睡眠时长。');
+  }
+  showResult('sd-result', lines.join('\n'));
+}
+
+// ============ 文本自动换行 ============
+function twWrapLine(line, width, keepWord) {
+  const chars = Array.from(line);
+  if (!chars.length) return '';
+  let out = '', cur = '', count = 0;
+  for (let i = 0; i < chars.length; i++) {
+    cur += chars[i];
+    count++;
+    if (count >= width) {
+      if (keepWord && i + 1 < chars.length && /[A-Za-z0-9]/.test(chars[i]) && /[A-Za-z0-9]/.test(chars[i + 1])) continue;
+      out += cur + '\n';
+      cur = '';
+      count = 0;
+    }
+  }
+  if (cur) out += cur;
+  return out;
+}
+function doTextWrap() {
+  const input = document.getElementById('tw-input');
+  const widthEl = document.getElementById('tw-width');
+  const output = document.getElementById('tw-output');
+  const countEl = document.getElementById('tw-count');
+  if (!input || !widthEl || !output || !countEl) return;
+  const width = Math.max(5, parseInt(widthEl.value, 10) || 40);
+  const keep = document.getElementById('tw-keep').checked;
+  const keepWord = document.getElementById('tw-word').checked;
+  let text = input.value.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  if (!keep) text = text.replace(/\n+/g, ' ').trim();
+  const lines = text.split('\n');
+  const out = lines.map(l => twWrapLine(l, width, keepWord)).join('\n').replace(/\n{2,}/g, '\n');
+  output.textContent = out || '--';
+  const lineCount = out ? out.split('\n').length : 0;
+  const charCount = Array.from(out.replace(/\n/g, '')).length;
+  countEl.textContent = '（' + lineCount + ' 行，' + charCount + ' 字符）';
+}
+function clearTextWrap() {
+  document.getElementById('tw-input').value = '';
+  document.getElementById('tw-output').textContent = '--';
+  document.getElementById('tw-count').textContent = '';
+}
+function twInit() {
+  const input = document.getElementById('tw-input');
+  if (input && !input.value) {
+    input.value = '万能工具箱是一个免费、无广告、纯本地运行的在线工具集合。所有数据都在你的浏览器里处理，不会上传到服务器，可以放心处理隐私文本。这段文字用于演示按指定字符宽度自动换行的效果，你可以替换成自己的内容。';
+  }
+  doTextWrap();
+}
+
+safeInit(() => pkcInit(), 'pkcInit');
+safeInit(() => dnSetup(), 'dnSetup');
+safeInit(() => gridUpdate(), 'gridUpdate');
+safeInit(() => calcSleepDebt(), 'calcSleepDebt');
+safeInit(() => twInit(), 'twInit');
 
 // ============ Search & Theme ============
 function filterTools() {
