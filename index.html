@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等224个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等229个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等224个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等229个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等224个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等229个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -613,6 +613,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#grid-gen" data-tool="grid-gen"><span class="icon">🔳</span>CSS Grid 生成器</a></li>
     <li><a href="#sleep-debt" data-tool="sleep-debt"><span class="icon">🛌</span>睡眠债务计算器</a></li>
     <li><a href="#text-wrap" data-tool="text-wrap"><span class="icon">🧵</span>文本自动换行</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#bonus-tax" data-tool="bonus-tax"><span class="icon">🧾</span>年终奖个税计算器</a></li>
+    <li><a href="#steps-distance" data-tool="steps-distance"><span class="icon">👣</span>步数换算距离</a></li>
+    <li><a href="#html-to-md" data-tool="html-to-md"><span class="icon">📝</span>HTML 转 Markdown</a></li>
+    <li><a href="#express-parse" data-tool="express-parse"><span class="icon">📦</span>快递单号识别</a></li>
+    <li><a href="#basketball-shoot" data-tool="basketball-shoot"><span class="icon">🏀</span>投篮挑战</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6314,6 +6320,130 @@ console.log('代码块');
     <div class="result-box" id="tw-output">--</div>
   </section>
 
+  <!-- 年终奖个税计算器 -->
+  <section class="tool-panel" id="panel-bonus-tax">
+    <h2>🧾 年终奖个税计算器</h2>
+    <p class="desc">对比「全年一次性奖金单独计税」与「并入综合所得」两种方式的个税合计，帮你选择更省税的方案（政策执行至 2027 年底，结果仅供参考）。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">年终奖金额（元）</div>
+        <input type="number" id="bonus-amount" value="60000" min="0" step="1000" oninput="calcBonusTax()">
+      </div>
+      <div>
+        <div class="label">全年综合所得应纳税所得额（元）</div>
+        <input type="number" id="bonus-taxable" value="120000" min="0" step="1000" oninput="calcBonusTax()">
+      </div>
+    </div>
+    <p class="desc" style="margin-top:10px;font-size:12px;">综合所得应纳税所得额 = 全年工资等收入 - 6 万基本减除费用 - 专项扣除 - 专项附加扣除 - 其他扣除。</p>
+    <div class="btn-group">
+      <button class="btn" onclick="calcBonusTax()">🧮 计算个税</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('bonus-result')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bonus-separate" style="font-size:22px;">--</div><div class="lbl">单独计税合计</div></div>
+      <div class="stat-card"><div class="num" id="bonus-merged" style="font-size:22px;">--</div><div class="lbl">并入综合所得</div></div>
+      <div class="stat-card"><div class="num" id="bonus-best" style="font-size:20px;line-height:1.5;">--</div><div class="lbl">更省税方案</div></div>
+    </div>
+    <div class="result-box" id="bonus-result">--</div>
+  </section>
+
+  <!-- 步数换算距离 -->
+  <section class="tool-panel" id="panel-steps-distance">
+    <h2>👣 步数换算距离</h2>
+    <p class="desc">按身高和性别估算步幅，把微信步数换算成距离、消耗热量和步行时间。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">今日步数</div>
+        <input type="number" id="step-count" value="8000" min="0" step="100" oninput="calcStepsDistance()">
+      </div>
+      <div>
+        <div class="label">身高（cm）</div>
+        <input type="number" id="step-height" value="170" min="120" max="220" step="1" oninput="calcStepsDistance()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">性别</div>
+        <select id="step-gender" onchange="calcStepsDistance()">
+          <option value="male" selected>男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">体重（kg）</div>
+        <input type="number" id="step-weight" value="65" min="30" max="200" step="0.5" oninput="calcStepsDistance()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcStepsDistance()">🚶 换算</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('step-result')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="step-stride">--</div><div class="lbl">步幅（cm）</div></div>
+      <div class="stat-card"><div class="num" id="step-distance">--</div><div class="lbl">距离（km）</div></div>
+      <div class="stat-card"><div class="num" id="step-calorie">--</div><div class="lbl">消耗（kcal）</div></div>
+      <div class="stat-card"><div class="num" id="step-time">--</div><div class="lbl">约用时（分钟）</div></div>
+    </div>
+    <div class="result-box" id="step-result">--</div>
+  </section>
+
+  <!-- HTML 转 Markdown -->
+  <section class="tool-panel" id="panel-html-to-md">
+    <h2>📝 HTML 转 Markdown</h2>
+    <p class="desc">把网页 HTML 片段转换为 Markdown，支持标题、段落、列表、链接、图片、代码块、引用和表格，全部在本地转换。</p>
+    <textarea id="h2m-input" placeholder="粘贴 HTML 源码，例如：<h1>标题</h1><p>正文</p>" style="min-height:150px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="convertHtmlToMd()">🔄 转换</button>
+      <button class="btn btn-secondary" onclick="h2mLoadSample()">💡 示例</button>
+      <button class="btn btn-secondary" onclick="copyText('h2m-output')">📋 复制结果</button>
+      <button class="btn btn-secondary" onclick="h2mClear()">🗑️ 清空</button>
+    </div>
+    <div class="label" style="margin-top:16px;">Markdown 结果</div>
+    <div class="result-box" id="h2m-output">--</div>
+  </section>
+
+  <!-- 快递单号识别 -->
+  <section class="tool-panel" id="panel-express-parse">
+    <h2>📦 快递单号识别</h2>
+    <p class="desc">粘贴一个或多个快递单号（每行一个），根据单号规则粗略识别所属快递公司。识别结果仅供参考，请以快递官网查询为准。</p>
+    <textarea id="expr-input" placeholder="SF1234567890123&#10;YT1234567890123&#10;JD1234567890123" style="min-height:120px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="parseExpress()">📦 识别</button>
+      <button class="btn btn-secondary" onclick="exprLoadSample()">💡 示例</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('expr-output')">📋 复制</button>
+      <button class="btn btn-secondary" onclick="exprClear()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="expr-total">0</div><div class="lbl">单号数量</div></div>
+      <div class="stat-card"><div class="num" id="expr-ok">0</div><div class="lbl">已识别</div></div>
+      <div class="stat-card"><div class="num" id="expr-fail">0</div><div class="lbl">未识别</div></div>
+    </div>
+    <div class="result-box" id="expr-output">--</div>
+  </section>
+
+  <!-- 投篮挑战 -->
+  <section class="tool-panel" id="panel-basketball-shoot">
+    <h2>🏀 投篮挑战</h2>
+    <p class="desc">力度条会来回摆动，在绿色区域内点击「出手」投篮。越接近中心越准，空心入网得 3 分，共 10 次机会。</p>
+    <canvas id="bkt-canvas" width="600" height="280" style="width:100%;max-width:600px;display:block;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);"></canvas>
+    <div class="label" style="margin-top:16px;">投篮力度</div>
+    <div style="position:relative;height:24px;background:var(--input-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div id="bkt-power" style="position:absolute;top:0;bottom:0;left:0;width:0%;background:linear-gradient(90deg,#22c55e,#eab308,#ef4444);transition:width .06s linear;"></div>
+      <div style="position:absolute;left:40%;width:30%;top:0;bottom:0;background:rgba(34,197,94,0.22);border-left:1px dashed var(--success);border-right:1px dashed var(--success);pointer-events:none;"></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="bkt-btn" onclick="bktAction()">🏀 开始投篮</button>
+      <button class="btn btn-secondary" onclick="bktReset()">🔄 重新开始</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bkt-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="bkt-hits">0</div><div class="lbl">命中</div></div>
+      <div class="stat-card"><div class="num" id="bkt-shots">10</div><div class="lbl">剩余次数</div></div>
+      <div class="stat-card"><div class="num" id="bkt-status" style="font-size:16px;line-height:1.8;">点击开始</div><div class="lbl">状态</div></div>
+    </div>
+    <div class="result-box" id="bkt-result" style="display:none;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6321,7 +6451,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 224个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 229个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -18844,6 +18974,434 @@ safeInit(() => dnSetup(), 'dnSetup');
 safeInit(() => gridUpdate(), 'gridUpdate');
 safeInit(() => calcSleepDebt(), 'calcSleepDebt');
 safeInit(() => twInit(), 'twInit');
+
+// ============ 年终奖个税计算器 ============
+function bonusFmt(n) {
+  return n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function bonusAnnualTax(x) {
+  const brackets = [
+    [36000, 0.03, 0], [144000, 0.1, 2520], [300000, 0.2, 16920],
+    [420000, 0.25, 31920], [660000, 0.3, 52920], [960000, 0.35, 85920],
+    [Infinity, 0.45, 181920]
+  ];
+  if (x <= 0) return 0;
+  for (const [cap, rate, ded] of brackets) {
+    if (x <= cap) return Math.max(0, x * rate - ded);
+  }
+  return 0;
+}
+function bonusMonthlyRate(per) {
+  const brackets = [
+    [3000, 0.03, 0], [12000, 0.1, 210], [25000, 0.2, 1410],
+    [35000, 0.25, 2660], [55000, 0.3, 4410], [80000, 0.35, 7160],
+    [Infinity, 0.45, 15160]
+  ];
+  for (const [cap, rate, ded] of brackets) {
+    if (per <= cap) return { rate, ded };
+  }
+  return { rate: 0.45, ded: 15160 };
+}
+function calcBonusTax() {
+  const amountEl = document.getElementById('bonus-amount');
+  const taxableEl = document.getElementById('bonus-taxable');
+  if (!amountEl || !taxableEl) return;
+  const bonus = Math.max(0, parseFloat(amountEl.value) || 0);
+  const taxable = Math.max(0, parseFloat(taxableEl.value) || 0);
+  const monthly = bonusMonthlyRate(bonus / 12);
+  const bonusTax = Math.max(0, bonus * monthly.rate - monthly.ded);
+  const salaryTax = bonusAnnualTax(taxable);
+  const separateTotal = salaryTax + bonusTax;
+  const mergedTotal = bonusAnnualTax(taxable + bonus);
+  const diff = Math.abs(separateTotal - mergedTotal);
+  const better = mergedTotal <= separateTotal ? '并入综合所得' : '单独计税';
+
+  document.getElementById('bonus-separate').textContent = '¥' + bonusFmt(separateTotal);
+  document.getElementById('bonus-merged').textContent = '¥' + bonusFmt(mergedTotal);
+  document.getElementById('bonus-best').textContent = bonus > 0 && diff >= 0.01 ? better + '省¥' + bonusFmt(diff) : better;
+
+  const lines = [
+    '【单独计税】',
+    '工资等综合所得应纳税额：¥' + bonusFmt(salaryTax),
+    '年终奖应纳税额：¥' + bonusFmt(bonusTax) + '（奖金÷12 后适用 ' + (monthly.rate * 100) + '% 税率，速算扣除数 ¥' + bonusFmt(monthly.ded) + '）',
+    '合计：¥' + bonusFmt(separateTotal),
+    '',
+    '【并入综合所得】',
+    '合计：¥' + bonusFmt(mergedTotal),
+    '',
+    '建议：选择「' + better + '」，' + (diff >= 0.01 ? '预计少缴个税 ¥' + bonusFmt(diff) : '两种方式税额相同') + '。',
+    '说明：仅估算个税，不含社保、公积金等；政策与税率表如有调整，以税务机关口径为准。'
+  ];
+  document.getElementById('bonus-result').textContent = lines.join('\n');
+}
+
+// ============ 步数换算距离 ============
+function calcStepsDistance() {
+  const stepsEl = document.getElementById('step-count');
+  const heightEl = document.getElementById('step-height');
+  const genderEl = document.getElementById('step-gender');
+  const weightEl = document.getElementById('step-weight');
+  if (!stepsEl || !heightEl || !genderEl || !weightEl) return;
+  const steps = Math.max(0, parseFloat(stepsEl.value) || 0);
+  const height = Math.max(80, parseFloat(heightEl.value) || 170);
+  const weight = Math.max(0, parseFloat(weightEl.value) || 65);
+  const factor = genderEl.value === 'female' ? 0.413 : 0.415;
+  const strideCm = height * factor;
+  const distanceKm = steps * (strideCm / 100) / 1000;
+  const hours = distanceKm / 5;
+  const kcal = 3.5 * weight * hours;
+  const minutes = Math.round(hours * 60);
+  const laps = distanceKm / 0.4;
+
+  document.getElementById('step-stride').textContent = strideCm.toFixed(1);
+  document.getElementById('step-distance').textContent = distanceKm.toFixed(2);
+  document.getElementById('step-calorie').textContent = Math.round(kcal);
+  document.getElementById('step-time').textContent = minutes;
+
+  document.getElementById('step-result').textContent = [
+    '步数：' + Math.round(steps) + ' 步',
+    '估算步幅：' + strideCm.toFixed(1) + ' cm（按身高 ' + height + ' cm、' + (genderEl.value === 'female' ? '女' : '男') + '估算）',
+    '步行距离：' + distanceKm.toFixed(2) + ' km（约 ' + Math.round(distanceKm * 1000) + ' 米）',
+    '消耗热量：约 ' + Math.round(kcal) + ' kcal（按 3.5 MET 估算）',
+    '步行时间：约 ' + minutes + ' 分钟（按 5 km/h 估算）',
+    '相当于 400 米操场 ' + (laps >= 0.1 ? laps.toFixed(1) : laps.toFixed(2)) + ' 圈',
+    '提示：手机手环计步存在误差，步幅也会随速度变化，结果仅供参考。'
+  ].join('\n');
+}
+
+// ============ HTML 转 Markdown ============
+function h2mConvertNode(node) {
+  if (node.nodeType === 3) return node.textContent.replace(/\s+/g, ' ');
+  if (node.nodeType !== 1) return '';
+  const tag = node.tagName.toLowerCase();
+  if (['script', 'style', 'head', 'title', 'noscript', 'meta', 'link'].includes(tag)) return '';
+  const inner = () => Array.from(node.childNodes).map(h2mConvertNode).join('');
+  switch (tag) {
+    case 'h1': return '\n\n# ' + inner().trim() + '\n\n';
+    case 'h2': return '\n\n## ' + inner().trim() + '\n\n';
+    case 'h3': return '\n\n### ' + inner().trim() + '\n\n';
+    case 'h4': return '\n\n#### ' + inner().trim() + '\n\n';
+    case 'h5': return '\n\n##### ' + inner().trim() + '\n\n';
+    case 'h6': return '\n\n###### ' + inner().trim() + '\n\n';
+    case 'strong': case 'b': return '**' + inner().trim() + '**';
+    case 'em': case 'i': return '*' + inner().trim() + '*';
+    case 'del': case 's': return '~~' + inner().trim() + '~~';
+    case 'code': return '`' + node.textContent.replace(/`/g, '\\`') + '`';
+    case 'pre': {
+      const code = node.textContent.replace(/^\n+|\n+$/g, '');
+      return '\n\n```\n' + code + '\n```\n\n';
+    }
+    case 'a': {
+      const href = node.getAttribute('href') || '';
+      const text = inner().trim() || href;
+      return '[' + text + '](' + href + ')';
+    }
+    case 'img': {
+      const src = node.getAttribute('src') || '';
+      const alt = node.getAttribute('alt') || '';
+      return '![' + alt + '](' + src + ')';
+    }
+    case 'br': return '\n';
+    case 'hr': return '\n\n---\n\n';
+    case 'blockquote': {
+      const body = inner().trim();
+      return '\n\n' + body.split('\n').map(l => '> ' + l.trim()).join('\n') + '\n\n';
+    }
+    case 'ul': case 'ol': {
+      const ordered = tag === 'ol';
+      const items = Array.from(node.children).filter(c => c.tagName && c.tagName.toLowerCase() === 'li');
+      return '\n' + items.map((li, i) => h2mListItem(li, ordered ? i + 1 : 0)).join('') + '\n';
+    }
+    case 'li': return h2mListItem(node, 0);
+    case 'table': return h2mTable(node);
+    case 'p': return '\n\n' + inner().trim() + '\n\n';
+    case 'td': case 'th': case 'tr': case 'tbody': case 'thead': return inner();
+    default: return inner();
+  }
+}
+function h2mListItem(li, num) {
+  const marker = num ? num + '. ' : '- ';
+  const content = Array.from(li.childNodes).map(h2mConvertNode).join('').trim();
+  const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
+  if (!lines.length) return marker.trimEnd() + '\n';
+  return marker + lines[0] + '\n' + lines.slice(1).map(l => '  ' + l).join('\n') + '\n';
+}
+function h2mTable(table) {
+  const rows = Array.from(table.querySelectorAll('tr'));
+  if (!rows.length) return '';
+  const cells = rows.map(row => Array.from(row.children)
+    .filter(c => ['td', 'th'].includes(c.tagName.toLowerCase()))
+    .map(c => h2mConvertNode(c).trim().replace(/\|/g, '\\|').replace(/\n+/g, ' ')));
+  const cols = Math.max(...cells.map(r => r.length));
+  if (cols <= 0) return '';
+  const lines = [];
+  cells.forEach((row, idx) => {
+    const padded = row.concat(Array(Math.max(0, cols - row.length)).fill(''));
+    lines.push('| ' + padded.join(' | ') + ' |');
+    if (idx === 0) lines.push('| ' + Array(cols).fill('---').join(' | ') + ' |');
+  });
+  return '\n\n' + lines.join('\n') + '\n\n';
+}
+function convertHtmlToMd() {
+  const input = document.getElementById('h2m-input');
+  const output = document.getElementById('h2m-output');
+  if (!input || !output) return;
+  const html = input.value.trim();
+  if (!html) { output.textContent = '--'; return; }
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    let md = Array.from(doc.body.childNodes).map(h2mConvertNode).join('');
+    md = md.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+    output.textContent = md || '（未提取到可转换的内容）';
+  } catch (e) {
+    output.textContent = '❌ 转换失败：' + e.message;
+  }
+}
+function h2mLoadSample() {
+  const input = document.getElementById('h2m-input');
+  if (!input) return;
+  input.value = '<h1>万能工具箱</h1><p>这是一个 <strong>免费</strong> 的在线工具集合，支持 <a href="https://example.com">链接</a> 和图片。</p><ul><li>本地运行</li><li>无需安装</li></ul><ol><li>粘贴 HTML</li><li>点击转换</li></ol><blockquote>数据不会上传服务器。</blockquote><pre><code>npm install</code></pre><table><tr><th>功能</th><th>说明</th></tr><tr><td>JSON</td><td>格式化</td></tr></table>';
+  convertHtmlToMd();
+}
+function h2mClear() {
+  const input = document.getElementById('h2m-input');
+  if (input) input.value = '';
+  const output = document.getElementById('h2m-output');
+  if (output) output.textContent = '--';
+}
+function h2mInit() {
+  h2mLoadSample();
+}
+
+// ============ 快递单号识别 ============
+const exprRules = [
+  { name: '顺丰速运', re: /^SF\d{12,15}$/ },
+  { name: '京东物流', re: /^JD[A-Z0-9]{10,16}$/ },
+  { name: '中通快递', re: /^(ZT\d{10,16}|7\d{11}|68\d{10})$/, maybe: true },
+  { name: '圆通速递', re: /^YT\d{10,16}$/ },
+  { name: '韵达速递', re: /^(YD\d{10,16}|4\d{12})$/, maybe: true },
+  { name: '申通快递', re: /^(ST\d{10,16}|3\d{11}|5\d{11}|6\d{11}|8\d{11})$/, maybe: true },
+  { name: '极兔速递', re: /^JT\d{10,16}$/ },
+  { name: '德邦快递', re: /^(DPK\d{9,16}|DP\d{9,16})$/, maybe: true },
+  { name: '百世快递', re: /^(BS\d{10,16}|B\d{11})$/, maybe: true },
+  { name: '中国邮政 EMS', re: /^(E[A-Z]\d{9}CN|[A-Z]{2}\d{9}CN|9\d{13})$/ },
+  { name: '天天快递', re: /^TT\d{10,16}$/ }
+];
+function exprMatch(code) {
+  for (const rule of exprRules) {
+    if (rule.re.test(code)) return rule;
+  }
+  return null;
+}
+function parseExpress() {
+  const input = document.getElementById('expr-input');
+  const output = document.getElementById('expr-output');
+  if (!input || !output) return;
+  const lines = input.value.split('\n').map(s => s.trim()).filter(Boolean);
+  if (!lines.length) {
+    output.textContent = '--';
+    document.getElementById('expr-total').textContent = '0';
+    document.getElementById('expr-ok').textContent = '0';
+    document.getElementById('expr-fail').textContent = '0';
+    return;
+  }
+  let ok = 0;
+  const results = lines.map((raw, idx) => {
+    const code = raw.replace(/[\s\-—_：:]/g, '').toUpperCase();
+    if (code.length < 8 || code.length > 25 || !/^[A-Z0-9]+$/.test(code)) {
+      return (idx + 1) + '. ' + raw + ' → 格式无效';
+    }
+    const rule = exprMatch(code);
+    if (rule) {
+      ok += 1;
+      return (idx + 1) + '. ' + code + ' → ' + rule.name + (rule.maybe ? '（可能）' : '');
+    }
+    return (idx + 1) + '. ' + code + ' → 未识别（不在常见规则内）';
+  });
+  const fail = lines.length - ok;
+  document.getElementById('expr-total').textContent = lines.length;
+  document.getElementById('expr-ok').textContent = ok;
+  document.getElementById('expr-fail').textContent = fail;
+  results.push('');
+  results.push('共 ' + lines.length + ' 个单号，识别成功 ' + ok + ' 个，未识别 ' + fail + ' 个。');
+  results.push('提示：单号规则会随快递公司调整，识别结果仅供参考，请到快递官网或小程序查询物流。');
+  output.textContent = results.join('\n');
+}
+function exprLoadSample() {
+  const input = document.getElementById('expr-input');
+  if (!input) return;
+  input.value = 'SF1234567890123\nYT1234567890123\nJD0123456789012\nZT712345678901';
+  parseExpress();
+}
+function exprClear() {
+  const input = document.getElementById('expr-input');
+  if (input) input.value = '';
+  const output = document.getElementById('expr-output');
+  if (output) output.textContent = '--';
+  document.getElementById('expr-total').textContent = '0';
+  document.getElementById('expr-ok').textContent = '0';
+  document.getElementById('expr-fail').textContent = '0';
+}
+
+// ============ 投篮挑战 ============
+const bktState = { aiming: false, power: 0, dir: 1, score: 0, hits: 0, shots: 10, over: false };
+let bktRaf = 0, bktAnim = 0, bktNext = 0;
+function bktDraw(ballX, ballY) {
+  const c = document.getElementById('bkt-canvas');
+  if (!c || !c.getContext) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.clearRect(0, 0, W, H);
+  const floorY = 240;
+  ctx.fillStyle = '#8b5a2b';
+  ctx.fillRect(0, floorY, W, H - floorY);
+  ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, floorY + 14); ctx.lineTo(W, floorY + 14); ctx.stroke();
+  ctx.fillStyle = '#e2e8f0';
+  ctx.fillRect(W - 100, 55, 14, 100);
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(W - 100, 55, 14, 100);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(W - 118, 128); ctx.lineTo(W - 58, 128); ctx.stroke();
+  ctx.strokeStyle = 'rgba(226,232,240,0.7)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    ctx.beginPath();
+    ctx.moveTo(W - 118 + i * 12, 128);
+    ctx.lineTo(W - 110 + i * 10, 165);
+    ctx.stroke();
+  }
+  const bx = ballX === undefined ? 80 : ballX;
+  const by = ballY === undefined ? 222 : ballY;
+  ctx.fillStyle = '#f97316';
+  ctx.beginPath(); ctx.arc(bx, by, 15, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#7c2d12';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(bx, by, 15, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx - 15, by); ctx.lineTo(bx + 15, by); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx, by - 15); ctx.lineTo(bx, by + 15); ctx.stroke();
+  ctx.beginPath(); ctx.arc(bx, by, 15, 0.6, 2.2); ctx.stroke();
+}
+function bktUpdateStats() {
+  document.getElementById('bkt-score').textContent = bktState.score;
+  document.getElementById('bkt-hits').textContent = bktState.hits;
+  document.getElementById('bkt-shots').textContent = bktState.shots;
+}
+function bktSetStatus(text) {
+  const el = document.getElementById('bkt-status');
+  if (el) el.textContent = text;
+}
+function bktSetBtn(text) {
+  const el = document.getElementById('bkt-btn');
+  if (el) el.textContent = text;
+}
+function bktStart() {
+  if (bktState.over || bktState.shots <= 0) { bktReset(); }
+  if (bktState.aiming) return;
+  clearTimeout(bktNext);
+  bktState.aiming = true;
+  bktState.power = 0;
+  bktState.dir = 1;
+  bktSetStatus('瞄准中…');
+  bktSetBtn('🏀 出手！');
+  bktCycle();
+}
+function bktCycle() {
+  if (!bktState.aiming) { bktRaf = 0; return; }
+  bktState.power += bktState.dir * 1.2;
+  if (bktState.power >= 100) { bktState.power = 100; bktState.dir = -1; }
+  else if (bktState.power <= 0) { bktState.power = 0; bktState.dir = 1; }
+  const bar = document.getElementById('bkt-power');
+  if (bar) bar.style.width = bktState.power.toFixed(1) + '%';
+  bktRaf = requestAnimationFrame(bktCycle);
+}
+function bktShoot() {
+  if (!bktState.aiming) return;
+  bktState.aiming = false;
+  cancelAnimationFrame(bktRaf);
+  bktRaf = 0;
+  const p = bktState.power;
+  const make = p >= 40 && p <= 70;
+  const perfect = make && Math.abs(p - 55) <= 6;
+  if (bktState.shots > 0) bktState.shots -= 1;
+  if (make) {
+    bktState.hits += 1;
+    bktState.score += perfect ? 3 : 2;
+  }
+  bktUpdateStats();
+  bktSetStatus('投篮中…');
+  bktSetBtn('🏀 等待落球');
+  const endX = make ? 538 : 585;
+  const endY = make ? 112 : 218;
+  const startX = 80, startY = 222, dur = 700;
+  const t0 = performance.now();
+  if (bktAnim) cancelAnimationFrame(bktAnim);
+  function step(now) {
+    const t = Math.min(1, (now - t0) / dur);
+    const x = startX + (endX - startX) * t;
+    const y = startY + (endY - startY) * t - 150 * Math.sin(Math.PI * t);
+    bktDraw(x, y);
+    if (t < 1) {
+      bktAnim = requestAnimationFrame(step);
+      return;
+    }
+    bktAnim = 0;
+    bktSetStatus(make ? (perfect ? '空心入网 +3' : '命中 +2') : '偏出！');
+    if (bktState.shots <= 0) {
+      bktState.over = true;
+      bktSetStatus('结束 ' + bktState.score + ' 分');
+      bktSetBtn('🏀 再来一局');
+      const res = document.getElementById('bkt-result');
+      if (res) {
+        res.style.display = 'block';
+        res.textContent = '本次挑战结束：得分 ' + bktState.score + ' 分，命中 ' + bktState.hits + '/10，命中率 ' + Math.round(bktState.hits / 10 * 100) + '%。\n提示：力度落在绿色区域（40%–70%）即可命中，越接近 55% 越容易空心入网。';
+      }
+    } else {
+      bktNext = setTimeout(() => bktStart(), 700);
+    }
+  }
+  bktAnim = requestAnimationFrame(step);
+}
+function bktAction() {
+  if (bktState.over) { bktReset(); bktStart(); return; }
+  if (!bktState.aiming) bktStart();
+  else bktShoot();
+}
+function bktReset() {
+  cancelAnimationFrame(bktRaf);
+  cancelAnimationFrame(bktAnim);
+  clearTimeout(bktNext);
+  bktRaf = 0; bktAnim = 0; bktNext = 0;
+  bktState.aiming = false;
+  bktState.power = 0;
+  bktState.dir = 1;
+  bktState.score = 0;
+  bktState.hits = 0;
+  bktState.shots = 10;
+  bktState.over = false;
+  const bar = document.getElementById('bkt-power');
+  if (bar) bar.style.width = '0%';
+  const res = document.getElementById('bkt-result');
+  if (res) { res.style.display = 'none'; res.textContent = '--'; }
+  bktUpdateStats();
+  bktSetStatus('点击开始');
+  bktSetBtn('🏀 开始投篮');
+  bktDraw();
+}
+function bktInit() {
+  const c = document.getElementById('bkt-canvas');
+  if (c) c.addEventListener('click', () => { if (bktState.aiming) bktShoot(); });
+  bktReset();
+}
+
+safeInit(() => calcBonusTax(), 'calcBonusTax');
+safeInit(() => calcStepsDistance(), 'calcStepsDistance');
+safeInit(() => h2mInit(), 'h2mInit');
+safeInit(() => parseExpress(), 'parseExpress');
+safeInit(() => bktInit(), 'bktInit');
 
 // ============ Search & Theme ============
 function filterTools() {
