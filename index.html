@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等229个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等234个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等229个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等234个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等229个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等234个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -619,6 +619,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#html-to-md" data-tool="html-to-md"><span class="icon">📝</span>HTML 转 Markdown</a></li>
     <li><a href="#express-parse" data-tool="express-parse"><span class="icon">📦</span>快递单号识别</a></li>
     <li><a href="#basketball-shoot" data-tool="basketball-shoot"><span class="icon">🏀</span>投篮挑战</a></li>
+    <li><a href="#pizza-dough" data-tool="pizza-dough"><span class="icon">🍕</span>披萨面团计算</a></li>
+    <li><a href="#coffee-ratio" data-tool="coffee-ratio"><span class="icon">☕</span>手冲咖啡比例</a></li>
+    <li><a href="#vaccine-schedule" data-tool="vaccine-schedule"><span class="icon">💉</span>疫苗接种时间表</a></li>
+    <li><a href="#svg-to-png" data-tool="svg-to-png"><span class="icon">🖼️</span>SVG 转 PNG</a></li>
+    <li><a href="#connect-four" data-tool="connect-four"><span class="icon">🔴</span>四子棋</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6444,6 +6449,172 @@ console.log('代码块');
     <div class="result-box" id="bkt-result" style="display:none;">--</div>
   </section>
 
+  <!-- 披萨面团计算器 -->
+  <section class="tool-panel" id="panel-pizza-dough">
+    <h2>🍕 披萨面团计算器</h2>
+    <p class="desc">按面团球数、单球重量和烘焙百分比精确计算面粉、水、盐、酵母与橄榄油用量，家庭烤披萨也能稳定复刻。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">面团球数</div>
+        <input type="number" id="pzd-balls" value="2" min="1" step="1" oninput="calcPizzaDough()">
+      </div>
+      <div>
+        <div class="label">单球重量（g）</div>
+        <input type="number" id="pzd-weight" value="250" min="50" step="10" oninput="calcPizzaDough()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">含水量（%）</div>
+        <input type="number" id="pzd-hydration" value="60" min="40" max="100" step="1" oninput="calcPizzaDough()">
+      </div>
+      <div>
+        <div class="label">盐（%）</div>
+        <input type="number" id="pzd-salt" value="2" min="0" max="5" step="0.1" oninput="calcPizzaDough()">
+      </div>
+      <div>
+        <div class="label">酵母（%）</div>
+        <input type="number" id="pzd-yeast" value="0.5" min="0" max="3" step="0.1" oninput="calcPizzaDough()">
+      </div>
+      <div>
+        <div class="label">橄榄油（%）</div>
+        <input type="number" id="pzd-oil" value="2" min="0" max="10" step="0.5" oninput="calcPizzaDough()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcPizzaDough()">🍕 计算配方</button>
+      <button class="btn btn-secondary" onclick="pzdPreset('napoli')">那不勒斯风</button>
+      <button class="btn btn-secondary" onclick="pzdPreset('pan')">厚底披萨</button>
+      <button class="btn btn-secondary" onclick="copyText('pzd-output')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pzd-total">0</div><div class="lbl">总面团 (g)</div></div>
+      <div class="stat-card"><div class="num" id="pzd-flour">0</div><div class="lbl">面粉 (g)</div></div>
+      <div class="stat-card"><div class="num" id="pzd-water">0</div><div class="lbl">水 (g)</div></div>
+    </div>
+    <div class="result-box" id="pzd-output" style="max-height:320px;">--</div>
+  </section>
+
+  <!-- 手冲咖啡比例计算器 -->
+  <section class="tool-panel" id="panel-coffee-ratio">
+    <h2>☕ 手冲咖啡比例计算器</h2>
+    <p class="desc">输入咖啡粉用量和粉水比，自动计算注水总量、闷蒸水量、后续注水量与预计杯中咖啡液，支持多杯批量换算。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">咖啡粉（g / 杯）</div>
+        <input type="number" id="cfr-coffee" value="15" min="1" step="0.5" oninput="calcCoffeeRatio()">
+      </div>
+      <div>
+        <div class="label">粉水比 1 :</div>
+        <input type="number" id="cfr-ratio" value="15" min="2" max="30" step="0.5" oninput="calcCoffeeRatio()">
+      </div>
+      <div>
+        <div class="label">杯数</div>
+        <input type="number" id="cfr-cups" value="1" min="1" step="1" oninput="calcCoffeeRatio()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcCoffeeRatio()">☕ 计算比例</button>
+      <button class="btn btn-secondary" onclick="cfrPreset(12)">浓郁 1:12</button>
+      <button class="btn btn-secondary" onclick="cfrPreset(15)">标准 1:15</button>
+      <button class="btn btn-secondary" onclick="cfrPreset(18)">清淡 1:18</button>
+      <button class="btn btn-secondary" onclick="copyText('cfr-output')">📋 复制</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="cfr-coffee-total">0</div><div class="lbl">总粉量 (g)</div></div>
+      <div class="stat-card"><div class="num" id="cfr-water">0</div><div class="lbl">注水总量 (g)</div></div>
+      <div class="stat-card"><div class="num" id="cfr-bloom">0</div><div class="lbl">闷蒸水量 (g)</div></div>
+      <div class="stat-card"><div class="num" id="cfr-yield">0</div><div class="lbl">预计咖啡液 (ml)</div></div>
+    </div>
+    <div class="result-box" id="cfr-output" style="max-height:320px;">--</div>
+  </section>
+
+  <!-- 儿童疫苗接种时间表 -->
+  <section class="tool-panel" id="panel-vaccine-schedule">
+    <h2>💉 儿童疫苗接种时间表</h2>
+    <p class="desc">根据宝宝出生日期生成国家免疫规划疫苗的接种时间与当前状态，帮助提前安排接种。实际接种时间与剂次请以当地接种门诊为准。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">宝宝出生日期</div>
+        <input type="date" id="vac-birth" onchange="calcVaccineSchedule()">
+      </div>
+      <div>
+        <div class="label">统计基准日</div>
+        <input type="date" id="vac-today" onchange="calcVaccineSchedule()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="calcVaccineSchedule()">💉 生成时间表</button>
+      <button class="btn btn-secondary" onclick="vacSetToday()">📅 以今天为准</button>
+      <button class="btn btn-secondary" onclick="vacCopy()">📋 复制文本</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="vac-total">0</div><div class="lbl">总剂次</div></div>
+      <div class="stat-card"><div class="num" id="vac-due">0</div><div class="lbl">已到时间</div></div>
+      <div class="stat-card"><div class="num" id="vac-pending">0</div><div class="lbl">待接种</div></div>
+      <div class="stat-card"><div class="num" id="vac-next" style="font-size:16px;line-height:1.8;">--</div><div class="lbl">下一次</div></div>
+    </div>
+    <div class="result-box" id="vac-output" style="max-height:520px;white-space:normal;">--</div>
+  </section>
+
+  <!-- SVG 转 PNG -->
+  <section class="tool-panel" id="panel-svg-to-png">
+    <h2>🖼️ SVG 转 PNG</h2>
+    <p class="desc">粘贴 SVG 代码，设置输出宽度与背景色，在浏览器本地渲染并下载高清 PNG。文件不会上传，转换即时完成。</p>
+    <div class="label">SVG 代码</div>
+    <textarea id="s2p-input" placeholder="粘贴完整的 SVG 代码，需包含 xmlns 与 viewBox" style="min-height:190px;" oninput="s2pRender(false)"></textarea>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">输出宽度（px）</div>
+        <input type="number" id="s2p-width" value="512" min="32" max="4096" step="1" onchange="s2pRender(false)">
+      </div>
+      <div>
+        <div class="label">背景</div>
+        <select id="s2p-bg" onchange="s2pRender(false)">
+          <option value="transparent">透明</option>
+          <option value="white">白色</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="s2pRender(true)">🖼️ 生成 PNG</button>
+      <button class="btn btn-secondary" onclick="s2pLoadSample()">💡 示例</button>
+      <button class="btn btn-secondary" id="s2p-download" onclick="s2pDownload()" disabled>⬇️ 下载 PNG</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="s2p-size" style="font-size:18px;line-height:1.8;">--</div><div class="lbl">输出尺寸</div></div>
+      <div class="stat-card"><div class="num" id="s2p-state" style="font-size:16px;line-height:1.8;">待生成</div><div class="lbl">状态</div></div>
+    </div>
+    <div class="label" style="margin-top:16px;">SVG 预览</div>
+    <div style="padding:10px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
+      <img id="s2p-svg-img" alt="SVG 预览" style="max-width:100%;max-height:220px;vertical-align:middle;">
+    </div>
+    <div class="label" style="margin-top:16px;">PNG 预览</div>
+    <div style="padding:10px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
+      <img id="s2p-png-img" alt="PNG 预览" style="max-width:100%;max-height:220px;display:none;vertical-align:middle;">
+      <span id="s2p-png-empty" style="color:var(--text-secondary);font-size:13px;">生成后在此处预览</span>
+    </div>
+    <div class="result-box" id="s2p-output" style="display:none;">--</div>
+  </section>
+
+  <!-- 四子棋 -->
+  <section class="tool-panel" id="panel-connect-four">
+    <h2>🔴 四子棋</h2>
+    <p class="desc">经典四子棋：你执红棋先手，点击任意一列落子。横、竖或斜向连成四子即获胜，AI 会主动进攻并封堵你的连线。</p>
+    <canvas id="c4g-canvas" width="560" height="480" style="width:100%;max-width:560px;display:block;background:#1d4ed8;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:pointer;"></canvas>
+    <div class="btn-group">
+      <button class="btn" onclick="c4gNew()">🔄 重新开始</button>
+      <button class="btn btn-secondary" onclick="c4gUndo()">↩️ 撤销一步</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="c4g-win">0</div><div class="lbl">你赢</div></div>
+      <div class="stat-card"><div class="num" id="c4g-lose">0</div><div class="lbl">AI 赢</div></div>
+      <div class="stat-card"><div class="num" id="c4g-draw">0</div><div class="lbl">平局</div></div>
+      <div class="stat-card"><div class="num" id="c4g-status" style="font-size:16px;line-height:1.8;">轮到你</div><div class="lbl">状态</div></div>
+    </div>
+    <div class="result-box" id="c4g-result">你执红棋先手，点击任意一列开始。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6451,7 +6622,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 229个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 234个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -19402,6 +19573,573 @@ safeInit(() => calcStepsDistance(), 'calcStepsDistance');
 safeInit(() => h2mInit(), 'h2mInit');
 safeInit(() => parseExpress(), 'parseExpress');
 safeInit(() => bktInit(), 'bktInit');
+
+// ============ 披萨面团计算器 ============
+function pzdNum(n) {
+  if (!isFinite(n)) return '0';
+  return String(Math.round(n * 10) / 10);
+}
+function calcPizzaDough() {
+  const balls = parseFloat(document.getElementById('pzd-balls').value);
+  const weight = parseFloat(document.getElementById('pzd-weight').value);
+  const h = parseFloat(document.getElementById('pzd-hydration').value);
+  const salt = parseFloat(document.getElementById('pzd-salt').value);
+  const yeast = parseFloat(document.getElementById('pzd-yeast').value);
+  const oil = parseFloat(document.getElementById('pzd-oil').value);
+  const out = document.getElementById('pzd-output');
+  const statIds = ['pzd-total', 'pzd-flour', 'pzd-water'];
+  if (!isFinite(balls) || balls < 1 || !isFinite(weight) || weight <= 0 ||
+      !isFinite(h) || h < 0 || !isFinite(salt) || salt < 0 ||
+      !isFinite(yeast) || yeast < 0 || !isFinite(oil) || oil < 0) {
+    statIds.forEach(id => { document.getElementById(id).textContent = '--'; });
+    out.textContent = '请输入有效数值：球数 ≥ 1，单球重量 > 0，其余百分比 ≥ 0。';
+    return;
+  }
+  const total = balls * weight;
+  const flour = total * 100 / (100 + h + salt + yeast + oil);
+  const water = flour * h / 100;
+  const saltG = flour * salt / 100;
+  const yeastG = flour * yeast / 100;
+  const oilG = flour * oil / 100;
+  document.getElementById('pzd-total').textContent = pzdNum(total);
+  document.getElementById('pzd-flour').textContent = pzdNum(flour);
+  document.getElementById('pzd-water').textContent = pzdNum(water);
+  out.textContent = [
+    '🍕 总面团：' + pzdNum(total) + ' g（' + balls + ' 球 × ' + weight + ' g）',
+    '',
+    '【总配方】',
+    '面粉：' + pzdNum(flour) + ' g（100%）',
+    '水：' + pzdNum(water) + ' g（' + h + '%）',
+    '盐：' + pzdNum(saltG) + ' g（' + salt + '%）',
+    '酵母：' + pzdNum(yeastG) + ' g（' + yeast + '%）',
+    '橄榄油：' + pzdNum(oilG) + ' g（' + oil + '%）',
+    '',
+    '【每球】',
+    '面粉：' + pzdNum(flour / balls) + ' g',
+    '水：' + pzdNum(water / balls) + ' g',
+    '盐：' + pzdNum(saltG / balls) + ' g',
+    '酵母：' + pzdNum(yeastG / balls) + ' g',
+    '橄榄油：' + pzdNum(oilG / balls) + ' g',
+    '',
+    '提示：酵母按即发干酵母计；室温发酵约 2 小时，冷藏慢发酵 24~48 小时风味更佳。'
+  ].join('\n');
+}
+function pzdPreset(type) {
+  if (type === 'napoli') {
+    document.getElementById('pzd-weight').value = '250';
+    document.getElementById('pzd-hydration').value = '62';
+    document.getElementById('pzd-salt').value = '2.5';
+    document.getElementById('pzd-yeast').value = '0.1';
+    document.getElementById('pzd-oil').value = '0';
+    showToast('已应用那不勒斯风配方');
+  } else {
+    document.getElementById('pzd-weight').value = '300';
+    document.getElementById('pzd-hydration').value = '70';
+    document.getElementById('pzd-salt').value = '2';
+    document.getElementById('pzd-yeast').value = '0.4';
+    document.getElementById('pzd-oil').value = '4';
+    showToast('已应用厚底披萨配方');
+  }
+  calcPizzaDough();
+}
+
+// ============ 手冲咖啡比例计算器 ============
+function cfrNum(n) {
+  if (!isFinite(n)) return '0';
+  return String(Math.round(n * 10) / 10);
+}
+function calcCoffeeRatio() {
+  const coffee = parseFloat(document.getElementById('cfr-coffee').value);
+  const ratio = parseFloat(document.getElementById('cfr-ratio').value);
+  const cups = parseFloat(document.getElementById('cfr-cups').value);
+  const out = document.getElementById('cfr-output');
+  const statIds = ['cfr-coffee-total', 'cfr-water', 'cfr-bloom', 'cfr-yield'];
+  if (!isFinite(coffee) || coffee <= 0 || !isFinite(ratio) || ratio < 2 ||
+      !isFinite(cups) || cups < 1) {
+    statIds.forEach(id => { document.getElementById(id).textContent = '--'; });
+    out.textContent = '请输入有效数值：咖啡粉 > 0，粉水比 ≥ 2，杯数 ≥ 1。';
+    return;
+  }
+  const totalCoffee = coffee * cups;
+  const water = totalCoffee * ratio;
+  const bloom = totalCoffee * 2;
+  const rest = water - bloom;
+  const yieldMl = Math.max(0, water - totalCoffee * 2);
+  document.getElementById('cfr-coffee-total').textContent = cfrNum(totalCoffee);
+  document.getElementById('cfr-water').textContent = cfrNum(water);
+  document.getElementById('cfr-bloom').textContent = cfrNum(bloom);
+  document.getElementById('cfr-yield').textContent = cfrNum(yieldMl);
+  out.textContent = [
+    '☕ 单杯粉量：' + cfrNum(coffee) + ' g，共 ' + cups + ' 杯',
+    '粉水比：1 : ' + ratio,
+    '总粉量：' + cfrNum(totalCoffee) + ' g',
+    '注水总量：' + cfrNum(water) + ' g（约 ' + cfrNum(water) + ' ml）',
+    '',
+    '【注水节奏】',
+    '闷蒸：' + cfrNum(bloom) + ' g（约 2 倍粉重，静置 30 秒）',
+    '后续注水：' + cfrNum(rest) + ' g（分 2~3 次绕圈注入）',
+    '预计杯中咖啡液：约 ' + cfrNum(yieldMl) + ' ml（咖啡渣吸水按 2 倍粉重估算）',
+    '',
+    '建议水温 92~94°C，总萃取时长 2:00~2:30；浅烘豆可适当提高水温，深烘豆可降低水温。'
+  ].join('\n');
+}
+function cfrPreset(ratio) {
+  document.getElementById('cfr-ratio').value = String(ratio);
+  calcCoffeeRatio();
+  showToast('已切换为 1:' + ratio);
+}
+
+// ============ 儿童疫苗接种时间表 ============
+const VAC_PLAN = [
+  { m: 0, name: '乙肝疫苗', dose: '第1剂' },
+  { m: 0, name: '卡介苗', dose: '第1剂' },
+  { m: 1, name: '乙肝疫苗', dose: '第2剂' },
+  { m: 2, name: '脊灰灭活疫苗', dose: '第1剂' },
+  { m: 3, name: '脊灰灭活疫苗', dose: '第2剂' },
+  { m: 3, name: '百白破疫苗', dose: '第1剂' },
+  { m: 4, name: '脊灰减毒活疫苗', dose: '第1剂' },
+  { m: 4, name: '百白破疫苗', dose: '第2剂' },
+  { m: 5, name: '百白破疫苗', dose: '第3剂' },
+  { m: 6, name: '乙肝疫苗', dose: '第3剂' },
+  { m: 6, name: 'A群流脑疫苗', dose: '第1剂' },
+  { m: 8, name: '麻腮风疫苗', dose: '第1剂' },
+  { m: 8, name: '乙脑减毒活疫苗', dose: '第1剂' },
+  { m: 9, name: 'A群流脑疫苗', dose: '第2剂' },
+  { m: 18, name: '百白破疫苗', dose: '第4剂' },
+  { m: 18, name: '麻腮风疫苗', dose: '第2剂' },
+  { m: 18, name: '甲肝减毒活疫苗', dose: '第1剂' },
+  { m: 24, name: '乙脑减毒活疫苗', dose: '第2剂' },
+  { m: 36, name: 'A+C群流脑疫苗', dose: '第1剂' },
+  { m: 48, name: '脊灰减毒活疫苗', dose: '第2剂' },
+  { m: 72, name: '白破疫苗', dose: '第1剂' },
+  { m: 72, name: 'A+C群流脑疫苗', dose: '第2剂' }
+];
+let vacLast = null;
+function vacFmtDate(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + day;
+}
+function vacAddMonths(dateStr, months) {
+  const p = dateStr.split('-').map(Number);
+  const monthIndex = p[1] - 1 + months;
+  const y = p[0] + Math.floor(monthIndex / 12);
+  const m = ((monthIndex % 12) + 12) % 12;
+  const lastDay = new Date(y, m + 1, 0).getDate();
+  const d = Math.min(p[2], lastDay);
+  return vacFmtDate(new Date(y, m, d));
+}
+function vacAgeLabel(m) {
+  const y = Math.floor(m / 12);
+  const mo = m % 12;
+  if (m === 0) return '出生时';
+  if (y === 0) return mo + '月龄';
+  if (mo === 0) return y + '岁';
+  return y + '岁' + mo + '个月';
+}
+function vacFail(msg) {
+  vacLast = null;
+  ['vac-total', 'vac-due', 'vac-pending', 'vac-next'].forEach(id => {
+    document.getElementById(id).textContent = '--';
+  });
+  const out = document.getElementById('vac-output');
+  out.style.whiteSpace = 'normal';
+  out.textContent = '❌ ' + msg;
+}
+function calcVaccineSchedule() {
+  const birth = document.getElementById('vac-birth').value;
+  const todayStr = document.getElementById('vac-today').value || vacFmtDate(new Date());
+  const out = document.getElementById('vac-output');
+  if (!birth) { vacFail('请选择宝宝出生日期。'); return; }
+  if (birth > todayStr) { vacFail('出生日期不能晚于统计基准日。'); return; }
+  const rows = VAC_PLAN.map(item => ({
+    m: item.m,
+    name: item.name,
+    dose: item.dose,
+    due: vacAddMonths(birth, item.m)
+  })).sort((a, b) => a.due.localeCompare(b.due) || a.m - b.m);
+  const dueCount = rows.filter(r => r.due <= todayStr).length;
+  const nextRow = rows.find(r => r.due >= todayStr) || null;
+  document.getElementById('vac-total').textContent = String(rows.length);
+  document.getElementById('vac-due').textContent = String(dueCount);
+  document.getElementById('vac-pending').textContent = String(rows.length - dueCount);
+  document.getElementById('vac-next').textContent = nextRow ? nextRow.due : '全部到期';
+  vacLast = { birth, todayStr, rows, dueCount, nextRow };
+  const headerStyle = 'padding:7px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:600;';
+  const cellStyle = 'padding:7px 8px;border-bottom:1px solid var(--border);';
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:12px;line-height:1.5;">';
+  html += '<thead><tr style="color:var(--text-secondary);">';
+  html += '<th style="' + headerStyle + '">月龄</th>';
+  html += '<th style="' + headerStyle + '">疫苗</th>';
+  html += '<th style="' + headerStyle + '">剂次</th>';
+  html += '<th style="' + headerStyle + '">建议日期</th>';
+  html += '<th style="' + headerStyle + '">状态</th></tr></thead><tbody>';
+  rows.forEach(r => {
+    const isNext = r === nextRow;
+    const due = r.due <= todayStr;
+    const color = due ? 'var(--success)' : 'var(--text-secondary)';
+    html += '<tr' + (isNext ? ' style="background:rgba(99,102,241,0.12);"' : '') + '>';
+    html += '<td style="' + cellStyle + '">' + vacAgeLabel(r.m) + '</td>';
+    html += '<td style="' + cellStyle + '">' + r.name + '</td>';
+    html += '<td style="' + cellStyle + '">' + r.dose + '</td>';
+    html += '<td style="' + cellStyle + 'font-family:monospace;">' + r.due + '</td>';
+    html += '<td style="' + cellStyle + 'color:' + color + ';">' + (due ? '已到时间' : '待接种') + (isNext ? ' · 下一次' : '') + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  html += '<p style="margin-top:10px;color:var(--text-secondary);font-size:12px;">共 ' + rows.length + ' 剂次，已到接种时间 ' + dueCount + ' 剂，待接种 ' + (rows.length - dueCount) + ' 剂。本表依据国家免疫规划常规程序生成，仅供参考，实际接种以当地接种门诊通知为准。</p>';
+  out.style.whiteSpace = 'normal';
+  out.innerHTML = html;
+}
+function vacSetToday() {
+  document.getElementById('vac-today').value = vacFmtDate(new Date());
+  calcVaccineSchedule();
+}
+function vacCopy() {
+  if (!vacLast) calcVaccineSchedule();
+  if (!vacLast) return;
+  const { birth, todayStr, rows, dueCount } = vacLast;
+  const lines = rows.map(r => vacAgeLabel(r.m) + '  ' + r.name + ' ' + r.dose + '  ' + r.due + '  ' + (r.due <= todayStr ? '已到时间' : '待接种'));
+  const text = '宝宝出生日期：' + birth + '\n统计基准日：' + todayStr + '\n共 ' + rows.length + ' 剂次，已到时间 ' + dueCount + ' 剂，待接种 ' + (rows.length - dueCount) + ' 剂\n\n' + lines.join('\n');
+  writeClipboard(text).then(() => showToast('已复制！'));
+}
+function vacInit() {
+  const today = new Date();
+  document.getElementById('vac-today').value = vacFmtDate(today);
+  document.getElementById('vac-birth').value = vacFmtDate(new Date(today.getFullYear() - 1, today.getMonth(), today.getDate()));
+  calcVaccineSchedule();
+}
+
+// ============ SVG 转 PNG ============
+const S2P_SAMPLE = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">' +
+  '<defs><linearGradient id="s2p-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>' +
+  '<rect width="240" height="240" rx="28" fill="url(#s2p-g)"/>' +
+  '<circle cx="120" cy="98" r="46" fill="#ffffff" opacity="0.9"/>' +
+  '<path d="M96 98h48M120 74v48" stroke="#6366f1" stroke-width="10" stroke-linecap="round"/>' +
+  '<text x="120" y="194" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle">SVG to PNG</text>' +
+  '</svg>';
+let s2pToken = 0;
+let s2pDataUrl = '';
+let s2pName = 'svg-to-png.png';
+function s2pMeasure(svgText) {
+  const doc = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+  if (doc.querySelector('parsererror')) throw new Error('SVG 代码解析失败，请检查标签是否闭合。');
+  const root = doc.documentElement;
+  if (!root || root.nodeName.toLowerCase() !== 'svg') throw new Error('根节点必须是 <svg>。');
+  let w = 0, h = 0;
+  const vb = (root.getAttribute('viewBox') || '').trim();
+  if (vb) {
+    const nums = vb.split(/[\s,]+/).map(Number);
+    if (nums.length === 4 && nums[2] > 0 && nums[3] > 0) { w = nums[2]; h = nums[3]; }
+  }
+  if (!w || !h) {
+    w = parseFloat(root.getAttribute('width'));
+    h = parseFloat(root.getAttribute('height'));
+  }
+  if (!isFinite(w) || !isFinite(h) || w <= 0 || h <= 0) throw new Error('无法识别 SVG 尺寸，请添加 viewBox。');
+  return { w, h };
+}
+function s2pSetState(text, isError) {
+  const el = document.getElementById('s2p-state');
+  if (!el) return;
+  el.textContent = text;
+  el.style.color = isError ? 'var(--danger)' : 'var(--success)';
+}
+function s2pFail(msg) {
+  s2pSetState('失败', true);
+  const out = document.getElementById('s2p-output');
+  if (out) { out.style.display = 'block'; out.textContent = '❌ ' + msg; }
+  const btn = document.getElementById('s2p-download');
+  if (btn) btn.disabled = true;
+  s2pDataUrl = '';
+}
+function s2pRender(notify) {
+  const svgText = document.getElementById('s2p-input').value.trim();
+  if (!svgText) { s2pFail('请先粘贴 SVG 代码。'); return; }
+  const widthEl = document.getElementById('s2p-width');
+  let outW = Math.round(parseFloat(widthEl.value));
+  if (!isFinite(outW) || outW < 32) outW = 32;
+  if (outW > 4096) outW = 4096;
+  widthEl.value = String(outW);
+  let info;
+  try {
+    info = s2pMeasure(svgText);
+  } catch (e) {
+    s2pFail(e.message);
+    return;
+  }
+  const outH = Math.round(outW * info.h / info.w);
+  if (!isFinite(outH) || outH < 1) { s2pFail('无法计算输出高度。'); return; }
+  if (outH > 8192) { s2pFail('输出高度超过 8192px，请降低输出宽度。'); return; }
+  document.getElementById('s2p-size').textContent = outW + '×' + outH;
+  s2pSetState('渲染中…', false);
+  const token = ++s2pToken;
+  const svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+  document.getElementById('s2p-svg-img').src = svgUrl;
+  const img = new Image();
+  img.onload = function() {
+    if (token !== s2pToken) return;
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = outW;
+      canvas.height = outH;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('浏览器不支持 Canvas');
+      if (document.getElementById('s2p-bg').value === 'white') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, outW, outH);
+      }
+      ctx.drawImage(img, 0, 0, outW, outH);
+      s2pDataUrl = canvas.toDataURL('image/png');
+      const png = document.getElementById('s2p-png-img');
+      png.src = s2pDataUrl;
+      png.style.display = 'inline-block';
+      document.getElementById('s2p-png-empty').style.display = 'none';
+      document.getElementById('s2p-download').disabled = false;
+      s2pName = 'svg-to-png-' + outW + 'x' + outH + '.png';
+      s2pSetState('生成成功', false);
+      const out = document.getElementById('s2p-output');
+      out.style.display = 'block';
+      out.textContent = '✅ 已生成 ' + outW + '×' + outH + ' PNG（' + (document.getElementById('s2p-bg').value === 'white' ? '白色背景' : '透明背景') + '），可点击「下载 PNG」保存。';
+      if (notify) showToast('PNG 已生成');
+    } catch (e) {
+      s2pFail('PNG 导出失败：' + e.message);
+    }
+  };
+  img.onerror = function() {
+    if (token !== s2pToken) return;
+    s2pFail('SVG 渲染失败，请检查代码是否完整、是否包含 xmlns。');
+  };
+  img.src = svgUrl;
+}
+function s2pLoadSample() {
+  document.getElementById('s2p-input').value = S2P_SAMPLE;
+  document.getElementById('s2p-width').value = '512';
+  document.getElementById('s2p-bg').value = 'transparent';
+  s2pRender(true);
+}
+function s2pDownload() {
+  if (!s2pDataUrl) { showToast('请先生成 PNG'); return; }
+  const a = document.createElement('a');
+  a.href = s2pDataUrl;
+  a.download = s2pName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+function s2pInit() {
+  const input = document.getElementById('s2p-input');
+  if (!input.value.trim()) input.value = S2P_SAMPLE;
+  s2pRender(false);
+}
+
+// ============ 四子棋 ============
+const C4G_ROWS = 6;
+const C4G_COLS = 7;
+const C4G_CELL = 80;
+let c4gBoard = [];
+let c4gCtx = null;
+let c4gOver = false;
+let c4gThinking = false;
+let c4gHistory = [];
+let c4gTimer = null;
+let c4gLast = null;
+const c4gScore = { win: 0, lose: 0, draw: 0 };
+function c4gInit() {
+  const cv = document.getElementById('c4g-canvas');
+  if (!cv) return;
+  c4gCtx = cv.getContext('2d');
+  cv.addEventListener('click', c4gClick);
+  c4gNew();
+}
+function c4gNew() {
+  clearTimeout(c4gTimer);
+  c4gBoard = [];
+  for (let r = 0; r < C4G_ROWS; r++) c4gBoard.push(new Array(C4G_COLS).fill(0));
+  c4gOver = false;
+  c4gThinking = false;
+  c4gHistory = [];
+  c4gLast = null;
+  c4gUpdateScore();
+  c4gSetStatus('轮到你', '你执红棋先手，点击任意一列开始。');
+  c4gDraw();
+}
+function c4gUpdateScore() {
+  document.getElementById('c4g-win').textContent = String(c4gScore.win);
+  document.getElementById('c4g-lose').textContent = String(c4gScore.lose);
+  document.getElementById('c4g-draw').textContent = String(c4gScore.draw);
+}
+function c4gSetStatus(short, detail) {
+  const s = document.getElementById('c4g-status');
+  if (s) s.textContent = short;
+  if (detail !== undefined) {
+    const r = document.getElementById('c4g-result');
+    if (r) r.textContent = detail;
+  }
+}
+function c4gDraw() {
+  if (!c4gCtx) return;
+  const ctx = c4gCtx;
+  const W = 560;
+  const H = 480;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#1d4ed8';
+  ctx.fillRect(0, 0, W, H);
+  for (let r = 0; r < C4G_ROWS; r++) {
+    for (let c = 0; c < C4G_COLS; c++) {
+      const x = C4G_CELL / 2 + c * C4G_CELL;
+      const y = C4G_CELL / 2 + r * C4G_CELL;
+      ctx.beginPath();
+      ctx.arc(x, y, 31, 0, Math.PI * 2);
+      ctx.fillStyle = '#0b1736';
+      ctx.fill();
+      if (c4gBoard[r][c]) {
+        ctx.beginPath();
+        ctx.arc(x, y, 26, 0, Math.PI * 2);
+        ctx.fillStyle = c4gBoard[r][c] === 1 ? '#ef4444' : '#facc15';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x - 8, y - 8, 7, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.fill();
+      }
+    }
+  }
+  if (c4gLast) {
+    const x = C4G_CELL / 2 + c4gLast.c * C4G_CELL;
+    const y = C4G_CELL / 2 + c4gLast.r * C4G_CELL;
+    ctx.beginPath();
+    ctx.arc(x, y, 31, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+}
+function c4gDropRow(board, col) {
+  for (let r = C4G_ROWS - 1; r >= 0; r--) {
+    if (board[r][col] === 0) return r;
+  }
+  return -1;
+}
+function c4gDrop(board, col, player) {
+  const r = c4gDropRow(board, col);
+  if (r < 0) return -1;
+  board[r][col] = player;
+  return r;
+}
+function c4gWinAt(board, r, c, player) {
+  const dirs = [[0, 1], [1, 0], [1, 1], [1, -1]];
+  for (const d of dirs) {
+    let count = 1;
+    for (const sign of [-1, 1]) {
+      let rr = r + d[0] * sign;
+      let cc = c + d[1] * sign;
+      while (rr >= 0 && rr < C4G_ROWS && cc >= 0 && cc < C4G_COLS && board[rr][cc] === player) {
+        count++;
+        rr += d[0] * sign;
+        cc += d[1] * sign;
+      }
+    }
+    if (count >= 4) return true;
+  }
+  return false;
+}
+function c4gClick(e) {
+  if (c4gOver) { c4gSetStatus('本局已结束', '点击「重新开始」开下一局。'); return; }
+  if (c4gThinking) { c4gSetStatus('AI 思考中', '请稍候，AI 正在落子。'); return; }
+  const cv = e.currentTarget;
+  const rect = cv.getBoundingClientRect();
+  const x = (e.clientX - rect.left) * (cv.width / rect.width);
+  const col = Math.floor(x / C4G_CELL);
+  if (col < 0 || col >= C4G_COLS) return;
+  if (c4gBoard[0][col] !== 0) { c4gSetStatus('这一列已满', '换一列落子吧。'); return; }
+  c4gHistory.push(c4gBoard.map(row => row.slice()));
+  const row = c4gDrop(c4gBoard, col, 1);
+  c4gLast = { r: row, c: col };
+  c4gDraw();
+  if (c4gWinAt(c4gBoard, row, col, 1)) { c4gFinish('win'); return; }
+  if (c4gBoard[0].every(v => v !== 0)) { c4gFinish('draw'); return; }
+  c4gThinking = true;
+  c4gSetStatus('AI 思考中', 'AI 正在选择落子位置…');
+  c4gTimer = setTimeout(c4gAiTurn, 400);
+}
+function c4gAiPick() {
+  const valid = [];
+  for (let c = 0; c < C4G_COLS; c++) {
+    if (c4gBoard[0][c] === 0) valid.push(c);
+  }
+  if (!valid.length) return -1;
+  for (const c of valid) {
+    const r = c4gDropRow(c4gBoard, c);
+    c4gBoard[r][c] = 2;
+    const win = c4gWinAt(c4gBoard, r, c, 2);
+    c4gBoard[r][c] = 0;
+    if (win) return c;
+  }
+  for (const c of valid) {
+    const r = c4gDropRow(c4gBoard, c);
+    c4gBoard[r][c] = 1;
+    const win = c4gWinAt(c4gBoard, r, c, 1);
+    c4gBoard[r][c] = 0;
+    if (win) return c;
+  }
+  const weights = [1, 2, 4, 7, 4, 2, 1];
+  let bestC = valid[0];
+  let bestScore = -Infinity;
+  for (const c of valid) {
+    const score = weights[c] + Math.random() * 1.5;
+    if (score > bestScore) { bestScore = score; bestC = c; }
+  }
+  return bestC;
+}
+function c4gAiTurn() {
+  const col = c4gAiPick();
+  if (col < 0) { c4gFinish('draw'); return; }
+  const row = c4gDrop(c4gBoard, col, 2);
+  c4gThinking = false;
+  c4gLast = { r: row, c: col };
+  c4gDraw();
+  if (c4gWinAt(c4gBoard, row, col, 2)) { c4gFinish('lose'); return; }
+  if (c4gBoard[0].every(v => v !== 0)) { c4gFinish('draw'); return; }
+  c4gSetStatus('轮到你', 'AI 已落子，轮到你选择一列。');
+}
+function c4gFinish(kind) {
+  c4gOver = true;
+  c4gThinking = false;
+  clearTimeout(c4gTimer);
+  let short = '平局';
+  let detail = '棋盘已满，本局平局。点击「重新开始」再来一局。';
+  if (kind === 'win') {
+    c4gScore.win++;
+    short = '你赢了';
+    detail = '🎉 连成四子，你赢了！点击「重新开始」再来一局。';
+  } else if (kind === 'lose') {
+    c4gScore.lose++;
+    short = 'AI 赢了';
+    detail = 'AI 连成四子获胜，点击「重新开始」再战一局。';
+  } else {
+    c4gScore.draw++;
+  }
+  c4gUpdateScore();
+  c4gSetStatus(short, detail);
+  c4gDraw();
+}
+function c4gUndo() {
+  if (c4gThinking) { showToast('AI 思考中，请稍后再撤销'); return; }
+  if (c4gOver) { showToast('本局已结束，请点击重新开始'); return; }
+  if (!c4gHistory.length) { c4gSetStatus('无法撤销', '还没有可以撤销的落子。'); return; }
+  c4gBoard = c4gHistory.pop();
+  c4gLast = null;
+  c4gSetStatus('轮到你', '已撤销上一轮落子，点击任意一列继续。');
+  c4gDraw();
+}
+
+safeInit(() => calcPizzaDough(), 'calcPizzaDough');
+safeInit(() => calcCoffeeRatio(), 'calcCoffeeRatio');
+safeInit(() => vacInit(), 'vacInit');
+safeInit(() => s2pInit(), 's2pInit');
+safeInit(() => c4gInit(), 'c4gInit');
 
 // ============ Search & Theme ============
 function filterTools() {
