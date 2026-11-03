@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等234个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等239个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等234个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等239个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等234个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等239个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -624,6 +624,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#vaccine-schedule" data-tool="vaccine-schedule"><span class="icon">💉</span>疫苗接种时间表</a></li>
     <li><a href="#svg-to-png" data-tool="svg-to-png"><span class="icon">🖼️</span>SVG 转 PNG</a></li>
     <li><a href="#connect-four" data-tool="connect-four"><span class="icon">🔴</span>四子棋</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#manjian-calc" data-tool="manjian-calc"><span class="icon">🛒</span>满减凑单计算器</a></li>
+    <li><a href="#quit-smoking" data-tool="quit-smoking"><span class="icon">🚭</span>戒烟省钱计算器</a></li>
+    <li><a href="#html-preview" data-tool="html-preview"><span class="icon">🖥️</span>HTML 实时预览</a></li>
+    <li><a href="#hanoi" data-tool="hanoi"><span class="icon">🗼</span>汉诺塔</a></li>
+    <li><a href="#chinese-name" data-tool="chinese-name"><span class="icon">🪪</span>随机中文姓名</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6615,6 +6621,168 @@ console.log('代码块');
     <div class="result-box" id="c4g-result">你执红棋先手，点击任意一列开始。</div>
   </section>
 
+  <!-- 满减凑单计算器 -->
+  <section class="tool-panel" id="panel-manjian-calc">
+    <h2>🛒 满减凑单计算器</h2>
+    <p class="desc">输入满减门槛、购物车已有金额和候选商品价格，自动找出「刚好跨过门槛、额外花钱最少」的凑单组合，避免为了满减反而多花冤枉钱。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">满减门槛（元）</div>
+        <input type="number" id="mjc-threshold" value="100" min="1" step="1" oninput="mjcCalc()">
+      </div>
+      <div>
+        <div class="label">立减金额（元）</div>
+        <input type="number" id="mjc-off" value="20" min="0" step="1" oninput="mjcCalc()">
+      </div>
+      <div>
+        <div class="label">购物车已有金额（元）</div>
+        <input type="number" id="mjc-have" value="86" min="0" step="0.01" oninput="mjcCalc()">
+      </div>
+    </div>
+    <div class="label" style="margin-top:14px;">候选商品价格（每行一个，或用逗号/空格分隔）</div>
+    <textarea id="mjc-items" style="min-height:110px;" oninput="mjcCalc()" placeholder="9.9&#10;15.8&#10;22&#10;35">9.9
+15.8
+22
+35</textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="mjcCalc()">🛒 计算凑单</button>
+      <button class="btn btn-secondary" onclick="mjcClear()">🗑️ 清空</button>
+      <button class="btn btn-secondary" onclick="copyText('mjc-output')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="mjc-gap">0</div><div class="lbl">还差 (元)</div></div>
+      <div class="stat-card"><div class="num" id="mjc-add">0</div><div class="lbl">建议加购 (元)</div></div>
+      <div class="stat-card"><div class="num" id="mjc-total">0</div><div class="lbl">凑单后合计</div></div>
+      <div class="stat-card"><div class="num" id="mjc-pay">0</div><div class="lbl">预计实付</div></div>
+    </div>
+    <div class="result-box" id="mjc-output" style="max-height:380px;white-space:normal;">--</div>
+  </section>
+
+  <!-- 戒烟省钱计算器 -->
+  <section class="tool-panel" id="panel-quit-smoking">
+    <h2>🚭 戒烟省钱计算器</h2>
+    <p class="desc">选择戒烟开始日期，实时计算已少吸的香烟、省下的钱和健康恢复里程碑。所有数据只在本地计算，健康信息仅供参考。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">戒烟开始日期</div>
+        <input type="date" id="qs-start" onchange="qsCalc()">
+      </div>
+      <div>
+        <div class="label">每天吸烟支数</div>
+        <input type="number" id="qs-per-day" value="20" min="1" step="1" oninput="qsCalc()">
+      </div>
+      <div>
+        <div class="label">每包价格（元）</div>
+        <input type="number" id="qs-pack-price" value="25" min="0" step="0.5" oninput="qsCalc()">
+      </div>
+      <div>
+        <div class="label">每包支数</div>
+        <input type="number" id="qs-pack-count" value="20" min="1" step="1" oninput="qsCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="qsCalc()">🚭 计算成果</button>
+      <button class="btn btn-secondary" onclick="qsSetToday()">📅 从今天开始</button>
+      <button class="btn btn-secondary" onclick="copyText('qs-output')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="qs-days">0</div><div class="lbl">已坚持 (天)</div></div>
+      <div class="stat-card"><div class="num" id="qs-sticks">0</div><div class="lbl">少吸 (支)</div></div>
+      <div class="stat-card"><div class="num" id="qs-money">0</div><div class="lbl">省下 (元)</div></div>
+      <div class="stat-card"><div class="num" id="qs-year">0</div><div class="lbl">一年可省 (元)</div></div>
+    </div>
+    <div class="result-box" id="qs-output" style="max-height:540px;white-space:normal;">--</div>
+  </section>
+
+  <!-- HTML 实时预览 -->
+  <section class="tool-panel" id="panel-html-preview">
+    <h2>🖥️ HTML 实时预览</h2>
+    <p class="desc">编写 HTML / CSS / JavaScript 并实时查看渲染效果，支持一键载入示例和下载 HTML 文件。代码在沙箱 iframe 中运行，不会影响本站页面。</p>
+    <div class="label">HTML 代码</div>
+    <textarea id="hp-code" style="min-height:240px;" spellcheck="false" oninput="hpQueue()" placeholder="在此粘贴 HTML 代码..."></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="hpRender()">🔄 刷新预览</button>
+      <button class="btn btn-secondary" onclick="hpSample()">📄 载入示例</button>
+      <button class="btn btn-secondary" onclick="hpDownload()">⬇️ 下载 HTML</button>
+      <button class="btn btn-secondary" onclick="hpClear()">🗑️ 清空</button>
+    </div>
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin:12px 0;">
+      <input type="checkbox" id="hp-auto" checked onchange="hpRender()"> 输入时自动刷新
+    </label>
+    <iframe id="hp-frame" title="HTML 预览" sandbox="allow-scripts allow-forms allow-modals" style="width:100%;height:420px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;"></iframe>
+  </section>
+
+  <!-- 汉诺塔 -->
+  <section class="tool-panel" id="panel-hanoi">
+    <h2>🗼 汉诺塔</h2>
+    <p class="desc">点击柱子拿起最上面的圆盘，再点击另一根柱子放下；大盘不能压在小盘上。目标是把全部圆盘从 A 柱移到 C 柱，挑战最少步数。</p>
+    <div class="flex-row" style="align-items:flex-end;">
+      <div>
+        <div class="label">圆盘数量</div>
+        <select id="hn-level" onchange="hnReset()">
+          <option value="3">3 层</option>
+          <option value="4" selected>4 层</option>
+          <option value="5">5 层</option>
+          <option value="6">6 层</option>
+          <option value="7">7 层</option>
+        </select>
+      </div>
+      <div style="flex:0 0 auto;">
+        <button class="btn" onclick="hnSolve()">🤖 自动演示</button>
+        <button class="btn btn-secondary" onclick="hnReset()">🔄 重新开始</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;height:240px;user-select:none;">
+      <div id="hn-peg-0" onclick="hnClick(0)" style="flex:1;display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;gap:4px;padding:10px 6px 8px;background:var(--card-bg);border:1px solid var(--border);border-bottom:6px solid var(--accent);border-radius:var(--radius);cursor:pointer;position:relative;overflow:hidden;">
+        <span style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--text-secondary);">A</span>
+      </div>
+      <div id="hn-peg-1" onclick="hnClick(1)" style="flex:1;display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;gap:4px;padding:10px 6px 8px;background:var(--card-bg);border:1px solid var(--border);border-bottom:6px solid var(--accent);border-radius:var(--radius);cursor:pointer;position:relative;overflow:hidden;">
+        <span style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--text-secondary);">B</span>
+      </div>
+      <div id="hn-peg-2" onclick="hnClick(2)" style="flex:1;display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;gap:4px;padding:10px 6px 8px;background:var(--card-bg);border:1px solid var(--border);border-bottom:6px solid var(--accent);border-radius:var(--radius);cursor:pointer;position:relative;overflow:hidden;">
+        <span style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--text-secondary);">C</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="hn-moves">0</div><div class="lbl">已用步数</div></div>
+      <div class="stat-card"><div class="num" id="hn-min">15</div><div class="lbl">最少步数</div></div>
+      <div class="stat-card"><div class="num" id="hn-status" style="font-size:16px;line-height:1.8;">准备开始</div><div class="lbl">状态</div></div>
+    </div>
+    <div class="result-box" id="hn-output" style="white-space:normal;">点击 A 柱拿走最上面的圆盘，再点击 C 柱放下。</div>
+  </section>
+
+  <!-- 随机中文姓名 -->
+  <section class="tool-panel" id="panel-chinese-name">
+    <h2>🪪 随机中文姓名生成器</h2>
+    <p class="desc">按性别与单双字偏好随机生成中文姓名，可用作小说角色、游戏昵称或测试数据。姓氏留空则从常见百家姓中随机抽取。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">姓氏（留空随机）</div>
+        <input type="text" id="nm-surname" placeholder="如：王 / 欧阳" maxlength="3" oninput="nmGenerate()">
+      </div>
+      <div>
+        <div class="label">性别</div>
+        <select id="nm-gender" onchange="nmGenerate()">
+          <option value="any">随机</option>
+          <option value="male">男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">生成数量</div>
+        <input type="number" id="nm-count" value="12" min="1" max="50" step="1" oninput="nmGenerate()">
+      </div>
+    </div>
+    <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin-top:12px;">
+      <input type="checkbox" id="nm-double" checked onchange="nmGenerate()"> 包含双字名
+    </label>
+    <div class="btn-group">
+      <button class="btn" onclick="nmGenerate()">🎲 生成姓名</button>
+      <button class="btn btn-secondary" onclick="copyText('nm-output')">📋 复制全部</button>
+    </div>
+    <div class="result-box" id="nm-output" style="max-height:420px;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6622,7 +6790,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 234个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 239个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -20140,6 +20308,406 @@ safeInit(() => calcCoffeeRatio(), 'calcCoffeeRatio');
 safeInit(() => vacInit(), 'vacInit');
 safeInit(() => s2pInit(), 's2pInit');
 safeInit(() => c4gInit(), 'c4gInit');
+
+// ============ 满减凑单计算器 ============
+function mjcMoney(cents) { return '¥' + (cents / 100).toFixed(2); }
+function mjcParseItems() {
+  return document.getElementById('mjc-items').value
+    .split(/[\s,，、;；]+/)
+    .map(s => s.trim()).filter(Boolean)
+    .map(s => Number(s))
+    .filter(n => isFinite(n) && n > 0)
+    .slice(0, 20)
+    .map(n => Math.round(n * 100));
+}
+function mjcClear() {
+  document.getElementById('mjc-items').value = '';
+  document.getElementById('mjc-have').value = '0';
+  mjcCalc();
+  showToast('已清空候选商品');
+}
+function mjcCalc() {
+  const threshold = Math.max(0, Math.round((parseFloat(document.getElementById('mjc-threshold').value) || 0) * 100));
+  const off = Math.max(0, Math.round((parseFloat(document.getElementById('mjc-off').value) || 0) * 100));
+  const have = Math.max(0, Math.round((parseFloat(document.getElementById('mjc-have').value) || 0) * 100));
+  const items = mjcParseItems();
+  const gap = Math.max(0, threshold - have);
+  const out = document.getElementById('mjc-output');
+  document.getElementById('mjc-gap').textContent = (gap / 100).toFixed(2);
+  const noAdd = () => {
+    document.getElementById('mjc-add').textContent = '0.00';
+    document.getElementById('mjc-total').textContent = (have / 100).toFixed(2);
+    document.getElementById('mjc-pay').textContent = (Math.max(0, have - off) / 100).toFixed(2);
+  };
+
+  if (threshold <= 0) {
+    noAdd();
+    out.textContent = '请先填写大于 0 的满减门槛。';
+    return;
+  }
+  if (gap === 0) {
+    noAdd();
+    out.textContent =
+      '✅ 已达到满减门槛，无需凑单。\n' +
+      '当前合计：' + mjcMoney(have) + '\n' +
+      '立减：' + mjcMoney(off) + '\n' +
+      '预计实付：' + mjcMoney(Math.max(0, have - off)) + '\n' +
+      '共省下：' + mjcMoney(off);
+    return;
+  }
+  if (!items.length) {
+    noAdd();
+    out.textContent = '还差 ' + mjcMoney(gap) + ' 才能满减。请在候选商品中填写价格（如 9.9、15.8），系统会帮你找出最省钱的凑单组合。';
+    return;
+  }
+  if (gap > 1000000) {
+    noAdd();
+    out.textContent = '金额过大，建议将门槛与商品金额控制在 10000 元以内。';
+    return;
+  }
+
+  const totalItems = items.reduce((a, b) => a + b, 0);
+  if (totalItems < gap) {
+    document.getElementById('mjc-add').textContent = (totalItems / 100).toFixed(2);
+    document.getElementById('mjc-total').textContent = ((have + totalItems) / 100).toFixed(2);
+    document.getElementById('mjc-pay').textContent = (Math.max(0, have + totalItems - off) / 100).toFixed(2);
+    out.textContent = '❌ 候选商品总价 ' + mjcMoney(totalItems) + ' 仍不足以凑到门槛，还差 ' + mjcMoney(gap - totalItems) + '。\n建议增加候选商品或提高预算后再试。';
+    return;
+  }
+
+  const maxItem = Math.max.apply(null, items);
+  const cap = Math.min(gap + maxItem - 1, 1000000);
+  const dp = new Uint8Array(cap + 1);
+  const prev = new Int32Array(cap + 1).fill(-1);
+  const pick = new Int32Array(cap + 1).fill(-1);
+  dp[0] = 1;
+  for (let i = 0; i < items.length; i++) {
+    const v = items[i];
+    for (let s = cap - v; s >= 0; s--) {
+      if (dp[s] && !dp[s + v]) {
+        dp[s + v] = 1;
+        prev[s + v] = s;
+        pick[s + v] = i;
+      }
+    }
+  }
+  let best = -1;
+  for (let s = gap; s <= cap; s++) { if (dp[s]) { best = s; break; } }
+  if (best < 0) {
+    noAdd();
+    out.textContent = '未找到合适的凑单组合，请尝试增加候选商品。';
+    return;
+  }
+  const combo = [];
+  let cur = best;
+  while (cur > 0) {
+    const idx = pick[cur];
+    if (idx < 0) break;
+    combo.push(items[idx]);
+    cur = prev[cur];
+  }
+  combo.sort((a, b) => a - b);
+  const add = best;
+  const newTotal = have + add;
+  const pay = Math.max(0, newTotal - off);
+  document.getElementById('mjc-add').textContent = (add / 100).toFixed(2);
+  document.getElementById('mjc-total').textContent = (newTotal / 100).toFixed(2);
+  document.getElementById('mjc-pay').textContent = (pay / 100).toFixed(2);
+  out.textContent =
+    '💡 当前合计 ' + mjcMoney(have) + '，还差 ' + mjcMoney(gap) + ' 达到 ' + mjcMoney(threshold) + ' 门槛。\n' +
+    '✅ 推荐加购：' + combo.map(mjcMoney).join(' + ') + '（共 ' + combo.length + ' 件，合计 ' + mjcMoney(add) + '）\n' +
+    '🧾 凑单后合计：' + mjcMoney(newTotal) + '\n' +
+    '💰 使用满减后实付：' + mjcMoney(pay) + '（立减 ' + mjcMoney(off) + '）\n' +
+    '📌 为凑单额外支出 ' + mjcMoney(add) + '，换回 ' + mjcMoney(off) + ' 优惠。若这些商品本来就需要，相当于净省 ' +
+    mjcMoney(Math.max(0, off - add)) + '；否则请谨慎下单。';
+}
+
+// ============ 戒烟省钱计算器 ============
+const QS_MILESTONES = [
+  { days: 20 / 1440, label: '20 分钟', desc: '心率与血压开始回落' },
+  { days: 12 / 24, label: '12 小时', desc: '血液中一氧化碳降至正常水平' },
+  { days: 1, label: '1 天', desc: '心脏病发作风险开始下降' },
+  { days: 2, label: '2 天', desc: '嗅觉与味觉开始恢复' },
+  { days: 3, label: '3 天', desc: '支气管放松，呼吸更顺畅' },
+  { days: 14, label: '2 周', desc: '肺功能与血液循环开始改善' },
+  { days: 30, label: '1 个月', desc: '咳嗽与气短明显减少' },
+  { days: 365, label: '1 年', desc: '冠心病风险降至吸烟者的一半' },
+  { days: 1825, label: '5 年', desc: '中风风险接近不吸烟者' },
+  { days: 3650, label: '10 年', desc: '肺癌死亡风险降至吸烟者的一半' }
+];
+function qsDateStr(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function qsSetToday() {
+  document.getElementById('qs-start').value = qsDateStr(new Date());
+  qsCalc();
+  showToast('已设置为从今天开始');
+}
+function qsInit() {
+  const d = new Date();
+  d.setDate(d.getDate() - 30);
+  document.getElementById('qs-start').value = qsDateStr(d);
+  qsCalc();
+}
+function qsCalc() {
+  const startVal = document.getElementById('qs-start').value;
+  const perDay = Math.max(1, parseInt(document.getElementById('qs-per-day').value, 10) || 1);
+  const packPrice = Math.max(0, parseFloat(document.getElementById('qs-pack-price').value) || 0);
+  const packCount = Math.max(1, parseInt(document.getElementById('qs-pack-count').value, 10) || 1);
+  let days = 0;
+  if (startVal) {
+    const start = new Date(startVal + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    days = Math.max(0, Math.floor((today - start) / 86400000));
+  }
+  const perStick = packPrice / packCount;
+  const sticks = perDay * days;
+  const money = perStick * sticks;
+  const yearMoney = perStick * perDay * 365;
+  document.getElementById('qs-days').textContent = String(days);
+  document.getElementById('qs-sticks').textContent = sticks.toLocaleString('zh-CN');
+  document.getElementById('qs-money').textContent = Math.round(money).toLocaleString('zh-CN');
+  document.getElementById('qs-year').textContent = Math.round(yearMoney).toLocaleString('zh-CN');
+  const out = document.getElementById('qs-output');
+  if (!startVal) {
+    out.textContent = '请先选择戒烟开始日期。';
+    return;
+  }
+  const packs = sticks / packCount;
+  let eq = '';
+  if (money >= 30) eq += '· ' + Math.floor(money / 30) + ' 杯咖啡（按 ¥30/杯）\n';
+  if (money >= 50) eq += '· ' + Math.floor(money / 50) + ' 张电影票（按 ¥50/张）\n';
+  if (money >= 100) eq += '· ' + Math.floor(money / 100) + ' 顿火锅（按 ¥100/顿）\n';
+  if (!eq) eq = '· 再坚持几天，就能换一杯咖啡了\n';
+  const milestones = QS_MILESTONES.map(m => (days >= m.days ? '✅ ' : '⏳ ') + m.label + '：' + m.desc).join('\n');
+  out.textContent =
+    '🚭 戒烟成果（已坚持 ' + days + ' 天）\n' +
+    '少吸香烟：' + sticks.toLocaleString('zh-CN') + ' 支（约 ' + packs.toFixed(1) + ' 包）\n' +
+    '省下烟钱：¥' + money.toFixed(2) + '\n' +
+    '按此速度，一年可省：¥' + yearMoney.toFixed(2) + '\n\n' +
+    '💡 这些钱大约可以换：\n' + eq + '\n' +
+    '🌱 身体恢复进度：\n' + milestones;
+}
+
+// ============ HTML 实时预览 ============
+const HP_SAMPLE = [
+  '<!DOCTYPE html>',
+  '<html lang="zh-CN">',
+  '<head>',
+  '<meta charset="UTF-8">',
+  '<style>',
+  '  body{font-family:system-ui,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;}',
+  '  .card{background:rgba(255,255,255,.15);padding:32px 40px;border-radius:16px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2);}',
+  '  h1{margin:0 0 8px;font-size:28px;}',
+  '  p{margin:0;opacity:.9;}',
+  '  button{margin-top:20px;padding:10px 24px;border:none;border-radius:999px;background:#fff;color:#6366f1;font-size:15px;cursor:pointer;}',
+  '</style>',
+  '</head>',
+  '<body>',
+  '  <div class="card">',
+  '    <h1>👋 Hello, 万能工具箱</h1>',
+  '    <p>这是 HTML 实时预览的示例页面</p>',
+  '    <button onclick="this.textContent=\'🎉 你点击了按钮\'">点我试试</button>',
+  '  </div>',
+  '</body>',
+  '</html>'
+].join('\n');
+let hpTimer = null;
+function hpRender() {
+  const code = document.getElementById('hp-code');
+  const frame = document.getElementById('hp-frame');
+  if (!code || !frame) return;
+  frame.srcdoc = code.value;
+}
+function hpQueue() {
+  const auto = document.getElementById('hp-auto');
+  if (auto && !auto.checked) return;
+  clearTimeout(hpTimer);
+  hpTimer = setTimeout(hpRender, 400);
+}
+function hpSample() {
+  document.getElementById('hp-code').value = HP_SAMPLE;
+  hpRender();
+  showToast('已载入示例代码');
+}
+function hpClear() {
+  document.getElementById('hp-code').value = '';
+  hpRender();
+  showToast('已清空代码');
+}
+function hpDownload() {
+  const html = document.getElementById('hp-code').value;
+  if (!html.trim()) { showToast('代码为空，无法下载'); return; }
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'preview.html';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function hpInit() {
+  document.getElementById('hp-code').value = HP_SAMPLE;
+  hpRender();
+}
+
+// ============ 汉诺塔 ============
+let hnPegs = [[], [], []];
+let hnN = 4;
+let hnSelected = -1;
+let hnMovesCount = 0;
+let hnSolving = false;
+let hnToken = 0;
+function hnInit() {
+  const sel = document.getElementById('hn-level');
+  hnN = parseInt(sel.value, 10) || 4;
+  hnReset();
+}
+function hnReset() {
+  hnToken++;
+  hnSolving = false;
+  const sel = document.getElementById('hn-level');
+  if (sel) hnN = parseInt(sel.value, 10) || 4;
+  hnPegs = [Array.from({ length: hnN }, (_, i) => hnN - i), [], []];
+  hnSelected = -1;
+  hnMovesCount = 0;
+  document.getElementById('hn-moves').textContent = '0';
+  document.getElementById('hn-min').textContent = String(Math.pow(2, hnN) - 1);
+  document.getElementById('hn-output').textContent = '点击 A 柱拿走最上面的圆盘，再点击 C 柱放下。';
+  hnSetStatus('准备开始');
+  hnRender();
+}
+function hnSetStatus(text) {
+  const el = document.getElementById('hn-status');
+  if (el) el.textContent = text;
+}
+function hnRender() {
+  for (let p = 0; p < 3; p++) {
+    const el = document.getElementById('hn-peg-' + p);
+    if (!el) return;
+    el.querySelectorAll('.hn-disk').forEach(d => d.remove());
+    el.style.outline = p === hnSelected ? '2px solid var(--accent)' : 'none';
+    el.style.outlineOffset = p === hnSelected ? '-2px' : '0';
+    hnPegs[p].forEach(size => {
+      const disk = document.createElement('div');
+      disk.className = 'hn-disk';
+      const pct = hnN <= 1 ? 80 : 34 + (size - 1) * (56 / (hnN - 1));
+      disk.style.cssText = 'width:' + pct + '%;height:22px;border-radius:6px;flex:0 0 22px;background:hsl(' +
+        (200 + (size - 1) * 20) + ',70%,55%);box-shadow:0 1px 3px rgba(0,0,0,.3);';
+      el.appendChild(disk);
+    });
+  }
+}
+function hnClick(p) {
+  if (hnSolving) { showToast('自动演示中，请稍候'); return; }
+  if (hnSelected === -1) {
+    if (!hnPegs[p].length) { showToast('这根柱子是空的'); return; }
+    hnSelected = p;
+    hnSetStatus(['A', 'B', 'C'][p] + ' 柱已选中');
+    hnRender();
+    return;
+  }
+  if (hnSelected === p) {
+    hnSelected = -1;
+    hnSetStatus('已取消选择');
+    hnRender();
+    return;
+  }
+  const from = hnSelected;
+  const to = p;
+  const disk = hnPegs[from][hnPegs[from].length - 1];
+  const top = hnPegs[to][hnPegs[to].length - 1];
+  if (top !== undefined && top < disk) { showToast('大盘不能压在小盘上'); return; }
+  hnPegs[from].pop();
+  hnPegs[to].push(disk);
+  hnSelected = -1;
+  hnMovesCount++;
+  document.getElementById('hn-moves').textContent = String(hnMovesCount);
+  hnRender();
+  if (hnPegs[2].length === hnN) hnWin();
+  else hnSetStatus(['A', 'B', 'C'][to] + ' 柱落子');
+}
+function hnWin() {
+  const min = Math.pow(2, hnN) - 1;
+  if (hnMovesCount === min) showToast('🎉 完美！' + hnMovesCount + ' 步最优解');
+  else showToast('🎉 完成！共 ' + hnMovesCount + ' 步（最少 ' + min + ' 步）');
+  document.getElementById('hn-output').textContent = '🎉 恭喜通关！用 ' + hnMovesCount + ' 步完成 ' + hnN +
+    ' 层汉诺塔（理论最少 ' + min + ' 步）。';
+  hnSetStatus('通关！');
+}
+function hnSolve() {
+  if (hnSolving) return;
+  hnReset();
+  const seq = [];
+  (function build(n, from, to, via) {
+    if (n === 0) return;
+    build(n - 1, from, via, to);
+    seq.push([from, to]);
+    build(n - 1, via, to, from);
+  })(hnN, 0, 2, 1);
+  const token = ++hnToken;
+  hnSolving = true;
+  hnSelected = -1;
+  let i = 0;
+  const tick = () => {
+    if (token !== hnToken) return;
+    if (i >= seq.length) { hnSolving = false; return; }
+    const pair = seq[i++];
+    const disk = hnPegs[pair[0]].pop();
+    hnPegs[pair[1]].push(disk);
+    hnMovesCount++;
+    document.getElementById('hn-moves').textContent = String(hnMovesCount);
+    hnSetStatus('自动演示中…');
+    hnRender();
+    if (hnPegs[2].length === hnN) { hnSolving = false; hnWin(); return; }
+    setTimeout(tick, 380);
+  };
+  tick();
+}
+
+// ============ 随机中文姓名 ============
+const NM_SURNAMES = ['王','李','张','刘','陈','杨','赵','黄','周','吴','徐','孙','胡','朱','高','林','何','郭','马','罗','梁','宋','郑','谢','韩','唐','冯','于','董','萧','程','曹','袁','邓','许','傅','沈','曾','彭','吕','苏','卢','蒋','蔡','贾','丁','魏','薛','叶','阎','余','潘','杜','戴','夏','钟','汪','田','任','姜','范','方','石','姚','谭','廖','邹','熊','金','陆','郝','孔','白','崔','康','毛','邱','秦','江','史','顾','侯','邵','孟','龙','万','段','雷','钱','汤','尹','黎','易','常','武','乔','贺','赖','龚','文'];
+const NM_MALE_SINGLE = ['伟','强','磊','军','洋','勇','杰','涛','明','超','鹏','华','飞','鑫','波','斌','宇','浩','凯','健','俊','帆','帅','旭','宁','龙','林','阳','峰','亮','辉','博','轩','晨','昊','睿','哲','毅','恒','建'];
+const NM_FEMALE_SINGLE = ['芳','娜','敏','静','丽','娟','艳','婷','雪','倩','颖','琳','晶','欣','悦','媛','露','萍','红','霞','燕','玲','慧','洁','梅','莉','菲','萱','涵','怡','琪','瑶','馨','月','雨','蕾','薇','璐','彤','妍'];
+const NM_MALE_DOUBLE = ['浩然','子轩','宇航','俊杰','思远','一鸣','展鹏','嘉豪','文博','泽宇','明远','嘉诚','天宇','晨曦','子墨','亦辰','沐阳','俊熙','致远','博文','铭泽','承宇','景行','书航','云帆','若尘','星河','嘉铭','皓轩','启航'];
+const NM_FEMALE_DOUBLE = ['思琪','梦琪','雨欣','欣怡','子涵','诗涵','若曦','雅静','紫萱','佳怡','可欣','语嫣','一诺','依诺','芷若','婉清','清雅','心怡','书瑶','静姝','悦彤','语汐','沐晴','安琪','雨桐','知夏','念薇','若彤','嘉怡','初晴'];
+function nmPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function nmGenerate() {
+  const surnameInput = document.getElementById('nm-surname').value.trim();
+  const gender = document.getElementById('nm-gender').value;
+  const allowDouble = document.getElementById('nm-double').checked;
+  const singlePool = gender === 'male' ? NM_MALE_SINGLE : gender === 'female' ? NM_FEMALE_SINGLE : NM_MALE_SINGLE.concat(NM_FEMALE_SINGLE);
+  let doublePool = gender === 'male' ? NM_MALE_DOUBLE : gender === 'female' ? NM_FEMALE_DOUBLE : NM_MALE_DOUBLE.concat(NM_FEMALE_DOUBLE);
+  if (!allowDouble) doublePool = [];
+  let count = Math.min(50, Math.max(1, parseInt(document.getElementById('nm-count').value, 10) || 1));
+  if (surnameInput) {
+    const maxUnique = singlePool.length + doublePool.length;
+    if (count > maxUnique) count = maxUnique;
+  }
+  const out = [];
+  const used = new Set();
+  const limit = surnameInput ? count * 40 + 300 : count * 20;
+  for (let attempt = 0; attempt < limit && out.length < count; attempt++) {
+    const surname = surnameInput || nmPick(NM_SURNAMES);
+    const given = doublePool.length && Math.random() < 0.65 ? nmPick(doublePool) : nmPick(singlePool);
+    const name = surname + given;
+    if (used.has(name)) continue;
+    used.add(name);
+    out.push(name);
+  }
+  document.getElementById('nm-output').textContent = out.length ? out.join('\n') : '暂时无法生成，请调整选项。';
+  if (out.length < count) showToast('可用组合不足，已生成 ' + out.length + ' 个');
+  else showToast('已生成 ' + out.length + ' 个姓名');
+}
+
+safeInit(() => mjcCalc(), 'mjcCalc');
+safeInit(() => qsInit(), 'qsInit');
+safeInit(() => hpInit(), 'hpInit');
+safeInit(() => hnInit(), 'hnInit');
+safeInit(() => nmGenerate(), 'nmGenerate');
 
 // ============ Search & Theme ============
 function filterTools() {
