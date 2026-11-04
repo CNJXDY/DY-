@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等239个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等244个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等239个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等244个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等239个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等244个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -630,6 +630,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#html-preview" data-tool="html-preview"><span class="icon">🖥️</span>HTML 实时预览</a></li>
     <li><a href="#hanoi" data-tool="hanoi"><span class="icon">🗼</span>汉诺塔</a></li>
     <li><a href="#chinese-name" data-tool="chinese-name"><span class="icon">🪪</span>随机中文姓名</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#aspect-ratio" data-tool="aspect-ratio"><span class="icon">📐</span>图片尺寸比例计算器</a></li>
+    <li><a href="#download-time" data-tool="download-time"><span class="icon">⏱️</span>下载时间计算器</a></li>
+    <li><a href="#battery-life" data-tool="battery-life"><span class="icon">🔋</span>电池续航计算器</a></li>
+    <li><a href="#reversi" data-tool="reversi"><span class="icon">⚫</span>黑白棋</a></li>
+    <li><a href="#barcode-gen" data-tool="barcode-gen"><span class="icon">🏷️</span>条形码生成器</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6783,6 +6789,159 @@ console.log('代码块');
     <div class="result-box" id="nm-output" style="max-height:420px;">--</div>
   </section>
 
+  <!-- Aspect Ratio Calculator -->
+  <section class="tool-panel" id="panel-aspect-ratio">
+    <h2>📐 图片尺寸比例计算器</h2>
+    <p class="desc">输入原始宽高自动求出最简比例，再按同一比例计算缩放后的新尺寸，适合图片裁剪、海报和视频封面设计。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">原始宽度 (px)</div>
+        <input type="number" id="ar-src-w" value="1920" min="1" step="1" oninput="arCalc()">
+      </div>
+      <div>
+        <div class="label">原始高度 (px)</div>
+        <input type="number" id="ar-src-h" value="1080" min="1" step="1" oninput="arCalc()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(16,9)">16:9</button>
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(4,3)">4:3</button>
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(1,1)">1:1</button>
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(9,16)">9:16</button>
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(3,2)">3:2</button>
+      <button class="btn btn-secondary btn-sm" onclick="arPreset(2,3)">2:3</button>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">目标宽度 (px)</div>
+        <input type="number" id="ar-new-w" min="1" step="1" placeholder="输入后自动算高度" oninput="arFromWidth()">
+      </div>
+      <div>
+        <div class="label">目标高度 (px)</div>
+        <input type="number" id="ar-new-h" min="1" step="1" placeholder="输入后自动算宽度" oninput="arFromHeight()">
+      </div>
+    </div>
+    <div class="result-box" id="ar-result" style="display:none;"></div>
+  </section>
+
+  <!-- Download Time Calculator -->
+  <section class="tool-panel" id="panel-download-time">
+    <h2>⏱️ 下载时间计算器</h2>
+    <p class="desc">根据文件大小与实际带宽估算下载耗时，支持 Mbps 与 MB/s 两种网速单位，并考虑网络损耗。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">文件大小</div>
+        <input type="number" id="dl-size" value="1" min="0" step="0.01" oninput="dlCalc()">
+      </div>
+      <div>
+        <div class="label">大小单位</div>
+        <select id="dl-size-unit" onchange="dlCalc()">
+          <option value="0.001">KB</option>
+          <option value="1" selected>MB</option>
+          <option value="1024">GB</option>
+          <option value="1048576">TB</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">网络带宽</div>
+        <input type="number" id="dl-speed" value="100" min="0" step="0.1" oninput="dlCalc()">
+      </div>
+      <div>
+        <div class="label">带宽单位</div>
+        <select id="dl-speed-unit" onchange="dlCalc()">
+          <option value="8" selected>Mbps（宽带标称）</option>
+          <option value="1">MB/s</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:12px;max-width:260px;">
+      <div class="label">实际效率 (%)</div>
+      <input type="number" id="dl-eff" value="85" min="1" max="100" step="1" oninput="dlCalc()">
+    </div>
+    <div class="result-box" id="dl-result" style="display:none;"></div>
+  </section>
+
+  <!-- Battery Life Calculator -->
+  <section class="tool-panel" id="panel-battery-life">
+    <h2>🔋 电池续航 / 充电计算器</h2>
+    <p class="desc">根据电池容量、电压与设备功耗估算续航时间，也可估算充电器充满所需时间，适合手机、笔记本与充电宝。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">电池容量 (mAh)</div>
+        <input type="number" id="bat-cap" value="5000" min="1" step="1" oninput="batCalc()">
+      </div>
+      <div>
+        <div class="label">电池电压 (V)</div>
+        <input type="number" id="bat-volt" value="3.7" min="0.1" step="0.1" oninput="batCalc()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">设备功耗 (W)</div>
+        <input type="number" id="bat-load" value="5" min="0.1" step="0.1" oninput="batCalc()">
+      </div>
+      <div>
+        <div class="label">充电功率 (W)</div>
+        <input type="number" id="bat-charge" value="18" min="0.1" step="0.1" oninput="batCalc()">
+      </div>
+    </div>
+    <div style="margin-top:12px;max-width:260px;">
+      <div class="label">转换效率 (%)</div>
+      <input type="number" id="bat-eff" value="85" min="1" max="100" step="1" oninput="batCalc()">
+    </div>
+    <div class="result-box" id="bat-result" style="display:none;"></div>
+  </section>
+
+  <!-- Reversi Game -->
+  <section class="tool-panel" id="panel-reversi">
+    <h2>⚫ 黑白棋（翻转棋）</h2>
+    <p class="desc">经典 8×8 黑白棋，落子夹住对方棋子即可翻转。支持人机对战与双人对战，可显示合法落点。</p>
+    <div class="flex-row" style="max-width:460px;">
+      <div>
+        <div class="label">对战模式</div>
+        <select id="rv-mode" onchange="rvNewGame()">
+          <option value="ai" selected>人机对战</option>
+          <option value="pvp">双人对战</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">合法落点提示</div>
+        <select id="rv-hint" onchange="rvRender()">
+          <option value="1" selected>显示</option>
+          <option value="0">隐藏</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:12px;flex-wrap:wrap;">
+      <span class="stat-card" style="padding:8px 14px;">⚫ 黑棋 <b id="rv-black">2</b></span>
+      <span class="stat-card" style="padding:8px 14px;">⚪ 白棋 <b id="rv-white">2</b></span>
+      <span id="rv-status" style="font-size:13px;color:var(--text-secondary);">黑棋先行</span>
+    </div>
+    <div id="rv-board" style="display:grid;grid-template-columns:repeat(8,1fr);gap:4px;width:100%;max-width:420px;margin-top:14px;"></div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="rvNewGame()">🔄 重新开局</button>
+      <button class="btn btn-secondary" onclick="rvUndo()">↩️ 悔棋</button>
+    </div>
+  </section>
+
+  <!-- Barcode Generator -->
+  <section class="tool-panel" id="panel-barcode-gen">
+    <h2>🏷️ 条形码生成器</h2>
+    <p class="desc">输入数字、字母或常见英文符号，生成标准 Code 128 条形码（Code128B），可直接下载 PNG 使用。</p>
+    <div class="label">条形码内容</div>
+    <input type="text" id="barcode-input" value="TOOLBOX-2026" maxlength="48" placeholder="仅支持英文字母、数字和常见符号" oninput="bcRender()">
+    <div class="btn-group">
+      <button class="btn" onclick="bcRender()">🏷️ 生成条形码</button>
+      <button class="btn btn-secondary" onclick="bcDownload()">⬇️ 下载 PNG</button>
+    </div>
+    <div id="bc-preview" style="margin-top:16px;padding:12px;background:#fff;border-radius:var(--radius);overflow-x:auto;">
+      <canvas id="barcode-canvas" style="max-width:100%;"></canvas>
+    </div>
+    <div class="result-box" id="barcode-result" style="display:none;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6790,7 +6949,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 239个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 244个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -6813,6 +6972,7 @@ window.addEventListener('scroll', () => {
 // ============ Navigation ============
 document.querySelectorAll('.tool-nav a').forEach(link => {
   link.addEventListener('click', e => {
+    if (!link.dataset.tool) return;
     e.preventDefault();
     document.querySelectorAll('.tool-nav a').forEach(l => l.classList.remove('active'));
     link.classList.add('active');
@@ -20708,6 +20868,380 @@ safeInit(() => qsInit(), 'qsInit');
 safeInit(() => hpInit(), 'hpInit');
 safeInit(() => hnInit(), 'hnInit');
 safeInit(() => nmGenerate(), 'nmGenerate');
+
+// ============ Aspect Ratio Calculator ============
+function arGcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { const t = a % b; a = b; b = t; }
+  return a || 1;
+}
+function arSource() {
+  const w = parseInt(document.getElementById('ar-src-w').value, 10);
+  const h = parseInt(document.getElementById('ar-src-h').value, 10);
+  return (w > 0 && h > 0) ? { w, h } : null;
+}
+function arCalc() {
+  const box = document.getElementById('ar-result');
+  const v = arSource();
+  if (!v) { box.style.display = 'none'; return; }
+  const ratio = v.w / v.h;
+  const g = arGcd(v.w, v.h);
+  const lines = [
+    `原始尺寸: ${v.w} × ${v.h} px`,
+    `最简比例: ${v.w / g}:${v.h / g}（约 ${ratio.toFixed(3)}）`,
+    `像素总数: ${((v.w * v.h) / 1000000).toFixed(2)} MP`
+  ];
+  const nw = parseInt(document.getElementById('ar-new-w').value, 10);
+  const nh = parseInt(document.getElementById('ar-new-h').value, 10);
+  if (nw > 0) {
+    const calcH = Math.round(nw / ratio);
+    lines.push(`目标尺寸: ${nw} × ${calcH} px`);
+    lines.push(`相对原始宽度缩放: ${(nw / v.w * 100).toFixed(1)}%`);
+  } else if (nh > 0) {
+    const calcW = Math.round(nh * ratio);
+    lines.push(`目标尺寸: ${calcW} × ${nh} px`);
+    lines.push(`相对原始高度缩放: ${(nh / v.h * 100).toFixed(1)}%`);
+  }
+  box.textContent = lines.join('\n');
+  box.style.display = 'block';
+}
+function arFromWidth() {
+  const v = arSource();
+  if (!v) return;
+  const nw = parseInt(document.getElementById('ar-new-w').value, 10);
+  if (nw > 0) document.getElementById('ar-new-h').value = Math.round(nw / (v.w / v.h));
+  arCalc();
+}
+function arFromHeight() {
+  const v = arSource();
+  if (!v) return;
+  const nh = parseInt(document.getElementById('ar-new-h').value, 10);
+  if (nh > 0) document.getElementById('ar-new-w').value = Math.round(nh * (v.w / v.h));
+  arCalc();
+}
+function arPreset(w, h) {
+  document.getElementById('ar-src-w').value = w * 120;
+  document.getElementById('ar-src-h').value = h * 120;
+  document.getElementById('ar-new-w').value = '';
+  document.getElementById('ar-new-h').value = '';
+  arCalc();
+}
+
+// ============ Download Time Calculator ============
+function dlFormatDuration(seconds) {
+  if (!isFinite(seconds) || seconds < 0) return '--';
+  if (seconds < 1) return seconds.toFixed(2) + ' 秒';
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  if (h > 0) return `${h} 小时 ${m} 分 ${s} 秒`;
+  if (m > 0) return `${m} 分 ${s} 秒`;
+  return `${s} 秒`;
+}
+function dlCalc() {
+  const box = document.getElementById('dl-result');
+  const size = parseFloat(document.getElementById('dl-size').value);
+  const sizeUnit = parseFloat(document.getElementById('dl-size-unit').value);
+  const speed = parseFloat(document.getElementById('dl-speed').value);
+  const speedUnit = parseFloat(document.getElementById('dl-speed-unit').value);
+  const eff = parseFloat(document.getElementById('dl-eff').value);
+  if (!(size > 0) || !(speed > 0) || !(sizeUnit > 0) || !(speedUnit > 0)) {
+    box.style.display = 'none';
+    return;
+  }
+  const sizeMB = size * sizeUnit;
+  const speedMBps = speed / speedUnit;
+  const effRatio = Math.min(100, Math.max(1, eff || 100)) / 100;
+  const realMBps = speedMBps * effRatio;
+  const seconds = sizeMB / realMBps;
+  const sizeText = sizeMB >= 1024 ? `${(sizeMB / 1024).toFixed(2)} GB` : `${sizeMB.toFixed(2)} MB`;
+  box.textContent = [
+    `文件大小: ${sizeText}`,
+    `理论速度: ${speedMBps.toFixed(2)} MB/s`,
+    `实际速度: ${realMBps.toFixed(2)} MB/s（效率 ${Math.round(effRatio * 100)}%）`,
+    `预计耗时: ${dlFormatDuration(seconds)}`
+  ].join('\n');
+  box.style.display = 'block';
+}
+
+// ============ Battery Life Calculator ============
+function batFormatHours(hours) {
+  if (!isFinite(hours) || hours <= 0) return '--';
+  if (hours >= 1) {
+    const h = Math.floor(hours);
+    const m = Math.round((hours - h) * 60);
+    return m > 0 ? `${h} 小时 ${m} 分` : `${h} 小时`;
+  }
+  return `${Math.round(hours * 60)} 分钟`;
+}
+function batCalc() {
+  const box = document.getElementById('bat-result');
+  const cap = parseFloat(document.getElementById('bat-cap').value);
+  const volt = parseFloat(document.getElementById('bat-volt').value);
+  const load = parseFloat(document.getElementById('bat-load').value);
+  const charge = parseFloat(document.getElementById('bat-charge').value);
+  const eff = parseFloat(document.getElementById('bat-eff').value);
+  if (!(cap > 0) || !(volt > 0) || !(load > 0) || !(charge > 0)) {
+    box.style.display = 'none';
+    return;
+  }
+  const effRatio = Math.min(100, Math.max(1, eff || 100)) / 100;
+  const energyWh = (cap / 1000) * volt;
+  const usableWh = energyWh * effRatio;
+  const runtime = usableWh / load;
+  const chargeHours = energyWh / (charge * effRatio);
+  box.textContent = [
+    `电池能量: ${energyWh.toFixed(2)} Wh`,
+    `可用能量: ${usableWh.toFixed(2)} Wh（效率 ${Math.round(effRatio * 100)}%）`,
+    `预计续航: ${batFormatHours(runtime)}（设备功耗 ${load} W）`,
+    `预计充满: ${batFormatHours(chargeHours)}（充电功率 ${charge} W）`
+  ].join('\n');
+  box.style.display = 'block';
+}
+
+// ============ Reversi Game ============
+const RV_DIRS = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+const RV_WEIGHTS = [
+  120, -20, 20, 5, 5, 20, -20, 120,
+  -20, -40, -5, -5, -5, -5, -40, -20,
+  20, -5, 10, 3, 3, 10, -5, 20,
+  5, -5, 3, 0, 0, 3, -5, 5,
+  5, -5, 3, 0, 0, 3, -5, 5,
+  20, -5, 10, 3, 3, 10, -5, 20,
+  -20, -40, -5, -5, -5, -5, -40, -20,
+  120, -20, 20, 5, 5, 20, -20, 120
+];
+const RV = { board: [], turn: 1, over: false, history: [] };
+function rvFlips(board, idx, player) {
+  if (board[idx] !== 0) return [];
+  const r = Math.floor(idx / 8), c = idx % 8;
+  const opp = player === 1 ? 2 : 1;
+  const result = [];
+  for (const [dr, dc] of RV_DIRS) {
+    const line = [];
+    let rr = r + dr, cc = c + dc;
+    while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[rr * 8 + cc] === opp) {
+      line.push(rr * 8 + cc);
+      rr += dr; cc += dc;
+    }
+    if (line.length && rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[rr * 8 + cc] === player) {
+      result.push(...line);
+    }
+  }
+  return result;
+}
+function rvLegalMoves(board, player) {
+  const moves = [];
+  for (let i = 0; i < 64; i++) {
+    const flips = rvFlips(board, i, player);
+    if (flips.length) moves.push({ idx: i, flips });
+  }
+  return moves;
+}
+function rvHistoryPush() {
+  RV.history.push({ board: RV.board.slice(), turn: RV.turn });
+  if (RV.history.length > 120) RV.history.shift();
+}
+function rvPlace(idx, flips) {
+  RV.board[idx] = RV.turn;
+  flips.forEach(i => { RV.board[i] = RV.turn; });
+}
+function rvNewGame() {
+  const b = new Array(64).fill(0);
+  b[27] = 2; b[28] = 1; b[35] = 1; b[36] = 2;
+  RV.board = b;
+  RV.turn = 1;
+  RV.over = false;
+  RV.history = [];
+  rvRender();
+  rvMaybeAI();
+}
+function rvMaybeAI() {
+  if (document.getElementById('rv-mode').value !== 'ai' || RV.over || RV.turn !== 2) return;
+  setTimeout(() => {
+    if (RV.over || RV.turn !== 2) return;
+    const moves = rvLegalMoves(RV.board, 2);
+    if (!moves.length) return;
+    let best = moves[0], bestScore = -Infinity;
+    moves.forEach(m => {
+      const score = m.flips.length * 8 + RV_WEIGHTS[m.idx] * 2 + Math.random() * 5;
+      if (score > bestScore) { bestScore = score; best = m; }
+    });
+    rvHistoryPush();
+    rvPlace(best.idx, best.flips);
+    rvAdvance();
+  }, 350);
+}
+function rvPlay(idx) {
+  if (RV.over) return;
+  if (document.getElementById('rv-mode').value === 'ai' && RV.turn === 2) return;
+  const flips = rvFlips(RV.board, idx, RV.turn);
+  if (!flips.length) return;
+  rvHistoryPush();
+  rvPlace(idx, flips);
+  rvAdvance();
+}
+function rvAdvance() {
+  const other = RV.turn === 1 ? 2 : 1;
+  const otherMoves = rvLegalMoves(RV.board, other);
+  if (!otherMoves.length) {
+    const myMoves = rvLegalMoves(RV.board, RV.turn);
+    if (myMoves.length) {
+      rvRender(`对方无棋可下，${RV.turn === 1 ? '黑棋' : '白棋'}继续`);
+      rvMaybeAI();
+      return;
+    }
+    RV.over = true;
+    rvRender();
+    return;
+  }
+  RV.turn = other;
+  rvRender();
+  rvMaybeAI();
+}
+function rvUndo() {
+  if (!RV.history.length) { showToast('没有可悔的棋'); return; }
+  let st = RV.history.pop();
+  if (document.getElementById('rv-mode').value === 'ai' && st.turn === 2 && RV.history.length) {
+    st = RV.history.pop();
+  }
+  RV.board = st.board.slice();
+  RV.turn = st.turn;
+  RV.over = false;
+  rvRender();
+}
+function rvRender(statusMsg) {
+  const boardEl = document.getElementById('rv-board');
+  const mode = document.getElementById('rv-mode').value;
+  const showHint = document.getElementById('rv-hint').value === '1';
+  const legal = (!RV.over && (mode === 'pvp' || RV.turn === 1)) ? rvLegalMoves(RV.board, RV.turn) : [];
+  boardEl.innerHTML = '';
+  for (let i = 0; i < 64; i++) {
+    const cell = document.createElement('button');
+    cell.type = 'button';
+    cell.style.cssText = 'aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:0;background:#1f6f4d;border:1px solid #14503a;border-radius:6px;cursor:pointer;';
+    if (RV.board[i] !== 0) {
+      const disc = document.createElement('span');
+      disc.style.cssText = 'width:76%;height:76%;border-radius:50%;display:block;background:' + (RV.board[i] === 1 ? '#111827' : '#f8fafc') + ';box-shadow:0 1px 3px rgba(0,0,0,.4);';
+      cell.appendChild(disc);
+    } else if (showHint && legal.some(m => m.idx === i)) {
+      cell.style.boxShadow = 'inset 0 0 0 2px rgba(250,204,21,.9)';
+      cell.innerHTML = '<span style="width:18%;height:18%;border-radius:50%;background:rgba(250,204,21,.9);display:block;"></span>';
+    }
+    cell.onclick = () => rvPlay(i);
+    boardEl.appendChild(cell);
+  }
+  let black = 0, white = 0;
+  RV.board.forEach(v => { if (v === 1) black++; else if (v === 2) white++; });
+  document.getElementById('rv-black').textContent = black;
+  document.getElementById('rv-white').textContent = white;
+  let status = statusMsg || '';
+  if (!status) {
+    if (RV.over) {
+      status = black > white ? `🎉 黑棋获胜（${black} : ${white}）`
+        : white > black ? `🎉 白棋获胜（${black} : ${white}）`
+        : `平局（${black} : ${white}）`;
+    } else if (mode === 'ai' && RV.turn === 2) {
+      status = '电脑思考中…';
+    } else {
+      status = (RV.turn === 1 ? '⚫ 黑棋落子' : '⚪ 白棋落子') + (mode === 'ai' ? '（你执黑）' : '');
+    }
+  }
+  document.getElementById('rv-status').textContent = status;
+}
+
+// ============ Barcode Generator (Code128B) ============
+const BC_PATTERNS = [
+  '212222', '222122', '222221', '121223', '121322', '131222', '122213', '122312', '132212', '221213',
+  '221312', '231212', '112232', '122132', '122231', '113222', '123122', '123221', '223211', '221132',
+  '221231', '213212', '223112', '312131', '311222', '321122', '321221', '312212', '322112', '322211',
+  '212123', '212321', '232121', '111323', '131123', '131321', '112313', '132113', '132311', '211313',
+  '231113', '231311', '112133', '112331', '132131', '113123', '113321', '133121', '313121', '211331',
+  '231131', '213113', '213311', '213131', '311123', '311321', '331121', '312113', '312311', '332111',
+  '314111', '221411', '431111', '111224', '111422', '121124', '121421', '141122', '141221', '112214',
+  '112412', '122114', '122411', '142112', '142211', '241211', '221114', '413111', '241112', '134111',
+  '111242', '121142', '121241', '114212', '124112', '124211', '411212', '421112', '421211', '212141',
+  '214121', '412121', '111143', '111341', '131141', '114113', '114311', '411113', '411311', '113141',
+  '114131', '311141', '411131', '211412', '211214', '211232', '2331112'
+];
+function bcClear() {
+  const canvas = document.getElementById('barcode-canvas');
+  canvas.width = 1;
+  canvas.height = 1;
+  canvas.style.width = '1px';
+  canvas.style.height = '1px';
+}
+function bcRender() {
+  const canvas = document.getElementById('barcode-canvas');
+  const box = document.getElementById('barcode-result');
+  const text = document.getElementById('barcode-input').value;
+  if (!text) {
+    bcClear();
+    box.style.display = 'none';
+    return;
+  }
+  const codes = [];
+  for (const ch of text) {
+    const code = ch.charCodeAt(0);
+    if (code < 32 || code > 126) {
+      bcClear();
+      box.textContent = '❌ 含不支持字符：Code128B 仅支持英文字母、数字、空格及常见英文符号，不支持中文和 emoji。';
+      box.style.display = 'block';
+      return;
+    }
+    codes.push(code - 32);
+  }
+  const values = [104].concat(codes);
+  let sum = 104;
+  codes.forEach((v, i) => { sum += v * (i + 1); });
+  const checksum = sum % 103;
+  values.push(checksum, 106);
+  const scale = 2, barHeight = 90, quiet = 10;
+  let totalModules = quiet * 2;
+  values.forEach(v => { totalModules += (v === 106 ? 13 : 11); });
+  const width = totalModules * scale;
+  const height = barHeight + 30;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = '#000000';
+  let x = quiet * scale;
+  values.forEach(v => {
+    const pattern = BC_PATTERNS[v];
+    for (let i = 0; i < pattern.length; i++) {
+      const w = parseInt(pattern[i], 10) * scale;
+      if (i % 2 === 0) ctx.fillRect(x, 0, w, barHeight);
+      x += w;
+    }
+  });
+  ctx.fillStyle = '#000000';
+  ctx.font = '14px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(text, width / 2, height - 8);
+  box.textContent = `✅ 已生成 Code128B 条形码：${text.length} 个字符，校验位 ${checksum}。`;
+  box.style.display = 'block';
+}
+function bcDownload() {
+  const canvas = document.getElementById('barcode-canvas');
+  if (!canvas.width || canvas.width <= 1) { showToast('请先生成条形码'); return; }
+  const name = (document.getElementById('barcode-input').value || 'code128').replace(/[^\w-]+/g, '_');
+  const a = document.createElement('a');
+  a.download = 'barcode-' + name + '.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+safeInit(() => arCalc(), 'arCalc');
+safeInit(() => dlCalc(), 'dlCalc');
+safeInit(() => batCalc(), 'batCalc');
+safeInit(() => rvNewGame(), 'rvNewGame');
+safeInit(() => bcRender(), 'bcRender');
 
 // ============ Search & Theme ============
 function filterTools() {
