@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等244个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等249个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等244个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等249个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等244个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等249个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -636,6 +636,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#battery-life" data-tool="battery-life"><span class="icon">🔋</span>电池续航计算器</a></li>
     <li><a href="#reversi" data-tool="reversi"><span class="icon">⚫</span>黑白棋</a></li>
     <li><a href="#barcode-gen" data-tool="barcode-gen"><span class="icon">🏷️</span>条形码生成器</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#image-grid-split" data-tool="image-grid-split"><span class="icon">🖼️</span>图片九宫格切图</a></li>
+    <li><a href="#favicon-gen" data-tool="favicon-gen"><span class="icon">🎯</span>ICO 图标生成器</a></li>
+    <li><a href="#id-photo-size" data-tool="id-photo-size"><span class="icon">🪪</span>证件照尺寸对照</a></li>
+    <li><a href="#plug-voltage" data-tool="plug-voltage"><span class="icon">🔌</span>各国电压插头查询</a></li>
+    <li><a href="#wordle" data-tool="wordle"><span class="icon">🟩</span>Wordle 猜单词</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -6942,6 +6948,126 @@ console.log('代码块');
     <div class="result-box" id="barcode-result" style="display:none;"></div>
   </section>
 
+  <!-- Image Grid Split -->
+  <section class="tool-panel" id="panel-image-grid-split">
+    <h2>🖼️ 图片九宫格切图</h2>
+    <p class="desc">上传图片，按行、列等分裁切为多张小图，适合朋友圈、小红书九宫格发布。图片全程在浏览器本地处理，不会上传服务器。</p>
+    <div id="igs-drop" style="border:2px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;">
+      <p style="color:var(--text-secondary);">📁 点击选择图片，或把图片拖到这里</p>
+      <input type="file" id="igs-file" accept="image/*" style="display:none;">
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">行数</div>
+        <input type="number" id="igs-rows" value="3" min="1" max="6" step="1" onchange="igsBuildTiles()">
+      </div>
+      <div>
+        <div class="label">列数</div>
+        <input type="number" id="igs-cols" value="3" min="1" max="6" step="1" onchange="igsBuildTiles()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="igsDownloadAll()">⬇️ 下载全部切片</button>
+      <button class="btn btn-secondary" onclick="igsSample()">💡 示例图</button>
+      <button class="btn btn-secondary" onclick="igsReset()">🔄 重置</button>
+    </div>
+    <div style="margin-top:16px;text-align:center;">
+      <canvas id="igs-preview" style="max-width:100%;display:none;border-radius:var(--radius);"></canvas>
+    </div>
+    <div class="result-box" id="igs-result" style="display:none;">--</div>
+    <div id="igs-tiles" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:16px;"></div>
+  </section>
+
+  <!-- ICO Favicon Generator -->
+  <section class="tool-panel" id="panel-favicon-gen">
+    <h2>🎯 ICO 网站图标生成器</h2>
+    <p class="desc">上传一张图片，一键生成包含 16/32/48/64/128 多种尺寸的 favicon.ico，放到网站根目录即可使用。图片不会上传服务器。</p>
+    <div id="fg-drop" style="border:2px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;">
+      <p style="color:var(--text-secondary);">📁 点击选择图片，或把图片拖到这里</p>
+      <p style="color:var(--text-secondary);font-size:12px;margin-top:4px;">建议使用 512×512 以上正方形图片，非正方形会自动居中裁切</p>
+      <input type="file" id="fg-file" accept="image/*" style="display:none;">
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="fg-download" onclick="fgDownload()" disabled>⬇️ 下载 favicon.ico</button>
+      <button class="btn btn-secondary" onclick="fgSample()">💡 示例图标</button>
+      <button class="btn btn-secondary" onclick="fgReset()">🔄 重置</button>
+    </div>
+    <div class="stats" id="fg-preview"></div>
+    <div class="result-box" id="fg-result" style="display:none;">--</div>
+  </section>
+
+  <!-- ID Photo Size -->
+  <section class="tool-panel" id="panel-id-photo-size">
+    <h2>🪪 证件照尺寸对照</h2>
+    <p class="desc">查询一寸、二寸、护照等常用证件照的毫米与像素尺寸，并按 72–1200 DPI 精确换算，方便拍照、打印和网上报名。</p>
+    <div class="label">常用规格</div>
+    <select id="idps-preset" onchange="idpsApplyPreset()">
+      <option value="-1">自定义尺寸</option>
+    </select>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">宽度 (mm)</div>
+        <input type="number" id="idps-w" value="25" min="1" step="0.1" oninput="idpsCalc()">
+      </div>
+      <div>
+        <div class="label">高度 (mm)</div>
+        <input type="number" id="idps-h" value="35" min="1" step="0.1" oninput="idpsCalc()">
+      </div>
+      <div>
+        <div class="label">分辨率 (DPI)</div>
+        <input type="number" id="idps-dpi" value="300" min="72" max="1200" step="1" oninput="idpsCalc()">
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="idps-pxw">295</div><div class="lbl">宽度像素</div></div>
+      <div class="stat-card"><div class="num" id="idps-pxh">413</div><div class="lbl">高度像素</div></div>
+      <div class="stat-card"><div class="num" id="idps-ratio" style="font-size:18px;line-height:1.8;">5:7</div><div class="lbl">宽高比</div></div>
+    </div>
+    <div class="result-box" id="idps-result" style="display:none;">--</div>
+    <div class="label" style="margin-top:16px;">常用规格对照表</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;" id="idps-table"></table>
+    </div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：不同考试、签证和证件对背景色、头部比例、文件大小有额外要求，请以办理机构的最新标准为准。</p>
+  </section>
+
+  <!-- Plug & Voltage -->
+  <section class="tool-panel" id="panel-plug-voltage">
+    <h2>🔌 各国电压与插头查询</h2>
+    <p class="desc">查询热门旅行国家 / 地区的电压、频率和插座类型，快速判断是否需要转换插头或变压器。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">搜索国家 / 地区</div>
+        <input type="text" id="pv-search" placeholder="例如：日本、美国、英国" oninput="pvRenderTable()">
+      </div>
+      <div>
+        <div class="label">快速查询</div>
+        <select id="pv-select" onchange="pvShowDetail()">
+          <option value="-1">请选择国家 / 地区</option>
+        </select>
+      </div>
+    </div>
+    <div class="result-box" id="pv-detail" style="display:none;">--</div>
+    <div style="overflow-x:auto;margin-top:16px;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;" id="pv-table"></table>
+    </div>
+    <p style="margin-top:12px;font-size:12px;color:var(--text-secondary);">提示：电压相同不代表插座通用；中国标准电压为 220V / 50Hz，插座以 A、C、I 型为主。100–240V 双电压电器通常只需转换插头；仅支持 220V 的电器在 110V 地区需要变压器。</p>
+  </section>
+
+  <!-- Wordle -->
+  <section class="tool-panel" id="panel-wordle">
+    <h2>🟩 Wordle 猜单词</h2>
+    <p class="desc">6 次机会猜中 5 字母英文单词。绿色表示位置正确，黄色表示字母存在但位置不对，灰色表示不含该字母。支持屏幕键盘和实体键盘输入。</p>
+    <div id="wd-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:340px;margin:8px auto 0;"></div>
+    <div class="btn-group" style="justify-content:center;margin-top:14px;">
+      <button class="btn" onclick="wdNewGame()">🔄 新游戏</button>
+      <button class="btn btn-secondary" onclick="wdBack()">⌫ 退格</button>
+      <button class="btn btn-secondary" onclick="wdSubmit()">↵ 提交</button>
+    </div>
+    <div id="wd-keyboard" style="margin-top:14px;display:flex;flex-direction:column;gap:6px;align-items:center;"></div>
+    <div class="result-box" id="wd-status" style="display:none;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -6949,7 +7075,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 244个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 249个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -21242,6 +21368,725 @@ safeInit(() => dlCalc(), 'dlCalc');
 safeInit(() => batCalc(), 'batCalc');
 safeInit(() => rvNewGame(), 'rvNewGame');
 safeInit(() => bcRender(), 'bcRender');
+
+// ============ Image Grid Split ============
+let igsSource = null, igsSrcW = 0, igsSrcH = 0, igsTiles = [], igsNames = [], igsBaseName = 'slice';
+function igsBind() {
+  const zone = document.getElementById('igs-drop');
+  const input = document.getElementById('igs-file');
+  if (!zone || !input) return;
+  zone.addEventListener('click', e => { if (e.target === input) return; input.click(); });
+  input.addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    if (f) igsLoadFile(f);
+  });
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--accent)'; });
+  zone.addEventListener('dragleave', e => { e.preventDefault(); zone.style.borderColor = 'var(--border)'; });
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.style.borderColor = 'var(--border)';
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) igsLoadFile(f);
+  });
+}
+function igsLoadFile(file) {
+  if (!file || !file.type || !file.type.startsWith('image/')) {
+    showToast('请选择图片文件');
+    return;
+  }
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    URL.revokeObjectURL(url);
+    igsSetSource(img, img.naturalWidth, img.naturalHeight, file.name.replace(/\.(png|jpg|jpeg|webp|gif|bmp)$/i, ''));
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(url);
+    showToast('图片读取失败，请换一张试试');
+  };
+  img.src = url;
+}
+function igsSetSource(src, w, h, baseName) {
+  igsSource = src;
+  igsSrcW = w;
+  igsSrcH = h;
+  igsBaseName = baseName || 'slice';
+  igsBuildTiles();
+}
+function igsSample() {
+  const w = 900, h = 900;
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, w, h);
+  g.addColorStop(0, '#6366f1');
+  g.addColorStop(0.5, '#ec4899');
+  g.addColorStop(1, '#f59e0b');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+  const colors = ['#ffffff', '#fde68a', '#a7f3d0', '#bfdbfe', '#fecaca', '#ddd6fe', '#fef3c7', '#bae6fd', '#bbf7d0'];
+  let k = 0;
+  for (let r = 0; r < 3; r++) {
+    for (let cx = 0; cx < 3; cx++) {
+      ctx.fillStyle = colors[k++];
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.arc(150 + cx * 300, 150 + r * 300, 82, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 64px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TOOLBOX', w / 2, h / 2);
+  igsSetSource(c, w, h, 'sample');
+  showToast('已加载示例图');
+}
+function igsBuildTiles() {
+  const rowsEl = document.getElementById('igs-rows');
+  const colsEl = document.getElementById('igs-cols');
+  const preview = document.getElementById('igs-preview');
+  const tilesBox = document.getElementById('igs-tiles');
+  const result = document.getElementById('igs-result');
+  if (!rowsEl || !colsEl || !preview || !tilesBox || !result) return;
+  const rows = Math.max(1, Math.min(6, parseInt(rowsEl.value, 10) || 3));
+  const cols = Math.max(1, Math.min(6, parseInt(colsEl.value, 10) || 3));
+  rowsEl.value = rows;
+  colsEl.value = cols;
+  if (!igsSource) {
+    preview.style.display = 'none';
+    tilesBox.innerHTML = '';
+    result.style.display = 'none';
+    return;
+  }
+  const maxW = 520;
+  const scale = Math.min(1, maxW / igsSrcW);
+  preview.width = Math.max(1, Math.round(igsSrcW * scale));
+  preview.height = Math.max(1, Math.round(igsSrcH * scale));
+  preview.style.display = 'inline-block';
+  const pctx = preview.getContext('2d');
+  pctx.clearRect(0, 0, preview.width, preview.height);
+  pctx.drawImage(igsSource, 0, 0, preview.width, preview.height);
+  pctx.strokeStyle = 'rgba(255,255,255,0.95)';
+  pctx.lineWidth = 2;
+  for (let i = 1; i < cols; i++) {
+    const x = preview.width * i / cols;
+    pctx.beginPath(); pctx.moveTo(x, 0); pctx.lineTo(x, preview.height); pctx.stroke();
+  }
+  for (let j = 1; j < rows; j++) {
+    const y = preview.height * j / rows;
+    pctx.beginPath(); pctx.moveTo(0, y); pctx.lineTo(preview.width, y); pctx.stroke();
+  }
+  igsTiles = [];
+  igsNames = [];
+  tilesBox.innerHTML = '';
+  for (let r = 0; r < rows; r++) {
+    for (let cix = 0; cix < cols; cix++) {
+      const x0 = Math.floor(cix * igsSrcW / cols);
+      const x1 = Math.floor((cix + 1) * igsSrcW / cols);
+      const y0 = Math.floor(r * igsSrcH / rows);
+      const y1 = Math.floor((r + 1) * igsSrcH / rows);
+      const tw = Math.max(1, x1 - x0);
+      const th = Math.max(1, y1 - y0);
+      const tile = document.createElement('canvas');
+      tile.width = tw; tile.height = th;
+      tile.getContext('2d').drawImage(igsSource, x0, y0, tw, th, 0, 0, tw, th);
+      const idx = igsTiles.length;
+      igsTiles.push(tile);
+      igsNames.push('r' + (r + 1) + '-c' + (cix + 1));
+      const card = document.createElement('div');
+      card.className = 'stat-card';
+      card.style.padding = '8px';
+      tile.style.width = '100%';
+      tile.style.height = 'auto';
+      tile.style.display = 'block';
+      tile.style.borderRadius = '6px';
+      const lbl = document.createElement('div');
+      lbl.className = 'lbl';
+      lbl.style.margin = '6px 0';
+      lbl.textContent = '第 ' + (r + 1) + ' 行 · 第 ' + (cix + 1) + ' 列';
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-secondary btn-sm';
+      btn.textContent = '⬇️ 下载';
+      btn.onclick = () => igsDownload(idx);
+      card.appendChild(tile);
+      card.appendChild(lbl);
+      card.appendChild(btn);
+      tilesBox.appendChild(card);
+    }
+  }
+  result.textContent = '✅ 原图 ' + igsSrcW + ' × ' + igsSrcH + ' px，已切分为 ' + rows + ' 行 × ' + cols + ' 列，共 ' + igsTiles.length + ' 张切片。';
+  result.style.display = 'block';
+}
+function igsDownload(i) {
+  const canvas = igsTiles[i];
+  if (!canvas) { showToast('请先加载图片'); return; }
+  const name = (igsBaseName || 'slice') + '-' + (igsNames[i] || i);
+  canvas.toBlob(blob => {
+    if (!blob) { showToast('导出失败'); return; }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name + '.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }, 'image/png');
+}
+function igsDownloadAll() {
+  if (!igsTiles.length) { showToast('请先加载图片'); return; }
+  igsTiles.forEach((canvas, i) => setTimeout(() => igsDownload(i), i * 200));
+  showToast('正在下载 ' + igsTiles.length + ' 张切片，浏览器可能询问是否允许多文件下载');
+}
+function igsReset() {
+  igsSource = null; igsSrcW = 0; igsSrcH = 0; igsTiles = []; igsNames = []; igsBaseName = 'slice';
+  const tilesBox = document.getElementById('igs-tiles');
+  if (tilesBox) tilesBox.innerHTML = '';
+  const preview = document.getElementById('igs-preview');
+  if (preview) { preview.style.display = 'none'; preview.width = 1; preview.height = 1; }
+  const result = document.getElementById('igs-result');
+  if (result) result.style.display = 'none';
+  const input = document.getElementById('igs-file');
+  if (input) input.value = '';
+}
+
+// ============ ICO Favicon Generator ============
+const FG_SIZES = [16, 32, 48, 64, 128];
+let fgSource = null, fgIcoBlob = null, fgBusy = false;
+function fgBind() {
+  const zone = document.getElementById('fg-drop');
+  const input = document.getElementById('fg-file');
+  if (!zone || !input) return;
+  zone.addEventListener('click', e => { if (e.target === input) return; input.click(); });
+  input.addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    if (f) fgLoadFile(f);
+  });
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--accent)'; });
+  zone.addEventListener('dragleave', e => { e.preventDefault(); zone.style.borderColor = 'var(--border)'; });
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.style.borderColor = 'var(--border)';
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) fgLoadFile(f);
+  });
+}
+function fgLoadFile(file) {
+  if (!file || !file.type || !file.type.startsWith('image/')) {
+    showToast('请选择图片文件');
+    return;
+  }
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    URL.revokeObjectURL(url);
+    fgSource = img;
+    fgGenerate();
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(url);
+    showToast('图片读取失败，请换一张试试');
+  };
+  img.src = url;
+}
+function fgSample() {
+  const size = 512;
+  const c = document.createElement('canvas');
+  c.width = size; c.height = size;
+  const ctx = c.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, size, size);
+  g.addColorStop(0, '#6366f1');
+  g.addColorStop(1, '#a78bfa');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, size / 2 - 16, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 260px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('T', size / 2, size / 2 + 12);
+  fgSource = c;
+  fgGenerate();
+  showToast('已加载示例图标');
+}
+async function fgGenerate() {
+  if (!fgSource || fgBusy) return;
+  fgBusy = true;
+  fgIcoBlob = null;
+  const btn = document.getElementById('fg-download');
+  const preview = document.getElementById('fg-preview');
+  const result = document.getElementById('fg-result');
+  if (btn) btn.disabled = true;
+  if (preview) preview.innerHTML = '';
+  try {
+    const srcW = fgSource.naturalWidth || fgSource.width;
+    const srcH = fgSource.naturalHeight || fgSource.height;
+    const side = Math.min(srcW, srcH);
+    const sx = (srcW - side) / 2;
+    const sy = (srcH - side) / 2;
+    const blobs = [];
+    for (const size of FG_SIZES) {
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(fgSource, sx, sy, side, side, 0, 0, size, size);
+      const blob = await new Promise(resolve => c.toBlob(resolve, 'image/png'));
+      if (!blob) throw new Error('PNG 编码失败');
+      blobs.push(blob);
+      if (preview) {
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        card.style.padding = '8px';
+        const img = document.createElement('img');
+        img.src = c.toDataURL('image/png');
+        img.alt = size + 'px 图标预览';
+        img.style.width = '100%';
+        img.style.maxWidth = size + 'px';
+        img.style.height = 'auto';
+        img.style.imageRendering = 'pixelated';
+        const lbl = document.createElement('div');
+        lbl.className = 'lbl';
+        lbl.textContent = size + ' × ' + size;
+        card.appendChild(img);
+        card.appendChild(lbl);
+        preview.appendChild(card);
+      }
+    }
+    const buffers = await Promise.all(blobs.map(b => b.arrayBuffer()));
+    const offset = 6 + 16 * blobs.length;
+    let total = offset;
+    buffers.forEach(ab => { total += ab.byteLength; });
+    const buf = new ArrayBuffer(total);
+    const view = new DataView(buf);
+    view.setUint16(0, 0, true);
+    view.setUint16(2, 1, true);
+    view.setUint16(4, blobs.length, true);
+    let p = 6;
+    let dataOffset = offset;
+    FG_SIZES.forEach((size, i) => {
+      view.setUint8(p, size >= 256 ? 0 : size); p += 1;
+      view.setUint8(p, size >= 256 ? 0 : size); p += 1;
+      view.setUint8(p, 0); p += 1;
+      view.setUint8(p, 0); p += 1;
+      view.setUint16(p, 1, true); p += 2;
+      view.setUint16(p, 32, true); p += 2;
+      view.setUint32(p, buffers[i].byteLength, true); p += 4;
+      view.setUint32(p, dataOffset, true); p += 4;
+      dataOffset += buffers[i].byteLength;
+    });
+    let dp = offset;
+    buffers.forEach(ab => {
+      new Uint8Array(buf, dp, ab.byteLength).set(new Uint8Array(ab));
+      dp += ab.byteLength;
+    });
+    fgIcoBlob = new Blob([buf], { type: 'image/x-icon' });
+    if (btn) btn.disabled = false;
+    if (result) {
+      result.textContent = '✅ 已生成 ' + FG_SIZES.length + ' 种尺寸的 favicon.ico，文件大小约 ' + (fgIcoBlob.size / 1024).toFixed(1) + ' KB。';
+      result.style.display = 'block';
+    }
+  } catch (err) {
+    showToast('生成失败：' + err.message);
+    if (result) {
+      result.textContent = '❌ 生成失败：' + err.message;
+      result.style.display = 'block';
+    }
+  } finally {
+    fgBusy = false;
+    if (btn) btn.disabled = !fgIcoBlob;
+  }
+}
+function fgDownload() {
+  if (!fgIcoBlob) { showToast('请先生成图标'); return; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(fgIcoBlob);
+  a.download = 'favicon.ico';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function fgReset() {
+  fgSource = null;
+  fgIcoBlob = null;
+  const preview = document.getElementById('fg-preview');
+  if (preview) preview.innerHTML = '';
+  const result = document.getElementById('fg-result');
+  if (result) result.style.display = 'none';
+  const btn = document.getElementById('fg-download');
+  if (btn) btn.disabled = true;
+  const input = document.getElementById('fg-file');
+  if (input) input.value = '';
+}
+
+// ============ ID Photo Size ============
+const IDPS_PRESETS = [
+  { name: '小一寸（22×32mm）', w: 22, h: 32, use: '驾照、社保卡、部分考试报名' },
+  { name: '一寸（25×35mm）', w: 25, h: 35, use: '简历、报名表、学生证' },
+  { name: '大一寸（33×48mm）', w: 33, h: 48, use: '护照、部分签证与资格考试' },
+  { name: '小二寸（35×45mm）', w: 35, h: 45, use: '签证、资格证' },
+  { name: '二寸（35×49mm）', w: 35, h: 49, use: '毕业证、职称评定' },
+  { name: '大二寸（35×53mm）', w: 35, h: 53, use: '结婚登记、部分国家签证' },
+  { name: '社保卡（26×32mm）', w: 26, h: 32, use: '社保卡、医保卡' },
+  { name: '美国签证（51×51mm）', w: 51, h: 51, use: '美国签证（2×2 英寸）' },
+  { name: '日本签证（45×45mm）', w: 45, h: 45, use: '日本签证' },
+  { name: '英国/韩国签证（35×45mm）', w: 35, h: 45, use: '英国、韩国等签证' }
+];
+function idpsPx(mm, dpi) { return Math.round(mm / 25.4 * dpi); }
+function idpsGcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { const t = b; b = a % b; a = t; }
+  return a || 1;
+}
+function idpsInit() {
+  const sel = document.getElementById('idps-preset');
+  if (sel && sel.options.length <= 1) {
+    IDPS_PRESETS.forEach((p, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = p.name + ' · ' + idpsPx(p.w, 300) + '×' + idpsPx(p.h, 300) + 'px';
+      sel.appendChild(o);
+    });
+  }
+  idpsRenderTable();
+  idpsCalc();
+}
+function idpsApplyPreset() {
+  const sel = document.getElementById('idps-preset');
+  if (!sel) return;
+  const i = parseInt(sel.value, 10);
+  if (i < 0 || !IDPS_PRESETS[i]) return;
+  const p = IDPS_PRESETS[i];
+  document.getElementById('idps-w').value = p.w;
+  document.getElementById('idps-h').value = p.h;
+  document.getElementById('idps-dpi').value = 300;
+  idpsCalc();
+}
+function idpsCalc() {
+  const wEl = document.getElementById('idps-w');
+  const hEl = document.getElementById('idps-h');
+  const dpiEl = document.getElementById('idps-dpi');
+  if (!wEl || !hEl || !dpiEl) return;
+  const w = parseFloat(wEl.value);
+  const h = parseFloat(hEl.value);
+  const dpi = parseFloat(dpiEl.value);
+  if (!(w > 0) || !(h > 0) || !(dpi > 0)) return;
+  const pxw = idpsPx(w, dpi);
+  const pxh = idpsPx(h, dpi);
+  const rw = Math.round(w * 10);
+  const rh = Math.round(h * 10);
+  const g = idpsGcd(rw, rh);
+  const ratio = (rw / g) + ':' + (rh / g);
+  const pxwEl = document.getElementById('idps-pxw');
+  const pxhEl = document.getElementById('idps-pxh');
+  const ratioEl = document.getElementById('idps-ratio');
+  if (pxwEl) pxwEl.textContent = pxw;
+  if (pxhEl) pxhEl.textContent = pxh;
+  if (ratioEl) ratioEl.textContent = ratio;
+  const result = document.getElementById('idps-result');
+  if (result) {
+    result.textContent = [
+      '✅ 像素尺寸：' + pxw + ' × ' + pxh + ' px（' + dpi + ' DPI）',
+      '📐 打印尺寸：' + w + ' × ' + h + ' mm（' + (w / 10) + ' × ' + (h / 10) + ' cm）',
+      '🔎 宽高比：' + ratio + '（' + (w / h).toFixed(3) + '）',
+      '💡 上传前请确认报名系统要求的像素范围、背景色与文件大小。'
+    ].join('\n');
+    result.style.display = 'block';
+  }
+}
+function idpsRenderTable() {
+  const table = document.getElementById('idps-table');
+  if (!table) return;
+  const th = 'padding:8px;border-bottom:1px solid var(--border);text-align:left;color:var(--text-secondary);font-size:12px;';
+  const td = 'padding:8px;border-bottom:1px solid var(--border);';
+  let html = '<thead><tr><th style="' + th + '">规格</th><th style="' + th + '">毫米尺寸</th><th style="' + th + '">像素（300 DPI）</th><th style="' + th + '">常见用途</th></tr></thead><tbody>';
+  IDPS_PRESETS.forEach(p => {
+    html += '<tr><td style="' + td + '">' + p.name + '</td><td style="' + td + '">' + p.w + ' × ' + p.h + ' mm</td><td style="' + td + '">' + idpsPx(p.w, 300) + ' × ' + idpsPx(p.h, 300) + ' px</td><td style="' + td + '">' + p.use + '</td></tr>';
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+// ============ Plug & Voltage ============
+const PV_DATA = [
+  { name: '中国', v: '220V', hz: '50Hz', plug: 'A / C / I' },
+  { name: '日本', v: '100V', hz: '50/60Hz', plug: 'A / B' },
+  { name: '韩国', v: '220V', hz: '60Hz', plug: 'C / F' },
+  { name: '泰国', v: '230V', hz: '50Hz', plug: 'A / B / C' },
+  { name: '新加坡', v: '230V', hz: '50Hz', plug: 'G' },
+  { name: '马来西亚', v: '240V', hz: '50Hz', plug: 'G' },
+  { name: '印度尼西亚', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '越南', v: '220V', hz: '50Hz', plug: 'A / C' },
+  { name: '菲律宾', v: '220V', hz: '60Hz', plug: 'A / B / C' },
+  { name: '印度', v: '230V', hz: '50Hz', plug: 'C / D' },
+  { name: '阿联酋', v: '220V', hz: '50Hz', plug: 'G' },
+  { name: '沙特阿拉伯', v: '220V', hz: '60Hz', plug: 'A / B / G' },
+  { name: '土耳其', v: '220V', hz: '50Hz', plug: 'C / F' },
+  { name: '俄罗斯', v: '220V', hz: '50Hz', plug: 'C / F' },
+  { name: '英国', v: '230V', hz: '50Hz', plug: 'G' },
+  { name: '法国', v: '230V', hz: '50Hz', plug: 'C / E' },
+  { name: '德国', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '意大利', v: '230V', hz: '50Hz', plug: 'C / F / L' },
+  { name: '西班牙', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '荷兰', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '瑞士', v: '230V', hz: '50Hz', plug: 'C / J' },
+  { name: '瑞典', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '挪威', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '丹麦', v: '230V', hz: '50Hz', plug: 'C / K' },
+  { name: '芬兰', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '爱尔兰', v: '230V', hz: '50Hz', plug: 'G' },
+  { name: '波兰', v: '230V', hz: '50Hz', plug: 'C / E' },
+  { name: '捷克', v: '230V', hz: '50Hz', plug: 'C / E' },
+  { name: '匈牙利', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '罗马尼亚', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '希腊', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '葡萄牙', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '奥地利', v: '230V', hz: '50Hz', plug: 'C / F' },
+  { name: '比利时', v: '230V', hz: '50Hz', plug: 'C / E' },
+  { name: '乌克兰', v: '220V', hz: '50Hz', plug: 'C / F' },
+  { name: '美国', v: '120V', hz: '60Hz', plug: 'A / B' },
+  { name: '加拿大', v: '120V', hz: '60Hz', plug: 'A / B' },
+  { name: '墨西哥', v: '127V', hz: '60Hz', plug: 'A / B' },
+  { name: '巴西', v: '127/220V', hz: '60Hz', plug: 'C / I / N' },
+  { name: '阿根廷', v: '220V', hz: '50Hz', plug: 'I' },
+  { name: '澳大利亚', v: '230V', hz: '50Hz', plug: 'I' },
+  { name: '新西兰', v: '230V', hz: '50Hz', plug: 'I' },
+  { name: '斐济', v: '240V', hz: '50Hz', plug: 'I' },
+  { name: '南非', v: '230V', hz: '50Hz', plug: 'C / D / M / N' },
+  { name: '埃及', v: '220V', hz: '50Hz', plug: 'C / F' },
+  { name: '摩洛哥', v: '220V', hz: '50Hz', plug: 'C / E' },
+  { name: '肯尼亚', v: '240V', hz: '50Hz', plug: 'G' },
+  { name: '以色列', v: '230V', hz: '50Hz', plug: 'C / H' },
+  { name: '中国台湾', v: '110V', hz: '60Hz', plug: 'A / B' },
+  { name: '中国香港', v: '220V', hz: '50Hz', plug: 'G / D' },
+  { name: '中国澳门', v: '220V', hz: '50Hz', plug: 'D / G' }
+];
+function pvInit() {
+  const sel = document.getElementById('pv-select');
+  if (sel && sel.options.length <= 1) {
+    PV_DATA.forEach((d, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = d.name + '（' + d.v + '）';
+      sel.appendChild(o);
+    });
+  }
+  pvRenderTable();
+}
+function pvRenderTable() {
+  const table = document.getElementById('pv-table');
+  if (!table) return;
+  const input = document.getElementById('pv-search');
+  const q = ((input && input.value) || '').trim().toLowerCase();
+  const rows = PV_DATA.filter(d => !q || d.name.toLowerCase().includes(q));
+  const th = 'padding:8px;border-bottom:1px solid var(--border);text-align:left;color:var(--text-secondary);font-size:12px;';
+  const td = 'padding:8px;border-bottom:1px solid var(--border);';
+  let html = '<thead><tr><th style="' + th + '">国家 / 地区</th><th style="' + th + '">电压</th><th style="' + th + '">频率</th><th style="' + th + '">插座类型</th></tr></thead><tbody>';
+  if (rows.length === 0) {
+    html += '<tr><td colspan="4" style="padding:14px;color:var(--text-secondary);">没有匹配的国家 / 地区，试试输入更短的关键词。</td></tr>';
+  } else {
+    rows.forEach(d => {
+      html += '<tr><td style="' + td + '">' + d.name + '</td><td style="' + td + '">' + d.v + '</td><td style="' + td + '">' + d.hz + '</td><td style="' + td + '">' + d.plug + ' 型</td></tr>';
+    });
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+function pvShowDetail() {
+  const sel = document.getElementById('pv-select');
+  const result = document.getElementById('pv-detail');
+  if (!sel || !result) return;
+  const i = parseInt(sel.value, 10);
+  if (i < 0 || !PV_DATA[i]) { result.style.display = 'none'; return; }
+  const d = PV_DATA[i];
+  const vNum = parseFloat(d.v);
+  let adapter;
+  let transformer;
+  if (d.name === '中国') {
+    adapter = '无需转换插头，中国标准插座可直接使用。';
+    transformer = '无需变压器。';
+  } else {
+    adapter = '当地插座为 ' + d.plug + ' 型，与中国常见的 A/C/I 型不同，建议携带万能转换插头。';
+    if (vNum < 150) {
+      transformer = '当地电压为 ' + d.v + '，仅支持 220V 的中国电器需要降压/升压变压器；标注 100–240V 的宽电压电器通常不需要。';
+    } else if (d.name === '巴西') {
+      transformer = '巴西存在 127V 与 220V 两种电压，使用前请确认当地酒店插座电压；宽电压电器通常无需变压器。';
+    } else {
+      transformer = '当地电压为 ' + d.v + '，与中国 220V 接近，通常无需变压器，但仍请确认电器铭牌上的额定电压。';
+    }
+  }
+  result.textContent = [
+    '📍 ' + d.name,
+    '⚡ 电压：' + d.v + '　频率：' + d.hz,
+    '🔌 插座类型：' + d.plug + ' 型',
+    '🧳 ' + adapter,
+    '🔋 ' + transformer,
+    '⚠️ 以上为旅行参考，具体以当地酒店和电器说明书为准。'
+  ].join('\n');
+  result.style.display = 'block';
+}
+
+// ============ Wordle ============
+const WD_WORDS = new Set(('about,above,abuse,actor,acute,adopt,adult,agent,agree,ahead,alarm,album,alert,alike,alive,allow,alone,along,alter,among,anger,angle,angry,apart,apple,apply,arena,argue,arise,array,aside,asset,audio,audit,avoid,awake,award,aware,badly,baker,basic,basis,beach,began,begin,begun,being,below,bench,birth,black,blame,blind,block,blood,board,boost,booth,bound,brain,brand,bread,break,breed,brief,bring,broad,broke,brown,build,built,buyer,cable,carry,catch,cause,chain,chair,chart,chase,cheap,check,chest,chief,child,china,chose,civil,claim,class,clean,clear,click,clock,close,cloud,coach,coast,could,count,court,cover,crane,crash,cream,crime,cross,crowd,crown,curve,cycle,daily,dance,dated,dealt,death,debut,delay,depth,dirty,doubt,dozen,draft,drama,drawn,dream,dress,drink,drive,drove,dying,eager,early,earth,eight,elite,empty,enemy,enjoy,enter,entry,equal,error,event,every,exact,exist,extra,faith,false,fault,favor,fence,field,fifth,fifty,fight,final,first,fixed,flash,fleet,floor,focus,force,forth,forty,forum,found,frame,frank,fresh,front,fruit,fully,funny,giant,given,glass,globe,going,grace,grade,grand,grant,grass,great,green,gross,group,grown,guard,guess,guest,guide,happy,harsh,heart,heavy,honey,horse,hotel,house,human,humor,ideal,image,index,inner,input,issue,joint,judge,known,label,large,laser,later,laugh,layer,learn,lease,least,leave,legal,level,light,limit,links,lives,local,logic,loose,lower,lucky,lunch,magic,major,maker,march,match,maybe,mayor,meant,media,metal,might,minor,minus,mixed,model,money,month,moral,motor,mount,mouse,mouth,moved,movie,music,needs,never,night,noise,north,novel,nurse,ocean,offer,often,order,other,ought,paint,panel,paper,party,peace,phase,phone,photo,piece,pilot,pitch,place,plain,plane,plant,plate,point,pound,power,press,price,pride,prime,print,prior,prize,proud,prove,queen,quick,quiet,quite,radio,raise,range,rapid,ratio,reach,ready,refer,right,rival,river,robot,roman,rough,round,route,royal,rural,scale,scene,scope,score,sense,serve,seven,shall,shape,share,sharp,sheet,shelf,shell,shift,shirt,shock,shoot,short,shown,sight,since,sixth,sixty,sized,skill,sleep,slide,slate,small,smart,smile,solid,solve,sorry,sound,south,space,spare,speak,speed,spend,spent,split,spoke,sport,staff,stage,stake,stand,start,state,steam,steel,stick,still,stock,stone,stood,store,storm,story,strip,stuck,study,stuff,style,sugar,suite,super,sweet,table,taken,taste,taxes,teach,teeth,thank,theft,their,theme,there,these,thick,thing,think,third,those,three,threw,throw,tight,times,tired,title,today,topic,total,touch,tough,tower,track,trade,train,treat,trend,trial,tried,tries,truck,truly,trust,truth,twice,under,until,upper,urban,usage,usual,valid,value,video,virus,visit,vital,voice,waste,watch,water,wheel,where,which,while,white,whole,whose,woman,women,world,worry,worse,worst,worth,would,write,wrong,wrote,yield,young,youth').split(','));
+const WD_RANK = { absent: 0, present: 1, correct: 2 };
+let wdAnswer = '', wdGuesses = [], wdCurrent = '', wdGameOver = false;
+const wdKeyState = {};
+function wdRenderKeyboard() {
+  const kb = document.getElementById('wd-keyboard');
+  if (!kb) return;
+  kb.innerHTML = '';
+  const rows = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+  rows.forEach((row, ri) => {
+    const rowEl = document.createElement('div');
+    rowEl.style.cssText = 'display:flex;gap:4px;justify-content:center;width:100%;flex-wrap:nowrap;';
+    if (ri === 2) rowEl.appendChild(wdMakeKey('ENTER', '↵'));
+    Array.from(row).forEach(ch => rowEl.appendChild(wdMakeKey(ch, ch)));
+    if (ri === 2) rowEl.appendChild(wdMakeKey('BACK', '⌫'));
+    kb.appendChild(rowEl);
+  });
+}
+function wdMakeKey(k, label) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.k = k;
+  b.textContent = label;
+  b.style.cssText = 'flex:1 1 auto;min-width:26px;height:40px;border:1px solid var(--border);border-radius:6px;background:var(--input-bg);color:var(--text);font-weight:700;font-size:13px;cursor:pointer;padding:0;';
+  if (k === 'ENTER' || k === 'BACK') { b.style.maxWidth = '54px'; b.style.fontSize = '12px'; }
+  b.onclick = () => wdKey(k);
+  return b;
+}
+function wdBindKeys() {
+  document.addEventListener('keydown', e => {
+    const panel = document.getElementById('panel-wordle');
+    if (!panel || !panel.classList.contains('active')) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (e.key === 'Enter') { e.preventDefault(); wdSubmit(); }
+    else if (e.key === 'Backspace') { e.preventDefault(); wdBack(); }
+    else if (/^[a-zA-Z]$/.test(e.key)) { e.preventDefault(); wdType(e.key.toUpperCase()); }
+  });
+}
+function wdRender() {
+  const grid = document.getElementById('wd-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let r = 0; r < 6; r++) {
+    const g = wdGuesses[r];
+    for (let c = 0; c < 5; c++) {
+      const cell = document.createElement('div');
+      cell.style.cssText = 'height:54px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;border:1px solid var(--border);border-radius:8px;background:var(--input-bg);color:var(--text);text-transform:uppercase;';
+      let ch = '';
+      if (g) {
+        ch = g.word[c];
+        const st = g.result[c];
+        if (st === 'correct') { cell.style.background = '#22c55e'; cell.style.borderColor = '#22c55e'; cell.style.color = '#fff'; }
+        else if (st === 'present') { cell.style.background = '#eab308'; cell.style.borderColor = '#eab308'; cell.style.color = '#fff'; }
+        else { cell.style.background = '#64748b'; cell.style.borderColor = '#64748b'; cell.style.color = '#fff'; }
+      } else if (r === wdGuesses.length) {
+        ch = wdCurrent[c] || '';
+      }
+      cell.textContent = ch;
+      grid.appendChild(cell);
+    }
+  }
+  wdPaintKeyboard();
+}
+function wdPaintKeyboard() {
+  document.querySelectorAll('#wd-keyboard button').forEach(b => {
+    const k = b.dataset.k;
+    const st = wdKeyState[k];
+    if (st === 'correct') { b.style.background = '#22c55e'; b.style.borderColor = '#22c55e'; b.style.color = '#fff'; }
+    else if (st === 'present') { b.style.background = '#eab308'; b.style.borderColor = '#eab308'; b.style.color = '#fff'; }
+    else if (st === 'absent') { b.style.background = 'var(--border)'; b.style.color = 'var(--text-secondary)'; }
+    else { b.style.background = 'var(--input-bg)'; b.style.color = 'var(--text)'; }
+  });
+}
+function wdKey(k) {
+  if (k === 'ENTER') wdSubmit();
+  else if (k === 'BACK') wdBack();
+  else wdType(k);
+}
+function wdType(ch) {
+  if (wdGameOver) return;
+  if (wdCurrent.length >= 5) return;
+  wdCurrent += ch;
+  wdRender();
+}
+function wdBack() {
+  if (wdGameOver) return;
+  wdCurrent = wdCurrent.slice(0, -1);
+  wdRender();
+}
+function wdMsg(text) {
+  const el = document.getElementById('wd-status');
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+}
+function wdSubmit() {
+  if (wdGameOver) { wdMsg('本局已结束，点击“新游戏”再来一局。'); return; }
+  if (wdCurrent.length < 5) { wdMsg('请输入 5 个字母后再提交。'); return; }
+  const word = wdCurrent.toUpperCase();
+  if (!WD_WORDS.has(word.toLowerCase())) { wdMsg('该单词不在词库中，换一个试试。'); return; }
+  const result = Array(5).fill('absent');
+  const ans = Array.from(wdAnswer);
+  for (let i = 0; i < 5; i++) {
+    if (word[i] === ans[i]) { result[i] = 'correct'; ans[i] = null; }
+  }
+  for (let i = 0; i < 5; i++) {
+    if (result[i] === 'correct') continue;
+    const j = ans.indexOf(word[i]);
+    if (j >= 0) { result[i] = 'present'; ans[j] = null; }
+  }
+  wdGuesses.push({ word: word, result: result });
+  for (let i = 0; i < 5; i++) {
+    const ch = word[i];
+    const st = result[i];
+    if (!wdKeyState[ch] || WD_RANK[st] > WD_RANK[wdKeyState[ch]]) wdKeyState[ch] = st;
+  }
+  wdCurrent = '';
+  if (word === wdAnswer) {
+    wdGameOver = true;
+    wdRender();
+    wdMsg('🎉 恭喜猜中！答案是 ' + wdAnswer + '，共用了 ' + wdGuesses.length + ' 次。');
+    return;
+  }
+  if (wdGuesses.length >= 6) {
+    wdGameOver = true;
+    wdRender();
+    wdMsg('😵 机会已用完，正确答案是 ' + wdAnswer + '。点击“新游戏”再试一次。');
+    return;
+  }
+  wdRender();
+  wdMsg('第 ' + wdGuesses.length + ' 次猜测已完成，还剩 ' + (6 - wdGuesses.length) + ' 次机会。');
+}
+function wdNewGame() {
+  const words = Array.from(WD_WORDS);
+  wdAnswer = words[Math.floor(Math.random() * words.length)].toUpperCase();
+  wdGuesses = [];
+  wdCurrent = '';
+  wdGameOver = false;
+  Object.keys(wdKeyState).forEach(k => delete wdKeyState[k]);
+  wdRender();
+  wdMsg('已开始新游戏：请输入 5 个字母的英文单词，共 6 次机会。');
+}
+function wdInit() {
+  wdRenderKeyboard();
+  wdBindKeys();
+  wdNewGame();
+}
+
+safeInit(() => igsBind(), 'igsBind');
+safeInit(() => fgBind(), 'fgBind');
+safeInit(() => idpsInit(), 'idpsInit');
+safeInit(() => pvInit(), 'pvInit');
+safeInit(() => wdInit(), 'wdInit');
 
 // ============ Search & Theme ============
 function filterTools() {
