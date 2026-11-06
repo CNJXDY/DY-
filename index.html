@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等249个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等254个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等249个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等254个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等249个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等254个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -642,6 +642,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#id-photo-size" data-tool="id-photo-size"><span class="icon">🪪</span>证件照尺寸对照</a></li>
     <li><a href="#plug-voltage" data-tool="plug-voltage"><span class="icon">🔌</span>各国电压插头查询</a></li>
     <li><a href="#wordle" data-tool="wordle"><span class="icon">🟩</span>Wordle 猜单词</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#qinqi-calc" data-tool="qinqi-calc"><span class="icon">👪</span>亲戚称呼计算器</a></li>
+    <li><a href="#spf-calc" data-tool="spf-calc"><span class="icon">🧴</span>防晒时间计算器</a></li>
+    <li><a href="#json-flatten" data-tool="json-flatten"><span class="icon">🧩</span>JSON 扁平化/还原</a></li>
+    <li><a href="#newline-convert" data-tool="newline-convert"><span class="icon">↵</span>换行符转换器</a></li>
+    <li><a href="#schulte-grid" data-tool="schulte-grid"><span class="icon">🎯</span>舒尔特方格</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7068,6 +7074,172 @@ console.log('代码块');
     <div class="result-box" id="wd-status" style="display:none;">--</div>
   </section>
 
+  <!-- 亲戚称呼计算器 -->
+  <section class="tool-panel" id="panel-qinqi-calc">
+    <h2>👪 亲戚称呼计算器</h2>
+    <p class="desc">输入「爸爸的哥哥」「妈妈的妈妈」等关系链，自动推算正确称呼，过年串门、走亲访友不再叫错人。</p>
+    <div class="label">关系链（用「的」分隔）</div>
+    <input type="text" id="qq-input" placeholder="例如：爸爸的哥哥、妈妈的妈妈、老公的爸爸" onkeydown="if(event.key==='Enter')qqCalc()">
+    <div class="btn-group">
+      <button class="btn" onclick="qqCalc()">🔍 计算称呼</button>
+      <button class="btn btn-secondary" onclick="qqClear()">🗑️ 清空</button>
+    </div>
+    <div class="btn-group" style="margin-top:6px;">
+      <button class="btn btn-secondary btn-sm" onclick="qqExample('爸爸的哥哥')">爸爸的哥哥</button>
+      <button class="btn btn-secondary btn-sm" onclick="qqExample('妈妈的妈妈')">妈妈的妈妈</button>
+      <button class="btn btn-secondary btn-sm" onclick="qqExample('爸爸的姐姐的儿子')">爸爸的姐姐的儿子</button>
+      <button class="btn btn-secondary btn-sm" onclick="qqExample('老公的爸爸')">老公的爸爸</button>
+      <button class="btn btn-secondary btn-sm" onclick="qqExample('女儿的儿子的女儿')">女儿的外孙女</button>
+    </div>
+    <div class="result-box" id="qq-result" style="display:none;">--</div>
+    <div class="label" style="margin-top:16px;">常见称呼速查</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;" id="qq-table"></table>
+    </div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：各地叫法存在差异（如「姥姥/外婆」「伯伯/大爷」），同辈的哥/弟、姐/妹需结合年龄判断，结果仅供参考。</p>
+  </section>
+
+  <!-- 防晒时间计算器 -->
+  <section class="tool-panel" id="panel-spf-calc">
+    <h2>🧴 防晒时间计算器</h2>
+    <p class="desc">结合 SPF 值、肤质、紫外线指数与活动状态，估算无防护晒伤时间和建议补涂间隔，帮助科学防晒。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">SPF 值</div>
+        <input type="number" id="spf-value" value="30" min="1" max="100" step="1" oninput="spfCalc()">
+      </div>
+      <div>
+        <div class="label">肤质类型（Fitzpatrick）</div>
+        <select id="spf-skin" onchange="spfCalc()">
+          <option value="10">I 型 · 极易晒伤</option>
+          <option value="15" selected>II 型 · 容易晒伤</option>
+          <option value="20">III 型 · 一般</option>
+          <option value="25">IV 型 · 较耐晒</option>
+          <option value="30">V 型 · 耐晒</option>
+          <option value="40">VI 型 · 极耐晒</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">紫外线指数（UV Index）</div>
+        <input type="number" id="spf-uv" value="6" min="0" max="15" step="1" oninput="spfCalc()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">活动状态</div>
+        <select id="spf-activity" onchange="spfCalc()">
+          <option value="1">日常通勤 / 室内</option>
+          <option value="0.8">户外步行 / 轻度活动</option>
+          <option value="0.6">大量出汗 / 运动</option>
+          <option value="0.5">游泳 / 长时间沾水</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">涂抹习惯</div>
+        <select id="spf-reapply" onchange="spfCalc()">
+          <option value="1">足量涂抹（2mg/cm²）</option>
+          <option value="0.7" selected>日常薄涂</option>
+          <option value="0.5">随意涂抹</option>
+        </select>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="spf-time" style="font-size:22px;">--</div><div class="lbl">建议补涂间隔</div></div>
+      <div class="stat-card"><div class="num" id="spf-med" style="font-size:22px;">--</div><div class="lbl">无防护晒伤时间</div></div>
+      <div class="stat-card"><div class="num" id="spf-level" style="font-size:22px;">--</div><div class="lbl">紫外线等级</div></div>
+    </div>
+    <div class="result-box" id="spf-result" style="display:none;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：防晒霜应每 2 小时补涂一次，出汗或游泳后需立即补涂；本结果基于常见经验公式估算，不替代皮肤科医生建议。</p>
+  </section>
+
+  <!-- JSON 扁平化 -->
+  <section class="tool-panel" id="panel-json-flatten">
+    <h2>🧩 JSON 扁平化 / 还原</h2>
+    <p class="desc">把嵌套 JSON 压平成「a.b[0].c」形式的键值对，或把扁平结构还原成嵌套对象，便于日志分析、表格导入与配置比对。</p>
+    <textarea id="jf-input" placeholder='粘贴 JSON，例如：{"user":{"name":"张三","tags":["A","B"]}}'></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="jfFlatten()">📦 扁平化</button>
+      <button class="btn" onclick="jfUnflatten()">🧱 还原嵌套</button>
+      <button class="btn btn-secondary" onclick="jfSample()">💡 示例</button>
+      <button class="btn btn-secondary" onclick="jfCopy()">📋 复制结果</button>
+    </div>
+    <div class="label">结果</div>
+    <textarea id="jf-output" placeholder="结果会显示在这里..." style="min-height:160px;" readonly></textarea>
+    <div class="result-box" id="jf-status" style="display:none;">--</div>
+  </section>
+
+  <!-- 换行符转换器 -->
+  <section class="tool-panel" id="panel-newline-convert">
+    <h2>↵ 换行符转换器</h2>
+    <p class="desc">在 Windows（CRLF）、Unix / macOS（LF）与旧版 Mac（CR）换行格式之间转换，并检测文本中的混合换行符。</p>
+    <textarea id="nl-input" placeholder="粘贴需要转换的文本..." oninput="nlAnalyze()"></textarea>
+    <div class="flex-row">
+      <div>
+        <div class="label">目标换行符</div>
+        <select id="nl-target" onchange="nlConvert()">
+          <option value="LF" selected>LF（Unix / macOS / Linux）</option>
+          <option value="CRLF">CRLF（Windows）</option>
+          <option value="CR">CR（旧版 Mac）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">附加处理</div>
+        <select id="nl-extra" onchange="nlConvert()">
+          <option value="none" selected>不处理</option>
+          <option value="trim">去除每行末尾空白</option>
+          <option value="blank">删除多余空行</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="nlConvert()">🔄 转换</button>
+      <button class="btn btn-secondary" onclick="nlSample()">💡 示例</button>
+      <button class="btn btn-secondary" onclick="nlCopy()">📋 复制结果</button>
+      <button class="btn btn-secondary" onclick="nlReset()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="nl-lines" style="font-size:22px;">0</div><div class="lbl">总行数</div></div>
+      <div class="stat-card"><div class="num" id="nl-crlf" style="font-size:22px;">0</div><div class="lbl">CRLF</div></div>
+      <div class="stat-card"><div class="num" id="nl-lf" style="font-size:22px;">0</div><div class="lbl">单独 LF</div></div>
+      <div class="stat-card"><div class="num" id="nl-cr" style="font-size:22px;">0</div><div class="lbl">单独 CR</div></div>
+    </div>
+    <div class="label">转换结果</div>
+    <textarea id="nl-output" placeholder="转换结果会显示在这里..." style="min-height:160px;" readonly></textarea>
+    <div class="result-box" id="nl-status" style="display:none;">--</div>
+  </section>
+
+  <!-- 舒尔特方格 -->
+  <section class="tool-panel" id="panel-schulte-grid">
+    <h2>🎯 舒尔特方格</h2>
+    <p class="desc">在方格中按 1 到 N 的顺序依次点击数字，训练注意力、视觉搜索与反应速度。点击「开始」后计时，挑战自己的最佳成绩。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">方格大小</div>
+        <select id="sg-size" onchange="sgNew()">
+          <option value="3">3×3（入门）</option>
+          <option value="4">4×4（进阶）</option>
+          <option value="5" selected>5×5（标准）</option>
+          <option value="6">6×6（挑战）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">最佳成绩</div>
+        <div class="stat-card" style="margin-top:4px;padding:10px;"><div class="num" id="sg-best" style="font-size:22px;">--</div><div class="lbl">当前尺寸最快用时</div></div>
+      </div>
+    </div>
+    <div id="sg-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:420px;margin:16px auto 0;"></div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" onclick="sgStart()">▶️ 开始计时</button>
+      <button class="btn btn-secondary" onclick="sgNew()">🔄 重新排列</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sg-time" style="font-size:22px;">0.0</div><div class="lbl">当前用时（秒）</div></div>
+      <div class="stat-card"><div class="num" id="sg-next" style="font-size:22px;">1</div><div class="lbl">下一个数字</div></div>
+      <div class="stat-card"><div class="num" id="sg-errors" style="font-size:22px;">0</div><div class="lbl">点错次数</div></div>
+    </div>
+    <div class="result-box" id="sg-status" style="display:none;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7075,7 +7247,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 249个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 254个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -22087,6 +22259,496 @@ safeInit(() => fgBind(), 'fgBind');
 safeInit(() => idpsInit(), 'idpsInit');
 safeInit(() => pvInit(), 'pvInit');
 safeInit(() => wdInit(), 'wdInit');
+
+// ============ 亲戚称呼计算器 ============
+const QQ_TOKENS = {
+  '爸爸': ['F'], '父亲': ['F'], '爸': ['F'], '老爸': ['F'],
+  '妈妈': ['M'], '母亲': ['M'], '妈': ['M'], '老妈': ['M'],
+  '哥哥': ['B+'], '大哥': ['B+'], '兄长': ['B+'],
+  '弟弟': ['B-'], '老弟': ['B-'],
+  '姐姐': ['S+'], '大姐': ['S+'],
+  '妹妹': ['S-'], '小妹': ['S-'],
+  '儿子': ['SON'], '女儿': ['DAU'],
+  '丈夫': ['H'], '老公': ['H'], '先生': ['H'],
+  '妻子': ['W'], '老婆': ['W'], '太太': ['W'],
+  '爷爷': ['F', 'F'], '祖父': ['F', 'F'],
+  '奶奶': ['F', 'M'], '祖母': ['F', 'M'],
+  '外公': ['M', 'F'], '姥爷': ['M', 'F'],
+  '外婆': ['M', 'M'], '姥姥': ['M', 'M'],
+  '伯父': ['F', 'B+'], '伯伯': ['F', 'B+'],
+  '叔叔': ['F', 'B-'], '姑姑': ['F', 'S+'],
+  '舅舅': ['M', 'B+'], '姨妈': ['M', 'S+'], '阿姨': ['M', 'S+'],
+  '孙子': ['SON', 'SON'], '孙女': ['SON', 'DAU'],
+  '外孙': ['DAU', 'SON'], '外孙女': ['DAU', 'DAU'],
+  '侄子': ['B+', 'SON'], '侄女': ['B+', 'DAU'],
+  '外甥': ['S+', 'SON'], '外甥女': ['S+', 'DAU'],
+  '公公': ['H', 'F'], '婆婆': ['H', 'M'],
+  '岳父': ['W', 'F'], '岳母': ['W', 'M']
+};
+const QQ_PATH_TEXT = {
+  'F': '爸爸', 'M': '妈妈', 'B+': '哥哥', 'B-': '弟弟',
+  'S+': '姐姐', 'S-': '妹妹', 'SON': '儿子', 'DAU': '女儿',
+  'H': '老公', 'W': '老婆'
+};
+const QQ_LABELS = {
+  '': '自己',
+  'F': '爸爸', 'M': '妈妈',
+  'B+': '哥哥', 'B-': '弟弟', 'S+': '姐姐', 'S-': '妹妹',
+  'SON': '儿子', 'DAU': '女儿', 'H': '老公', 'W': '老婆',
+  'F|F': '爷爷', 'F|M': '奶奶', 'M|F': '外公', 'M|M': '外婆',
+  'F|B+': '伯父（大伯）', 'F|B-': '叔叔',
+  'F|S+': '姑姑', 'F|S-': '姑姑',
+  'M|B+': '舅舅', 'M|B-': '舅舅',
+  'M|S+': '姨妈', 'M|S-': '姨妈',
+  'SON|SON': '孙子', 'SON|DAU': '孙女',
+  'DAU|SON': '外孙', 'DAU|DAU': '外孙女',
+  'B+|SON': '侄子', 'B+|DAU': '侄女',
+  'B-|SON': '侄子', 'B-|DAU': '侄女',
+  'S+|SON': '外甥', 'S+|DAU': '外甥女',
+  'S-|SON': '外甥', 'S-|DAU': '外甥女',
+  'H|F': '公公', 'H|M': '婆婆', 'W|F': '岳父', 'W|M': '岳母',
+  'F|F|F': '曾祖父', 'F|F|M': '曾祖母',
+  'M|F|F': '外曾祖父', 'M|F|M': '外曾祖母',
+  'SON|SON|SON': '曾孙', 'SON|SON|DAU': '曾孙女',
+  'DAU|SON|SON': '外曾孙', 'DAU|SON|DAU': '外曾孙女',
+  'F|B+|SON': '堂哥 / 堂弟', 'F|B+|DAU': '堂姐 / 堂妹',
+  'F|B-|SON': '堂哥 / 堂弟', 'F|B-|DAU': '堂姐 / 堂妹',
+  'F|S+|SON': '表哥 / 表弟', 'F|S+|DAU': '表姐 / 表妹',
+  'F|S-|SON': '表哥 / 表弟', 'F|S-|DAU': '表姐 / 表妹',
+  'M|B+|SON': '表哥 / 表弟', 'M|B+|DAU': '表姐 / 表妹',
+  'M|B-|SON': '表哥 / 表弟', 'M|B-|DAU': '表姐 / 表妹',
+  'M|S+|SON': '表哥 / 表弟', 'M|S+|DAU': '表姐 / 表妹',
+  'M|S-|SON': '表哥 / 表弟', 'M|S-|DAU': '表姐 / 表妹'
+};
+const QQ_TABLE = [
+  ['爸爸的爸爸', '爷爷'], ['爸爸的妈妈', '奶奶'],
+  ['妈妈的爸爸', '外公'], ['妈妈的妈妈', '外婆'],
+  ['爸爸的哥哥', '伯父（大伯）'], ['爸爸的弟弟', '叔叔'],
+  ['爸爸的姐姐 / 妹妹', '姑姑'],
+  ['妈妈的哥哥 / 弟弟', '舅舅'], ['妈妈的姐姐 / 妹妹', '姨妈'],
+  ['哥哥 / 弟弟的儿子', '侄子'], ['姐姐 / 妹妹的儿子', '外甥'],
+  ['老公的爸爸', '公公'], ['老公的妈妈', '婆婆'],
+  ['老婆的爸爸', '岳父'], ['老婆的妈妈', '岳母'],
+  ['儿子的儿子', '孙子'], ['女儿的女儿', '外孙女']
+];
+function qqInit() {
+  const table = document.getElementById('qq-table');
+  if (!table) return;
+  const th = 'padding:8px;border-bottom:1px solid var(--border);text-align:left;color:var(--text-secondary);font-size:12px;';
+  const td = 'padding:8px;border-bottom:1px solid var(--border);';
+  let html = '<thead><tr><th style="' + th + '">关系链</th><th style="' + th + '">常见称呼</th></tr></thead><tbody>';
+  QQ_TABLE.forEach(row => {
+    html += '<tr><td style="' + td + '">' + row[0] + '</td><td style="' + td + '">' + row[1] + '</td></tr>';
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+function qqSetResult(text) {
+  const el = document.getElementById('qq-result');
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+}
+function qqCalc() {
+  const input = document.getElementById('qq-input');
+  if (!input) return;
+  const raw = (input.value || '').trim();
+  if (!raw) { qqSetResult('⚠️ 请先输入关系链，例如「爸爸的哥哥」。'); return; }
+  const chainText = raw.replace(/^我(的)?/, '').trim();
+  const tokens = chainText.replace(/[，,；;、]/g, ' ').split(/的|之|\s+/).map(s => s.trim()).filter(Boolean);
+  if (!tokens.length) { qqSetResult('⚠️ 请输入有效的关系词，例如「爸爸的哥哥」。'); return; }
+  let path = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (t === '我' || t === '自己' || t === '俺') continue;
+    const step = QQ_TOKENS[t];
+    if (!step) {
+      qqSetResult('❓ 暂不支持「' + t + '」这个关系词。\n可用词：爸爸、妈妈、哥哥、弟弟、姐姐、妹妹、儿子、女儿、老公、老婆、爷爷、奶奶、外公、外婆、伯父、叔叔、姑姑、舅舅、姨妈、公公、婆婆、岳父、岳母等。');
+      return;
+    }
+    path = path.concat(step);
+  }
+  if (!path.length) { qqSetResult('⚠️ 请输入至少一个关系词，例如「爸爸的哥哥」。'); return; }
+  const key = path.join('|');
+  const label = QQ_LABELS[key];
+  const pathText = path.map(s => QQ_PATH_TEXT[s] || s).join('的');
+  let out = '👤 你输入的关系：' + raw;
+  out += '\n🧭 关系路径：我 → ' + pathText;
+  if (label) {
+    out += '\n🏷️ 对方是你的：' + label;
+    out += '\n💡 说明：按普通话常用称谓推算，同辈的哥 / 弟、姐 / 妹需结合年龄判断，各地叫法可能不同。';
+  } else {
+    out += '\n🏷️ 称呼：这段关系比较远，通常按「' + pathText + '」称呼。';
+    out += '\n💡 说明：超出常用称谓范围（如多次隔代、姻亲再组合），建议直接称呼「叔叔 / 阿姨」或询问家人。';
+  }
+  qqSetResult(out);
+}
+function qqExample(v) {
+  const input = document.getElementById('qq-input');
+  if (!input) return;
+  input.value = v;
+  qqCalc();
+}
+function qqClear() {
+  const input = document.getElementById('qq-input');
+  const result = document.getElementById('qq-result');
+  if (input) input.value = '';
+  if (result) { result.textContent = '--'; result.style.display = 'none'; }
+}
+
+// ============ 防晒时间计算器 ============
+function spfLevel(uv) {
+  if (uv <= 2) return '低';
+  if (uv <= 5) return '中等';
+  if (uv <= 7) return '高';
+  if (uv <= 10) return '很高';
+  return '极高';
+}
+function spfCalc() {
+  const spfEl = document.getElementById('spf-value');
+  const skinEl = document.getElementById('spf-skin');
+  const uvEl = document.getElementById('spf-uv');
+  const actEl = document.getElementById('spf-activity');
+  const repEl = document.getElementById('spf-reapply');
+  if (!spfEl || !skinEl || !uvEl || !actEl || !repEl) return;
+  const spf = Math.max(1, Math.min(100, parseFloat(spfEl.value) || 1));
+  const skin = parseFloat(skinEl.value) || 15;
+  const uv = Math.max(0, Math.min(15, parseFloat(uvEl.value) || 0));
+  const act = parseFloat(actEl.value) || 1;
+  const rep = parseFloat(repEl.value) || 1;
+  const uvFactor = uv <= 0 ? 60 : 5 / uv;
+  const med = Math.round(Math.min(240, skin * uvFactor));
+  const protectedMin = Math.round(med * spf * act * rep);
+  const interval = Math.min(120, Math.max(10, protectedMin));
+  const timeEl = document.getElementById('spf-time');
+  const medEl = document.getElementById('spf-med');
+  const levelEl = document.getElementById('spf-level');
+  if (timeEl) timeEl.textContent = interval + ' 分钟';
+  if (medEl) medEl.textContent = uv <= 0 ? '风险极低' : med + ' 分钟';
+  if (levelEl) levelEl.textContent = spfLevel(uv);
+  const result = document.getElementById('spf-result');
+  if (result) {
+    const lines = [
+      '🧴 防晒参数：SPF ' + spf + ' · 紫外线指数 ' + uv + '（' + spfLevel(uv) + '）',
+      '⏱️ 无防护晒伤时间：' + (uv <= 0 ? '紫外线极低，短时间户外几乎无晒伤风险' : '约 ' + med + ' 分钟'),
+      '🛡️ 理论防护时间：约 ' + protectedMin + ' 分钟（受涂抹量与活动状态影响）',
+      '🔔 建议补涂间隔：约 ' + interval + ' 分钟'
+    ];
+    if (uv >= 6) lines.push('☀️ 紫外线较强，建议搭配遮阳帽、太阳镜和防晒衣。');
+    if (act < 1) lines.push('💦 出汗或沾水会明显降低防护效果，请及时补涂。');
+    if (rep < 1) lines.push('📏 薄涂会降低实际防护值，建议每次使用约一元硬币大小的用量。');
+    lines.push('⚠️ 无论计算值多长，户外都建议每 2 小时补涂一次。');
+    result.textContent = lines.join('\n');
+    result.style.display = 'block';
+  }
+}
+
+// ============ JSON 扁平化 / 还原 ============
+function jfMsg(text) {
+  const el = document.getElementById('jf-status');
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+}
+function jfFlatten() {
+  const input = document.getElementById('jf-input');
+  const output = document.getElementById('jf-output');
+  if (!input || !output) return;
+  const raw = (input.value || '').trim();
+  if (!raw) { jfMsg('⚠️ 请先粘贴要处理的 JSON。'); return; }
+  let data;
+  try { data = JSON.parse(raw); }
+  catch (e) { jfMsg('❌ JSON 解析失败：' + e.message); return; }
+  if (!data || typeof data !== 'object') { jfMsg('⚠️ 请输入 JSON 对象或数组。'); return; }
+  const out = {};
+  function walk(value, prefix) {
+    if (Array.isArray(value)) {
+      if (!value.length) { if (prefix) out[prefix] = []; return; }
+      value.forEach((item, i) => walk(item, prefix + '[' + i + ']'));
+      return;
+    }
+    if (value && typeof value === 'object') {
+      const keys = Object.keys(value);
+      if (!keys.length) { if (prefix) out[prefix] = {}; return; }
+      keys.forEach(k => walk(value[k], prefix ? prefix + '.' + k : k));
+      return;
+    }
+    out[prefix] = value;
+  }
+  walk(data, '');
+  if (!Object.keys(out).length) out.empty = {};
+  output.value = JSON.stringify(out, null, 2);
+  jfMsg('✅ 扁平化完成：共 ' + Object.keys(out).length + ' 个键值对。');
+}
+function jfTokens(key) {
+  const parts = key.match(/[^.[\]]+|\[(\d+)\]/g) || [];
+  return parts.map(s => {
+    const m = /^\[(\d+)\]$/.exec(s);
+    return m ? Number(m[1]) : s;
+  });
+}
+function jfUnflatten() {
+  const input = document.getElementById('jf-input');
+  const output = document.getElementById('jf-output');
+  if (!input || !output) return;
+  const raw = (input.value || '').trim();
+  if (!raw) { jfMsg('⚠️ 请先粘贴扁平化的 JSON 对象。'); return; }
+  let flat = null;
+  try { flat = JSON.parse(raw); } catch (e) { flat = null; }
+  const isFlat = obj => {
+    if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return false;
+    return Object.keys(obj).every(k => obj[k] === null || typeof obj[k] !== 'object');
+  };
+  if (!isFlat(flat)) {
+    const prev = document.getElementById('jf-output');
+    if (prev && prev.value.trim()) {
+      try { const alt = JSON.parse(prev.value); if (isFlat(alt)) flat = alt; } catch (e) { /* 忽略 */ }
+    }
+  }
+  if (!isFlat(flat)) {
+    jfMsg('⚠️ 还原嵌套需要扁平对象（如 {"a.b":1}）；也可以先点「扁平化」生成结果后再还原。'); return;
+  }
+  const keys = Object.keys(flat);
+  const firstToks = keys.length ? jfTokens(keys[0]) : [];
+  let root = firstToks.length && typeof firstToks[0] === 'number' ? [] : {};
+  const badKeys = [];
+  keys.forEach(key => {
+    const toks = jfTokens(key);
+    if (!toks.length) return;
+    if (toks.some(t => t === '__proto__' || t === 'constructor' || t === 'prototype')) {
+      badKeys.push(key); return;
+    }
+    let cur = root;
+    for (let i = 0; i < toks.length; i++) {
+      const t = toks[i];
+      if (i === toks.length - 1) { cur[t] = flat[key]; break; }
+      const next = toks[i + 1];
+      if (cur[t] === null || typeof cur[t] !== 'object') {
+        cur[t] = typeof next === 'number' ? [] : {};
+      }
+      cur = cur[t];
+    }
+  });
+  output.value = JSON.stringify(root, null, 2);
+  jfMsg('✅ 还原完成：共处理 ' + (keys.length - badKeys.length) + ' 个键。' + (badKeys.length ? '已跳过不安全键：' + badKeys.join('、') : ''));
+}
+function jfSample() {
+  const input = document.getElementById('jf-input');
+  if (!input) return;
+  input.value = '{"user":{"name":"张三","age":28,"tags":["前端","摄影"]},"orders":[{"id":1001,"total":99.5},{"id":1002,"total":35}]}';
+  jfFlatten();
+}
+function jfCopy() {
+  const output = document.getElementById('jf-output');
+  if (!output || !output.value) { showToast('暂无可复制的结果'); return; }
+  writeClipboard(output.value).then(() => showToast('已复制结果！'));
+}
+function jfInit() {
+  jfMsg('提示：先点「示例」可快速体验扁平化效果。');
+}
+
+// ============ 换行符转换器 ============
+function nlCount(text) {
+  const crlf = (text.match(/\r\n/g) || []).length;
+  const rest = text.replace(/\r\n/g, '');
+  const lf = (rest.match(/\n/g) || []).length;
+  const cr = (rest.match(/\r/g) || []).length;
+  return { crlf: crlf, lf: lf, cr: cr, breaks: crlf + lf + cr };
+}
+function nlAnalyze() {
+  const input = document.getElementById('nl-input');
+  if (!input) return;
+  const c = nlCount(input.value || '');
+  const lines = (input.value || '') ? c.breaks + 1 : 0;
+  const linesEl = document.getElementById('nl-lines');
+  const crlfEl = document.getElementById('nl-crlf');
+  const lfEl = document.getElementById('nl-lf');
+  const crEl = document.getElementById('nl-cr');
+  if (linesEl) linesEl.textContent = lines;
+  if (crlfEl) crlfEl.textContent = c.crlf;
+  if (lfEl) lfEl.textContent = c.lf;
+  if (crEl) crEl.textContent = c.cr;
+}
+function nlConvert() {
+  const input = document.getElementById('nl-input');
+  const output = document.getElementById('nl-output');
+  const targetEl = document.getElementById('nl-target');
+  const extraEl = document.getElementById('nl-extra');
+  if (!input || !output || !targetEl || !extraEl) return;
+  const raw = input.value || '';
+  if (!raw) {
+    output.value = '';
+    nlAnalyze();
+    const status = document.getElementById('nl-status');
+    if (status) { status.textContent = '⚠️ 请先输入或粘贴文本。'; status.style.display = 'block'; }
+    return;
+  }
+  let text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const extra = extraEl.value;
+  if (extra === 'trim') {
+    text = text.split('\n').map(line => line.replace(/[ \t]+$/g, '')).join('\n');
+  } else if (extra === 'blank') {
+    text = text.replace(/\n{3,}/g, '\n\n');
+  }
+  const sep = targetEl.value === 'CRLF' ? '\r\n' : (targetEl.value === 'CR' ? '\r' : '\n');
+  const result = text.replace(/\n/g, sep);
+  output.value = result;
+  nlAnalyze();
+  const targetName = targetEl.value === 'CRLF' ? 'Windows（CRLF）' : (targetEl.value === 'CR' ? '旧版 Mac（CR）' : 'Unix / macOS（LF）');
+  const status = document.getElementById('nl-status');
+  if (status) {
+    const c = nlCount(result);
+    status.textContent = '✅ 已转换为 ' + targetName + '，共 ' + c.breaks + ' 个换行符。' + (extra === 'trim' ? '（已去除行尾空白）' : extra === 'blank' ? '（已压缩多余空行）' : '');
+    status.style.display = 'block';
+  }
+}
+function nlSample() {
+  const input = document.getElementById('nl-input');
+  if (!input) return;
+  input.value = '第一行\r\n第二行\n第三行\r第四行   \r\n\r\n\r\n第五行';
+  nlConvert();
+}
+function nlCopy() {
+  const output = document.getElementById('nl-output');
+  if (!output || !output.value) { showToast('暂无可复制的结果'); return; }
+  writeClipboard(output.value).then(() => showToast('已复制结果！'));
+}
+function nlReset() {
+  ['nl-input', 'nl-output', 'nl-status'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (id.endsWith('status')) { el.textContent = '--'; el.style.display = 'none'; }
+    else el.value = '';
+  });
+  nlAnalyze();
+}
+function nlInit() {
+  nlAnalyze();
+}
+
+// ============ 舒尔特方格 ============
+let sgSize = 5, sgNext = 1, sgStarted = false, sgErrors = 0, sgTimer = null, sgStartTs = 0;
+const sgBest = {};
+try {
+  const saved = localStorage.getItem('schulteBest');
+  if (saved) Object.assign(sgBest, JSON.parse(saved));
+} catch (e) { /* localStorage 不可用时忽略 */ }
+function sgMsg(text) {
+  const el = document.getElementById('sg-status');
+  if (!el) return;
+  el.textContent = text;
+  el.style.display = 'block';
+}
+function sgShowBest() {
+  const el = document.getElementById('sg-best');
+  if (!el) return;
+  el.textContent = sgBest[sgSize] ? sgBest[sgSize] + ' 秒' : '--';
+}
+function sgNew() {
+  if (sgTimer) { clearInterval(sgTimer); sgTimer = null; }
+  sgStarted = false;
+  sgErrors = 0;
+  sgNext = 1;
+  sgStartTs = 0;
+  const sizeEl = document.getElementById('sg-size');
+  sgSize = sizeEl ? (parseInt(sizeEl.value, 10) || 5) : 5;
+  const grid = document.getElementById('sg-grid');
+  if (!grid) return;
+  const total = sgSize * sgSize;
+  const nums = [];
+  for (let i = 1; i <= total; i++) nums.push(i);
+  for (let i = nums.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = nums[i]; nums[i] = nums[j]; nums[j] = t;
+  }
+  grid.innerHTML = '';
+  grid.style.gridTemplateColumns = 'repeat(' + sgSize + ', 1fr)';
+  grid.style.maxWidth = sgSize >= 6 ? '480px' : '420px';
+  nums.forEach(n => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn-secondary';
+    btn.textContent = n;
+    btn.style.cssText = 'aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:0;font-size:' + (sgSize >= 6 ? '14px' : '18px') + ';font-weight:600;';
+    btn.addEventListener('click', () => sgClick(btn, n));
+    grid.appendChild(btn);
+  });
+  const timeEl = document.getElementById('sg-time');
+  const nextEl = document.getElementById('sg-next');
+  const errEl = document.getElementById('sg-errors');
+  if (timeEl) timeEl.textContent = '0.0';
+  if (nextEl) nextEl.textContent = 1;
+  if (errEl) errEl.textContent = 0;
+  sgShowBest();
+  const status = document.getElementById('sg-status');
+  if (status) { status.textContent = '--'; status.style.display = 'none'; }
+}
+function sgStart() {
+  sgNew();
+  sgStarted = true;
+  sgStartTs = performance.now();
+  sgMsg('⏱️ 计时开始！请按 1、2、3…的顺序依次点击。');
+  if (sgTimer) clearInterval(sgTimer);
+  sgTimer = setInterval(() => {
+    const el = document.getElementById('sg-time');
+    if (el && sgStarted) el.textContent = ((performance.now() - sgStartTs) / 1000).toFixed(1);
+  }, 100);
+}
+function sgClick(btn, num) {
+  if (!sgStarted) { sgMsg('请先点击「开始计时」再开始游戏。'); return; }
+  if (num !== sgNext) {
+    sgErrors++;
+    const errEl = document.getElementById('sg-errors');
+    if (errEl) errEl.textContent = sgErrors;
+    btn.style.background = '#ef4444';
+    btn.style.borderColor = '#ef4444';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      if (!btn.disabled) {
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }
+    }, 260);
+    sgMsg('❌ 顺序不对，当前应该点击 ' + sgNext + '。');
+    return;
+  }
+  btn.disabled = true;
+  btn.style.background = '#22c55e';
+  btn.style.borderColor = '#22c55e';
+  btn.style.color = '#fff';
+  btn.style.opacity = '0.7';
+  sgNext++;
+  const nextEl = document.getElementById('sg-next');
+  if (nextEl) nextEl.textContent = sgNext <= sgSize * sgSize ? sgNext : '完成';
+  if (sgNext > sgSize * sgSize) {
+    sgStarted = false;
+    if (sgTimer) { clearInterval(sgTimer); sgTimer = null; }
+    const elapsed = (performance.now() - sgStartTs) / 1000;
+    const timeEl = document.getElementById('sg-time');
+    if (timeEl) timeEl.textContent = elapsed.toFixed(1);
+    const fixed = Math.round(elapsed * 10) / 10;
+    let isBest = false;
+    if (!sgBest[sgSize] || fixed < sgBest[sgSize]) {
+      sgBest[sgSize] = fixed;
+      isBest = true;
+      try { localStorage.setItem('schulteBest', JSON.stringify(sgBest)); } catch (e) { /* 忽略 */ }
+      sgShowBest();
+    }
+    sgMsg('🎉 完成！用时 ' + fixed.toFixed(1) + ' 秒，点错 ' + sgErrors + ' 次。' + (isBest ? '刷新了当前尺寸的最佳成绩！' : '继续挑战更快速度吧。'));
+  } else {
+    sgMsg('✅ 已找到 ' + num + '，下一个：' + sgNext);
+  }
+}
+function sgInit() {
+  sgNew();
+}
+
+safeInit(() => qqInit(), 'qqInit');
+safeInit(() => spfCalc(), 'spfCalc');
+safeInit(() => jfInit(), 'jfInit');
+safeInit(() => nlInit(), 'nlInit');
+safeInit(() => sgInit(), 'sgInit');
 
 // ============ Search & Theme ============
 function filterTools() {
