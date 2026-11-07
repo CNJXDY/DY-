@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等254个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等259个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等254个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等259个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等254个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等259个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -648,6 +648,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#json-flatten" data-tool="json-flatten"><span class="icon">🧩</span>JSON 扁平化/还原</a></li>
     <li><a href="#newline-convert" data-tool="newline-convert"><span class="icon">↵</span>换行符转换器</a></li>
     <li><a href="#schulte-grid" data-tool="schulte-grid"><span class="icon">🎯</span>舒尔特方格</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#resale-tax-calc" data-tool="resale-tax-calc"><span class="icon">🏘️</span>二手房税费计算器</a></li>
+    <li><a href="#annual-leave-calc" data-tool="annual-leave-calc"><span class="icon">🏖️</span>年假天数计算器</a></li>
+    <li><a href="#baby-formula-calc" data-tool="baby-formula-calc"><span class="icon">🍼</span>婴儿奶量计算器</a></li>
+    <li><a href="#special-symbols" data-tool="special-symbols"><span class="icon">✨</span>特殊符号大全</a></li>
+    <li><a href="#git-cheatsheet" data-tool="git-cheatsheet"><span class="icon">🐙</span>Git 命令速查</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7240,6 +7246,159 @@ console.log('代码块');
     <div class="result-box" id="sg-status" style="display:none;">--</div>
   </section>
 
+  <!-- 二手房交易税费计算器 -->
+  <section class="tool-panel" id="panel-resale-tax-calc">
+    <h2>🏘️ 二手房交易税费计算器</h2>
+    <p class="desc">按成交价、面积、持有年限和买方套数，估算二手房交易中的契税、增值税及附加、个人所得税与中介费，帮助买卖双方提前算清购房成本。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">成交价（万元）</div>
+        <input type="number" id="rt-price" value="200" min="1" step="1" oninput="rtCalc()">
+      </div>
+      <div>
+        <div class="label">房屋面积（㎡）</div>
+        <input type="number" id="rt-area" value="90" min="1" step="0.1" oninput="rtCalc()">
+      </div>
+    </div>
+    <div class="flex-row" style="margin-top:12px;">
+      <div>
+        <div class="label">卖方持有情况</div>
+        <select id="rt-hold" onchange="rtCalc()">
+          <option value="5u">满五唯一（免增值税、个税）</option>
+          <option value="2n" selected>满二非唯一（免增值税，缴个税）</option>
+          <option value="n2">不满两年（增值税 + 个税）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">买方住房套数</div>
+        <select id="rt-buyer" onchange="rtCalc()">
+          <option value="1" selected>首套房</option>
+          <option value="2">二套房</option>
+          <option value="3">三套及以上</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">中介费率（%）</div>
+        <input type="number" id="rt-agency" value="2" min="0" max="10" step="0.5" oninput="rtCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="rtCalc()">🧮 计算税费</button>
+      <button class="btn btn-secondary" onclick="rtReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="rt-total" style="font-size:24px;">0</div><div class="lbl">税费合计（元）</div></div>
+      <div class="stat-card"><div class="num" id="rt-deed" style="font-size:24px;">0</div><div class="lbl">契税（元）</div></div>
+      <div class="stat-card"><div class="num" id="rt-vat" style="font-size:24px;">0</div><div class="lbl">增值税及附加（元）</div></div>
+      <div class="stat-card"><div class="num" id="rt-tax" style="font-size:24px;">0</div><div class="lbl">个人所得税（元）</div></div>
+    </div>
+    <div class="result-box" id="rt-result" style="display:none;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">说明：结果按常见住宅交易政策估算（契税首套 ≤90㎡ 按 1%、&gt;90㎡ 按 1.5%；二套 ≤90㎡ 按 1%、&gt;90㎡ 按 2%；三套及以上按 3%；满二免征增值税，不满二按 5.3% 全额征收；个税按 1% 核定，满五唯一免征）。各地计税价格、减免口径不同，请以当地税务部门为准。</p>
+  </section>
+
+  <!-- 年假天数计算器 -->
+  <section class="tool-panel" id="panel-annual-leave-calc">
+    <h2>🏖️ 年假天数计算器</h2>
+    <p class="desc">根据累计工作年限计算法定带薪年假天数；当年新入职员工可按剩余日历天数折算，不足 1 整天不计。入职前请先确认累计工作年限（含此前单位）。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">累计工作年限（年）</div>
+        <input type="number" id="al-years" value="5" min="0" max="50" step="0.1" oninput="alCalc()">
+      </div>
+      <div>
+        <div class="label">入职日期（当年新入职填写）</div>
+        <input type="date" id="al-join" onchange="alCalc()">
+      </div>
+      <div>
+        <div class="label">计算年度</div>
+        <input type="number" id="al-year" value="2026" min="2020" max="2100" step="1" oninput="alCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="alCalc()">🧮 计算年假</button>
+      <button class="btn btn-secondary" onclick="alReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="al-base">5</div><div class="lbl">全年应享天数</div></div>
+      <div class="stat-card"><div class="num" id="al-days">5</div><div class="lbl">当年应享天数</div></div>
+      <div class="stat-card"><div class="num" id="al-remain" style="font-size:22px;">--</div><div class="lbl">当年剩余日历天数</div></div>
+    </div>
+    <div class="result-box" id="al-result" style="display:none;">--</div>
+    <div class="label" style="margin-top:16px;">法定年假标准速查</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr style="color:var(--text-secondary);">
+          <th style="text-align:left;padding:6px;border-bottom:1px solid var(--border);">累计工作年限</th>
+          <th style="text-align:left;padding:6px;border-bottom:1px solid var(--border);">全年年假天数</th>
+          <th style="text-align:left;padding:6px;border-bottom:1px solid var(--border);">常见情形</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:6px;border-bottom:1px solid var(--border);">满 1 年不满 10 年</td><td style="padding:6px;border-bottom:1px solid var(--border);">5 天</td><td style="padding:6px;border-bottom:1px solid var(--border);">大多数职场新人</td></tr>
+        <tr><td style="padding:6px;border-bottom:1px solid var(--border);">满 10 年不满 20 年</td><td style="padding:6px;border-bottom:1px solid var(--border);">10 天</td><td style="padding:6px;border-bottom:1px solid var(--border);">资深员工</td></tr>
+        <tr><td style="padding:6px;border-bottom:1px solid var(--border);">满 20 年以上</td><td style="padding:6px;border-bottom:1px solid var(--border);">15 天</td><td style="padding:6px;border-bottom:1px solid var(--border);">长期服务员工</td></tr>
+        <tr><td style="padding:6px;">不满 1 年</td><td style="padding:6px;">不享受</td><td style="padding:6px;">连续工作满 12 个月后开始享受</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：职工累计工作已满 1 年不满 10 年的，年休假 5 天；已满 10 年不满 20 年的，10 天；已满 20 年的，15 天。国家法定休假日、休息日不计入年休假。折算方法：(当年度在本单位剩余日历天数 ÷ 365) × 职工本人全年应当享受的年休假天数，折算后不足 1 整天的部分不享受。</p>
+  </section>
+
+  <!-- 婴儿奶量计算器 -->
+  <section class="tool-panel" id="panel-baby-formula-calc">
+    <h2>🍼 婴儿奶量计算器</h2>
+    <p class="desc">按月龄和体重估算宝宝每日、每次配方奶的参考量，并给出常见喂养次数建议。每个宝宝食量与消化情况不同，请按需喂养，具体以儿科医生意见为准。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">月龄（个月）</div>
+        <input type="number" id="bfm-age" value="3" min="0" max="36" step="1" oninput="bfCalc()">
+      </div>
+      <div>
+        <div class="label">体重（kg）</div>
+        <input type="number" id="bfm-weight" value="6" min="1" max="40" step="0.1" oninput="bfCalc()">
+      </div>
+      <div>
+        <div class="label">每日喂养次数</div>
+        <input type="number" id="bfm-feeds" value="8" min="3" max="12" step="1" oninput="bfCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="bfCalc()">🧮 计算奶量</button>
+      <button class="btn btn-secondary" onclick="bfSuggestFeeds()">💡 按建议次数</button>
+      <button class="btn btn-secondary" onclick="bfReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bfm-daily-min" style="font-size:24px;">0</div><div class="lbl">每日参考下限（ml）</div></div>
+      <div class="stat-card"><div class="num" id="bfm-daily-max" style="font-size:24px;">0</div><div class="lbl">每日参考上限（ml）</div></div>
+      <div class="stat-card"><div class="num" id="bfm-feed-min" style="font-size:24px;">0</div><div class="lbl">每次参考下限（ml）</div></div>
+      <div class="stat-card"><div class="num" id="bfm-feed-max" style="font-size:24px;">0</div><div class="lbl">每次参考上限（ml）</div></div>
+    </div>
+    <div class="result-box" id="bfm-result" style="display:none;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">参考依据：婴儿配方奶每日总量常按 100–150 ml/kg 估算，6 月龄后需逐步添加辅食，奶量占比应相应减少。早产儿、低体重儿或有特殊健康情况的宝宝请遵医嘱，不要强行喂养。</p>
+  </section>
+
+  <!-- 特殊符号大全 -->
+  <section class="tool-panel" id="panel-special-symbols">
+    <h2>✨ 特殊符号大全</h2>
+    <p class="desc">收录箭头、数学、货币、勾选、星标等常用特殊符号，点击符号即可复制到剪贴板，适用于文案、表格、社交平台与文档排版。</p>
+    <div class="label">搜索符号 / 分类</div>
+    <input type="text" id="ss-search" placeholder="输入关键词，如：箭头、星、勾选、货币" oninput="ssRender()">
+    <div class="btn-group" id="ss-tabs"></div>
+    <div id="ss-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;margin-top:12px;"></div>
+    <div class="result-box" id="ss-result" style="display:none;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：点击符号即可自动复制；部分特殊符号在旧设备或特殊字体下可能显示为方框。</p>
+  </section>
+
+  <!-- Git 命令速查 -->
+  <section class="tool-panel" id="panel-git-cheatsheet">
+    <h2>🐙 Git 命令速查</h2>
+    <p class="desc">汇总日常开发中最常用的 Git 命令，按分类浏览或搜索关键词，点击任意命令即可复制到剪贴板，方便随时查漏补缺。</p>
+    <div class="label">搜索命令 / 用途</div>
+    <input type="text" id="gc-search" placeholder="输入关键词，如：撤销、分支、rebase、远程" oninput="gcRender()">
+    <div class="btn-group" id="gc-tabs"></div>
+    <div id="gc-list" style="margin-top:12px;"></div>
+    <div class="result-box" id="gc-result" style="display:none;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7247,7 +7406,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 254个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 259个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -22749,6 +22908,366 @@ safeInit(() => spfCalc(), 'spfCalc');
 safeInit(() => jfInit(), 'jfInit');
 safeInit(() => nlInit(), 'nlInit');
 safeInit(() => sgInit(), 'sgInit');
+
+// ============ 二手房交易税费计算器 ============
+function rtMoney(n) {
+  return Math.round(n).toLocaleString('en-US');
+}
+function rtCalc() {
+  const price = parseFloat(document.getElementById('rt-price').value);
+  const area = parseFloat(document.getElementById('rt-area').value);
+  const hold = document.getElementById('rt-hold').value;
+  const buyer = document.getElementById('rt-buyer').value;
+  const agencyRate = parseFloat(document.getElementById('rt-agency').value);
+  const ids = ['rt-total', 'rt-deed', 'rt-vat', 'rt-tax'];
+  if (!(price > 0) || !(area > 0)) {
+    ids.forEach(function (id) { document.getElementById(id).textContent = '--'; });
+    document.getElementById('rt-result').style.display = 'none';
+    return;
+  }
+  const totalPrice = price * 10000;
+  let deedRate;
+  if (buyer === '1') deedRate = area <= 90 ? 0.01 : 0.015;
+  else if (buyer === '2') deedRate = area <= 90 ? 0.01 : 0.02;
+  else deedRate = 0.03;
+  const deed = totalPrice * deedRate;
+  const vat = hold === 'n2' ? totalPrice * 0.053 : 0;
+  const incomeTaxRate = hold === '5u' ? 0 : 0.01;
+  const incomeTax = totalPrice * incomeTaxRate;
+  const taxes = deed + vat + incomeTax;
+  const agency = totalPrice * ((isNaN(agencyRate) ? 0 : agencyRate) / 100);
+  document.getElementById('rt-total').textContent = rtMoney(taxes);
+  document.getElementById('rt-deed').textContent = rtMoney(deed);
+  document.getElementById('rt-vat').textContent = rtMoney(vat);
+  document.getElementById('rt-tax').textContent = rtMoney(incomeTax);
+  const holdText = hold === '5u' ? '满五唯一' : (hold === '2n' ? '满二非唯一' : '不满两年');
+  const buyerText = buyer === '1' ? '首套房' : (buyer === '2' ? '二套房' : '三套及以上');
+  const lines = [
+    '🏘️ 成交价 ' + price + ' 万元 · 面积 ' + area + ' ㎡ · ' + holdText + ' · ' + buyerText,
+    '契税（' + (deedRate * 100).toFixed(1).replace(/\.0$/, '') + '%）：' + rtMoney(deed) + ' 元',
+    '增值税及附加：' + rtMoney(vat) + ' 元' + (vat === 0 ? '（满二免征）' : '（按 5.3% 估算）'),
+    '个人所得税：' + rtMoney(incomeTax) + ' 元' + (hold === '5u' ? '（满五唯一免征）' : '（按 1% 核定）'),
+    '税费合计：' + rtMoney(taxes) + ' 元',
+    '中介费（' + (isNaN(agencyRate) ? 0 : agencyRate) + '%）：' + rtMoney(agency) + ' 元（通常由买卖双方协商承担）',
+    '买方总支出参考：' + rtMoney(totalPrice + taxes + agency) + ' 元（含税费与中介费）'
+  ];
+  showResult('rt-result', lines.join('\n'));
+}
+function rtReset() {
+  document.getElementById('rt-price').value = 200;
+  document.getElementById('rt-area').value = 90;
+  document.getElementById('rt-hold').value = '2n';
+  document.getElementById('rt-buyer').value = '1';
+  document.getElementById('rt-agency').value = 2;
+  rtCalc();
+}
+
+// ============ 年假天数计算器 ============
+function alBaseDays(years) {
+  if (years >= 20) return 15;
+  if (years >= 10) return 10;
+  if (years >= 1) return 5;
+  return 0;
+}
+function alCalc() {
+  const years = parseFloat(document.getElementById('al-years').value);
+  const yearInput = parseInt(document.getElementById('al-year').value, 10);
+  const year = isNaN(yearInput) ? new Date().getFullYear() : yearInput;
+  const joinVal = document.getElementById('al-join').value;
+  const base = alBaseDays(isNaN(years) ? 0 : years);
+  let remain = null;
+  let days = base;
+  let prorated = false;
+  let joinYear = null;
+  let calcTotalDays = 365;
+  if (joinVal) {
+    const join = new Date(joinVal + 'T00:00:00');
+    joinYear = join.getFullYear();
+    const yearStart = new Date(year, 0, 1);
+    const yearEnd = new Date(year, 11, 31);
+    const totalDays = Math.round((yearEnd - yearStart) / 86400000) + 1;
+    calcTotalDays = totalDays;
+    if (joinYear === year) {
+      remain = Math.round((yearEnd - join) / 86400000) + 1;
+      days = Math.floor(base * remain / totalDays);
+      prorated = true;
+    } else if (joinYear > year) {
+      remain = 0;
+      days = 0;
+      prorated = true;
+    }
+  }
+  document.getElementById('al-base').textContent = base;
+  document.getElementById('al-days').textContent = days;
+  document.getElementById('al-remain').textContent = remain === null ? '全年在职' : remain;
+  const lines = [];
+  lines.push('📅 ' + year + ' 年度年假核算');
+  if (base === 0) {
+    lines.push('⚠️ 累计工作不满 1 年：暂不享受法定年假（连续工作满 12 个月后开始享受）。');
+  } else {
+    lines.push('✅ 累计工作 ' + (isNaN(years) ? 0 : years) + ' 年：全年应享 ' + base + ' 天法定年假。');
+  }
+  if (prorated) {
+    if (joinYear > year) {
+      lines.push('ℹ️ 入职日期晚于计算年度，当年应享 0 天。');
+    } else {
+      lines.push('🔄 当年 ' + joinVal + ' 入职，剩余日历天数 ' + remain + ' 天，折算后 ' + days + ' 天（不足 1 整天不计）。');
+      lines.push('计算式：(' + remain + ' ÷ ' + calcTotalDays + ') × ' + base + ' = ' + (base * remain / calcTotalDays).toFixed(2) + ' 天 → 取整 ' + days + ' 天。');
+    }
+  } else if (joinVal) {
+    lines.push('ℹ️ 入职日期不在 ' + year + ' 年度，当年可享受完整 ' + base + ' 天年假。');
+  } else {
+    lines.push('ℹ️ 未填写入职日期，按全年在职计算。');
+  }
+  lines.push('💡 国家法定休假日、休息日不计入年休假；未休年假通常应按日工资收入的 300% 支付（含正常工作期间工资）。');
+  showResult('al-result', lines.join('\n'));
+}
+function alReset() {
+  document.getElementById('al-years').value = 5;
+  document.getElementById('al-join').value = '';
+  document.getElementById('al-year').value = new Date().getFullYear();
+  alCalc();
+}
+
+// ============ 婴儿奶量计算器 ============
+function bfSuggestCount(age) {
+  if (age < 1) return '8–12 次';
+  if (age < 3) return '7–9 次';
+  if (age < 6) return '6–8 次';
+  if (age < 12) return '4–6 次';
+  return '3–5 次';
+}
+function bfCalc() {
+  const age = parseFloat(document.getElementById('bfm-age').value);
+  const weight = parseFloat(document.getElementById('bfm-weight').value);
+  const feeds = parseInt(document.getElementById('bfm-feeds').value, 10);
+  const ids = ['bfm-daily-min', 'bfm-daily-max', 'bfm-feed-min', 'bfm-feed-max'];
+  if (!(weight > 0) || !(feeds > 0)) {
+    ids.forEach(function (id) { document.getElementById(id).textContent = '--'; });
+    document.getElementById('bfm-result').style.display = 'none';
+    return;
+  }
+  const dailyMin = Math.round(weight * 100);
+  const dailyMax = Math.round(weight * 150);
+  const feedMin = Math.round(dailyMin / feeds);
+  const feedMax = Math.round(dailyMax / feeds);
+  document.getElementById('bfm-daily-min').textContent = dailyMin;
+  document.getElementById('bfm-daily-max').textContent = dailyMax;
+  document.getElementById('bfm-feed-min').textContent = feedMin;
+  document.getElementById('bfm-feed-max').textContent = feedMax;
+  const ageText = isNaN(age) ? '月龄未填' : (age < 1 ? '未满 1 个月' : age + ' 个月');
+  const lines = [
+    '🍼 宝宝月龄 ' + ageText + ' · 体重 ' + weight + ' kg',
+    '每日奶量参考：' + dailyMin + '–' + dailyMax + ' ml（约 100–150 ml/kg）',
+    '按每日 ' + feeds + ' 次喂养：每次约 ' + feedMin + '–' + feedMax + ' ml',
+    '💡 该月龄常见喂养次数：' + bfSuggestCount(isNaN(age) ? 0 : age)
+  ];
+  if (!isNaN(age) && age >= 6) {
+    lines.push('🥣 6 月龄后请逐步添加辅食，奶量占比应相应减少。');
+  }
+  lines.push('⚠️ 以上为参考估算，早产儿、低体重儿或有特殊健康情况的宝宝请遵医嘱。');
+  showResult('bfm-result', lines.join('\n'));
+}
+function bfSuggestFeeds() {
+  const age = parseFloat(document.getElementById('bfm-age').value) || 0;
+  let n;
+  if (age < 1) n = 10;
+  else if (age < 3) n = 8;
+  else if (age < 6) n = 7;
+  else if (age < 12) n = 5;
+  else n = 4;
+  document.getElementById('bfm-feeds').value = n;
+  bfCalc();
+}
+function bfReset() {
+  document.getElementById('bfm-age').value = 3;
+  document.getElementById('bfm-weight').value = 6;
+  document.getElementById('bfm-feeds').value = 8;
+  bfCalc();
+}
+
+// ============ 特殊符号大全 ============
+const SS_KEYWORDS = {
+  '箭头': '方向 上下 左右 前后 指向 arrow',
+  '数学': '数学 运算 小于 大于 等于 无穷 math',
+  '货币': '货币 人民币 美元 欧元 日元 英镑 money currency',
+  '勾选': '勾 叉 对 错 正确 错误 check cross',
+  '星标': '星星 星 爱心 心 花 喜欢 star heart',
+  '标点': '标点 引号 括号 省略号 punctuation',
+  '单位': '单位 长度 重量 面积 体积 温度 版权 unit',
+  '序号': '序号 编号 数字 罗马数字 number'
+};
+const SS_DATA = {
+  '箭头': ['←','→','↑','↓','↔','↕','⇐','⇒','⇑','⇓','⇔','⇕','➜','➔','➡','⬅','⬆','⬇','↩','↪','⤴','⤵','↗','↘','↙','↖','⟶','⟵','⇄','⇅','⇉','⇈'],
+  '数学': ['±','×','÷','≈','≠','≤','≥','∞','√','∛','∑','∏','∫','∮','∈','∉','⊂','⊃','∪','∩','∅','∠','⊥','∥','°','℃','℉','‰','％','π','Δ','∇','∝','≌','≡','⌒'],
+  '货币': ['¥','$','€','£','₩','₽','₹','₺','₴','₦','₱','฿','₫','₪','₿','¢','₭','₮','₲','₵'],
+  '勾选': ['✓','✔','✗','✘','☑','☒','✅','❌','❎','☐','🔘','⭕','❗','❓','‼','⁉','✔️','☑️'],
+  '星标': ['★','☆','✦','✧','✩','✪','✫','✬','✭','✮','✯','✰','❤','♥','♦','♣','♠','♤','♡','❥','❣','💔','💕','💖','💘','💝','✿','❀','✾','☀','☂','☁','☃'],
+  '标点': ['、','。','，','；','：','？','！','…','—','～','·','「','」','『','』','【','】','《','》','〈','〉','（','）','〔','〕','﹏','﹍','＿','﹉','﹊','︵','︶','︷','︸'],
+  '单位': ['㎜','㎝','㎞','㎏','㎎','㏄','㎡','㎥','㎖','㎗','Ω','Ǻ','Å','µm','㏑','㏒','№','℡','™','©','®','℗','§','¶','†','‡','℉','℃'],
+  '序号': ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮','⑯','⑰','⑱','⑲','⑳','㊀','㊁','㊂','㊃','㊄','㊅','㊆','㊇','㊈','㊉','Ⅰ','Ⅱ','Ⅲ','Ⅳ','Ⅴ','Ⅵ','Ⅶ','Ⅷ','Ⅸ','Ⅹ','Ⅺ','Ⅻ','㈠','㈡','㈢','㈣','㈤','㈥','㈦','㈧','㈨','㈩']
+};
+let ssActive = '全部';
+function ssInit() {
+  ssRenderTabs();
+  ssRender();
+}
+function ssRenderTabs() {
+  const tabs = document.getElementById('ss-tabs');
+  tabs.innerHTML = '';
+  const cats = ['全部'].concat(Object.keys(SS_DATA));
+  cats.forEach(function (cat) {
+    const b = document.createElement('button');
+    b.className = 'btn btn-sm' + (cat === ssActive ? '' : ' btn-secondary');
+    b.textContent = cat;
+    b.onclick = function () { ssActive = cat; ssRenderTabs(); ssRender(); };
+    tabs.appendChild(b);
+  });
+}
+function ssRender() {
+  const q = document.getElementById('ss-search').value.trim().toLowerCase();
+  const grid = document.getElementById('ss-grid');
+  grid.innerHTML = '';
+  let count = 0;
+  const cats = q ? Object.keys(SS_DATA) : (ssActive === '全部' ? Object.keys(SS_DATA) : [ssActive]);
+  cats.forEach(function (cat) {
+    const keywords = (cat + ' ' + (SS_KEYWORDS[cat] || '')).toLowerCase();
+    const matched = SS_DATA[cat].filter(function (sym) {
+      if (!q) return true;
+      return sym === q || keywords.indexOf(q) !== -1;
+    });
+    if (!matched.length) return;
+    if (q) {
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.style.gridColumn = '1 / -1';
+      label.textContent = cat;
+      grid.appendChild(label);
+    }
+    matched.forEach(function (sym) {
+      const btn = document.createElement('button');
+      btn.textContent = sym;
+      btn.title = '点击复制 ' + sym;
+      btn.style.cssText = 'padding:10px 0;font-size:20px;line-height:1.2;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);transition:all .15s;';
+      btn.onmouseover = function () { btn.style.borderColor = 'var(--accent)'; };
+      btn.onmouseout = function () { btn.style.borderColor = 'var(--border)'; };
+      btn.onclick = function () { ssCopy(sym); };
+      grid.appendChild(btn);
+      count++;
+    });
+  });
+  showResult('ss-result', '共 ' + count + ' 个符号' + (q ? '（关键词：' + q + '）' : '') + '，点击即可复制。');
+}
+function ssCopy(sym) {
+  writeClipboard(sym).then(function (ok) {
+    showToast(ok ? '已复制：' + sym : '复制失败，请手动选择复制');
+  });
+}
+
+// ============ Git 命令速查 ============
+const GC_DATA = [
+  { cat: '基础操作', cmd: 'git init', desc: '初始化本地仓库' },
+  { cat: '基础操作', cmd: 'git clone <url>', desc: '克隆远程仓库到本地' },
+  { cat: '基础操作', cmd: 'git status', desc: '查看工作区与暂存区状态' },
+  { cat: '基础操作', cmd: 'git add <file>', desc: '将指定文件加入暂存区' },
+  { cat: '基础操作', cmd: 'git add -p', desc: '交互式分块暂存修改' },
+  { cat: '基础操作', cmd: 'git commit -m "msg"', desc: '提交暂存区修改' },
+  { cat: '基础操作', cmd: 'git commit --amend', desc: '修改最近一次提交（信息或内容）' },
+  { cat: '基础操作', cmd: 'git config --global user.name "name"', desc: '设置全局用户名' },
+  { cat: '分支管理', cmd: 'git branch', desc: '列出本地分支' },
+  { cat: '分支管理', cmd: 'git switch -c <branch>', desc: '创建并切换到新分支' },
+  { cat: '分支管理', cmd: 'git switch <branch>', desc: '切换到指定分支' },
+  { cat: '分支管理', cmd: 'git merge <branch>', desc: '把指定分支合并到当前分支' },
+  { cat: '分支管理', cmd: 'git rebase <branch>', desc: '把当前分支变基到指定分支' },
+  { cat: '分支管理', cmd: 'git branch -d <branch>', desc: '删除已合并的本地分支' },
+  { cat: '分支管理', cmd: 'git branch -D <branch>', desc: '强制删除本地分支' },
+  { cat: '撤销回滚', cmd: 'git restore <file>', desc: '撤销工作区文件修改' },
+  { cat: '撤销回滚', cmd: 'git restore --staged <file>', desc: '把文件移出暂存区' },
+  { cat: '撤销回滚', cmd: 'git reset --soft HEAD~1', desc: '撤销最近一次提交，保留修改在暂存区' },
+  { cat: '撤销回滚', cmd: 'git reset --hard HEAD~1', desc: '彻底回退到上一次提交（会丢失修改）' },
+  { cat: '撤销回滚', cmd: 'git revert <commit>', desc: '生成一次反向提交，安全撤销历史提交' },
+  { cat: '撤销回滚', cmd: 'git stash', desc: '临时保存未提交的修改' },
+  { cat: '撤销回滚', cmd: 'git stash pop', desc: '恢复最近一次 stash 并删除记录' },
+  { cat: '撤销回滚', cmd: 'git clean -fd', desc: '删除未跟踪的文件和目录（谨慎）' },
+  { cat: '远程协作', cmd: 'git remote -v', desc: '查看远程仓库地址' },
+  { cat: '远程协作', cmd: 'git remote add origin <url>', desc: '添加远程仓库' },
+  { cat: '远程协作', cmd: 'git fetch origin', desc: '拉取远程更新但不合并' },
+  { cat: '远程协作', cmd: 'git pull --rebase origin main', desc: '变基方式拉取远程更新' },
+  { cat: '远程协作', cmd: 'git push -u origin <branch>', desc: '推送分支并建立跟踪关系' },
+  { cat: '远程协作', cmd: 'git push', desc: '推送当前分支到远程' },
+  { cat: '远程协作', cmd: 'git tag v1.0.0', desc: '创建版本标签' },
+  { cat: '远程协作', cmd: 'git push --tags', desc: '推送所有本地标签' },
+  { cat: '查看排查', cmd: 'git log --oneline --graph', desc: '图形化查看提交历史' },
+  { cat: '查看排查', cmd: 'git log -p <file>', desc: '查看指定文件的提交与差异' },
+  { cat: '查看排查', cmd: 'git diff', desc: '查看工作区未暂存的改动' },
+  { cat: '查看排查', cmd: 'git diff --staged', desc: '查看已暂存的改动' },
+  { cat: '查看排查', cmd: 'git show <commit>', desc: '查看某次提交的详情' },
+  { cat: '查看排查', cmd: 'git blame <file>', desc: '查看文件每一行的最后修改者' },
+  { cat: '查看排查', cmd: 'git reflog', desc: '查看 HEAD 移动记录，找回误删提交' },
+  { cat: '高级技巧', cmd: 'git cherry-pick <commit>', desc: '把指定提交应用到当前分支' },
+  { cat: '高级技巧', cmd: 'git bisect', desc: '二分查找引入问题的提交' },
+  { cat: '高级技巧', cmd: 'git worktree add <path> <branch>', desc: '在另一个目录检出分支' },
+  { cat: '高级技巧', cmd: 'git archive -o out.zip HEAD', desc: '导出当前版本源码压缩包' },
+  { cat: '高级技巧', cmd: 'git submodule update --init', desc: '初始化并更新子模块' }
+];
+let gcActive = '全部';
+function gcInit() {
+  gcRenderTabs();
+  gcRender();
+}
+function gcRenderTabs() {
+  const tabs = document.getElementById('gc-tabs');
+  tabs.innerHTML = '';
+  const cats = ['全部'].concat(Array.from(new Set(GC_DATA.map(function (it) { return it.cat; }))));
+  cats.forEach(function (cat) {
+    const b = document.createElement('button');
+    b.className = 'btn btn-sm' + (cat === gcActive ? '' : ' btn-secondary');
+    b.textContent = cat;
+    b.onclick = function () { gcActive = cat; gcRenderTabs(); gcRender(); };
+    tabs.appendChild(b);
+  });
+}
+function gcRender() {
+  const q = document.getElementById('gc-search').value.trim().toLowerCase();
+  const list = document.getElementById('gc-list');
+  list.innerHTML = '';
+  const items = GC_DATA.filter(function (it) {
+    const matchCat = gcActive === '全部' || it.cat === gcActive;
+    const text = (it.cmd + ' ' + it.desc + ' ' + it.cat).toLowerCase();
+    return matchCat && (!q || text.indexOf(q) !== -1);
+  });
+  items.forEach(function (it) {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;margin-bottom:8px;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;';
+    const code = document.createElement('code');
+    code.textContent = it.cmd;
+    code.style.cssText = 'flex:1 1 220px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--accent-hover);font-size:13px;word-break:break-all;';
+    const desc = document.createElement('span');
+    desc.textContent = it.desc;
+    desc.style.cssText = 'flex:1 1 160px;font-size:13px;color:var(--text-secondary);';
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-secondary btn-sm';
+    btn.textContent = '📋 复制';
+    btn.onclick = function (e) { e.stopPropagation(); gcCopy(it.cmd); };
+    row.onclick = function () { gcCopy(it.cmd); };
+    row.appendChild(code);
+    row.appendChild(desc);
+    row.appendChild(btn);
+    list.appendChild(row);
+  });
+  showResult('gc-result', '共 ' + items.length + ' 条命令' + (q ? '（关键词：' + q + '）' : '') + '，点击任意一行即可复制。');
+}
+function gcCopy(cmd) {
+  writeClipboard(cmd).then(function (ok) {
+    showToast(ok ? '已复制：' + cmd : '复制失败，请手动选择复制');
+  });
+}
+
+safeInit(() => rtCalc(), 'rtCalc');
+safeInit(() => alCalc(), 'alCalc');
+safeInit(() => bfCalc(), 'bfCalc');
+safeInit(() => ssInit(), 'ssInit');
+safeInit(() => gcInit(), 'gcInit');
 
 // ============ Search & Theme ============
 function filterTools() {
