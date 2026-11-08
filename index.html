@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、单位换算等259个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等264个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、摩尔斯电码、金额大写、简繁转换等259个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等264个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、二维码生成、密码生成等259个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等264个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -654,6 +654,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#baby-formula-calc" data-tool="baby-formula-calc"><span class="icon">🍼</span>婴儿奶量计算器</a></li>
     <li><a href="#special-symbols" data-tool="special-symbols"><span class="icon">✨</span>特殊符号大全</a></li>
     <li><a href="#git-cheatsheet" data-tool="git-cheatsheet"><span class="icon">🐙</span>Git 命令速查</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#area-code" data-tool="area-code"><span class="icon">📞</span>电话区号查询</a></li>
+    <li><a href="#math-drill" data-tool="math-drill"><span class="icon">🧮</span>口算题生成器</a></li>
+    <li><a href="#tone-generator" data-tool="tone-generator"><span class="icon">🎵</span>音调发生器</a></li>
+    <li><a href="#idiom-chain" data-tool="idiom-chain"><span class="icon">🀄</span>成语接龙</a></li>
+    <li><a href="#garbage-sort" data-tool="garbage-sort"><span class="icon">🗑️</span>垃圾分类查询</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7399,6 +7405,124 @@ console.log('代码块');
     <div class="result-box" id="gc-result" style="display:none;">--</div>
   </section>
 
+  <!-- 电话区号查询 -->
+  <section class="tool-panel" id="panel-area-code">
+    <h2>📞 电话区号查询</h2>
+    <p class="desc">输入城市名称或区号，快速查询全国主要城市的固定电话区号（含港澳台）。点击任意结果即可复制区号。</p>
+    <input type="text" id="ac-search" placeholder="输入城市名或区号，例如：杭州 / 0571" oninput="acRender()">
+    <div class="btn-group" id="ac-tabs"></div>
+    <div class="result-box" id="acq-result" style="display:none;">--</div>
+    <div id="ac-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px;"></div>
+  </section>
+
+  <!-- 口算题生成器 -->
+  <section class="tool-panel" id="panel-math-drill">
+    <h2>🧮 口算题生成器</h2>
+    <p class="desc">按运算类型和数值范围随机生成口算练习题，支持查看答案与一键复制，适合小学生日常练习。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">运算类型</div>
+        <select id="md-op">
+          <option value="mix">四则混合</option>
+          <option value="+">加法</option>
+          <option value="-">减法</option>
+          <option value="×">乘法</option>
+          <option value="÷">除法</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">数值范围</div>
+        <select id="md-range">
+          <option value="10">10 以内</option>
+          <option value="20" selected>20 以内</option>
+          <option value="50">50 以内</option>
+          <option value="100">100 以内</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">题目数量</div>
+        <select id="md-count">
+          <option value="10">10 题</option>
+          <option value="20" selected>20 题</option>
+          <option value="30">30 题</option>
+          <option value="50">50 题</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="mdGenerate()">🎲 生成题目</button>
+      <button class="btn btn-secondary" id="md-answer-btn" onclick="mdToggleAnswer()">👀 显示答案</button>
+      <button class="btn btn-secondary" onclick="mdCopy()">📋 复制题目</button>
+    </div>
+    <div class="result-box" id="md-result" style="display:none;white-space:pre-wrap;line-height:1.9;">--</div>
+  </section>
+
+  <!-- 音调发生器 -->
+  <section class="tool-panel" id="panel-tone-generator">
+    <h2>🎵 音调发生器</h2>
+    <p class="desc">生成 20Hz–20000Hz 的测试音，可用于检查耳机、音箱或做简单的听力感知练习。请先把设备音量调低，避免损伤听力。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">频率 (Hz)</div>
+        <input type="number" id="tg-freq" value="440" min="20" max="20000" oninput="tgUpdateLive()">
+      </div>
+      <div>
+        <div class="label">波形</div>
+        <select id="tg-wave" onchange="tgUpdateLive()">
+          <option value="sine">正弦波</option>
+          <option value="square">方波</option>
+          <option value="triangle">三角波</option>
+          <option value="sawtooth">锯齿波</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">音量 (%)</div>
+        <input type="number" id="tg-vol" value="20" min="0" max="100" oninput="tgUpdateLive()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="tg-btn" onclick="tgToggle()">▶ 播放</button>
+      <button class="btn btn-secondary btn-sm" onclick="tgPreset(100)">100Hz</button>
+      <button class="btn btn-secondary btn-sm" onclick="tgPreset(440)">440Hz</button>
+      <button class="btn btn-secondary btn-sm" onclick="tgPreset(1000)">1kHz</button>
+      <button class="btn btn-secondary btn-sm" onclick="tgPreset(4000)">4kHz</button>
+      <button class="btn btn-secondary btn-sm" onclick="tgPreset(8000)">8kHz</button>
+    </div>
+    <div class="result-box" id="tg-result" style="display:none;">--</div>
+  </section>
+
+  <!-- 成语接龙 -->
+  <section class="tool-panel" id="panel-idiom-chain">
+    <h2>🀄 成语接龙</h2>
+    <p class="desc">根据上一个成语的最后一个字接出新的四字成语，内置常用成语词库，支持提示与重新开始。</p>
+    <div class="result-box" id="ic-current" style="display:block;font-size:16px;">点击「重新开始」生成第一个成语。</div>
+    <div style="margin-top:12px;">
+      <div class="label">你的成语</div>
+      <input type="text" id="ic-input" maxlength="8" placeholder="输入以上一个字开头的四字成语，回车提交">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="icSubmit()">✅ 接龙</button>
+      <button class="btn btn-secondary" onclick="icHint()">💡 提示</button>
+      <button class="btn btn-secondary" onclick="icRestart()">🔄 重新开始</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ic-score">0</div><div class="lbl">已接成语</div></div>
+      <div class="stat-card"><div class="num" id="ic-need">--</div><div class="lbl">当前需接字</div></div>
+    </div>
+    <div class="result-box" id="ic-msg" style="display:none;">--</div>
+    <div class="result-box" id="ic-log" style="display:none;max-height:200px;">--</div>
+  </section>
+
+  <!-- 垃圾分类查询 -->
+  <section class="tool-panel" id="panel-garbage-sort">
+    <h2>🗑️ 垃圾分类查询</h2>
+    <p class="desc">查询常见生活垃圾属于可回收物、有害垃圾、厨余垃圾还是其他垃圾。各地分类标准略有差异，请以当地规定为准。</p>
+    <input type="text" id="gs-search" placeholder="输入物品名称，例如：电池、奶茶杯、香蕉皮" oninput="gsRender()">
+    <div class="btn-group" id="gs-cats"></div>
+    <div class="result-box" id="gs-result" style="display:none;">--</div>
+    <div id="gs-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:14px;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7406,7 +7530,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 259个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 264个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -23268,6 +23392,429 @@ safeInit(() => alCalc(), 'alCalc');
 safeInit(() => bfCalc(), 'bfCalc');
 safeInit(() => ssInit(), 'ssInit');
 safeInit(() => gcInit(), 'gcInit');
+
+// ============ 电话区号查询 ============
+const AC_REGIONS = ['全部', '直辖市', '华北', '东北', '华东', '华中', '华南', '西南', '西北', '港澳台'];
+const AC_DATA = `
+北京|010|直辖市,上海|021|直辖市,天津|022|直辖市,重庆|023|直辖市,
+石家庄|0311|华北,唐山|0315|华北,秦皇岛|0335|华北,邯郸|0310|华北,邢台|0319|华北,保定|0312|华北,张家口|0313|华北,承德|0314|华北,沧州|0317|华北,廊坊|0316|华北,衡水|0318|华北,
+太原|0351|华北,大同|0352|华北,阳泉|0353|华北,长治|0355|华北,晋城|0356|华北,朔州|0349|华北,晋中|0354|华北,运城|0359|华北,忻州|0350|华北,临汾|0357|华北,吕梁|0358|华北,
+呼和浩特|0471|华北,包头|0472|华北,乌海|0473|华北,赤峰|0476|华北,通辽|0475|华北,鄂尔多斯|0477|华北,呼伦贝尔|0470|华北,巴彦淖尔|0478|华北,乌兰察布|0474|华北,
+沈阳|024|东北,大连|0411|东北,鞍山|0412|东北,抚顺|0413|东北,本溪|0414|东北,丹东|0415|东北,锦州|0416|东北,营口|0417|东北,阜新|0418|东北,辽阳|0419|东北,盘锦|0427|东北,铁岭|0410|东北,朝阳|0421|东北,葫芦岛|0429|东北,
+长春|0431|东北,吉林|0432|东北,四平|0434|东北,辽源|0437|东北,通化|0435|东北,白山|0439|东北,松原|0438|东北,白城|0436|东北,延边|0433|东北,
+哈尔滨|0451|东北,齐齐哈尔|0452|东北,鸡西|0467|东北,鹤岗|0468|东北,双鸭山|0469|东北,大庆|0459|东北,伊春|0458|东北,佳木斯|0454|东北,七台河|0464|东北,牡丹江|0453|东北,黑河|0456|东北,绥化|0455|东北,大兴安岭|0457|东北,
+南京|025|华东,无锡|0510|华东,徐州|0516|华东,常州|0519|华东,苏州|0512|华东,南通|0513|华东,连云港|0518|华东,淮安|0517|华东,盐城|0515|华东,扬州|0514|华东,镇江|0511|华东,泰州|0523|华东,宿迁|0527|华东,
+杭州|0571|华东,宁波|0574|华东,温州|0577|华东,嘉兴|0573|华东,湖州|0572|华东,绍兴|0575|华东,金华|0579|华东,衢州|0570|华东,舟山|0580|华东,台州|0576|华东,丽水|0578|华东,
+合肥|0551|华东,芜湖|0553|华东,蚌埠|0552|华东,淮南|0554|华东,马鞍山|0555|华东,淮北|0561|华东,铜陵|0562|华东,安庆|0556|华东,黄山|0559|华东,滁州|0550|华东,阜阳|0558|华东,宿州|0557|华东,六安|0564|华东,亳州|0558|华东,池州|0566|华东,宣城|0563|华东,
+福州|0591|华东,厦门|0592|华东,莆田|0594|华东,三明|0598|华东,泉州|0595|华东,漳州|0596|华东,南平|0599|华东,龙岩|0597|华东,宁德|0593|华东,
+南昌|0791|华东,景德镇|0798|华东,萍乡|0799|华东,九江|0792|华东,新余|0790|华东,鹰潭|0701|华东,赣州|0797|华东,吉安|0796|华东,宜春|0795|华东,抚州|0794|华东,上饶|0793|华东,
+济南|0531|华东,青岛|0532|华东,淄博|0533|华东,枣庄|0632|华东,东营|0546|华东,烟台|0535|华东,潍坊|0536|华东,济宁|0537|华东,泰安|0538|华东,威海|0631|华东,日照|0633|华东,临沂|0539|华东,德州|0534|华东,聊城|0635|华东,滨州|0543|华东,菏泽|0530|华东,
+郑州|0371|华中,开封|0371|华中,洛阳|0379|华中,平顶山|0375|华中,安阳|0372|华中,鹤壁|0392|华中,新乡|0373|华中,焦作|0391|华中,濮阳|0393|华中,许昌|0374|华中,漯河|0395|华中,三门峡|0398|华中,南阳|0377|华中,商丘|0370|华中,信阳|0376|华中,周口|0394|华中,驻马店|0396|华中,
+武汉|027|华中,黄石|0714|华中,十堰|0719|华中,宜昌|0717|华中,襄阳|0710|华中,鄂州|0711|华中,荆门|0724|华中,孝感|0712|华中,荆州|0716|华中,黄冈|0713|华中,咸宁|0715|华中,随州|0722|华中,恩施|0718|华中,
+长沙|0731|华中,株洲|0731|华中,湘潭|0731|华中,衡阳|0734|华中,邵阳|0739|华中,岳阳|0730|华中,常德|0736|华中,张家界|0744|华中,益阳|0737|华中,郴州|0735|华中,永州|0746|华中,怀化|0745|华中,娄底|0738|华中,湘西|0743|华中,
+广州|020|华南,韶关|0751|华南,深圳|0755|华南,珠海|0756|华南,汕头|0754|华南,佛山|0757|华南,江门|0750|华南,湛江|0759|华南,茂名|0668|华南,肇庆|0758|华南,惠州|0752|华南,梅州|0753|华南,汕尾|0660|华南,河源|0762|华南,阳江|0662|华南,清远|0763|华南,东莞|0769|华南,中山|0760|华南,潮州|0768|华南,揭阳|0663|华南,云浮|0766|华南,
+南宁|0771|华南,柳州|0772|华南,桂林|0773|华南,梧州|0774|华南,北海|0779|华南,防城港|0770|华南,钦州|0777|华南,贵港|0775|华南,玉林|0775|华南,百色|0776|华南,贺州|0774|华南,河池|0778|华南,来宾|0772|华南,崇左|0771|华南,
+海口|0898|华南,三亚|0898|华南,三沙|0898|华南,儋州|0898|华南,
+成都|028|西南,自贡|0813|西南,攀枝花|0812|西南,泸州|0830|西南,德阳|0838|西南,绵阳|0816|西南,广元|0839|西南,遂宁|0825|西南,内江|0832|西南,乐山|0833|西南,南充|0817|西南,眉山|028|西南,宜宾|0831|西南,广安|0826|西南,达州|0818|西南,雅安|0835|西南,巴中|0827|西南,资阳|028|西南,阿坝|0837|西南,甘孜|0836|西南,凉山|0834|西南,
+贵阳|0851|西南,六盘水|0858|西南,遵义|0851|西南,安顺|0851|西南,毕节|0857|西南,铜仁|0856|西南,黔西南|0859|西南,黔东南|0855|西南,黔南|0854|西南,
+昆明|0871|西南,曲靖|0874|西南,玉溪|0877|西南,保山|0875|西南,昭通|0870|西南,丽江|0888|西南,普洱|0879|西南,临沧|0883|西南,楚雄|0878|西南,红河|0873|西南,文山|0876|西南,西双版纳|0691|西南,大理|0872|西南,德宏|0692|西南,怒江|0886|西南,迪庆|0887|西南,
+拉萨|0891|西南,日喀则|0892|西南,昌都|0895|西南,林芝|0894|西南,山南|0893|西南,那曲|0896|西南,阿里|0897|西南,
+西安|029|西北,铜川|0919|西北,宝鸡|0917|西北,咸阳|029|西北,渭南|0913|西北,延安|0911|西北,汉中|0916|西北,榆林|0912|西北,安康|0915|西北,商洛|0914|西北,
+兰州|0931|西北,嘉峪关|0937|西北,金昌|0935|西北,白银|0943|西北,天水|0938|西北,武威|0935|西北,张掖|0936|西北,平凉|0933|西北,酒泉|0937|西北,庆阳|0934|西北,定西|0932|西北,陇南|0939|西北,临夏|0930|西北,甘南|0941|西北,
+西宁|0971|西北,海东|0972|西北,海北|0970|西北,黄南|0973|西北,海南州|0974|西北,果洛|0975|西北,玉树|0976|西北,海西|0977|西北,
+银川|0951|西北,石嘴山|0952|西北,吴忠|0953|西北,固原|0954|西北,中卫|0955|西北,
+乌鲁木齐|0991|西北,克拉玛依|0990|西北,吐鲁番|0995|西北,哈密|0902|西北,昌吉|0994|西北,博尔塔拉|0909|西北,巴音郭楞|0996|西北,阿克苏|0997|西北,克孜勒苏|0908|西北,喀什|0998|西北,和田|0903|西北,伊犁|0999|西北,塔城|0901|西北,阿勒泰|0906|西北,
+香港|852|港澳台,澳门|853|港澳台,台北|886|港澳台,高雄|886|港澳台,台中|886|港澳台
+`.split(/[,\s]+/).filter(Boolean).map(function (s) { return s.split('|'); });
+
+let acRegion = '全部';
+
+function acInit() {
+  const box = document.getElementById('ac-tabs');
+  box.innerHTML = '';
+  AC_REGIONS.forEach(function (r) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-sm' + (r === acRegion ? '' : ' btn-secondary');
+    b.textContent = r;
+    b.onclick = function () { acRegion = r; acInit(); };
+    box.appendChild(b);
+  });
+  acRender();
+}
+function acRender() {
+  const q = (document.getElementById('ac-search').value || '').trim();
+  const list = document.getElementById('ac-list');
+  list.innerHTML = '';
+  const items = AC_DATA.filter(function (it) {
+    const inRegion = acRegion === '全部' || it[2] === acRegion;
+    const hit = !q || it[0].indexOf(q) !== -1 || it[1].indexOf(q) !== -1;
+    return inRegion && hit;
+  });
+  items.forEach(function (it) {
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    card.style.cursor = 'pointer';
+    const name = document.createElement('div');
+    name.textContent = it[0];
+    name.style.cssText = 'font-size:15px;font-weight:600;';
+    const code = document.createElement('div');
+    code.textContent = it[1];
+    code.style.cssText = 'font-size:18px;font-family:monospace;color:var(--accent-hover);margin-top:4px;';
+    const region = document.createElement('div');
+    region.className = 'lbl';
+    region.textContent = it[2];
+    card.appendChild(name); card.appendChild(code); card.appendChild(region);
+    card.onclick = function () {
+      writeClipboard(it[1]).then(function (ok) { showToast(ok ? '已复制 ' + it[1] : '复制失败'); });
+    };
+    list.appendChild(card);
+  });
+  if (items.length) showResult('acq-result', '共找到 ' + items.length + ' 个城市/地区，点击卡片复制区号。');
+  else showResult('acq-result', '未找到匹配的城市或区号，试试输入「杭州」或「0571」。');
+}
+
+// ============ 口算题生成器 ============
+let mdState = { items: [], answers: [], show: false };
+
+function mdInit() { mdGenerate(); }
+function mdRandInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function mdMakeQuestion(op, range) {
+  let a, b, ans;
+  if (op === '+') {
+    a = mdRandInt(1, Math.max(2, range - 1));
+    b = mdRandInt(1, Math.max(1, range - a));
+    ans = a + b;
+  } else if (op === '-') {
+    a = mdRandInt(2, range);
+    b = mdRandInt(1, a);
+    ans = a - b;
+  } else if (op === '×') {
+    a = mdRandInt(1, 9); b = mdRandInt(1, 9); ans = a * b;
+  } else {
+    b = mdRandInt(2, 9); ans = mdRandInt(1, 9); a = b * ans;
+  }
+  return { text: a + ' ' + op + ' ' + b + ' = ______', ans: ans };
+}
+function mdGenerate() {
+  const opSel = document.getElementById('md-op').value;
+  const range = parseInt(document.getElementById('md-range').value, 10) || 20;
+  const count = parseInt(document.getElementById('md-count').value, 10) || 20;
+  const pool = ['+', '-', '×', '÷'];
+  mdState.items = [];
+  mdState.answers = [];
+  mdState.show = false;
+  for (let i = 0; i < count; i++) {
+    const op = opSel === 'mix' ? pool[Math.floor(Math.random() * pool.length)] : opSel;
+    const q = mdMakeQuestion(op, range);
+    mdState.items.push((i + 1) + '. ' + q.text);
+    mdState.answers.push(q.ans);
+  }
+  document.getElementById('md-answer-btn').textContent = '👀 显示答案';
+  mdRender();
+}
+function mdRender() {
+  if (!mdState.items.length) { showResult('md-result', '请点击「生成题目」。'); return; }
+  let text = mdState.items.join('\n');
+  if (mdState.show) {
+    text += '\n\n参考答案：';
+    for (let i = 0; i < mdState.answers.length; i++) {
+      text += (i % 5 === 0 ? '\n' : '    ') + (i + 1) + '. ' + mdState.answers[i];
+    }
+  }
+  showResult('md-result', text);
+}
+function mdToggleAnswer() {
+  if (!mdState.items.length) { showToast('请先生成题目'); return; }
+  mdState.show = !mdState.show;
+  document.getElementById('md-answer-btn').textContent = mdState.show ? '🙈 隐藏答案' : '👀 显示答案';
+  mdRender();
+}
+function mdCopy() {
+  if (!mdState.items.length) { showToast('请先生成题目'); return; }
+  writeClipboard(document.getElementById('md-result').textContent).then(function (ok) {
+    showToast(ok ? '已复制题目' : '复制失败，请手动选择');
+  });
+}
+
+// ============ 音调发生器 ============
+let tgCtx = null, tgOsc = null, tgGain = null, tgPlaying = false;
+
+function tgInit() {
+  tgUpdateReadout();
+  document.querySelectorAll('.tool-nav a[data-tool]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (a.dataset.tool !== 'tone-generator' && tgPlaying) tgStop(false);
+    });
+  });
+}
+function tgReadVals() {
+  const f = parseFloat(document.getElementById('tg-freq').value);
+  const v = parseFloat(document.getElementById('tg-vol').value);
+  return {
+    f: isFinite(f) ? f : 440,
+    v: isFinite(v) ? Math.max(0, Math.min(100, v)) : 20,
+    wave: document.getElementById('tg-wave').value
+  };
+}
+function tgGainValue(v) { return Math.max(0, Math.min(100, v)) / 100 * 0.3; }
+function tgUpdateReadout() {
+  const o = tgReadVals();
+  const names = { sine: '正弦波', square: '方波', triangle: '三角波', sawtooth: '锯齿波' };
+  showResult('tg-result', '状态：' + (tgPlaying ? '播放中' : '未播放') +
+    '\n频率：' + o.f + ' Hz\n波形：' + (names[o.wave] || o.wave) + '\n音量：' + o.v + '%');
+}
+function tgStart() {
+  const o = tgReadVals();
+  if (!isFinite(o.f) || o.f < 20 || o.f > 20000) { showToast('频率需在 20–20000 Hz 之间'); return; }
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { showToast('当前浏览器不支持 Web Audio'); return; }
+  if (!tgCtx) tgCtx = new AC();
+  if (tgCtx.state === 'suspended') tgCtx.resume();
+  tgStop(true);
+  tgOsc = tgCtx.createOscillator();
+  tgGain = tgCtx.createGain();
+  tgOsc.type = o.wave;
+  tgOsc.frequency.value = o.f;
+  tgGain.gain.value = tgGainValue(o.v);
+  tgOsc.connect(tgGain);
+  tgGain.connect(tgCtx.destination);
+  tgOsc.start();
+  tgPlaying = true;
+  document.getElementById('tg-btn').textContent = '⏹ 停止';
+  tgUpdateReadout();
+}
+function tgStop(silent) {
+  if (tgOsc) {
+    try { tgOsc.stop(); } catch (e) {}
+    try { tgOsc.disconnect(); } catch (e) {}
+    tgOsc = null;
+  }
+  if (tgGain) {
+    try { tgGain.disconnect(); } catch (e) {}
+    tgGain = null;
+  }
+  tgPlaying = false;
+  const btn = document.getElementById('tg-btn');
+  if (btn) btn.textContent = '▶ 播放';
+  if (!silent) { tgUpdateReadout(); showToast('已停止播放'); }
+}
+function tgToggle() { if (tgPlaying) tgStop(false); else tgStart(); }
+function tgPreset(f) {
+  document.getElementById('tg-freq').value = f;
+  tgUpdateLive();
+}
+function tgUpdateLive() {
+  if (tgPlaying && tgOsc && tgGain) {
+    const o = tgReadVals();
+    tgOsc.frequency.value = Math.max(20, Math.min(20000, o.f));
+    tgOsc.type = o.wave;
+    tgGain.gain.value = tgGainValue(o.v);
+  }
+  tgUpdateReadout();
+}
+
+// ============ 成语接龙 ============
+const IC_IDIOMS = Array.from(new Set(`
+一心一意,意气风发,发扬光大,大公无私,私心杂念,念念不忘,忘乎所以,以人为本,本末倒置,置之不理,
+理直气壮,壮志凌云,云开见日,日新月异,异想天开,开门见山,山清水秀,秀外慧中,中流砥柱,
+心花怒放,放虎归山,山穷水尽,尽心尽力,力不从心,心旷神怡,怡然自得,得心应手,手忙脚乱,乱七八糟,
+糟糠之妻,妻离子散,散兵游勇,勇往直前,前因后果,果不其然,
+一鸣惊人,人定胜天,天长地久,久别重逢,逢凶化吉,吉祥如意,
+一帆风顺,顺理成章,一举两得,得寸进尺,尺有所短,短兵相接,接二连三,三心二意,
+四面八方,方兴未艾,五湖四海,海阔天空,空前绝后,后生可畏,畏首畏尾,尾大不掉,掉以轻心,
+六神无主,主次分明,明察秋毫,毫不犹豫,七上八下,下不为例,例行公事,事半功倍,倍道兼行,
+行云流水,水落石出,出人头地,地大物博,博学多才,才华横溢,溢于言表,表里如一,
+一马当先,先发制人,人杰地灵,灵机一动,动人心弦,弦外之音,音容笑貌,貌合神离,离乡背井,
+井井有条,条分缕析,一箭双雕,雕虫小技,技高一筹,一诺千金,金玉良言,言而有信,信口开河,
+河清海晏,一石二鸟,鸟语花香,香飘万里,里应外合,合情合理,一见钟情,情投意合,
+一往无前,前程似锦,锦上添花,花好月圆,圆满成功,功成名就,就事论事,一丝不苟,苟且偷生,
+生龙活虎,虎头蛇尾,一鼓作气,气宇轩昂,昂首挺胸,胸有成竹,竹报平安,安居乐业,业精于勤,
+勤能补拙,拙嘴笨舌,舌战群儒,一视同仁,仁至义尽,尽力而为,为人师表,一衣带水,
+一清二白,白手起家,家喻户晓,晓以大义,义不容辞,辞旧迎新,新陈代谢,谢天谢地,
+一劳永逸,一败涂地,一草一木,木已成舟,一叶知秋,秋高气爽,一望无际,一往情深,深入浅出,
+一意孤行,一尘不染,一曝十寒,寒来暑往,往事如烟,烟消云散,一言九鼎,鼎力相助,助人为乐,
+乐不思蜀,蜀犬吠日,一脉相承,承前启后,一针见血,血浓于水,一塌糊涂,一蹶不振,振振有词,
+词不达意,一板一眼,眼高手低,低三下四,四通八达,达官贵人,一飞冲天,一落千丈,丈二和尚,
+一日千里,一穷二白,一唱一和,和风细雨,雨过天晴,晴空万里,一呼百应,应对自如,如鱼得水,
+一应俱全,全心全意,一蹴而就,一触即发,
+不约而同,同甘共苦,苦尽甘来,来日方长,长驱直入,入木三分,分秒必争,争分夺秒,
+不劳而获,不可思议,不寒而栗,不谋而合,不翼而飞,飞黄腾达,不耻下问,问心无愧,
+不甘落后,不由自主,不遗余力,不假思索,索然无味,味同嚼蜡,不同凡响,响彻云霄,
+不欢而散,不速之客,不辞而别,别出心裁,不胫而走,走马观花,不折不扣,扣人心弦,
+不言而喻,不闻不问,不卑不亢,不容置疑,疑神疑鬼,鬼斧神工,
+心平气和,和颜悦色,色彩斑斓,心直口快,快马加鞭,鞭长莫及,及时行乐,心照不宣,
+心领神会,会心一笑,笑逐颜开,心驰神往,心猿意马,马到成功,心灰意冷,冷若冰霜,
+心满意足,足智多谋,谋事在人,心安理得,心口如一,心心相印,
+天下无双,双管齐下,天马行空,天道酬勤,天衣无缝,天翻地覆,覆水难收,收放自如,
+天伦之乐,天荒地老,老当益壮,老马识途,天罗地网,网开一面,面面俱到,天涯海角,
+春暖花开,开卷有益,风和日丽,风平浪静,静观其变,变本加厉,风雨同舟,风景如画,
+画蛇添足,风起云涌,风调雨顺,顺其自然,风华正茂,风花雪月,月下老人,月明星稀,
+雪中送炭,雪上加霜,雷厉风行,电闪雷鸣,鸣金收兵,山水相连,连绵不断,断章取义,
+水天一色,水泄不通,通情达理,水乳交融,融会贯通,水涨船高,高瞻远瞩,高山流水,
+山明水秀,山盟海誓,山南海北,山珍海味,海纳百川,川流不息,息事宁人,海枯石烂,
+海底捞针,针锋相对,对答如流,流连忘返,返老还童,童言无忌
+`.split(/[\s,]+/).filter(Boolean)));
+const IC_SET = new Set(IC_IDIOMS);
+let icCurrent = '', icUsed = new Set(), icScore = 0;
+
+function icInit() {
+  const input = document.getElementById('ic-input');
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); icSubmit(); }
+  });
+  icRestart();
+}
+function icFindNext(word, used) {
+  return IC_IDIOMS.filter(function (w) {
+    return w !== word && w.charAt(0) === word.charAt(3) && !used.has(w);
+  });
+}
+function icUpdateUI(msg) {
+  document.getElementById('ic-current').textContent =
+    '当前成语：' + icCurrent + '（请接「' + icCurrent.charAt(3) + '」字开头的成语）';
+  document.getElementById('ic-score').textContent = icScore;
+  document.getElementById('ic-need').textContent = icCurrent.charAt(3);
+  if (msg) showResult('ic-msg', msg);
+}
+function icRestart() {
+  const pool = IC_IDIOMS.filter(function (w) {
+    return IC_IDIOMS.some(function (x) { return x !== w && x.charAt(0) === w.charAt(3); });
+  });
+  icCurrent = pool.length ? pool[Math.floor(Math.random() * pool.length)] : IC_IDIOMS[0];
+  icUsed = new Set([icCurrent]);
+  icScore = 0;
+  document.getElementById('ic-input').value = '';
+  const log = document.getElementById('ic-log');
+  log.style.display = 'none';
+  log.textContent = '';
+  icUpdateUI('新的一局开始，请接「' + icCurrent.charAt(3) + '」字开头的成语。');
+}
+function icSubmit() {
+  if (!icCurrent) { showToast('请先点击「重新开始」'); return; }
+  const input = document.getElementById('ic-input');
+  const val = (input.value || '').trim().replace(/\s+/g, '');
+  if (!val) { showToast('请输入一个四字成语'); return; }
+  if (!/^[\u4e00-\u9fa5]{4}$/.test(val)) {
+    showResult('ic-msg', '❌ 请输入四个汉字的成语。');
+    return;
+  }
+  if (val.charAt(0) !== icCurrent.charAt(3)) {
+    showResult('ic-msg', '❌ 需要接「' + icCurrent.charAt(3) + '」字开头的成语。');
+    return;
+  }
+  if (icUsed.has(val)) {
+    showResult('ic-msg', '❌「' + val + '」已经用过了，换一个吧。');
+    return;
+  }
+  if (!IC_SET.has(val)) {
+    showResult('ic-msg', '❌ 词库中没有收录「' + val + '」，换一个常用成语试试。');
+    return;
+  }
+  icUsed.add(val);
+  icCurrent = val;
+  icScore++;
+  input.value = '';
+  const log = document.getElementById('ic-log');
+  log.style.display = 'block';
+  log.textContent += (log.textContent ? '\n' : '') + '✓ ' + val;
+  log.scrollTop = log.scrollHeight;
+  const next = icFindNext(val, icUsed);
+  if (next.length === 0) {
+    icUpdateUI('🎉 接得漂亮！当前词库中已没有可接的成语，点击「重新开始」再来一局。');
+  } else {
+    icUpdateUI('✅ 接龙成功！请继续接「' + val.charAt(3) + '」字开头的成语。');
+  }
+}
+function icHint() {
+  if (!icCurrent) { showToast('请先点击「重新开始」'); return; }
+  const cands = icFindNext(icCurrent, icUsed);
+  if (!cands.length) {
+    showResult('ic-msg', '💡 词库中没有可接的成语了，点击「重新开始」换一局吧。');
+    return;
+  }
+  showResult('ic-msg', '💡 可以试试：' + cands[Math.floor(Math.random() * cands.length)]);
+}
+
+// ============ 垃圾分类查询 ============
+const GS_CATS = {
+  recycle: { name: '可回收物', color: '#3b82f6', icon: '♻️' },
+  harmful: { name: '有害垃圾', color: '#ef4444', icon: '☣️' },
+  kitchen: { name: '厨余垃圾', color: '#22c55e', icon: '🥬' },
+  other: { name: '其他垃圾', color: '#94a3b8', icon: '🚮' }
+};
+const GS_DATA = `
+报纸|recycle,纸箱|recycle,快递纸箱|recycle,硬纸板|recycle,书本|recycle,杂志|recycle,广告单|recycle,信封|recycle,
+塑料瓶|recycle,饮料瓶|recycle,洗发水瓶|recycle,洗衣液瓶|recycle,塑料玩具|recycle,塑料收纳箱|recycle,塑料衣架|recycle,
+玻璃瓶|recycle,玻璃杯|recycle,易拉罐|recycle,金属罐头|recycle,铁锅|recycle,铝制饭盒|recycle,不锈钢杯|recycle,保温杯|recycle,
+旧衣服|recycle,旧鞋子|recycle,旧床单|recycle,旧书包|recycle,旧手机|recycle,旧电脑|recycle,旧电视|recycle,旧冰箱|recycle,
+旧洗衣机|recycle,充电线|recycle,数据线|recycle,充电宝|recycle,牛奶盒|recycle,利乐包|recycle,泡沫箱|recycle,金属衣架|recycle,
+充电电池|harmful,纽扣电池|harmful,锂电池|harmful,铅酸电池|harmful,荧光灯管|harmful,节能灯|harmful,
+过期药品|harmful,药品包装|harmful,过期化妆品|harmful,指甲油|harmful,染发剂|harmful,油漆桶|harmful,
+杀虫剂罐|harmful,农药瓶|harmful,水银温度计|harmful,水银血压计|harmful,废胶片|harmful,相纸|harmful,
+打印机墨盒|harmful,硒鼓|harmful,消毒剂|harmful,漂白剂|harmful,废矿物油|harmful,油漆刷|harmful,
+剩菜剩饭|kitchen,菜叶|kitchen,果皮|kitchen,香蕉皮|kitchen,苹果核|kitchen,西瓜皮|kitchen,橘子皮|kitchen,
+鸡蛋壳|kitchen,鱼骨|kitchen,虾壳|kitchen,小骨头|kitchen,茶叶渣|kitchen,咖啡渣|kitchen,剩面条|kitchen,
+剩米饭|kitchen,过期食品|kitchen,面包|kitchen,饼干|kitchen,蛋糕|kitchen,花生壳|kitchen,瓜子壳|kitchen,
+中药渣|kitchen,玉米须|kitchen,豆渣|kitchen,菜根|kitchen,蘑菇|kitchen,肉渣|kitchen,鱼鳞|kitchen,虾头|kitchen,
+卫生纸|other,纸巾|other,湿巾|other,尿不湿|other,卫生巾|other,一次性餐具|other,一次性筷子|other,
+牙签|other,烟头|other,陶瓷碗|other,陶瓷杯|other,碎玻璃|other,镜子|other,牙刷|other,牙膏皮|other,
+口罩|other,创可贴|other,棉签|other,化妆棉|other,猫砂|other,宠物粪便|other,大骨头|other,榴莲壳|other,
+椰子壳|other,玉米核|other,核桃壳|other,蟹壳|other,贝壳|other,头发|other,灰尘|other,干燥剂|other,
+保鲜膜|other,胶带|other,圆珠笔|other,橡皮|other,海绵|other,抹布|other,拖把|other,一次性手套|other,
+方便面桶|other,奶茶杯|other,雨伞|other,竹签|other,打火机|other,火柴|other,蜡烛|other,蚊香|other
+`.split(/[,\s]+/).filter(Boolean).map(function (s) { return s.split('|'); });
+
+let gsCat = 'all';
+
+function gsInit() {
+  const box = document.getElementById('gs-cats');
+  box.innerHTML = '';
+  const tabs = [['all', '全部'], ['recycle', '可回收物'], ['harmful', '有害垃圾'], ['kitchen', '厨余垃圾'], ['other', '其他垃圾']];
+  tabs.forEach(function (t) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-sm' + (gsCat === t[0] ? '' : ' btn-secondary');
+    b.textContent = t[1];
+    b.onclick = function () { gsCat = t[0]; gsInit(); };
+    box.appendChild(b);
+  });
+  gsRender();
+}
+function gsRender() {
+  const q = (document.getElementById('gs-search').value || '').trim();
+  const list = document.getElementById('gs-list');
+  list.innerHTML = '';
+  const items = GS_DATA.filter(function (it) {
+    return (gsCat === 'all' || it[1] === gsCat) && (!q || it[0].indexOf(q) !== -1);
+  });
+  items.forEach(function (it) {
+    const meta = GS_CATS[it[1]];
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    card.style.textAlign = 'left';
+    const name = document.createElement('div');
+    name.textContent = it[0];
+    name.style.cssText = 'font-size:14px;font-weight:600;';
+    const badge = document.createElement('div');
+    badge.textContent = meta.icon + ' ' + meta.name;
+    badge.style.cssText = 'margin-top:8px;font-size:12px;font-weight:600;color:' + meta.color + ';';
+    card.appendChild(name);
+    card.appendChild(badge);
+    list.appendChild(card);
+  });
+  if (!items.length) {
+    showResult('gs-result', q ? '未找到「' + q + '」，换个关键词试试，或按分类浏览。' : '暂无数据。');
+  } else {
+    showResult('gs-result', '共找到 ' + items.length + ' 项' + (gsCat === 'all' ? '' : ' · ' + GS_CATS[gsCat].name));
+  }
+}
+
+safeInit(() => acInit(), 'acInit');
+safeInit(() => mdInit(), 'mdInit');
+safeInit(() => tgInit(), 'tgInit');
+safeInit(() => icInit(), 'icInit');
+safeInit(() => gsInit(), 'gsInit');
 
 // ============ Search & Theme ============
 function filterTools() {
