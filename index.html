@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等264个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等269个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等264个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等269个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等264个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等269个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -660,6 +660,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#tone-generator" data-tool="tone-generator"><span class="icon">🎵</span>音调发生器</a></li>
     <li><a href="#idiom-chain" data-tool="idiom-chain"><span class="icon">🀄</span>成语接龙</a></li>
     <li><a href="#garbage-sort" data-tool="garbage-sort"><span class="icon">🗑️</span>垃圾分类查询</a></li>
+    <li class="category">最新工具</li>
+    <li><a href="#periodic-table" data-tool="periodic-table"><span class="icon">⚗️</span>元素周期表查询</a></li>
+    <li><a href="#sun-times" data-tool="sun-times"><span class="icon">🌅</span>日出日落计算器</a></li>
+    <li><a href="#packing-list" data-tool="packing-list"><span class="icon">🧳</span>旅行行李清单</a></li>
+    <li><a href="#quadratic-solver" data-tool="quadratic-solver"><span class="icon">📐</span>一元二次方程求解</a></li>
+    <li><a href="#unicode-lookup" data-tool="unicode-lookup"><span class="icon">🔣</span>Unicode 字符查询</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7523,6 +7529,169 @@ console.log('代码块');
     <div id="gs-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:14px;"></div>
   </section>
 
+  <!-- 元素周期表查询 -->
+  <section class="tool-panel" id="panel-periodic-table">
+    <h2>⚗️ 元素周期表查询</h2>
+    <p class="desc">输入元素中文名、符号或原子序数，快速查询相对原子质量、类别与周期。点击结果卡片可查看完整信息。</p>
+    <input type="text" id="pt-search" placeholder="输入元素名称、符号或原子序数，例如：氧 / O / 8" oninput="ptRender()">
+    <div class="btn-group" id="pt-tabs"></div>
+    <div class="result-box" id="pt-result" style="display:none;">--</div>
+    <div id="pt-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px;"></div>
+  </section>
+
+  <!-- 日出日落计算器 -->
+  <section class="tool-panel" id="panel-sun-times">
+    <h2>🌅 日出日落时间计算器</h2>
+    <p class="desc">根据日期、经纬度和时区计算日出、日落、太阳正午与昼长，适合旅行、摄影和户外活动参考（不含夏令时与地形遮挡）。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">日期</div>
+        <input type="date" id="sun-date" onchange="sunCalc()">
+      </div>
+      <div>
+        <div class="label">城市预设</div>
+        <select id="sun-city" onchange="sunPreset()">
+          <option value="">自定义</option>
+          <option value="北京">北京</option>
+          <option value="上海">上海</option>
+          <option value="广州">广州</option>
+          <option value="深圳">深圳</option>
+          <option value="成都">成都</option>
+          <option value="西安">西安</option>
+          <option value="哈尔滨">哈尔滨</option>
+          <option value="乌鲁木齐">乌鲁木齐</option>
+          <option value="拉萨">拉萨</option>
+          <option value="三亚">三亚</option>
+          <option value="香港">香港</option>
+          <option value="台北">台北</option>
+          <option value="东京">东京</option>
+          <option value="新加坡">新加坡</option>
+          <option value="悉尼">悉尼</option>
+          <option value="伦敦">伦敦</option>
+          <option value="巴黎">巴黎</option>
+          <option value="纽约">纽约</option>
+          <option value="洛杉矶">洛杉矶</option>
+          <option value="杜拜">杜拜</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">纬度</div>
+        <input type="number" id="sun-lat" value="39.9042" step="0.0001" min="-90" max="90" oninput="sunCalc()">
+      </div>
+      <div>
+        <div class="label">经度</div>
+        <input type="number" id="sun-lng" value="116.4074" step="0.0001" min="-180" max="180" oninput="sunCalc()">
+      </div>
+      <div>
+        <div class="label">时区（UTC 偏移小时）</div>
+        <input type="number" id="sun-tz" value="8" step="0.5" min="-12" max="14" oninput="sunCalc()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="sunCalc()">🌅 计算</button>
+      <button class="btn btn-secondary" onclick="sunToday()">📅 使用今天</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sun-rise" style="font-size:22px;">--:--</div><div class="lbl">日出</div></div>
+      <div class="stat-card"><div class="num" id="sun-set" style="font-size:22px;">--:--</div><div class="lbl">日落</div></div>
+      <div class="stat-card"><div class="num" id="sun-noon" style="font-size:22px;">--:--</div><div class="lbl">太阳正午</div></div>
+      <div class="stat-card"><div class="num" id="sun-day" style="font-size:22px;">--</div><div class="lbl">昼长</div></div>
+    </div>
+    <div class="result-box" id="sun-result" style="display:none;">--</div>
+  </section>
+
+  <!-- 旅行行李清单 -->
+  <section class="tool-panel" id="panel-packing-list">
+    <h2>🧳 旅行行李清单生成器</h2>
+    <p class="desc">按出行类型、季节和天数生成行李清单，勾选进度自动保存在本地浏览器，出发前逐项确认更安心。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">出行类型</div>
+        <select id="pl-type" onchange="plGenerate()">
+          <option value="city">城市观光</option>
+          <option value="business">商务出差</option>
+          <option value="beach">海边度假</option>
+          <option value="hiking">户外徒步</option>
+          <option value="ski">滑雪旅行</option>
+          <option value="family">探亲访友</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">季节</div>
+        <select id="pl-season" onchange="plGenerate()">
+          <option value="spring">春季</option>
+          <option value="summer">夏季</option>
+          <option value="autumn" selected>秋季</option>
+          <option value="winter">冬季</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">出行天数</div>
+        <input type="number" id="pl-days" value="3" min="1" max="60" oninput="plGenerate()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="plGenerate()">🧳 生成清单</button>
+      <button class="btn btn-secondary" onclick="plCheckAll()">✅ 全部勾选</button>
+      <button class="btn btn-secondary" onclick="plClear()">🧹 清空勾选</button>
+    </div>
+    <div class="result-box" id="pl-progress" style="display:block;">--</div>
+    <div id="pl-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:14px;"></div>
+  </section>
+
+  <!-- 一元二次方程求解 -->
+  <section class="tool-panel" id="panel-quadratic-solver">
+    <h2>📐 一元二次方程求解器</h2>
+    <p class="desc">输入 ax² + bx + c = 0 的系数，自动计算判别式、实数根或复数根，并给出顶点坐标与对称轴。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">a</div>
+        <input type="number" id="quad-a" value="1" step="any" oninput="quadSolve()">
+      </div>
+      <div>
+        <div class="label">b</div>
+        <input type="number" id="quad-b" value="-3" step="any" oninput="quadSolve()">
+      </div>
+      <div>
+        <div class="label">c</div>
+        <input type="number" id="quad-c" value="2" step="any" oninput="quadSolve()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="quadSolve()">📐 求解</button>
+      <button class="btn btn-secondary" onclick="quadExample()">🎲 随机示例</button>
+      <button class="btn btn-secondary" onclick="quadReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="quad-delta" style="font-size:22px;">--</div><div class="lbl">判别式 Δ</div></div>
+      <div class="stat-card"><div class="num" id="quad-x1" style="font-size:20px;">--</div><div class="lbl">根 x₁</div></div>
+      <div class="stat-card"><div class="num" id="quad-x2" style="font-size:20px;">--</div><div class="lbl">根 x₂</div></div>
+    </div>
+    <div class="result-box" id="quad-result" style="display:block;">--</div>
+  </section>
+
+  <!-- Unicode 字符查询 -->
+  <section class="tool-panel" id="panel-unicode-lookup">
+    <h2>🔣 Unicode 字符查询器</h2>
+    <p class="desc">输入单个字符查看码点、UTF-8 字节、HTML 实体与 JS 转义；也可输入 U+4E2D、0x4E2D 或十进制 20013 反查字符。</p>
+    <input type="text" id="ul-input" value="中" maxlength="32" placeholder="输入字符或码点，例如：中 / 😀 / U+4E2D / 20013" oninput="ulRun()">
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('中')">中</button>
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('😀')">😀</button>
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('€')">€</button>
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('©')">©</button>
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('→')">→</button>
+      <button class="btn btn-secondary btn-sm" onclick="ulSet('♥')">♥</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ul-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ul-char" style="font-size:32px;">--</div><div class="lbl">字符</div></div>
+      <div class="stat-card"><div class="num" id="ul-cp" style="font-size:22px;">--</div><div class="lbl">码点</div></div>
+      <div class="stat-card"><div class="num" id="ul-dec" style="font-size:22px;">--</div><div class="lbl">十进制</div></div>
+    </div>
+    <div class="result-box" id="ul-result" style="display:block;white-space:pre-wrap;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7530,7 +7699,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 264个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 269个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -23815,6 +23984,591 @@ safeInit(() => mdInit(), 'mdInit');
 safeInit(() => tgInit(), 'tgInit');
 safeInit(() => icInit(), 'icInit');
 safeInit(() => gsInit(), 'gsInit');
+
+// ============ Periodic Table ============
+const PT_DATA = `
+1|H|氢|1.008|非金属
+2|He|氦|4.003|稀有气体
+3|Li|锂|6.94|碱金属
+4|Be|铍|9.012|碱土金属
+5|B|硼|10.81|准金属
+6|C|碳|12.011|非金属
+7|N|氮|14.007|非金属
+8|O|氧|15.999|非金属
+9|F|氟|18.998|卤素
+10|Ne|氖|20.180|稀有气体
+11|Na|钠|22.990|碱金属
+12|Mg|镁|24.305|碱土金属
+13|Al|铝|26.982|后过渡金属
+14|Si|硅|28.085|准金属
+15|P|磷|30.974|非金属
+16|S|硫|32.06|非金属
+17|Cl|氯|35.45|卤素
+18|Ar|氩|39.948|稀有气体
+19|K|钾|39.098|碱金属
+20|Ca|钙|40.078|碱土金属
+21|Sc|钪|44.956|过渡金属
+22|Ti|钛|47.867|过渡金属
+23|V|钒|50.942|过渡金属
+24|Cr|铬|51.996|过渡金属
+25|Mn|锰|54.938|过渡金属
+26|Fe|铁|55.845|过渡金属
+27|Co|钴|58.933|过渡金属
+28|Ni|镍|58.693|过渡金属
+29|Cu|铜|63.546|过渡金属
+30|Zn|锌|65.38|过渡金属
+31|Ga|镓|69.723|后过渡金属
+32|Ge|锗|72.630|准金属
+33|As|砷|74.922|准金属
+34|Se|硒|78.971|非金属
+35|Br|溴|79.904|卤素
+36|Kr|氪|83.798|稀有气体
+37|Rb|铷|85.468|碱金属
+38|Sr|锶|87.62|碱土金属
+39|Y|钇|88.906|过渡金属
+40|Zr|锆|91.224|过渡金属
+41|Nb|铌|92.906|过渡金属
+42|Mo|钼|95.95|过渡金属
+43|Tc|锝|98|过渡金属
+44|Ru|钌|101.07|过渡金属
+45|Rh|铑|102.91|过渡金属
+46|Pd|钯|106.42|过渡金属
+47|Ag|银|107.87|过渡金属
+48|Cd|镉|112.41|过渡金属
+49|In|铟|114.82|后过渡金属
+50|Sn|锡|118.71|后过渡金属
+51|Sb|锑|121.76|准金属
+52|Te|碲|127.60|准金属
+53|I|碘|126.90|卤素
+54|Xe|氙|131.29|稀有气体
+55|Cs|铯|132.91|碱金属
+56|Ba|钡|137.33|碱土金属
+57|La|镧|138.91|镧系
+58|Ce|铈|140.12|镧系
+59|Pr|镨|140.91|镧系
+60|Nd|钕|144.24|镧系
+61|Pm|钷|145|镧系
+62|Sm|钐|150.36|镧系
+63|Eu|铕|151.96|镧系
+64|Gd|钆|157.25|镧系
+65|Tb|铽|158.93|镧系
+66|Dy|镝|162.50|镧系
+67|Ho|钬|164.93|镧系
+68|Er|铒|167.26|镧系
+69|Tm|铥|168.93|镧系
+70|Yb|镱|173.05|镧系
+71|Lu|镥|174.97|镧系
+72|Hf|铪|178.49|过渡金属
+73|Ta|钽|180.95|过渡金属
+74|W|钨|183.84|过渡金属
+75|Re|铼|186.21|过渡金属
+76|Os|锇|190.23|过渡金属
+77|Ir|铱|192.22|过渡金属
+78|Pt|铂|195.08|过渡金属
+79|Au|金|196.97|过渡金属
+80|Hg|汞|200.59|过渡金属
+81|Tl|铊|204.38|后过渡金属
+82|Pb|铅|207.2|后过渡金属
+83|Bi|铋|208.98|后过渡金属
+84|Po|钋|209|后过渡金属
+85|At|砹|210|卤素
+86|Rn|氡|222|稀有气体
+87|Fr|钫|223|碱金属
+88|Ra|镭|226|碱土金属
+89|Ac|锕|227|锕系
+90|Th|钍|232.04|锕系
+91|Pa|镤|231.04|锕系
+92|U|铀|238.03|锕系
+93|Np|镎|237|锕系
+94|Pu|钚|244|锕系
+95|Am|镅|243|锕系
+96|Cm|锔|247|锕系
+97|Bk|锫|247|锕系
+98|Cf|锎|251|锕系
+99|Es|锿|252|锕系
+100|Fm|镄|257|锕系
+101|Md|钔|258|锕系
+102|No|锘|259|锕系
+103|Lr|铹|262|锕系
+104|Rf|𬬻|267|过渡金属
+105|Db|𬭊|268|过渡金属
+106|Sg|𬭳|269|过渡金属
+107|Bh|𬭛|270|过渡金属
+108|Hs|𬭶|269|过渡金属
+109|Mt|鿏|278|过渡金属
+110|Ds|𫟼|281|过渡金属
+111|Rg|𬬭|282|过渡金属
+112|Cn|鿔|285|过渡金属
+113|Nh|鿭|286|后过渡金属
+114|Fl|𫓧|289|后过渡金属
+115|Mc|镆|290|后过渡金属
+116|Lv|𫟷|293|后过渡金属
+117|Ts|鿬|294|卤素
+118|Og|鿫|294|稀有气体
+`.trim().split('\n').map(function (line) { return line.split('|'); });
+
+const PT_TABS = ['全部', '非金属', '金属', '稀有气体', '镧锕系'];
+let ptTab = '全部';
+
+function ptInit() {
+  const box = document.getElementById('pt-tabs');
+  box.innerHTML = '';
+  PT_TABS.forEach(function (t) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-sm' + (ptTab === t ? '' : ' btn-secondary');
+    b.textContent = t;
+    b.onclick = function () { ptTab = t; ptInit(); };
+    box.appendChild(b);
+  });
+  ptRender();
+}
+function ptMatchTab(cat) {
+  if (ptTab === '全部') return true;
+  if (ptTab === '非金属') return cat === '非金属' || cat === '卤素' || cat === '准金属';
+  if (ptTab === '金属') return cat === '碱金属' || cat === '碱土金属' || cat === '过渡金属' || cat === '后过渡金属';
+  if (ptTab === '稀有气体') return cat === '稀有气体';
+  if (ptTab === '镧锕系') return cat === '镧系' || cat === '锕系';
+  return true;
+}
+function ptPeriod(n) {
+  if (n <= 2) return 1;
+  if (n <= 10) return 2;
+  if (n <= 18) return 3;
+  if (n <= 36) return 4;
+  if (n <= 54) return 5;
+  if (n <= 86) return 6;
+  return 7;
+}
+function ptRender() {
+  const q = (document.getElementById('pt-search').value || '').trim().toLowerCase();
+  const list = document.getElementById('pt-list');
+  list.innerHTML = '';
+  const items = PT_DATA.filter(function (el) {
+    const hit = !q || el[2].indexOf(q) !== -1 || el[0] === q || el[1].toLowerCase() === q;
+    return hit && ptMatchTab(el[4]);
+  });
+  items.forEach(function (el) {
+    const card = document.createElement('div');
+    card.className = 'stat-card';
+    card.style.cssText = 'cursor:pointer;text-align:center;padding:10px;';
+    const num = document.createElement('div');
+    num.textContent = '#' + el[0];
+    num.style.cssText = 'font-size:11px;color:var(--text-secondary);';
+    const sym = document.createElement('div');
+    sym.textContent = el[1];
+    sym.style.cssText = 'font-size:26px;font-weight:700;color:var(--accent);line-height:1.2;';
+    const name = document.createElement('div');
+    name.textContent = el[2];
+    name.style.cssText = 'font-size:13px;font-weight:600;';
+    const mass = document.createElement('div');
+    mass.textContent = el[3];
+    mass.style.cssText = 'font-size:11px;color:var(--text-secondary);margin-top:2px;';
+    card.appendChild(num);
+    card.appendChild(sym);
+    card.appendChild(name);
+    card.appendChild(mass);
+    card.onclick = function () { ptShow(el); };
+    list.appendChild(card);
+  });
+  showResult('pt-result', items.length ? '共找到 ' + items.length + ' 种元素' + (ptTab === '全部' ? '' : ' · ' + ptTab) : '未找到匹配的元素，请换个关键词。');
+}
+function ptShow(el) {
+  showResult('pt-result', '元素：' + el[2] + '（' + el[1] + '）\n原子序数：' + el[0] + '\n相对原子质量：' + el[3] + '\n类别：' + el[4] + '\n周期：第 ' + ptPeriod(Number(el[0])) + ' 周期');
+}
+
+// ============ Sun Times ============
+const SUN_CITIES = {
+  '北京': [39.9042, 116.4074, 8],
+  '上海': [31.2304, 121.4737, 8],
+  '广州': [23.1291, 113.2644, 8],
+  '深圳': [22.5431, 114.0579, 8],
+  '成都': [30.5728, 104.0668, 8],
+  '西安': [34.3416, 108.9398, 8],
+  '哈尔滨': [45.8038, 126.5349, 8],
+  '乌鲁木齐': [43.8256, 87.6168, 8],
+  '拉萨': [29.6520, 91.1721, 8],
+  '三亚': [18.2528, 109.5119, 8],
+  '香港': [22.3193, 114.1694, 8],
+  '台北': [25.0330, 121.5654, 8],
+  '东京': [35.6762, 139.6503, 9],
+  '新加坡': [1.3521, 103.8198, 8],
+  '悉尼': [-33.8688, 151.2093, 11],
+  '伦敦': [51.5074, -0.1278, 0],
+  '巴黎': [48.8566, 2.3522, 1],
+  '纽约': [40.7128, -74.0060, -5],
+  '洛杉矶': [34.0522, -118.2437, -8],
+  '杜拜': [25.2048, 55.2708, 4]
+};
+
+function sunInit() {
+  sunToday();
+}
+function sunToday() {
+  const d = new Date();
+  const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  document.getElementById('sun-date').value = iso;
+  sunCalc();
+}
+function sunPreset() {
+  const key = document.getElementById('sun-city').value;
+  if (!key || !SUN_CITIES[key]) return;
+  const c = SUN_CITIES[key];
+  document.getElementById('sun-lat').value = c[0];
+  document.getElementById('sun-lng').value = c[1];
+  document.getElementById('sun-tz').value = c[2];
+  sunCalc();
+}
+function sunPad(n) {
+  return String(n).padStart(2, '0');
+}
+function sunFmt(mins, tz) {
+  let m = Math.round(mins + tz * 60);
+  m = ((m % 1440) + 1440) % 1440;
+  return sunPad(Math.floor(m / 60)) + ':' + sunPad(m % 60);
+}
+function sunCalc() {
+  const dateStr = document.getElementById('sun-date').value;
+  const lat = parseFloat(document.getElementById('sun-lat').value);
+  const lng = parseFloat(document.getElementById('sun-lng').value);
+  const tz = parseFloat(document.getElementById('sun-tz').value);
+  if (!dateStr || !isFinite(lat) || !isFinite(lng) || !isFinite(tz)) {
+    showResult('sun-result', '请填写完整的日期、纬度和经度。');
+    return;
+  }
+  if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+    showResult('sun-result', '纬度需在 -90～90，经度需在 -180～180 之间。');
+    return;
+  }
+  const parts = dateStr.split('-').map(Number);
+  const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+  const start = new Date(parts[0], 0, 0);
+  const n = Math.round((dt - start) / 86400000);
+  const gamma = 2 * Math.PI / 365 * (n - 1);
+  const eot = 229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma) - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma));
+  const decl = 0.006918 - 0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma) - 0.006758 * Math.cos(2 * gamma) + 0.000907 * Math.sin(2 * gamma) - 0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma);
+  const latRad = lat * Math.PI / 180;
+  const cosH = (Math.cos(90.833 * Math.PI / 180) - Math.sin(latRad) * Math.sin(decl)) / (Math.cos(latRad) * Math.cos(decl));
+  const noonUTC = 720 - 4 * lng - eot;
+  if (cosH > 1) {
+    document.getElementById('sun-rise').textContent = '极夜';
+    document.getElementById('sun-set').textContent = '极夜';
+    document.getElementById('sun-noon').textContent = sunFmt(noonUTC, tz);
+    document.getElementById('sun-day').textContent = '0 小时';
+    showResult('sun-result', '该日期在所选纬度出现极夜，太阳全天位于地平线以下。');
+    return;
+  }
+  if (cosH < -1) {
+    document.getElementById('sun-rise').textContent = '极昼';
+    document.getElementById('sun-set').textContent = '极昼';
+    document.getElementById('sun-noon').textContent = sunFmt(noonUTC, tz);
+    document.getElementById('sun-day').textContent = '24 小时';
+    showResult('sun-result', '该日期在所选纬度出现极昼，太阳全天位于地平线以上。');
+    return;
+  }
+  const H = Math.acos(cosH) * 180 / Math.PI;
+  const riseUTC = noonUTC - 4 * H;
+  const setUTC = noonUTC + 4 * H;
+  const dayMin = 8 * H;
+  let dayH = Math.floor(dayMin / 60);
+  let dayM = Math.round(dayMin % 60);
+  if (dayM === 60) { dayH += 1; dayM = 0; }
+  document.getElementById('sun-rise').textContent = sunFmt(riseUTC, tz);
+  document.getElementById('sun-set').textContent = sunFmt(setUTC, tz);
+  document.getElementById('sun-noon').textContent = sunFmt(noonUTC, tz);
+  document.getElementById('sun-day').textContent = dayH + ' 小时 ' + dayM + ' 分';
+  const cityKey = document.getElementById('sun-city').value;
+  showResult('sun-result', '日期：' + dateStr + (cityKey ? ' · ' + cityKey : '') + '\n坐标：纬度 ' + lat + '° / 经度 ' + lng + '° · UTC' + (tz >= 0 ? '+' : '') + tz + '\n日出：' + sunFmt(riseUTC, tz) + '　日落：' + sunFmt(setUTC, tz) + '\n昼长：' + dayH + ' 小时 ' + dayM + ' 分（不含夏令时与地形遮挡）');
+}
+
+// ============ Packing List ============
+const PL_BASE = ['身份证 / 护照', '手机', '充电器', '充电宝', '钱包 / 银行卡', '钥匙', '洗漱包', '毛巾 / 浴巾', '内衣袜子', '睡衣', '常用药品', '雨伞 / 雨衣', '水杯', '纸巾 / 湿巾'];
+const PL_TYPES = {
+  city: ['舒适步行鞋', '相机', '景点预约凭证', '离线地图', '防晒霜', '轻便背包'],
+  business: ['正装', '衬衫', '笔记本电脑', '电脑充电器', '名片', '笔记本和笔', '转换插头'],
+  beach: ['泳衣', '沙滩巾', '太阳镜', '遮阳帽', '防晒霜', '拖鞋', '防水袋', '驱蚊液'],
+  hiking: ['登山鞋', '冲锋衣', '登山杖', '头灯', '急救包', '保温壶', '能量棒', '速干衣裤'],
+  ski: ['滑雪服', '滑雪镜', '滑雪手套', '保暖内衣', '滑雪袜', '护脸', '暖宝宝'],
+  family: ['伴手礼', '居家服', '拖鞋', '充电线', '儿童用品', '常用药']
+};
+const PL_SEASONS = {
+  spring: ['薄外套', '长袖上衣', '长裤', '围巾'],
+  summer: ['短袖上衣', '短裤 / 裙子', '凉鞋', '遮阳帽', '防晒霜', '驱蚊液'],
+  autumn: ['外套', '长袖上衣', '长裤', '薄围巾'],
+  winter: ['羽绒服', '毛衣', '保暖内衣', '围巾', '手套', '暖宝宝', '润唇膏']
+};
+const PL_KEY = 'toolbox-packing-checked';
+
+function plInit() {
+  plGenerate();
+}
+function plChecked() {
+  try {
+    const raw = localStorage.getItem(PL_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) { return []; }
+}
+function plSaveState(arr) {
+  try { localStorage.setItem(PL_KEY, JSON.stringify(arr)); } catch (e) {}
+}
+function plBuild() {
+  const type = document.getElementById('pl-type').value;
+  const season = document.getElementById('pl-season').value;
+  let days = parseInt(document.getElementById('pl-days').value, 10);
+  if (!isFinite(days) || days < 1) days = 1;
+  if (days > 60) days = 60;
+  let items = PL_BASE.slice();
+  items = items.concat(PL_TYPES[type] || []);
+  items = items.concat(PL_SEASONS[season] || []);
+  if (days >= 4) items.push('洗衣袋');
+  if (days >= 7) items.push('便携洗衣液');
+  if (days >= 5) items.push('备用充电线');
+  if (days <= 2) items.push('轻便随身包');
+  items.push('换洗衣物（约 ' + Math.min(days, 7) + ' 套）');
+  const seen = {};
+  return items.filter(function (it) {
+    if (seen[it]) return false;
+    seen[it] = true;
+    return true;
+  });
+}
+function plGenerate() {
+  const items = plBuild();
+  const checked = plChecked();
+  const box = document.getElementById('pl-list');
+  box.innerHTML = '';
+  items.forEach(function (name) {
+    const label = document.createElement('label');
+    label.className = 'stat-card';
+    label.style.cssText = 'display:flex;align-items:center;gap:10px;cursor:pointer;text-align:left;padding:10px 12px;';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = checked.indexOf(name) !== -1;
+    cb.style.cssText = 'width:16px;height:16px;accent-color:var(--accent);flex:0 0 auto;';
+    cb.onchange = function () {
+      const arr = plChecked();
+      const idx = arr.indexOf(name);
+      if (cb.checked && idx === -1) arr.push(name);
+      if (!cb.checked && idx !== -1) arr.splice(idx, 1);
+      plSaveState(arr);
+      plUpdateProgress();
+    };
+    const text = document.createElement('span');
+    text.textContent = name;
+    text.style.cssText = 'font-size:14px;';
+    label.appendChild(cb);
+    label.appendChild(text);
+    box.appendChild(label);
+  });
+  plUpdateProgress();
+}
+function plUpdateProgress() {
+  const all = document.querySelectorAll('#pl-list input[type="checkbox"]');
+  let done = 0;
+  all.forEach(function (cb) { if (cb.checked) done++; });
+  const pct = all.length ? Math.round(done / all.length * 100) : 0;
+  showResult('pl-progress', '已完成 ' + done + ' / ' + all.length + ' 项（' + pct + '%）' + (all.length && done === all.length ? ' · 可以出发啦！' : ''));
+}
+function plCheckAll() {
+  const items = [];
+  document.querySelectorAll('#pl-list input[type="checkbox"]').forEach(function (cb) {
+    cb.checked = true;
+    const s = cb.parentNode.querySelector('span');
+    if (s) items.push(s.textContent);
+  });
+  plSaveState(items);
+  plUpdateProgress();
+}
+function plClear() {
+  document.querySelectorAll('#pl-list input[type="checkbox"]').forEach(function (cb) { cb.checked = false; });
+  plSaveState([]);
+  plUpdateProgress();
+}
+
+// ============ Quadratic Solver ============
+function quadFmt(n) {
+  if (!isFinite(n)) return '--';
+  let r = Math.round(n * 1e6) / 1e6;
+  if (Object.is(r, -0)) r = 0;
+  return String(r);
+}
+function quadInit() {
+  quadSolve();
+}
+function quadReset() {
+  document.getElementById('quad-a').value = 1;
+  document.getElementById('quad-b').value = -3;
+  document.getElementById('quad-c').value = 2;
+  quadSolve();
+}
+function quadExample() {
+  const a = Math.floor(Math.random() * 3) + 1;
+  const b = Math.floor(Math.random() * 11) - 5;
+  const c = Math.floor(Math.random() * 11) - 5;
+  document.getElementById('quad-a').value = a;
+  document.getElementById('quad-b').value = b;
+  document.getElementById('quad-c').value = c;
+  quadSolve();
+}
+function quadEqStr(a, b, c) {
+  let s = (a === 1 ? '' : (a === -1 ? '-' : quadFmt(a))) + 'x²';
+  if (b !== 0) s += (b > 0 ? ' + ' : ' - ') + (Math.abs(b) === 1 ? '' : quadFmt(Math.abs(b))) + 'x';
+  if (c !== 0) s += (c > 0 ? ' + ' : ' - ') + quadFmt(Math.abs(c));
+  return s + ' = 0';
+}
+function quadSolve() {
+  const a = parseFloat(document.getElementById('quad-a').value);
+  const b = parseFloat(document.getElementById('quad-b').value);
+  const c = parseFloat(document.getElementById('quad-c').value);
+  const dEl = document.getElementById('quad-delta');
+  const x1El = document.getElementById('quad-x1');
+  const x2El = document.getElementById('quad-x2');
+  if (!isFinite(a) || !isFinite(b) || !isFinite(c)) {
+    dEl.textContent = '--';
+    x1El.textContent = '--';
+    x2El.textContent = '--';
+    showResult('quad-result', '请输入有效的数字系数 a、b、c。');
+    return;
+  }
+  if (Math.abs(a) < 1e-12) {
+    dEl.textContent = '--';
+    x1El.textContent = '--';
+    x2El.textContent = '--';
+    const lin = Math.abs(b) > 1e-12 ? '，解为 x = ' + quadFmt(-c / b) : '，无解或恒成立';
+    showResult('quad-result', '二次项系数 a 不能为 0。若 a = 0，该方程为一元一次方程：' + quadFmt(b) + 'x + ' + quadFmt(c) + ' = 0' + lin);
+    return;
+  }
+  const delta = b * b - 4 * a * c;
+  const axis = -b / (2 * a);
+  const vertexY = (4 * a * c - b * b) / (4 * a);
+  let nature, x1, x2;
+  if (delta > 1e-12) {
+    nature = '两个不相等的实数根';
+    x1 = quadFmt((-b + Math.sqrt(delta)) / (2 * a));
+    x2 = quadFmt((-b - Math.sqrt(delta)) / (2 * a));
+  } else if (Math.abs(delta) <= 1e-12) {
+    nature = '两个相等的实数根';
+    x1 = quadFmt(-b / (2 * a));
+    x2 = x1;
+  } else {
+    nature = '一对共轭复数根';
+    const re = -b / (2 * a);
+    const im = Math.sqrt(-delta) / (2 * a);
+    x1 = quadFmt(re) + ' + ' + quadFmt(Math.abs(im)) + 'i';
+    x2 = quadFmt(re) + ' - ' + quadFmt(Math.abs(im)) + 'i';
+  }
+  dEl.textContent = quadFmt(delta);
+  x1El.textContent = x1;
+  x2El.textContent = x2;
+  const lines = [
+    '方程：' + quadEqStr(a, b, c),
+    '判别式：Δ = b² - 4ac = ' + quadFmt(delta),
+    '根的情况：' + nature,
+    'x₁ = ' + x1,
+    'x₂ = ' + x2,
+    '对称轴：x = ' + quadFmt(axis),
+    '顶点坐标：(' + quadFmt(axis) + ', ' + quadFmt(vertexY) + ')'
+  ];
+  showResult('quad-result', lines.join('\n'));
+}
+
+// ============ Unicode Lookup ============
+function ulInit() {
+  ulRun();
+}
+function ulSet(ch) {
+  document.getElementById('ul-input').value = ch;
+  ulRun();
+}
+function ulHex4(n) {
+  return n.toString(16).toUpperCase().padStart(4, '0');
+}
+function ulType(cp) {
+  if (cp <= 0x1F) return '控制字符';
+  if (cp >= 0x20 && cp <= 0x7E) return 'ASCII 可打印字符';
+  if (cp >= 0x3400 && cp <= 0x4DBF) return '中日韩统一表意文字扩展 A';
+  if (cp >= 0x4E00 && cp <= 0x9FFF) return '中日韩统一表意文字';
+  if (cp >= 0x3000 && cp <= 0x303F) return '中日韩标点符号';
+  if (cp >= 0x2000 && cp <= 0x206F) return '通用标点符号';
+  if (cp >= 0x1F300 && cp <= 0x1FAFF) return 'Emoji / 表情符号';
+  if (cp >= 0x1F000 && cp <= 0x1F2FF) return '麻将 / 扑克等符号';
+  return '其他字符';
+}
+function ulRun() {
+  const raw = (document.getElementById('ul-input').value || '').trim();
+  const box = document.getElementById('ul-result');
+  const charEl = document.getElementById('ul-char');
+  const cpEl = document.getElementById('ul-cp');
+  const decEl = document.getElementById('ul-dec');
+  let ch = '';
+  let cp = NaN;
+  let note = '';
+  try {
+    if (!raw) {
+      charEl.textContent = '--';
+      cpEl.textContent = '--';
+      decEl.textContent = '--';
+      box.textContent = '输入一个字符或码点开始查询。';
+      return;
+    }
+    if (/^U\+[0-9A-Fa-f]{1,6}$/.test(raw)) {
+      cp = parseInt(raw.slice(2), 16);
+    } else if (/^0x[0-9A-Fa-f]{1,6}$/.test(raw)) {
+      cp = parseInt(raw.slice(2), 16);
+    } else if (/^\d{3,7}$/.test(raw)) {
+      cp = parseInt(raw, 10);
+    } else {
+      const chars = Array.from(raw);
+      ch = chars[0];
+      cp = ch.codePointAt(0);
+      if (chars.length > 1) note = '（输入包含多个字符，已取第一个）';
+    }
+    if (!isFinite(cp) || cp < 0 || cp > 0x10FFFF || (cp >= 0xD800 && cp <= 0xDFFF)) {
+      throw new Error('invalid code point');
+    }
+    if (!ch) ch = String.fromCodePoint(cp);
+    const utf8 = Array.from(new TextEncoder().encode(ch)).map(function (b) {
+      return b.toString(16).toUpperCase().padStart(2, '0');
+    }).join(' ');
+    let utf16 = [];
+    for (let i = 0; i < ch.length; i++) utf16.push(ulHex4(ch.charCodeAt(i)));
+    let jsEsc;
+    if (cp <= 0xFFFF) {
+      jsEsc = '\\u' + ulHex4(cp);
+    } else {
+      const v = cp - 0x10000;
+      const hi = 0xD800 + (v >> 10);
+      const lo = 0xDC00 + (v & 0x3FF);
+      jsEsc = '\\u' + ulHex4(hi) + '\\u' + ulHex4(lo);
+    }
+    charEl.textContent = ch;
+    cpEl.textContent = 'U+' + cp.toString(16).toUpperCase();
+    decEl.textContent = String(cp);
+    box.textContent = [
+      '字符：' + ch + note,
+      '码点：U+' + cp.toString(16).toUpperCase().padStart(4, '0'),
+      '十进制：' + cp,
+      'UTF-8 字节：' + utf8,
+      'UTF-16 编码：' + utf16.join(' '),
+      'HTML 实体：&#' + cp + '; / &#x' + cp.toString(16).toUpperCase() + ';',
+      'JS 转义：' + jsEsc,
+      'URL 编码：' + encodeURIComponent(ch),
+      '字符类型：' + ulType(cp)
+    ].join('\n');
+  } catch (e) {
+    charEl.textContent = '--';
+    cpEl.textContent = '--';
+    decEl.textContent = '--';
+    box.textContent = '无法识别的字符或码点，请输入单个字符，或 U+4E2D、0x4E2D、20013 这样的码点格式。';
+  }
+}
+
+safeInit(() => ptInit(), 'ptInit');
+safeInit(() => sunInit(), 'sunInit');
+safeInit(() => plInit(), 'plInit');
+safeInit(() => quadInit(), 'quadInit');
+safeInit(() => ulInit(), 'ulInit');
 
 // ============ Search & Theme ============
 function filterTools() {
