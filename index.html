@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等269个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等274个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等269个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等274个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等269个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等274个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -666,6 +666,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#packing-list" data-tool="packing-list"><span class="icon">🧳</span>旅行行李清单</a></li>
     <li><a href="#quadratic-solver" data-tool="quadratic-solver"><span class="icon">📐</span>一元二次方程求解</a></li>
     <li><a href="#unicode-lookup" data-tool="unicode-lookup"><span class="icon">🔣</span>Unicode 字符查询</a></li>
+    <li><a href="#totp" data-tool="totp"><span class="icon">🔐</span>TOTP 验证码</a></li>
+    <li><a href="#bitwise-calc" data-tool="bitwise-calc"><span class="icon">01</span>位运算计算器</a></li>
+    <li><a href="#ledger" data-tool="ledger"><span class="icon">💳</span>简易记账本</a></li>
+    <li><a href="#paper-size" data-tool="paper-size"><span class="icon">📃</span>纸张尺寸换算</a></li>
+    <li><a href="#fancy-text" data-tool="fancy-text"><span class="icon">✨</span>花体字生成器</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7692,6 +7697,135 @@ console.log('代码块');
     <div class="result-box" id="ul-result" style="display:block;white-space:pre-wrap;">--</div>
   </section>
 
+  <!-- TOTP 动态验证码 -->
+  <section class="tool-panel" id="panel-totp">
+    <h2>🔐 TOTP 动态验证码</h2>
+    <p class="desc">输入网站提供的 Base32 密钥，在本地生成 6 位两步验证码。密钥不会上传，可离线使用。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">Base32 密钥</div>
+        <input type="text" id="totp-secret" value="JBSWY3DPEHPK3PXP" placeholder="例如：JBSWY3DPEHPK3PXP" oninput="totpUpdate()">
+      </div>
+      <div>
+        <div class="label">验证码位数</div>
+        <select id="totp-digits" onchange="totpUpdate()">
+          <option value="6">6 位</option>
+          <option value="8">8 位</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">刷新周期（秒）</div>
+        <input type="number" id="totp-period" value="30" min="10" max="120" step="1" oninput="totpUpdate()">
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="totp-code" style="font-size:32px;letter-spacing:4px;">------</div><div class="lbl">当前验证码</div></div>
+      <div class="stat-card"><div class="num" id="totp-left">--</div><div class="lbl">剩余秒数</div></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('totp-code')">📋 复制验证码</button>
+      <button class="btn btn-secondary btn-sm" onclick="totpUpdate(true)">🔄 立即刷新</button>
+    </div>
+    <div class="result-box" id="totp-result" style="display:block;">--</div>
+  </section>
+
+  <!-- 位运算计算器 -->
+  <section class="tool-panel" id="panel-bitwise-calc">
+    <h2>01 位运算计算器</h2>
+    <p class="desc">支持与、或、异或、取反与左右移位，实时显示 32 位二进制、十六进制和十进制结果。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">数值 A</div>
+        <input type="text" id="bw-a" value="12" placeholder="支持 12、0x0C、0b1100" oninput="bitwiseCalc()">
+      </div>
+      <div>
+        <div class="label">运算符</div>
+        <select id="bw-op" onchange="bitwiseCalc()">
+          <option value="and">A AND B</option>
+          <option value="or">A OR B</option>
+          <option value="xor">A XOR B</option>
+          <option value="not">NOT A</option>
+          <option value="shl">A &lt;&lt; B</option>
+          <option value="shr">A &gt;&gt; B</option>
+          <option value="ushr">A &gt;&gt;&gt; B</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">数值 B</div>
+        <input type="text" id="bw-b" value="10" placeholder="支持 10、0x0A、0b1010" oninput="bitwiseCalc()">
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bw-dec" style="font-size:22px;">--</div><div class="lbl">无符号十进制</div></div>
+      <div class="stat-card"><div class="num" id="bw-hex" style="font-size:22px;">--</div><div class="lbl">十六进制</div></div>
+    </div>
+    <div class="result-box" id="bw-result" style="display:block;">--</div>
+  </section>
+
+  <!-- 简易记账本 -->
+  <section class="tool-panel" id="panel-ledger">
+    <h2>💳 简易记账本</h2>
+    <p class="desc">记录日常收支，自动汇总本月支出、收入与累计结余。数据仅保存在本机浏览器，不会上传。</p>
+    <div class="flex-row">
+      <div>
+        <div class="label">类型</div>
+        <select id="ledger-type">
+          <option value="expense">支出</option>
+          <option value="income">收入</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">金额（元）</div>
+        <input type="number" id="ledger-amount" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div>
+        <div class="label">分类</div>
+        <input type="text" id="ledger-cat" placeholder="餐饮 / 工资 / 交通">
+      </div>
+      <div>
+        <div class="label">日期</div>
+        <input type="text" id="ledger-date" placeholder="YYYY-MM-DD">
+      </div>
+    </div>
+    <div class="label" style="margin-top:12px;">备注</div>
+    <input type="text" id="ledger-note" placeholder="可选备注">
+    <div class="btn-group">
+      <button class="btn" onclick="ledgerAdd()">➕ 记一笔</button>
+      <button class="btn btn-secondary" onclick="ledgerClear()">🗑️ 清空全部</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ledger-month-expense">0.00</div><div class="lbl">本月支出</div></div>
+      <div class="stat-card"><div class="num" id="ledger-month-income">0.00</div><div class="lbl">本月收入</div></div>
+      <div class="stat-card"><div class="num" id="ledger-balance">0.00</div><div class="lbl">累计结余</div></div>
+    </div>
+    <div id="ledger-list" style="margin-top:16px;"></div>
+  </section>
+
+  <!-- 纸张尺寸换算 -->
+  <section class="tool-panel" id="panel-paper-size">
+    <h2>📃 纸张尺寸换算</h2>
+    <p class="desc">查询 ISO A/B/C 系列纸张尺寸，并换算为厘米、英寸以及 72/96/150/300 DPI 下的像素尺寸。</p>
+    <div class="label">选择纸张规格</div>
+    <select id="paper-format" onchange="paperRender()"></select>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="paper-mm" style="font-size:20px;">--</div><div class="lbl">毫米 (mm)</div></div>
+      <div class="stat-card"><div class="num" id="paper-inch" style="font-size:20px;">--</div><div class="lbl">英寸 (inch)</div></div>
+    </div>
+    <div class="result-box" id="paper-result" style="display:block;">--</div>
+  </section>
+
+  <!-- 花体字生成器 -->
+  <section class="tool-panel" id="panel-fancy-text">
+    <h2>✨ 花体字生成器</h2>
+    <p class="desc">把英文和数字转换成粗体、斜体、花体、等宽、圆圈、全角等 Unicode 样式，可直接复制到社交平台。</p>
+    <textarea id="fancy-input" placeholder="输入英文或数字..." oninput="fancyRender()" style="min-height:90px;">Hello 2026</textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="fancyRender()">✨ 生成</button>
+      <button class="btn btn-secondary" onclick="fancyClear()">🗑️ 清空</button>
+    </div>
+    <div id="fancy-output" style="margin-top:16px;display:grid;gap:10px;"></div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7699,7 +7833,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 269个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 274个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -24569,6 +24703,413 @@ safeInit(() => sunInit(), 'sunInit');
 safeInit(() => plInit(), 'plInit');
 safeInit(() => quadInit(), 'quadInit');
 safeInit(() => ulInit(), 'ulInit');
+
+// ============ TOTP 动态验证码 ============
+const TOTP_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+let totpTimer = null;
+
+function base32ToBytes(input) {
+  const clean = String(input || '').toUpperCase().replace(/[\s-]/g, '').replace(/=+$/g, '');
+  let bits = 0;
+  let value = 0;
+  const out = [];
+  for (const ch of clean) {
+    const idx = TOTP_ALPHABET.indexOf(ch);
+    if (idx < 0) throw new Error('密钥包含无效的 Base32 字符：' + ch);
+    value = (value << 5) | idx;
+    bits += 5;
+    if (bits >= 8) {
+      out.push((value >>> (bits - 8)) & 0xff);
+      bits -= 8;
+    }
+  }
+  return out;
+}
+
+function totpCode(secret, digits, period, nowMs) {
+  if (typeof CryptoJS === 'undefined') throw new Error('加密库未加载，请检查网络后刷新页面');
+  const keyBytes = base32ToBytes(secret);
+  if (!keyBytes.length) throw new Error('请输入 Base32 密钥');
+  const counter = Math.floor(nowMs / 1000 / period);
+  const msgHex = counter.toString(16).padStart(16, '0');
+  const keyHex = keyBytes.map(b => b.toString(16).padStart(2, '0')).join('');
+  const digest = CryptoJS.HmacSHA1(CryptoJS.enc.Hex.parse(msgHex), CryptoJS.enc.Hex.parse(keyHex));
+  const bytes = [];
+  for (let i = 0; i < digest.sigBytes; i++) {
+    bytes.push((digest.words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff);
+  }
+  const offset = bytes[bytes.length - 1] & 0x0f;
+  const binary = (((bytes[offset] & 0x7f) << 24) |
+    (bytes[offset + 1] << 16) |
+    (bytes[offset + 2] << 8) |
+    bytes[offset + 3]) >>> 0;
+  return String(binary % Math.pow(10, digits)).padStart(digits, '0');
+}
+
+function totpUpdate() {
+  const codeEl = document.getElementById('totp-code');
+  const leftEl = document.getElementById('totp-left');
+  const box = document.getElementById('totp-result');
+  if (!codeEl || !leftEl || !box) return;
+  try {
+    const secret = document.getElementById('totp-secret').value;
+    const digits = parseInt(document.getElementById('totp-digits').value, 10) || 6;
+    let period = parseInt(document.getElementById('totp-period').value, 10) || 30;
+    period = Math.max(10, Math.min(120, period));
+    const now = Date.now();
+    const code = totpCode(secret, digits, period, now);
+    const left = period - (Math.floor(now / 1000) % period);
+    codeEl.textContent = code;
+    leftEl.textContent = String(left);
+    const keyBytes = base32ToBytes(secret);
+    box.textContent = [
+      '算法：HMAC-SHA1',
+      '周期：' + period + ' 秒 · 位数：' + digits + ' 位',
+      '密钥长度：' + keyBytes.length + ' 字节（已自动忽略空格与填充符）',
+      '验证码每 ' + period + ' 秒自动刷新，请确保设备时间准确。'
+    ].join('\n');
+  } catch (e) {
+    codeEl.textContent = '------';
+    leftEl.textContent = '--';
+    box.textContent = '❌ ' + e.message;
+  }
+}
+
+function totpInit() {
+  totpUpdate();
+  if (totpTimer) clearInterval(totpTimer);
+  totpTimer = setInterval(totpUpdate, 1000);
+}
+
+// ============ 位运算计算器 ============
+function bwParseValue(raw) {
+  const s = String(raw == null ? '' : raw).trim();
+  if (!s) throw new Error('请输入数值');
+  if (/^0b[01]+$/i.test(s)) return parseInt(s.slice(2), 2);
+  if (/^0o[0-7]+$/i.test(s)) return parseInt(s.slice(2), 8);
+  if (/^0x[0-9a-f]+$/i.test(s)) return parseInt(s.slice(2), 16);
+  if (/^-?\d+$/.test(s)) return parseInt(s, 10);
+  throw new Error('无法识别的数值：' + s);
+}
+
+function bitwiseCalc() {
+  const decEl = document.getElementById('bw-dec');
+  const hexEl = document.getElementById('bw-hex');
+  const box = document.getElementById('bw-result');
+  if (!decEl || !hexEl || !box) return;
+  try {
+    const a = bwParseValue(document.getElementById('bw-a').value);
+    const op = document.getElementById('bw-op').value;
+    let b = 0;
+    if (op !== 'not') b = bwParseValue(document.getElementById('bw-b').value);
+    let result = 0;
+    let expr = '';
+    if (op === 'and') { result = a & b; expr = a + ' AND ' + b; }
+    else if (op === 'or') { result = a | b; expr = a + ' OR ' + b; }
+    else if (op === 'xor') { result = a ^ b; expr = a + ' XOR ' + b; }
+    else if (op === 'not') { result = ~a; expr = 'NOT ' + a; }
+    else if (op === 'shl') { result = a << (b & 31); expr = a + ' << ' + (b & 31); }
+    else if (op === 'shr') { result = a >> (b & 31); expr = a + ' >> ' + (b & 31); }
+    else if (op === 'ushr') { result = a >>> (b & 31); expr = a + ' >>> ' + (b & 31); }
+    const unsigned = result >>> 0;
+    const bin = unsigned.toString(2).padStart(32, '0').replace(/(.{4})(?=.)/g, '$1 ');
+    const hex = unsigned.toString(16).toUpperCase().padStart(8, '0');
+    decEl.textContent = unsigned.toString();
+    hexEl.textContent = '0x' + hex;
+    box.textContent = [
+      '表达式：' + expr + ' = ' + result,
+      '二进制（32 位）：' + bin,
+      '十六进制：0x' + hex,
+      '无符号十进制：' + unsigned,
+      '有符号十进制：' + result
+    ].join('\n');
+  } catch (e) {
+    decEl.textContent = '--';
+    hexEl.textContent = '--';
+    box.textContent = '❌ ' + e.message;
+  }
+}
+
+// ============ 简易记账本 ============
+const LEDGER_KEY = 'toolbox-ledger-v1';
+let ledgerEntries = [];
+
+function ledgerToday() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function ledgerLoad() {
+  try {
+    const raw = localStorage.getItem(LEDGER_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    ledgerEntries = Array.isArray(arr) ? arr : [];
+  } catch (e) {
+    ledgerEntries = [];
+  }
+}
+
+function ledgerSave() {
+  try { localStorage.setItem(LEDGER_KEY, JSON.stringify(ledgerEntries)); } catch (e) { /* 忽略存储异常 */ }
+}
+
+function ledgerAdd() {
+  const amountEl = document.getElementById('ledger-amount');
+  const amount = parseFloat(amountEl.value);
+  if (!isFinite(amount) || amount <= 0) {
+    showToast('请输入大于 0 的金额');
+    amountEl.focus();
+    return;
+  }
+  const type = document.getElementById('ledger-type').value === 'income' ? 'income' : 'expense';
+  const cat = document.getElementById('ledger-cat').value.trim() || (type === 'income' ? '其他收入' : '其他支出');
+  let date = document.getElementById('ledger-date').value.trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) date = ledgerToday();
+  const note = document.getElementById('ledger-note').value.trim();
+  ledgerEntries.unshift({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    type: type,
+    amount: Math.round(amount * 100) / 100,
+    cat: cat,
+    note: note,
+    date: date
+  });
+  ledgerSave();
+  amountEl.value = '';
+  document.getElementById('ledger-note').value = '';
+  ledgerRender();
+  showToast('已记一笔');
+}
+
+function ledgerDelete(id) {
+  ledgerEntries = ledgerEntries.filter(item => item.id !== id);
+  ledgerSave();
+  ledgerRender();
+}
+
+function ledgerClear() {
+  if (!ledgerEntries.length) { showToast('暂无记录'); return; }
+  if (!confirm('确定清空所有记账记录吗？此操作不可恢复。')) return;
+  ledgerEntries = [];
+  ledgerSave();
+  ledgerRender();
+  showToast('已清空全部记录');
+}
+
+function ledgerRender() {
+  const list = document.getElementById('ledger-list');
+  if (!list) return;
+  const month = ledgerToday().slice(0, 7);
+  let monthExpense = 0;
+  let monthIncome = 0;
+  let totalIncome = 0;
+  let totalExpense = 0;
+  ledgerEntries.forEach(item => {
+    const amt = Number(item.amount) || 0;
+    if (item.type === 'income') totalIncome += amt;
+    else totalExpense += amt;
+    if (String(item.date).slice(0, 7) === month) {
+      if (item.type === 'income') monthIncome += amt;
+      else monthExpense += amt;
+    }
+  });
+  const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val.toFixed(2); };
+  setText('ledger-month-expense', monthExpense);
+  setText('ledger-month-income', monthIncome);
+  setText('ledger-balance', totalIncome - totalExpense);
+  list.textContent = '';
+  if (!ledgerEntries.length) {
+    const empty = document.createElement('div');
+    empty.className = 'result-box';
+    empty.style.display = 'block';
+    empty.textContent = '暂无记账记录，填写金额后点击「记一笔」开始记录。';
+    list.appendChild(empty);
+    return;
+  }
+  ledgerEntries.forEach(item => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;';
+    const main = document.createElement('div');
+    main.style.cssText = 'flex:1;min-width:0;';
+    const title = document.createElement('div');
+    title.style.cssText = 'font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    title.textContent = item.cat + (item.note ? ' · ' + item.note : '');
+    const meta = document.createElement('div');
+    meta.style.cssText = 'color:var(--text-secondary);font-size:12px;margin-top:2px;';
+    meta.textContent = item.date;
+    main.appendChild(title);
+    main.appendChild(meta);
+    const amount = document.createElement('div');
+    amount.style.cssText = 'font-weight:700;white-space:nowrap;color:' + (item.type === 'income' ? '#34d399' : '#f87171') + ';';
+    amount.textContent = (item.type === 'income' ? '+' : '-') + '¥' + Number(item.amount).toFixed(2);
+    const del = document.createElement('button');
+    del.className = 'btn btn-secondary btn-sm';
+    del.style.padding = '4px 10px';
+    del.textContent = '删除';
+    del.addEventListener('click', () => ledgerDelete(item.id));
+    row.appendChild(main);
+    row.appendChild(amount);
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+
+function ledgerInit() {
+  const dateEl = document.getElementById('ledger-date');
+  if (dateEl && !dateEl.value) dateEl.value = ledgerToday();
+  ledgerLoad();
+  ledgerRender();
+}
+
+// ============ 纸张尺寸换算 ============
+const PAPER_SIZES = {
+  A: [[841, 1189], [594, 841], [420, 594], [297, 420], [210, 297], [148, 210], [105, 148], [74, 105], [52, 74], [37, 52], [26, 37]],
+  B: [[1000, 1414], [707, 1000], [500, 707], [353, 500], [250, 353], [176, 250], [125, 176], [88, 125], [62, 88], [44, 62], [31, 44]],
+  C: [[917, 1297], [648, 917], [458, 648], [324, 458], [229, 324], [162, 229], [114, 162], [81, 114], [57, 81], [40, 57], [28, 40]]
+};
+
+function paperInit() {
+  const sel = document.getElementById('paper-format');
+  if (!sel) return;
+  const groupNames = { A: 'A 系列（常用印刷）', B: 'B 系列（书籍海报）', C: 'C 系列（信封）' };
+  Object.keys(PAPER_SIZES).forEach(series => {
+    const group = document.createElement('optgroup');
+    group.label = groupNames[series];
+    PAPER_SIZES[series].forEach((wh, i) => {
+      const opt = document.createElement('option');
+      opt.value = series + i;
+      opt.textContent = series + i + '（' + wh[0] + ' × ' + wh[1] + ' mm）';
+      group.appendChild(opt);
+    });
+    sel.appendChild(group);
+  });
+  sel.value = 'A4';
+  paperRender();
+}
+
+function paperRender() {
+  const sel = document.getElementById('paper-format');
+  const mmEl = document.getElementById('paper-mm');
+  const inchEl = document.getElementById('paper-inch');
+  const box = document.getElementById('paper-result');
+  if (!sel || !mmEl || !inchEl || !box) return;
+  try {
+    const key = sel.value || 'A4';
+    const series = key.charAt(0);
+    const index = parseInt(key.slice(1), 10);
+    const size = PAPER_SIZES[series] && PAPER_SIZES[series][index];
+    if (!size) throw new Error('未知纸张规格');
+    const w = size[0];
+    const h = size[1];
+    const inchW = w / 25.4;
+    const inchH = h / 25.4;
+    mmEl.textContent = w + ' × ' + h;
+    inchEl.textContent = inchW.toFixed(2) + ' × ' + inchH.toFixed(2);
+    const px = dpi => Math.round(w / 25.4 * dpi) + ' × ' + Math.round(h / 25.4 * dpi) + ' px';
+    box.textContent = [
+      '规格：' + key,
+      '毫米：' + w + ' × ' + h + ' mm',
+      '厘米：' + (w / 10).toFixed(1) + ' × ' + (h / 10).toFixed(1) + ' cm',
+      '英寸：' + inchW.toFixed(2) + ' × ' + inchH.toFixed(2) + ' inch',
+      '像素 @72 DPI：' + px(72),
+      '像素 @96 DPI：' + px(96),
+      '像素 @150 DPI：' + px(150),
+      '像素 @300 DPI：' + px(300),
+      '面积：' + (w * h / 1000000).toFixed(4) + ' 平方米'
+    ].join('\n');
+  } catch (e) {
+    mmEl.textContent = '--';
+    inchEl.textContent = '--';
+    box.textContent = '❌ ' + e.message;
+  }
+}
+
+// ============ 花体字生成器 ============
+const FANCY_STYLES = [
+  { name: '粗体', upper: 0x1D400, lower: 0x1D41A, digit: 0x1D7CE },
+  { name: '斜体', upper: 0x1D434, lower: 0x1D44E, digit: 0, lowerGaps: { h: 'ℎ' } },
+  { name: '粗斜体', upper: 0x1D468, lower: 0x1D482, digit: 0 },
+  { name: '花体（粗）', upper: 0x1D4D0, lower: 0x1D4EA, digit: 0 },
+  { name: '双线体', upper: 0x1D538, lower: 0x1D552, digit: 0x1D7D8, upperGaps: { C: 'ℂ', H: 'ℋ', N: 'ℕ', P: 'ℙ', Q: 'ℚ', R: 'ℝ', Z: 'ℤ' } },
+  { name: '等宽体', upper: 0x1D670, lower: 0x1D68A, digit: 0x1D7F6 },
+  { name: '圆圈体', upper: 0x24B6, lower: 0x24D0, digit: 0x2460, circleDigits: true },
+  { name: '全角体', upper: 0xFF21, lower: 0xFF41, digit: 0xFF10 }
+];
+
+const FANCY_FLIP = {
+  a: 'ɐ', b: 'q', c: 'ɔ', d: 'p', e: 'ǝ', f: 'ɟ', g: 'ƃ', h: 'ɥ', i: 'ᴉ', j: 'ɾ', k: 'ʞ', l: 'l', m: 'ɯ', n: 'u', o: 'o', p: 'd', q: 'b', r: 'ɹ', s: 's', t: 'ʇ', u: 'n', v: 'ʌ', w: 'ʍ', x: 'x', y: 'ʎ', z: 'z',
+  A: '∀', B: '𐐒', C: 'Ɔ', D: '◖', E: 'Ǝ', F: 'Ⅎ', G: '⅁', H: 'H', I: 'I', J: 'ſ', K: 'ʞ', L: '˥', M: 'W', N: 'N', O: 'O', P: 'Ԁ', Q: 'Ό', R: 'ᴚ', S: 'S', T: '⊥', U: '∩', V: 'Λ', W: 'M', X: 'X', Y: '⅄', Z: 'Z',
+  '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6',
+  '!': '¡', '?': '¿', '.': '˙', ',': "'", "'": ',', '"': '„', '(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{', '<': '>', '>': '<', '&': '⅋', '_': '‾'
+};
+
+function fancyConvert(text, style) {
+  let out = '';
+  Array.from(text).forEach(ch => {
+    const code = ch.codePointAt(0);
+    if (code >= 65 && code <= 90) {
+      out += (style.upperGaps && style.upperGaps[ch]) || String.fromCodePoint(style.upper + code - 65);
+    } else if (code >= 97 && code <= 122) {
+      out += (style.lowerGaps && style.lowerGaps[ch]) || String.fromCodePoint(style.lower + code - 97);
+    } else if (code >= 48 && code <= 57 && style.digit) {
+      const d = code - 48;
+      out += style.circleDigits ? (d === 0 ? '⓪' : String.fromCodePoint(0x2460 + d - 1)) : String.fromCodePoint(style.digit + d);
+    } else {
+      out += ch;
+    }
+  });
+  return out;
+}
+
+function fancyFlip(text) {
+  return Array.from(text).reverse().map(ch => FANCY_FLIP[ch] || ch).join('');
+}
+
+function fancyRender() {
+  const input = document.getElementById('fancy-input');
+  const container = document.getElementById('fancy-output');
+  if (!input || !container) return;
+  const text = input.value;
+  const results = FANCY_STYLES.map(style => ({ name: style.name, text: fancyConvert(text, style) }));
+  results.push({ name: '倒置文字', text: fancyFlip(text) });
+  container.textContent = '';
+  results.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = item.name;
+    const box = document.createElement('div');
+    box.className = 'result-box';
+    box.id = 'fancy-out-' + i;
+    box.style.display = 'block';
+    box.style.marginTop = '0';
+    box.textContent = item.text || '（请输入英文或数字）';
+    const bar = document.createElement('div');
+    bar.className = 'btn-group';
+    bar.style.marginTop = '6px';
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-secondary btn-sm';
+    btn.textContent = '📋 复制';
+    btn.addEventListener('click', () => copyText('fancy-out-' + i));
+    bar.appendChild(btn);
+    wrap.appendChild(label);
+    wrap.appendChild(box);
+    wrap.appendChild(bar);
+    container.appendChild(wrap);
+  });
+}
+
+function fancyClear() {
+  const input = document.getElementById('fancy-input');
+  if (input) input.value = '';
+  fancyRender();
+}
+
+safeInit(() => totpInit(), 'totpInit');
+safeInit(() => bitwiseCalc(), 'bitwiseCalc');
+safeInit(() => ledgerInit(), 'ledgerInit');
+safeInit(() => paperInit(), 'paperInit');
+safeInit(() => fancyRender(), 'fancyRender');
 
 // ============ Search & Theme ============
 function filterTools() {
