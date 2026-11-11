@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等274个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等279个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等274个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等279个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等274个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等279个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -671,6 +671,11 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#ledger" data-tool="ledger"><span class="icon">💳</span>简易记账本</a></li>
     <li><a href="#paper-size" data-tool="paper-size"><span class="icon">📃</span>纸张尺寸换算</a></li>
     <li><a href="#fancy-text" data-tool="fancy-text"><span class="icon">✨</span>花体字生成器</a></li>
+    <li><a href="#stock-fee-calc" data-tool="stock-fee-calc"><span class="icon">💹</span>股票交易费用</a></li>
+    <li><a href="#pfeed-calc" data-tool="pfeed-calc"><span class="icon">🐾</span>宠物喂食量</a></li>
+    <li><a href="#file-hash" data-tool="file-hash"><span class="icon">🔐</span>文件哈希校验</a></li>
+    <li><a href="#ebbinghaus" data-tool="ebbinghaus"><span class="icon">🧠</span>艾宾浩斯复习</a></li>
+    <li><a href="#prime-factor" data-tool="prime-factor"><span class="icon">🔢</span>质数因数分解</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7826,6 +7831,133 @@ console.log('代码块');
     <div id="fancy-output" style="margin-top:16px;display:grid;gap:10px;"></div>
   </section>
 
+  <!-- 股票交易费用计算器 -->
+  <section class="tool-panel" id="panel-stock-fee-calc">
+    <h2>💹 股票交易费用计算器</h2>
+    <p class="desc">计算 A 股买入、卖出产生的佣金、印花税和过户费，并给出实际盈亏与保本价。费率可自行调整，结果仅供参考。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div><div class="label">买入价（元）</div><input type="number" id="sf-buy" value="10" step="0.001" min="0" oninput="stockFeeCalc()"></div>
+      <div><div class="label">卖出价（元）</div><input type="number" id="sf-sell" value="11" step="0.001" min="0" oninput="stockFeeCalc()"></div>
+      <div><div class="label">股数</div><input type="number" id="sf-qty" value="1000" step="100" min="1" oninput="stockFeeCalc()"></div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div><div class="label">佣金费率（万分之）</div><input type="number" id="sf-comm" value="2.5" step="0.1" min="0" oninput="stockFeeCalc()"></div>
+      <div><div class="label">最低佣金（元）</div><input type="number" id="sf-min" value="5" step="0.01" min="0" oninput="stockFeeCalc()"></div>
+      <div><div class="label">印花税率（%，仅卖出）</div><input type="number" id="sf-stamp" value="0.05" step="0.01" min="0" oninput="stockFeeCalc()"></div>
+      <div><div class="label">过户费率（%，双向）</div><input type="number" id="sf-transfer" value="0.001" step="0.001" min="0" oninput="stockFeeCalc()"></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="stockFeeCalc()">💹 计算</button>
+      <button class="btn btn-secondary" onclick="stockFeeReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="sf-profit" style="font-size:20px;">--</div><div class="lbl">实际盈亏（元）</div></div>
+      <div class="stat-card"><div class="num" id="sf-roi" style="font-size:20px;">--</div><div class="lbl">收益率</div></div>
+      <div class="stat-card"><div class="num" id="sf-breakeven" style="font-size:20px;">--</div><div class="lbl">保本卖出价</div></div>
+    </div>
+    <div class="result-box" id="sf-result" style="display:block;">--</div>
+  </section>
+
+  <!-- 宠物喂食量计算器 -->
+  <section class="tool-panel" id="panel-pfeed-calc">
+    <h2>🐾 宠物喂食量计算器</h2>
+    <p class="desc">根据宠物体重、年龄阶段和食物热量，估算每日所需热量与喂食克数，帮助控制体重、避免喂多或喂少。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div><div class="label">宠物类型</div>
+        <select id="pfeed-type" onchange="petFoodCalc()">
+          <option value="dog">狗狗</option>
+          <option value="cat">猫咪</option>
+        </select>
+      </div>
+      <div><div class="label">体重（kg）</div><input type="number" id="pfeed-weight" value="10" step="0.1" min="0.1" oninput="petFoodCalc()"></div>
+      <div><div class="label">年龄 / 状态</div>
+        <select id="pfeed-stage" onchange="petFoodCalc()">
+          <option value="baby">幼年生长期</option>
+          <option value="neutered" selected>成年已绝育</option>
+          <option value="intact">成年未绝育</option>
+          <option value="loss">减肥期</option>
+          <option value="gain">增重期</option>
+        </select>
+      </div>
+      <div><div class="label">食物热量（kcal/100g）</div><input type="number" id="pfeed-kcal" value="350" step="1" min="1" oninput="petFoodCalc()"></div>
+      <div><div class="label">每日餐数</div><input type="number" id="pfeed-meals" value="2" step="1" min="1" max="6" oninput="petFoodCalc()"></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="petFoodCalc()">🐾 计算喂食量</button>
+      <button class="btn btn-secondary" onclick="petFoodReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pfeed-rer" style="font-size:20px;">--</div><div class="lbl">静息热量 RER</div></div>
+      <div class="stat-card"><div class="num" id="pfeed-mer" style="font-size:20px;">--</div><div class="lbl">每日需求 MER</div></div>
+      <div class="stat-card"><div class="num" id="pfeed-grams" style="font-size:20px;">--</div><div class="lbl">每日喂食量</div></div>
+      <div class="stat-card"><div class="num" id="pfeed-permeal" style="font-size:20px;">--</div><div class="lbl">每餐喂食量</div></div>
+    </div>
+    <div class="result-box" id="pfeed-result" style="display:block;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：结果仅为估算值。幼年、妊娠、哺乳或患病宠物的营养需求差异较大，请以兽医或宠物营养师建议为准。</p>
+  </section>
+
+  <!-- 文件哈希校验 -->
+  <section class="tool-panel" id="panel-file-hash">
+    <h2>🔐 文件哈希校验</h2>
+    <p class="desc">选择或拖入任意文件，在本地计算 SHA-1 / SHA-256 / SHA-512 校验值，用于核对下载文件是否完整、是否被篡改。文件不会上传。</p>
+    <div id="fh-drop" style="border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;color:var(--text-secondary);cursor:pointer;transition:border-color .2s;">
+      📂 点击选择文件，或把文件拖到这里
+    </div>
+    <input type="file" id="fh-file" style="display:none;">
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="fileHashReset()">🗑️ 清空</button>
+      <button class="btn btn-secondary" onclick="fileHashCopy()">📋 复制全部结果</button>
+    </div>
+    <div class="label" style="margin-top:16px;">期望的哈希值（可选）</div>
+    <input type="text" id="fh-expected" placeholder="粘贴 SHA-1 / SHA-256 / SHA-512 值，自动比对..." oninput="fileHashCompare()">
+    <div class="result-box" id="fh-compare" style="display:none;">--</div>
+    <div class="label" style="margin-top:16px;">计算结果</div>
+    <div class="result-box" id="fh-result" style="display:block;">尚未选择文件</div>
+  </section>
+
+  <!-- 艾宾浩斯复习计划 -->
+  <section class="tool-panel" id="panel-ebbinghaus">
+    <h2>🧠 艾宾浩斯复习计划生成器</h2>
+    <p class="desc">根据首次学习日期，按艾宾浩斯记忆曲线自动生成复习时间表，适合背单词、记知识点和考前复习安排。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div><div class="label">学习内容（可选）</div><input type="text" id="eb-title" placeholder="例如：考研英语 Unit 1" oninput="ebGenerate()"></div>
+      <div><div class="label">首次学习日期</div><input type="date" id="eb-date" onchange="ebGenerate()"></div>
+      <div><div class="label">复习方案</div>
+        <select id="eb-plan" onchange="ebGenerate()">
+          <option value="classic">经典版：1/2/4/7/15/30 天</option>
+          <option value="intensive">强化版：12 小时 / 1/2/4/7/15 天</option>
+          <option value="short">短期版：5 分钟 / 30 分钟 / 12 小时 / 1/2 天</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="ebGenerate()">🧠 生成计划</button>
+      <button class="btn btn-secondary" onclick="ebToday()">📅 设为今天</button>
+      <button class="btn btn-secondary" onclick="ebCopy()">📋 复制计划</button>
+    </div>
+    <div class="result-box" id="eb-summary" style="display:block;">--</div>
+    <div id="eb-table-wrap" style="margin-top:14px;"></div>
+  </section>
+
+  <!-- 质数检测与因数分解 -->
+  <section class="tool-panel" id="panel-prime-factor">
+    <h2>🔢 质数检测与因数分解</h2>
+    <p class="desc">快速判断一个整数是否为质数，并进行质因数分解，统计约数个数与约数之和。支持 2 到 1 万亿的整数。</p>
+    <div class="label">输入整数（2 ~ 1,000,000,000,000）</div>
+    <input type="number" id="pfac-input" value="360" min="2" step="1" oninput="primeFactorCalc()">
+    <div class="btn-group">
+      <button class="btn" onclick="primeFactorCalc()">🔢 计算</button>
+      <button class="btn btn-secondary" onclick="primeFactorRandom()">🎲 随机数</button>
+      <button class="btn btn-secondary" onclick="primeFactorClear()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pfac-type" style="font-size:20px;">--</div><div class="lbl">质数判断</div></div>
+      <div class="stat-card"><div class="num" id="pfac-count" style="font-size:20px;">--</div><div class="lbl">约数个数</div></div>
+      <div class="stat-card"><div class="num" id="pfac-sum" style="font-size:20px;">--</div><div class="lbl">约数之和</div></div>
+    </div>
+    <div class="result-box" id="pfac-result" style="display:block;">--</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7833,7 +7965,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 274个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 279个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -25110,6 +25242,509 @@ safeInit(() => bitwiseCalc(), 'bitwiseCalc');
 safeInit(() => ledgerInit(), 'ledgerInit');
 safeInit(() => paperInit(), 'paperInit');
 safeInit(() => fancyRender(), 'fancyRender');
+
+// ============ 股票交易费用计算器 ============
+function sfVal(id) {
+  const el = document.getElementById(id);
+  return el ? (parseFloat(el.value) || 0) : 0;
+}
+function stockFeeCalc() {
+  const buy = sfVal('sf-buy');
+  const sell = sfVal('sf-sell');
+  const qty = Math.floor(sfVal('sf-qty'));
+  const commRate = sfVal('sf-comm') / 10000;
+  const minComm = sfVal('sf-min');
+  const stampRate = sfVal('sf-stamp') / 100;
+  const transferRate = sfVal('sf-transfer') / 100;
+  const empty = () => {
+    ['sf-profit', 'sf-roi', 'sf-breakeven'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '--';
+    });
+  };
+  if (!(buy > 0) || !(sell > 0) || !(qty > 0)) {
+    empty();
+    showResult('sf-result', '请输入有效的买入价、卖出价和股数。');
+    return;
+  }
+  const buyAmt = buy * qty;
+  const buyComm = Math.max(buyAmt * commRate, minComm);
+  const buyTransfer = buyAmt * transferRate;
+  const buyCost = buyAmt + buyComm + buyTransfer;
+  const sellAmt = sell * qty;
+  const sellComm = Math.max(sellAmt * commRate, minComm);
+  const stamp = sellAmt * stampRate;
+  const sellTransfer = sellAmt * transferRate;
+  const sellNet = sellAmt - sellComm - stamp - sellTransfer;
+  const profit = sellNet - buyCost;
+  const roi = buyCost > 0 ? (profit / buyCost) * 100 : 0;
+  // 二分查找保本卖出价（考虑最低佣金的分段情况）
+  let lo = 0, hi = Math.max(buy * 10, 10);
+  for (let i = 0; i < 80; i++) {
+    const mid = (lo + hi) / 2;
+    const amt = mid * qty;
+    const net = amt - Math.max(amt * commRate, minComm) - amt * stampRate - amt * transferRate;
+    if (net < buyCost) lo = mid; else hi = mid;
+  }
+  const breakeven = (lo + hi) / 2;
+  const money = n => '¥' + n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const profitEl = document.getElementById('sf-profit');
+  const roiEl = document.getElementById('sf-roi');
+  const beEl = document.getElementById('sf-breakeven');
+  if (profitEl) {
+    profitEl.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(2);
+    profitEl.style.color = profit >= 0 ? '#22c55e' : '#ef4444';
+  }
+  if (roiEl) {
+    roiEl.textContent = (roi >= 0 ? '+' : '') + roi.toFixed(2) + '%';
+    roiEl.style.color = roi >= 0 ? '#22c55e' : '#ef4444';
+  }
+  if (beEl) beEl.textContent = breakeven.toFixed(3);
+  const lines = [
+    '买入金额：' + money(buyAmt),
+    '买入佣金：' + money(buyComm) + '（费率万分之 ' + sfVal('sf-comm') + '，最低 ' + money(minComm) + '）',
+    '买入过户费：' + money(buyTransfer),
+    '买入总成本：' + money(buyCost),
+    '',
+    '卖出金额：' + money(sellAmt),
+    '卖出佣金：' + money(sellComm),
+    '印花税：' + money(stamp) + '（费率 ' + sfVal('sf-stamp') + '%，仅卖出收取）',
+    '卖出过户费：' + money(sellTransfer),
+    '卖出净收入：' + money(sellNet),
+    '',
+    '实际盈亏：' + (profit >= 0 ? '+' : '') + money(profit) + '（收益率 ' + roi.toFixed(2) + '%）',
+    '保本卖出价：' + breakeven.toFixed(3) + ' 元/股'
+  ];
+  showResult('sf-result', lines.join('\n'));
+}
+function stockFeeReset() {
+  const vals = { 'sf-buy': 10, 'sf-sell': 11, 'sf-qty': 1000, 'sf-comm': 2.5, 'sf-min': 5, 'sf-stamp': 0.05, 'sf-transfer': 0.001 };
+  Object.keys(vals).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = vals[id];
+  });
+  stockFeeCalc();
+}
+
+// ============ 宠物喂食量计算器 ============
+const PFEED_FACTORS = {
+  dog: { baby: 3.0, neutered: 1.6, intact: 1.8, loss: 1.0, gain: 1.7 },
+  cat: { baby: 2.5, neutered: 1.2, intact: 1.4, loss: 0.8, gain: 1.3 }
+};
+const PFEED_STAGE_NAMES = { baby: '幼年生长期', neutered: '成年已绝育', intact: '成年未绝育', loss: '减肥期', gain: '增重期' };
+function petFoodCalc() {
+  const typeEl = document.getElementById('pfeed-type');
+  const stageEl = document.getElementById('pfeed-stage');
+  const res = document.getElementById('pfeed-result');
+  if (!typeEl || !stageEl || !res) return;
+  const type = typeEl.value;
+  const stage = stageEl.value;
+  const weight = sfVal('pfeed-weight');
+  const kcal100 = sfVal('pfeed-kcal');
+  let meals = Math.floor(sfVal('pfeed-meals'));
+  if (!(meals >= 1)) meals = 1;
+  const reset = () => {
+    ['pfeed-rer', 'pfeed-mer', 'pfeed-grams', 'pfeed-permeal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '--';
+    });
+  };
+  if (!(weight > 0) || !(kcal100 > 0)) {
+    reset();
+    res.textContent = '请输入有效的体重和食物热量。';
+    return;
+  }
+  const rer = 70 * Math.pow(weight, 0.75);
+  const factor = (PFEED_FACTORS[type] || PFEED_FACTORS.dog)[stage] || 1.6;
+  const mer = rer * factor;
+  const grams = mer / kcal100 * 100;
+  const perMeal = grams / meals;
+  const set = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
+  set('pfeed-rer', Math.round(rer) + ' kcal');
+  set('pfeed-mer', Math.round(mer) + ' kcal');
+  set('pfeed-grams', Math.round(grams) + ' g');
+  set('pfeed-permeal', Math.round(perMeal) + ' g');
+  const lines = [
+    '宠物类型：' + (type === 'cat' ? '猫咪' : '狗狗'),
+    '体重：' + weight + ' kg（' + PFEED_STAGE_NAMES[stage] + '）',
+    '食物热量：' + kcal100 + ' kcal/100g',
+    '',
+    '静息能量需求 RER：' + Math.round(rer) + ' kcal/天',
+    '维持能量需求 MER：' + Math.round(mer) + ' kcal/天（系数 ' + factor + '）',
+    '每日建议喂食量：约 ' + Math.round(grams) + ' g',
+    '分 ' + meals + ' 餐喂食：每餐约 ' + Math.round(perMeal) + ' g',
+    '',
+    '建议根据 1~2 周内体重变化微调喂食量，并保证充足饮水。'
+  ];
+  res.textContent = lines.join('\n');
+}
+function petFoodReset() {
+  const vals = { 'pfeed-weight': 10, 'pfeed-kcal': 350, 'pfeed-meals': 2 };
+  Object.keys(vals).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = vals[id];
+  });
+  const typeEl = document.getElementById('pfeed-type');
+  const stageEl = document.getElementById('pfeed-stage');
+  if (typeEl) typeEl.value = 'dog';
+  if (stageEl) stageEl.value = 'neutered';
+  petFoodCalc();
+}
+
+// ============ 文件哈希校验 ============
+let fhHashes = {};
+function fhSize(n) {
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  let i = 0;
+  while (n >= 1024 && i < units.length - 1) { n /= 1024; i++; }
+  return (i === 0 ? n : n.toFixed(2)) + ' ' + units[i];
+}
+// 非安全上下文（如 http 内网）下的 SHA-256 兜底实现
+const FH_SHA256_K = [
+  0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+  0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+  0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+  0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+  0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+  0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+];
+function fhRotr(x, n) {
+  return ((x >>> n) | (x << (32 - n))) >>> 0;
+}
+function fhSha256Hex(bytes) {
+  const H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+  const len = bytes.length;
+  const bitLen = len * 8;
+  const total = ((len + 9 + 63) >> 6) << 6;
+  const msg = new Uint8Array(total);
+  msg.set(bytes);
+  msg[len] = 0x80;
+  const dv = new DataView(msg.buffer);
+  dv.setUint32(total - 8, Math.floor(bitLen / 0x100000000));
+  dv.setUint32(total - 4, bitLen >>> 0);
+  const w = new Uint32Array(64);
+  for (let i = 0; i < total; i += 64) {
+    for (let t = 0; t < 16; t++) w[t] = dv.getUint32(i + t * 4);
+    for (let t = 16; t < 64; t++) {
+      const s0 = (fhRotr(w[t - 15], 7) ^ fhRotr(w[t - 15], 18) ^ (w[t - 15] >>> 3)) >>> 0;
+      const s1 = (fhRotr(w[t - 2], 17) ^ fhRotr(w[t - 2], 19) ^ (w[t - 2] >>> 10)) >>> 0;
+      w[t] = (w[t - 16] + s0 + w[t - 7] + s1) >>> 0;
+    }
+    let a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+    for (let t = 0; t < 64; t++) {
+      const S1 = (fhRotr(e, 6) ^ fhRotr(e, 11) ^ fhRotr(e, 25)) >>> 0;
+      const ch = ((e & f) ^ (~e & g)) >>> 0;
+      const temp1 = (h + S1 + ch + FH_SHA256_K[t] + w[t]) >>> 0;
+      const S0 = (fhRotr(a, 2) ^ fhRotr(a, 13) ^ fhRotr(a, 22)) >>> 0;
+      const maj = ((a & b) ^ (a & c) ^ (b & c)) >>> 0;
+      const temp2 = (S0 + maj) >>> 0;
+      h = g; g = f; f = e; e = (d + temp1) >>> 0;
+      d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+    }
+    H[0] = (H[0] + a) >>> 0; H[1] = (H[1] + b) >>> 0; H[2] = (H[2] + c) >>> 0; H[3] = (H[3] + d) >>> 0;
+    H[4] = (H[4] + e) >>> 0; H[5] = (H[5] + f) >>> 0; H[6] = (H[6] + g) >>> 0; H[7] = (H[7] + h) >>> 0;
+  }
+  const out = new Uint8Array(32);
+  const odv = new DataView(out.buffer);
+  H.forEach((v, i) => odv.setUint32(i * 4, v));
+  return Array.from(out).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function fhInit() {
+  const drop = document.getElementById('fh-drop');
+  const input = document.getElementById('fh-file');
+  if (!drop || !input || drop.dataset.bound) return;
+  drop.dataset.bound = '1';
+  drop.addEventListener('click', () => input.click());
+  input.addEventListener('change', () => {
+    if (input.files && input.files[0]) fileHashCompute(input.files[0]);
+  });
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    drop.style.borderColor = 'var(--accent-hover)';
+  }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault();
+    e.stopPropagation();
+    drop.style.borderColor = 'var(--border)';
+  }));
+  drop.addEventListener('drop', e => {
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) fileHashCompute(f);
+  });
+}
+async function fileHashCompute(file) {
+  const result = document.getElementById('fh-result');
+  const compare = document.getElementById('fh-compare');
+  if (!result) return;
+  fhHashes = {};
+  if (compare) {
+    compare.style.display = 'none';
+    compare.textContent = '--';
+    compare.style.color = '';
+  }
+  if (!(window.crypto && window.crypto.subtle && window.crypto.subtle.digest)) {
+    try {
+      const buf = await file.arrayBuffer();
+      const hex = fhSha256Hex(new Uint8Array(buf));
+      fhHashes = { 'SHA-256': hex };
+      result.textContent = [
+        '文件：' + file.name,
+        '大小：' + fhSize(file.size) + '（' + file.size.toLocaleString('zh-CN') + ' 字节）',
+        '',
+        'SHA-256（内置实现）:',
+        hex,
+        '',
+        '提示：当前为非安全上下文，SHA-1 / SHA-512 需通过 https 访问。'
+      ].join('\n');
+      fileHashCompare();
+    } catch (err) {
+      result.textContent = '计算失败：' + (err && err.message ? err.message : '未知错误');
+    }
+    return;
+  }
+  result.textContent = '正在计算：' + file.name + '（' + fhSize(file.size) + '）...';
+  try {
+    const buf = await file.arrayBuffer();
+    const algs = [['SHA-1', 'SHA-1'], ['SHA-256', 'SHA-256'], ['SHA-512', 'SHA-512']];
+    const lines = [
+      '文件：' + file.name,
+      '大小：' + fhSize(file.size) + '（' + file.size.toLocaleString('zh-CN') + ' 字节）',
+      ''
+    ];
+    for (const pair of algs) {
+      const digest = await window.crypto.subtle.digest(pair[1], buf);
+      const hex = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+      fhHashes[pair[0]] = hex;
+      lines.push(pair[0] + ':', hex, '');
+    }
+    result.textContent = lines.join('\n').trim();
+    fileHashCompare();
+  } catch (err) {
+    result.textContent = '计算失败：' + (err && err.message ? err.message : '未知错误');
+  }
+}
+function fileHashCompare() {
+  const input = document.getElementById('fh-expected');
+  const box = document.getElementById('fh-compare');
+  if (!input || !box) return;
+  const val = input.value.trim().toLowerCase().replace(/\s+/g, '');
+  if (!val) {
+    box.style.display = 'none';
+    return;
+  }
+  box.style.display = 'block';
+  const labels = Object.keys(fhHashes);
+  if (!labels.length) {
+    box.textContent = '请先选择文件并等待计算完成。';
+    box.style.color = '';
+    return;
+  }
+  const hit = labels.find(l => fhHashes[l] === val);
+  box.textContent = hit ? ('✅ 匹配成功：' + hit + ' 校验值一致') : '❌ 未匹配：与 SHA-1 / SHA-256 / SHA-512 均不一致';
+  box.style.color = hit ? '#22c55e' : '#ef4444';
+}
+function fileHashReset() {
+  fhHashes = {};
+  const input = document.getElementById('fh-file');
+  if (input) input.value = '';
+  const exp = document.getElementById('fh-expected');
+  if (exp) exp.value = '';
+  const cmp = document.getElementById('fh-compare');
+  if (cmp) {
+    cmp.style.display = 'none';
+    cmp.textContent = '--';
+    cmp.style.color = '';
+  }
+  const res = document.getElementById('fh-result');
+  if (res) res.textContent = '尚未选择文件';
+}
+function fileHashCopy() {
+  const labels = Object.keys(fhHashes);
+  if (!labels.length) {
+    showToast('请先选择文件并计算');
+    return;
+  }
+  const text = labels.map(l => l + ': ' + fhHashes[l]).join('\n');
+  writeClipboard(text).then(() => showToast('哈希值已复制！'));
+}
+
+// ============ 艾宾浩斯复习计划 ============
+const EB_PLANS = {
+  classic: { name: '经典版', offsets: [0, 1440, 2880, 5760, 10080, 21600, 43200] },
+  intensive: { name: '强化版', offsets: [0, 720, 1440, 2880, 5760, 10080, 21600] },
+  short: { name: '短期版', offsets: [0, 5, 30, 720, 1440, 2880] }
+};
+let ebPlanText = '';
+function ebTwo(n) { return String(n).padStart(2, '0'); }
+function ebTodayKey() {
+  const d = new Date();
+  return d.getFullYear() + '-' + ebTwo(d.getMonth() + 1) + '-' + ebTwo(d.getDate());
+}
+function ebIntervalLabel(mins) {
+  if (mins === 0) return '首次';
+  if (mins < 60) return mins + ' 分钟';
+  if (mins < 1440) return (mins / 60) + ' 小时';
+  return (mins / 1440) + ' 天';
+}
+function ebInit() {
+  const d = document.getElementById('eb-date');
+  if (d && !d.value) d.value = ebTodayKey();
+  ebGenerate();
+}
+function ebGenerate() {
+  const dateEl = document.getElementById('eb-date');
+  const planEl = document.getElementById('eb-plan');
+  const titleEl = document.getElementById('eb-title');
+  const summary = document.getElementById('eb-summary');
+  const wrap = document.getElementById('eb-table-wrap');
+  if (!dateEl || !planEl || !summary || !wrap) return;
+  const plan = EB_PLANS[planEl.value] || EB_PLANS.classic;
+  let base = dateEl.value ? new Date(dateEl.value + 'T09:00:00') : new Date();
+  if (isNaN(base.getTime())) base = new Date();
+  const title = titleEl ? titleEl.value.trim() : '';
+  const todayKey = ebTodayKey();
+  const rows = plan.offsets.map((mins, i) => {
+    const d = new Date(base.getTime() + mins * 60000);
+    const dateKey = d.getFullYear() + '-' + ebTwo(d.getMonth() + 1) + '-' + ebTwo(d.getDate());
+    const time = dateKey + ' ' + ebTwo(d.getHours()) + ':' + ebTwo(d.getMinutes()) + ' 周' + '日一二三四五六'[d.getDay()];
+    let status = '待复习';
+    if (dateKey < todayKey) status = '已过期';
+    else if (dateKey === todayKey) status = '今天';
+    return {
+      stage: i === 0 ? '首次学习' : '第 ' + i + ' 次复习',
+      gap: ebIntervalLabel(mins),
+      time: time,
+      status: status
+    };
+  });
+  const lines = [];
+  if (title) lines.push('学习内容：' + title);
+  lines.push('复习方案：' + plan.name);
+  lines.push('首次学习：' + rows[0].time);
+  lines.push('复习次数：' + (rows.length - 1) + ' 次');
+  lines.push('最后复习：' + rows[rows.length - 1].time);
+  lines.push('');
+  rows.forEach(r => lines.push(r.stage + '（间隔 ' + r.gap + '）：' + r.time + '  ' + r.status));
+  ebPlanText = lines.join('\n');
+  summary.textContent = lines.slice(0, 5).join('\n');
+  const statusColor = s => s === '今天' ? '#f59e0b' : (s === '已过期' ? '#ef4444' : 'var(--text-secondary)');
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<thead><tr style="color:var(--text-secondary);">';
+  ['阶段', '间隔', '复习时间', '状态'].forEach(h => {
+    html += '<th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">' + h + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+  rows.forEach(r => {
+    html += '<tr>'
+      + '<td style="padding:8px;border-bottom:1px solid var(--border);">' + r.stage + '</td>'
+      + '<td style="padding:8px;border-bottom:1px solid var(--border);">' + r.gap + '</td>'
+      + '<td style="padding:8px;border-bottom:1px solid var(--border);">' + r.time + '</td>'
+      + '<td style="padding:8px;border-bottom:1px solid var(--border);color:' + statusColor(r.status) + ';">' + r.status + '</td>'
+      + '</tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+}
+function ebToday() {
+  const d = document.getElementById('eb-date');
+  if (d) d.value = ebTodayKey();
+  ebGenerate();
+}
+function ebCopy() {
+  if (!ebPlanText) ebGenerate();
+  if (!ebPlanText) {
+    showToast('暂无计划可复制');
+    return;
+  }
+  writeClipboard(ebPlanText).then(() => showToast('复习计划已复制！'));
+}
+
+// ============ 质数检测与因数分解 ============
+function primeFactorCalc() {
+  const input = document.getElementById('pfac-input');
+  const res = document.getElementById('pfac-result');
+  if (!input || !res) return;
+  const typeEl = document.getElementById('pfac-type');
+  const countEl = document.getElementById('pfac-count');
+  const sumEl = document.getElementById('pfac-sum');
+  const reset = () => {
+    [typeEl, countEl, sumEl].forEach(el => { if (el) el.textContent = '--'; });
+  };
+  const raw = input.value.trim();
+  const n = Number(raw);
+  if (!raw || !Number.isInteger(n) || n < 2) {
+    reset();
+    res.textContent = '请输入大于等于 2 的整数。';
+    return;
+  }
+  if (n > 1e12) {
+    reset();
+    res.textContent = '数字过大。为保证计算速度，请输入不超过 1,000,000,000,000 的整数。';
+    return;
+  }
+  let x = n;
+  const factors = {};
+  let d = 2;
+  while (d * d <= x) {
+    while (x % d === 0) {
+      factors[d] = (factors[d] || 0) + 1;
+      x /= d;
+    }
+    d = d === 2 ? 3 : d + 2;
+  }
+  if (x > 1) factors[x] = (factors[x] || 0) + 1;
+  const primes = Object.keys(factors).map(Number).sort((a, b) => a - b);
+  const isPrime = primes.length === 1 && factors[n] === 1;
+  let count = 1;
+  let sum = 1;
+  primes.forEach(p => {
+    const e = factors[p];
+    count *= (e + 1);
+    sum *= (Math.pow(p, e + 1) - 1) / (p - 1);
+  });
+  const expr = primes.map(p => p + (factors[p] > 1 ? '^' + factors[p] : '')).join(' × ');
+  if (typeEl) typeEl.textContent = isPrime ? '✅ 质数' : '❌ 合数';
+  if (countEl) countEl.textContent = count.toLocaleString('zh-CN');
+  if (sumEl) sumEl.textContent = Math.round(sum).toLocaleString('zh-CN');
+  const lines = [
+    '数字：' + n.toLocaleString('zh-CN'),
+    '质因数分解：' + (isPrime ? n + '（本身是质数）' : n + ' = ' + expr),
+    '质数判断：' + (isPrime ? '是质数' : '不是质数'),
+    '不同质因数：' + primes.length + ' 个（' + primes.join('、') + '）',
+    '约数个数：' + count,
+    '约数之和：' + Math.round(sum).toLocaleString('zh-CN'),
+    '最大质因数：' + primes[primes.length - 1]
+  ];
+  res.textContent = lines.join('\n');
+}
+function primeFactorRandom() {
+  const input = document.getElementById('pfac-input');
+  if (!input) return;
+  input.value = Math.floor(Math.random() * 999999) + 2;
+  primeFactorCalc();
+}
+function primeFactorClear() {
+  const input = document.getElementById('pfac-input');
+  if (input) input.value = '';
+  ['pfac-type', 'pfac-count', 'pfac-sum'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '--';
+  });
+  const res = document.getElementById('pfac-result');
+  if (res) res.textContent = '请输入大于等于 2 的整数。';
+}
+
+safeInit(() => stockFeeCalc(), 'stockFeeCalc');
+safeInit(() => petFoodCalc(), 'petFoodCalc');
+safeInit(() => fhInit(), 'fhInit');
+safeInit(() => ebInit(), 'ebInit');
+safeInit(() => primeFactorCalc(), 'primeFactorCalc');
 
 // ============ Search & Theme ============
 function filterTools() {
