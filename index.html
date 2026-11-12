@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等279个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等284个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等279个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等284个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等279个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等284个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -676,6 +676,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#file-hash" data-tool="file-hash"><span class="icon">🔐</span>文件哈希校验</a></li>
     <li><a href="#ebbinghaus" data-tool="ebbinghaus"><span class="icon">🧠</span>艾宾浩斯复习</a></li>
     <li><a href="#prime-factor" data-tool="prime-factor"><span class="icon">🔢</span>质数因数分解</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#docker-to-compose" data-tool="docker-to-compose"><span class="icon">🐳</span>Docker 转 Compose</a></li>
+    <li><a href="#svg-minifier" data-tool="svg-minifier"><span class="icon">🧹</span>SVG 压缩优化</a></li>
+    <li><a href="#severance-calc" data-tool="severance-calc"><span class="icon">💼</span>离职补偿金计算</a></li>
+    <li><a href="#renovation-budget" data-tool="renovation-budget"><span class="icon">🏠</span>装修预算计算</a></li>
+    <li><a href="#purine-query" data-tool="purine-query"><span class="icon">🍤</span>食物嘌呤查询</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -7958,6 +7964,186 @@ console.log('代码块');
     <div class="result-box" id="pfac-result" style="display:block;">--</div>
   </section>
 
+  <!-- Docker Run 转 Docker Compose -->
+  <section class="tool-panel" id="panel-docker-to-compose">
+    <h2>🐳 Docker Run 转 Docker Compose</h2>
+    <p class="desc">粘贴一条 docker run 命令，自动解析端口、目录挂载、环境变量、网络与资源限制，生成可直接使用的 docker-compose.yml。命令只在本地解析，不会上传。</p>
+    <div class="label">docker run 命令</div>
+    <textarea id="dck-input" spellcheck="false" placeholder="docker run -d --name web -p 8080:80 -v /data:/usr/share/nginx/html -e TZ=Asia/Shanghai nginx:latest"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="dckConvert()">🐳 生成 Compose</button>
+      <button class="btn btn-secondary" onclick="dckExample()">📝 示例</button>
+      <button class="btn btn-secondary" onclick="dckCopy()">📋 复制</button>
+      <button class="btn btn-secondary" onclick="dckClear()">🗑️ 清空</button>
+    </div>
+    <div class="result-box" id="dck-result" style="display:none;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">支持 --name、-p、-v、-e、--env-file、--network、--restart、-u、-w、-m、--cpus、--device、--cap-add、--entrypoint 等常用参数；未识别的参数会以注释形式保留，方便手动调整。</p>
+  </section>
+
+  <!-- SVG 压缩优化 -->
+  <section class="tool-panel" id="panel-svg-minifier">
+    <h2>🧹 SVG 压缩优化</h2>
+    <p class="desc">在本地去除 SVG 中的注释、XML 声明与多余空白，减小文件体积，并提供实时预览与下载。适合压缩图标、Logo 和网页插画。</p>
+    <div class="label">SVG 源码</div>
+    <textarea id="svm-input" spellcheck="false" placeholder="粘贴完整的 &lt;svg&gt;...&lt;/svg&gt; 代码"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="svmRun()">🧹 压缩并预览</button>
+      <button class="btn btn-secondary" onclick="svmExample()">📝 示例</button>
+      <button class="btn btn-secondary" onclick="svmCopy()">📋 复制</button>
+      <button class="btn btn-secondary" onclick="svmDownload()">⬇️ 下载 SVG</button>
+      <button class="btn btn-secondary" onclick="svmClear()">🗑️ 清空</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="svm-orig" style="font-size:22px;">--</div><div class="lbl">原始大小</div></div>
+      <div class="stat-card"><div class="num" id="svm-size" style="font-size:22px;">--</div><div class="lbl">压缩后大小</div></div>
+      <div class="stat-card"><div class="num" id="svm-saved" style="font-size:22px;">--</div><div class="lbl">节省比例</div></div>
+    </div>
+    <div class="result-box" id="svm-msg" style="display:none;">--</div>
+    <div style="margin-top:14px;padding:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;">
+      <span id="svm-preview-hint" style="color:#64748b;font-size:13px;">压缩后在此预览</span>
+      <img id="svm-preview" alt="SVG 预览" style="max-width:100%;max-height:260px;display:none;">
+    </div>
+  </section>
+
+  <!-- 离职经济补偿金计算器 -->
+  <section class="tool-panel" id="panel-severance-calc">
+    <h2>💼 离职经济补偿金计算器</h2>
+    <p class="desc">依据《劳动合同法》第 47 条，按工作年限与离职前 12 个月平均工资估算经济补偿金（N），并支持违法解除的 2N 情形与三倍工资封顶规则。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">入职日期</div>
+        <input type="date" id="svr-start" onchange="svrCalc()">
+      </div>
+      <div>
+        <div class="label">离职日期</div>
+        <input type="date" id="svr-end" onchange="svrCalc()">
+      </div>
+      <div>
+        <div class="label">月平均工资（元）</div>
+        <input type="number" id="svr-salary" value="12000" min="0" step="100" oninput="svrCalc()">
+      </div>
+      <div>
+        <div class="label">当地上年度社平工资（元，可选）</div>
+        <input type="number" id="svr-local" value="8000" min="0" step="100" oninput="svrCalc()">
+      </div>
+      <div>
+        <div class="label">离职情形</div>
+        <select id="svr-type" onchange="svrCalc()">
+          <option value="mutual">协商一致解除（N）</option>
+          <option value="layoff">经济性裁员 / 客观情况变化（N）</option>
+          <option value="expire">合同到期公司不续签（N）</option>
+          <option value="illegal">违法解除（2N）</option>
+          <option value="resign">员工主动辞职（通常无补偿）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="svrCalc()">💼 计算补偿金</button>
+      <button class="btn btn-secondary" onclick="svrReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="svr-years" style="font-size:20px;">--</div><div class="lbl">工作年限</div></div>
+      <div class="stat-card"><div class="num" id="svr-months" style="font-size:20px;">--</div><div class="lbl">补偿月数 N</div></div>
+      <div class="stat-card"><div class="num" id="svr-amount" style="font-size:20px;">--</div><div class="lbl">补偿金额（元）</div></div>
+    </div>
+    <div class="result-box" id="svr-result" style="display:block;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">说明：月工资指离职前 12 个月平均应得工资；高于当地社平工资 3 倍的按 3 倍计算，且补偿年限最高 12 年。本工具适用于 2008 年 1 月 1 日之后入职的常见情形，结果仅供参考，具体以当地法规和劳动仲裁认定为准。</p>
+  </section>
+
+  <!-- 装修预算计算器 -->
+  <section class="tool-panel" id="panel-renovation-budget">
+    <h2>🏠 装修预算计算器</h2>
+    <p class="desc">按建筑面积与装修档次估算硬装费用，并叠加设计、拆改、家电、家具与备用金，快速得到整体预算区间，装修前先做到心里有数。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">建筑面积（㎡）</div>
+        <input type="number" id="rnb-area" value="90" min="1" step="1" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">装修档次</div>
+        <select id="rnb-level" onchange="rnbLevelChange()">
+          <option value="800">简装（约 800 元/㎡）</option>
+          <option value="1500" selected>中档（约 1500 元/㎡）</option>
+          <option value="2500">精装（约 2500 元/㎡）</option>
+          <option value="4000">豪装（约 4000 元/㎡）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">硬装单价（元/㎡）</div>
+        <input type="number" id="rnb-unit" value="1500" min="0" step="50" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">设计费（元）</div>
+        <input type="number" id="rnb-design" value="0" min="0" step="500" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">拆改费（元）</div>
+        <input type="number" id="rnb-demolish" value="0" min="0" step="500" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">家电预算（元）</div>
+        <input type="number" id="rnb-appliance" value="30000" min="0" step="1000" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">家具软装（元）</div>
+        <input type="number" id="rnb-furniture" value="50000" min="0" step="1000" oninput="rnbCalc()">
+      </div>
+      <div>
+        <div class="label">备用金比例（%）</div>
+        <input type="number" id="rnb-reserve" value="10" min="0" max="50" step="1" oninput="rnbCalc()">
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="rnbCalc()">🏠 计算预算</button>
+      <button class="btn btn-secondary" onclick="rnbReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="rnb-hard" style="font-size:20px;">--</div><div class="lbl">硬装费用（元）</div></div>
+      <div class="stat-card"><div class="num" id="rnb-total" style="font-size:20px;">--</div><div class="lbl">预算总计（元）</div></div>
+      <div class="stat-card"><div class="num" id="rnb-per" style="font-size:20px;">--</div><div class="lbl">每平米造价（元）</div></div>
+    </div>
+    <div class="result-box" id="rnb-result" style="display:block;">--</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">提示：硬装通常包含水电、瓦工、木工、油漆、主材与基础安装；不同城市、材料品牌和施工工艺差异较大，建议预留 10%–20% 备用金应对增项。</p>
+  </section>
+
+  <!-- 食物嘌呤查询 -->
+  <section class="tool-panel" id="panel-purine-query">
+    <h2>🍤 食物嘌呤查询</h2>
+    <p class="desc">按名称或类别查询常见食物的嘌呤含量（mg/100g），并用低、中、高三档标注，帮助高尿酸和痛风人群日常选餐。数据为常见参考值，具体请遵医嘱。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">搜索食物</div>
+        <input type="text" id="pq-search" placeholder="例如：猪肝、带鱼、豆腐、啤酒" oninput="pqRender()">
+      </div>
+      <div>
+        <div class="label">食物类别</div>
+        <select id="pq-cat" onchange="pqRender()">
+          <option value="全部">全部类别</option>
+          <option value="内脏">内脏</option>
+          <option value="海鲜">海鲜水产</option>
+          <option value="肉类">肉类蛋奶</option>
+          <option value="豆类">豆类豆制品</option>
+          <option value="蔬菜">蔬菜菌藻</option>
+          <option value="主食">主食谷物</option>
+          <option value="其他">饮品其他</option>
+          <option value="高嘌呤">⚠️ 高嘌呤（&gt;150）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn" onclick="pqRender()">🔍 查询</button>
+      <button class="btn btn-secondary" onclick="pqFilterHigh()">⚠️ 只看高嘌呤</button>
+      <button class="btn btn-secondary" onclick="pqReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="pq-total" style="font-size:22px;">--</div><div class="lbl">收录食物</div></div>
+      <div class="stat-card"><div class="num" id="pq-high" style="font-size:22px;">--</div><div class="lbl">高嘌呤食物</div></div>
+      <div class="stat-card"><div class="num" id="pq-show" style="font-size:22px;">--</div><div class="lbl">当前显示</div></div>
+    </div>
+    <div id="pq-table" style="margin-top:14px;"></div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">参考标准：低嘌呤 &lt; 50 mg/100g，中嘌呤 50–150 mg/100g，高嘌呤 &gt; 150 mg/100g。急性发作期建议每日嘌呤摄入控制在 150 mg 以内，缓解期控制在 300 mg 以内；肉类焯水、避免浓汤与酒精有助于减少嘌呤摄入。</p>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -7965,7 +8151,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 279个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 284个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -25745,6 +25931,708 @@ safeInit(() => petFoodCalc(), 'petFoodCalc');
 safeInit(() => fhInit(), 'fhInit');
 safeInit(() => ebInit(), 'ebInit');
 safeInit(() => primeFactorCalc(), 'primeFactorCalc');
+
+// ============ Docker Run 转 Docker Compose ============
+let dckOutput = '';
+
+function dckTokenize(str) {
+  const s = String(str).replace(/\\\r?\n/g, ' ');
+  const out = [];
+  let cur = '';
+  let quote = null;
+  let has = false;
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (quote) {
+      if (ch === quote) quote = null;
+      else if (ch === '\\' && quote === '"' && i + 1 < s.length) cur += s[++i];
+      else cur += ch;
+      has = true;
+    } else if (ch === '"' || ch === "'") {
+      quote = ch;
+      has = true;
+    } else if (/\s/.test(ch)) {
+      if (has) { out.push(cur); cur = ''; has = false; }
+    } else if (ch === '\\' && i + 1 < s.length) {
+      cur += s[++i];
+      has = true;
+    } else {
+      cur += ch;
+      has = true;
+    }
+  }
+  if (quote) throw new Error('引号未闭合，请检查命令');
+  if (has) out.push(cur);
+  return out;
+}
+
+function dckConvert() {
+  const box = document.getElementById('dck-result');
+  if (!box) return;
+  const raw = document.getElementById('dck-input').value.trim();
+  const fail = (msg) => {
+    dckOutput = '';
+    box.style.display = 'block';
+    box.textContent = '❌ ' + msg;
+  };
+  if (!raw) { fail('请先粘贴一条 docker run 命令。'); return; }
+  try {
+    const tokens = dckTokenize(raw);
+    let i = 0;
+    if (tokens[i] === 'docker') i++;
+    if (tokens[i] === 'container') i++;
+    if (tokens[i] !== 'run') throw new Error('命令需以 docker run 开头，例如：docker run -d nginx');
+    i++;
+    const cfg = {
+      name: '', image: '', command: [],
+      ports: [], volumes: [], env: [], envFile: [], labels: [], devices: [], capAdd: [], networks: [],
+      networkMode: '', restart: '', hostname: '', user: '', workdir: '', memory: '', cpus: '',
+      entrypoint: '', platform: '', privileged: false, init: false, rm: false, interactive: false, unknown: []
+    };
+    const take = (flag) => {
+      if (i + 1 >= tokens.length) throw new Error(flag + ' 缺少参数值');
+      return tokens[++i];
+    };
+    while (i < tokens.length) {
+      let t = tokens[i];
+      if (t.charAt(0) !== '-') break;
+      let inlineVal = null;
+      const eq = t.indexOf('=');
+      if (t.slice(0, 2) === '--' && eq > -1) {
+        inlineVal = t.slice(eq + 1);
+        t = t.slice(0, eq);
+      }
+      const get = (flag) => {
+        if (inlineVal !== null) return inlineVal;
+        return take(flag);
+      };
+      switch (t) {
+        case '--name': cfg.name = get(t); break;
+        case '--restart': cfg.restart = get(t); break;
+        case '--network': {
+          const v = get(t);
+          if (v === 'host' || v === 'none' || v.indexOf('container:') === 0) cfg.networkMode = v;
+          else cfg.networks.push(v);
+          break;
+        }
+        case '--hostname': case '-h': cfg.hostname = get(t); break;
+        case '--user': case '-u': cfg.user = get(t); break;
+        case '--workdir': case '-w': cfg.workdir = get(t); break;
+        case '--memory': case '-m': cfg.memory = get(t); break;
+        case '--cpus': cfg.cpus = get(t); break;
+        case '--platform': cfg.platform = get(t); break;
+        case '--entrypoint': cfg.entrypoint = get(t); break;
+        case '--env-file': cfg.envFile.push(get(t)); break;
+        case '--privileged': cfg.privileged = true; break;
+        case '--init': cfg.init = true; break;
+        case '--rm': cfg.rm = true; break;
+        case '-d': case '--detach': break;
+        case '-i': case '--interactive': cfg.interactive = true; break;
+        case '-t': case '--tty': break;
+        case '-p': case '--publish': cfg.ports.push(get(t)); break;
+        case '-v': case '--volume': cfg.volumes.push(get(t)); break;
+        case '-e': case '--env': cfg.env.push(get(t)); break;
+        case '--label': cfg.labels.push(get(t)); break;
+        case '--device': cfg.devices.push(get(t)); break;
+        case '--cap-add': cfg.capAdd.push(get(t)); break;
+        default: {
+          if (/^-[pve]/.test(t) && t.length > 2) {
+            const f = t.slice(0, 2);
+            const v = t.slice(2).replace(/^=/, '');
+            if (f === '-p') cfg.ports.push(v);
+            else if (f === '-v') cfg.volumes.push(v);
+            else cfg.env.push(v);
+          } else if (/^-[dit]+$/.test(t)) {
+            if (t.indexOf('i') > -1) cfg.interactive = true;
+          } else {
+            cfg.unknown.push(t + (inlineVal !== null ? '=' + inlineVal : ''));
+          }
+        }
+      }
+      i++;
+    }
+    if (!cfg.image && i < tokens.length) cfg.image = tokens[i++];
+    if (!cfg.image) throw new Error('未找到镜像名称');
+    if (i < tokens.length) cfg.command = tokens.slice(i);
+    let base = cfg.image.split('/').pop();
+    base = base.split('@')[0].split(':')[0];
+    let serviceName = (cfg.name || base || 'app').replace(/[^a-zA-Z0-9_.-]/g, '-');
+    if (!serviceName) serviceName = 'app';
+    if (/^[0-9]/.test(serviceName)) serviceName = 'svc-' + serviceName;
+    const q = (v) => JSON.stringify(String(v));
+    const lines = ['services:', '  ' + serviceName + ':', '    image: ' + q(cfg.image)];
+    if (cfg.name) lines.push('    container_name: ' + q(cfg.name));
+    if (cfg.restart) lines.push('    restart: ' + q(cfg.restart));
+    if (cfg.hostname) lines.push('    hostname: ' + q(cfg.hostname));
+    if (cfg.platform) lines.push('    platform: ' + q(cfg.platform));
+    if (cfg.user) lines.push('    user: ' + q(cfg.user));
+    if (cfg.workdir) lines.push('    working_dir: ' + q(cfg.workdir));
+    if (cfg.entrypoint) lines.push('    entrypoint: ' + q(cfg.entrypoint));
+    if (cfg.memory) lines.push('    mem_limit: ' + q(cfg.memory));
+    if (cfg.cpus) lines.push('    cpus: ' + cfg.cpus);
+    if (cfg.privileged) lines.push('    privileged: true');
+    if (cfg.init) lines.push('    init: true');
+    if (cfg.networkMode) lines.push('    network_mode: ' + q(cfg.networkMode));
+    if (cfg.networks.length) {
+      lines.push('    networks:');
+      cfg.networks.forEach(n => lines.push('      - ' + q(n)));
+    }
+    if (cfg.ports.length) {
+      lines.push('    ports:');
+      cfg.ports.forEach(p => lines.push('      - ' + q(p)));
+    }
+    if (cfg.volumes.length) {
+      lines.push('    volumes:');
+      cfg.volumes.forEach(v => lines.push('      - ' + q(v)));
+    }
+    if (cfg.env.length) {
+      lines.push('    environment:');
+      cfg.env.forEach(e => lines.push('      - ' + q(e)));
+    }
+    if (cfg.envFile.length) {
+      lines.push('    env_file:');
+      cfg.envFile.forEach(f => lines.push('      - ' + q(f)));
+    }
+    if (cfg.labels.length) {
+      lines.push('    labels:');
+      cfg.labels.forEach(l => lines.push('      - ' + q(l)));
+    }
+    if (cfg.devices.length) {
+      lines.push('    devices:');
+      cfg.devices.forEach(d => lines.push('      - ' + q(d)));
+    }
+    if (cfg.capAdd.length) {
+      lines.push('    cap_add:');
+      cfg.capAdd.forEach(c => lines.push('      - ' + q(c)));
+    }
+    if (cfg.command.length) {
+      lines.push('    command:');
+      cfg.command.forEach(c => lines.push('      - ' + q(c)));
+    }
+    if (cfg.networks.length) {
+      lines.push('');
+      lines.push('# 若该网络由 Compose 创建，请删除下面的 external: true');
+      lines.push('networks:');
+      cfg.networks.forEach(n => {
+        lines.push('  ' + q(n) + ':');
+        lines.push('    external: true');
+      });
+    }
+    const comments = [];
+    if (cfg.rm) comments.push('# 提示：docker run 的 --rm 对应 docker compose run --rm，docker compose up 不会自动删除容器');
+    if (cfg.interactive) comments.push('# 提示：-i/-t 交互参数在 docker compose up 中通常不需要');
+    if (cfg.unknown.length) comments.push('# 未识别参数（请手动确认）：' + cfg.unknown.join(' '));
+    dckOutput = comments.concat(lines).join('\n');
+    box.style.display = 'block';
+    box.textContent = dckOutput;
+  } catch (err) {
+    fail(err.message);
+  }
+}
+
+function dckExample() {
+  const input = document.getElementById('dck-input');
+  if (!input) return;
+  input.value = 'docker run -d --name web \\\n  --restart unless-stopped \\\n  -p 8080:80 -p 8443:443 \\\n  -v /srv/www:/usr/share/nginx/html:ro \\\n  -e TZ=Asia/Shanghai -e NGINX_HOST=example.com \\\n  --network webnet --cpus 1.5 --memory 512m \\\n  nginx:1.25-alpine';
+  dckConvert();
+}
+
+function dckCopy() {
+  if (!dckOutput) dckConvert();
+  if (!dckOutput) return;
+  writeClipboard(dckOutput).then(() => showToast('Compose 配置已复制！'));
+}
+
+function dckClear() {
+  const input = document.getElementById('dck-input');
+  const box = document.getElementById('dck-result');
+  if (input) input.value = '';
+  if (box) { box.textContent = '--'; box.style.display = 'none'; }
+  dckOutput = '';
+}
+
+// ============ SVG 压缩优化 ============
+let svmOutput = '';
+let svmObjectUrl = '';
+
+function svmBytes(str) {
+  return new TextEncoder().encode(str).length;
+}
+
+function svmFmtBytes(n) {
+  if (n < 1024) return n + ' B';
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+  return (n / 1024 / 1024).toFixed(2) + ' MB';
+}
+
+function svmMinifySource(src) {
+  let s = String(src).replace(/^\uFEFF/, '');
+  s = s.replace(/<!--[\s\S]*?-->/g, '');
+  s = s.replace(/<\?xml[\s\S]*?\?>/gi, '');
+  s = s.replace(/<!DOCTYPE[^>]*>/gi, '');
+  s = s.replace(/>\s+</g, '><');
+  s = s.replace(/<([^<>]+)>/g, (m, inner) => {
+    let t = inner.replace(/\s+/g, ' ').trim();
+    t = t.replace(/\s*=\s*/g, '=');
+    t = t.replace(/\s*\/$/, '/');
+    return '<' + t + '>';
+  });
+  return s.trim();
+}
+
+function svmMsg(text, isError) {
+  const box = document.getElementById('svm-msg');
+  if (!box) return;
+  if (!text) { box.style.display = 'none'; box.textContent = '--'; return; }
+  box.style.display = 'block';
+  box.textContent = (isError ? '❌ ' : '✅ ') + text;
+}
+
+function svmRun() {
+  const input = document.getElementById('svm-input');
+  const img = document.getElementById('svm-preview');
+  const hint = document.getElementById('svm-preview-hint');
+  if (!input || !img || !hint) return;
+  const raw = input.value;
+  const fail = (msg) => {
+    svmOutput = '';
+    svmMsg(msg, true);
+  };
+  if (!raw.trim()) { fail('请先粘贴 SVG 代码。'); return; }
+  if (!/<svg[\s>]/i.test(raw)) { fail('未找到 <svg> 标签，请检查内容。'); return; }
+  if (!/<\/svg>/i.test(raw)) { fail('SVG 代码不完整，缺少 </svg>。'); return; }
+  try {
+    const min = svmMinifySource(raw);
+    svmOutput = min;
+    const origSize = svmBytes(raw);
+    const outSize = svmBytes(min);
+    const saved = origSize > 0 ? Math.max(0, (1 - outSize / origSize) * 100) : 0;
+    document.getElementById('svm-orig').textContent = svmFmtBytes(origSize);
+    document.getElementById('svm-size').textContent = svmFmtBytes(outSize);
+    document.getElementById('svm-saved').textContent = saved.toFixed(1) + '%';
+    svmMsg('压缩完成，已去除注释与多余空白，可复制或下载。', false);
+    if (svmObjectUrl) URL.revokeObjectURL(svmObjectUrl);
+    svmObjectUrl = URL.createObjectURL(new Blob([min], { type: 'image/svg+xml;charset=utf-8' }));
+    img.onload = () => {
+      img.style.display = 'block';
+      hint.style.display = 'none';
+    };
+    img.onerror = () => {
+      img.style.display = 'none';
+      hint.style.display = 'block';
+      hint.textContent = '预览失败，请检查 SVG 是否有效';
+    };
+    img.src = svmObjectUrl;
+  } catch (err) {
+    fail('压缩失败：' + err.message);
+  }
+}
+
+function svmExample() {
+  const input = document.getElementById('svm-input');
+  if (!input) return;
+  input.value = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<!-- 示例：渐变圆形图标，带有多余空白与注释 -->',
+    '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">',
+    '  <defs>',
+    '    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">',
+    '      <stop offset="0%" stop-color="#6366f1"/>',
+    '      <stop offset="100%" stop-color="#22d3ee"/>',
+    '    </linearGradient>',
+    '  </defs>',
+    '  <rect width="240" height="240" rx="48" fill="#0f172a"/>',
+    '  <circle cx="120" cy="120" r="72" fill="url(#g)"/>',
+    '  <path d="M84 120 L108 144 L156 96" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>',
+    '</svg>'
+  ].join('\n');
+  svmRun();
+}
+
+function svmCopy() {
+  if (!svmOutput) svmRun();
+  if (!svmOutput) return;
+  writeClipboard(svmOutput).then(() => showToast('压缩后的 SVG 已复制！'));
+}
+
+function svmDownload() {
+  if (!svmOutput) svmRun();
+  if (!svmOutput) return;
+  const blob = new Blob([svmOutput], { type: 'image/svg+xml;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'optimized.svg';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  showToast('SVG 已开始下载');
+}
+
+function svmClear() {
+  const input = document.getElementById('svm-input');
+  const img = document.getElementById('svm-preview');
+  const hint = document.getElementById('svm-preview-hint');
+  if (input) input.value = '';
+  if (img) { img.removeAttribute('src'); img.style.display = 'none'; }
+  if (hint) { hint.style.display = 'block'; hint.textContent = '压缩后在此预览'; }
+  ['svm-orig', 'svm-size', 'svm-saved'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '--';
+  });
+  if (svmObjectUrl) { URL.revokeObjectURL(svmObjectUrl); svmObjectUrl = ''; }
+  svmOutput = '';
+  svmMsg('', false);
+}
+
+// ============ 离职经济补偿金计算器 ============
+function svrTodayStr() {
+  const d = new Date();
+  const p = (n) => (n < 10 ? '0' + n : '' + n);
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+function svrParseDate(id) {
+  const el = document.getElementById(id);
+  if (!el || !el.value) return null;
+  const d = new Date(el.value + 'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function svrResetStats() {
+  ['svr-years', 'svr-months', 'svr-amount'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '--';
+  });
+}
+
+function svrCalc() {
+  const res = document.getElementById('svr-result');
+  if (!res) return;
+  const start = svrParseDate('svr-start');
+  const end = svrParseDate('svr-end');
+  const salary = parseFloat(document.getElementById('svr-salary').value);
+  const localAvg = parseFloat(document.getElementById('svr-local').value);
+  const type = document.getElementById('svr-type').value;
+  if (!start || !end) {
+    svrResetStats();
+    res.textContent = '请填写入职日期与离职日期。';
+    return;
+  }
+  if (!(salary >= 0)) {
+    svrResetStats();
+    res.textContent = '请填写有效的月平均工资。';
+    return;
+  }
+  if (end <= start) {
+    svrResetStats();
+    res.textContent = '❌ 离职日期需要晚于入职日期。';
+    return;
+  }
+  let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+  if (end.getDate() < start.getDate()) months--;
+  if (months <= 0) months = 1;
+  let n = Math.floor(months / 12);
+  const rem = months % 12;
+  if (rem >= 6) n += 1;
+  else if (rem > 0) n += 0.5;
+  if (n === 0) n = 0.5;
+  const multMap = { mutual: 1, layoff: 1, expire: 1, illegal: 2, resign: 0 };
+  const mult = Object.prototype.hasOwnProperty.call(multMap, type) ? multMap[type] : 1;
+  let base = salary;
+  let capped = false;
+  if (localAvg > 0 && salary > localAvg * 3) {
+    base = localAvg * 3;
+    capped = true;
+  }
+  const nUsed = capped ? Math.min(n, 12) : n;
+  const amount = mult === 0 ? 0 : base * nUsed * mult;
+  const yearsText = Math.floor(months / 12) + '年' + (months % 12) + '个月';
+  const yearsEl = document.getElementById('svr-years');
+  const monthsEl = document.getElementById('svr-months');
+  const amountEl = document.getElementById('svr-amount');
+  if (yearsEl) yearsEl.textContent = yearsText;
+  if (monthsEl) monthsEl.textContent = mult === 0 ? '0' : nUsed + ' 个月';
+  if (amountEl) amountEl.textContent = amount.toLocaleString('zh-CN', { maximumFractionDigits: 0 });
+  const typeName = document.querySelector('#svr-type option:checked');
+  const lines = [
+    '入职日期：' + start.getFullYear() + '-' + (start.getMonth() + 1) + '-' + start.getDate(),
+    '离职日期：' + end.getFullYear() + '-' + (end.getMonth() + 1) + '-' + end.getDate(),
+    '工作年限：' + yearsText + '（满 6 个月不满 1 年按 1 年，不满 6 个月按 0.5 年）',
+    '离职情形：' + (typeName ? typeName.textContent : type),
+    '补偿年限 N：' + nUsed + ' 个月工资',
+    '月平均工资：' + salary.toLocaleString('zh-CN') + ' 元'
+  ];
+  if (capped) {
+    lines.push('计发基数：' + base.toLocaleString('zh-CN') + ' 元/月（超过当地社平工资 3 倍，已按 3 倍封顶）');
+    if (n > 12) lines.push('年限封顶：' + n + ' 个月 → 按 12 个月计算');
+  } else {
+    lines.push('计发基数：' + base.toLocaleString('zh-CN') + ' 元/月');
+  }
+  lines.push('补偿倍数：' + (mult === 2 ? '2N（违法解除赔偿金）' : mult === 1 ? '1N（经济补偿）' : '0（主动辞职）'));
+  lines.push('补偿金额：' + amount.toLocaleString('zh-CN', { maximumFractionDigits: 2 }) + ' 元');
+  if (mult === 0) {
+    lines.push('');
+    lines.push('提示：员工主动辞职通常不享有经济补偿；若存在未足额支付工资、未依法缴纳社保等情形，可主张被迫解除劳动合同并要求 N 倍经济补偿。');
+  }
+  if (mult === 2) {
+    lines.push('提示：违法解除赔偿金通常为经济补偿标准的 2 倍（2N），是否适用三倍封顶与 12 年上限存在地区差异，建议咨询当地劳动仲裁机构。');
+  }
+  res.textContent = lines.join('\n');
+}
+
+function svrInit() {
+  const start = document.getElementById('svr-start');
+  const end = document.getElementById('svr-end');
+  if (start && !start.value) start.value = '2020-01-01';
+  if (end && !end.value) end.value = svrTodayStr();
+  svrCalc();
+}
+
+function svrReset() {
+  const start = document.getElementById('svr-start');
+  const end = document.getElementById('svr-end');
+  const salary = document.getElementById('svr-salary');
+  const local = document.getElementById('svr-local');
+  const type = document.getElementById('svr-type');
+  if (start) start.value = '2020-01-01';
+  if (end) end.value = svrTodayStr();
+  if (salary) salary.value = 12000;
+  if (local) local.value = 8000;
+  if (type) type.value = 'mutual';
+  svrCalc();
+}
+
+// ============ 装修预算计算器 ============
+function rnbNum(id, def) {
+  const el = document.getElementById(id);
+  if (!el) return def;
+  const v = parseFloat(el.value);
+  return isNaN(v) ? def : v;
+}
+
+function rnbCalc() {
+  const res = document.getElementById('rnb-result');
+  if (!res) return;
+  const area = rnbNum('rnb-area', 0);
+  const unit = rnbNum('rnb-unit', 0);
+  const design = rnbNum('rnb-design', 0);
+  const demolish = rnbNum('rnb-demolish', 0);
+  const appliance = rnbNum('rnb-appliance', 0);
+  const furniture = rnbNum('rnb-furniture', 0);
+  const reservePct = Math.min(50, Math.max(0, rnbNum('rnb-reserve', 0)));
+  if (!(area > 0)) {
+    ['rnb-hard', 'rnb-total', 'rnb-per'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '--';
+    });
+    res.textContent = '请填写有效的建筑面积。';
+    return;
+  }
+  const hard = area * unit;
+  const subtotal = hard + design + demolish + appliance + furniture;
+  const reserve = subtotal * reservePct / 100;
+  const total = subtotal + reserve;
+  const per = total / area;
+  const money = (x) => Math.round(x).toLocaleString('zh-CN');
+  const hardEl = document.getElementById('rnb-hard');
+  const totalEl = document.getElementById('rnb-total');
+  const perEl = document.getElementById('rnb-per');
+  if (hardEl) hardEl.textContent = money(hard);
+  if (totalEl) totalEl.textContent = money(total);
+  if (perEl) perEl.textContent = money(per);
+  const levelSel = document.getElementById('rnb-level');
+  const levelName = levelSel && levelSel.selectedIndex > -1 ? levelSel.options[levelSel.selectedIndex].text : '自定义';
+  const lines = [
+    '建筑面积：' + area + ' ㎡',
+    '装修档次：' + levelName,
+    '硬装费用：' + area + ' ㎡ × ' + money(unit) + ' 元/㎡ = ' + money(hard) + ' 元',
+    '设计费：' + money(design) + ' 元',
+    '拆改费：' + money(demolish) + ' 元',
+    '家电预算：' + money(appliance) + ' 元',
+    '家具软装：' + money(furniture) + ' 元',
+    '小计：' + money(subtotal) + ' 元',
+    '备用金：' + reservePct + '% = ' + money(reserve) + ' 元',
+    '预算总计：' + money(total) + ' 元',
+    '建议预算区间：' + money(total * 0.9) + ' ~ ' + money(total * 1.1) + ' 元（±10%）',
+    '每平米造价：约 ' + money(per) + ' 元/㎡'
+  ];
+  res.textContent = lines.join('\n');
+}
+
+function rnbLevelChange() {
+  const level = document.getElementById('rnb-level');
+  const unit = document.getElementById('rnb-unit');
+  if (!level || !unit) return;
+  unit.value = level.value;
+  rnbCalc();
+}
+
+function rnbReset() {
+  const area = document.getElementById('rnb-area');
+  const level = document.getElementById('rnb-level');
+  const unit = document.getElementById('rnb-unit');
+  const design = document.getElementById('rnb-design');
+  const demolish = document.getElementById('rnb-demolish');
+  const appliance = document.getElementById('rnb-appliance');
+  const furniture = document.getElementById('rnb-furniture');
+  const reserve = document.getElementById('rnb-reserve');
+  if (area) area.value = 90;
+  if (level) level.value = '1500';
+  if (unit) unit.value = 1500;
+  if (design) design.value = 0;
+  if (demolish) demolish.value = 0;
+  if (appliance) appliance.value = 30000;
+  if (furniture) furniture.value = 50000;
+  if (reserve) reserve.value = 10;
+  rnbCalc();
+}
+
+// ============ 食物嘌呤查询 ============
+const PQ_FOODS = [
+  { n: '猪肝', c: '内脏', v: 275 },
+  { n: '猪肾', c: '内脏', v: 132 },
+  { n: '猪心', c: '内脏', v: 170 },
+  { n: '猪肺', c: '内脏', v: 70 },
+  { n: '牛肝', c: '内脏', v: 200 },
+  { n: '鸡肝', c: '内脏', v: 293 },
+  { n: '鸭肝', c: '内脏', v: 301 },
+  { n: '猪肠', c: '内脏', v: 262 },
+  { n: '猪脑', c: '内脏', v: 180 },
+  { n: '沙丁鱼', c: '海鲜', v: 345 },
+  { n: '凤尾鱼', c: '海鲜', v: 363 },
+  { n: '带鱼', c: '海鲜', v: 392 },
+  { n: '鲱鱼', c: '海鲜', v: 378 },
+  { n: '牡蛎', c: '海鲜', v: 239 },
+  { n: '鱿鱼', c: '海鲜', v: 226 },
+  { n: '扇贝', c: '海鲜', v: 193 },
+  { n: '三文鱼', c: '海鲜', v: 170 },
+  { n: '虾', c: '海鲜', v: 138 },
+  { n: '蟹', c: '海鲜', v: 82 },
+  { n: '鲫鱼', c: '海鲜', v: 137 },
+  { n: '鲈鱼', c: '海鲜', v: 110 },
+  { n: '海参', c: '海鲜', v: 4 },
+  { n: '海蜇', c: '海鲜', v: 9 },
+  { n: '鱼丸', c: '海鲜', v: 63 },
+  { n: '猪肉', c: '肉类', v: 123 },
+  { n: '牛肉', c: '肉类', v: 84 },
+  { n: '羊肉', c: '肉类', v: 112 },
+  { n: '鸡肉', c: '肉类', v: 140 },
+  { n: '鸭肉', c: '肉类', v: 138 },
+  { n: '火腿', c: '肉类', v: 55 },
+  { n: '腊肉', c: '肉类', v: 100 },
+  { n: '鸡蛋', c: '肉类', v: 4 },
+  { n: '牛奶', c: '肉类', v: 1 },
+  { n: '黄豆', c: '豆类', v: 190 },
+  { n: '黑豆', c: '豆类', v: 137 },
+  { n: '豆腐', c: '豆类', v: 68 },
+  { n: '豆干', c: '豆类', v: 66 },
+  { n: '豆浆', c: '豆类', v: 27 },
+  { n: '绿豆', c: '豆类', v: 75 },
+  { n: '黄豆芽', c: '豆类', v: 166 },
+  { n: '腐竹', c: '豆类', v: 160 },
+  { n: '香菇', c: '蔬菜', v: 214 },
+  { n: '紫菜', c: '蔬菜', v: 274 },
+  { n: '芦笋', c: '蔬菜', v: 23 },
+  { n: '菠菜', c: '蔬菜', v: 57 },
+  { n: '菜花', c: '蔬菜', v: 24 },
+  { n: '西兰花', c: '蔬菜', v: 70 },
+  { n: '黄瓜', c: '蔬菜', v: 3 },
+  { n: '番茄', c: '蔬菜', v: 4 },
+  { n: '芹菜', c: '蔬菜', v: 8 },
+  { n: '韭菜', c: '蔬菜', v: 25 },
+  { n: '海带', c: '蔬菜', v: 8 },
+  { n: '蘑菇', c: '蔬菜', v: 28 },
+  { n: '豌豆', c: '蔬菜', v: 75 },
+  { n: '大米', c: '主食', v: 18 },
+  { n: '面粉', c: '主食', v: 17 },
+  { n: '面条', c: '主食', v: 19 },
+  { n: '面包', c: '主食', v: 14 },
+  { n: '玉米', c: '主食', v: 9 },
+  { n: '燕麦', c: '主食', v: 94 },
+  { n: '红薯', c: '主食', v: 18 },
+  { n: '啤酒', c: '其他', v: 79 },
+  { n: '白酒', c: '其他', v: 2 },
+  { n: '咖啡', c: '其他', v: 10 },
+  { n: '酵母粉', c: '其他', v: 589 },
+  { n: '鸡精', c: '其他', v: 500 },
+  { n: '浓肉汤', c: '其他', v: 150 },
+  { n: '蜂蜜', c: '其他', v: 1 },
+  { n: '花生', c: '其他', v: 30 }
+];
+
+function pqLevel(v) {
+  if (v >= 150) return { t: '高', color: '#ef4444' };
+  if (v >= 50) return { t: '中', color: '#f59e0b' };
+  return { t: '低', color: '#22c55e' };
+}
+
+function pqRender() {
+  const box = document.getElementById('pq-table');
+  if (!box) return;
+  const searchEl = document.getElementById('pq-search');
+  const catEl = document.getElementById('pq-cat');
+  const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+  const cat = catEl ? catEl.value : '全部';
+  const isHigh = cat === '高嘌呤';
+  const list = PQ_FOODS.filter(f => {
+    if (isHigh && f.v < 150) return false;
+    if (!isHigh && cat !== '全部' && f.c !== cat) return false;
+    if (q && f.n.toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  }).sort((a, b) => b.v - a.v);
+  const totalEl = document.getElementById('pq-total');
+  const highEl = document.getElementById('pq-high');
+  const showEl = document.getElementById('pq-show');
+  if (totalEl) totalEl.textContent = PQ_FOODS.length;
+  if (highEl) highEl.textContent = PQ_FOODS.filter(f => f.v >= 150).length;
+  if (showEl) showEl.textContent = list.length;
+  if (!list.length) {
+    box.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-secondary);font-size:14px;">没有找到匹配的食物，换个关键词或类别试试。</div>';
+    return;
+  }
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+    '<thead><tr style="color:var(--text-secondary);">' +
+    '<th style="text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);">食物</th>' +
+    '<th style="text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);">类别</th>' +
+    '<th style="text-align:right;padding:8px 6px;border-bottom:1px solid var(--border);">嘌呤</th>' +
+    '<th style="text-align:center;padding:8px 6px;border-bottom:1px solid var(--border);">等级</th>' +
+    '<th style="text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);">建议</th>' +
+    '</tr></thead><tbody>';
+  list.forEach(f => {
+    const lv = pqLevel(f.v);
+    const advice = lv.t === '高' ? '急性期避免' : lv.t === '中' ? '适量食用' : '可放心食用';
+    html += '<tr>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);color:var(--text);">' + escapeHtml(f.n) + '</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);color:var(--text-secondary);">' + escapeHtml(f.c) + '</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);text-align:right;color:var(--text);">' + f.v + ' mg</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);text-align:center;color:' + lv.color + ';font-weight:600;">' + lv.t + '</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);color:var(--text-secondary);">' + advice + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody></table>';
+  box.innerHTML = html;
+}
+
+function pqFilterHigh() {
+  const cat = document.getElementById('pq-cat');
+  if (cat) cat.value = '高嘌呤';
+  pqRender();
+}
+
+function pqReset() {
+  const search = document.getElementById('pq-search');
+  const cat = document.getElementById('pq-cat');
+  if (search) search.value = '';
+  if (cat) cat.value = '全部';
+  pqRender();
+}
+
+safeInit(() => dckExample(), 'dckExample');
+safeInit(() => svmExample(), 'svmExample');
+safeInit(() => svrInit(), 'svrInit');
+safeInit(() => rnbCalc(), 'rnbCalc');
+safeInit(() => pqRender(), 'pqRender');
 
 // ============ Search & Theme ============
 function filterTools() {
