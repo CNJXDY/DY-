@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等284个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等289个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等284个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等289个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等284个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等289个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -682,6 +682,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#severance-calc" data-tool="severance-calc"><span class="icon">💼</span>离职补偿金计算</a></li>
     <li><a href="#renovation-budget" data-tool="renovation-budget"><span class="icon">🏠</span>装修预算计算</a></li>
     <li><a href="#purine-query" data-tool="purine-query"><span class="icon">🍤</span>食物嘌呤查询</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#shipping-calc" data-tool="shipping-calc"><span class="icon">📦</span>快递运费估算</a></li>
+    <li><a href="#game-of-life" data-tool="game-of-life"><span class="icon">🧬</span>康威生命游戏</a></li>
+    <li><a href="#rsa-keygen" data-tool="rsa-keygen"><span class="icon">🔐</span>RSA 密钥生成</a></li>
+    <li><a href="#fasting-calc" data-tool="fasting-calc"><span class="icon">⏱️</span>轻断食时间计算</a></li>
+    <li><a href="#zw-stego" data-tool="zw-stego"><span class="icon">🕵️</span>零宽字符隐写</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -8144,6 +8150,177 @@ console.log('代码块');
     <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">参考标准：低嘌呤 &lt; 50 mg/100g，中嘌呤 50–150 mg/100g，高嘌呤 &gt; 150 mg/100g。急性发作期建议每日嘌呤摄入控制在 150 mg 以内，缓解期控制在 300 mg 以内；肉类焯水、避免浓汤与酒精有助于减少嘌呤摄入。</p>
   </section>
 
+  <!-- 快递运费估算 -->
+  <section class="tool-panel" id="panel-shipping-calc">
+    <h2>📦 快递运费估算器</h2>
+    <p class="desc">输入重量与寄送区域，快速估算运费并横向对比 6 家常见快递的参考价格。支持按长宽高计算体积重量，按「实际重量与体积重量取大」计费。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">实际重量（kg）</div>
+        <input type="number" id="ship-weight" value="1" min="0.1" step="0.1" oninput="shipCalc()">
+      </div>
+      <div>
+        <div class="label">寄送区域</div>
+        <select id="ship-zone" onchange="shipCalc()">
+          <option value="0">同城</option>
+          <option value="1" selected>省内</option>
+          <option value="2">跨省（普通地区）</option>
+          <option value="3">偏远地区（新疆 / 西藏等）</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">长（cm，可选）</div>
+        <input type="number" id="ship-len" placeholder="长" min="0" step="0.1" oninput="shipCalc()">
+      </div>
+      <div>
+        <div class="label">宽（cm，可选）</div>
+        <input type="number" id="ship-wid" placeholder="宽" min="0" step="0.1" oninput="shipCalc()">
+      </div>
+      <div>
+        <div class="label">高（cm，可选）</div>
+        <input type="number" id="ship-hei" placeholder="高" min="0" step="0.1" oninput="shipCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="shipCalc()">🚚 估算运费</button>
+      <button class="btn btn-secondary" onclick="shipReset()">🔄 重置</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="ship-cheapest" style="font-size:22px;">--</div><div class="lbl">最低运费（元）</div></div>
+      <div class="stat-card"><div class="num" id="ship-charge" style="font-size:22px;">--</div><div class="lbl">计费重量（kg）</div></div>
+      <div class="stat-card"><div class="num" id="ship-diff" style="font-size:22px;">--</div><div class="lbl">最高与最低差（元）</div></div>
+    </div>
+    <div id="ship-table" style="margin-top:14px;"></div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">体积重量 = 长 × 宽 × 高 ÷ 6000（cm³/kg），首重不足 1kg 按 1kg 计，续重不足 1kg 按 1kg 计。以上为常见公开报价的简化模型，仅作估算参考，实际以快递网点报价为准。</p>
+  </section>
+
+  <!-- 康威生命游戏 -->
+  <section class="tool-panel" id="panel-game-of-life">
+    <h2>🧬 康威生命游戏</h2>
+    <p class="desc">康威生命游戏（Conway's Game of Life）：每个格子根据周围 8 个邻居的数量繁衍或消亡。点击或拖动格子绘制图案，观察简单规则如何演化出滑翔机、脉冲星等复杂结构。</p>
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat-card"><div class="num" id="gol-gen" style="font-size:22px;">0</div><div class="lbl">代数</div></div>
+      <div class="stat-card"><div class="num" id="gol-alive" style="font-size:22px;">0</div><div class="lbl">存活细胞</div></div>
+      <div class="stat-card"><div class="num" id="gol-speed-label" style="font-size:22px;">8</div><div class="lbl">代 / 秒</div></div>
+    </div>
+    <canvas id="gol-canvas" width="600" height="360" style="width:100%;max-width:600px;display:block;margin:0 auto;background:#0f172a;border:1px solid var(--border);border-radius:var(--radius);touch-action:none;cursor:crosshair;"></canvas>
+    <div class="btn-group" style="justify-content:center;margin-top:12px;">
+      <button class="btn" id="gol-btn" onclick="golToggle()">▶️ 开始</button>
+      <button class="btn btn-secondary" onclick="golStep()">⏭️ 单步</button>
+      <button class="btn btn-secondary" onclick="golRandom()">🎲 随机</button>
+      <button class="btn btn-secondary" onclick="golClear()">🧹 清空</button>
+    </div>
+    <div class="flex-row" style="margin-top:12px;flex-wrap:wrap;">
+      <div>
+        <div class="label">预设图案</div>
+        <select id="gol-preset" onchange="golLoadPreset(this.value)">
+          <option value="">选择预设…</option>
+          <option value="glider">滑翔机 Glider</option>
+          <option value="pulsar">脉冲星 Pulsar</option>
+          <option value="lwss">轻量级飞船 LWSS</option>
+          <option value="toad">蟾蜍 Toad</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">演化速度</div>
+        <input type="range" id="gol-speed" min="1" max="30" value="8" oninput="golSetSpeed(this.value)" style="width:100%;">
+      </div>
+    </div>
+    <div class="result-box" id="gol-msg" style="margin-top:12px;text-align:center;">点击「随机」或手绘细胞，再点「开始」观察演化。</div>
+  </section>
+
+  <!-- RSA 密钥生成 -->
+  <section class="tool-panel" id="panel-rsa-keygen">
+    <h2>🔐 RSA 密钥对生成器</h2>
+    <p class="desc">使用浏览器原生 Web Crypto API 在本地生成 RSA 密钥对，导出 PKCS#8 私钥与 SPKI 公钥 PEM，可用于签名验签或加密测试。密钥只在你的设备上生成，不会上传。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">密钥长度</div>
+        <select id="rsa-bits">
+          <option value="2048">2048 位（推荐）</option>
+          <option value="3072">3072 位</option>
+          <option value="4096">4096 位（较慢）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">用途</div>
+        <select id="rsa-usage">
+          <option value="RSASSA-PKCS1-v1_5">签名验签（RSASSA-PKCS1-v1_5）</option>
+          <option value="RSA-OAEP">加密解密（RSA-OAEP）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" id="rsa-gen-btn" onclick="rsaGenerate()">🔑 生成密钥对</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('rsa-pub')">📋 复制公钥</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('rsa-priv')">📋 复制私钥</button>
+    </div>
+    <div class="label" style="margin-top:16px;">公钥（SPKI PEM）</div>
+    <div class="result-box" id="rsa-pub" style="max-height:160px;">点击上方按钮生成密钥对</div>
+    <div class="label" style="margin-top:14px;">私钥（PKCS#8 PEM，请妥善保管）</div>
+    <div class="result-box" id="rsa-priv" style="max-height:220px;">--</div>
+    <div class="result-box" id="rsa-status" style="margin-top:12px;max-height:none;white-space:normal;font-family:inherit;">等待生成…</div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">RSA-2048 目前仍可用于一般场景，但新项目建议优先使用 3072 位及以上或 Ed25519；私钥一旦泄露应立即作废并重新生成。</p>
+  </section>
+
+  <!-- 轻断食时间计算 -->
+  <section class="tool-panel" id="panel-fasting-calc">
+    <h2>⏱️ 轻断食时间计算器</h2>
+    <p class="desc">选择 16:8、18:6 等常见轻断食方案，输入每天第一餐时间，自动算出进食窗口、禁食时段以及当前所处状态。轻断食并非适合所有人，孕期、哺乳期、糖尿病、低血糖及胃病患者请先咨询医生。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">断食方案</div>
+        <select id="fast-plan" onchange="fastCalc()">
+          <option value="16">16:8（禁食 16 小时）</option>
+          <option value="18">18:6（禁食 18 小时）</option>
+          <option value="20">20:4（禁食 20 小时）</option>
+          <option value="14">14:10（禁食 14 小时）</option>
+          <option value="12">12:12（禁食 12 小时）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">第一餐时间（HH:MM）</div>
+        <input type="text" id="fast-start" value="12:00" placeholder="如 12:00" oninput="fastCalc()" onchange="fastCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="fastCalc()">🧮 计算窗口</button>
+      <button class="btn btn-secondary" onclick="fastNow()">⏰ 现在该吃吗</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="fast-eat" style="font-size:14px;">--</div><div class="lbl">进食窗口</div></div>
+      <div class="stat-card"><div class="num" id="fast-fast" style="font-size:14px;">--</div><div class="lbl">禁食窗口</div></div>
+      <div class="stat-card"><div class="num" id="fast-status" style="font-size:20px;">--</div><div class="lbl">当前状态</div></div>
+    </div>
+    <div id="fast-bar" style="margin-top:16px;"></div>
+    <div class="result-box" id="fast-result" style="margin-top:12px;white-space:normal;font-family:inherit;">输入第一餐时间后自动计算。</div>
+  </section>
+
+  <!-- 零宽字符隐写 -->
+  <section class="tool-panel" id="panel-zw-stego">
+    <h2>🕵️ 零宽字符隐写</h2>
+    <p class="desc">把一段文字编码成肉眼不可见的零宽字符，藏进普通文本里；对方用本工具即可提取。适合传递彩蛋、水印或趣味暗号，不适合传输真正的机密信息。</p>
+    <div class="label">载体文本（表面内容）</div>
+    <textarea id="zw-cover" placeholder="粘贴一段普通文字，例如：今天天气不错，记得喝水。" style="min-height:100px;">今天天气不错，记得喝水。</textarea>
+    <div class="label" style="margin-top:14px;">要隐藏的秘密内容</div>
+    <textarea id="zw-secret" placeholder="输入想隐藏的文字，例如：晚上八点老地方见。" style="min-height:80px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="zwEncode()">🫥 隐藏到文本</button>
+      <button class="btn btn-secondary" onclick="zwDecode()">🔎 提取隐藏内容</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('zw-result')">📋 复制结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="zwClear()">🧹 清空</button>
+    </div>
+    <div class="result-box" id="zw-result">结果会显示在这里（隐藏后看起来和原文一样是正常的）。</div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="zw-bits" style="font-size:20px;">0</div><div class="lbl">隐藏比特</div></div>
+      <div class="stat-card"><div class="num" id="zw-chars" style="font-size:20px;">0</div><div class="lbl">隐藏字符</div></div>
+      <div class="stat-card"><div class="num" id="zw-total" style="font-size:20px;">0</div><div class="lbl">输出总长度</div></div>
+    </div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">原理：把每个字符的 UTF-16 编码转成二进制，用 U+200B（0）和 U+200C（1）表示，并用 U+200D / U+2060 作为起止标记。部分聊天软件会自动清理零宽字符，建议先小范围测试。</p>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -8151,7 +8328,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 284个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 289个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -26633,6 +26810,441 @@ safeInit(() => svmExample(), 'svmExample');
 safeInit(() => svrInit(), 'svrInit');
 safeInit(() => rnbCalc(), 'rnbCalc');
 safeInit(() => pqRender(), 'pqRender');
+
+// ============ 快递运费估算 ============
+const SHIP_COMPANIES = [
+  { name: '顺丰标快', first: [12, 14, 18, 26], next: [2, 3, 6, 12] },
+  { name: '京东快递', first: [10, 12, 15, 22], next: [2, 3, 5, 10] },
+  { name: '中通快递', first: [8, 10, 12, 18], next: [2, 3, 5, 8] },
+  { name: '圆通速递', first: [8, 10, 12, 18], next: [2, 3, 5, 8] },
+  { name: '韵达快递', first: [8, 9, 12, 17], next: [2, 3, 5, 8] },
+  { name: '邮政 EMS', first: [10, 12, 16, 24], next: [4, 5, 8, 15] }
+];
+
+function shipCalc() {
+  const weightEl = document.getElementById('ship-weight');
+  if (!weightEl) return;
+  const len = parseFloat(document.getElementById('ship-len').value) || 0;
+  const wid = parseFloat(document.getElementById('ship-wid').value) || 0;
+  const hei = parseFloat(document.getElementById('ship-hei').value) || 0;
+  const zone = parseInt(document.getElementById('ship-zone').value, 10) || 0;
+  const weight = Math.max(0, parseFloat(weightEl.value) || 0);
+  const volume = (len > 0 && wid > 0 && hei > 0) ? (len * wid * hei) / 6000 : 0;
+  const raw = Math.max(weight, volume);
+  const chargeable = Math.max(1, Math.ceil(raw - 1e-9));
+  const rows = SHIP_COMPANIES.map(c => ({
+    name: c.name,
+    cost: c.first[zone] + Math.max(0, chargeable - 1) * c.next[zone]
+  })).sort((a, b) => a.cost - b.cost);
+
+  document.getElementById('ship-cheapest').textContent = '¥' + rows[0].cost;
+  document.getElementById('ship-charge').textContent = chargeable;
+  document.getElementById('ship-diff').textContent = '¥' + (rows[rows.length - 1].cost - rows[0].cost);
+
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">' +
+    '<thead><tr style="color:var(--text-secondary);">' +
+    '<th style="text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);">快递公司</th>' +
+    '<th style="text-align:right;padding:8px 6px;border-bottom:1px solid var(--border);">预估运费</th>' +
+    '<th style="text-align:right;padding:8px 6px;border-bottom:1px solid var(--border);">相对最低</th>' +
+    '</tr></thead><tbody>';
+  rows.forEach(function (r, i) {
+    const extra = r.cost - rows[0].cost;
+    const badge = i === 0 ? '<span style="color:#22c55e;font-weight:600;">最低</span>' : '+' + extra + ' 元';
+    html += '<tr' + (i === 0 ? ' style="background:rgba(34,197,94,0.08);"' : '') + '>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);">' + r.name + '</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);text-align:right;font-weight:600;color:' + (i === 0 ? '#22c55e' : 'var(--text)') + ';">¥' + r.cost + '</td>' +
+      '<td style="padding:7px 6px;border-bottom:1px solid var(--border);text-align:right;color:var(--text-secondary);">' + badge + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('ship-table').innerHTML = html;
+}
+
+function shipReset() {
+  document.getElementById('ship-weight').value = 1;
+  document.getElementById('ship-zone').value = '1';
+  document.getElementById('ship-len').value = '';
+  document.getElementById('ship-wid').value = '';
+  document.getElementById('ship-hei').value = '';
+  shipCalc();
+}
+
+// ============ 康威生命游戏 ============
+const GOL_COLS = 75, GOL_ROWS = 45, GOL_CELL = 8;
+let golGrid = new Uint8Array(GOL_COLS * GOL_ROWS);
+let golGen = 0, golRunning = false, golTimer = null, golSpeed = 8, golInited = false;
+let golPointerDown = false, golPaint = 1;
+
+const GOL_PRESETS = {
+  glider: ['.O.', '..O', 'OOO'],
+  toad: ['.OOO', 'OOO.'],
+  lwss: ['.OOOO', 'O...O', '....O', 'O..O.'],
+  pulsar: [
+    '..OOO...OOO..',
+    '.............',
+    'O....O.O....O',
+    'O....O.O....O',
+    'O....O.O....O',
+    '..OOO...OOO..',
+    '.............',
+    '..OOO...OOO..',
+    'O....O.O....O',
+    'O....O.O....O',
+    'O....O.O....O',
+    '.............',
+    '..OOO...OOO..'
+  ]
+};
+
+function golIdx(x, y) { return y * GOL_COLS + x; }
+
+function golMsg(text) {
+  const el = document.getElementById('gol-msg');
+  if (el) el.textContent = text;
+}
+
+function golRender() {
+  const canvas = document.getElementById('gol-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#818cf8';
+  let alive = 0;
+  for (let y = 0; y < GOL_ROWS; y++) {
+    for (let x = 0; x < GOL_COLS; x++) {
+      if (golGrid[golIdx(x, y)]) {
+        alive++;
+        ctx.fillRect(x * GOL_CELL + 1, y * GOL_CELL + 1, GOL_CELL - 2, GOL_CELL - 2);
+      }
+    }
+  }
+  const genEl = document.getElementById('gol-gen');
+  const aliveEl = document.getElementById('gol-alive');
+  if (genEl) genEl.textContent = golGen;
+  if (aliveEl) aliveEl.textContent = alive;
+}
+
+function golNext() {
+  const next = new Uint8Array(golGrid.length);
+  for (let y = 0; y < GOL_ROWS; y++) {
+    for (let x = 0; x < GOL_COLS; x++) {
+      let n = 0;
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          if (dx === 0 && dy === 0) continue;
+          const nx = (x + dx + GOL_COLS) % GOL_COLS;
+          const ny = (y + dy + GOL_ROWS) % GOL_ROWS;
+          n += golGrid[golIdx(nx, ny)];
+        }
+      }
+      const cur = golGrid[golIdx(x, y)];
+      next[golIdx(x, y)] = cur ? ((n === 2 || n === 3) ? 1 : 0) : (n === 3 ? 1 : 0);
+    }
+  }
+  golGrid = next;
+  golGen++;
+  golRender();
+}
+
+function golStart() {
+  if (golRunning) return;
+  golRunning = true;
+  if (golTimer) clearInterval(golTimer);
+  golTimer = setInterval(golNext, Math.max(33, Math.round(1000 / golSpeed)));
+  const btn = document.getElementById('gol-btn');
+  if (btn) btn.textContent = '⏸️ 暂停';
+}
+
+function golStop() {
+  golRunning = false;
+  if (golTimer) { clearInterval(golTimer); golTimer = null; }
+  const btn = document.getElementById('gol-btn');
+  if (btn) btn.textContent = '▶️ 开始';
+}
+
+function golToggle() { if (golRunning) golStop(); else golStart(); }
+function golStep() { golStop(); golNext(); }
+
+function golRandom() {
+  golStop();
+  golGen = 0;
+  for (let i = 0; i < golGrid.length; i++) golGrid[i] = Math.random() < 0.28 ? 1 : 0;
+  golRender();
+  golMsg('已生成随机初始细胞，点击「开始」观察演化。');
+}
+
+function golClear() {
+  golStop();
+  golGen = 0;
+  golGrid = new Uint8Array(GOL_COLS * GOL_ROWS);
+  golRender();
+  golMsg('画布已清空，点击格子绘制或选择预设图案。');
+}
+
+function golSetSpeed(v) {
+  golSpeed = Math.max(1, Math.min(30, parseInt(v, 10) || 8));
+  const label = document.getElementById('gol-speed-label');
+  if (label) label.textContent = golSpeed;
+  if (golRunning) {
+    if (golTimer) clearInterval(golTimer);
+    golTimer = setInterval(golNext, Math.max(33, Math.round(1000 / golSpeed)));
+  }
+}
+
+function golLoadPreset(name) {
+  if (!name || !GOL_PRESETS[name]) return;
+  golStop();
+  const pattern = GOL_PRESETS[name];
+  golGrid = new Uint8Array(GOL_COLS * GOL_ROWS);
+  golGen = 0;
+  const h = pattern.length, w = pattern[0].length;
+  const ox = Math.floor((GOL_COLS - w) / 2);
+  const oy = Math.floor((GOL_ROWS - h) / 2);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (pattern[y][x] === 'O') golGrid[golIdx(ox + x, oy + y)] = 1;
+    }
+  }
+  golRender();
+  golMsg('已加载预设图案，点击「开始」观察演化。');
+}
+
+function golCanvasCell(e) {
+  const canvas = document.getElementById('gol-canvas');
+  const rect = canvas.getBoundingClientRect();
+  const x = Math.floor((e.clientX - rect.left) / rect.width * GOL_COLS);
+  const y = Math.floor((e.clientY - rect.top) / rect.height * GOL_ROWS);
+  if (x < 0 || y < 0 || x >= GOL_COLS || y >= GOL_ROWS) return null;
+  return { x: x, y: y };
+}
+
+function golInit() {
+  if (golInited) return;
+  golInited = true;
+  const canvas = document.getElementById('gol-canvas');
+  if (!canvas) return;
+  canvas.addEventListener('pointerdown', function (e) {
+    const cell = golCanvasCell(e);
+    if (!cell) return;
+    golPointerDown = true;
+    golPaint = golGrid[golIdx(cell.x, cell.y)] ? 0 : 1;
+    golGrid[golIdx(cell.x, cell.y)] = golPaint;
+    golRender();
+    if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!golPointerDown) return;
+    const cell = golCanvasCell(e);
+    if (!cell) return;
+    golGrid[golIdx(cell.x, cell.y)] = golPaint;
+    golRender();
+  });
+  window.addEventListener('pointerup', function () { golPointerDown = false; });
+  golRandom();
+}
+
+// ============ RSA 密钥对生成 ============
+function rsaPem(buffer, type) {
+  const bytes = new Uint8Array(buffer);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  const b64 = btoa(bin).replace(/(.{64})/g, '$1\n').trim();
+  return '-----BEGIN ' + type + '-----\n' + b64 + '\n-----END ' + type + '-----';
+}
+
+function rsaInit() {
+  const statusEl = document.getElementById('rsa-status');
+  if (!statusEl) return;
+  if (!window.crypto || !window.crypto.subtle) {
+    statusEl.textContent = '❌ 当前环境不支持 Web Crypto，请通过 HTTPS 或 localhost 访问本站。';
+  } else {
+    statusEl.textContent = '等待生成…（2048 位通常 1 秒内完成，4096 位可能需要数秒）';
+  }
+}
+
+async function rsaGenerate() {
+  const statusEl = document.getElementById('rsa-status');
+  const pubEl = document.getElementById('rsa-pub');
+  const privEl = document.getElementById('rsa-priv');
+  const btn = document.getElementById('rsa-gen-btn');
+  if (!window.crypto || !window.crypto.subtle) {
+    statusEl.textContent = '❌ 当前环境不支持 Web Crypto，请通过 HTTPS 或 localhost 访问本站。';
+    return;
+  }
+  const bits = parseInt(document.getElementById('rsa-bits').value, 10) || 2048;
+  const usage = document.getElementById('rsa-usage').value;
+  btn.disabled = true;
+  statusEl.textContent = '⏳ 正在生成 ' + bits + ' 位密钥，请稍候…';
+  try {
+    const alg = usage === 'RSA-OAEP'
+      ? { name: 'RSA-OAEP', modulusLength: bits, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' }
+      : { name: 'RSASSA-PKCS1-v1_5', modulusLength: bits, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };
+    const usages = usage === 'RSA-OAEP' ? ['encrypt', 'decrypt'] : ['sign', 'verify'];
+    const pair = await crypto.subtle.generateKey(alg, true, usages);
+    const exported = await Promise.all([
+      crypto.subtle.exportKey('spki', pair.publicKey),
+      crypto.subtle.exportKey('pkcs8', pair.privateKey)
+    ]);
+    pubEl.textContent = rsaPem(exported[0], 'PUBLIC KEY');
+    privEl.textContent = rsaPem(exported[1], 'PRIVATE KEY');
+    statusEl.textContent = '✅ 已生成 ' + bits + ' 位 ' + usage + ' 密钥对（' + new Date().toLocaleTimeString('zh-CN') + '）';
+    showToast('密钥对生成成功');
+  } catch (err) {
+    statusEl.textContent = '❌ 生成失败：' + (err && err.message ? err.message : err);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ============ 轻断食时间计算 ============
+function fastParseTime(str) {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(String(str || '').trim());
+  if (!m) return null;
+  const h = parseInt(m[1], 10);
+  const mi = parseInt(m[2], 10);
+  if (h > 23 || mi > 59) return null;
+  return h * 60 + mi;
+}
+
+function fastFmt(min) {
+  const norm = ((Math.round(min) % 1440) + 1440) % 1440;
+  const h = Math.floor(norm / 60);
+  const m = norm % 60;
+  return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+}
+
+function fastCalc() {
+  const planEl = document.getElementById('fast-plan');
+  if (!planEl) return;
+  const fastHours = parseInt(planEl.value, 10) || 16;
+  const start = fastParseTime(document.getElementById('fast-start').value);
+  const bar = document.getElementById('fast-bar');
+  const res = document.getElementById('fast-result');
+  const eatEl = document.getElementById('fast-eat');
+  const fastEl = document.getElementById('fast-fast');
+  const statusEl = document.getElementById('fast-status');
+  if (start === null) {
+    eatEl.textContent = '--';
+    fastEl.textContent = '--';
+    statusEl.textContent = '--';
+    if (bar) bar.innerHTML = '';
+    if (res) res.textContent = '请输入第一餐时间，格式如 12:00。';
+    return;
+  }
+  const eatHours = 24 - fastHours;
+  const eatEndRaw = start + eatHours * 60;
+  const eatEnd = eatEndRaw % 1440;
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  let inEating;
+  if (eatEndRaw <= 1440) inEating = nowMin >= start && nowMin < eatEndRaw;
+  else inEating = nowMin >= start || nowMin < eatEnd;
+
+  eatEl.textContent = fastFmt(start) + '–' + (eatEndRaw > 1440 ? '次日 ' : '') + fastFmt(eatEnd);
+  fastEl.textContent = fastFmt(eatEnd) + '–' + (eatEndRaw > 1440 ? '次日 ' : '') + fastFmt(start);
+  statusEl.textContent = inEating ? '进食中' : '禁食中';
+  statusEl.style.color = inEating ? 'var(--success)' : 'var(--accent-hover)';
+
+  if (bar) {
+    bar.innerHTML = '<div style="display:flex;height:28px;border-radius:8px;overflow:hidden;border:1px solid var(--border);font-size:11px;line-height:28px;text-align:center;color:#fff;">' +
+      '<div style="width:' + (eatHours / 24 * 100) + '%;background:#22c55e;">进食 ' + eatHours + 'h</div>' +
+      '<div style="flex:1;background:#6366f1;">禁食 ' + fastHours + 'h</div>' +
+      '</div>';
+  }
+  if (res) {
+    res.textContent = '进食窗口：' + fastFmt(start) + ' – ' + (eatEndRaw > 1440 ? '次日 ' : '') + fastFmt(eatEnd) + '（' + eatHours + ' 小时）；' +
+      '禁食窗口：' + fastFmt(eatEnd) + ' – ' + (eatEndRaw > 1440 ? '次日 ' : '') + fastFmt(start) + '（' + fastHours + ' 小时）。' +
+      '禁食期间建议只喝水、黑咖啡或不加糖的茶，进食窗口内也要保证蛋白质、蔬菜和水分摄入。';
+  }
+}
+
+function fastNow() {
+  fastCalc();
+  const planEl = document.getElementById('fast-plan');
+  const start = fastParseTime(document.getElementById('fast-start').value);
+  if (start === null || !planEl) return;
+  const fastHours = parseInt(planEl.value, 10) || 16;
+  const eatHours = 24 - fastHours;
+  const eatEndRaw = start + eatHours * 60;
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const inEating = eatEndRaw <= 1440 ? (nowMin >= start && nowMin < eatEndRaw) : (nowMin >= start || nowMin < eatEndRaw % 1440);
+  showToast(inEating ? '现在处于进食窗口，可以正常用餐' : '现在处于禁食窗口，建议只喝水或无糖饮品');
+}
+
+// ============ 零宽字符隐写 ============
+const ZW_ZERO = '\u200B', ZW_ONE = '\u200C', ZW_START = '\u200D', ZW_END = '\u2060';
+
+function zwEncode() {
+  const cover = document.getElementById('zw-cover').value;
+  const secret = document.getElementById('zw-secret').value;
+  const out = document.getElementById('zw-result');
+  if (!secret) {
+    out.textContent = '⚠️ 请先输入要隐藏的秘密内容。';
+    return;
+  }
+  let bits = '';
+  for (let i = 0; i < secret.length; i++) bits += secret.charCodeAt(i).toString(2).padStart(16, '0');
+  let hidden = ZW_START;
+  for (let i = 0; i < bits.length; i++) hidden += bits.charAt(i) === '1' ? ZW_ONE : ZW_ZERO;
+  hidden += ZW_END;
+  const result = cover + hidden;
+  out.textContent = result;
+  document.getElementById('zw-bits').textContent = bits.length;
+  document.getElementById('zw-chars').textContent = secret.length;
+  document.getElementById('zw-total').textContent = result.length;
+  showToast('已隐藏，复制结果即可发送');
+}
+
+function zwDecode() {
+  const out = document.getElementById('zw-result');
+  const coverEl = document.getElementById('zw-cover');
+  const inCover = coverEl.value.indexOf(ZW_START) !== -1;
+  const src = inCover ? coverEl.value : (out.textContent || '');
+  const startIdx = src.indexOf(ZW_START);
+  const endIdx = startIdx === -1 ? -1 : src.indexOf(ZW_END, startIdx + 1);
+  if (startIdx === -1 || endIdx === -1) {
+    out.textContent = '❌ 没有检测到隐藏内容（可能被聊天软件清理了零宽字符）。';
+    document.getElementById('zw-bits').textContent = 0;
+    document.getElementById('zw-chars').textContent = 0;
+    document.getElementById('zw-total').textContent = 0;
+    return;
+  }
+  const seq = src.slice(startIdx + 1, endIdx);
+  let bits = '';
+  for (const ch of seq) {
+    if (ch === ZW_ONE) bits += '1';
+    else if (ch === ZW_ZERO) bits += '0';
+  }
+  if (!bits.length || bits.length % 16 !== 0) {
+    out.textContent = '❌ 隐藏数据不完整或已损坏。';
+    return;
+  }
+  let text = '';
+  for (let i = 0; i < bits.length; i += 16) text += String.fromCharCode(parseInt(bits.slice(i, i + 16), 2));
+  document.getElementById('zw-secret').value = text;
+  out.textContent = '✅ 已提取 ' + text.length + ' 个字符，内容已填入上方「要隐藏的秘密内容」输入框：\n\n' + text;
+  document.getElementById('zw-bits').textContent = bits.length;
+  document.getElementById('zw-chars').textContent = text.length;
+  document.getElementById('zw-total').textContent = src.length;
+  showToast('提取成功');
+}
+
+function zwClear() {
+  document.getElementById('zw-cover').value = '';
+  document.getElementById('zw-secret').value = '';
+  document.getElementById('zw-result').textContent = '结果会显示在这里（隐藏后看起来和原文一样是正常的）。';
+  document.getElementById('zw-bits').textContent = 0;
+  document.getElementById('zw-chars').textContent = 0;
+  document.getElementById('zw-total').textContent = 0;
+}
+
+safeInit(() => shipCalc(), 'shipCalc');
+safeInit(() => golInit(), 'golInit');
+safeInit(() => rsaInit(), 'rsaInit');
+safeInit(() => fastCalc(), 'fastCalc');
 
 // ============ Search & Theme ============
 function filterTools() {
