@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等289个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等294个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等289个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等294个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等289个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等294个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -688,6 +688,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#rsa-keygen" data-tool="rsa-keygen"><span class="icon">🔐</span>RSA 密钥生成</a></li>
     <li><a href="#fasting-calc" data-tool="fasting-calc"><span class="icon">⏱️</span>轻断食时间计算</a></li>
     <li><a href="#zw-stego" data-tool="zw-stego"><span class="icon">🕵️</span>零宽字符隐写</a></li>
+    <li class="category">最新新增</li>
+    <li><a href="#vat-calc" data-tool="vat-calc"><span class="icon">🧾</span>增值税计算器</a></li>
+    <li><a href="#image-convert" data-tool="image-convert"><span class="icon">🖼️</span>图片格式转换</a></li>
+    <li><a href="#json-to-python" data-tool="json-to-python"><span class="icon">🐍</span>JSON 转 Python</a></li>
+    <li><a href="#food-calorie" data-tool="food-calorie"><span class="icon">🍎</span>食物热量查询</a></li>
+    <li><a href="#brain-teaser" data-tool="brain-teaser"><span class="icon">🧠</span>脑筋急转弯</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -8321,6 +8327,157 @@ console.log('代码块');
     <p style="margin-top:10px;font-size:12px;color:var(--text-secondary);">原理：把每个字符的 UTF-16 编码转成二进制，用 U+200B（0）和 U+200C（1）表示，并用 U+200D / U+2060 作为起止标记。部分聊天软件会自动清理零宽字符，建议先小范围测试。</p>
   </section>
 
+  <!-- 增值税计算器 -->
+  <section class="tool-panel" id="panel-vat-calc">
+    <h2>🧾 增值税 / 含税价计算器</h2>
+    <p class="desc">在含税价与不含税价之间换算，自动拆分税额，适用于报价、开票、报销等场景。默认按 13% 税率，可按实际业务选择 9%、6%、5%、3%、1% 或 0%。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">金额（元）</div>
+        <input type="number" id="vat-amount" value="1000" min="0" step="0.01" oninput="vatCalc()">
+      </div>
+      <div>
+        <div class="label">税率</div>
+        <select id="vat-rate" onchange="vatCalc()">
+          <option value="0.13">13%（一般货物）</option>
+          <option value="0.09">9%（交通运输等）</option>
+          <option value="0.06">6%（现代服务等）</option>
+          <option value="0.05">5%（简易计税）</option>
+          <option value="0.03">3%（小规模）</option>
+          <option value="0.01">1%（小规模优惠）</option>
+          <option value="0">0%（免税）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">金额类型</div>
+        <select id="vat-mode" onchange="vatCalc()">
+          <option value="gross">含税价</option>
+          <option value="net">不含税价</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="vatCalc()">🧮 计算</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('vat-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="vat-net" style="font-size:20px;">--</div><div class="lbl">不含税金额</div></div>
+      <div class="stat-card"><div class="num" id="vat-tax" style="font-size:20px;">--</div><div class="lbl">税额</div></div>
+      <div class="stat-card"><div class="num" id="vat-gross" style="font-size:20px;">--</div><div class="lbl">含税金额</div></div>
+    </div>
+    <div class="result-box" id="vat-result" style="white-space:normal;font-family:inherit;">输入金额后自动计算。</div>
+  </section>
+
+  <!-- 图片格式转换 -->
+  <section class="tool-panel" id="panel-image-convert">
+    <h2>🖼️ 图片格式转换</h2>
+    <p class="desc">在浏览器本地把图片转换为 PNG、JPEG 或 WebP，可调整 JPEG/WebP 质量并查看转换前后体积。图片不会上传到任何服务器，隐私安全。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">选择图片</div>
+        <input type="file" id="imgconv-file" accept="image/*" onchange="imgconvLoad()" style="width:100%;padding:9px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;">
+      </div>
+      <div>
+        <div class="label">输出格式</div>
+        <select id="imgconv-format" onchange="imgconvUpdateQuality()">
+          <option value="image/png">PNG（无损，体积较大）</option>
+          <option value="image/jpeg">JPEG（有损，体积小）</option>
+          <option value="image/webp">WebP（推荐，体积更小）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">质量：<span id="imgconv-qval">90</span>%</div>
+        <input type="range" id="imgconv-quality" min="10" max="100" value="90" oninput="document.getElementById('imgconv-qval').textContent=this.value;imgconvRun()" style="width:100%;">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="imgconvRun()">🔄 转换</button>
+      <button class="btn btn-secondary" id="imgconv-download" onclick="imgconvDownload()" disabled>⬇️ 下载结果</button>
+      <button class="btn btn-secondary btn-sm" onclick="imgconvClear()">🧹 清空</button>
+    </div>
+    <div style="margin-top:14px;text-align:center;">
+      <img id="imgconv-preview" alt="图片预览" style="max-width:100%;max-height:320px;border-radius:12px;display:none;">
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="imgconv-size" style="font-size:18px;">--</div><div class="lbl">原图体积</div></div>
+      <div class="stat-card"><div class="num" id="imgconv-out" style="font-size:18px;">--</div><div class="lbl">输出体积</div></div>
+      <div class="stat-card"><div class="num" id="imgconv-dim" style="font-size:18px;">--</div><div class="lbl">图片尺寸</div></div>
+    </div>
+    <div class="result-box" id="imgconv-result" style="white-space:normal;font-family:inherit;">选择图片后自动转换。</div>
+  </section>
+
+  <!-- JSON 转 Python -->
+  <section class="tool-panel" id="panel-json-to-python">
+    <h2>🐍 JSON 转 Python 数据类</h2>
+    <p class="desc">把 JSON 样本转换为 Python 3 的 @dataclass 定义，自动推断字段类型并生成嵌套类，适合快速搭建接口模型。只保留字段结构，示例值不会写入代码。</p>
+    <div class="label">根类名</div>
+    <input type="text" id="j2py-class" value="Root" placeholder="如 User">
+    <div class="label" style="margin-top:14px;">JSON 样本</div>
+    <textarea id="j2py-input" placeholder='{"id":1,"name":"张三","tags":["a","b"],"address":{"city":"上海"}}' style="min-height:160px;"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="jsonToPython()">🐍 生成代码</button>
+      <button class="btn btn-secondary" onclick="jsonToPythonSample()">✨ 填入示例</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('j2py-result')">📋 复制</button>
+    </div>
+    <div class="result-box" id="j2py-result" style="max-height:420px;">生成结果会显示在这里。</div>
+  </section>
+
+  <!-- 食物热量查询 -->
+  <section class="tool-panel" id="panel-food-calorie">
+    <h2>🍎 常见食物热量查询</h2>
+    <p class="desc">查询常见食物每 100 克的热量，并按实际重量换算总热量。数据为常见品种的近似值，不同品牌与烹饪方式会有差异，仅供日常参考。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">搜索食物</div>
+        <input type="text" id="fcal-search" placeholder="如：米饭、鸡胸肉、苹果" oninput="fcalRender()">
+      </div>
+      <div>
+        <div class="label">分类</div>
+        <select id="fcal-cat" onchange="fcalRender()">
+          <option value="">全部分类</option>
+          <option value="主食">主食</option>
+          <option value="肉蛋豆">肉蛋豆</option>
+          <option value="蔬菜">蔬菜</option>
+          <option value="水果">水果</option>
+          <option value="乳品">乳品</option>
+          <option value="零食饮品">零食饮品</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">当前选择</div>
+        <div class="result-box" id="fcal-selected" style="margin-top:0;min-height:46px;display:flex;align-items:center;">未选择食物</div>
+      </div>
+      <div>
+        <div class="label">重量（克）</div>
+        <input type="number" id="fcal-grams" value="100" min="1" step="1" oninput="fcalCalc()">
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="fcal-kcal" style="font-size:20px;">--</div><div class="lbl">每 100 克</div></div>
+      <div class="stat-card"><div class="num" id="fcal-total" style="font-size:20px;">--</div><div class="lbl">所选重量热量</div></div>
+      <div class="stat-card"><div class="num" id="fcal-count" style="font-size:20px;">--</div><div class="lbl">匹配数量</div></div>
+    </div>
+    <div id="fcal-list" style="margin-top:14px;max-height:360px;overflow:auto;"></div>
+  </section>
+
+  <!-- 脑筋急转弯 -->
+  <section class="tool-panel" id="panel-brain-teaser">
+    <h2>🧠 脑筋急转弯</h2>
+    <p class="desc">随机抽取一道脑筋急转弯，先自己想一想，再点击查看答案。共 30 道题，适合聚会破冰、课间休息和放松大脑。</p>
+    <div class="result-box" id="bteaser-question" style="min-height:90px;font-size:16px;line-height:1.7;">点击「下一题」抽取题目。</div>
+    <div class="result-box" id="bteaser-answer" style="min-height:60px;">答案会显示在这里。</div>
+    <div class="btn-group">
+      <button class="btn" onclick="bteaserNext()">🎲 下一题</button>
+      <button class="btn btn-secondary" onclick="bteaserReveal()">👀 查看答案</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bteaser-progress" style="font-size:20px;">0/30</div><div class="lbl">已看题数</div></div>
+      <div class="stat-card"><div class="num" id="bteaser-revealed" style="font-size:20px;">0</div><div class="lbl">已看答案</div></div>
+    </div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -8328,7 +8485,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 289个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 294个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -27245,6 +27402,432 @@ safeInit(() => shipCalc(), 'shipCalc');
 safeInit(() => golInit(), 'golInit');
 safeInit(() => rsaInit(), 'rsaInit');
 safeInit(() => fastCalc(), 'fastCalc');
+
+// ============ VAT Calculator ============
+function vatMoney(n) {
+  return n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function vatCalc() {
+  const amount = Number(document.getElementById('vat-amount').value);
+  const rate = Number(document.getElementById('vat-rate').value);
+  const mode = document.getElementById('vat-mode').value;
+  const result = document.getElementById('vat-result');
+  if (!isFinite(amount) || amount < 0) {
+    result.textContent = '❌ 请输入有效的非负金额。';
+    return;
+  }
+  let net, tax, gross;
+  if (mode === 'gross') {
+    gross = amount;
+    net = rate > 0 ? gross / (1 + rate) : gross;
+    tax = gross - net;
+  } else {
+    net = amount;
+    tax = net * rate;
+    gross = net + tax;
+  }
+  document.getElementById('vat-net').textContent = '¥' + vatMoney(net);
+  document.getElementById('vat-tax').textContent = '¥' + vatMoney(tax);
+  document.getElementById('vat-gross').textContent = '¥' + vatMoney(gross);
+  result.textContent = '按税率 ' + (rate * 100) + '% 计算：\n' +
+    '不含税金额：¥' + vatMoney(net) + '\n' +
+    '税额：¥' + vatMoney(tax) + '\n' +
+    '含税金额：¥' + vatMoney(gross) + '\n' +
+    '计算方式：' + (mode === 'gross' ? '含税价 → 不含税价' : '不含税价 → 含税价');
+}
+
+// ============ Image Format Converter ============
+let imgconvSource = null;
+let imgconvBlob = null;
+function imgconvFmt(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+}
+function imgconvLoad() {
+  const input = document.getElementById('imgconv-file');
+  const file = input.files && input.files[0];
+  if (!file) return;
+  if (!file.type || file.type.indexOf('image/') !== 0) {
+    document.getElementById('imgconv-result').textContent = '❌ 请选择图片文件。';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      imgconvSource = { img: img, name: file.name, size: file.size };
+      document.getElementById('imgconv-size').textContent = imgconvFmt(file.size);
+      document.getElementById('imgconv-dim').textContent = img.naturalWidth + '×' + img.naturalHeight;
+      const preview = document.getElementById('imgconv-preview');
+      preview.src = e.target.result;
+      preview.style.display = 'inline-block';
+      imgconvRun();
+    };
+    img.onerror = () => {
+      document.getElementById('imgconv-result').textContent = '❌ 图片读取失败，请换一张图片试试。';
+    };
+    img.src = e.target.result;
+  };
+  reader.onerror = () => {
+    document.getElementById('imgconv-result').textContent = '❌ 文件读取失败。';
+  };
+  reader.readAsDataURL(file);
+}
+function imgconvUpdateQuality() {
+  const fmt = document.getElementById('imgconv-format').value;
+  document.getElementById('imgconv-quality').disabled = fmt === 'image/png';
+  if (imgconvSource) imgconvRun();
+}
+function imgconvRun() {
+  if (!imgconvSource) return;
+  const fmt = document.getElementById('imgconv-format').value;
+  const quality = Math.max(0.1, Math.min(1, Number(document.getElementById('imgconv-quality').value) / 100));
+  const img = imgconvSource.img;
+  const canvas = document.createElement('canvas');
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext('2d');
+  if (fmt === 'image/jpeg') {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  ctx.drawImage(img, 0, 0);
+  if (!canvas.toBlob) {
+    document.getElementById('imgconv-result').textContent = '❌ 当前浏览器不支持图片导出。';
+    return;
+  }
+  canvas.toBlob(blob => {
+    if (!blob) {
+      document.getElementById('imgconv-result').textContent = '❌ 该格式转换失败，请换一种输出格式。';
+      return;
+    }
+    imgconvBlob = blob;
+    document.getElementById('imgconv-out').textContent = imgconvFmt(blob.size);
+    const btn = document.getElementById('imgconv-download');
+    btn.disabled = false;
+    const ratio = imgconvSource.size ? (blob.size / imgconvSource.size * 100) : 0;
+    const label = fmt === 'image/png' ? 'PNG' : (fmt === 'image/jpeg' ? 'JPEG' : 'WebP');
+    document.getElementById('imgconv-result').textContent = '✅ 已转换为 ' + label + '，输出体积为原图的 ' + ratio.toFixed(1) + '%。\n原图：' + imgconvSource.name + '（' + imgconvSource.size + ' 字节）\n输出：' + blob.size + ' 字节';
+  }, fmt, quality);
+}
+function imgconvDownload() {
+  if (!imgconvBlob) return;
+  const fmt = document.getElementById('imgconv-format').value;
+  const ext = fmt === 'image/png' ? 'png' : (fmt === 'image/jpeg' ? 'jpg' : 'webp');
+  const base = (imgconvSource && imgconvSource.name ? imgconvSource.name.replace(/\.[^.]+$/, '') : 'image');
+  const url = URL.createObjectURL(imgconvBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = base + '.' + ext;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast('已开始下载');
+}
+function imgconvClear() {
+  imgconvSource = null;
+  imgconvBlob = null;
+  document.getElementById('imgconv-file').value = '';
+  const preview = document.getElementById('imgconv-preview');
+  preview.src = '';
+  preview.style.display = 'none';
+  document.getElementById('imgconv-size').textContent = '--';
+  document.getElementById('imgconv-out').textContent = '--';
+  document.getElementById('imgconv-dim').textContent = '--';
+  document.getElementById('imgconv-download').disabled = true;
+  document.getElementById('imgconv-result').textContent = '选择图片后自动转换。';
+}
+
+// ============ JSON to Python ============
+const J2PY_KEYWORDS = ['False','None','True','and','as','assert','async','await','break','class','continue','def','del','elif','else','except','finally','for','from','global','if','import','in','is','lambda','nonlocal','not','or','pass','raise','return','try','while','with','yield'];
+function j2pyPascal(s) {
+  const parts = String(s).replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/).filter(Boolean);
+  let name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join('');
+  if (!name) name = 'Item';
+  if (/^[0-9]/.test(name)) name = 'N' + name;
+  return name;
+}
+function j2pySingular(s) {
+  const str = String(s);
+  if (/ies$/i.test(str)) return str.slice(0, -3) + 'y';
+  if (/(ses|xes|zes|ches|shes)$/i.test(str)) return str.slice(0, -2);
+  if (/s$/i.test(str) && !/ss$/i.test(str)) return str.slice(0, -1);
+  return str;
+}
+function j2pyIdent(key, used) {
+  let s = String(key).replace(/[^\p{L}\p{N}_]+/gu, '_').replace(/^_+|_+$/g, '');
+  if (!s) s = 'field';
+  if (/^[0-9]/.test(s)) s = 'field_' + s;
+  if (J2PY_KEYWORDS.indexOf(s) >= 0) s += '_';
+  const base = s;
+  let i = 2;
+  while (used.has(s)) {
+    s = base + '_' + i;
+    i++;
+  }
+  used.add(s);
+  return s;
+}
+function j2pyClass(obj, nameHint, ctx) {
+  const base = j2pyPascal(nameHint || 'Item');
+  let name = base;
+  if (ctx.names.has(name)) {
+    let i = 2;
+    while (ctx.names.has(base + i)) i++;
+    name = base + i;
+  }
+  ctx.names.add(name);
+  const used = new Set();
+  const lines = ['@dataclass', 'class ' + name + ':'];
+  const keys = Object.keys(obj);
+  if (!keys.length) lines.push('    pass');
+  keys.forEach(k => {
+    const field = j2pyIdent(k, used);
+    lines.push('    ' + field + ': ' + j2pyType(obj[k], k, ctx));
+  });
+  ctx.classes.push(lines.join('\n'));
+  return name;
+}
+function j2pyType(value, hint, ctx) {
+  if (value === null) return 'Optional[Any]';
+  if (Array.isArray(value)) {
+    if (!value.length) return 'List[Any]';
+    const itemHint = j2pySingular(hint || 'Item');
+    if (value.every(v => v !== null && typeof v === 'object' && !Array.isArray(v))) {
+      return 'List[' + j2pyClass(value[0], itemHint, ctx) + ']';
+    }
+    const unique = [];
+    value.forEach(v => {
+      let t = 'Any';
+      if (v === null) t = 'Any';
+      else if (Array.isArray(v)) t = 'List[Any]';
+      else if (typeof v === 'object') t = 'Any';
+      else if (typeof v === 'string') t = 'str';
+      else if (typeof v === 'boolean') t = 'bool';
+      else if (typeof v === 'number') t = Number.isInteger(v) ? 'int' : 'float';
+      if (unique.indexOf(t) < 0) unique.push(t);
+    });
+    if (unique.length === 1) return 'List[' + unique[0] + ']';
+    if (unique.length === 2 && unique.indexOf('int') >= 0 && unique.indexOf('float') >= 0) return 'List[float]';
+    return 'List[Any]';
+  }
+  if (typeof value === 'object') return j2pyClass(value, hint, ctx);
+  if (typeof value === 'string') return 'str';
+  if (typeof value === 'boolean') return 'bool';
+  if (typeof value === 'number') return Number.isInteger(value) ? 'int' : 'float';
+  return 'Any';
+}
+function jsonToPython() {
+  const out = document.getElementById('j2py-result');
+  const raw = document.getElementById('j2py-input').value.trim();
+  if (!raw) {
+    out.textContent = '❌ 请先粘贴 JSON 内容。';
+    return;
+  }
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (err) {
+    out.textContent = '❌ JSON 解析失败：' + err.message;
+    return;
+  }
+  if (data === null || typeof data !== 'object' || Array.isArray(data)) {
+    out.textContent = '❌ 根节点需要是 JSON 对象（{ ... }），暂不支持根节点为数组或基础类型。';
+    return;
+  }
+  const ctx = { names: new Set(), classes: [] };
+  const rootName = j2pyPascal(document.getElementById('j2py-class').value || 'Root');
+  j2pyClass(data, rootName, ctx);
+  const header = 'from __future__ import annotations\nfrom dataclasses import dataclass\nfrom typing import Any, List, Optional\n';
+  out.textContent = header + '\n\n' + ctx.classes.join('\n\n');
+}
+function jsonToPythonSample() {
+  document.getElementById('j2py-class').value = 'User';
+  document.getElementById('j2py-input').value = JSON.stringify({
+    id: 1,
+    name: '张三',
+    active: true,
+    score: 98.5,
+    tags: ['admin', 'vip'],
+    address: { city: '上海', zip: '200000' }
+  }, null, 2);
+  jsonToPython();
+}
+
+// ============ Food Calorie Lookup ============
+const FCAL_FOODS = [
+  { n: '米饭（熟）', k: 116, c: '主食' },
+  { n: '白粥', k: 46, c: '主食' },
+  { n: '馒头', k: 223, c: '主食' },
+  { n: '面条（熟）', k: 110, c: '主食' },
+  { n: '全麦面包', k: 246, c: '主食' },
+  { n: '燕麦片（干）', k: 377, c: '主食' },
+  { n: '红薯', k: 86, c: '主食' },
+  { n: '土豆', k: 77, c: '主食' },
+  { n: '玉米（鲜）', k: 112, c: '主食' },
+  { n: '油条', k: 388, c: '主食' },
+  { n: '包子（肉馅）', k: 227, c: '主食' },
+  { n: '饺子（猪肉）', k: 240, c: '主食' },
+  { n: '蛋炒饭', k: 188, c: '主食' },
+  { n: '方便面', k: 472, c: '主食' },
+  { n: '鸡胸肉', k: 133, c: '肉蛋豆' },
+  { n: '鸡腿肉', k: 181, c: '肉蛋豆' },
+  { n: '鸡蛋', k: 144, c: '肉蛋豆' },
+  { n: '牛肉（瘦）', k: 106, c: '肉蛋豆' },
+  { n: '猪里脊', k: 155, c: '肉蛋豆' },
+  { n: '三文鱼', k: 208, c: '肉蛋豆' },
+  { n: '虾', k: 93, c: '肉蛋豆' },
+  { n: '带鱼', k: 127, c: '肉蛋豆' },
+  { n: '鳕鱼', k: 88, c: '肉蛋豆' },
+  { n: '北豆腐', k: 82, c: '肉蛋豆' },
+  { n: '豆浆（无糖）', k: 31, c: '肉蛋豆' },
+  { n: '火腿肠', k: 212, c: '肉蛋豆' },
+  { n: '培根', k: 181, c: '肉蛋豆' },
+  { n: '西兰花', k: 36, c: '蔬菜' },
+  { n: '菠菜', k: 28, c: '蔬菜' },
+  { n: '生菜', k: 15, c: '蔬菜' },
+  { n: '黄瓜', k: 16, c: '蔬菜' },
+  { n: '番茄', k: 18, c: '蔬菜' },
+  { n: '胡萝卜', k: 41, c: '蔬菜' },
+  { n: '大白菜', k: 20, c: '蔬菜' },
+  { n: '南瓜', k: 26, c: '蔬菜' },
+  { n: '香菇', k: 26, c: '蔬菜' },
+  { n: '茄子', k: 23, c: '蔬菜' },
+  { n: '青椒', k: 22, c: '蔬菜' },
+  { n: '苹果', k: 53, c: '水果' },
+  { n: '香蕉', k: 93, c: '水果' },
+  { n: '橙子', k: 48, c: '水果' },
+  { n: '西瓜', k: 31, c: '水果' },
+  { n: '葡萄', k: 45, c: '水果' },
+  { n: '草莓', k: 32, c: '水果' },
+  { n: '蓝莓', k: 57, c: '水果' },
+  { n: '猕猴桃', k: 61, c: '水果' },
+  { n: '芒果', k: 60, c: '水果' },
+  { n: '梨', k: 51, c: '水果' },
+  { n: '纯牛奶', k: 54, c: '乳品' },
+  { n: '无糖酸奶', k: 72, c: '乳品' },
+  { n: '希腊酸奶', k: 97, c: '乳品' },
+  { n: '奶酪', k: 328, c: '乳品' },
+  { n: '可乐', k: 43, c: '零食饮品' },
+  { n: '奶茶（全糖）', k: 60, c: '零食饮品' },
+  { n: '拿铁咖啡', k: 55, c: '零食饮品' },
+  { n: '黑咖啡', k: 2, c: '零食饮品' },
+  { n: '啤酒', k: 43, c: '零食饮品' },
+  { n: '薯片', k: 536, c: '零食饮品' },
+  { n: '巧克力', k: 589, c: '零食饮品' },
+  { n: '花生', k: 574, c: '零食饮品' },
+  { n: '核桃', k: 646, c: '零食饮品' },
+  { n: '饼干', k: 433, c: '零食饮品' },
+  { n: '冰淇淋', k: 207, c: '零食饮品' }
+];
+let fcalCurrent = null;
+function fcalRender() {
+  const q = (document.getElementById('fcal-search').value || '').trim().toLowerCase();
+  const cat = document.getElementById('fcal-cat').value;
+  const list = FCAL_FOODS.filter(f => (!cat || f.c === cat) && (!q || f.n.toLowerCase().indexOf(q) >= 0));
+  document.getElementById('fcal-count').textContent = list.length;
+  const wrap = document.getElementById('fcal-list');
+  if (!list.length) {
+    wrap.innerHTML = '<div style="padding:16px;color:var(--text-secondary);text-align:center;">没有找到匹配的食物，试试其他关键词。</div>';
+    return;
+  }
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+  list.forEach(f => {
+    const active = fcalCurrent && fcalCurrent.n === f.n;
+    html += '<tr onclick="fcalSelect(\'' + f.n + '\')" style="cursor:pointer;border-bottom:1px solid var(--border);' + (active ? 'background:var(--border);' : '') + '">' +
+      '<td style="padding:8px 6px;">' + f.n + '</td>' +
+      '<td style="padding:8px 6px;text-align:right;font-weight:600;color:var(--accent-hover);">' + f.k + '</td>' +
+      '<td style="padding:8px 6px;text-align:right;color:var(--text-secondary);">kcal/100g</td>' +
+      '<td style="padding:8px 6px;text-align:right;color:var(--text-secondary);">' + f.c + '</td>' +
+      '</tr>';
+  });
+  wrap.innerHTML = html + '</table>';
+}
+function fcalSelect(name) {
+  const item = FCAL_FOODS.find(f => f.n === name);
+  if (!item) return;
+  fcalCurrent = item;
+  document.getElementById('fcal-selected').textContent = item.n + '（' + item.c + '）';
+  document.getElementById('fcal-kcal').textContent = item.k + ' kcal';
+  fcalCalc();
+  fcalRender();
+}
+function fcalCalc() {
+  const grams = Number(document.getElementById('fcal-grams').value);
+  const total = document.getElementById('fcal-total');
+  if (!fcalCurrent || !isFinite(grams) || grams <= 0) {
+    total.textContent = '--';
+    return;
+  }
+  total.textContent = Math.round(fcalCurrent.k * grams / 100) + ' kcal';
+}
+
+// ============ Brain Teaser ============
+const BTEASER_DATA = [
+  { q: '什么东西越洗越脏？', a: '水' },
+  { q: '什么东西有面没有口，有脚没有手，虽有四只脚，自己不会走？', a: '桌子' },
+  { q: '什么书在书店买不到？', a: '秘书' },
+  { q: '什么东西人们都不喜欢吃？', a: '吃亏' },
+  { q: '什么东西晚上才会长出尾巴？', a: '流星' },
+  { q: '什么布剪不断？', a: '瀑布' },
+  { q: '什么东西有头无颈，有眼无眉，无脚能走，有翅难飞？', a: '鱼' },
+  { q: '什么东西打破了大家都叫好？', a: '纪录' },
+  { q: '什么东西越生气越大？', a: '脾气' },
+  { q: '什么东西倒立后会增加一半？', a: '数字 6' },
+  { q: '什么东西有牙齿却不会咬人？', a: '梳子' },
+  { q: '什么东西有耳朵却听不见？', a: '茶壶' },
+  { q: '什么人每天靠运气赚钱？', a: '送煤气罐的工人' },
+  { q: '什么东西明明是你的，别人却用得比你多？', a: '你的名字' },
+  { q: '什么人始终不敢洗澡？', a: '泥人' },
+  { q: '什么东西有脚却不能走路？', a: '椅子' },
+  { q: '什么东西越用越多？', a: '知识' },
+  { q: '什么车子寸步难行？', a: '风车' },
+  { q: '什么地方进去容易出来难？', a: '监狱' },
+  { q: '什么动物天天熬夜？', a: '熊猫' },
+  { q: '什么东西晚上才出来？', a: '星星' },
+  { q: '什么帽不能戴？', a: '螺帽' },
+  { q: '什么球离你最近？', a: '眼球' },
+  { q: '什么门永远关不上？', a: '球门' },
+  { q: '什么蛋打不烂，煮不熟，更不能吃？', a: '考试得的零蛋' },
+  { q: '什么东西有风不动无风动？', a: '扇子' },
+  { q: '什么东西越热越爱出来？', a: '汗' },
+  { q: '什么人最不怕冷？', a: '雪人' },
+  { q: '什么东西只能加不能减？', a: '年龄' },
+  { q: '什么东西有嘴不会说话？', a: '杯子' }
+];
+let bteaserIndex = -1;
+let bteaserSeen = 0;
+let bteaserRevealedCount = 0;
+let bteaserAnswered = false;
+function bteaserNext() {
+  bteaserIndex = Math.floor(Math.random() * BTEASER_DATA.length);
+  const item = BTEASER_DATA[bteaserIndex];
+  document.getElementById('bteaser-question').textContent = '❓ ' + item.q;
+  const ans = document.getElementById('bteaser-answer');
+  ans.textContent = '答案已隐藏，先自己想一下，再点「查看答案」。';
+  ans.style.color = 'var(--text-secondary)';
+  bteaserAnswered = false;
+  bteaserSeen++;
+  document.getElementById('bteaser-progress').textContent = bteaserSeen + '/' + BTEASER_DATA.length;
+}
+function bteaserReveal() {
+  if (bteaserIndex < 0) return;
+  const ans = document.getElementById('bteaser-answer');
+  ans.textContent = '💡 答案：' + BTEASER_DATA[bteaserIndex].a;
+  ans.style.color = 'var(--accent-hover)';
+  if (!bteaserAnswered) {
+    bteaserAnswered = true;
+    bteaserRevealedCount++;
+    document.getElementById('bteaser-revealed').textContent = bteaserRevealedCount;
+  }
+}
+
+safeInit(() => vatCalc(), 'vatCalc');
+safeInit(() => jsonToPythonSample(), 'jsonToPythonSample');
+safeInit(() => fcalRender(), 'fcalRender');
+safeInit(() => bteaserNext(), 'bteaserNext');
 
 // ============ Search & Theme ============
 function filterTools() {
