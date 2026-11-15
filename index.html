@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等294个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等299个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等294个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等299个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等294个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等299个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -694,6 +694,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#json-to-python" data-tool="json-to-python"><span class="icon">🐍</span>JSON 转 Python</a></li>
     <li><a href="#food-calorie" data-tool="food-calorie"><span class="icon">🍎</span>食物热量查询</a></li>
     <li><a href="#brain-teaser" data-tool="brain-teaser"><span class="icon">🧠</span>脑筋急转弯</a></li>
+    <li class="category">本次新增</li>
+    <li><a href="#retire-calc" data-tool="retire-calc"><span class="icon">👴</span>退休年龄计算</a></li>
+    <li><a href="#llk" data-tool="llk"><span class="icon">🀄</span>连连看</a></li>
+    <li><a href="#clip-path" data-tool="clip-path"><span class="icon">✂️</span>CSS 裁剪生成</a></li>
+    <li><a href="#bmr-calc" data-tool="bmr-calc"><span class="icon">🔥</span>基础代谢计算</a></li>
+    <li><a href="#text-table" data-tool="text-table"><span class="icon">🧮</span>文本表格对齐</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -8478,6 +8484,193 @@ console.log('代码块');
     </div>
   </section>
 
+  <!-- 退休年龄计算器 -->
+  <section class="tool-panel" id="panel-retire-calc">
+    <h2>👴 退休年龄计算器</h2>
+    <p class="desc">依据 2025 年起实施的渐进式延迟退休方案，按出生年月与参保类型估算退休时间、法定退休年龄和剩余工作年限。结果仅供参考，具体以当地人社部门核定为准。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">出生年月</div>
+        <input type="month" id="retire-birth" value="1985-06" min="1950-01" max="2005-12" oninput="retireCalc()" onchange="retireCalc()" style="width:100%;background:var(--input-bg);border:1px solid var(--border);color:var(--text);padding:12px;border-radius:var(--radius);font-size:14px;">
+      </div>
+      <div>
+        <div class="label">参保类型</div>
+        <select id="retire-type" onchange="retireCalc()">
+          <option value="male">男职工（原 60 岁）</option>
+          <option value="female55">女职工 · 管理/技术岗（原 55 岁）</option>
+          <option value="female50">女职工 · 工人岗（原 50 岁）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="retireCalc()">🧮 计算退休时间</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('retire-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="retire-date" style="font-size:20px;">--</div><div class="lbl">预计退休时间</div></div>
+      <div class="stat-card"><div class="num" id="retire-age" style="font-size:20px;">--</div><div class="lbl">法定退休年龄</div></div>
+      <div class="stat-card"><div class="num" id="retire-years" style="font-size:20px;">--</div><div class="lbl">距退休还有</div></div>
+    </div>
+    <div class="result-box" id="retire-result" style="white-space:normal;font-family:inherit;">选择出生年月后自动计算。</div>
+  </section>
+
+  <!-- 连连看 -->
+  <section class="tool-panel" id="panel-llk">
+    <h2>🀄 连连看</h2>
+    <p class="desc">经典连连看小游戏：点击两个相同图案，若能用不超过两个转弯的路径连接即可消除。棋盘 8×6，限时 5 分钟，卡住时可使用提示或重排。</p>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="llk-left">24</div><div class="lbl">剩余对数</div></div>
+      <div class="stat-card"><div class="num" id="llk-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="llk-time">05:00</div><div class="lbl">剩余时间</div></div>
+    </div>
+    <div id="llk-board" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:16px;max-width:560px;"></div>
+    <div class="btn-group">
+      <button class="btn" id="llk-btn" onclick="llkStart()">▶️ 开始游戏</button>
+      <button class="btn btn-secondary" onclick="llkHint()">💡 提示</button>
+      <button class="btn btn-secondary" onclick="llkShuffle()">🔀 重排</button>
+    </div>
+    <div class="result-box" id="llk-result" style="white-space:normal;font-family:inherit;">点击「开始游戏」，在 5 分钟内消除全部图案。</div>
+  </section>
+
+  <!-- CSS clip-path 生成器 -->
+  <section class="tool-panel" id="panel-clip-path">
+    <h2>✂️ CSS clip-path 生成器</h2>
+    <p class="desc">选择常用形状或直接编辑 polygon 百分比坐标，实时预览裁剪效果并一键复制 CSS 代码。适合头像、卡片、标签和海报装饰。</p>
+    <div class="label">预设形状</div>
+    <select id="clip-preset" onchange="clipApplyPreset()">
+      <option value="triangle">三角形</option>
+      <option value="diamond">菱形</option>
+      <option value="hexagon">六边形</option>
+      <option value="octagon">八边形</option>
+      <option value="pentagon">五边形</option>
+      <option value="star">五角星</option>
+      <option value="parallelogram">平行四边形</option>
+      <option value="trapezoid">梯形</option>
+      <option value="arrow-right">右箭头</option>
+      <option value="arrow-left">左箭头</option>
+      <option value="message">消息气泡</option>
+      <option value="cross">十字形</option>
+      <option value="custom">自定义（编辑下方坐标）</option>
+    </select>
+    <div class="label" style="margin-top:14px;">polygon 坐标（百分比，格式：x y, x y, ...）</div>
+    <input type="text" id="clip-poly" value="50% 0%, 100% 100%, 0% 100%" oninput="clipInput()">
+    <div class="label" style="margin-top:16px;">实时预览</div>
+    <div style="display:flex;justify-content:center;align-items:center;margin-top:10px;padding:16px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);">
+      <div id="clip-preview" style="width:260px;height:200px;max-width:100%;background:linear-gradient(135deg,#6366f1,#22d3ee);"></div>
+    </div>
+    <div class="result-box" id="clip-code" style="margin-top:14px;">clip-path: polygon(50% 0%, 100% 100%, 0% 100%);</div>
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm" onclick="copyText('clip-code')">📋 复制 CSS</button>
+    </div>
+  </section>
+
+  <!-- 基础代谢率计算 -->
+  <section class="tool-panel" id="panel-bmr-calc">
+    <h2>🔥 基础代谢与每日热量计算</h2>
+    <p class="desc">使用 Mifflin-St Jeor 公式估算基础代谢率（BMR）与每日总消耗（TDEE），再按减脂或增肌目标给出建议摄入量和三大营养素分配。结果仅为估算，实际需求受基因、肌肉量和活动强度影响。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">性别</div>
+        <select id="bmr-gender" onchange="bmrCalc()">
+          <option value="male">男</option>
+          <option value="female">女</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">年龄（岁）</div>
+        <input type="number" id="bmr-age" value="28" min="10" max="100" step="1" oninput="bmrCalc()">
+      </div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">身高（cm）</div>
+        <input type="number" id="bmr-height" value="172" min="100" max="250" step="0.5" oninput="bmrCalc()">
+      </div>
+      <div>
+        <div class="label">体重（kg）</div>
+        <input type="number" id="bmr-weight" value="65" min="25" max="300" step="0.1" oninput="bmrCalc()">
+      </div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">日常活动量</div>
+        <select id="bmr-activity" onchange="bmrCalc()">
+          <option value="1.2">久坐少动（几乎不运动）</option>
+          <option value="1.375">轻度活动（每周 1-3 次）</option>
+          <option value="1.55" selected>中度活动（每周 3-5 次）</option>
+          <option value="1.725">高强度（每周 6-7 次）</option>
+          <option value="1.9">极高强度（体力工作/一日两练）</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">目标</div>
+        <select id="bmr-goal" onchange="bmrCalc()">
+          <option value="0">维持体重</option>
+          <option value="-300">温和减脂（-300 kcal）</option>
+          <option value="-500">快速减脂（-500 kcal）</option>
+          <option value="300">增肌（+300 kcal）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="bmrCalc()">🧮 计算</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('bmr-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="bmr-value" style="font-size:24px;">--</div><div class="lbl">基础代谢 BMR</div></div>
+      <div class="stat-card"><div class="num" id="bmr-tdee" style="font-size:24px;">--</div><div class="lbl">每日消耗 TDEE</div></div>
+      <div class="stat-card"><div class="num" id="bmr-target" style="font-size:24px;">--</div><div class="lbl">目标摄入</div></div>
+    </div>
+    <div class="result-box" id="bmr-result" style="white-space:normal;font-family:inherit;">修改上方数据后自动计算。</div>
+  </section>
+
+  <!-- 文本表格对齐 -->
+  <section class="tool-panel" id="panel-text-table">
+    <h2>🧮 文本表格对齐</h2>
+    <p class="desc">把从 Excel、日志或 CSV 复制来的多行数据整理成等宽对齐的纯文本表格，自动识别分隔符并按中英文显示宽度补齐，适合贴进代码注释、终端输出和聊天记录。</p>
+    <div class="label">原始数据（每行一条，列之间用分隔符隔开）</div>
+    <textarea id="tbl-input" style="min-height:150px;" oninput="tblRender()">姓名,年龄,城市,备注
+张三,25,北京,前端
+李四,30,上海,后端
+王五,28,广州,测试</textarea>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">分隔符</div>
+        <select id="tbl-delim" onchange="tblRender()">
+          <option value="auto">自动识别</option>
+          <option value="tab">制表符 Tab</option>
+          <option value=",">逗号 ,</option>
+          <option value="|">竖线 |</option>
+          <option value=";">分号 ;</option>
+          <option value="space">连续空格</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">对齐方式</div>
+        <select id="tbl-align" onchange="tblRender()">
+          <option value="auto">自动（数字右对齐）</option>
+          <option value="left">全部左对齐</option>
+          <option value="right">全部右对齐</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">边框样式</div>
+        <select id="tbl-style" onchange="tblRender()">
+          <option value="plain">纯文本（空格分隔）</option>
+          <option value="grid">字符网格</option>
+        </select>
+      </div>
+    </div>
+    <label style="display:flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--text-secondary);">
+      <input type="checkbox" id="tbl-header" checked onchange="tblRender()"> 第一行作为表头并添加分隔线
+    </label>
+    <div class="btn-group">
+      <button class="btn" onclick="tblRender()">📐 生成对齐表格</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('tbl-output')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="tbl-output" style="white-space:pre;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;">生成结果会显示在这里。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -8485,7 +8678,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 294个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 299个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -27828,6 +28021,493 @@ safeInit(() => vatCalc(), 'vatCalc');
 safeInit(() => jsonToPythonSample(), 'jsonToPythonSample');
 safeInit(() => fcalRender(), 'fcalRender');
 safeInit(() => bteaserNext(), 'bteaserNext');
+
+// ============ 退休年龄计算器 ============
+const RETIRE_RULES = {
+  male: { base: 720, startYear: 1965, step: 4, cap: 36, label: '男职工（原 60 岁）' },
+  female55: { base: 660, startYear: 1970, step: 4, cap: 36, label: '女职工 · 管理/技术岗（原 55 岁）' },
+  female50: { base: 600, startYear: 1975, step: 2, cap: 60, label: '女职工 · 工人岗（原 50 岁）' }
+};
+function retireCalc() {
+  const birthEl = document.getElementById('retire-birth');
+  const typeEl = document.getElementById('retire-type');
+  if (!birthEl || !typeEl) return;
+  const raw = birthEl.value;
+  if (!raw || raw.indexOf('-') < 0) return;
+  const y = parseInt(raw.slice(0, 4), 10);
+  const m = parseInt(raw.slice(5, 7), 10);
+  if (!y || !m || m < 1 || m > 12) return;
+  const rule = RETIRE_RULES[typeEl.value] || RETIRE_RULES.male;
+  const since = (y - rule.startYear) * 12 + (m - 1);
+  const delay = since < 0 ? 0 : Math.min(rule.cap, Math.floor(since / rule.step) + 1);
+  const totalMonths = rule.base + delay;
+  const birthIdx = y * 12 + m;
+  const retireIdx = birthIdx + totalMonths;
+  const rYear = Math.floor((retireIdx - 1) / 12);
+  const rMonth = (retireIdx - 1) % 12 + 1;
+  const ageY = Math.floor(totalMonths / 12);
+  const ageM = totalMonths % 12;
+  const now = new Date();
+  const nowIdx = now.getFullYear() * 12 + now.getMonth() + 1;
+  const remain = retireIdx - nowIdx;
+  const ageText = ageM ? ageY + ' 岁 ' + ageM + ' 个月' : ageY + ' 岁';
+  const remainText = remain <= 0 ? '已达退休' : Math.floor(remain / 12) + ' 年 ' + (remain % 12) + ' 个月';
+  const reqYears = rYear < 2030 ? 15 : Math.min(20, 15 + (rYear - 2029) * 0.5);
+  const reqText = (reqYears % 1 === 0 ? reqYears : reqYears.toFixed(1)) + ' 年';
+  document.getElementById('retire-date').textContent = rYear + '年' + rMonth + '月';
+  document.getElementById('retire-age').textContent = ageText;
+  document.getElementById('retire-years').textContent = remainText;
+  const lines = [
+    '出生年月：' + y + ' 年 ' + m + ' 月',
+    '参保类型：' + rule.label,
+    '预计退休：' + rYear + ' 年 ' + rMonth + ' 月',
+    '法定退休年龄：' + ageText,
+    '相比原退休年龄延迟：' + delay + ' 个月',
+    '距离退休：' + (remain <= 0 ? '已达到法定退休年龄' : remainText),
+    '最低缴费年限参考：' + reqText + '（2030 年起逐步由 15 年提高到 20 年）',
+    '',
+    '说明：本结果按 2025 年 1 月 1 日起实施的渐进式延迟退休规则推算（男职工每 4 个月延迟 1 个月；原 55 岁女职工每 4 个月延迟 1 个月；原 50 岁女职工每 2 个月延迟 1 个月）。特殊工种、病退、灵活就业等情况以当地人社部门核定为准。'
+  ];
+  document.getElementById('retire-result').textContent = lines.join('\n');
+}
+
+// ============ 连连看 ============
+const LLK_ROWS = 6, LLK_COLS = 8;
+const LLK_ICONS = ['🍎','🍌','🍇','🍉','🍓','🍑','🍋','🥝','🥥','🍒','🌰','🥕','🌽','🍄','🌶️','🥦','🍅','🍆','🥑','🍍','🧄','🧅','🥔','🍠'];
+let llkGrid = [];
+let llkSelected = null;
+let llkScore = 0;
+let llkLeft = 0;
+let llkTimeLeft = 300;
+let llkTimer = null;
+let llkPlaying = false;
+
+function llkCellEl(r, c) {
+  const board = document.getElementById('llk-board');
+  return board ? board.querySelector('.llk-tile[data-r="' + r + '"][data-c="' + c + '"]') : null;
+}
+function llkFormatTime(sec) {
+  const mm = String(Math.floor(sec / 60)).padStart(2, '0');
+  const ss = String(sec % 60).padStart(2, '0');
+  return mm + ':' + ss;
+}
+function llkUpdateStats() {
+  document.getElementById('llk-left').textContent = llkLeft;
+  document.getElementById('llk-score').textContent = llkScore;
+  document.getElementById('llk-time').textContent = llkFormatTime(llkTimeLeft);
+}
+function llkRemainingCells() {
+  const cells = [];
+  for (let r = 1; r <= LLK_ROWS; r++) {
+    for (let c = 1; c <= LLK_COLS; c++) {
+      if (llkGrid[r][c] >= 0) cells.push({ r: r, c: c });
+    }
+  }
+  return cells;
+}
+function llkNewBoard() {
+  const total = LLK_ROWS * LLK_COLS;
+  const vals = [];
+  for (let i = 0; i < total / 2; i++) { vals.push(i, i); }
+  for (let i = vals.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = vals[i]; vals[i] = vals[j]; vals[j] = t;
+  }
+  llkGrid = Array.from({ length: LLK_ROWS + 2 }, () => new Array(LLK_COLS + 2).fill(-1));
+  let k = 0;
+  for (let r = 1; r <= LLK_ROWS; r++) {
+    for (let c = 1; c <= LLK_COLS; c++) { llkGrid[r][c] = vals[k++]; }
+  }
+  llkEnsureSolvable();
+  llkLeft = total / 2;
+  llkSelected = null;
+}
+function llkEnsureSolvable() {
+  let guard = 0;
+  while (!llkFindPair() && guard < 100) {
+    const cells = llkRemainingCells();
+    for (let i = cells.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const a = cells[i], b = cells[j];
+      const t = llkGrid[a.r][a.c];
+      llkGrid[a.r][a.c] = llkGrid[b.r][b.c];
+      llkGrid[b.r][b.c] = t;
+    }
+    guard++;
+  }
+}
+function llkRender() {
+  const board = document.getElementById('llk-board');
+  if (!board) return;
+  board.innerHTML = '';
+  for (let r = 1; r <= LLK_ROWS; r++) {
+    for (let c = 1; c <= LLK_COLS; c++) {
+      const v = llkGrid[r][c];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'llk-tile';
+      btn.dataset.r = r;
+      btn.dataset.c = c;
+      btn.style.cssText = 'aspect-ratio:1;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;padding:0;transition:transform .12s;';
+      if (v < 0) {
+        btn.style.visibility = 'hidden';
+        btn.disabled = true;
+      } else {
+        btn.textContent = LLK_ICONS[v];
+        btn.addEventListener('click', () => llkClick(r, c));
+      }
+      board.appendChild(btn);
+    }
+  }
+}
+function llkEmpty(r, c) {
+  return !!(llkGrid[r] && llkGrid[r][c] === -1);
+}
+function llkClearH(r, c1, c2) {
+  const from = Math.min(c1, c2), to = Math.max(c1, c2);
+  for (let c = from + 1; c < to; c++) { if (!llkEmpty(r, c)) return false; }
+  return true;
+}
+function llkClearV(c, r1, r2) {
+  const from = Math.min(r1, r2), to = Math.max(r1, r2);
+  for (let r = from + 1; r < to; r++) { if (!llkEmpty(r, c)) return false; }
+  return true;
+}
+function llkCanLink(r1, c1, r2, c2) {
+  if (r1 === r2 && c1 === c2) return false;
+  if (r1 === r2) return llkClearH(r1, c1, c2);
+  if (c1 === c2) return llkClearV(c1, r1, r2);
+  if (llkEmpty(r1, c2) && llkClearH(r1, c1, c2) && llkClearV(c2, r1, r2)) return true;
+  if (llkEmpty(r2, c1) && llkClearV(c1, r1, r2) && llkClearH(r2, c1, c2)) return true;
+  for (let r = 0; r < LLK_ROWS + 2; r++) {
+    if (r === r1 || r === r2) continue;
+    if (llkEmpty(r, c1) && llkEmpty(r, c2) && llkClearV(c1, r1, r) && llkClearH(r, c1, c2) && llkClearV(c2, r, r2)) return true;
+  }
+  for (let c = 0; c < LLK_COLS + 2; c++) {
+    if (c === c1 || c === c2) continue;
+    if (llkEmpty(r1, c) && llkEmpty(r2, c) && llkClearH(r1, c1, c) && llkClearV(c, r1, r2) && llkClearH(r2, c, c2)) return true;
+  }
+  return false;
+}
+function llkFindPair() {
+  const cells = [];
+  for (let r = 1; r <= LLK_ROWS; r++) {
+    for (let c = 1; c <= LLK_COLS; c++) {
+      if (llkGrid[r][c] >= 0) cells.push({ r: r, c: c, v: llkGrid[r][c] });
+    }
+  }
+  for (let i = 0; i < cells.length; i++) {
+    for (let j = i + 1; j < cells.length; j++) {
+      if (cells[i].v === cells[j].v && llkCanLink(cells[i].r, cells[i].c, cells[j].r, cells[j].c)) {
+        return [cells[i], cells[j]];
+      }
+    }
+  }
+  return null;
+}
+function llkClick(r, c) {
+  if (!llkPlaying) { showToast('请先点击「开始游戏」'); return; }
+  const v = llkGrid[r][c];
+  if (v < 0) return;
+  const el = llkCellEl(r, c);
+  if (!llkSelected) {
+    llkSelected = { r: r, c: c };
+    if (el) el.style.outline = '2px solid var(--accent)';
+    return;
+  }
+  const first = llkSelected;
+  const firstEl = llkCellEl(first.r, first.c);
+  if (first.r === r && first.c === c) {
+    llkSelected = null;
+    if (el) el.style.outline = '';
+    return;
+  }
+  if (llkGrid[first.r][first.c] !== v) {
+    if (firstEl) firstEl.style.outline = '';
+    llkSelected = { r: r, c: c };
+    if (el) el.style.outline = '2px solid var(--accent)';
+    return;
+  }
+  if (llkCanLink(first.r, first.c, r, c)) {
+    llkGrid[first.r][first.c] = -1;
+    llkGrid[r][c] = -1;
+    [firstEl, el].forEach(function (node) {
+      if (!node) return;
+      node.style.outline = '';
+      node.style.visibility = 'hidden';
+      node.disabled = true;
+    });
+    llkSelected = null;
+    llkScore += 10;
+    llkLeft--;
+    llkUpdateStats();
+    if (llkLeft === 0) { llkEnd(true); return; }
+    if (!llkFindPair()) { showToast('没有可消除的组合，自动重排'); llkShuffle(); }
+  } else {
+    showToast('这两个图案无法连接');
+    if (firstEl) firstEl.style.outline = '';
+    llkSelected = { r: r, c: c };
+    if (el) el.style.outline = '2px solid var(--accent)';
+  }
+}
+function llkHint() {
+  if (!llkPlaying) { showToast('请先点击「开始游戏」'); return; }
+  const pair = llkFindPair();
+  if (!pair) { showToast('暂无可消除组合，正在重排'); llkShuffle(); return; }
+  pair.forEach(function (p) {
+    const el = llkCellEl(p.r, p.c);
+    if (!el) return;
+    el.style.outline = '2px dashed var(--accent)';
+    setTimeout(function () { el.style.outline = ''; }, 1600);
+  });
+}
+function llkShuffle() {
+  const cells = llkRemainingCells();
+  if (!cells.length) return;
+  const vals = cells.map(function (p) { return llkGrid[p.r][p.c]; });
+  for (let i = vals.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = vals[i]; vals[i] = vals[j]; vals[j] = t;
+  }
+  cells.forEach(function (p, i) { llkGrid[p.r][p.c] = vals[i]; });
+  llkEnsureSolvable();
+  llkSelected = null;
+  llkRender();
+  if (llkPlaying) document.getElementById('llk-result').textContent = '已重排剩余图案，继续消除吧。';
+}
+function llkTick() {
+  llkTimeLeft--;
+  if (llkTimeLeft <= 0) { llkTimeLeft = 0; llkUpdateStats(); llkEnd(false); return; }
+  llkUpdateStats();
+}
+function llkStart() {
+  if (llkTimer) { clearInterval(llkTimer); llkTimer = null; }
+  llkPlaying = true;
+  llkScore = 0;
+  llkTimeLeft = 300;
+  llkNewBoard();
+  llkRender();
+  llkUpdateStats();
+  document.getElementById('llk-result').textContent = '游戏进行中：点击两个相同图案即可消除，路径最多转弯两次。';
+  llkTimer = setInterval(llkTick, 1000);
+}
+function llkEnd(win) {
+  if (llkTimer) { clearInterval(llkTimer); llkTimer = null; }
+  llkPlaying = false;
+  if (win) {
+    const bonus = llkTimeLeft * 2;
+    llkScore += bonus;
+    llkUpdateStats();
+    document.getElementById('llk-result').textContent = '🎉 恭喜通关！时间奖励 ' + bonus + ' 分，最终得分 ' + llkScore + ' 分。';
+  } else {
+    document.getElementById('llk-result').textContent = '⏰ 时间到！还剩 ' + llkLeft + ' 对未消除，本次得分 ' + llkScore + ' 分。点击「开始游戏」再来一局。';
+  }
+}
+
+// ============ CSS clip-path 生成器 ============
+const CLIP_PRESETS = {
+  triangle: '50% 0%, 100% 100%, 0% 100%',
+  diamond: '50% 0%, 100% 50%, 50% 100%, 0% 50%',
+  hexagon: '25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%',
+  octagon: '30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%',
+  pentagon: '50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%',
+  star: '50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%',
+  parallelogram: '25% 0%, 100% 0%, 75% 100%, 0% 100%',
+  trapezoid: '20% 0%, 80% 0%, 100% 100%, 0% 100%',
+  'arrow-right': '0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%',
+  'arrow-left': '40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%',
+  message: '0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%',
+  cross: '35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%'
+};
+function clipApplyPreset() {
+  const key = document.getElementById('clip-preset').value;
+  if (key !== 'custom' && CLIP_PRESETS[key]) {
+    document.getElementById('clip-poly').value = CLIP_PRESETS[key];
+  }
+  clipUpdate();
+}
+function clipInput() {
+  const sel = document.getElementById('clip-preset');
+  if (sel) sel.value = 'custom';
+  clipUpdate();
+}
+function clipParsePoly(raw) {
+  const parts = String(raw).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  if (parts.length < 3) return null;
+  const pts = [];
+  for (let i = 0; i < parts.length; i++) {
+    const nums = parts[i].split(/\s+/);
+    if (nums.length !== 2) return null;
+    if (!/^-?\d+(\.\d+)?%?$/.test(nums[0]) || !/^-?\d+(\.\d+)?%?$/.test(nums[1])) return null;
+    pts.push(nums[0] + ' ' + nums[1]);
+  }
+  return pts.join(', ');
+}
+function clipUpdate() {
+  const input = document.getElementById('clip-poly');
+  const preview = document.getElementById('clip-preview');
+  const code = document.getElementById('clip-code');
+  if (!input || !preview || !code) return;
+  const norm = clipParsePoly(input.value);
+  if (!norm) {
+    preview.style.clipPath = 'none';
+    preview.style.webkitClipPath = 'none';
+    code.textContent = '⚠️ 坐标格式有误，请使用「x y, x y, ...」格式，至少 3 个点，例如：50% 0%, 100% 100%, 0% 100%';
+    return;
+  }
+  preview.style.clipPath = 'polygon(' + norm + ')';
+  preview.style.webkitClipPath = 'polygon(' + norm + ')';
+  code.textContent = 'clip-path: polygon(' + norm + ');\n-webkit-clip-path: polygon(' + norm + ');';
+}
+
+// ============ 基础代谢与每日热量 ============
+function bmrCalc() {
+  const genderEl = document.getElementById('bmr-gender');
+  const ageEl = document.getElementById('bmr-age');
+  const heightEl = document.getElementById('bmr-height');
+  const weightEl = document.getElementById('bmr-weight');
+  const actEl = document.getElementById('bmr-activity');
+  const goalEl = document.getElementById('bmr-goal');
+  if (!genderEl || !ageEl || !heightEl || !weightEl) return;
+  const age = parseFloat(ageEl.value);
+  const height = parseFloat(heightEl.value);
+  const weight = parseFloat(weightEl.value);
+  if (!isFinite(age) || !isFinite(height) || !isFinite(weight) || age < 10 || age > 100 || height < 100 || height > 250 || weight < 25 || weight > 300) {
+    document.getElementById('bmr-value').textContent = '--';
+    document.getElementById('bmr-tdee').textContent = '--';
+    document.getElementById('bmr-target').textContent = '--';
+    document.getElementById('bmr-result').textContent = '请输入合理的年龄（10-100）、身高（100-250 cm）和体重（25-300 kg）。';
+    return;
+  }
+  const isMale = genderEl.value === 'male';
+  const bmr = 10 * weight + 6.25 * height - 5 * age + (isMale ? 5 : -161);
+  const factor = parseFloat(actEl.value) || 1.55;
+  const goal = parseFloat(goalEl.value) || 0;
+  const tdee = bmr * factor;
+  const target = Math.max(Math.round(bmr), Math.round(tdee + goal));
+  const protein = Math.round(target * 0.3 / 4);
+  const carbs = Math.round(target * 0.4 / 4);
+  const fat = Math.round(target * 0.3 / 9);
+  document.getElementById('bmr-value').textContent = Math.round(bmr) + ' kcal';
+  document.getElementById('bmr-tdee').textContent = Math.round(tdee) + ' kcal';
+  document.getElementById('bmr-target').textContent = target + ' kcal';
+  const goalLabel = goal === 0 ? '维持体重' : (goal < 0 ? '减脂（' + goal + ' kcal）' : '增肌（+' + goal + ' kcal）');
+  const lines = [
+    '基础代谢率 BMR：' + Math.round(bmr) + ' kcal/天',
+    '每日总消耗 TDEE：' + Math.round(tdee) + ' kcal/天（活动系数 ' + factor + '）',
+    '目标：' + goalLabel,
+    '建议每日摄入：' + target + ' kcal',
+    '',
+    '营养素建议（按 30% 蛋白质 / 40% 碳水 / 30% 脂肪）：',
+    '蛋白质：约 ' + protein + ' g',
+    '碳水化合物：约 ' + carbs + ' g',
+    '脂肪：约 ' + fat + ' g',
+    '',
+    '提示：减脂时每日摄入不建议低于 BMR；体重变化应结合 2-4 周的趋势判断，而不是单日数字。'
+  ];
+  document.getElementById('bmr-result').textContent = lines.join('\n');
+}
+
+// ============ 文本表格对齐 ============
+function tblWidth(str) {
+  let w = 0;
+  for (const ch of String(str)) {
+    const cp = ch.codePointAt(0);
+    if ((cp >= 0x1100 && cp <= 0x115F) || (cp >= 0x2E80 && cp <= 0xA4CF) || (cp >= 0xAC00 && cp <= 0xD7A3) ||
+        (cp >= 0xF900 && cp <= 0xFAFF) || (cp >= 0xFE30 && cp <= 0xFE4F) || (cp >= 0xFF00 && cp <= 0xFF60) ||
+        (cp >= 0xFFE0 && cp <= 0xFFE6) || (cp >= 0x1F300 && cp <= 0x1FAFF) || (cp >= 0x2600 && cp <= 0x27BF)) {
+      w += 2;
+    } else {
+      w += 1;
+    }
+  }
+  return w;
+}
+function tblIsNumeric(str) {
+  return /^[-+]?\d+(\.\d+)?%?$/.test(String(str).replace(/,/g, ''));
+}
+function tblPad(str, width, align) {
+  const gap = Math.max(0, width - tblWidth(str));
+  const pad = ' '.repeat(gap);
+  return align === 'right' ? pad + str : str + pad;
+}
+function tblRender() {
+  const inputEl = document.getElementById('tbl-input');
+  const outEl = document.getElementById('tbl-output');
+  if (!inputEl || !outEl) return;
+  const text = inputEl.value.replace(/\r/g, '');
+  if (!text.trim()) { outEl.textContent = '请输入需要对齐的数据。'; return; }
+  let splitter = '\t';
+  const delim = document.getElementById('tbl-delim').value;
+  if (delim === 'auto') {
+    if (text.indexOf('\t') >= 0) splitter = '\t';
+    else if (text.indexOf('|') >= 0) splitter = '|';
+    else if (text.indexOf(',') >= 0) splitter = ',';
+    else if (text.indexOf(';') >= 0) splitter = ';';
+    else splitter = /\s{2,}/;
+  } else if (delim === 'tab') {
+    splitter = '\t';
+  } else if (delim === 'space') {
+    splitter = /\s{2,}/;
+  } else {
+    splitter = delim;
+  }
+  let rows = text.split('\n').map(function (line) {
+    return (typeof splitter === 'string' ? line.split(splitter) : line.split(splitter)).map(function (cell) { return cell.trim(); });
+  });
+  rows = rows.filter(function (row) { return !(row.length === 1 && row[0] === ''); });
+  if (!rows.length) { outEl.textContent = '没有解析到有效数据。'; return; }
+  const colCount = rows.reduce(function (max, row) { return Math.max(max, row.length); }, 0);
+  rows.forEach(function (row) {
+    while (row.length < colCount) row.push('');
+  });
+  const widths = [];
+  for (let i = 0; i < colCount; i++) {
+    let w = 2;
+    rows.forEach(function (row) { w = Math.max(w, tblWidth(row[i])); });
+    widths.push(w);
+  }
+  const alignMode = document.getElementById('tbl-align').value;
+  const style = document.getElementById('tbl-style').value;
+  const hasHeader = document.getElementById('tbl-header').checked && rows.length > 1;
+  function alignFor(cell) {
+    if (alignMode === 'left') return 'left';
+    if (alignMode === 'right') return 'right';
+    return tblIsNumeric(cell) ? 'right' : 'left';
+  }
+  const lines = [];
+  if (style === 'grid') {
+    const border = '+' + widths.map(function (w) { return '-'.repeat(w + 2); }).join('+') + '+';
+    function gridRow(row) {
+      return '| ' + row.map(function (cell, i) { return tblPad(cell, widths[i], alignFor(cell)); }).join(' | ') + ' |';
+    }
+    lines.push(border);
+    rows.forEach(function (row, i) {
+      lines.push(gridRow(row));
+      if (hasHeader && i === 0) lines.push(border);
+    });
+    lines.push(border);
+  } else {
+    function plainRow(row) {
+      return row.map(function (cell, i) { return tblPad(cell, widths[i], alignFor(cell)); }).join('  ').replace(/\s+$/, '');
+    }
+    rows.forEach(function (row, i) {
+      lines.push(plainRow(row));
+      if (hasHeader && i === 0) {
+        lines.push(widths.map(function (w) { return '-'.repeat(w); }).join('  '));
+      }
+    });
+  }
+  outEl.textContent = lines.join('\n');
+}
+
+safeInit(() => retireCalc(), 'retireCalc');
+safeInit(() => llkNewBoard(), 'llkNewBoard');
+safeInit(() => llkRender(), 'llkRender');
+safeInit(() => llkUpdateStats(), 'llkUpdateStats');
+safeInit(() => clipUpdate(), 'clipUpdate');
+safeInit(() => bmrCalc(), 'bmrCalc');
+safeInit(() => tblRender(), 'tblRender');
 
 // ============ Search & Theme ============
 function filterTools() {
