@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等299个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等304个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等299个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等304个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等299个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等304个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -700,6 +700,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#clip-path" data-tool="clip-path"><span class="icon">✂️</span>CSS 裁剪生成</a></li>
     <li><a href="#bmr-calc" data-tool="bmr-calc"><span class="icon">🔥</span>基础代谢计算</a></li>
     <li><a href="#text-table" data-tool="text-table"><span class="icon">🧮</span>文本表格对齐</a></li>
+    <li class="category">今日新增</li>
+    <li><a href="#reading-time" data-tool="reading-time"><span class="icon">📖</span>阅读时长估算</a></li>
+    <li><a href="#cps-test" data-tool="cps-test"><span class="icon">🖱️</span>点击速度测试</a></li>
+    <li><a href="#robots-txt" data-tool="robots-txt"><span class="icon">🤖</span>robots.txt 生成器</a></li>
+    <li><a href="#viewing-distance" data-tool="viewing-distance"><span class="icon">👀</span>屏幕观看距离</a></li>
+    <li><a href="#ring-size" data-tool="ring-size"><span class="icon">💍</span>戒指尺寸对照</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -8671,6 +8677,146 @@ console.log('代码块');
     <div class="result-box" id="tbl-output" style="white-space:pre;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;">生成结果会显示在这里。</div>
   </section>
 
+  <!-- 阅读时长估算 -->
+  <section class="tool-panel" id="panel-reading-time">
+    <h2>📖 阅读时长估算</h2>
+    <p class="desc">粘贴文章、文案或演讲稿，按设定阅读速度估算通读所需时间，并区分中文与英文单词数量。适合评估公众号、演讲稿和文档的篇幅。</p>
+    <textarea id="reading-input" style="min-height:150px;" oninput="readingCalc()" placeholder="在这里粘贴要阅读的文本...">产品设计不是堆砌功能，而是帮用户用更少的步骤完成目标。好的工具应该安静、可靠，并且在你需要的时候恰好出现。</textarea>
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">阅读速度</div>
+        <select id="reading-wpm" onchange="readingCalc()">
+          <option value="200">慢速精读（200 字/分钟）</option>
+          <option value="300" selected>常规阅读（300 字/分钟）</option>
+          <option value="450">快速浏览（450 字/分钟）</option>
+          <option value="600">一目十行（600 字/分钟）</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="readingCalc()">⏱️ 估算时长</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('reading-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="reading-total" style="font-size:24px;">--</div><div class="lbl">总字数</div></div>
+      <div class="stat-card"><div class="num" id="reading-cn" style="font-size:24px;">--</div><div class="lbl">中文字数</div></div>
+      <div class="stat-card"><div class="num" id="reading-en" style="font-size:24px;">--</div><div class="lbl">英文单词</div></div>
+    </div>
+    <div class="result-box" id="reading-result" style="white-space:pre-line;font-family:inherit;">修改文本后自动估算。</div>
+  </section>
+
+  <!-- 点击速度测试 -->
+  <section class="tool-panel" id="panel-cps-test">
+    <h2>🖱️ 点击速度测试（CPS）</h2>
+    <p class="desc">在限定时间内尽可能快地点击下方区域，测试每秒点击次数（Clicks Per Second）。可选择 5/10/15/30 秒模式，成绩仅在本次页面会话中保留。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">测试时长</div>
+        <select id="cps-duration" onchange="cpsReset()">
+          <option value="5" selected>5 秒</option>
+          <option value="10">10 秒</option>
+          <option value="15">15 秒</option>
+          <option value="30">30 秒</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button class="btn" style="width:100%;" onclick="cpsStart()">▶️ 开始测试</button>
+      </div>
+    </div>
+    <div id="cps-area" onclick="cpsTap()" style="margin-top:14px;padding:36px 16px;border:2px dashed var(--border);border-radius:var(--radius);text-align:center;cursor:pointer;user-select:none;font-size:18px;font-weight:600;color:var(--text-secondary);transition:background .15s;">
+      点击这里开始快速点击
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="cps-timer">--</div><div class="lbl">剩余秒数</div></div>
+      <div class="stat-card"><div class="num" id="cps-count">0</div><div class="lbl">点击次数</div></div>
+      <div class="stat-card"><div class="num" id="cps-rate">0.00</div><div class="lbl">CPS</div></div>
+      <div class="stat-card"><div class="num" id="cps-best">--</div><div class="lbl">本次最佳</div></div>
+    </div>
+    <div class="result-box" id="cps-result" style="white-space:normal;font-family:inherit;">选择时长后点击「开始测试」。</div>
+  </section>
+
+  <!-- robots.txt 生成器 -->
+  <section class="tool-panel" id="panel-robots-txt">
+    <h2>🤖 robots.txt 生成器</h2>
+    <p class="desc">按站点地址和抓取策略生成规范的 robots.txt，可附加 Sitemap 地址与自定义屏蔽路径。生成结果可直接复制到网站根目录。</p>
+    <div class="label">站点地址</div>
+    <input type="text" id="robots-site" value="https://example.com" oninput="robotsGenerate()" placeholder="https://example.com">
+    <div class="flex-row" style="flex-wrap:wrap;margin-top:12px;">
+      <div>
+        <div class="label">抓取策略</div>
+        <select id="robots-mode" onchange="robotsGenerate()">
+          <option value="allow">允许抓取全站</option>
+          <option value="block-admin">屏蔽后台与接口目录</option>
+          <option value="disallow">禁止抓取全站</option>
+          <option value="custom">仅使用下方自定义规则</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;padding-bottom:6px;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);">
+          <input type="checkbox" id="robots-sitemap" checked onchange="robotsGenerate()"> 添加 Sitemap
+        </label>
+      </div>
+    </div>
+    <div class="label" style="margin-top:12px;">自定义屏蔽路径（每行一个，可选）</div>
+    <textarea id="robots-custom" style="min-height:90px;" oninput="robotsGenerate()" placeholder="每行一个路径，例如：/private/"></textarea>
+    <div class="btn-group">
+      <button class="btn" onclick="robotsGenerate()">⚙️ 生成 robots.txt</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('robots-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="robots-result" style="white-space:pre;font-family:'SF Mono','Fira Code','Consolas',monospace;"></div>
+  </section>
+
+  <!-- 屏幕最佳观看距离 -->
+  <section class="tool-panel" id="panel-viewing-distance">
+    <h2>👀 屏幕最佳观看距离</h2>
+    <p class="desc">根据屏幕尺寸与分辨率估算电视、显示器的最佳观看距离，兼顾画面沉浸感与用眼舒适度。数值为参考区间，可按个人习惯微调。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">屏幕尺寸（英寸，对角线）</div>
+        <input type="number" id="vd-size" value="55" min="10" max="200" step="1" oninput="vdCalc()">
+      </div>
+      <div>
+        <div class="label">分辨率</div>
+        <select id="vd-res" onchange="vdCalc()">
+          <option value="1080">1080P 全高清</option>
+          <option value="2160" selected>4K 超高清</option>
+          <option value="4320">8K 超高清</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="vdCalc()">📏 计算距离</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('vd-result')">📋 复制结果</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="vd-best" style="font-size:24px;">--</div><div class="lbl">推荐距离</div></div>
+      <div class="stat-card"><div class="num" id="vd-min" style="font-size:24px;">--</div><div class="lbl">最近距离</div></div>
+      <div class="stat-card"><div class="num" id="vd-max" style="font-size:24px;">--</div><div class="lbl">最远距离</div></div>
+    </div>
+    <div class="result-box" id="vd-result" style="white-space:pre-line;font-family:inherit;">输入尺寸后自动计算。</div>
+  </section>
+
+  <!-- 戒指尺寸对照 -->
+  <section class="tool-panel" id="panel-ring-size">
+    <h2>💍 戒指尺寸对照换算</h2>
+    <p class="desc">输入手指内周长或戒指内直径，换算港号（大陆常用）、美码与欧码，并列出相邻尺寸对照表。建议傍晚测量手指根部，并取下偏小的一个号。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">手指内周长（mm）</div>
+        <input type="number" id="ring-circ" value="54" min="30" max="80" step="0.1" oninput="ringCalc('circ')">
+      </div>
+      <div>
+        <div class="label">戒指内直径（mm）</div>
+        <input type="number" id="ring-diam" value="17.2" min="10" max="30" step="0.1" oninput="ringCalc('diam')">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="ringCalc('circ')">💍 换算尺寸</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('ring-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="ring-result" style="white-space:pre;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;">输入周长或直径后自动换算。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -8678,7 +8824,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 299个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 304个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -28508,6 +28654,221 @@ safeInit(() => llkUpdateStats(), 'llkUpdateStats');
 safeInit(() => clipUpdate(), 'clipUpdate');
 safeInit(() => bmrCalc(), 'bmrCalc');
 safeInit(() => tblRender(), 'tblRender');
+
+// ============ 阅读时长估算 ============
+function readingCalc() {
+  const inputEl = document.getElementById('reading-input');
+  const wpmEl = document.getElementById('reading-wpm');
+  const text = inputEl ? inputEl.value : '';
+  const wpm = wpmEl ? (parseInt(wpmEl.value, 10) || 300) : 300;
+  const cn = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+  const en = (text.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g) || []).length;
+  const num = (text.match(/\d+(?:\.\d+)?/g) || []).length;
+  const total = cn + en + num;
+  const secs = Math.round(total / wpm * 60);
+  let duration;
+  if (!total) duration = '0 秒';
+  else if (secs < 60) duration = Math.max(1, secs) + ' 秒';
+  else duration = Math.floor(secs / 60) + ' 分' + (secs % 60 ? ' ' + (secs % 60) + ' 秒' : '');
+  const set = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('reading-total', total);
+  set('reading-cn', cn);
+  set('reading-en', en);
+  const out = document.getElementById('reading-result');
+  if (out) {
+    out.textContent = [
+      '预计阅读时长：' + duration,
+      '总字数：' + total + '（中文 ' + cn + ' 字 + 英文 ' + en + ' 词 + 数字 ' + num + ' 个）',
+      '阅读速度：' + wpm + ' 字/分钟',
+      '',
+      '提示：正式演讲建议预留 10%-20% 的停顿与互动时间；实际时长会受排版、图表和阅读熟练度影响。'
+    ].join('\n');
+  }
+}
+
+// ============ 点击速度测试 ============
+var cpsState = { running: false, count: 0, endAt: 0, timerId: null, duration: 5, best: 0 };
+function cpsReset() {
+  if (cpsState.timerId) { clearInterval(cpsState.timerId); cpsState.timerId = null; }
+  cpsState.running = false;
+  cpsState.count = 0;
+  const durEl = document.getElementById('cps-duration');
+  cpsState.duration = durEl ? (parseInt(durEl.value, 10) || 5) : 5;
+  const set = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('cps-timer', cpsState.duration.toFixed(1));
+  set('cps-count', '0');
+  set('cps-rate', '0.00');
+  const area = document.getElementById('cps-area');
+  if (area) { area.textContent = '点击这里开始快速点击'; area.style.background = 'transparent'; }
+  const out = document.getElementById('cps-result');
+  if (out) out.textContent = '选择时长后点击「开始测试」，然后快速点击上方区域。';
+}
+function cpsStart() {
+  cpsReset();
+  cpsState.running = true;
+  cpsState.endAt = Date.now() + cpsState.duration * 1000;
+  const area = document.getElementById('cps-area');
+  if (area) { area.textContent = '开始！快速点击我 👆'; area.style.background = 'rgba(99,102,241,0.12)'; }
+  const out = document.getElementById('cps-result');
+  if (out) out.textContent = '测试进行中…';
+  cpsState.timerId = setInterval(cpsTick, 50);
+}
+function cpsTap() {
+  if (!cpsState.running) return;
+  if (Date.now() >= cpsState.endAt) { cpsFinish(); return; }
+  cpsState.count++;
+  const countEl = document.getElementById('cps-count');
+  if (countEl) countEl.textContent = String(cpsState.count);
+  const elapsed = Math.max(0.1, (cpsState.duration * 1000 - (cpsState.endAt - Date.now())) / 1000);
+  const rateEl = document.getElementById('cps-rate');
+  if (rateEl) rateEl.textContent = (cpsState.count / elapsed).toFixed(2);
+}
+function cpsTick() {
+  const left = Math.max(0, (cpsState.endAt - Date.now()) / 1000);
+  const timerEl = document.getElementById('cps-timer');
+  if (timerEl) timerEl.textContent = left.toFixed(1);
+  if (left <= 0) cpsFinish();
+}
+function cpsFinish() {
+  if (cpsState.timerId) { clearInterval(cpsState.timerId); cpsState.timerId = null; }
+  if (!cpsState.running) return;
+  cpsState.running = false;
+  const cps = cpsState.count / cpsState.duration;
+  if (cps > cpsState.best) cpsState.best = cps;
+  const set = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('cps-timer', '0.0');
+  set('cps-rate', cps.toFixed(2));
+  set('cps-best', cpsState.best.toFixed(2));
+  const area = document.getElementById('cps-area');
+  if (area) { area.textContent = '点击开始新一轮测试'; area.style.background = 'transparent'; }
+  let rating = '慢慢来，保持节奏会更稳。';
+  if (cps >= 8) rating = '手速惊人，属于高分段！';
+  else if (cps >= 6) rating = '很快，超过多数人。';
+  else if (cps >= 4) rating = '不错，属于常见水平。';
+  else if (cps >= 2) rating = '一般水平，可以再练练。';
+  const out = document.getElementById('cps-result');
+  if (out) out.textContent = '本轮点击 ' + cpsState.count + ' 次，用时 ' + cpsState.duration + ' 秒，平均 ' + cps.toFixed(2) + ' CPS（每秒点击次数）。' + rating;
+}
+
+// ============ robots.txt 生成器 ============
+function robotsGenerate() {
+  const siteEl = document.getElementById('robots-site');
+  const modeEl = document.getElementById('robots-mode');
+  const customEl = document.getElementById('robots-custom');
+  const sitemapEl = document.getElementById('robots-sitemap');
+  const outEl = document.getElementById('robots-result');
+  if (!outEl) return;
+  let base = siteEl ? siteEl.value.trim() : '';
+  base = base.replace(/\/+$/, '');
+  if (base && !/^https?:\/\//i.test(base)) base = 'https://' + base;
+  const mode = modeEl ? modeEl.value : 'allow';
+  const lines = ['User-agent: *'];
+  if (mode === 'allow') {
+    lines.push('Allow: /');
+  } else if (mode === 'disallow') {
+    lines.push('Disallow: /');
+  } else if (mode === 'block-admin') {
+    lines.push('Disallow: /admin/');
+    lines.push('Disallow: /api/');
+    lines.push('Disallow: /login');
+    lines.push('Disallow: /cart/');
+    lines.push('Disallow: /checkout/');
+  }
+  if (customEl) {
+    customEl.value.split('\n').forEach(function (raw) {
+      const p = raw.trim();
+      if (!p) return;
+      lines.push('Disallow: ' + (p.charAt(0) === '/' ? p : '/' + p));
+    });
+  }
+  if (sitemapEl && sitemapEl.checked && base) {
+    lines.push('');
+    lines.push('Sitemap: ' + base + '/sitemap.xml');
+  }
+  outEl.textContent = lines.join('\n') + '\n';
+}
+
+// ============ 屏幕最佳观看距离 ============
+function vdCalc() {
+  const sizeEl = document.getElementById('vd-size');
+  const resEl = document.getElementById('vd-res');
+  const size = sizeEl ? parseFloat(sizeEl.value) : NaN;
+  const set = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const out = document.getElementById('vd-result');
+  if (!isFinite(size) || size <= 0) {
+    set('vd-best', '--'); set('vd-min', '--'); set('vd-max', '--');
+    if (out) out.textContent = '请输入有效的屏幕尺寸。';
+    return;
+  }
+  const resValue = resEl ? resEl.value : '2160';
+  const resLabel = resValue === '1080' ? '1080P 全高清' : (resValue === '4320' ? '8K 超高清' : '4K 超高清');
+  const factor = resValue === '1080' ? 2.5 : (resValue === '4320' ? 1.0 : 1.6);
+  const heightCm = size * 2.54 * (9 / Math.hypot(16, 9));
+  const best = heightCm * factor / 100;
+  const min = Math.max(0.4, best * 0.85);
+  const max = best * 1.2;
+  set('vd-best', best.toFixed(2) + ' m');
+  set('vd-min', min.toFixed(2) + ' m');
+  set('vd-max', max.toFixed(2) + ' m');
+  if (out) {
+    out.textContent = [
+      '屏幕：' + size + ' 英寸（' + resLabel + '）',
+      '屏幕高度：约 ' + heightCm.toFixed(1) + ' cm',
+      '推荐观看距离：约 ' + best.toFixed(2) + ' m（约 ' + factor.toFixed(1) + ' 倍屏幕高度）',
+      '舒适区间：约 ' + min.toFixed(2) + ' m ~ ' + max.toFixed(2) + ' m',
+      '',
+      '说明：距离越近沉浸感越强，但更容易疲劳；办公显示器建议至少保持一臂距离，并让屏幕上沿略低于视线。'
+    ].join('\n');
+  }
+}
+
+// ============ 戒指尺寸对照 ============
+var RING_US = { 8: '4.5', 9: '5', 10: '5.5', 11: '5.5', 12: '6', 13: '6.5', 14: '7', 15: '7.5', 16: '7.5', 17: '8', 18: '8.5', 19: '9', 20: '9', 21: '9.5', 22: '10', 23: '10.5', 24: '11' };
+function ringRow(hk) {
+  const circ = hk + 40;
+  return tblPad(String(hk), 6, 'left') + tblPad(circ.toFixed(1), 12, 'right') + tblPad((circ / Math.PI).toFixed(1), 12, 'right') + tblPad(RING_US[hk], 8, 'right');
+}
+function ringCalc(source) {
+  const circEl = document.getElementById('ring-circ');
+  const diamEl = document.getElementById('ring-diam');
+  const outEl = document.getElementById('ring-result');
+  if (!circEl || !diamEl || !outEl) return;
+  let circ = parseFloat(circEl.value);
+  let diam = parseFloat(diamEl.value);
+  if (source === 'diam') {
+    if (!isFinite(diam) || diam <= 0) { outEl.textContent = '请输入有效的内直径。'; return; }
+    circ = diam * Math.PI;
+    circEl.value = circ.toFixed(1);
+  } else {
+    if (!isFinite(circ) || circ <= 0) { outEl.textContent = '请输入有效的内周长。'; return; }
+    diam = circ / Math.PI;
+    diamEl.value = diam.toFixed(1);
+  }
+  const hk = Math.min(24, Math.max(8, Math.round(circ - 40)));
+  const lines = [];
+  lines.push('测量结果');
+  lines.push('内周长：' + circ.toFixed(1) + ' mm');
+  lines.push('内直径：' + diam.toFixed(1) + ' mm');
+  lines.push('港号/大陆号：' + hk + ' 号');
+  lines.push('美码：约 ' + RING_US[hk] + ' 码');
+  lines.push('欧码：' + circ.toFixed(0));
+  if (circ < 48 || circ > 64) lines.push('（超出常见成人尺寸范围，结果仅供参考）');
+  lines.push('');
+  lines.push('相邻尺寸对照');
+  lines.push(tblPad('港号', 6, 'left') + tblPad('内周长mm', 12, 'right') + tblPad('内直径mm', 12, 'right') + tblPad('美码', 8, 'right'));
+  const start = Math.max(8, hk - 2);
+  const end = Math.min(24, hk + 2);
+  for (let i = start; i <= end; i++) lines.push(ringRow(i));
+  lines.push('');
+  lines.push('提示：手指热胀冷缩，早晚可能相差半号；测量时以关节处能顺利通过为准，偏紧时建议选大一号。');
+  outEl.textContent = lines.join('\n');
+}
+
+safeInit(() => readingCalc(), 'readingCalc');
+safeInit(() => cpsReset(), 'cpsReset');
+safeInit(() => robotsGenerate(), 'robotsGenerate');
+safeInit(() => vdCalc(), 'vdCalc');
+safeInit(() => ringCalc('circ'), 'ringCalc');
 
 // ============ Search & Theme ============
 function filterTools() {
