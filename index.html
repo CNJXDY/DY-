@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万能工具箱 - 免费在线工具集合</title>
-<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等304个实用在线工具，免费、无广告、本地运行。">
+<meta name="description" content="免费在线工具集合：JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、成语接龙等309个实用在线工具，免费、无广告、本地运行。">
 <meta name="theme-color" content="#6366f1">
 <meta property="og:title" content="万能工具箱 - 免费在线工具集合">
-<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等304个实用在线工具，支持暗色/亮色模式。">
+<meta property="og:description" content="JSON格式化、房贷计算器、个税计算、图片压缩、随机数生成、电话区号、口算题生成、垃圾分类查询等309个实用在线工具，支持暗色/亮色模式。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cnjxdy.github.io/DY-/">
 <link rel="manifest" href="manifest.json">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "万能工具箱",
-  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等304个实用工具",
+  "description": "免费在线工具集合：JSON格式化、进制转换、CSS格式化、SQL格式化、电话区号、口算题生成、成语接龙、垃圾分类查询等309个实用工具",
   "url": "https://cnjxdy.github.io/DY-/",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
@@ -706,6 +706,12 @@ input[type="text"] { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     <li><a href="#robots-txt" data-tool="robots-txt"><span class="icon">🤖</span>robots.txt 生成器</a></li>
     <li><a href="#viewing-distance" data-tool="viewing-distance"><span class="icon">👀</span>屏幕观看距离</a></li>
     <li><a href="#ring-size" data-tool="ring-size"><span class="icon">💍</span>戒指尺寸对照</a></li>
+    <li class="category">最新工具</li>
+    <li><a href="#currency-converter" data-tool="currency-converter"><span class="icon">💱</span>汇率换算</a></li>
+    <li><a href="#tire-size" data-tool="tire-size"><span class="icon">🛞</span>轮胎尺寸换算</a></li>
+    <li><a href="#cubic-bezier" data-tool="cubic-bezier"><span class="icon">🎢</span>CSS 缓动曲线</a></li>
+    <li><a href="#match-three" data-tool="match-three"><span class="icon">💎</span>宝石三消</a></li>
+    <li><a href="#moon-phase" data-tool="moon-phase"><span class="icon">🌙</span>月相查询</a></li>
     <li class="category">更多</li>
     <li><a href="blog/" target="_blank"><span class="icon">📖</span>实用教程博客</a></li>
   </ul>
@@ -8817,6 +8823,187 @@ console.log('代码块');
     <div class="result-box" id="ring-result" style="white-space:pre;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;">输入周长或直径后自动换算。</div>
   </section>
 
+  <!-- 汇率换算 -->
+  <section class="tool-panel" id="panel-currency-converter">
+    <h2>💱 汇率换算</h2>
+    <p class="desc">输入金额与汇率，快速换算常用货币。内置汇率为离线参考值，可手动修改为实时汇率，换算完全在本地完成。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">金额</div>
+        <input type="number" id="fx-amount" value="100" min="0" step="0.01" oninput="fxConvert()">
+      </div>
+      <div>
+        <div class="label">源货币</div>
+        <select id="fx-from" onchange="fxRate();fxConvert()">
+          <option value="CNY">人民币 CNY ¥</option>
+          <option value="USD" selected>美元 USD $</option>
+          <option value="EUR">欧元 EUR €</option>
+          <option value="JPY">日元 JPY ¥</option>
+          <option value="GBP">英镑 GBP £</option>
+          <option value="HKD">港币 HKD HK$</option>
+          <option value="KRW">韩元 KRW ₩</option>
+          <option value="AUD">澳元 AUD A$</option>
+          <option value="CAD">加元 CAD C$</option>
+          <option value="SGD">新加坡元 SGD S$</option>
+          <option value="CHF">瑞士法郎 CHF</option>
+          <option value="THB">泰铢 THB ฿</option>
+          <option value="TWD">新台币 TWD NT$</option>
+          <option value="MYR">马来西亚林吉特 MYR</option>
+          <option value="RUB">俄罗斯卢布 RUB ₽</option>
+          <option value="INR">印度卢比 INR ₹</option>
+          <option value="AED">阿联酋迪拉姆 AED</option>
+          <option value="NZD">新西兰元 NZD NZ$</option>
+        </select>
+      </div>
+      <div>
+        <div class="label">目标货币</div>
+        <select id="fx-to" onchange="fxRate();fxConvert()">
+          <option value="CNY" selected>人民币 CNY ¥</option>
+          <option value="USD">美元 USD $</option>
+          <option value="EUR">欧元 EUR €</option>
+          <option value="JPY">日元 JPY ¥</option>
+          <option value="GBP">英镑 GBP £</option>
+          <option value="HKD">港币 HKD HK$</option>
+          <option value="KRW">韩元 KRW ₩</option>
+          <option value="AUD">澳元 AUD A$</option>
+          <option value="CAD">加元 CAD C$</option>
+          <option value="SGD">新加坡元 SGD S$</option>
+          <option value="CHF">瑞士法郎 CHF</option>
+          <option value="THB">泰铢 THB ฿</option>
+          <option value="TWD">新台币 TWD NT$</option>
+          <option value="MYR">马来西亚林吉特 MYR</option>
+          <option value="RUB">俄罗斯卢布 RUB ₽</option>
+          <option value="INR">印度卢比 INR ₹</option>
+          <option value="AED">阿联酋迪拉姆 AED</option>
+          <option value="NZD">新西兰元 NZD NZ$</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="label">汇率（1 源货币 = ? 目标货币）</div>
+      <input type="number" id="fx-rate" value="7.1" min="0" step="0.000001" oninput="fxConvert()">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="fxConvert()">💱 换算</button>
+      <button class="btn btn-secondary" onclick="fxSwap()">🔁 互换货币</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('fx-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="fx-result">输入金额后自动换算。</div>
+  </section>
+
+  <!-- 轮胎尺寸换算 -->
+  <section class="tool-panel" id="panel-tire-size">
+    <h2>🛞 轮胎尺寸换算</h2>
+    <p class="desc">根据胎宽、扁平比与轮毂尺寸计算轮胎外径、周长、胎侧高度和每公里转数，并可对比改装尺寸的速度表误差。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">胎宽 (mm)</div>
+        <input type="number" id="tire-width" value="205" min="50" max="400" oninput="tireCalc()">
+      </div>
+      <div>
+        <div class="label">扁平比 (%)</div>
+        <input type="number" id="tire-aspect" value="55" min="20" max="100" oninput="tireCalc()">
+      </div>
+      <div>
+        <div class="label">轮毂直径 (英寸)</div>
+        <input type="number" id="tire-rim" value="16" min="10" max="26" step="0.5" oninput="tireCalc()">
+      </div>
+    </div>
+    <div class="label" style="margin-top:16px;">对比尺寸（可选）</div>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">胎宽 (mm)</div>
+        <input type="number" id="tire-width2" value="225" min="50" max="400" oninput="tireCalc()">
+      </div>
+      <div>
+        <div class="label">扁平比 (%)</div>
+        <input type="number" id="tire-aspect2" value="50" min="20" max="100" oninput="tireCalc()">
+      </div>
+      <div>
+        <div class="label">轮毂直径 (英寸)</div>
+        <input type="number" id="tire-rim2" value="17" min="10" max="26" step="0.5" oninput="tireCalc()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="tireCalc()">🛞 计算尺寸</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('tire-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="tire-result">输入尺寸后自动计算。</div>
+  </section>
+
+  <!-- CSS 缓动曲线生成器 -->
+  <section class="tool-panel" id="panel-cubic-bezier">
+    <h2>🎢 CSS 缓动曲线生成器</h2>
+    <p class="desc">调整贝塞尔控制点，实时查看速度曲线并预览动画，一键复制 cubic-bezier() 代码，适用于 transition 与 animation。</p>
+    <div class="flex-row" style="flex-wrap:wrap;">
+      <div>
+        <div class="label">X1</div>
+        <input type="number" id="cb-x1" value="0.25" min="0" max="1" step="0.01" oninput="cbUpdate()">
+      </div>
+      <div>
+        <div class="label">Y1</div>
+        <input type="number" id="cb-y1" value="0.1" min="-2" max="3" step="0.01" oninput="cbUpdate()">
+      </div>
+      <div>
+        <div class="label">X2</div>
+        <input type="number" id="cb-x2" value="0.25" min="0" max="1" step="0.01" oninput="cbUpdate()">
+      </div>
+      <div>
+        <div class="label">Y2</div>
+        <input type="number" id="cb-y2" value="1" min="-2" max="3" step="0.01" oninput="cbUpdate()">
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="cbPlay()">▶️ 播放预览</button>
+      <button class="btn btn-secondary btn-sm" onclick="cbPreset('ease')">ease</button>
+      <button class="btn btn-secondary btn-sm" onclick="cbPreset('ease-in')">ease-in</button>
+      <button class="btn btn-secondary btn-sm" onclick="cbPreset('ease-out')">ease-out</button>
+      <button class="btn btn-secondary btn-sm" onclick="cbPreset('ease-in-out')">ease-in-out</button>
+      <button class="btn btn-secondary btn-sm" onclick="cbPreset('back')">回弹</button>
+    </div>
+    <div style="margin-top:16px;padding:12px;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);">
+      <div style="position:relative;height:32px;background:var(--card-bg);border-radius:16px;overflow:hidden;">
+        <div id="cb-dot" style="position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:var(--accent);"></div>
+      </div>
+    </div>
+    <div class="flex-row" style="flex-wrap:wrap;align-items:flex-start;margin-top:12px;">
+      <svg id="cb-curve" viewBox="0 0 200 200" style="width:200px;height:200px;flex:0 0 auto;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--radius);"></svg>
+      <div class="result-box" id="cb-output" style="margin-top:0;flex:1;min-width:220px;"></div>
+    </div>
+  </section>
+
+  <!-- 宝石三消 -->
+  <section class="tool-panel" id="panel-match-three">
+    <h2>💎 宝石三消</h2>
+    <p class="desc">点击相邻的两颗宝石交换位置，凑成横向或纵向 3 颗及以上同色即可消除得分。消除后上方宝石下落并补充，可连续连击。</p>
+    <div class="stats">
+      <div class="stat-card"><div class="num" id="m3-score">0</div><div class="lbl">得分</div></div>
+      <div class="stat-card"><div class="num" id="m3-moves">0</div><div class="lbl">步数</div></div>
+      <div class="stat-card"><div class="num" id="m3-best">0</div><div class="lbl">最高连击</div></div>
+    </div>
+    <div id="m3-board" style="display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:400px;margin:16px auto;"></div>
+    <div class="btn-group" style="justify-content:center;">
+      <button class="btn" onclick="m3NewGame()">🔄 重新开始</button>
+    </div>
+    <div class="result-box" id="m3-status">选择一颗宝石，再点击相邻宝石交换。</div>
+  </section>
+
+  <!-- 月相查询 -->
+  <section class="tool-panel" id="panel-moon-phase">
+    <h2>🌙 月相查询</h2>
+    <p class="desc">选择日期，估算当天月相、月龄与照明百分比，并给出下一次满月和新月日期。基于平均朔望月推算，结果仅供参考。</p>
+    <div>
+      <div class="label">日期</div>
+      <input type="date" id="moon-date" onchange="moonCalc()">
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="moonCalc()">🌙 查询月相</button>
+      <button class="btn btn-secondary" onclick="moonToday()">📅 今天</button>
+      <button class="btn btn-secondary btn-sm" onclick="copyText('moon-result')">📋 复制结果</button>
+    </div>
+    <div class="result-box" id="moon-result">选择日期后自动查询。</div>
+  </section>
+
   <!-- Ad Placeholder -->
   <div class="ad-placeholder">
     📢 广告位招租 &mdash; 联系邮箱：your@email.com
@@ -8824,7 +9011,7 @@ console.log('代码块');
 
   <!-- Footer -->
   <footer style="margin-top:40px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:13px;">
-    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 304个实用工具</p>
+    <p>万能工具箱 &copy; 2026 &mdash; 免费在线工具集合 | 309个实用工具</p>
     <p style="margin-top:6px;">
       <a href="/DY-/" style="color:var(--accent-hover);text-decoration:none;">首页</a> &nbsp;·&nbsp;
       <a href="/DY-/blog/" style="color:var(--accent-hover);text-decoration:none;">博客</a> &nbsp;·&nbsp;
@@ -28869,6 +29056,396 @@ safeInit(() => cpsReset(), 'cpsReset');
 safeInit(() => robotsGenerate(), 'robotsGenerate');
 safeInit(() => vdCalc(), 'vdCalc');
 safeInit(() => ringCalc('circ'), 'ringCalc');
+
+// ============ 汇率换算 ============
+const FX_CNY_PER = {
+  CNY: 1, USD: 7.10, EUR: 7.75, JPY: 0.0465, GBP: 9.10, HKD: 0.912,
+  KRW: 0.00515, AUD: 4.65, CAD: 5.20, SGD: 5.30, CHF: 8.05, THB: 0.200,
+  TWD: 0.222, MYR: 1.60, RUB: 0.073, INR: 0.084, AED: 1.933, NZD: 4.25
+};
+const FX_LABELS = {
+  CNY: '人民币', USD: '美元', EUR: '欧元', JPY: '日元', GBP: '英镑', HKD: '港币',
+  KRW: '韩元', AUD: '澳元', CAD: '加元', SGD: '新加坡元', CHF: '瑞士法郎',
+  THB: '泰铢', TWD: '新台币', MYR: '马来西亚林吉特', RUB: '俄罗斯卢布',
+  INR: '印度卢比', AED: '阿联酋迪拉姆', NZD: '新西兰元'
+};
+
+function fxRate() {
+  const from = document.getElementById('fx-from').value;
+  const to = document.getElementById('fx-to').value;
+  const rate = FX_CNY_PER[from] / FX_CNY_PER[to];
+  document.getElementById('fx-rate').value = Number(rate.toFixed(6));
+}
+
+function fxConvert() {
+  const amount = parseFloat(document.getElementById('fx-amount').value);
+  const rate = parseFloat(document.getElementById('fx-rate').value);
+  const from = document.getElementById('fx-from').value;
+  const to = document.getElementById('fx-to').value;
+  const out = document.getElementById('fx-result');
+  if (!isFinite(amount) || !isFinite(rate) || amount < 0 || rate <= 0) {
+    out.textContent = '❌ 请输入有效的金额（≥ 0）和汇率（> 0）。';
+    return;
+  }
+  const money = n => n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const lines = [
+    `${money(amount)} ${FX_LABELS[from]} = ${money(amount * rate)} ${FX_LABELS[to]}`,
+    '',
+    `1 ${FX_LABELS[from]} = ${rate} ${FX_LABELS[to]}`,
+    `1 ${FX_LABELS[to]} = ${(1 / rate).toFixed(6)} ${FX_LABELS[from]}`,
+    '',
+    '提示：内置汇率为离线参考值（2026-11），可手动填写银行或平台的实时汇率。'
+  ];
+  out.textContent = lines.join('\n');
+}
+
+function fxSwap() {
+  const a = document.getElementById('fx-from');
+  const b = document.getElementById('fx-to');
+  const tmp = a.value;
+  a.value = b.value;
+  b.value = tmp;
+  fxRate();
+  fxConvert();
+}
+
+safeInit(() => { fxRate(); fxConvert(); }, 'fxInit');
+
+// ============ 轮胎尺寸换算 ============
+function tireDims(width, aspect, rim) {
+  const side = width * aspect / 100;
+  const diameter = rim * 25.4 + 2 * side;
+  const circumference = Math.PI * diameter;
+  return { side, diameter, circumference, revsPerKm: 1000000 / circumference };
+}
+
+function tireCalc() {
+  const width = parseFloat(document.getElementById('tire-width').value);
+  const aspect = parseFloat(document.getElementById('tire-aspect').value);
+  const rim = parseFloat(document.getElementById('tire-rim').value);
+  const out = document.getElementById('tire-result');
+  if (![width, aspect, rim].every(v => isFinite(v) && v > 0)) {
+    out.textContent = '❌ 请输入有效的胎宽、扁平比和轮毂直径。';
+    return;
+  }
+  const d = tireDims(width, aspect, rim);
+  const lines = [
+    `规格：${width}/${aspect} R${rim}`,
+    `胎侧高度：${d.side.toFixed(1)} mm`,
+    `轮胎外径：${d.diameter.toFixed(1)} mm（${(d.diameter / 25.4).toFixed(2)} 英寸）`,
+    `轮胎周长：${d.circumference.toFixed(1)} mm`,
+    `每公里转数：约 ${d.revsPerKm.toFixed(0)} 转`
+  ];
+  const width2 = parseFloat(document.getElementById('tire-width2').value);
+  const aspect2 = parseFloat(document.getElementById('tire-aspect2').value);
+  const rim2 = parseFloat(document.getElementById('tire-rim2').value);
+  if ([width2, aspect2, rim2].every(v => isFinite(v) && v > 0)) {
+    const d2 = tireDims(width2, aspect2, rim2);
+    const diff = (d2.diameter - d.diameter) / d.diameter * 100;
+    lines.push('');
+    lines.push(`对比规格：${width2}/${aspect2} R${rim2}`);
+    lines.push(`轮胎外径：${d2.diameter.toFixed(1)} mm（差值 ${diff >= 0 ? '+' : ''}${diff.toFixed(2)}%）`);
+    lines.push(`轮胎周长：${d2.circumference.toFixed(1)} mm`);
+    lines.push(`速度表显示 100 km/h 时，实际约 ${(100 * d2.diameter / d.diameter).toFixed(1)} km/h`);
+    if (Math.abs(diff) > 3) {
+      lines.push('⚠️ 外径变化超过 3%，可能影响速度表、ESP 与年检，改装前请谨慎。');
+    } else {
+      lines.push('✅ 外径变化在 3% 以内，属于较常见的替换范围。');
+    }
+  }
+  out.textContent = lines.join('\n');
+}
+
+safeInit(() => tireCalc(), 'tireCalc');
+
+// ============ CSS 缓动曲线生成器 ============
+function cbValues() {
+  const get = id => {
+    const v = parseFloat(document.getElementById(id).value);
+    return isFinite(v) ? v : 0;
+  };
+  return [get('cb-x1'), get('cb-y1'), get('cb-x2'), get('cb-y2')];
+}
+
+function cbUpdate() {
+  const raw = cbValues();
+  const x1 = Math.min(1, Math.max(0, raw[0]));
+  const y1 = raw[1];
+  const x2 = Math.min(1, Math.max(0, raw[2]));
+  const y2 = raw[3];
+  const svg = document.getElementById('cb-curve');
+  svg.innerHTML =
+    `<line x1="0" y1="200" x2="200" y2="0" stroke="var(--border)" stroke-dasharray="5 5"/>` +
+    `<line x1="0" y1="200" x2="${x1 * 200}" y2="${200 - y1 * 200}" stroke="var(--accent-hover)" stroke-opacity="0.6"/>` +
+    `<line x1="200" y1="0" x2="${x2 * 200}" y2="${200 - y2 * 200}" stroke="var(--accent-hover)" stroke-opacity="0.6"/>` +
+    `<path d="M 0 200 C ${x1 * 200} ${200 - y1 * 200}, ${x2 * 200} ${200 - y2 * 200}, 200 0" fill="none" stroke="var(--accent)" stroke-width="3"/>` +
+    `<circle cx="0" cy="200" r="4" fill="var(--accent)"/>` +
+    `<circle cx="200" cy="0" r="4" fill="var(--accent)"/>`;
+  document.getElementById('cb-output').textContent =
+    `transition-timing-function:\n  cubic-bezier(${x1}, ${y1}, ${x2}, ${y2});\n\n` +
+    `animation-timing-function:\n  cubic-bezier(${x1}, ${y1}, ${x2}, ${y2});\n\n` +
+    '提示：X1、X2 需在 0 ~ 1 之间；Y 值可以超出 0 ~ 1 以产生回弹效果。';
+  const dot = document.getElementById('cb-dot');
+  if (dot) dot.style.transition = 'none';
+}
+
+function cbPlay() {
+  const [x1, y1, x2, y2] = cbValues();
+  const dot = document.getElementById('cb-dot');
+  const tx = Math.max(0, dot.parentElement.clientWidth - 32);
+  dot.style.transition = 'none';
+  dot.style.transform = 'translateX(0)';
+  void dot.offsetWidth;
+  dot.style.transition = `transform 1.2s cubic-bezier(${x1}, ${y1}, ${x2}, ${y2})`;
+  dot.style.transform = `translateX(${tx}px)`;
+}
+
+function cbPreset(name) {
+  const presets = {
+    'ease': [0.25, 0.1, 0.25, 1],
+    'ease-in': [0.42, 0, 1, 1],
+    'ease-out': [0, 0, 0.58, 1],
+    'ease-in-out': [0.42, 0, 0.58, 1],
+    'back': [0.34, 1.56, 0.64, 1]
+  };
+  const p = presets[name];
+  if (!p) return;
+  document.getElementById('cb-x1').value = p[0];
+  document.getElementById('cb-y1').value = p[1];
+  document.getElementById('cb-x2').value = p[2];
+  document.getElementById('cb-y2').value = p[3];
+  cbUpdate();
+  cbPlay();
+}
+
+safeInit(() => cbUpdate(), 'cbUpdate');
+
+// ============ 宝石三消 ============
+const M3_SIZE = 8;
+const M3_COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#eab308', '#a855f7'];
+let m3Board = [];
+let m3Selected = -1;
+let m3Score = 0;
+let m3Moves = 0;
+let m3Best = 0;
+let m3Combo = 0;
+let m3Busy = false;
+
+function m3NewGame() {
+  m3Score = 0;
+  m3Moves = 0;
+  m3Best = 0;
+  m3Combo = 0;
+  m3Selected = -1;
+  m3Busy = false;
+  do {
+    m3Board = [];
+    for (let i = 0; i < M3_SIZE * M3_SIZE; i++) {
+      m3Board.push(Math.floor(Math.random() * M3_COLORS.length));
+    }
+  } while (m3FindMatches().size > 0);
+  m3Render();
+  m3UpdateStats();
+  document.getElementById('m3-status').textContent = '选择一颗宝石，再点击相邻宝石交换。';
+}
+
+function m3FindMatches() {
+  const matched = new Set();
+  for (let r = 0; r < M3_SIZE; r++) {
+    let run = 1;
+    for (let c = 1; c <= M3_SIZE; c++) {
+      const same = c < M3_SIZE && m3Board[r * M3_SIZE + c] >= 0 &&
+        m3Board[r * M3_SIZE + c] === m3Board[r * M3_SIZE + c - 1];
+      if (same) {
+        run++;
+      } else {
+        if (run >= 3) for (let k = c - run; k < c; k++) matched.add(r * M3_SIZE + k);
+        run = 1;
+      }
+    }
+  }
+  for (let c = 0; c < M3_SIZE; c++) {
+    let run = 1;
+    for (let r = 1; r <= M3_SIZE; r++) {
+      const same = r < M3_SIZE && m3Board[r * M3_SIZE + c] >= 0 &&
+        m3Board[r * M3_SIZE + c] === m3Board[(r - 1) * M3_SIZE + c];
+      if (same) {
+        run++;
+      } else {
+        if (run >= 3) for (let k = r - run; k < r; k++) matched.add(k * M3_SIZE + c);
+        run = 1;
+      }
+    }
+  }
+  return matched;
+}
+
+function m3Render() {
+  const board = document.getElementById('m3-board');
+  if (!board) return;
+  board.innerHTML = '';
+  for (let i = 0; i < m3Board.length; i++) {
+    const cell = document.createElement('button');
+    cell.type = 'button';
+    cell.setAttribute('aria-label', '宝石 ' + (i + 1));
+    cell.style.cssText = 'aspect-ratio:1;padding:0;border-radius:8px;cursor:pointer;transition:transform .12s,border-color .12s;' +
+      'border:2px solid ' + (m3Selected === i ? '#fff' : 'transparent') + ';background:' + M3_COLORS[m3Board[i]] + ';';
+    if (m3Selected === i) cell.style.transform = 'scale(1.08)';
+    cell.addEventListener('click', () => m3Click(i));
+    board.appendChild(cell);
+  }
+}
+
+function m3UpdateStats() {
+  document.getElementById('m3-score').textContent = m3Score;
+  document.getElementById('m3-moves').textContent = m3Moves;
+  document.getElementById('m3-best').textContent = m3Best;
+}
+
+function m3Adjacent(a, b) {
+  const ra = Math.floor(a / M3_SIZE), ca = a % M3_SIZE;
+  const rb = Math.floor(b / M3_SIZE), cb = b % M3_SIZE;
+  return Math.abs(ra - rb) + Math.abs(ca - cb) === 1;
+}
+
+function m3SwapCells(a, b) {
+  const tmp = m3Board[a];
+  m3Board[a] = m3Board[b];
+  m3Board[b] = tmp;
+}
+
+function m3DropAndFill() {
+  for (let c = 0; c < M3_SIZE; c++) {
+    let write = M3_SIZE - 1;
+    for (let r = M3_SIZE - 1; r >= 0; r--) {
+      const v = m3Board[r * M3_SIZE + c];
+      if (v >= 0) {
+        m3Board[write * M3_SIZE + c] = v;
+        write--;
+      }
+    }
+    for (let r = write; r >= 0; r--) {
+      m3Board[r * M3_SIZE + c] = Math.floor(Math.random() * M3_COLORS.length);
+    }
+  }
+}
+
+async function m3Resolve() {
+  const status = document.getElementById('m3-status');
+  while (true) {
+    const matched = m3FindMatches();
+    if (matched.size === 0) break;
+    m3Combo++;
+    if (m3Combo > m3Best) m3Best = m3Combo;
+    m3Score += matched.size * 10 * m3Combo;
+    status.textContent = `消除 ${matched.size} 颗宝石，连击 x${m3Combo}！`;
+    matched.forEach(i => { m3Board[i] = -1; });
+    m3UpdateStats();
+    m3Render();
+    await new Promise(resolve => setTimeout(resolve, 180));
+    m3DropAndFill();
+    m3Render();
+    await new Promise(resolve => setTimeout(resolve, 180));
+  }
+}
+
+async function m3Click(i) {
+  if (m3Busy) return;
+  if (m3Selected === -1) {
+    m3Selected = i;
+    m3Render();
+    return;
+  }
+  if (m3Selected === i) {
+    m3Selected = -1;
+    m3Render();
+    return;
+  }
+  if (!m3Adjacent(m3Selected, i)) {
+    m3Selected = i;
+    m3Render();
+    return;
+  }
+  const a = m3Selected;
+  m3Selected = -1;
+  m3Busy = true;
+  m3SwapCells(a, i);
+  m3Render();
+  if (m3FindMatches().size === 0) {
+    m3SwapCells(a, i);
+    m3Render();
+    document.getElementById('m3-status').textContent = '这一步无法消除，换一对相邻宝石试试。';
+    m3Busy = false;
+    return;
+  }
+  m3Moves++;
+  m3Combo = 0;
+  try {
+    await m3Resolve();
+  } finally {
+    m3Busy = false;
+  }
+  m3UpdateStats();
+}
+
+safeInit(() => m3NewGame(), 'm3NewGame');
+
+// ============ 月相查询 ============
+const MOON_SYNODIC = 29.530588853;
+const MOON_EPOCH = Date.UTC(2000, 0, 6, 18, 14);
+const MOON_NAMES = ['新月', '蛾眉月', '上弦月', '盈凸月', '满月', '亏凸月', '下弦月', '残月'];
+const MOON_EMOJI = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+
+function moonPhaseAt(ms) {
+  let phase = ((ms - MOON_EPOCH) / 86400000 / MOON_SYNODIC) % 1;
+  if (phase < 0) phase += 1;
+  return phase;
+}
+
+function moonCalc() {
+  const value = document.getElementById('moon-date').value;
+  const out = document.getElementById('moon-result');
+  if (!value) {
+    out.textContent = '请选择日期。';
+    return;
+  }
+  const ms = Date.parse(value + 'T12:00:00Z');
+  if (isNaN(ms)) {
+    out.textContent = '❌ 日期格式无效，请重新选择。';
+    return;
+  }
+  const phase = moonPhaseAt(ms);
+  const idx = Math.round(phase * 8) % 8;
+  const illumination = (1 - Math.cos(2 * Math.PI * phase)) / 2 * 100;
+  const age = phase * MOON_SYNODIC;
+  const toFull = ((0.5 - phase + 1) % 1) * MOON_SYNODIC;
+  const toNew = ((1 - phase) % 1) * MOON_SYNODIC;
+  const fmt = d => new Date(ms + d * 86400000).toLocaleDateString('zh-CN', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+  const lines = [
+    `日期：${value}`,
+    `月相：${MOON_EMOJI[idx]} ${MOON_NAMES[idx]}`,
+    `月龄：约 ${age.toFixed(1)} 天`,
+    `照明：${illumination.toFixed(1)}%`,
+    `朔望周期：29.53 天`,
+    '',
+    `下一次满月：${fmt(toFull)}（约 ${toFull.toFixed(1)} 天后）`,
+    `下一次新月：${fmt(toNew)}（约 ${toNew.toFixed(1)} 天后）`,
+    '',
+    '说明：按平均朔望月推算，与权威天文历法可能有数小时误差。'
+  ];
+  out.textContent = lines.join('\n');
+}
+
+function moonToday() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('moon-date').value = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  moonCalc();
+}
+
+safeInit(() => moonToday(), 'moonToday');
 
 // ============ Search & Theme ============
 function filterTools() {
